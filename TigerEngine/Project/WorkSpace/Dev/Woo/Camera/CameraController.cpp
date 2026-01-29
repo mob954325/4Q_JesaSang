@@ -34,13 +34,16 @@ void CameraController::OnStart()
     groundY = tpos.y;
     pivotPos = { tpos.x, groundY, tpos.z };
 
+    // pivot smoothing init
+    isTrackingPivot = false;
+    pivotVel = Vector3::Zero;
+
     // desired cam pos init
     Vector3 desiredCamPos = pivotPos + quarterOffset;
     camPosSmooth = desiredCamPos;
 
     // cam transform init
-    Vector3 camPos = pivotPos + quarterOffset;
-    transform->SetPosition(camPos);
+    transform->SetPosition(camPosSmooth);
     transform->SetEuler(DegToRad(quarterEuler));
 }
 
@@ -61,16 +64,14 @@ void CameraController::OnLateUpdate(float delta)
 
     // desired cam pos update
     Vector3 desiredCamPos = pivotPos + quarterOffset;
+
+    // cam smoothing
     float t = 1.0f - std::exp(-camFollowLambda * delta);
     camPosSmooth = camPosSmooth + (desiredCamPos - camPosSmooth) * t;
 
+    // apply to transform
     transform->SetPosition(camPosSmooth);
     transform->SetEuler(DegToRad(quarterEuler));
-
-    // cam transform update
-    //Vector3 camPos = pivotPos + quarterOffset;
-    //transform->SetPosition(camPos);
-    //transform->SetEuler(quarterEuler);
 }
 
 void CameraController::OnDestory()
@@ -87,26 +88,93 @@ void CameraController::Deserialize(nlohmann::json data)
     JsonHelper::SetDataFromJson(this, data);
 }
 
+float CameraController::SmoothDamp(float current, float target, float& currentVelocity, float smoothTime, float maxSpeed, float deltaTime)
+{
+    smoothTime = std::max(0.0001f, smoothTime);
+
+    float omega = 2.0f / smoothTime;
+    float x = omega * deltaTime;
+
+    // 근사 exp (Unity 방식)
+    float exp = 1.0f / (1.0f + x + 0.48f * x * x + 0.235f * x * x * x);
+
+    float change = current - target;
+    float originalTarget = target;
+
+    // 최대 속도 제한 (1프레임에 너무 멀리 못 가게)
+    float maxChange = maxSpeed * smoothTime;
+    change = Clamp(change, -maxChange, maxChange);
+    target = current - change;
+
+    float temp = (currentVelocity + omega * change) * deltaTime;
+    currentVelocity = (currentVelocity - omega * temp) * exp;
+
+    float output = target + (change + temp) * exp;
+
+    // overshoot 방지
+    if ((originalTarget - current > 0.0f) == (output > originalTarget))
+    {
+        output = originalTarget;
+        currentVelocity = (output - originalTarget) / deltaTime;
+    }
+
+    return output;
+}
+
+Vector3 CameraController::SmoothDampVec3(const Vector3& current, const Vector3& target, Vector3& currentVelocity, float smoothTime, float maxSpeed, float deltaTime)
+{
+    Vector3 result;
+    result.x = SmoothDamp(current.x, target.x, currentVelocity.x, smoothTime, maxSpeed, deltaTime);
+    result.y = SmoothDamp(current.y, target.y, currentVelocity.y, smoothTime, maxSpeed, deltaTime);
+    result.z = SmoothDamp(current.z, target.z, currentVelocity.z, smoothTime, maxSpeed, deltaTime);
+    return result;
+}
+
 void CameraController::UpdatePivotByDeadRadius(const Vector3& targetWorldPos, float dt)
 {
     // target을 ground 평면에 투영
     Vector3 targetGround = { targetWorldPos.x, groundY, targetWorldPos.z };
 
-    Vector3 delta = targetGround - pivotPos;
-    delta.y = 0.0f;
+    Vector3 toTarget = targetGround - pivotPos;
+    toTarget.y = 0.0f;
 
-    float distSq = delta.LengthSquared();
+    float distSq = toTarget.LengthSquared();
+    float dist = std::sqrt(std::max(0.0f, distSq));
+
     float r = std::max(0.0f, deadRadius);
-    float rSq = r * r;
+    float enterR = r + std::max(0.0f, deadHysteresis); // 밖으로 나가면 tracking 시작
+    float exitR = std::max(0.0f, r - std::max(0.0f, deadHysteresis)); // 안으로 충분히 들어오면 tracking 종료
 
-    // pivot dead line
-    if (distSq <= rSq) return;
+    // hysteresis 상태 전환 (경계 부들거림 방지)
+    if (!isTrackingPivot)
+    {
+        if (dist > enterR) isTrackingPivot = true;
+    }
+    else
+    {
+        if (dist < exitR) isTrackingPivot = false;
+    }
 
-    float dist = std::sqrt(distSq);
-    Vector3 dir = delta / dist;
+    // tracking 안 하면 pivot 고정(속도만 서서히 줄여서 잔떨림 제거)
+    if (!isTrackingPivot)
+    {
+        // 약간의 damping으로 velocity를 죽여줌 (갑자기 0으로 만들면 또 흔들릴 수 있음)
+        float t = 1.0f - std::exp(-12.0f * dt);
+        pivotVel = pivotVel + (Vector3::Zero - pivotVel) * t;
+        return;
+    }
+
+    // dist가 거의 0이면 dir 계산 불안정 -> 방어
+    if (dist < 0.0001f)
+        return;
+
+    Vector3 dir = toTarget / dist;
+
+    // desiredPivot: 타겟이 deadRadius 바깥으로 나간 만큼 pivot이 따라가되, "deadRadius 경계에 걸치도록"
     Vector3 desiredPivot = targetGround - dir * r;
+    desiredPivot.y = groundY;
 
-    // clamped follow
-    pivotPos = desiredPivot;
-    pivotPos.y = groundY;
+    // ★ 핵심: pivot을 desiredPivot으로 SmoothDamp
+    pivotPos = SmoothDampVec3(pivotPos, desiredPivot, pivotVel, pivotSmoothTime, pivotMaxSpeed, dt);
+    pivotPos.y = groundY; // y는 고정
 }
