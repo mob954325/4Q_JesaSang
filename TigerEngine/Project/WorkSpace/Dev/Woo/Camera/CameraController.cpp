@@ -45,6 +45,10 @@ void CameraController::OnStart()
     // cam transform init
     transform->SetPosition(camPosSmooth);
     transform->SetEuler(DegToRad(quarterEuler));
+
+    // look init
+    lookEulerSmooth = DegToRad(quarterEuler);
+    lookEulerVel = Vector3::Zero;
 }
 
 void CameraController::OnLateUpdate(float delta)
@@ -69,9 +73,35 @@ void CameraController::OnLateUpdate(float delta)
     float t = 1.0f - std::exp(-camFollowLambda * delta);
     camPosSmooth = camPosSmooth + (desiredCamPos - camPosSmooth) * t;
 
-    // apply to transform
+    // apply position
     transform->SetPosition(camPosSmooth);
-    transform->SetEuler(DegToRad(quarterEuler));
+
+    // apply rotation
+    if (true)
+    {
+        // dead zone 안: look focus
+        Vector3 lookPoint = targetPos + lookAtOffset;
+        Vector3 desiredLookEuler = ComputeLookEulerRad(camPosSmooth, lookPoint);
+
+        // SmoothDampVec3로 회전 스무딩 (rad 단위)
+        lookEulerSmooth = SmoothDampVec3(
+            lookEulerSmooth,
+            desiredLookEuler,
+            lookEulerVel,
+            lookSmoothTime,
+            lookMaxSpeed,
+            delta
+        );
+
+        transform->SetEuler(lookEulerSmooth);
+    }
+    else
+    {
+        // dead zone 밖(또는 비활성): 기존 고정 euler
+        lookEulerSmooth = DegToRad(quarterEuler); // 상태 전환 시 튐 방지용 동기화
+        lookEulerVel = Vector3::Zero;
+        transform->SetEuler(lookEulerSmooth);
+    }
 }
 
 void CameraController::OnDestory()
@@ -130,6 +160,18 @@ Vector3 CameraController::SmoothDampVec3(const Vector3& current, const Vector3& 
     return result;
 }
 
+Vector3 CameraController::ComputeLookEulerRad(const Vector3& camPos, const Vector3& lookTarget)
+{
+    Vector3 dir = lookTarget - camPos;
+
+    float yaw = std::atan2(dir.x, dir.z);      // z forward 가정
+    float xzLen = std::sqrt(dir.x * dir.x + dir.z * dir.z);
+
+    float pitch = -std::atan2(dir.y, xzLen);
+
+    return Vector3(pitch, yaw, 0.0f);
+}
+
 void CameraController::UpdatePivotByDeadRadius(const Vector3& targetWorldPos, float dt)
 {
     // target을 ground 평면에 투영
@@ -174,7 +216,7 @@ void CameraController::UpdatePivotByDeadRadius(const Vector3& targetWorldPos, fl
     Vector3 desiredPivot = targetGround - dir * r;
     desiredPivot.y = groundY;
 
-    // ★ 핵심: pivot을 desiredPivot으로 SmoothDamp
+    // 핵심: pivot을 desiredPivot으로 SmoothDamp
     pivotPos = SmoothDampVec3(pivotPos, desiredPivot, pivotVel, pivotSmoothTime, pivotMaxSpeed, dt);
     pivotPos.y = groundY; // y는 고정
 }

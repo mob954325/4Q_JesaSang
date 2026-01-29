@@ -42,18 +42,24 @@ private:
     float   groundY = 0.0f;    // pivot.y
 
     // track values
-    float deadRadius = 120.0f;     // target <-> dead zone radius
+    float deadRadius = 50.0f;     // target <-> dead zone radius
     float deadHysteresis = 10.0f;  // 경계 떨림 방지
 
-    // smooth
-    bool   isTrackingPivot = false;  // hysteresis 상태
+    // track smooth
+    bool   isTrackingPivot = false;
     Vector3 pivotVel = Vector3::Zero;
-    float  pivotSmoothTime = 0.22f;  // 값 키우면 더 묵직/느리게 따라옴
+    float  pivotSmoothTime = 0.22f;
     float  pivotMaxSpeed = 5000.0f;
 
-    // camera smoothing (기존)
     Vector3 camPosSmooth = Vector3::Zero;
-    float   camFollowLambda = 6.0f;  // 기존 10 -> 6 (조금 더 부드럽게)
+    float   camFollowLambda = 6.0f;
+
+    // look focus
+    Vector3 lookEulerSmooth = Vector3::Zero;  // 현재 스무딩된 euler (rad)
+    Vector3 lookEulerVel = Vector3::Zero;     // SmoothDamp용 속도
+    float   lookSmoothTime = 0.12f;
+    float   lookMaxSpeed = 9999.0f;
+    Vector3 lookAtOffset = { 0.0f, 0.0f, 0.0f };
 
 public:
     void OnInitialize() override;
@@ -78,6 +84,7 @@ private:
     static Vector3 SmoothDampVec3(const Vector3& current, const Vector3& target, Vector3& currentVelocity,
         float smoothTime, float maxSpeed, float deltaTime);
 
+    static Vector3 ComputeLookEulerRad(const Vector3& camPos, const Vector3& lookTarget);
 
     // funs..
     void UpdatePivotByDeadRadius(const Vector3& targetWorldPos, float dt);
