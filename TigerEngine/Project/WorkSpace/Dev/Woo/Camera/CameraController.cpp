@@ -18,22 +18,30 @@ RTTR_REGISTRATION
 
 void CameraController::OnInitialize()
 {
+    transform = GetOwner()->GetComponent<Transform>();
+    targetTr = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("CameraTrackingPoint")->GetComponent<Transform>();
 }
 
 void CameraController::OnStart()
 {
-    transform = GetOwner()->GetComponent<Transform>();
-    targetTr = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("CameraTrackingPoint")->GetComponent<Transform>();
+    if(!transform)
+        transform = GetOwner()->GetComponent<Transform>();
+    if (!targetTr)
+        targetTr = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("CameraTrackingPoint")->GetComponent<Transform>();
 
     // pivot pos init
     Vector3 tpos = targetTr->GetWorldPosition();
     groundY = tpos.y;
     pivotPos = { tpos.x, groundY, tpos.z };
 
+    // desired cam pos init
+    Vector3 desiredCamPos = pivotPos + quarterOffset;
+    camPosSmooth = desiredCamPos;
+
     // cam transform init
     Vector3 camPos = pivotPos + quarterOffset;
     transform->SetPosition(camPos);
-    transform->SetEuler(quarterEuler);
+    transform->SetEuler(DegToRad(quarterEuler));
 }
 
 void CameraController::OnLateUpdate(float delta)
@@ -46,15 +54,23 @@ void CameraController::OnLateUpdate(float delta)
 
     // target pos update
     Vector3 targetPos = targetTr->GetWorldPosition();
-    targetPos.z -= 200.0f;
+    targetPos.z -= 50.0f;
 
     // pivot pos update
     UpdatePivotByDeadRadius(targetPos, delta);
 
+    // desired cam pos update
+    Vector3 desiredCamPos = pivotPos + quarterOffset;
+    float t = 1.0f - std::exp(-camFollowLambda * delta);
+    camPosSmooth = camPosSmooth + (desiredCamPos - camPosSmooth) * t;
+
+    transform->SetPosition(camPosSmooth);
+    transform->SetEuler(DegToRad(quarterEuler));
+
     // cam transform update
-    Vector3 camPos = pivotPos + quarterOffset;
-    transform->SetPosition(camPos);
-    transform->SetEuler(quarterEuler);
+    //Vector3 camPos = pivotPos + quarterOffset;
+    //transform->SetPosition(camPos);
+    //transform->SetEuler(quarterEuler);
 }
 
 void CameraController::OnDestory()
@@ -91,7 +107,6 @@ void CameraController::UpdatePivotByDeadRadius(const Vector3& targetWorldPos, fl
     Vector3 desiredPivot = targetGround - dir * r;
 
     // clamped follow
-    float t = 1.0f - std::exp(-followSpeed * dt);
-    pivotPos = pivotPos + (desiredPivot - pivotPos) * t;
+    pivotPos = desiredPivot;
     pivotPos.y = groundY;
 }

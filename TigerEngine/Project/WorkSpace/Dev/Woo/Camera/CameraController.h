@@ -33,18 +33,20 @@ private:
     Transform* targetTr = nullptr;    
 
     // offset
-    Vector3 quarterOffset = { 0, 330.0f, -230.0f };
-    Vector3 quarterEuler = { -100.0f, 0.0f, 0.0f };
+    Vector3 quarterOffset = { 0, 280.0f, -230.0f };
+    Vector3 quarterEuler = { 50.0f, 0.0f, 0.0f };
 
     // pivot
     // (campos = pivot + modeOffset)
     Vector3 pivotPos = Vector3::Zero;
+    float   groundY = 0.0f;    // pivot.y
 
-    // values
-    float groundY = 0.0f;          // pivot.y
+    // track values
     float deadRadius = 120.0f;     // target <-> dead zone radius
     float followSpeed = 8.0f;      // following speed
 
+    Vector3 camPosSmooth = Vector3::Zero;
+    float camFollowLambda = 10.0f;
 
 public:
     void OnInitialize() override;
@@ -57,5 +59,10 @@ public:
 
 private:
     static float Clamp(float v, float a, float b) { return std::max(a, std::min(v, b)); }
+    static float ToRad(float deg) { return deg * DirectX::XM_PI / 180.0f; }
+    static Vector3 DegToRad(const Vector3& deg)
+    {
+        return Vector3(ToRad(deg.x), ToRad(deg.y), ToRad(deg.z));
+    }
     void UpdatePivotByDeadRadius(const Vector3& targetWorldPos, float dt);
 };
