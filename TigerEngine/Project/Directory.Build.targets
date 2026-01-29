@@ -4,8 +4,8 @@
         <CommonBinDir>$(SolutionDir)bin\$(ProjectName)\</CommonBinDir>
 
         <!-- OutDir 쪽 리소스/셰이더 루트 -->
-        <OutAssetsDir>$(OutDir)Assets\</OutAssetsDir>
-        <OutShadersDir>$(OutDir)Shaders\</OutShadersDir>
+        <OutAssetsDir>$(OutDir)..\Assets\</OutAssetsDir>
+        <OutShadersDir>$(OutDir)..\Shaders\</OutShadersDir>
 
         <!-- 공통 bin 루트(프로젝트 폴더 상위) -->
         <CommonAssetsDir>$(CommonBinDir)..\Assets\</CommonAssetsDir>
