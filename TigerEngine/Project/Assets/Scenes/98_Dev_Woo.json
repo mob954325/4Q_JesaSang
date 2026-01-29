@@ -2,7 +2,7 @@
   "objects": [
     {
       "properties": {
-        "ID": 139,
+        "ID": 290,
         "Name": "Main Camera",
         "ParentID": -1,
         "components": {
@@ -24,11 +24,11 @@
             "properties": {
               "Position": [
                 0.0,
-                232.5,
-                -224.5
+                230.0,
+                -230.0
               ],
               "Rotation": [
-                0.815068781375885,
+                0.8726646304130554,
                 0.0,
                 0.0
               ],
@@ -46,7 +46,7 @@
     },
     {
       "properties": {
-        "ID": 140,
+        "ID": 291,
         "Name": "DirectionalLight(Sun)",
         "ParentID": -1,
         "components": {
@@ -98,7 +98,7 @@
     },
     {
       "properties": {
-        "ID": 141,
+        "ID": 292,
         "Name": "---------Floor----------",
         "ParentID": -1,
         "components": {
@@ -128,9 +128,9 @@
     },
     {
       "properties": {
-        "ID": 142,
+        "ID": 293,
         "Name": "Floor",
-        "ParentID": 141,
+        "ParentID": 292,
         "components": {
           "FBXData": {
             "properties": {
@@ -227,7 +227,7 @@
     },
     {
       "properties": {
-        "ID": 143,
+        "ID": 294,
         "Name": "---------Wall----------",
         "ParentID": -1,
         "components": {
@@ -257,9 +257,9 @@
     },
     {
       "properties": {
-        "ID": 144,
+        "ID": 295,
         "Name": "Door_Open",
-        "ParentID": 143,
+        "ParentID": 294,
         "components": {
           "FBXData": {
             "properties": {
@@ -334,9 +334,9 @@
     },
     {
       "properties": {
-        "ID": 145,
+        "ID": 296,
         "Name": "Pillar",
-        "ParentID": 143,
+        "ParentID": 294,
         "components": {
           "FBXData": {
             "properties": {
@@ -433,9 +433,9 @@
     },
     {
       "properties": {
-        "ID": 146,
+        "ID": 297,
         "Name": "wall_4",
-        "ParentID": 143,
+        "ParentID": 294,
         "components": {
           "FBXData": {
             "properties": {
@@ -532,9 +532,9 @@
     },
     {
       "properties": {
-        "ID": 147,
+        "ID": 298,
         "Name": "wall_5",
-        "ParentID": 143,
+        "ParentID": 294,
         "components": {
           "FBXData": {
             "properties": {
@@ -631,9 +631,9 @@
     },
     {
       "properties": {
-        "ID": 148,
+        "ID": 299,
         "Name": "Room",
-        "ParentID": 141,
+        "ParentID": 292,
         "components": {
           "FBXData": {
             "properties": {
@@ -708,9 +708,9 @@
     },
     {
       "properties": {
-        "ID": 149,
+        "ID": 300,
         "Name": "Room_a_love_room",
-        "ParentID": 141,
+        "ParentID": 292,
         "components": {
           "FBXData": {
             "properties": {
@@ -785,9 +785,9 @@
     },
     {
       "properties": {
-        "ID": 150,
+        "ID": 301,
         "Name": "Room_Kitchen",
-        "ParentID": 141,
+        "ParentID": 292,
         "components": {
           "FBXData": {
             "properties": {
@@ -862,9 +862,9 @@
     },
     {
       "properties": {
-        "ID": 151,
+        "ID": 302,
         "Name": "Room_main_room",
-        "ParentID": 141,
+        "ParentID": 292,
         "components": {
           "FBXData": {
             "properties": {
@@ -939,9 +939,9 @@
     },
     {
       "properties": {
-        "ID": 152,
+        "ID": 303,
         "Name": "Room_saibi",
-        "ParentID": 141,
+        "ParentID": 292,
         "components": {
           "FBXData": {
             "properties": {
@@ -1016,9 +1016,9 @@
     },
     {
       "properties": {
-        "ID": 153,
+        "ID": 304,
         "Name": "Room_Table_of_memorial_ceremony",
-        "ParentID": 141,
+        "ParentID": 292,
         "components": {
           "FBXData": {
             "properties": {
@@ -1093,9 +1093,9 @@
     },
     {
       "properties": {
-        "ID": 154,
+        "ID": 305,
         "Name": "Room_Warehouse",
-        "ParentID": 141,
+        "ParentID": 292,
         "components": {
           "FBXData": {
             "properties": {
@@ -1170,7 +1170,7 @@
     },
     {
       "properties": {
-        "ID": 155,
+        "ID": 306,
         "Name": "---------Object----------",
         "ParentID": -1,
         "components": {
@@ -1200,9 +1200,9 @@
     },
     {
       "properties": {
-        "ID": 156,
+        "ID": 307,
         "Name": "teble",
-        "ParentID": 155,
+        "ParentID": 306,
         "components": {
           "FBXData": {
             "properties": {
@@ -1299,9 +1299,9 @@
     },
     {
       "properties": {
-        "ID": 157,
+        "ID": 308,
         "Name": "cabinet",
-        "ParentID": 155,
+        "ParentID": 306,
         "components": {
           "FBXData": {
             "properties": {
@@ -1398,9 +1398,9 @@
     },
     {
       "properties": {
-        "ID": 158,
+        "ID": 309,
         "Name": "cabinet_Open",
-        "ParentID": 155,
+        "ParentID": 306,
         "components": {
           "FBXData": {
             "properties": {
@@ -1497,9 +1497,9 @@
     },
     {
       "properties": {
-        "ID": 159,
+        "ID": 310,
         "Name": "food",
-        "ParentID": 155,
+        "ParentID": 306,
         "components": {
           "FBXData": {
             "properties": {
@@ -1574,7 +1574,7 @@
     },
     {
       "properties": {
-        "ID": 160,
+        "ID": 311,
         "Name": "Player",
         "ParentID": -1,
         "components": {
@@ -1671,7 +1671,7 @@
     },
     {
       "properties": {
-        "ID": 161,
+        "ID": 312,
         "Name": "-----------------------",
         "ParentID": -1,
         "components": {
@@ -1701,7 +1701,7 @@
     },
     {
       "properties": {
-        "ID": 162,
+        "ID": 313,
         "Name": "CurScene_98_Dev_Woo",
         "ParentID": -1,
         "components": {
@@ -1731,7 +1731,7 @@
     },
     {
       "properties": {
-        "ID": 163,
+        "ID": 314,
         "Name": "-----------------------",
         "ParentID": -1,
         "components": {
@@ -1761,9 +1761,9 @@
     },
     {
       "properties": {
-        "ID": 164,
+        "ID": 315,
         "Name": "wall_5",
-        "ParentID": 143,
+        "ParentID": 294,
         "components": {
           "FBXData": {
             "properties": {
@@ -1860,9 +1860,9 @@
     },
     {
       "properties": {
-        "ID": 165,
+        "ID": 316,
         "Name": "wall_5",
-        "ParentID": 143,
+        "ParentID": 294,
         "components": {
           "FBXData": {
             "properties": {
@@ -1959,9 +1959,9 @@
     },
     {
       "properties": {
-        "ID": 166,
+        "ID": 317,
         "Name": "wall_5",
-        "ParentID": 143,
+        "ParentID": 294,
         "components": {
           "FBXData": {
             "properties": {
@@ -2058,9 +2058,9 @@
     },
     {
       "properties": {
-        "ID": 167,
+        "ID": 318,
         "Name": "wall_4",
-        "ParentID": 143,
+        "ParentID": 294,
         "components": {
           "FBXData": {
             "properties": {
@@ -2145,6 +2145,36 @@
               ],
               "Scale": [
                 0.8999999761581421,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          }
+        }
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "ID": 319,
+        "Name": "CameraTrackingPoint",
+        "ParentID": 311,
+        "components": {
+          "Transform": {
+            "properties": {
+              "Position": [
+                0.0,
+                79.69999694824219,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
                 1.0,
                 1.0
               ]
