@@ -195,6 +195,8 @@ void PlayerController::InputProcess()
 /*-------[ Movement ]----------------------------------*/
 void PlayerController::Move(float delta)
 {
+    if (!cct) return;
+
     cct->m_MoveSpeed = curSpeed;
     cct->MoveCharacter(moveDir, delta);
 }
