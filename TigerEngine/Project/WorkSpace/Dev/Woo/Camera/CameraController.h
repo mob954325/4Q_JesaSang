@@ -36,13 +36,14 @@ private:
     Vector3 quarterOffset = { 0, 330.0f, -230.0f };
     Vector3 quarterEuler = { -100.0f, 0.0f, 0.0f };
 
-    // pivot point (campos = pivot + modeOffset)
+    // pivot
+    // (campos = pivot + modeOffset)
     Vector3 pivotPos = Vector3::Zero;
 
-    // --- tunables ---
-    float groundY = 0.0f;          // pivot이 붙어있는 평면 높이
-    float deadRadius = 120.0f;     // 월드 단위 dead zone 반경
-    float followLambda = 12.0f;    // 따라오는 속도
+    // values
+    float groundY = 0.0f;          // pivot.y
+    float deadRadius = 120.0f;     // target <-> dead zone radius
+    float followSpeed = 8.0f;      // following speed
 
 
 public:

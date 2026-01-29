@@ -83,18 +83,15 @@ void CameraController::UpdatePivotByDeadRadius(const Vector3& targetWorldPos, fl
     float r = std::max(0.0f, deadRadius);
     float rSq = r * r;
 
-    // dead zone 안 : pivot 유지
-    if (distSq <= rSq)
-        return;
+    // pivot dead line
+    if (distSq <= rSq) return;
 
     float dist = std::sqrt(distSq);
-    Vector3 dir = delta / dist; // normalize
-
-    // 경계까지만 따라간 pivot 목표
+    Vector3 dir = delta / dist;
     Vector3 desiredPivot = targetGround - dir * r;
 
-    // 부드럽게 따라가기
-    float t = 1.0f - std::exp(-followLambda * dt);
+    // clamped follow
+    float t = 1.0f - std::exp(-followSpeed * dt);
     pivotPos = pivotPos + (desiredPivot - pivotPos) * t;
     pivotPos.y = groundY;
 }
