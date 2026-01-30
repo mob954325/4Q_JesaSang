@@ -1,12 +1,13 @@
 #pragma once
 #include "pch.h"
 #include "System/ObjectSystem.h"
+#include "Enableable.h"
 
 class GameObject; // forward declear
 
-class Component : public Object
+class Component : public Enableable
 {
-	RTTR_ENABLE()
+	RTTR_ENABLE(Enableable)
 protected:
 	GameObject* owner{}; 	// 해당 컴포넌트를 소유하고 있는 게임 오브젝트
 	std::string name{};		// 해당 컴포넌트 이름
@@ -37,6 +38,11 @@ public:
     /// 
     /// </summary>
     virtual void OnFixedUpdate(float delta) {};
+
+    /// <summary>
+    /// 우정추가. 렌더링이 끝난 뒤 호출(카메라 이동 등에 사용)
+    /// </summary>
+    virtual void OnLateUpdate(float delta) {};
 
     /// <summary>
     /// 객체가 파괴 될 때 호출됩니다.

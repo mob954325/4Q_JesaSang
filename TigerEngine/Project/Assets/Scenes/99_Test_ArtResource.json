@@ -2,7 +2,9 @@
   "objects": [
     {
       "properties": {
+        "ID": 142,
         "Name": "Main Camera",
+        "ParentID": -1,
         "components": {
           "Camera": {
             "properties": {
@@ -40,10 +42,13 @@
     },
     {
       "properties": {
+        "ID": 143,
         "Name": "DirectionalLight(Sun)",
+        "ParentID": -1,
         "components": {
           "Light": {
             "properties": {
+              "Active": true,
               "Color": [
                 1.0,
                 1.0,
@@ -90,7 +95,9 @@
     },
     {
       "properties": {
+        "ID": 144,
         "Name": "---------Floor----------",
+        "ParentID": -1,
         "components": {
           "Transform": {
             "properties": {
@@ -118,10 +125,13 @@
     },
     {
       "properties": {
+        "ID": 145,
         "Name": "Floor",
+        "ParentID": -1,
         "components": {
           "FBXData": {
             "properties": {
+              "Active": true,
               "DataPath": "..\\Assets\\Resource\\FBX\\Floor\\Floor.fbx",
               "IsStatic": true
             },
@@ -129,6 +139,7 @@
           },
           "FBXRenderer": {
             "properties": {
+              "Active": true,
               "Alpha": 1.0,
               "Diffuse": [
                 1.0,
@@ -193,7 +204,9 @@
     },
     {
       "properties": {
+        "ID": 146,
         "Name": "---------House----------",
+        "ParentID": -1,
         "components": {
           "Transform": {
             "properties": {
@@ -221,10 +234,13 @@
     },
     {
       "properties": {
+        "ID": 147,
         "Name": "Door_Open",
+        "ParentID": -1,
         "components": {
           "FBXData": {
             "properties": {
+              "Active": true,
               "DataPath": "..\\Assets\\Resource\\FBX\\House\\Door_Open.fbx",
               "IsStatic": false
             },
@@ -232,6 +248,7 @@
           },
           "FBXRenderer": {
             "properties": {
+              "Active": true,
               "Alpha": 1.0,
               "Diffuse": [
                 1.0,
@@ -296,10 +313,13 @@
     },
     {
       "properties": {
+        "ID": 148,
         "Name": "Pillar",
+        "ParentID": -1,
         "components": {
           "FBXData": {
             "properties": {
+              "Active": true,
               "DataPath": "..\\Assets\\Resource\\FBX\\House\\Pillar.fbx",
               "IsStatic": true
             },
@@ -307,6 +327,7 @@
           },
           "FBXRenderer": {
             "properties": {
+              "Active": true,
               "Alpha": 1.0,
               "Diffuse": [
                 1.0,
@@ -371,10 +392,13 @@
     },
     {
       "properties": {
+        "ID": 149,
         "Name": "wall",
+        "ParentID": -1,
         "components": {
           "FBXData": {
             "properties": {
+              "Active": true,
               "DataPath": "..\\Assets\\Resource\\FBX\\House\\wall.fbx",
               "IsStatic": true
             },
@@ -382,6 +406,7 @@
           },
           "FBXRenderer": {
             "properties": {
+              "Active": true,
               "Alpha": 1.0,
               "Diffuse": [
                 1.0,
@@ -446,10 +471,13 @@
     },
     {
       "properties": {
+        "ID": 150,
         "Name": "wall_2",
+        "ParentID": -1,
         "components": {
           "FBXData": {
             "properties": {
+              "Active": true,
               "DataPath": "..\\Assets\\Resource\\FBX\\House\\wall_2.fbx",
               "IsStatic": true
             },
@@ -457,6 +485,7 @@
           },
           "FBXRenderer": {
             "properties": {
+              "Active": true,
               "Alpha": 1.0,
               "Diffuse": [
                 1.0,
@@ -521,10 +550,13 @@
     },
     {
       "properties": {
+        "ID": 151,
         "Name": "wall_3",
+        "ParentID": -1,
         "components": {
           "FBXData": {
             "properties": {
+              "Active": true,
               "DataPath": "..\\Assets\\Resource\\FBX\\House\\wall_3.fbx",
               "IsStatic": true
             },
@@ -532,6 +564,7 @@
           },
           "FBXRenderer": {
             "properties": {
+              "Active": true,
               "Alpha": 1.0,
               "Diffuse": [
                 1.0,
@@ -596,10 +629,13 @@
     },
     {
       "properties": {
+        "ID": 152,
         "Name": "wall_4",
+        "ParentID": -1,
         "components": {
           "FBXData": {
             "properties": {
+              "Active": true,
               "DataPath": "..\\Assets\\Resource\\FBX\\House\\wall_4.fbx",
               "IsStatic": true
             },
@@ -607,6 +643,7 @@
           },
           "FBXRenderer": {
             "properties": {
+              "Active": true,
               "Alpha": 1.0,
               "Diffuse": [
                 1.0,
@@ -671,10 +708,13 @@
     },
     {
       "properties": {
+        "ID": 153,
         "Name": "wall_5",
+        "ParentID": -1,
         "components": {
           "FBXData": {
             "properties": {
+              "Active": true,
               "DataPath": "..\\Assets\\Resource\\FBX\\House\\wall_5.fbx",
               "IsStatic": true
             },
@@ -682,6 +722,7 @@
           },
           "FBXRenderer": {
             "properties": {
+              "Active": true,
               "Alpha": 1.0,
               "Diffuse": [
                 1.0,
@@ -746,10 +787,13 @@
     },
     {
       "properties": {
+        "ID": 154,
         "Name": "wall_6",
+        "ParentID": -1,
         "components": {
           "FBXData": {
             "properties": {
+              "Active": true,
               "DataPath": "..\\Assets\\Resource\\FBX\\House\\wall_6.fbx",
               "IsStatic": true
             },
@@ -757,6 +801,7 @@
           },
           "FBXRenderer": {
             "properties": {
+              "Active": true,
               "Alpha": 1.0,
               "Diffuse": [
                 1.0,
@@ -821,10 +866,13 @@
     },
     {
       "properties": {
+        "ID": 155,
         "Name": "wall_8",
+        "ParentID": -1,
         "components": {
           "FBXData": {
             "properties": {
+              "Active": true,
               "DataPath": "..\\Assets\\Resource\\FBX\\House\\wall_8.fbx",
               "IsStatic": true
             },
@@ -832,6 +880,7 @@
           },
           "FBXRenderer": {
             "properties": {
+              "Active": true,
               "Alpha": 1.0,
               "Diffuse": [
                 1.0,
@@ -896,10 +945,13 @@
     },
     {
       "properties": {
+        "ID": 156,
         "Name": "wall_9",
+        "ParentID": -1,
         "components": {
           "FBXData": {
             "properties": {
+              "Active": true,
               "DataPath": "..\\Assets\\Resource\\FBX\\House\\wall_9.fbx",
               "IsStatic": true
             },
@@ -907,6 +959,7 @@
           },
           "FBXRenderer": {
             "properties": {
+              "Active": true,
               "Alpha": 1.0,
               "Diffuse": [
                 1.0,
@@ -971,10 +1024,13 @@
     },
     {
       "properties": {
+        "ID": 157,
         "Name": "wall_12",
+        "ParentID": -1,
         "components": {
           "FBXData": {
             "properties": {
+              "Active": true,
               "DataPath": "..\\Assets\\Resource\\FBX\\House\\wall_12.fbx",
               "IsStatic": true
             },
@@ -982,6 +1038,7 @@
           },
           "FBXRenderer": {
             "properties": {
+              "Active": true,
               "Alpha": 1.0,
               "Diffuse": [
                 1.0,
@@ -1046,10 +1103,13 @@
     },
     {
       "properties": {
+        "ID": 158,
         "Name": "wall_13",
+        "ParentID": -1,
         "components": {
           "FBXData": {
             "properties": {
+              "Active": true,
               "DataPath": "..\\Assets\\Resource\\FBX\\House\\wall_13.fbx",
               "IsStatic": true
             },
@@ -1057,6 +1117,7 @@
           },
           "FBXRenderer": {
             "properties": {
+              "Active": true,
               "Alpha": 1.0,
               "Diffuse": [
                 1.0,
@@ -1121,10 +1182,13 @@
     },
     {
       "properties": {
+        "ID": 159,
         "Name": "wall_14",
+        "ParentID": -1,
         "components": {
           "FBXData": {
             "properties": {
+              "Active": true,
               "DataPath": "..\\Assets\\Resource\\FBX\\House\\wall_14.fbx",
               "IsStatic": true
             },
@@ -1132,6 +1196,7 @@
           },
           "FBXRenderer": {
             "properties": {
+              "Active": true,
               "Alpha": 1.0,
               "Diffuse": [
                 1.0,
@@ -1196,7 +1261,9 @@
     },
     {
       "properties": {
+        "ID": 160,
         "Name": "---------Room----------",
+        "ParentID": -1,
         "components": {
           "Transform": {
             "properties": {
@@ -1224,10 +1291,13 @@
     },
     {
       "properties": {
+        "ID": 161,
         "Name": "Room",
+        "ParentID": -1,
         "components": {
           "FBXData": {
             "properties": {
+              "Active": true,
               "DataPath": "..\\Assets\\Resource\\FBX\\Room\\Room_.fbx",
               "IsStatic": true
             },
@@ -1235,6 +1305,7 @@
           },
           "FBXRenderer": {
             "properties": {
+              "Active": true,
               "Alpha": 1.0,
               "Diffuse": [
                 1.0,
@@ -1299,10 +1370,13 @@
     },
     {
       "properties": {
+        "ID": 162,
         "Name": "Room_a_love_room",
+        "ParentID": -1,
         "components": {
           "FBXData": {
             "properties": {
+              "Active": true,
               "DataPath": "..\\Assets\\Resource\\FBX\\Room\\Room_a_love_room.fbx",
               "IsStatic": true
             },
@@ -1310,6 +1384,7 @@
           },
           "FBXRenderer": {
             "properties": {
+              "Active": true,
               "Alpha": 1.0,
               "Diffuse": [
                 1.0,
@@ -1374,10 +1449,13 @@
     },
     {
       "properties": {
+        "ID": 163,
         "Name": "Room_Kitchen",
+        "ParentID": -1,
         "components": {
           "FBXData": {
             "properties": {
+              "Active": true,
               "DataPath": "..\\Assets\\Resource\\FBX\\Room\\Room_Kitchen.fbx",
               "IsStatic": true
             },
@@ -1385,6 +1463,7 @@
           },
           "FBXRenderer": {
             "properties": {
+              "Active": true,
               "Alpha": 1.0,
               "Diffuse": [
                 1.0,
@@ -1449,10 +1528,13 @@
     },
     {
       "properties": {
+        "ID": 164,
         "Name": "Room_main_room",
+        "ParentID": -1,
         "components": {
           "FBXData": {
             "properties": {
+              "Active": true,
               "DataPath": "..\\Assets\\Resource\\FBX\\Room\\Room_main_room.fbx",
               "IsStatic": true
             },
@@ -1460,6 +1542,7 @@
           },
           "FBXRenderer": {
             "properties": {
+              "Active": true,
               "Alpha": 1.0,
               "Diffuse": [
                 1.0,
@@ -1524,10 +1607,13 @@
     },
     {
       "properties": {
+        "ID": 165,
         "Name": "Room_saibi",
+        "ParentID": -1,
         "components": {
           "FBXData": {
             "properties": {
+              "Active": true,
               "DataPath": "..\\Assets\\Resource\\FBX\\Room\\Room_saibi.fbx",
               "IsStatic": true
             },
@@ -1535,6 +1621,7 @@
           },
           "FBXRenderer": {
             "properties": {
+              "Active": true,
               "Alpha": 1.0,
               "Diffuse": [
                 1.0,
@@ -1599,10 +1686,13 @@
     },
     {
       "properties": {
+        "ID": 166,
         "Name": "Room_Table_of_memorial_ceremony",
+        "ParentID": -1,
         "components": {
           "FBXData": {
             "properties": {
+              "Active": true,
               "DataPath": "..\\Assets\\Resource\\FBX\\Room\\Room_Table_of_memorial_ceremony.fbx",
               "IsStatic": true
             },
@@ -1610,6 +1700,7 @@
           },
           "FBXRenderer": {
             "properties": {
+              "Active": true,
               "Alpha": 1.0,
               "Diffuse": [
                 1.0,
@@ -1674,10 +1765,13 @@
     },
     {
       "properties": {
+        "ID": 167,
         "Name": "Room_Warehouse",
+        "ParentID": -1,
         "components": {
           "FBXData": {
             "properties": {
+              "Active": true,
               "DataPath": "..\\Assets\\Resource\\FBX\\Room\\Room_Warehouse.fbx",
               "IsStatic": true
             },
@@ -1685,6 +1779,7 @@
           },
           "FBXRenderer": {
             "properties": {
+              "Active": true,
               "Alpha": 1.0,
               "Diffuse": [
                 1.0,
@@ -1749,7 +1844,9 @@
     },
     {
       "properties": {
+        "ID": 168,
         "Name": "---------Object----------",
+        "ParentID": -1,
         "components": {
           "Transform": {
             "properties": {
@@ -1777,10 +1874,13 @@
     },
     {
       "properties": {
+        "ID": 169,
         "Name": "teble",
+        "ParentID": -1,
         "components": {
           "FBXData": {
             "properties": {
+              "Active": true,
               "DataPath": "..\\Assets\\Resource\\FBX\\Table\\teble.fbx",
               "IsStatic": false
             },
@@ -1788,6 +1888,7 @@
           },
           "FBXRenderer": {
             "properties": {
+              "Active": true,
               "Alpha": 1.0,
               "Diffuse": [
                 1.0,
@@ -1852,10 +1953,13 @@
     },
     {
       "properties": {
+        "ID": 170,
         "Name": "cabinet",
+        "ParentID": -1,
         "components": {
           "FBXData": {
             "properties": {
+              "Active": true,
               "DataPath": "..\\Assets\\Resource\\FBX\\Jagaejang\\cabinet.fbx",
               "IsStatic": false
             },
@@ -1863,6 +1967,7 @@
           },
           "FBXRenderer": {
             "properties": {
+              "Active": true,
               "Alpha": 1.0,
               "Diffuse": [
                 1.0,
@@ -1927,10 +2032,13 @@
     },
     {
       "properties": {
+        "ID": 171,
         "Name": "cabinet_Open",
+        "ParentID": -1,
         "components": {
           "FBXData": {
             "properties": {
+              "Active": true,
               "DataPath": "..\\Assets\\Resource\\FBX\\Jagaejang\\cabinet_Open.fbx",
               "IsStatic": false
             },
@@ -1938,6 +2046,7 @@
           },
           "FBXRenderer": {
             "properties": {
+              "Active": true,
               "Alpha": 1.0,
               "Diffuse": [
                 1.0,
@@ -2002,10 +2111,13 @@
     },
     {
       "properties": {
+        "ID": 172,
         "Name": "food",
+        "ParentID": -1,
         "components": {
           "FBXData": {
             "properties": {
+              "Active": true,
               "DataPath": "..\\Assets\\Resource\\FBX\\Food\\teble_Food.fbx",
               "IsStatic": true
             },
@@ -2013,6 +2125,7 @@
           },
           "FBXRenderer": {
             "properties": {
+              "Active": true,
               "Alpha": 1.0,
               "Diffuse": [
                 1.0,
@@ -2077,10 +2190,13 @@
     },
     {
       "properties": {
+        "ID": 173,
         "Name": "Player",
+        "ParentID": -1,
         "components": {
           "FBXData": {
             "properties": {
+              "Active": true,
               "DataPath": "..\\Assets\\Resource\\FBX\\Player\\charcter_test.fbx",
               "IsStatic": false
             },
@@ -2088,6 +2204,7 @@
           },
           "FBXRenderer": {
             "properties": {
+              "Active": true,
               "Alpha": 1.0,
               "Diffuse": [
                 1.0,
@@ -2132,6 +2249,85 @@
                 0.0,
                 0.0,
                 -100.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          }
+        }
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "ID": 175,
+        "Name": "baby_ghost",
+        "ParentID": -1,
+        "components": {
+          "FBXData": {
+            "properties": {
+              "Active": true,
+              "DataPath": "..\\Assets\\Resource\\FBX\\Ghost\\baby_ghost.fbx",
+              "IsStatic": false
+            },
+            "type": "FBXData"
+          },
+          "FBXRenderer": {
+            "properties": {
+              "Active": true,
+              "Alpha": 1.0,
+              "Diffuse": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "DiffuseOverride": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Emissive": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "EmissiveOverride": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "IsGround": false,
+              "Metalic": 1.0,
+              "MetallicOverride": 1.0,
+              "RenderBlendType": "Opaque",
+              "Roughness": 1.0,
+              "RoughnessOverride": 1.0,
+              "UseDiffuseOverride": false,
+              "UseEmissiveOverride": false,
+              "UseMetallicOverride": false,
+              "UseRoughnessOverride": false
+            },
+            "type": "FBXRenderer"
+          },
+          "Transform": {
+            "properties": {
+              "Position": [
+                -77.69999694824219,
+                0.0,
+                -70.69999694824219
               ],
               "Rotation": [
                 0.0,

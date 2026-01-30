@@ -7,9 +7,11 @@
 
 RTTR_REGISTRATION
 {
+    rttr::registration::class_<Enableable>("Enableable")
+        .property("Active", &Enableable::GetActiveSelf, &Enableable::SetActive);
+
     rttr::registration::class_<GameObject>("GameObject")
-        .constructor<>()
-            (rttr::policy::ctor::as_std_shared_ptr) 
+        
         .property("Name", &GameObject::name);
 }
 
@@ -188,7 +190,7 @@ void GameObject::UpdateAABB()
 {
     Transform* trans = transform;
     Vector3 updatedExtent = aabbBoxExtent * trans->GetScale();
-    aabbBox.Center = trans->GetPosition() + aabbCenter;
+    aabbBox.Center = trans->GetWorldPosition() + aabbCenter;
     aabbBox.Extents = updatedExtent;
 }
 
@@ -208,7 +210,7 @@ void GameObject::SetAABB(Vector3 min, Vector3 max, Vector3 centor)
 {
     auto tran = transform;
 
-    aabbBox.Center = tran->GetPosition();
+    aabbBox.Center = tran->GetLocalPosition();
     aabbBoxExtent = (max - min) / 2.0f;
     aabbCenter = centor;
 }

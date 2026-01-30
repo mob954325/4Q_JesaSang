@@ -52,6 +52,11 @@ public:
     /// </summary>
     void FixedUpdate(float dt);
 
+    /// <summary>
+   /// 등록된 컴포넌트 호출
+   /// </summary>
+    void LateUpdate(float dt);
+
 private:
     // === 일반 Component ===
     /// <summary>
@@ -71,7 +76,7 @@ private:
     std::vector<Component*> scriptComps{};
 
     /// <summary>
-    /// 스크립트 컴포넌트 initialize 레디 큐 
+    /// 스크립트 컴포넌트 initialize 레디 목록 
     /// </summary>
-    std::queue<Component*> scriptCompsInitReadyQueue{};
+    std::vector<Component*> scriptCompsInitReady{};
 };
