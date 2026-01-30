@@ -414,16 +414,14 @@ void EngineApp::OnInputProcess(const Keyboard::State &KeyState, const Keyboard::
 #include "Components/AnimationController.h"
 #include "Manager/ComponentFactory.h"
 
-#include "Player/Player1.h"
-#include "Player/Weapon.h"
+#include "99_Test/Player/Player1.h"
+#include "99_Test/Player/Weapon.h"
 
-#include "PhysicsTest/PhysicsTestScript.h"
-#include "PhysicsTest/GroundTestScript.h"
-#include "PhysicsTest/CCTTest.h"
-#include "AudioTest/AudioPlayModeScript.h"
-#include "AudioTest/AudioListenerSyncScript.h"
-#include "AudioTest/AudioOrbitScript.h"
-#include "AudioTest/AudioKeyTriggerScript.h"
+
+#include "99_Test/PhysicsTest/PhysicsTestScript.h"
+#include "99_Test/PhysicsTest/GroundTestScript.h"
+#include "99_Test/PhysicsTest/CCTTest.h"
+#include "99_Test/AudioTest/AudioPlayModeScript.h"
 
 
 void EngineApp::RegisterAllComponents()
