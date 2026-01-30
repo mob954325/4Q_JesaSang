@@ -44,8 +44,8 @@ private:
     Vector3 moveDir = Vector3::Zero;
 
     // init
-    float walkSpeed = 3.0f;
-    float runSpeed = 6.0f;
+    float walkSpeed = 2.5f;
+    float runSpeed = 4.0f;
     float sitSpeed = 1.0f;
         
 

@@ -117,7 +117,7 @@ void Editor::Render(HWND &hwnd)
     RenderHierarchy();
     RenderInspector();
     RenderDebugAABBDraw();
-    RenderCameraFrustum();
+    //RenderCameraFrustum();
     RenderWorldSettings();
     RenderShadowMap();
     RenderPrefabWindow(hwnd);
