@@ -62,7 +62,7 @@ private:
     Vector3 lookEulerSmooth = Vector3::Zero;     // rotation euler
     Vector3 lookEulerVel    = Vector3::Zero;     // rotation euler smooth velocity
 
-    float lookPointSmoothTime = 0.7f;   // target pos -> look point smoothing time
+    float lookPointSmoothTime = 0.4f;   // target pos -> look point smoothing time
     float lookSmoothTime = 0.15f;       // look euler smoothing time
     float lookMaxSpeed = 1000.0f;       // look euler max speed
     float lookDeadZoneDeg = 1.5f;       // 회전 무시 threshold
