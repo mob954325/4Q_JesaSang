@@ -172,11 +172,11 @@ void GameObject::Deserialize(const nlohmann::json objData)
         else    // 그 외 컴포넌트는 추가한다.
         {
             // 컴포넌트를 찾아서 factory에 등록되어있으면 컴포넌트 추가
-            for (auto [name, create] : registered)
+            for (auto [name, entry] : registered)
             {
                 if (compName == name)
                 {                   
-                    auto createdComp = create(this);
+                    auto createdComp = entry.creator(this);
                     createdComp->Deserialize(prop);
 
                     break;

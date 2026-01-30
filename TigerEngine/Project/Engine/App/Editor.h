@@ -54,6 +54,7 @@ private:
 
     // inspector
     void RenderInspector();
+    void DrawAddComponentPopup(GameObject* obj);
 
     // Debug Draw
     void RenderCameraFrustum();
