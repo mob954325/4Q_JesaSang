@@ -97,7 +97,6 @@ void GeometryPass::Execute(ComPtr<ID3D11DeviceContext>& context, RenderQueue& qu
     context->OMSetRenderTargets(4, nullRTV, nullptr);
 }
 
-#if _DEBUG
 #include "../../EngineSystem/SceneSystem.h"
 
 void GeometryPass::ExecutePickingPass(ComPtr<ID3D11DeviceContext>& context, RenderQueue& queue, Camera* cam)
@@ -214,5 +213,3 @@ void GeometryPass::ExecutePickingPass(ComPtr<ID3D11DeviceContext>& context, Rend
 
     context->PSSetShader(nullptr, 0, 0); // ps 바인드 해제
 }
-#endif
-

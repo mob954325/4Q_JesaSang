@@ -4,7 +4,7 @@
 #include "../EngineSystem/SceneSystem.h"
 
 #include <commdlg.h>
-#include "imguiFileDialog/ImGuiFileDialog.h"
+#include "../Externals/imguiFileDialog/ImGuiFileDialog.h"
 #include "../Components/FBXData.h"
 #include "../Components/Decal.h"
 #include "../Object/GameObject.h"
@@ -1192,11 +1192,11 @@ void Editor::RenderDebugAABBDraw()
     // DebugDraw의 BasicEffect 설정
     
     Camera* cam{}; 
-    if (PlayModeSystem::Instance().IsPlaying())
-    {
-        cam = CameraSystem::Instance().GetCurrCamera();
-    }
-    else
+    //if (PlayModeSystem::Instance().IsPlaying())
+    //{
+    //    cam = CameraSystem::Instance().GetCurrCamera();
+    //}
+    //else
     {
         cam = CameraSystem::Instance().GetFreeCamera();
     }
@@ -1529,8 +1529,8 @@ void Editor::CheckObjectDeleteKey()
         return;
 
     // 플레이 모드일 때 막기
-    if (PlayModeSystem::Instance().IsPlaying())
-        return;
+    //if (PlayModeSystem::Instance().IsPlaying())
+    //    return;
 
     // imgui로 키 입력 확인
     if (ImGui::IsKeyPressed(ImGuiKey_Delete, false))

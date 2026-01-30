@@ -128,9 +128,9 @@ void EngineApp::OnPreUpdate()
 void EngineApp::OnUpdate()
 {
     Camera* curCam;
-    if(PlayModeSystem::Instance().IsPlaying())
-        curCam = CameraSystem::Instance().GetCurrCamera();
-    else
+    //if(PlayModeSystem::Instance().IsPlaying())
+    //    curCam = CameraSystem::Instance().GetCurrCamera();
+    //else
         curCam = CameraSystem::Instance().GetFreeCamera();
 
 	SceneSystem::Instance().BeforUpdate();	
@@ -181,9 +181,9 @@ void EngineApp::OnRender()
 
     // current camera
     Camera* curCam;
-    if (PlayModeSystem::Instance().IsPlaying())
-        curCam = CameraSystem::Instance().GetCurrCamera();
-    else
+    //if (PlayModeSystem::Instance().IsPlaying())
+    //    curCam = CameraSystem::Instance().GetCurrCamera();
+    //else
         curCam = CameraSystem::Instance().GetFreeCamera();
 
     // render pass
