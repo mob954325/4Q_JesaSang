@@ -19,10 +19,8 @@ void ShaderManager::Init(const ComPtr<ID3D11Device>& dev, const ComPtr<ID3D11Dev
     CreateInputLayoutShader(dev, ctx);
     CreateCB(dev);
 
-#if _DEBUG
     CreatePickingGBufferTex(dev, width, height);
     CreatePickingDSV(dev, width, height);
-#endif
 }
 
 
@@ -685,9 +683,7 @@ void ShaderManager::CreateInputLayoutShader(const ComPtr<ID3D11Device>& dev, con
         SAFE_RELEASE(pixelShaderBuffer);
     }
 
-#if _DEBUG
     CreatePickingPS(dev);
-#endif
     //---------------------------
     // ForwardTransparent PS
     {
@@ -820,9 +816,7 @@ void ShaderManager::CreateCB(const ComPtr<ID3D11Device>& dev)
         HR_T(dev->CreateBuffer(&constBuffer_Desc, nullptr, &decalCB));
     }
   
-#if _DEBUG
     CreatePickingCB(dev);
-#endif
 }
 
 void ShaderManager::CreateBackBufferResource(const ComPtr<ID3D11Device>& dev, int screenWidth, int screenHeight)
@@ -830,10 +824,8 @@ void ShaderManager::CreateBackBufferResource(const ComPtr<ID3D11Device>& dev, in
     CreateHDRResource(dev, screenWidth, screenHeight);
     CreateGbufferResource(dev, screenWidth, screenHeight);
     CreateBloomResource(dev, screenWidth, screenHeight);
-#if _DEBUG
     CreatePickingGBufferTex(dev, screenWidth, screenHeight);
     CreatePickingDSV(dev, screenWidth, screenHeight);
-#endif
 }
 
 // [ Util Funcs ] --------------------------------------------------------------
@@ -925,14 +917,11 @@ void ShaderManager::ReleaseBackBufferResources()
     sceneHDRRTV.Reset();
     sceneHDRSRV.Reset();
 
-#if _DEBUG
     pickingSRV.Reset();
     pickingRTV.Reset();
     pickingTex.Reset();
-#endif
 }
 
-#if _DEBUG
 void ShaderManager::CreatePickingGBufferTex(const ComPtr<ID3D11Device>& dev, int screenWidth, int screenHeight)
 {
     CreateRTTex_RTV_SRV(dev,
@@ -992,4 +981,3 @@ void ShaderManager::CreatePickingDSV(const ComPtr<ID3D11Device>& dev, int screen
 
     HR_T(dev->CreateDepthStencilView(pickingDepthTex.Get(), &dsv, pickingDSV.GetAddressOf()));
 }
-#endif

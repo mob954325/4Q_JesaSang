@@ -165,7 +165,6 @@ public:
     DecalCB         decalCBData;
 
     // Debug Picking 
-#if _DEBUG
     ComPtr<ID3D11ShaderResourceView>    pickingSRV;
     ComPtr<ID3D11RenderTargetView>      pickingRTV;
     ComPtr<ID3D11Texture2D>             pickingTex;         // ID 기록 텍스처
@@ -179,7 +178,6 @@ public:
     void CreatePickingCB(const ComPtr<ID3D11Device>& dev);
     void CreatePickingPS(const ComPtr<ID3D11Device>& dev);
     void CreatePickingDSV(const ComPtr<ID3D11Device>& dev, int screenWidth, int screenHeight);
-#endif
 
 public:
     // Util funcs

@@ -1,4 +1,3 @@
-#if _DEBUG
 #pragma once
 #include "../pch.h"
 #include "wrl/client.h"
@@ -22,4 +21,3 @@ public:
 
     void AddRenderContents(std::function<void()> contants);
 };
-#endif

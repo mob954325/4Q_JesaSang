@@ -1,4 +1,3 @@
-#if _DEBUG
 #include "Editor.h"
 #include "../EngineSystem/CameraSystem.h"
 #include "../Manager/ComponentFactory.h"
@@ -1593,4 +1592,3 @@ void Editor::OnInputProcess(const Keyboard::State &KeyState, const Keyboard::Key
         }
     }
 }
-#endif

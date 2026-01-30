@@ -1,6 +1,4 @@
-#if _DEBUG
 #include "imgui_impl_win32.h" // ImGui_ImplWin32_WndProcHandler 사용하기 위함
-#endif
 
 #include "GameApp.h"
 #include "EngineApp.h"
@@ -44,10 +42,8 @@ bool EngineApp::OnInitialize()
 
 	// == init renderer ==
 	dxRenderer = std::static_pointer_cast<DirectX11Renderer>(renderer); 
-#if _DEBUG
 	imguiRenderer = std::make_unique<ImguiRenderer>();
 	imguiRenderer->Initialize(hwnd, dxRenderer->GetDevice(), dxRenderer->GetDeviceContext());
-#endif
 
 	// == init system ==
 	FBXResourceManager::Instance().GetDevice(dxRenderer->GetDevice(), dxRenderer->GetDeviceContext());
@@ -69,14 +65,12 @@ bool EngineApp::OnInitialize()
 
     renderQueue = std::make_unique<RenderQueue>();
 
-#if _DEBUG
 	editor = std::make_unique<Editor>();
 	editor->GetScreenSize(clientWidth, clientHeight);
 	editor->Initialize(dxRenderer->GetDevice(), dxRenderer->GetDeviceContext());
 	editor->GetDSV(dxRenderer->GetDepthStencilView());
 	editor->GetRTV(dxRenderer->GetBackBufferRTV());
     editor->CreatePickingStagingTex();
-#endif
 
 	SceneSystem::Instance().AddScene();			    	// create first scene
 	SceneSystem::Instance().SetCurrentSceneByIndex(); 	// render first scene
@@ -84,11 +78,9 @@ bool EngineApp::OnInitialize()
 	// create free camera
 	CameraSystem::Instance().SetScreenSize(clientWidth, clientHeight);
 
-#if _DEBUG
 	auto freeCamHandle = CameraSystem::Instance().CreateFreeCamera(clientWidth, clientHeight, SceneSystem::Instance().GetCurrentScene().get());
     auto freeCamObjPtr = ObjectSystem::Instance().Get<GameObject>(freeCamHandle);
     freeCamObjPtr->AddComponent<FreeCamera>();
-#endif
 
     // == find scene ==
     LoadSavedFirstScene();
@@ -122,10 +114,7 @@ bool EngineApp::OnInitialize()
 
  
 
-#if _DEBUG
-#else
     PlayModeSystem::Instance().SetPlayMode(PlayModeState::Playing);
-#endif
 
 	return true;
 }
@@ -152,9 +141,7 @@ void EngineApp::OnUpdate()
     AudioManager::Instance().Update();
     AnimationSystem::Instance().Update(GameTimer::Instance().DeltaTime());
 
-#if _DEBUG
 	editor->Update();
-#endif
 }
 
 void EngineApp::OnRender()
@@ -210,11 +197,9 @@ void EngineApp::OnRender()
     dxRenderer->ProcessScene(*renderQueue, *postProcessPass, curCam);
 
 
-#if _DEBUG
 	editor->Render(hwnd); 	// 엔진 오버레이 렌더링
 	imguiRenderer->Render();		// imgui 렌더링
 	editor->RenderEnd(dxRenderer->GetDeviceContext());
-#endif
 
 	EndRender(); 					// 업데이트 마무리
 }
@@ -244,30 +229,24 @@ void EngineApp::OnLateUpdate()
 
 void GameApp::ConsoleInitialize()
 {
-#if _DEBUG
     AllocConsole();
     FILE* fp;
     freopen_s(&fp, "CONOUT$", "w", stdout);
     SetConsoleTitle(L"윈도우 메세지 콘솔 로그");
     printf("-- Console log start --\n\n");
-#endif
 }
 
 void GameApp::ConsoleUninitalize()
 {
-#if _DEBUG
     // 표준 출력 스트림 닫기
     fclose(stdout);
     // 콘솔 해제
     FreeConsole();
-#endif
 }
 
 void EngineApp::BeginRender()
 {
-#if _DEBUG
 	imguiRenderer->BeginRender();
-#endif
 	renderer->BeginRender();
     renderQueue->Clear();
 }
@@ -275,9 +254,7 @@ void EngineApp::BeginRender()
 void EngineApp::EndRender()
 {	
 	renderer->EndRender();
-#if _DEBUG
 	imguiRenderer->EndRender();
-#endif
 }
 
 #include "Util/PathHelper.h"
@@ -329,9 +306,7 @@ void EngineApp::ResizeResource()
     auto& sm = ShaderManager::Instance();
 
     sm.ReleaseBackBufferResources();
-#if _DEBUG
     editor->ReleaseBackBufferResources();
-#endif
 
     dxRenderer->OnResize(clientWidth, clientHeight);
     sm.CreateBackBufferResource(dxRenderer->GetDevice(), clientWidth, clientHeight);
@@ -343,13 +318,11 @@ void EngineApp::ResizeResource()
     sm.depthSRV = dxRenderer->GetDepthSRV();
     sm.viewport_screen = dxRenderer->GetRenderViewPort();
 
-#if _DEBUG
     // editor 참조
     editor->GetScreenSize(clientWidth, clientHeight);
     editor->GetDSV(dxRenderer->GetDepthStencilView());
     editor->GetRTV(dxRenderer->GetBackBufferRTV());
     editor->CreatePickingStagingTex();
-#endif
 
     // Camera
     auto cams = CameraSystem::Instance().GetAllCamera();
@@ -360,16 +333,12 @@ void EngineApp::ResizeResource()
 }
 
 // Forward declare message handler from imgui_impl_win32.cpp
-#if _DEBUG
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
-#endif
 
 LRESULT EngineApp::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
-#if _DEBUG
     if (ImGui_ImplWin32_WndProcHandler(hWnd, message, wParam, lParam))
         return true;
-#endif
 
     switch (message)
     {
@@ -396,9 +365,7 @@ LRESULT EngineApp::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam
 void EngineApp::OnInputProcess(const Keyboard::State &KeyState, const Keyboard::KeyboardStateTracker &KeyTracker, const Mouse::State &MouseState, const Mouse::ButtonStateTracker &MouseTracker)
 {
 	__super::OnInputProcess(KeyState, KeyTracker, MouseState, MouseTracker);
-#if _DEBUG
 	editor->OnInputProcess(KeyState, KeyTracker, MouseState, MouseTracker);
-#endif
 }
 
 // ================= 컴포넌트 등록 =================

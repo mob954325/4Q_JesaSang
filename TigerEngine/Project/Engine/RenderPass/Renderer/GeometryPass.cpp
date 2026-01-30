@@ -90,9 +90,7 @@ void GeometryPass::Execute(ComPtr<ID3D11DeviceContext>& context, RenderQueue& qu
         opaqueItem.mesh->Draw(context);
     }
 
-#if _DEBUG
     ExecutePickingPass(context, queue, cam);
-#endif
 
     // clean up
     ID3D11RenderTargetView* nullRTV[4] = { nullptr, nullptr, nullptr, nullptr };

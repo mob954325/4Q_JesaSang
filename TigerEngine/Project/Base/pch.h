@@ -27,11 +27,9 @@
 #include <functional>
 #include <fstream>
 
-#if _DEBUG
 #include <imgui.h>
 #include <imgui_impl_win32.h>
 #include <imgui_impl_dx11.h>
-#endif
 
 #include <directxtk/SimpleMath.h>
 

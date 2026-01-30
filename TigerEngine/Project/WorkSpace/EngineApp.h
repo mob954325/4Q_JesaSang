@@ -36,10 +36,8 @@ public:
     void OnFixedUpdate() override;
     void OnLateUpdate() override;
 
-#if _DEBUG
 	std::unique_ptr<ImguiRenderer> imguiRenderer{};
 	std::unique_ptr<Editor> editor{};
-#endif
 
     // [ Render Pass ] ---------------------------------
     std::unique_ptr<ShadowPass>               shadowPass{};
