@@ -38,10 +38,6 @@ static Vector2 WorldToMiniMap(const Vector3& worldPos, const Vector3& worldMin, 
 
 void MiniMapTestScript::OnInitialize()
 {
-    if (auto owner = GetOwner())
-    {
-        m_Transform = owner->GetTransform();
-    }
     std::cout << "[MiniMapTest] OnInitialize" << std::endl;
 }
 
@@ -54,18 +50,19 @@ void MiniMapTestScript::OnUpdate(float delta)
 {
     (void)delta;
 
+    Transform* transform = nullptr;
     if (auto owner = GetOwner())
     {
-        m_Transform = owner->GetTransform();
+        transform = owner->GetTransform();
     }
-    if (!m_Transform)
+    if (!transform)
     {
         return;
     }
 
     if (Input::GetKeyDown(DirectX::Keyboard::Keys::M))
     {
-        const Vector3 pos = m_Transform->GetWorldPosition();
+        const Vector3 pos = transform->GetWorldPosition();
         const Vector2 mm = WorldToMiniMap(pos, worldMin, worldMax, mapSize);
         std::cout << "[MiniMapTest] world("
             << pos.x << ", " << pos.y << ", " << pos.z

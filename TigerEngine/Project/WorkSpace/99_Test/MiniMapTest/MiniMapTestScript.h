@@ -24,5 +24,4 @@ public:
     int collectedPieces = 0;
 
 private:
-    Transform* m_Transform = nullptr;
 };
