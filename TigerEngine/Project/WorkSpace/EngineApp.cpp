@@ -53,6 +53,8 @@ bool EngineApp::OnInitialize()
 	FBXResourceManager::Instance().GetDevice(dxRenderer->GetDevice(), dxRenderer->GetDeviceContext());
     ShaderManager::Instance().Init(dxRenderer->GetDevice(), dxRenderer->GetDeviceContext(), clientWidth, clientHeight);
     AudioManager::Instance().Initialize();
+    // AudioManager::Instance().GetSystem().Set3DSettings(1.0f, 0.01f, 1.0f);// 기본 3D 설정 도플러 스케일, 거리 , 감쇠 효과
+    AudioManager::Instance().GetSystem().Set3DSettings(1.0f, 0.01f, 1.0f);
     if (!PhysicsSystem::Instance().Initialize()) { return false; }
 
     auto& sm = ShaderManager::Instance();
@@ -415,6 +417,7 @@ void EngineApp::OnInputProcess(const Keyboard::State &KeyState, const Keyboard::
 #include "99_Test/Player/Player1.h"
 #include "99_Test/Player/Weapon.h"
 
+
 #include "99_Test/PhysicsTest/PhysicsTestScript.h"
 #include "99_Test/PhysicsTest/GroundTestScript.h"
 #include "99_Test/PhysicsTest/CCTTest.h"
@@ -436,6 +439,9 @@ void EngineApp::RegisterAllComponents()
     ComponentFactory::Instance().Register<AudioListenerComponent>("AudioListenerComponent");
     ComponentFactory::Instance().Register<AudioSourceComponent>("AudioSourceComponent");
     ComponentFactory::Instance().Register<AudioPlayModeScript>("AudioPlayModeScript");
+    ComponentFactory::Instance().Register<AudioListenerSyncScript>("AudioListenerSyncScript");
+    ComponentFactory::Instance().Register<AudioOrbitScript>("AudioOrbitScript");
+    ComponentFactory::Instance().Register<AudioKeyTriggerScript>("AudioKeyTriggerScript");
     ComponentFactory::Instance().Register<PhysicsTestScript>("PhysicsTestScript");
     ComponentFactory::Instance().Register<GroundTestScript>("GroundTestScript");
     ComponentFactory::Instance().Register<CCTTest>("CCTTestScript");

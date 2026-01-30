@@ -147,6 +147,7 @@
   <ItemGroup>
     <ClInclude Include="02_Script\Woo\Camera\CameraController.h" />
     <ClInclude Include="EngineApp.h" />
+
     <ClInclude Include="99_Test\AudioTest\AudioPlayModeScript.h" />
     <ClInclude Include="02_Script\Woo\Player\FSM\IPlayerState.h" />
     <ClInclude Include="99_Test\PhysicsTest\CCTTest.h" />
@@ -163,6 +164,11 @@
     <ClInclude Include="02_Script\Woo\Player\FSM\Player_Hit.h" />
     <ClInclude Include="02_Script\Woo\Player\FSM\Player_Die.h" />
     <ClInclude Include="02_Script\Woo\Player\FSM\Player_SitWalk.h" />
+
+    <ClInclude Include="AudioTest\AudioListenerSyncScript.h" />
+    <ClInclude Include="AudioTest\AudioKeyTriggerScript.h" />
+    <ClInclude Include="AudioTest\AudioOrbitScript.h" />
+   
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="02_Script\Woo\Camera\CameraController.cpp" />
@@ -183,6 +189,10 @@
     <ClCompile Include="02_Script\Woo\Player\FSM\Player_Hit.cpp" />
     <ClCompile Include="02_Script\Woo\Player\FSM\Player_Die.cpp" />
     <ClCompile Include="02_Script\Woo\Player\FSM\Player_SitWalk.cpp" />
+    <ClCompile Include="AudioTest\AudioListenerSyncScript.cpp" />
+    <ClCompile Include="AudioTest\AudioKeyTriggerScript.cpp" />
+    <ClCompile Include="AudioTest\AudioOrbitScript.cpp" />
+   
     <ClCompile Include="winMain.cpp" />
   </ItemGroup>
   <ItemGroup>
