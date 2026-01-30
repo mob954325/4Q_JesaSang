@@ -1509,6 +1509,30 @@ void Editor::ReadVariants(rttr::instance inst)
             if (ImGui::ColorEdit3(name.c_str(), &c.x))
                 prop.set_value(inst, c);
         }
+        else if (value.is_type<string>())
+        {
+            std::string c = value.get_value<std::string>();
+
+            if (ImGui::InputText(
+                name.c_str(),
+                c.data(),
+                c.capacity() + 1,
+                ImGuiInputTextFlags_CallbackResize,
+                [](ImGuiInputTextCallbackData* data) -> int
+                {
+                    if (data->EventFlag == ImGuiInputTextFlags_CallbackResize)
+                    {
+                        auto* str = static_cast<std::string*>(data->UserData);
+                        str->resize(data->BufTextLen);
+                        data->Buf = str->data();
+                    }
+                    return 0;
+                },
+                &c))
+            {
+                prop.set_value(inst, c);
+            }
+        }
     }
 }
 
