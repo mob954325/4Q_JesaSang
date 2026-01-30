@@ -422,6 +422,9 @@ void EngineApp::OnInputProcess(const Keyboard::State &KeyState, const Keyboard::
 #include "99_Test/PhysicsTest/GroundTestScript.h"
 #include "99_Test/PhysicsTest/CCTTest.h"
 #include "99_Test/AudioTest/AudioPlayModeScript.h"
+#include "99_Test/AudioTest/AudioListenerSyncScript.h"
+#include "99_Test/AudioTest/AudioOrbitScript.h"
+#include "99_Test/AudioTest/AudioKeyTriggerScript.h"
 
 
 void EngineApp::RegisterAllComponents()

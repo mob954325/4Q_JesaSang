@@ -26,7 +26,7 @@ void AudioListenerSyncScript::OnInitialize()
 
     if (m_Transform)
     {
-        m_PrevPos = m_Transform->GetPosition();
+        m_PrevPos = m_Transform->GetWorldPosition();
     }
 }
 
@@ -37,7 +37,7 @@ void AudioListenerSyncScript::OnUpdate(float delta)
         return;
     }
 
-    const Vector3 pos = m_Transform->GetPosition();
+    const Vector3 pos = m_Transform->GetWorldPosition();
     // Convert cm/s to m/s for FMOD doppler.
     Vector3 vel = (pos - m_PrevPos) / delta * 0.01f;
     m_PrevPos = pos;

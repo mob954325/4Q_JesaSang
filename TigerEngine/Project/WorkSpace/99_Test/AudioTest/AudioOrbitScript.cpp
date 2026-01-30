@@ -31,7 +31,7 @@ void AudioOrbitScript::OnInitialize()
 
     if (m_Transform)
     {
-        m_Center = m_Transform->GetPosition();
+        m_Center = m_Transform->GetWorldPosition();
         m_PrevPos = m_Center;
     }
 }
