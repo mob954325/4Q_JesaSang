@@ -246,6 +246,18 @@ void AudioManager::PreloadAll()
     }
 }
 
+std::vector<std::string> AudioManager::GetEntryIds() const
+{
+    std::vector<std::string> ids;
+    ids.reserve(m_entries.size());
+    for (const auto& pair : m_entries)
+    {
+        ids.push_back(pair.first);
+    }
+    std::sort(ids.begin(), ids.end());
+    return ids;
+}
+
 std::filesystem::path AudioManager::ResolveManifestPath(const std::string& manifestPath) const
 {
     if (!manifestPath.empty())
