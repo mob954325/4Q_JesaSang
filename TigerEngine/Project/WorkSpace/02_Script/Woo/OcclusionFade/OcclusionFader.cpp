@@ -99,12 +99,6 @@ void OcclusionFader::OnUpdate(float delta)
 
 void OcclusionFader::OnDestory()
 {
-    for (OcclusionFadeObject* obj : previousHits)
-    {
-        if (obj)
-            obj->StartFadeOut();
-    }
-
     previousHits.clear();
     currentHits.clear();
     hitBuffer.clear();

@@ -46,6 +46,7 @@ void SearchObject::OnStart()
 
 void SearchObject::OnUpdate(float delta)
 {
+    // Test
     if(Input::GetKeyDown(Keyboard::F))
     {
         auto item = Interaction();
@@ -67,9 +68,9 @@ void SearchObject::Deserialize(nlohmann::json data)
 IItem* SearchObject::Interaction()
 {
     if (isSearched) return nullptr;
-    if (!hasItem) return nullptr;
+    fbxRenderer->SetDiffuse(interactionDiffuse);
 
     // 플레이어 아이템 습득
-    fbxRenderer->SetDiffuse(interactionDiffuse);
+    if (!hasItem) return nullptr;
     return item;
 }
