@@ -1,7 +1,7 @@
 #pragma once
-#include "../../../../Engine/Components/ScriptComponent.h"
-#include "../../../../Engine/Components/FBXRenderer.h"
-#include "../../../../Engine/Components/CharacterControllerComponent.h"
+#include "Components/ScriptComponent.h"
+#include "Components/FBXRenderer.h"
+#include "Components/CharacterControllerComponent.h"
 
 #include <directxtk/Keyboard.h>
 
