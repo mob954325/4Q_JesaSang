@@ -421,10 +421,10 @@ void EngineApp::OnInputProcess(const Keyboard::State &KeyState, const Keyboard::
 #include "99_Test/PhysicsTest/PhysicsTestScript.h"
 #include "99_Test/PhysicsTest/GroundTestScript.h"
 #include "99_Test/PhysicsTest/CCTTest.h"
-#include "99_Test/AudioTest/AudioPlayModeScript.h"
-#include "99_Test/AudioTest/AudioListenerSyncScript.h"
-#include "99_Test/AudioTest/AudioOrbitScript.h"
-#include "99_Test/AudioTest/AudioKeyTriggerScript.h"
+#include "99_Test/AudioTest/AudioTestController.h"
+#include "99_Test/AudioTest/AudioManagerComponent.h"
+#include "99_Test/MiniMapTest/MiniMapTestScript.h"
+
 
 
 void EngineApp::RegisterAllComponents()
@@ -441,10 +441,9 @@ void EngineApp::RegisterAllComponents()
 
     ComponentFactory::Instance().Register<AudioListenerComponent>("AudioListenerComponent");
     ComponentFactory::Instance().Register<AudioSourceComponent>("AudioSourceComponent");
-    ComponentFactory::Instance().Register<AudioPlayModeScript>("AudioPlayModeScript");
-    ComponentFactory::Instance().Register<AudioListenerSyncScript>("AudioListenerSyncScript");
-    ComponentFactory::Instance().Register<AudioOrbitScript>("AudioOrbitScript");
-    ComponentFactory::Instance().Register<AudioKeyTriggerScript>("AudioKeyTriggerScript");
+    ComponentFactory::Instance().Register<AudioTestController>("AudioTestController");
+    ComponentFactory::Instance().Register<AudioManagerComponent>("AudioManagerComponent");
+    ComponentFactory::Instance().Register<MiniMapTestScript>("MiniMapTestScript");
     ComponentFactory::Instance().Register<PhysicsTestScript>("PhysicsTestScript");
     ComponentFactory::Instance().Register<GroundTestScript>("GroundTestScript");
     ComponentFactory::Instance().Register<CCTTest>("CCTTestScript");
@@ -460,7 +459,6 @@ void EngineApp::RegisterAllComponents()
 
 void EngineApp::Woo_Registeration()
 {    
-    
 }
 
 void EngineApp::Moon_Registeration()
