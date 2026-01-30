@@ -145,44 +145,44 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Dev\Woo\Camera\CameraController.h" />
+    <ClInclude Include="02_Script\Woo\Camera\CameraController.h" />
     <ClInclude Include="EngineApp.h" />
-    <ClInclude Include="AudioTest\AudioPlayModeScript.h" />
-    <ClInclude Include="Dev\Woo\Player\FSM\IPlayerState.h" />
-    <ClInclude Include="PhysicsTest\CCTTest.h" />
-    <ClInclude Include="PhysicsTest\GroundTestScript.h" />
-    <ClInclude Include="PhysicsTest\PhysicsTestScript.h" />
-    <ClInclude Include="Dev\Woo\Player\PlayerController.h" />
-    <ClInclude Include="Player\Player1.h" />
-    <ClInclude Include="Player\Weapon.h" />
-    <ClInclude Include="Dev\Woo\Player\FSM\Player_Idle.h" />
-    <ClInclude Include="Dev\Woo\Player\FSM\Player_Walk.h" />
-    <ClInclude Include="Dev\Woo\Player\FSM\Player_Run.h" />
-    <ClInclude Include="Dev\Woo\Player\FSM\Player_Sit.h" />
-    <ClInclude Include="Dev\Woo\Player\FSM\Player_Hide.h" />
-    <ClInclude Include="Dev\Woo\Player\FSM\Player_Hit.h" />
-    <ClInclude Include="Dev\Woo\Player\FSM\Player_Die.h" />
-    <ClInclude Include="Dev\Woo\Player\FSM\Player_SitWalk.h" />
+    <ClInclude Include="99_Test\AudioTest\AudioPlayModeScript.h" />
+    <ClInclude Include="02_Script\Woo\Player\FSM\IPlayerState.h" />
+    <ClInclude Include="99_Test\PhysicsTest\CCTTest.h" />
+    <ClInclude Include="99_Test\PhysicsTest\GroundTestScript.h" />
+    <ClInclude Include="99_Test\PhysicsTest\PhysicsTestScript.h" />
+    <ClInclude Include="02_Script\Woo\Player\PlayerController.h" />
+    <ClInclude Include="99_Test\Player\Player1.h" />
+    <ClInclude Include="99_Test\Player\Weapon.h" />
+    <ClInclude Include="02_Script\Woo\Player\FSM\Player_Idle.h" />
+    <ClInclude Include="02_Script\Woo\Player\FSM\Player_Walk.h" />
+    <ClInclude Include="02_Script\Woo\Player\FSM\Player_Run.h" />
+    <ClInclude Include="02_Script\Woo\Player\FSM\Player_Sit.h" />
+    <ClInclude Include="02_Script\Woo\Player\FSM\Player_Hide.h" />
+    <ClInclude Include="02_Script\Woo\Player\FSM\Player_Hit.h" />
+    <ClInclude Include="02_Script\Woo\Player\FSM\Player_Die.h" />
+    <ClInclude Include="02_Script\Woo\Player\FSM\Player_SitWalk.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Dev\Woo\Camera\CameraController.cpp" />
+    <ClCompile Include="02_Script\Woo\Camera\CameraController.cpp" />
     <ClCompile Include="EngineApp.cpp" />
-    <ClCompile Include="AudioTest\AudioPlayModeScript.cpp" />
-    <ClCompile Include="Dev\Woo\Player\FSM\IPlayerState.cpp" />
-    <ClCompile Include="PhysicsTest\CCTTest.cpp" />
-    <ClCompile Include="PhysicsTest\GroundTestScript.cpp" />
-    <ClCompile Include="PhysicsTest\PhysicsTestScript.cpp" />
-    <ClCompile Include="Dev\Woo\Player\PlayerController.cpp" />
-    <ClCompile Include="Player\Player1.cpp" />
-    <ClCompile Include="Player\Weapon.cpp" />
-    <ClCompile Include="Dev\Woo\Player\FSM\Player_Idle.cpp" />
-    <ClCompile Include="Dev\Woo\Player\FSM\Player_Walk.cpp" />
-    <ClCompile Include="Dev\Woo\Player\FSM\Player_Run.cpp" />
-    <ClCompile Include="Dev\Woo\Player\FSM\Player_Sit.cpp" />
-    <ClCompile Include="Dev\Woo\Player\FSM\Player_Hide.cpp" />
-    <ClCompile Include="Dev\Woo\Player\FSM\Player_Hit.cpp" />
-    <ClCompile Include="Dev\Woo\Player\FSM\Player_Die.cpp" />
-    <ClCompile Include="Dev\Woo\Player\FSM\Player_SitWalk.cpp" />
+    <ClCompile Include="99_Test\AudioTest\AudioPlayModeScript.cpp" />
+    <ClCompile Include="02_Script\Woo\Player\FSM\IPlayerState.cpp" />
+    <ClCompile Include="99_Test\PhysicsTest\CCTTest.cpp" />
+    <ClCompile Include="99_Test\PhysicsTest\GroundTestScript.cpp" />
+    <ClCompile Include="99_Test\PhysicsTest\PhysicsTestScript.cpp" />
+    <ClCompile Include="02_Script\Woo\Player\PlayerController.cpp" />
+    <ClCompile Include="99_Test\Player\Player1.cpp" />
+    <ClCompile Include="99_Test\Player\Weapon.cpp" />
+    <ClCompile Include="02_Script\Woo\Player\FSM\Player_Idle.cpp" />
+    <ClCompile Include="02_Script\Woo\Player\FSM\Player_Walk.cpp" />
+    <ClCompile Include="02_Script\Woo\Player\FSM\Player_Run.cpp" />
+    <ClCompile Include="02_Script\Woo\Player\FSM\Player_Sit.cpp" />
+    <ClCompile Include="02_Script\Woo\Player\FSM\Player_Hide.cpp" />
+    <ClCompile Include="02_Script\Woo\Player\FSM\Player_Hit.cpp" />
+    <ClCompile Include="02_Script\Woo\Player\FSM\Player_Die.cpp" />
+    <ClCompile Include="02_Script\Woo\Player\FSM\Player_SitWalk.cpp" />
     <ClCompile Include="winMain.cpp" />
   </ItemGroup>
   <ItemGroup>
