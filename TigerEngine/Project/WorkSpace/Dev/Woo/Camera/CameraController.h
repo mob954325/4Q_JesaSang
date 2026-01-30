@@ -36,30 +36,36 @@ private:
     Vector3 quarterOffset = { 0, 280.0f, -230.0f };
     Vector3 quarterEuler = { 50.0f, 0.0f, 0.0f };
 
-    // pivot
-    // (campos = pivot + modeOffset)
+    // pivot (campos = pivot + modeOffset)
     Vector3 pivotPos = Vector3::Zero;
     float   groundY = 0.0f;    // pivot.y
 
-    // track values
-    float deadRadius = 50.0f;     // target <-> dead zone radius
-    float deadHysteresis = 10.0f;  // 경계 떨림 방지
 
-    // track smooth
-    bool   isTrackingPivot = false;
-    Vector3 pivotVel = Vector3::Zero;
-    float  pivotSmoothTime = 0.22f;
-    float  pivotMaxSpeed = 5000.0f;
+    // [ Tracking / Focusing ]
+    float deadRadius      = 60.0f;   // target <-> dead zone radius
+    float deadHysteresis  = 10.0f;   // 경계 떨림 방지
+    bool  isTrackingPivot = false;   // tracking state flag
+    float lookPointStrength = 0.6f;  // look point 영향 강도
+    float followStrength    = 0.2f;  // look eule 영향 강도 
 
-    Vector3 camPosSmooth = Vector3::Zero;
+    // tracking smooth
+    Vector3 pivotVel        = Vector3::Zero;
+    float   pivotSmoothTime = 0.22f;
+    float   pivotMaxSpeed   = 5000.0f;
+
+    Vector3 camPosSmooth    = Vector3::Zero;
     float   camFollowLambda = 6.0f;
 
-    // look focus
-    Vector3 lookEulerSmooth = Vector3::Zero;  // 현재 스무딩된 euler (rad)
-    Vector3 lookEulerVel = Vector3::Zero;     // SmoothDamp용 속도
-    float   lookSmoothTime = 0.12f;
-    float   lookMaxSpeed = 9999.0f;
-    Vector3 lookAtOffset = { 0.0f, 0.0f, 0.0f };
+    // look focus smooth
+    Vector3 lookPointSmooth   = Vector3::Zero;   // look point (target pos smoothing)
+    Vector3 lookPointVel      = Vector3::Zero;   // look point smooth velocity
+    Vector3 lookEulerSmooth = Vector3::Zero;     // rotation euler
+    Vector3 lookEulerVel    = Vector3::Zero;     // rotation euler smooth velocity
+
+    float lookPointSmoothTime = 0.7f;   // target pos -> look point smoothing time
+    float lookSmoothTime = 0.15f;       // look euler smoothing time
+    float lookMaxSpeed = 1000.0f;       // look euler max speed
+    float lookDeadZoneDeg = 1.5f;       // 회전 무시 threshold
 
 public:
     void OnInitialize() override;

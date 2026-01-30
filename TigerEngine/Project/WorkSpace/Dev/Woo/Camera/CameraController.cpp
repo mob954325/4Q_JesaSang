@@ -29,26 +29,32 @@ void CameraController::OnStart()
     if (!targetTr)
         targetTr = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("CameraTrackingPoint")->GetComponent<Transform>();
 
+    Vector3 targetPos = targetTr->GetWorldPosition();
+    targetPos.z -= 50.0f;
+
     // pivot pos init
-    Vector3 tpos = targetTr->GetWorldPosition();
-    groundY = tpos.y;
-    pivotPos = { tpos.x, groundY, tpos.z };
+    groundY = targetPos.y;
+    pivotPos = { targetPos.x, groundY, targetPos.z };
 
     // pivot smoothing init
     isTrackingPivot = false;
     pivotVel = Vector3::Zero;
 
-    // desired cam pos init
+    // camPos Smooth init
     Vector3 desiredCamPos = pivotPos + quarterOffset;
     camPosSmooth = desiredCamPos;
 
-    // cam transform init
-    transform->SetPosition(camPosSmooth);
-    transform->SetEuler(DegToRad(quarterEuler));
+    // look point init
+    lookPointSmooth = targetPos;
+    lookPointVel = Vector3::Zero;
 
-    // look init
+    // look rotation init
     lookEulerSmooth = DegToRad(quarterEuler);
     lookEulerVel = Vector3::Zero;
+
+    // cam transform init
+    transform->SetPosition(camPosSmooth);
+    transform->SetEuler(DegToRad(quarterEuler));   // 처음은 중앙 고정
 }
 
 void CameraController::OnLateUpdate(float delta)
@@ -79,28 +85,54 @@ void CameraController::OnLateUpdate(float delta)
     // apply rotation
     if (true)
     {
-        // dead zone 안: look focus
-        Vector3 lookPoint = targetPos + lookAtOffset;
-        Vector3 desiredLookEuler = ComputeLookEulerRad(camPosSmooth, lookPoint);
+        // look point
+        Vector3 targetLookPoint =
+            lookPointSmooth +
+            (targetPos - lookPointSmooth) * lookPointStrength;
 
-        // SmoothDampVec3로 회전 스무딩 (rad 단위)
+        // look point smoothing
+        lookPointSmooth = SmoothDampVec3(
+            lookPointSmooth,
+            targetLookPoint,
+            lookPointVel,
+            lookPointSmoothTime,
+            lookMaxSpeed,
+            delta
+        );
+
+        // desired look euler
+        Vector3 desiredLookEuler = ComputeLookEulerRad(camPosSmooth, lookPointSmooth);
+
+        // dead zone
+        Vector3 diff = desiredLookEuler - lookEulerSmooth;
+        float deadZoneRad = ToRad(lookDeadZoneDeg);
+        if (diff.Length() < deadZoneRad)
+            desiredLookEuler = lookEulerSmooth;
+
+        // followStrength
+        Vector3 limitedLookEuler =
+            lookEulerSmooth +
+            (desiredLookEuler - lookEulerSmooth) * followStrength;
+
+        // look rotation smoothing
         lookEulerSmooth = SmoothDampVec3(
             lookEulerSmooth,
-            desiredLookEuler,
+            limitedLookEuler,
             lookEulerVel,
             lookSmoothTime,
             lookMaxSpeed,
             delta
         );
 
+        // apply
         transform->SetEuler(lookEulerSmooth);
     }
     else
     {
-        // dead zone 밖(또는 비활성): 기존 고정 euler
-        lookEulerSmooth = DegToRad(quarterEuler); // 상태 전환 시 튐 방지용 동기화
-        lookEulerVel = Vector3::Zero;
-        transform->SetEuler(lookEulerSmooth);
+        // target 고정 rotation
+        //lookEulerSmooth = DegToRad(quarterEuler); // 상태 전환 시 튐 방지용 동기화
+        //lookEulerVel = Vector3::Zero;
+        //transform->SetEuler(lookEulerSmooth);
     }
 }
 
@@ -166,7 +198,6 @@ Vector3 CameraController::ComputeLookEulerRad(const Vector3& camPos, const Vecto
 
     float yaw = std::atan2(dir.x, dir.z);      // z forward 가정
     float xzLen = std::sqrt(dir.x * dir.x + dir.z * dir.z);
-
     float pitch = -std::atan2(dir.y, xzLen);
 
     return Vector3(pitch, yaw, 0.0f);
@@ -174,49 +205,39 @@ Vector3 CameraController::ComputeLookEulerRad(const Vector3& camPos, const Vecto
 
 void CameraController::UpdatePivotByDeadRadius(const Vector3& targetWorldPos, float dt)
 {
-    // target을 ground 평면에 투영
+    // pivot - target dist
     Vector3 targetGround = { targetWorldPos.x, groundY, targetWorldPos.z };
-
     Vector3 toTarget = targetGround - pivotPos;
     toTarget.y = 0.0f;
 
     float distSq = toTarget.LengthSquared();
     float dist = std::sqrt(std::max(0.0f, distSq));
 
-    float r = std::max(0.0f, deadRadius);
-    float enterR = r + std::max(0.0f, deadHysteresis); // 밖으로 나가면 tracking 시작
-    float exitR = std::max(0.0f, r - std::max(0.0f, deadHysteresis)); // 안으로 충분히 들어오면 tracking 종료
-
-    // hysteresis 상태 전환 (경계 부들거림 방지)
+    // 경계 부들거림 방지
     if (!isTrackingPivot)
-    {
-        if (dist > enterR) isTrackingPivot = true;
-    }
+        if (dist > deadHysteresis) isTrackingPivot = true;
     else
-    {
-        if (dist < exitR) isTrackingPivot = false;
-    }
+        if (dist < deadHysteresis) isTrackingPivot = false;
 
-    // tracking 안 하면 pivot 고정(속도만 서서히 줄여서 잔떨림 제거)
+    // tracking pivot velocity update
     if (!isTrackingPivot)
     {
-        // 약간의 damping으로 velocity를 죽여줌 (갑자기 0으로 만들면 또 흔들릴 수 있음)
         float t = 1.0f - std::exp(-12.0f * dt);
         pivotVel = pivotVel + (Vector3::Zero - pivotVel) * t;
         return;
     }
 
-    // dist가 거의 0이면 dir 계산 불안정 -> 방어
     if (dist < 0.0001f)
         return;
 
+    // direction
     Vector3 dir = toTarget / dist;
 
-    // desiredPivot: 타겟이 deadRadius 바깥으로 나간 만큼 pivot이 따라가되, "deadRadius 경계에 걸치도록"
-    Vector3 desiredPivot = targetGround - dir * r;
+    // desiredPivot
+    Vector3 desiredPivot = targetGround - dir * deadRadius;
     desiredPivot.y = groundY;
 
-    // 핵심: pivot을 desiredPivot으로 SmoothDamp
+    // pivot pos smoothing
     pivotPos = SmoothDampVec3(pivotPos, desiredPivot, pivotVel, pivotSmoothTime, pivotMaxSpeed, dt);
     pivotPos.y = groundY; // y는 고정
 }
