@@ -37,15 +37,9 @@ void OcclusionFadeObject::OnUpdate(float delta)
 {
     if (!fbxRenderer) return;
 
-    // 투명화/복구
+    // 투명화 / 복구
     if (isFading)
         OcclusionFadeProcess(delta);
-
-    // test
-    if (Input::GetKeyDown(Keyboard::Q)) StartFadeIn();
-    if (Input::GetKeyDown(Keyboard::W)) StartFadeOut();
-
-    cout << std::boolalpha << isFading << endl;
 }
 
 nlohmann::json OcclusionFadeObject::Serialize()

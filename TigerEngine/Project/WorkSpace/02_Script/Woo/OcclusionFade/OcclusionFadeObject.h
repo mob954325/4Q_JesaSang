@@ -20,8 +20,8 @@ private:
     FBXRenderer* fbxRenderer = nullptr;
 
     // values (inspector)
-    float fadeDuration = 0.4f;
-    float fadeInOpacity = 0.3f;     // 투명화 목표값
+    float fadeDuration = 0.3f;
+    float fadeInOpacity = 0.15f;    // 투명화 목표값
 
     // controll
     bool isFading = false;          // 투명화/복구 진행중 flag
