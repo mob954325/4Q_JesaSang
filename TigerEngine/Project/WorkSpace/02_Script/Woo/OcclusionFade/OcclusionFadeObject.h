@@ -19,7 +19,7 @@ private:
     // components
     FBXRenderer* fbxRenderer = nullptr;
 
-    // values
+    // values (inspector)
     float fadeDuration = 0.4f;
     float fadeInOpacity = 0.3f;     // 투명화 목표값
 

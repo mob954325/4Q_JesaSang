@@ -39,17 +39,15 @@ private:
     IPlayerState* fsmStates[8];
 
     // --- [ Stat ] --------------------------------
-    // current
-    float curSpeed = 0.0f;
-    Vector3 moveDir = Vector3::Zero;
-
-    // init
+    // values (inspector)
     float walkSpeed = 2.5f;
     float runSpeed = 4.0f;
     float sitSpeed = 1.0f;
         
 
     // --- [ Controll ] ----------------------------
+    float curSpeed = 0.0f;
+    Vector3 moveDir = Vector3::Zero;
 
 
     // --- [ Key ] ---------------------------------
@@ -62,7 +60,7 @@ private:
     bool isRunKey;
     bool isInteractionKey;
 
-    // key buindings
+    // key buindings (inspector)
     Keyboard::Keys moveL_Key = Keyboard::Left;
     Keyboard::Keys moveR_Key = Keyboard::Right;
     Keyboard::Keys moveF_Key = Keyboard::Up;
@@ -94,10 +92,9 @@ public:
     nlohmann::json Serialize();
     void Deserialize(nlohmann::json data);
 
-
-public:
+private:
     // FSM
-    void AddFSMStates();
+    void InitFSMStates();
     void ChangeState(PlayerState state);
 
     // Init
