@@ -3,6 +3,7 @@
 #include "Manager/AudioManager.h"
 #include "EngineSystem/PlayModeSystem.h"
 #include "Util/ComponentAutoRegister.h"
+#include "Util/JsonHelper.h"
 
 REGISTER_COMPONENT(AudioManagerComponent);
 
@@ -138,37 +139,10 @@ void AudioManagerComponent::OnDestory()
 
 nlohmann::json AudioManagerComponent::Serialize()
 {
-    nlohmann::json data;
-    rttr::type t = rttr::type::get(*this);
-    data["type"] = t.get_name().to_string();
-    data["properties"] = nlohmann::json::object();
-    data["properties"]["BgmClipId"] = bgmClipId;
-    data["properties"]["AmbClipId"] = ambClipId;
-    data["properties"]["BgmGroup"] = bgmGroup;
-    data["properties"]["AmbGroup"] = ambGroup;
-    data["properties"]["PlayOnEnter"] = playOnEnter;
-    data["properties"]["LoopBgm"] = loopBgm;
-    data["properties"]["LoopAmb"] = loopAmb;
-    data["properties"]["BgmVolume"] = bgmVolume;
-    data["properties"]["AmbVolume"] = ambVolume;
-    return data;
+    return JsonHelper::MakeSaveData(this);
 }
 
 void AudioManagerComponent::Deserialize(nlohmann::json data)
 {
-    if (!data.contains("properties"))
-    {
-        return;
-    }
-
-    const auto& props = data["properties"];
-    if (props.contains("BgmClipId")) bgmClipId = props["BgmClipId"].get<std::string>();
-    if (props.contains("AmbClipId")) ambClipId = props["AmbClipId"].get<std::string>();
-    if (props.contains("BgmGroup")) bgmGroup = props["BgmGroup"].get<std::string>();
-    if (props.contains("AmbGroup")) ambGroup = props["AmbGroup"].get<std::string>();
-    if (props.contains("PlayOnEnter")) playOnEnter = props["PlayOnEnter"].get<bool>();
-    if (props.contains("LoopBgm")) loopBgm = props["LoopBgm"].get<bool>();
-    if (props.contains("LoopAmb")) loopAmb = props["LoopAmb"].get<bool>();
-    if (props.contains("BgmVolume")) bgmVolume = props["BgmVolume"].get<float>();
-    if (props.contains("AmbVolume")) ambVolume = props["AmbVolume"].get<float>();
+    JsonHelper::SetDataFromJson(this, data);
 }

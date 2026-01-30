@@ -8,6 +8,7 @@
 #include "System/InputSystem.h"
 #include "Manager/AudioManager.h"
 #include "Util/ComponentAutoRegister.h"
+#include "Util/JsonHelper.h"
 
 REGISTER_COMPONENT(AudioTestController);
 
@@ -174,43 +175,10 @@ void AudioTestController::OnUpdate(float delta)
 
 nlohmann::json AudioTestController::Serialize()
 {
-    nlohmann::json data;
-    rttr::type t = rttr::type::get(*this);
-    data["type"] = t.get_name().to_string();
-    data["properties"] = nlohmann::json::object();
-
-    data["properties"]["EnablePlayModeAuto"] = enablePlayModeAuto;
-    data["properties"]["EnableListenerSync"] = enableListenerSync;
-    data["properties"]["EnableOrbit"] = enableOrbit;
-    data["properties"]["EnableKeyTrigger"] = enableKeyTrigger;
-    data["properties"]["AutoPlay"] = autoPlay;
-    data["properties"]["ClipId"] = clipId;
-    data["properties"]["TriggerKey"] = triggerKey;
-    data["properties"]["Radius"] = radius;
-    data["properties"]["Speed"] = speed;
-    data["properties"]["Height"] = height;
-    data["properties"]["ListenerVelScale"] = listenerVelScale;
-
-    return data;
+    return JsonHelper::MakeSaveData(this);
 }
 
 void AudioTestController::Deserialize(nlohmann::json data)
 {
-    if (!data.contains("properties"))
-    {
-        return;
-    }
-
-    const auto& props = data["properties"];
-    if (props.contains("EnablePlayModeAuto")) enablePlayModeAuto = props["EnablePlayModeAuto"].get<bool>();
-    if (props.contains("EnableListenerSync")) enableListenerSync = props["EnableListenerSync"].get<bool>();
-    if (props.contains("EnableOrbit")) enableOrbit = props["EnableOrbit"].get<bool>();
-    if (props.contains("EnableKeyTrigger")) enableKeyTrigger = props["EnableKeyTrigger"].get<bool>();
-    if (props.contains("AutoPlay")) autoPlay = props["AutoPlay"].get<bool>();
-    if (props.contains("ClipId")) clipId = props["ClipId"].get<std::string>();
-    if (props.contains("TriggerKey")) triggerKey = props["TriggerKey"].get<int>();
-    if (props.contains("Radius")) radius = props["Radius"].get<float>();
-    if (props.contains("Speed")) speed = props["Speed"].get<float>();
-    if (props.contains("Height")) height = props["Height"].get<float>();
-    if (props.contains("ListenerVelScale")) listenerVelScale = props["ListenerVelScale"].get<float>();
+    JsonHelper::SetDataFromJson(this, data);
 }
