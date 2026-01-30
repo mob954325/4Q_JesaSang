@@ -4,6 +4,7 @@
 #include "Object/GameObject.h"
 #include "System/InputSystem.h"
 #include "Util/ComponentAutoRegister.h"
+#include "Util/JsonHelper.h"
 
 #include <algorithm>
 #include <iostream>
@@ -53,16 +54,13 @@ void MiniMapTestScript::OnUpdate(float delta)
 {
     (void)delta;
 
+    if (auto owner = GetOwner())
+    {
+        m_Transform = owner->GetTransform();
+    }
     if (!m_Transform)
     {
-        if (auto owner = GetOwner())
-        {
-            m_Transform = owner->GetTransform();
-        }
-        if (!m_Transform)
-        {
-            return;
-        }
+        return;
     }
 
     if (Input::GetKeyDown(DirectX::Keyboard::Keys::M))
@@ -83,44 +81,10 @@ void MiniMapTestScript::OnUpdate(float delta)
 
 nlohmann::json MiniMapTestScript::Serialize()
 {
-    nlohmann::json data;
-    rttr::type t = rttr::type::get(*this);
-    data["type"] = t.get_name().to_string();
-    data["properties"] = nlohmann::json::object();
-    data["properties"]["WorldMin"] = { worldMin.x, worldMin.y, worldMin.z };
-    data["properties"]["WorldMax"] = { worldMax.x, worldMax.y, worldMax.z };
-    data["properties"]["MapSize"] = { mapSize.x, mapSize.y };
-    data["properties"]["TotalPieces"] = totalPieces;
-    data["properties"]["CollectedPieces"] = collectedPieces;
-    return data;
+    return JsonHelper::MakeSaveData(this);
 }
 
 void MiniMapTestScript::Deserialize(nlohmann::json data)
 {
-    if (!data.contains("properties"))
-    {
-        return;
-    }
-
-    const auto& props = data["properties"];
-    if (props.contains("WorldMin"))
-    {
-        worldMin = { props["WorldMin"][0], props["WorldMin"][1], props["WorldMin"][2] };
-    }
-    if (props.contains("WorldMax"))
-    {
-        worldMax = { props["WorldMax"][0], props["WorldMax"][1], props["WorldMax"][2] };
-    }
-    if (props.contains("MapSize"))
-    {
-        mapSize = { props["MapSize"][0], props["MapSize"][1] };
-    }
-    if (props.contains("TotalPieces"))
-    {
-        totalPieces = props["TotalPieces"].get<int>();
-    }
-    if (props.contains("CollectedPieces"))
-    {
-        collectedPieces = props["CollectedPieces"].get<int>();
-    }
+    JsonHelper::SetDataFromJson(this, data);
 }
