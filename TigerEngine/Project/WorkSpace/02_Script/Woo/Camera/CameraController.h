@@ -29,47 +29,43 @@ public:
     ViewMode currentMode = ViewMode::Quarter;
 
 private:
-    // [ components ]
     Transform* transform = nullptr;       
-    Transform* targetTr = nullptr;   
+    Transform* targetTr = nullptr;    
 
-
-    // [ values (inspector) ]
     // offset
     Vector3 quarterOffset = { 0, 280.0f, -230.0f };
     Vector3 quarterEuler = { 50.0f, 0.0f, 0.0f };
 
-    // dead radius
+    // pivot (campos = pivot + modeOffset)
+    Vector3 pivotPos = Vector3::Zero;
+    float   groundY = 0.0f;    // pivot.y
+
+
+    // [ Tracking / Focusing ]
     float deadRadius      = 60.0f;   // target <-> dead zone radius
     float deadHysteresis  = 10.0f;   // 경계 떨림 방지
+    bool  isTrackingPivot = false;   // tracking state flag
+    float lookPointStrength = 0.6f;  // look point 영향 강도
+    float followStrength    = 0.2f;  // look eule 영향 강도 
 
     // tracking smooth
+    Vector3 pivotVel        = Vector3::Zero;
     float   pivotSmoothTime = 0.22f;
+    float   pivotMaxSpeed   = 5000.0f;
+
+    Vector3 camPosSmooth    = Vector3::Zero;
     float   camFollowLambda = 6.0f;
 
     // look focus smooth
-    float lookPointSmoothTime = 0.4f;     // target pos -> look point smoothing time
-    float lookSmoothTime      = 0.15f;    // look euler smoothing time
-    float lookMaxSpeed        = 1000.0f;  // look euler max speed
-    float lookDeadZoneDeg     = 1.5f;     // 회전 무시 threshold
-                                          
-    // strength                           
-    float lookPointStrength = 0.6f;       // look point 영향 강도
-    float followStrength    = 0.2f;       // look eule 영향 강도 
+    Vector3 lookPointSmooth   = Vector3::Zero;   // look point (target pos smoothing)
+    Vector3 lookPointVel      = Vector3::Zero;   // look point smooth velocity
+    Vector3 lookEulerSmooth = Vector3::Zero;     // rotation euler
+    Vector3 lookEulerVel    = Vector3::Zero;     // rotation euler smooth velocity
 
-
-    // [ controll ]
-    bool    isTrackingPivot  = false;             // tracking state flag
-    Vector3 pivotPos         = Vector3::Zero;     // pivot (campos = pivot + modeOffset)
-    float   groundY          = 0.0f;              // pivot.y
-    Vector3 pivotVel         = Vector3::Zero;
-    float   pivotMaxSpeed    = 5000.0f;
-    Vector3 camPosSmooth     = Vector3::Zero;
-    Vector3 lookPointSmooth  = Vector3::Zero;     // look point (target pos smoothing)
-    Vector3 lookPointVel     = Vector3::Zero;     // look point smooth velocity
-    Vector3 lookEulerSmooth  = Vector3::Zero;     // rotation euler
-    Vector3 lookEulerVel     = Vector3::Zero;     // rotation euler smooth velocity
-
+    float lookPointSmoothTime = 0.4f;   // target pos -> look point smoothing time
+    float lookSmoothTime = 0.15f;       // look euler smoothing time
+    float lookMaxSpeed = 1000.0f;       // look euler max speed
+    float lookDeadZoneDeg = 1.5f;       // 회전 무시 threshold
 
 public:
     void OnInitialize() override;
