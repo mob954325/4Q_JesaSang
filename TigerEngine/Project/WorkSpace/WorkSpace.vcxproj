@@ -166,8 +166,6 @@
     <ClInclude Include="99_Test\AudioTest\AudioListenerSyncScript.h" />
     <ClInclude Include="99_Test\AudioTest\AudioKeyTriggerScript.h" />
     <ClInclude Include="99_Test\AudioTest\AudioOrbitScript.h" />
-    <ClInclude Include="02_Script\Woo\OcclusionFade\OcclusionFadeObject.h" />
-    <ClInclude Include="02_Script\Woo\OcclusionFade\OcclusionFader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="02_Script\Woo\Camera\CameraController.cpp" />
@@ -191,8 +189,6 @@
     <ClCompile Include="99_Test\AudioTest\AudioListenerSyncScript.cpp" />
     <ClCompile Include="99_Test\AudioTest\AudioKeyTriggerScript.cpp" />
     <ClCompile Include="99_Test\AudioTest\AudioOrbitScript.cpp" />
-    <ClCompile Include="02_Script\Woo\OcclusionFade\OcclusionFadeObject.cpp" />
-    <ClCompile Include="02_Script\Woo\OcclusionFade\OcclusionFader.cpp" />
     <ClCompile Include="winMain.cpp" />
   </ItemGroup>
   <ItemGroup>
