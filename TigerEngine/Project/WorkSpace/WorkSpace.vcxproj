@@ -170,6 +170,8 @@
     <ClInclude Include="02_Script\Woo\OcclusionFade\OcclusionFader.h" />
     <ClInclude Include="02_Script\Woo\Object\SearchObject.h" />
     <ClInclude Include="02_Script\Woo\Item\Item.h" />
+    <ClInclude Include="02_Script\Woo\Player\Interaction\InteractionZone.h" />
+    <ClInclude Include="02_Script\Woo\Player\Interaction\InteractionSensor.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="02_Script\Woo\Camera\CameraController.cpp" />
@@ -197,6 +199,8 @@
     <ClCompile Include="02_Script\Woo\OcclusionFade\OcclusionFader.cpp" />
     <ClCompile Include="02_Script\Woo\Object\SearchObject.cpp" />
     <ClCompile Include="02_Script\Woo\Item\Item.cpp" />
+    <ClCompile Include="02_Script\Woo\Player\Interaction\InteractionZone.cpp" />
+    <ClCompile Include="02_Script\Woo\Player\Interaction\InteractionSensor.cpp" />
     <ClCompile Include="winMain.cpp" />
   </ItemGroup>
   <ItemGroup>
