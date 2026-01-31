@@ -47,12 +47,12 @@ void SearchObject::OnStart()
 void SearchObject::OnUpdate(float delta)
 {
     // Test
-    if(Input::GetKeyDown(Keyboard::F))
-    {
-        auto item = Interaction();
-        if (item) cout << "item " << item->itemId << " get!" << endl;
-        else cout << "this object has none item" << endl;
-    }
+    //if(Input::GetKeyDown(Keyboard::F))
+    //{
+    //    auto item = Interaction();
+    //    if (item) cout << "item " << item->itemId << " get!" << endl;
+    //    else cout << "this object has none item" << endl;
+    //}
 }
 
 nlohmann::json SearchObject::Serialize()

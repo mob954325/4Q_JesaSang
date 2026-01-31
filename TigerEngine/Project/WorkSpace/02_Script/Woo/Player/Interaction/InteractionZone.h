@@ -1,6 +1,7 @@
 #pragma once
 #include "Components/ScriptComponent.h"
 #include "Components/FBXRenderer.h"
+#include "../PlayerController.h"
 
 /*
     [ InteractionZone Script Component ]
@@ -15,6 +16,7 @@ class InteractionZone : public ScriptComponent
 
 private:
     // components
+    PlayerController* player;
 
     // members..
 

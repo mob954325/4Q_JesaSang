@@ -16,6 +16,7 @@ class InteractionSensor : public ScriptComponent
 
 private:
     // components
+   
 
     // members..
 
