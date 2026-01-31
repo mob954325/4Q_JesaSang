@@ -139,12 +139,12 @@ nlohmann::json GameObject::Serialize() const
     }
 
     // 컴포넌트 내용 직렬화
-    datas["properties"]["components"] = nlohmann::json::object();
+    datas["properties"]["components"] = nlohmann::json::array();
     auto& comps = datas["properties"]["components"];
 
     for (auto& comp : components)
     {
-        comps[comp->GetName()] = comp->Serialize();
+        comps.push_back(comp->Serialize());
     }
     
     return datas;
@@ -168,21 +168,15 @@ void GameObject::Deserialize(const nlohmann::json objData)
         {
             auto trans = this->GetComponent<Transform>();
             trans->Deserialize(prop);
+            continue;
         }
-        else    // 그 외 컴포넌트는 추가한다.
-        {
-            // 컴포넌트를 찾아서 factory에 등록되어있으면 컴포넌트 추가
-            for (auto [name, create] : registered)
-            {
-                if (compName == name)
-                {                   
-                    auto createdComp = create(this);
-                    createdComp->Deserialize(prop);
 
-                    break;
-                }
-            }            
-        }
+        auto it = registered.find(compName);
+        if (it != registered.end())
+        {
+            Component* createdComp = it->second.creator(this);
+            createdComp->Deserialize(prop);
+        }          
     }
 }
 
