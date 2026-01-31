@@ -28,7 +28,7 @@ public:
     Color    interactionDiffuse;
 
     // controlls
-    IItem* item = nullptr;
+    std::unique_ptr<IItem> item = nullptr;
     bool  isSearched;
 
 public:
@@ -42,6 +42,6 @@ public:
 
 public:
     // 외부 call funcs...
-    IItem* Interaction();       // 상호작용 Enter
+    std::unique_ptr<IItem> Interaction();       // 상호작용 Enter
 };
 

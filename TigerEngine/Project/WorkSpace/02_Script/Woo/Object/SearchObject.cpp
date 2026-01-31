@@ -38,9 +38,9 @@ void SearchObject::OnStart()
     if (hasItem)
     {
         if (itemType == ItemType::Ingredient)
-            item = new Ingredient(itemType, itemID);
+            item = std::make_unique<Ingredient>(itemType, itemID);
         else if (itemType == ItemType::Piece)
-            item = new Piece(itemType, itemID);
+            item = std::make_unique<Piece>(itemType, itemID);
     }
 }
 
@@ -65,12 +65,14 @@ void SearchObject::Deserialize(nlohmann::json data)
     JsonHelper::SetDataFromJson(this, data);
 }
 
-IItem* SearchObject::Interaction()
+std::unique_ptr<IItem> SearchObject::Interaction()
 {
     if (isSearched) return nullptr;
+
+    // 수색한 오브젝트 표시
     fbxRenderer->SetDiffuse(interactionDiffuse);
 
     // 플레이어 아이템 습득
     if (!hasItem) return nullptr;
-    return item;
+    return std::move(item);
 }
