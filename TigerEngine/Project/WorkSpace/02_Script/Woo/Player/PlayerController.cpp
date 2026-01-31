@@ -19,6 +19,8 @@
 #include "FSM/Player_Hit.h"
 #include "FSM/Player_Die.h"
 
+#include "../Object/SearchObject.h"
+
 
 REGISTER_COMPONENT(PlayerController)
 
@@ -44,7 +46,7 @@ void PlayerController::OnStart()
     camTransform = CameraSystem::Instance().GetCurrCamera()->GetOwner()->GetTransform();
 
     // init fsm
-    AddFSMStates();
+    InitFSMStates();
     ChangeState(PlayerState::Idle);
 
     // init stat
@@ -62,6 +64,9 @@ void PlayerController::OnUpdate(float delta)
         curState->ChangeStateLogic();
         curState->Update(delta);
     }
+
+    // interaction cheak
+    InteractionCheak(delta);
 
     // Debug----
     //cout << "[Player] State : " << (int)state << endl;
@@ -90,34 +95,32 @@ void PlayerController::OnDestory()
 
 }
 
+
 /*-------[ Collision Event ]-------------------------------------*/
-void PlayerController::OnCCTTriggerEnter(CharacterControllerComponent*)
-{
-
-}
-
-void PlayerController::OnCCTTriggerStay(CharacterControllerComponent*)
-{
-
-}
-
-void PlayerController::OnCCTTriggerExit(CharacterControllerComponent*)
+void PlayerController::OnTriggerEnter(PhysicsComponent*)
 {
 }
 
-void PlayerController::OnCCTCollisionEnter(CharacterControllerComponent*)
-{
-
-}
-
-void PlayerController::OnCCTCollisionStay(CharacterControllerComponent*)
+void PlayerController::OnTriggerStay(PhysicsComponent*)
 {
 }
 
-void PlayerController::OnCCTCollisionExit(CharacterControllerComponent*)
+void PlayerController::OnTriggerExit(PhysicsComponent*)
 {
-
 }
+
+void PlayerController::OnCollisionEnter(PhysicsComponent*)
+{
+}
+
+void PlayerController::OnCollisionStay(PhysicsComponent*)
+{
+}
+
+void PlayerController::OnCollisionExit(PhysicsComponent*)
+{
+}
+
 
 /*-------[ JSON ]-------------------------------------*/
 nlohmann::json PlayerController::Serialize()
@@ -133,7 +136,7 @@ void PlayerController::Deserialize(nlohmann::json data)
 /*----------------------------------------------------------------*/
 /*-------[ FSM ]--------------------------------------------------*/
 /*----------------------------------------------------------------*/
-void PlayerController::AddFSMStates()
+void PlayerController::InitFSMStates()
 {
     fsmStates[(int)PlayerState::Idle] = new Player_Idle(this);
     fsmStates[(int)PlayerState::Walk] = new Player_Walk(this);
@@ -223,4 +226,60 @@ void PlayerController::Rotation(float delta)
     float newYaw = currentYaw + deltaYaw * turnSpeed * delta;
 
     transform->SetEuler(Vector3(0.0f, newYaw, 0.0f));
+}
+
+void PlayerController::InteractionCheak(float delta)
+{
+    // interaction x -> reset
+    if (!isInteractionKey || !isPossibleInteraction || serachObject == nullptr)
+    {
+        interactionTimer = 0.0f;
+        return;
+    }
+
+    // holding
+    interactionTimer += delta;
+    float progress = interactionTimer / interactionTime;
+    if (progress > 1.0f) progress = 1.0f;
+
+    // completion -> interaction
+    if (interactionTimer >= interactionTime)
+    {
+        SerachObjectInteraction();
+        interactionTimer = 0.0f;
+    }
+}
+
+void PlayerController::SerachObjectInteraction()
+{
+    std::unique_ptr<IItem> item = serachObject->Interaction();
+    
+    if (item)
+    {
+        // TODO 인벤토리에 추가
+        std::cout << "[Player] Get Item : " << item->itemId << std::endl;
+    }
+    else
+    {
+        std::cout << "[Player] Fail Get Item... " << std::endl;
+    }
+
+    // clear
+    isPossibleInteraction = false;
+    serachObject = nullptr;
+}
+    
+
+void PlayerController::SetInterZoneSearchObect(SearchObject* object)
+{
+    if (object)
+    {
+        isPossibleInteraction = true;
+        serachObject = object;
+    }
+    else
+    {
+        isPossibleInteraction = false;
+        serachObject = nullptr;
+    }
 }

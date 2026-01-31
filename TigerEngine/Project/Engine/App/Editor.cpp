@@ -790,87 +790,53 @@ void Editor::RenderInspector()
                     ImGui::OpenPopup("ComponentMenu"); // 1. popup 열라고 명령 
                     // open component menu
                     // - select component -> ???
-                    // - call obj->AddComponent<T>()  
+                    // - call obj->AddComponent<T>()
                 }
 
                 // 2. 해당 ID를 가진 팝업이 열려있는지 확인하고 그림
                 if (ImGui::BeginPopup("ComponentMenu"))
                 {
-                    DrawAddComponentPopup(obj);
+                    auto& componentsMap = ComponentFactory::Instance().GetRegisteredComponents();
+
+                    for (auto& [name, creatorFunc] : componentsMap)
+                    {
+                        if (name == "Transform") continue; // transform은 무시 ( 왜나면 Transform은 한 게임 오브젝트에 한 개만 존재한다. )
+
+                        // 컴포넌트 이름을 버튼 (MenuItem)으로 노출
+                        if (ImGui::MenuItem(name.c_str()))
+                        {
+                            // 1. 생성 람다 함수를 통해 새 컴포넌트 생성
+                            creatorFunc(obj);
+
+                            // 2. 현재 작업 중인 오브젝트에 추가
+                            // GameObject에 AddComponent(std::shared_ptr<Component>) 형태의 함수가 있어야 합니다.
+                            // obj->AddComponent(newComp); 
+                            ImGui::CloseCurrentPopup();
+                        }
+                    }
+
+                    ImGui::Separator();
+                    if (ImGui::MenuItem("Close")) { ImGui::CloseCurrentPopup(); }
+
                     ImGui::EndPopup();
                 }
 
                 /* ------------------------------- 컴포넌트 내용 출력 ------------------------------- */
-
                 for (auto& comp : obj->GetComponents())
                 {
-                    auto& registered = ComponentFactory::Instance().GetRegisteredComponents();
+                    auto registeredComps = ComponentFactory::Instance().GetRegisteredComponents();
                     auto name = comp->GetName();
-
-                    // 등록된 컴포넌트만 UI 렌더
-                    if (auto it = registered.find(name); it != registered.end())
+                    if (auto it = registeredComps.find(name); it != registeredComps.end())
                     {
-                        RenderComponentInfo(name, comp);
+                        RenderComponentInfo(it->first, comp);
                         ImGui::NewLine();
                         ImGui::Separator();
                     }
-                } // 컴포넌트 내용 출력 end
-            } // obj is destroy end
+                }
+            }
         }
     }
     ImGui::End();
-}
-
-static const char* CatName(ComponentCategory c)
-{
-    switch (c)
-    {
-    case ComponentCategory::Core:      return "Core";
-    case ComponentCategory::Rendering: return "Rendering";
-    case ComponentCategory::Audio:     return "Audio";
-    case ComponentCategory::Physics:   return "Physics";
-    case ComponentCategory::Animation: return "Animation";
-    case ComponentCategory::Script:    return "Scripts";
-    default:                           return "Others";
-    }
-}
-
-void Editor::DrawAddComponentPopup(GameObject* obj)
-{
-    auto& entries = ComponentFactory::Instance().GetRegisteredComponents();
-    // entries: unordered_map<string, ComponentEntry> 라고 가정
-
-    // bucket 만들기 (한 번만)
-    std::map<ComponentCategory, std::vector<const ComponentEntry*>> buckets;
-    for (auto& [k, e] : entries)
-        buckets[e.category].push_back(&e);
-
-    for (auto& [cat, list] : buckets)
-    {
-        // Transform 같은 금지 항목만 있는 카테고리는 숨기고 싶으면 여기서 필터링 가능
-
-        if (ImGui::BeginMenu(CatName(cat)))
-        {
-            std::sort(list.begin(), list.end(),
-                [](auto a, auto b) { return a->name < b->name; });
-
-            for (auto* e : list)
-            {
-                if (e->name == "Transform") continue;
-
-                if (ImGui::MenuItem(e->name.c_str()))
-                {
-                    e->creator(obj);
-                    ImGui::CloseCurrentPopup();
-                }
-            }
-            ImGui::EndMenu();
-        }
-    }
-
-    ImGui::Separator();
-    if (ImGui::MenuItem("Close"))
-        ImGui::CloseCurrentPopup();
 }
 
 void Editor::RenderPlayModeControls()
@@ -1542,6 +1508,30 @@ void Editor::ReadVariants(rttr::instance inst)
             auto c = value.get_value<Color>();
             if (ImGui::ColorEdit3(name.c_str(), &c.x))
                 prop.set_value(inst, c);
+        }
+        else if (value.is_type<string>())
+        {
+            std::string c = value.get_value<std::string>();
+
+            if (ImGui::InputText(
+                name.c_str(),
+                c.data(),
+                c.capacity() + 1,
+                ImGuiInputTextFlags_CallbackResize,
+                [](ImGuiInputTextCallbackData* data) -> int
+                {
+                    if (data->EventFlag == ImGuiInputTextFlags_CallbackResize)
+                    {
+                        auto* str = static_cast<std::string*>(data->UserData);
+                        str->resize(data->BufTextLen);
+                        data->Buf = str->data();
+                    }
+                    return 0;
+                },
+                &c))
+            {
+                prop.set_value(inst, c);
+            }
         }
     }
 }

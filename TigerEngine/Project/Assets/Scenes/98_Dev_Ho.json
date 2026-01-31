@@ -2,11 +2,21 @@
   "objects": [
     {
       "properties": {
-        "ID": 138,
+        "ID": 73,
         "Name": "Main Camera",
         "ParentID": -1,
-        "components": [
-          {
+        "components": {
+          "Camera": {
+            "properties": {
+              "angle": 1.5707963705062866,
+              "farDist": 2000.0,
+              "moveSpeed": 100.0,
+              "nearDist": 0.009999999776482582,
+              "rotSpeed": 0.004000000189989805
+            },
+            "type": "Camera"
+          },
+          "Transform": {
             "properties": {
               "Position": [
                 -98.92500305175781,
@@ -25,50 +35,19 @@
               ]
             },
             "type": "Transform"
-          },
-          {
-            "properties": {
-              "angle": 1.5707963705062866,
-              "farDist": 2000.0,
-              "moveSpeed": 100.0,
-              "nearDist": 0.009999999776482582,
-              "rotSpeed": 0.004000000189989805
-            },
-            "type": "Camera"
           }
-        ]
+        }
       },
       "type": "GameObject"
     },
     {
       "properties": {
-        "ID": 139,
+        "ID": 74,
         "Name": "DirectionalLight(Sun)",
         "ParentID": -1,
-        "components": [
-          {
+        "components": {
+          "Light": {
             "properties": {
-              "Position": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Rotation": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ]
-            },
-            "type": "Transform"
-          },
-          {
-            "properties": {
-              "Active": true,
               "Color": [
                 1.0,
                 1.0,
@@ -88,18 +67,8 @@
               "Range": 15.0
             },
             "type": "Light"
-          }
-        ]
-      },
-      "type": "GameObject"
-    },
-    {
-      "properties": {
-        "ID": 140,
-        "Name": "----------------------",
-        "ParentID": -1,
-        "components": [
-          {
+          },
+          "Transform": {
             "properties": {
               "Position": [
                 0.0,
@@ -119,17 +88,17 @@
             },
             "type": "Transform"
           }
-        ]
+        }
       },
       "type": "GameObject"
     },
     {
       "properties": {
-        "ID": 141,
-        "Name": "Ground",
+        "ID": 75,
+        "Name": "----------------------",
         "ParentID": -1,
-        "components": [
-          {
+        "components": {
+          "Transform": {
             "properties": {
               "Position": [
                 0.0,
@@ -142,24 +111,32 @@
                 0.0
               ],
               "Scale": [
-                10.0,
-                0.05000000074505806,
-                10.0
+                1.0,
+                1.0,
+                1.0
               ]
             },
             "type": "Transform"
-          },
-          {
+          }
+        }
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "ID": 76,
+        "Name": "Ground",
+        "ParentID": -1,
+        "components": {
+          "FBXData": {
             "properties": {
-              "Active": true,
               "DataPath": "..\\Assets\\Resource\\Ground.fbx",
               "IsStatic": true
             },
             "type": "FBXData"
           },
-          {
+          "FBXRenderer": {
             "properties": {
-              "Active": true,
               "Alpha": 1.0,
               "Diffuse": [
                 1.0,
@@ -197,18 +174,38 @@
               "UseRoughnessOverride": false
             },
             "type": "FBXRenderer"
+          },
+          "Transform": {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                10.0,
+                0.05000000074505806,
+                10.0
+              ]
+            },
+            "type": "Transform"
           }
-        ]
+        }
       },
       "type": "GameObject"
     },
     {
       "properties": {
-        "ID": 142,
+        "ID": 77,
         "Name": "CurScene_98_Dev_Ho",
         "ParentID": -1,
-        "components": [
-          {
+        "components": {
+          "Transform": {
             "properties": {
               "Position": [
                 0.0,
@@ -228,47 +225,25 @@
             },
             "type": "Transform"
           }
-        ]
+        }
       },
       "type": "GameObject"
     },
     {
       "properties": {
-        "ID": 143,
+        "ID": 78,
         "Name": "Test_Object_1",
         "ParentID": -1,
-        "components": [
-          {
+        "components": {
+          "FBXData": {
             "properties": {
-              "Position": [
-                136.10000610351563,
-                89.0,
-                69.19999694824219
-              ],
-              "Rotation": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ]
-            },
-            "type": "Transform"
-          },
-          {
-            "properties": {
-              "Active": true,
               "DataPath": "..\\Assets\\Resource\\Torus.fbx",
               "IsStatic": true
             },
             "type": "FBXData"
           },
-          {
+          "FBXRenderer": {
             "properties": {
-              "Active": true,
               "Alpha": 1.0,
               "Diffuse": [
                 0.0,
@@ -306,18 +281,85 @@
               "UseRoughnessOverride": false
             },
             "type": "FBXRenderer"
+          },
+          "Transform": {
+            "properties": {
+              "Position": [
+                136.10000610351563,
+                89.0,
+                69.19999694824219
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
           }
-        ]
+        }
       },
       "type": "GameObject"
     },
     {
       "properties": {
-        "ID": 144,
+        "ID": 79,
         "Name": "Test_Object_Child_1",
-        "ParentID": 143,
-        "components": [
-          {
+        "ParentID": 78,
+        "components": {
+          "FBXData": {
+            "properties": {
+              "DataPath": "..\\Assets\\Resource\\SillyDancing.fbx",
+              "IsStatic": true
+            },
+            "type": "FBXData"
+          },
+          "FBXRenderer": {
+            "properties": {
+              "Alpha": 1.0,
+              "Diffuse": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "DiffuseOverride": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Emissive": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "EmissiveOverride": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "IsGround": false,
+              "Metalic": 1.0,
+              "MetallicOverride": 1.0,
+              "RenderBlendType": "Opaque",
+              "Roughness": 1.0,
+              "RoughnessOverride": 1.0,
+              "UseDiffuseOverride": false,
+              "UseEmissiveOverride": false,
+              "UseMetallicOverride": false,
+              "UseRoughnessOverride": false
+            },
+            "type": "FBXRenderer"
+          },
+          "Transform": {
             "properties": {
               "Position": [
                 0.0,
@@ -336,18 +378,26 @@
               ]
             },
             "type": "Transform"
-          },
-          {
+          }
+        }
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "ID": 80,
+        "Name": "CameraSoket",
+        "ParentID": 79,
+        "components": {
+          "FBXData": {
             "properties": {
-              "Active": true,
-              "DataPath": "..\\Assets\\Resource\\SillyDancing.fbx",
+              "DataPath": "..\\Assets\\Resource\\sphere.fbx",
               "IsStatic": true
             },
             "type": "FBXData"
           },
-          {
+          "FBXRenderer": {
             "properties": {
-              "Active": true,
               "Alpha": 1.0,
               "Diffuse": [
                 1.0,
@@ -386,33 +436,7 @@
             },
             "type": "FBXRenderer"
           },
-          {
-            "properties": {
-              "b": -6.099999904632568,
-              "g": -4.099999904632568,
-              "r": -6.599999904632568
-            },
-            "type": "Player1"
-          },
-          {
-            "properties": {
-              "b": 4.099999904632568,
-              "g": 4.5,
-              "r": 8.899999618530273
-            },
-            "type": "Player1"
-          }
-        ]
-      },
-      "type": "GameObject"
-    },
-    {
-      "properties": {
-        "ID": 145,
-        "Name": "CameraSoket",
-        "ParentID": 144,
-        "components": [
-          {
+          "Transform": {
             "properties": {
               "Position": [
                 162.1999969482422,
@@ -431,67 +455,28 @@
               ]
             },
             "type": "Transform"
-          },
-          {
-            "properties": {
-              "Active": true,
-              "DataPath": "..\\Assets\\Resource\\sphere.fbx",
-              "IsStatic": true
-            },
-            "type": "FBXData"
-          },
-          {
-            "properties": {
-              "Active": true,
-              "Alpha": 1.0,
-              "Diffuse": [
-                1.0,
-                1.0,
-                1.0,
-                1.0
-              ],
-              "DiffuseOverride": [
-                1.0,
-                1.0,
-                1.0,
-                1.0
-              ],
-              "Emissive": [
-                1.0,
-                1.0,
-                1.0,
-                1.0
-              ],
-              "EmissiveOverride": [
-                1.0,
-                1.0,
-                1.0,
-                1.0
-              ],
-              "IsGround": false,
-              "Metalic": 1.0,
-              "MetallicOverride": 1.0,
-              "RenderBlendType": "Opaque",
-              "Roughness": 1.0,
-              "RoughnessOverride": 1.0,
-              "UseDiffuseOverride": false,
-              "UseEmissiveOverride": false,
-              "UseMetallicOverride": false,
-              "UseRoughnessOverride": false
-            },
-            "type": "FBXRenderer"
           }
-        ]
+        }
       },
       "type": "GameObject"
     },
     {
       "properties": {
-        "ID": 146,
+        "ID": 81,
         "Name": "Sub Camera",
-        "ParentID": 145,
-        "components": [
-          {
+        "ParentID": 80,
+        "components": {
+          "Camera": {
+            "properties": {
+              "angle": 1.5707963705062866,
+              "farDist": 2000.0,
+              "moveSpeed": 100.0,
+              "nearDist": 0.009999999776482582,
+              "rotSpeed": 0.004000000189989805
+            },
+            "type": "Camera"
+          },
+          "Transform": {
             "properties": {
               "Position": [
                 0.0,
@@ -510,28 +495,65 @@
               ]
             },
             "type": "Transform"
-          },
-          {
-            "properties": {
-              "angle": 1.5707963705062866,
-              "farDist": 2000.0,
-              "moveSpeed": 100.0,
-              "nearDist": 0.009999999776482582,
-              "rotSpeed": 0.004000000189989805
-            },
-            "type": "Camera"
           }
-        ]
+        }
       },
       "type": "GameObject"
     },
     {
       "properties": {
-        "ID": 147,
+        "ID": 82,
         "Name": "Parent",
         "ParentID": -1,
-        "components": [
-          {
+        "components": {
+          "FBXData": {
+            "properties": {
+              "DataPath": "..\\Assets\\Resource\\cube2.fbx",
+              "IsStatic": true
+            },
+            "type": "FBXData"
+          },
+          "FBXRenderer": {
+            "properties": {
+              "Alpha": 1.0,
+              "Diffuse": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "DiffuseOverride": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Emissive": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "EmissiveOverride": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "IsGround": false,
+              "Metalic": 1.0,
+              "MetallicOverride": 1.0,
+              "RenderBlendType": "Opaque",
+              "Roughness": 1.0,
+              "RoughnessOverride": 1.0,
+              "UseDiffuseOverride": false,
+              "UseEmissiveOverride": false,
+              "UseMetallicOverride": false,
+              "UseRoughnessOverride": false
+            },
+            "type": "FBXRenderer"
+          },
+          "Transform": {
             "properties": {
               "Position": [
                 -272.5,
@@ -550,18 +572,26 @@
               ]
             },
             "type": "Transform"
-          },
-          {
+          }
+        }
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "ID": 83,
+        "Name": "child1",
+        "ParentID": 82,
+        "components": {
+          "FBXData": {
             "properties": {
-              "Active": true,
-              "DataPath": "..\\Assets\\Resource\\cube2.fbx",
+              "DataPath": "..\\Assets\\Resource\\fire.fbx",
               "IsStatic": true
             },
             "type": "FBXData"
           },
-          {
+          "FBXRenderer": {
             "properties": {
-              "Active": true,
               "Alpha": 1.0,
               "Diffuse": [
                 1.0,
@@ -599,18 +629,8 @@
               "UseRoughnessOverride": false
             },
             "type": "FBXRenderer"
-          }
-        ]
-      },
-      "type": "GameObject"
-    },
-    {
-      "properties": {
-        "ID": 148,
-        "Name": "child1",
-        "ParentID": 147,
-        "components": [
-          {
+          },
+          "Transform": {
             "properties": {
               "Position": [
                 0.0,
@@ -629,18 +649,26 @@
               ]
             },
             "type": "Transform"
-          },
-          {
+          }
+        }
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "ID": 84,
+        "Name": "Child2",
+        "ParentID": 83,
+        "components": {
+          "FBXData": {
             "properties": {
-              "Active": true,
-              "DataPath": "..\\Assets\\Resource\\fire.fbx",
+              "DataPath": "..\\Assets\\Resource\\sphere.fbx",
               "IsStatic": true
             },
             "type": "FBXData"
           },
-          {
+          "FBXRenderer": {
             "properties": {
-              "Active": true,
               "Alpha": 1.0,
               "Diffuse": [
                 1.0,
@@ -678,18 +706,8 @@
               "UseRoughnessOverride": false
             },
             "type": "FBXRenderer"
-          }
-        ]
-      },
-      "type": "GameObject"
-    },
-    {
-      "properties": {
-        "ID": 149,
-        "Name": "Child2",
-        "ParentID": 148,
-        "components": [
-          {
+          },
+          "Transform": {
             "properties": {
               "Position": [
                 0.0,
@@ -708,18 +726,26 @@
               ]
             },
             "type": "Transform"
-          },
-          {
+          }
+        }
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "ID": 85,
+        "Name": "NewGameObject",
+        "ParentID": 82,
+        "components": {
+          "FBXData": {
             "properties": {
-              "Active": true,
-              "DataPath": "..\\Assets\\Resource\\sphere.fbx",
+              "DataPath": "..\\Assets\\Resource\\Character.fbx",
               "IsStatic": true
             },
             "type": "FBXData"
           },
-          {
+          "FBXRenderer": {
             "properties": {
-              "Active": true,
               "Alpha": 1.0,
               "Diffuse": [
                 1.0,
@@ -757,18 +783,8 @@
               "UseRoughnessOverride": false
             },
             "type": "FBXRenderer"
-          }
-        ]
-      },
-      "type": "GameObject"
-    },
-    {
-      "properties": {
-        "ID": 150,
-        "Name": "NewGameObject",
-        "ParentID": 147,
-        "components": [
-          {
+          },
+          "Transform": {
             "properties": {
               "Position": [
                 159.0,
@@ -787,18 +803,26 @@
               ]
             },
             "type": "Transform"
-          },
-          {
+          }
+        }
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "ID": 86,
+        "Name": "NewGameObject",
+        "ParentID": 85,
+        "components": {
+          "FBXData": {
             "properties": {
-              "Active": true,
-              "DataPath": "..\\Assets\\Resource\\Character.fbx",
+              "DataPath": "..\\Assets\\Resource\\sphere.fbx",
               "IsStatic": true
             },
             "type": "FBXData"
           },
-          {
+          "FBXRenderer": {
             "properties": {
-              "Active": true,
               "Alpha": 1.0,
               "Diffuse": [
                 1.0,
@@ -836,18 +860,8 @@
               "UseRoughnessOverride": false
             },
             "type": "FBXRenderer"
-          }
-        ]
-      },
-      "type": "GameObject"
-    },
-    {
-      "properties": {
-        "ID": 151,
-        "Name": "NewGameObject",
-        "ParentID": 150,
-        "components": [
-          {
+          },
+          "Transform": {
             "properties": {
               "Position": [
                 0.0,
@@ -866,18 +880,26 @@
               ]
             },
             "type": "Transform"
-          },
-          {
+          }
+        }
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "ID": 107,
+        "Name": "Parent",
+        "ParentID": -1,
+        "components": {
+          "FBXData": {
             "properties": {
-              "Active": true,
-              "DataPath": "..\\Assets\\Resource\\sphere.fbx",
+              "DataPath": "..\\Assets\\Resource\\cube2.fbx",
               "IsStatic": true
             },
             "type": "FBXData"
           },
-          {
+          "FBXRenderer": {
             "properties": {
-              "Active": true,
               "Alpha": 1.0,
               "Diffuse": [
                 1.0,
@@ -915,18 +937,8 @@
               "UseRoughnessOverride": false
             },
             "type": "FBXRenderer"
-          }
-        ]
-      },
-      "type": "GameObject"
-    },
-    {
-      "properties": {
-        "ID": 152,
-        "Name": "Parent",
-        "ParentID": -1,
-        "components": [
-          {
+          },
+          "Transform": {
             "properties": {
               "Position": [
                 -272.5,
@@ -945,18 +957,26 @@
               ]
             },
             "type": "Transform"
-          },
-          {
+          }
+        }
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "ID": 108,
+        "Name": "child1",
+        "ParentID": 107,
+        "components": {
+          "FBXData": {
             "properties": {
-              "Active": true,
-              "DataPath": "..\\Assets\\Resource\\cube2.fbx",
+              "DataPath": "..\\Assets\\Resource\\fire.fbx",
               "IsStatic": true
             },
             "type": "FBXData"
           },
-          {
+          "FBXRenderer": {
             "properties": {
-              "Active": true,
               "Alpha": 1.0,
               "Diffuse": [
                 1.0,
@@ -994,18 +1014,8 @@
               "UseRoughnessOverride": false
             },
             "type": "FBXRenderer"
-          }
-        ]
-      },
-      "type": "GameObject"
-    },
-    {
-      "properties": {
-        "ID": 153,
-        "Name": "child1",
-        "ParentID": 152,
-        "components": [
-          {
+          },
+          "Transform": {
             "properties": {
               "Position": [
                 0.0,
@@ -1024,18 +1034,26 @@
               ]
             },
             "type": "Transform"
-          },
-          {
+          }
+        }
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "ID": 109,
+        "Name": "Child2",
+        "ParentID": 108,
+        "components": {
+          "FBXData": {
             "properties": {
-              "Active": true,
-              "DataPath": "..\\Assets\\Resource\\fire.fbx",
+              "DataPath": "..\\Assets\\Resource\\sphere.fbx",
               "IsStatic": true
             },
             "type": "FBXData"
           },
-          {
+          "FBXRenderer": {
             "properties": {
-              "Active": true,
               "Alpha": 1.0,
               "Diffuse": [
                 1.0,
@@ -1073,18 +1091,8 @@
               "UseRoughnessOverride": false
             },
             "type": "FBXRenderer"
-          }
-        ]
-      },
-      "type": "GameObject"
-    },
-    {
-      "properties": {
-        "ID": 154,
-        "Name": "Child2",
-        "ParentID": 153,
-        "components": [
-          {
+          },
+          "Transform": {
             "properties": {
               "Position": [
                 0.0,
@@ -1103,18 +1111,26 @@
               ]
             },
             "type": "Transform"
-          },
-          {
+          }
+        }
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "ID": 110,
+        "Name": "NewGameObject",
+        "ParentID": 107,
+        "components": {
+          "FBXData": {
             "properties": {
-              "Active": true,
-              "DataPath": "..\\Assets\\Resource\\sphere.fbx",
+              "DataPath": "..\\Assets\\Resource\\Character.fbx",
               "IsStatic": true
             },
             "type": "FBXData"
           },
-          {
+          "FBXRenderer": {
             "properties": {
-              "Active": true,
               "Alpha": 1.0,
               "Diffuse": [
                 1.0,
@@ -1152,18 +1168,8 @@
               "UseRoughnessOverride": false
             },
             "type": "FBXRenderer"
-          }
-        ]
-      },
-      "type": "GameObject"
-    },
-    {
-      "properties": {
-        "ID": 155,
-        "Name": "NewGameObject",
-        "ParentID": 152,
-        "components": [
-          {
+          },
+          "Transform": {
             "properties": {
               "Position": [
                 159.0,
@@ -1182,18 +1188,26 @@
               ]
             },
             "type": "Transform"
-          },
-          {
+          }
+        }
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "ID": 111,
+        "Name": "NewGameObject",
+        "ParentID": 110,
+        "components": {
+          "FBXData": {
             "properties": {
-              "Active": true,
-              "DataPath": "..\\Assets\\Resource\\Character.fbx",
+              "DataPath": "..\\Assets\\Resource\\sphere.fbx",
               "IsStatic": true
             },
             "type": "FBXData"
           },
-          {
+          "FBXRenderer": {
             "properties": {
-              "Active": true,
               "Alpha": 1.0,
               "Diffuse": [
                 1.0,
@@ -1231,18 +1245,8 @@
               "UseRoughnessOverride": false
             },
             "type": "FBXRenderer"
-          }
-        ]
-      },
-      "type": "GameObject"
-    },
-    {
-      "properties": {
-        "ID": 156,
-        "Name": "NewGameObject",
-        "ParentID": 155,
-        "components": [
-          {
+          },
+          "Transform": {
             "properties": {
               "Position": [
                 0.0,
@@ -1261,18 +1265,26 @@
               ]
             },
             "type": "Transform"
-          },
-          {
+          }
+        }
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "ID": 132,
+        "Name": "Parent",
+        "ParentID": -1,
+        "components": {
+          "FBXData": {
             "properties": {
-              "Active": true,
-              "DataPath": "..\\Assets\\Resource\\sphere.fbx",
+              "DataPath": "..\\Assets\\Resource\\cube2.fbx",
               "IsStatic": true
             },
             "type": "FBXData"
           },
-          {
+          "FBXRenderer": {
             "properties": {
-              "Active": true,
               "Alpha": 1.0,
               "Diffuse": [
                 1.0,
@@ -1310,18 +1322,8 @@
               "UseRoughnessOverride": false
             },
             "type": "FBXRenderer"
-          }
-        ]
-      },
-      "type": "GameObject"
-    },
-    {
-      "properties": {
-        "ID": 157,
-        "Name": "Parent",
-        "ParentID": -1,
-        "components": [
-          {
+          },
+          "Transform": {
             "properties": {
               "Position": [
                 -87.69999694824219,
@@ -1340,18 +1342,26 @@
               ]
             },
             "type": "Transform"
-          },
-          {
+          }
+        }
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "ID": 133,
+        "Name": "child1",
+        "ParentID": 132,
+        "components": {
+          "FBXData": {
             "properties": {
-              "Active": true,
-              "DataPath": "..\\Assets\\Resource\\cube2.fbx",
+              "DataPath": "..\\Assets\\Resource\\fire.fbx",
               "IsStatic": true
             },
             "type": "FBXData"
           },
-          {
+          "FBXRenderer": {
             "properties": {
-              "Active": true,
               "Alpha": 1.0,
               "Diffuse": [
                 1.0,
@@ -1389,18 +1399,8 @@
               "UseRoughnessOverride": false
             },
             "type": "FBXRenderer"
-          }
-        ]
-      },
-      "type": "GameObject"
-    },
-    {
-      "properties": {
-        "ID": 158,
-        "Name": "child1",
-        "ParentID": 157,
-        "components": [
-          {
+          },
+          "Transform": {
             "properties": {
               "Position": [
                 0.0,
@@ -1419,18 +1419,26 @@
               ]
             },
             "type": "Transform"
-          },
-          {
+          }
+        }
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "ID": 134,
+        "Name": "Child2",
+        "ParentID": 133,
+        "components": {
+          "FBXData": {
             "properties": {
-              "Active": true,
-              "DataPath": "..\\Assets\\Resource\\fire.fbx",
+              "DataPath": "..\\Assets\\Resource\\sphere.fbx",
               "IsStatic": true
             },
             "type": "FBXData"
           },
-          {
+          "FBXRenderer": {
             "properties": {
-              "Active": true,
               "Alpha": 1.0,
               "Diffuse": [
                 1.0,
@@ -1468,18 +1476,8 @@
               "UseRoughnessOverride": false
             },
             "type": "FBXRenderer"
-          }
-        ]
-      },
-      "type": "GameObject"
-    },
-    {
-      "properties": {
-        "ID": 159,
-        "Name": "Child2",
-        "ParentID": 158,
-        "components": [
-          {
+          },
+          "Transform": {
             "properties": {
               "Position": [
                 0.0,
@@ -1498,18 +1496,26 @@
               ]
             },
             "type": "Transform"
-          },
-          {
+          }
+        }
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "ID": 135,
+        "Name": "NewGameObject",
+        "ParentID": 132,
+        "components": {
+          "FBXData": {
             "properties": {
-              "Active": true,
-              "DataPath": "..\\Assets\\Resource\\sphere.fbx",
+              "DataPath": "..\\Assets\\Resource\\Character.fbx",
               "IsStatic": true
             },
             "type": "FBXData"
           },
-          {
+          "FBXRenderer": {
             "properties": {
-              "Active": true,
               "Alpha": 1.0,
               "Diffuse": [
                 1.0,
@@ -1547,18 +1553,8 @@
               "UseRoughnessOverride": false
             },
             "type": "FBXRenderer"
-          }
-        ]
-      },
-      "type": "GameObject"
-    },
-    {
-      "properties": {
-        "ID": 160,
-        "Name": "NewGameObject",
-        "ParentID": 157,
-        "components": [
-          {
+          },
+          "Transform": {
             "properties": {
               "Position": [
                 159.0,
@@ -1577,18 +1573,26 @@
               ]
             },
             "type": "Transform"
-          },
-          {
+          }
+        }
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "ID": 136,
+        "Name": "NewGameObject",
+        "ParentID": 135,
+        "components": {
+          "FBXData": {
             "properties": {
-              "Active": true,
-              "DataPath": "..\\Assets\\Resource\\Character.fbx",
+              "DataPath": "..\\Assets\\Resource\\sphere.fbx",
               "IsStatic": true
             },
             "type": "FBXData"
           },
-          {
+          "FBXRenderer": {
             "properties": {
-              "Active": true,
               "Alpha": 1.0,
               "Diffuse": [
                 1.0,
@@ -1626,18 +1630,8 @@
               "UseRoughnessOverride": false
             },
             "type": "FBXRenderer"
-          }
-        ]
-      },
-      "type": "GameObject"
-    },
-    {
-      "properties": {
-        "ID": 161,
-        "Name": "NewGameObject",
-        "ParentID": 160,
-        "components": [
-          {
+          },
+          "Transform": {
             "properties": {
               "Position": [
                 0.0,
@@ -1656,57 +1650,8 @@
               ]
             },
             "type": "Transform"
-          },
-          {
-            "properties": {
-              "Active": true,
-              "DataPath": "..\\Assets\\Resource\\sphere.fbx",
-              "IsStatic": true
-            },
-            "type": "FBXData"
-          },
-          {
-            "properties": {
-              "Active": true,
-              "Alpha": 1.0,
-              "Diffuse": [
-                1.0,
-                1.0,
-                1.0,
-                1.0
-              ],
-              "DiffuseOverride": [
-                1.0,
-                1.0,
-                1.0,
-                1.0
-              ],
-              "Emissive": [
-                1.0,
-                1.0,
-                1.0,
-                1.0
-              ],
-              "EmissiveOverride": [
-                1.0,
-                1.0,
-                1.0,
-                1.0
-              ],
-              "IsGround": false,
-              "Metalic": 1.0,
-              "MetallicOverride": 1.0,
-              "RenderBlendType": "Opaque",
-              "Roughness": 1.0,
-              "RoughnessOverride": 1.0,
-              "UseDiffuseOverride": false,
-              "UseEmissiveOverride": false,
-              "UseMetallicOverride": false,
-              "UseRoughnessOverride": false
-            },
-            "type": "FBXRenderer"
           }
-        ]
+        }
       },
       "type": "GameObject"
     }

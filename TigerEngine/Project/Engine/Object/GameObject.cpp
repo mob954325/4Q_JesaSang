@@ -139,12 +139,12 @@ nlohmann::json GameObject::Serialize() const
     }
 
     // 컴포넌트 내용 직렬화
-    datas["properties"]["components"] = nlohmann::json::array();
+    datas["properties"]["components"] = nlohmann::json::object();
     auto& comps = datas["properties"]["components"];
 
     for (auto& comp : components)
     {
-        comps.push_back(comp->Serialize());
+        comps[comp->GetName()] = comp->Serialize();
     }
     
     return datas;
@@ -164,19 +164,24 @@ void GameObject::Deserialize(const nlohmann::json objData)
         if(!prop.contains("type")) continue;
 
         std::string compName = prop["type"];
-
         if(compName == "Transform") // Transform은 게임 오브젝트가 생성 시에 추가된다.
         {
             auto trans = this->GetComponent<Transform>();
             trans->Deserialize(prop);
-            continue;
         }
-
-        auto it = registered.find(compName);
-        if (it != registered.end())
+        else    // 그 외 컴포넌트는 추가한다.
         {
-            Component* createdComp = it->second.creator(this);
-            createdComp->Deserialize(prop);
+            // 컴포넌트를 찾아서 factory에 등록되어있으면 컴포넌트 추가
+            for (auto [name, create] : registered)
+            {
+                if (compName == name)
+                {                   
+                    auto createdComp = create(this);
+                    createdComp->Deserialize(prop);
+
+                    break;
+                }
+            }            
         }
     }
 }

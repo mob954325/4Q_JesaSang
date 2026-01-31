@@ -2,7 +2,7 @@
   "objects": [
     {
       "properties": {
-        "ID": 142,
+        "ID": 346,
         "Name": "Main Camera",
         "ParentID": -1,
         "components": {
@@ -21,6 +21,12 @@
               "Active": true
             },
             "type": "CameraController"
+          },
+          "OcclusionFader": {
+            "properties": {
+              "Active": true
+            },
+            "type": "OcclusionFader"
           },
           "Transform": {
             "properties": {
@@ -48,7 +54,7 @@
     },
     {
       "properties": {
-        "ID": 143,
+        "ID": 347,
         "Name": "DirectionalLight(Sun)",
         "ParentID": -1,
         "components": {
@@ -101,7 +107,7 @@
     },
     {
       "properties": {
-        "ID": 144,
+        "ID": 348,
         "Name": "---------Floor----------",
         "ParentID": -1,
         "components": {
@@ -131,9 +137,9 @@
     },
     {
       "properties": {
-        "ID": 145,
+        "ID": 349,
         "Name": "Floor",
-        "ParentID": 144,
+        "ParentID": 348,
         "components": {
           "FBXData": {
             "properties": {
@@ -233,7 +239,7 @@
     },
     {
       "properties": {
-        "ID": 146,
+        "ID": 350,
         "Name": "---------Wall----------",
         "ParentID": -1,
         "components": {
@@ -263,9 +269,9 @@
     },
     {
       "properties": {
-        "ID": 147,
+        "ID": 351,
         "Name": "Door_Open",
-        "ParentID": 146,
+        "ParentID": 350,
         "components": {
           "FBXData": {
             "properties": {
@@ -342,9 +348,9 @@
     },
     {
       "properties": {
-        "ID": 148,
+        "ID": 352,
         "Name": "Pillar",
-        "ParentID": 146,
+        "ParentID": 350,
         "components": {
           "FBXData": {
             "properties": {
@@ -395,6 +401,12 @@
             },
             "type": "FBXRenderer"
           },
+          "OcclusionFadeObject": {
+            "properties": {
+              "Active": true
+            },
+            "type": "OcclusionFadeObject"
+          },
           "PhysicsComponent": {
             "properties": {
               "Active": true,
@@ -444,9 +456,9 @@
     },
     {
       "properties": {
-        "ID": 149,
+        "ID": 353,
         "Name": "wall_4",
-        "ParentID": 146,
+        "ParentID": 350,
         "components": {
           "FBXData": {
             "properties": {
@@ -459,7 +471,7 @@
           "FBXRenderer": {
             "properties": {
               "Active": true,
-              "Alpha": 0.4000000059604645,
+              "Alpha": 1.0,
               "Diffuse": [
                 1.0,
                 1.0,
@@ -487,7 +499,7 @@
               "IsGround": false,
               "Metalic": 1.0,
               "MetallicOverride": 1.0,
-              "RenderBlendType": "Transparent",
+              "RenderBlendType": "Opaque",
               "Roughness": 1.0,
               "RoughnessOverride": 1.0,
               "UseDiffuseOverride": false,
@@ -496,6 +508,12 @@
               "UseRoughnessOverride": false
             },
             "type": "FBXRenderer"
+          },
+          "OcclusionFadeObject": {
+            "properties": {
+              "Active": true
+            },
+            "type": "OcclusionFadeObject"
           },
           "PhysicsComponent": {
             "properties": {
@@ -523,7 +541,7 @@
           "Transform": {
             "properties": {
               "Position": [
-                -152.60000610351563,
+                -151.1999969482422,
                 -110.0,
                 -150.60000610351563
               ],
@@ -546,9 +564,9 @@
     },
     {
       "properties": {
-        "ID": 150,
+        "ID": 354,
         "Name": "wall_5",
-        "ParentID": 146,
+        "ParentID": 350,
         "components": {
           "FBXData": {
             "properties": {
@@ -599,6 +617,12 @@
             },
             "type": "FBXRenderer"
           },
+          "OcclusionFadeObject": {
+            "properties": {
+              "Active": true
+            },
+            "type": "OcclusionFadeObject"
+          },
           "PhysicsComponent": {
             "properties": {
               "Active": true,
@@ -648,9 +672,9 @@
     },
     {
       "properties": {
-        "ID": 151,
+        "ID": 355,
         "Name": "Room",
-        "ParentID": 144,
+        "ParentID": 348,
         "components": {
           "FBXData": {
             "properties": {
@@ -727,9 +751,9 @@
     },
     {
       "properties": {
-        "ID": 152,
+        "ID": 356,
         "Name": "Room_a_love_room",
-        "ParentID": 144,
+        "ParentID": 348,
         "components": {
           "FBXData": {
             "properties": {
@@ -806,9 +830,9 @@
     },
     {
       "properties": {
-        "ID": 153,
+        "ID": 357,
         "Name": "Room_Kitchen",
-        "ParentID": 144,
+        "ParentID": 348,
         "components": {
           "FBXData": {
             "properties": {
@@ -885,9 +909,9 @@
     },
     {
       "properties": {
-        "ID": 154,
+        "ID": 358,
         "Name": "Room_main_room",
-        "ParentID": 144,
+        "ParentID": 348,
         "components": {
           "FBXData": {
             "properties": {
@@ -964,9 +988,9 @@
     },
     {
       "properties": {
-        "ID": 155,
+        "ID": 359,
         "Name": "Room_saibi",
-        "ParentID": 144,
+        "ParentID": 348,
         "components": {
           "FBXData": {
             "properties": {
@@ -1043,9 +1067,9 @@
     },
     {
       "properties": {
-        "ID": 156,
+        "ID": 360,
         "Name": "Room_Table_of_memorial_ceremony",
-        "ParentID": 144,
+        "ParentID": 348,
         "components": {
           "FBXData": {
             "properties": {
@@ -1122,9 +1146,9 @@
     },
     {
       "properties": {
-        "ID": 157,
+        "ID": 361,
         "Name": "Room_Warehouse",
-        "ParentID": 144,
+        "ParentID": 348,
         "components": {
           "FBXData": {
             "properties": {
@@ -1201,7 +1225,7 @@
     },
     {
       "properties": {
-        "ID": 158,
+        "ID": 362,
         "Name": "---------Object----------",
         "ParentID": -1,
         "components": {
@@ -1231,9 +1255,9 @@
     },
     {
       "properties": {
-        "ID": 159,
+        "ID": 363,
         "Name": "teble",
-        "ParentID": 158,
+        "ParentID": 362,
         "components": {
           "FBXData": {
             "properties": {
@@ -1333,9 +1357,9 @@
     },
     {
       "properties": {
-        "ID": 160,
-        "Name": "cabinet",
-        "ParentID": 158,
+        "ID": 364,
+        "Name": "SearchOB_Item",
+        "ParentID": 362,
         "components": {
           "FBXData": {
             "properties": {
@@ -1398,7 +1422,7 @@
                 50.0
               ],
               "height": 10.0,
-              "isTrigger": false,
+              "isTrigger": true,
               "layer": "Default",
               "localOffset": [
                 0.0,
@@ -1408,6 +1432,21 @@
               "radius": 50.0
             },
             "type": "PhysicsComponent"
+          },
+          "SearchObject": {
+            "properties": {
+              "Active": true,
+              "hasItem": true,
+              "interactionDiffuse": [
+                0.23529411852359772,
+                0.23529411852359772,
+                0.23529411852359772,
+                1.0
+              ],
+              "itemID": "Apple",
+              "itemType": "Ingredient"
+            },
+            "type": "SearchObject"
           },
           "Transform": {
             "properties": {
@@ -1435,9 +1474,9 @@
     },
     {
       "properties": {
-        "ID": 161,
-        "Name": "cabinet_Open",
-        "ParentID": 158,
+        "ID": 365,
+        "Name": "SearchOB_Item",
+        "ParentID": 362,
         "components": {
           "FBXData": {
             "properties": {
@@ -1500,7 +1539,7 @@
                 50.0
               ],
               "height": 10.0,
-              "isTrigger": false,
+              "isTrigger": true,
               "layer": "Default",
               "localOffset": [
                 0.0,
@@ -1510,6 +1549,21 @@
               "radius": 50.0
             },
             "type": "PhysicsComponent"
+          },
+          "SearchObject": {
+            "properties": {
+              "Active": true,
+              "hasItem": true,
+              "interactionDiffuse": [
+                0.23529411852359772,
+                0.23529411852359772,
+                0.23529411852359772,
+                1.0
+              ],
+              "itemID": "Orange",
+              "itemType": "Ingredient"
+            },
+            "type": "SearchObject"
           },
           "Transform": {
             "properties": {
@@ -1537,9 +1591,9 @@
     },
     {
       "properties": {
-        "ID": 162,
+        "ID": 366,
         "Name": "food",
-        "ParentID": 158,
+        "ParentID": 362,
         "components": {
           "FBXData": {
             "properties": {
@@ -1616,7 +1670,7 @@
     },
     {
       "properties": {
-        "ID": 163,
+        "ID": 367,
         "Name": "Player",
         "ParentID": -1,
         "components": {
@@ -1718,7 +1772,7 @@
     },
     {
       "properties": {
-        "ID": 164,
+        "ID": 368,
         "Name": "-----------------------",
         "ParentID": -1,
         "components": {
@@ -1748,7 +1802,7 @@
     },
     {
       "properties": {
-        "ID": 165,
+        "ID": 369,
         "Name": "CurScene_98_Dev_Woo",
         "ParentID": -1,
         "components": {
@@ -1778,7 +1832,7 @@
     },
     {
       "properties": {
-        "ID": 166,
+        "ID": 370,
         "Name": "-----------------------",
         "ParentID": -1,
         "components": {
@@ -1808,9 +1862,9 @@
     },
     {
       "properties": {
-        "ID": 167,
+        "ID": 371,
         "Name": "wall_5",
-        "ParentID": 146,
+        "ParentID": 350,
         "components": {
           "FBXData": {
             "properties": {
@@ -1860,6 +1914,12 @@
               "UseRoughnessOverride": false
             },
             "type": "FBXRenderer"
+          },
+          "OcclusionFadeObject": {
+            "properties": {
+              "Active": true
+            },
+            "type": "OcclusionFadeObject"
           },
           "PhysicsComponent": {
             "properties": {
@@ -1910,9 +1970,9 @@
     },
     {
       "properties": {
-        "ID": 168,
+        "ID": 372,
         "Name": "wall_5",
-        "ParentID": 146,
+        "ParentID": 350,
         "components": {
           "FBXData": {
             "properties": {
@@ -1962,6 +2022,12 @@
               "UseRoughnessOverride": false
             },
             "type": "FBXRenderer"
+          },
+          "OcclusionFadeObject": {
+            "properties": {
+              "Active": true
+            },
+            "type": "OcclusionFadeObject"
           },
           "PhysicsComponent": {
             "properties": {
@@ -2012,15 +2078,291 @@
     },
     {
       "properties": {
-        "ID": 169,
+        "ID": 373,
         "Name": "wall_5",
-        "ParentID": 146,
+        "ParentID": 350,
         "components": {
           "FBXData": {
             "properties": {
               "Active": true,
               "DataPath": "..\\Assets\\Resource\\FBX\\House\\wall_5.fbx",
               "IsStatic": true
+            },
+            "type": "FBXData"
+          },
+          "FBXRenderer": {
+            "properties": {
+              "Active": true,
+              "Alpha": 1.0,
+              "Diffuse": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "DiffuseOverride": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Emissive": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "EmissiveOverride": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "IsGround": false,
+              "Metalic": 1.0,
+              "MetallicOverride": 1.0,
+              "RenderBlendType": "Opaque",
+              "Roughness": 1.0,
+              "RoughnessOverride": 1.0,
+              "UseDiffuseOverride": false,
+              "UseEmissiveOverride": false,
+              "UseMetallicOverride": false,
+              "UseRoughnessOverride": false
+            },
+            "type": "FBXRenderer"
+          },
+          "OcclusionFadeObject": {
+            "properties": {
+              "Active": true
+            },
+            "type": "OcclusionFadeObject"
+          },
+          "PhysicsComponent": {
+            "properties": {
+              "Active": true,
+              "ColliderType": "Box",
+              "PhysicsBodyType": "Static",
+              "density": 10.0,
+              "halfExtents": [
+                200.0,
+                100.0,
+                10.0
+              ],
+              "height": 10.0,
+              "isTrigger": false,
+              "layer": "Default",
+              "localOffset": [
+                0.0,
+                100.0,
+                0.0
+              ],
+              "radius": 50.0
+            },
+            "type": "PhysicsComponent"
+          },
+          "Transform": {
+            "properties": {
+              "Position": [
+                509.4989318847656,
+                -110.0,
+                83.0999984741211
+              ],
+              "Rotation": [
+                -0.0,
+                1.5707964897155762,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          }
+        }
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "ID": 374,
+        "Name": "wall_4",
+        "ParentID": 350,
+        "components": {
+          "FBXData": {
+            "properties": {
+              "Active": true,
+              "DataPath": "..\\Assets\\Resource\\FBX\\House\\wall_4.fbx",
+              "IsStatic": true
+            },
+            "type": "FBXData"
+          },
+          "FBXRenderer": {
+            "properties": {
+              "Active": true,
+              "Alpha": 1.0,
+              "Diffuse": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "DiffuseOverride": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Emissive": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "EmissiveOverride": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "IsGround": false,
+              "Metalic": 1.0,
+              "MetallicOverride": 1.0,
+              "RenderBlendType": "Opaque",
+              "Roughness": 1.0,
+              "RoughnessOverride": 1.0,
+              "UseDiffuseOverride": false,
+              "UseEmissiveOverride": false,
+              "UseMetallicOverride": false,
+              "UseRoughnessOverride": false
+            },
+            "type": "FBXRenderer"
+          },
+          "OcclusionFadeObject": {
+            "properties": {
+              "Active": true
+            },
+            "type": "OcclusionFadeObject"
+          },
+          "PhysicsComponent": {
+            "properties": {
+              "Active": true,
+              "ColliderType": "Box",
+              "PhysicsBodyType": "Static",
+              "density": 10.0,
+              "halfExtents": [
+                155.0,
+                100.0,
+                10.0
+              ],
+              "height": 10.0,
+              "isTrigger": false,
+              "layer": "Default",
+              "localOffset": [
+                0.0,
+                100.0,
+                0.0
+              ],
+              "radius": 50.0
+            },
+            "type": "PhysicsComponent"
+          },
+          "Transform": {
+            "properties": {
+              "Position": [
+                327.3999938964844,
+                -110.0,
+                -158.69998168945313
+              ],
+              "Rotation": [
+                -0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                0.8999999761581421,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          }
+        }
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "ID": 375,
+        "Name": "CameraTrackingPoint",
+        "ParentID": 367,
+        "components": {
+          "Transform": {
+            "properties": {
+              "Position": [
+                0.0,
+                79.69999694824219,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          }
+        }
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "ID": 376,
+        "Name": "OcclusionFadePoint",
+        "ParentID": 367,
+        "components": {
+          "Transform": {
+            "properties": {
+              "Position": [
+                0.0,
+                25.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          }
+        }
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "ID": 377,
+        "Name": "SearchOB_None",
+        "ParentID": 362,
+        "components": {
+          "FBXData": {
+            "properties": {
+              "Active": true,
+              "DataPath": "..\\Assets\\Resource\\FBX\\Jagaejang\\cabinet.fbx",
+              "IsStatic": false
             },
             "type": "FBXData"
           },
@@ -2072,12 +2414,12 @@
               "PhysicsBodyType": "Static",
               "density": 10.0,
               "halfExtents": [
-                200.0,
+                50.0,
                 100.0,
-                10.0
+                50.0
               ],
               "height": 10.0,
-              "isTrigger": false,
+              "isTrigger": true,
               "layer": "Default",
               "localOffset": [
                 0.0,
@@ -2088,16 +2430,31 @@
             },
             "type": "PhysicsComponent"
           },
+          "SearchObject": {
+            "properties": {
+              "Active": true,
+              "hasItem": false,
+              "interactionDiffuse": [
+                0.23529411852359772,
+                0.23529411852359772,
+                0.23529411852359772,
+                1.0
+              ],
+              "itemID": "",
+              "itemType": "None"
+            },
+            "type": "SearchObject"
+          },
           "Transform": {
             "properties": {
               "Position": [
-                509.4989318847656,
+                94.4000015258789,
                 -110.0,
-                83.0999984741211
+                280.0
               ],
               "Rotation": [
                 -0.0,
-                1.5707964897155762,
+                0.0,
                 0.0
               ],
               "Scale": [
@@ -2114,58 +2471,15 @@
     },
     {
       "properties": {
-        "ID": 170,
-        "Name": "wall_4",
-        "ParentID": 146,
+        "ID": 378,
+        "Name": "InteractionSensor",
+        "ParentID": 367,
         "components": {
-          "FBXData": {
+          "InteractionSensor": {
             "properties": {
-              "Active": true,
-              "DataPath": "..\\Assets\\Resource\\FBX\\House\\wall_4.fbx",
-              "IsStatic": true
+              "Active": true
             },
-            "type": "FBXData"
-          },
-          "FBXRenderer": {
-            "properties": {
-              "Active": true,
-              "Alpha": 0.30000001192092896,
-              "Diffuse": [
-                1.0,
-                1.0,
-                1.0,
-                1.0
-              ],
-              "DiffuseOverride": [
-                1.0,
-                1.0,
-                1.0,
-                1.0
-              ],
-              "Emissive": [
-                1.0,
-                1.0,
-                1.0,
-                1.0
-              ],
-              "EmissiveOverride": [
-                1.0,
-                1.0,
-                1.0,
-                1.0
-              ],
-              "IsGround": false,
-              "Metalic": 1.0,
-              "MetallicOverride": 1.0,
-              "RenderBlendType": "Transparent",
-              "Roughness": 1.0,
-              "RoughnessOverride": 1.0,
-              "UseDiffuseOverride": false,
-              "UseEmissiveOverride": false,
-              "UseMetallicOverride": false,
-              "UseRoughnessOverride": false
-            },
-            "type": "FBXRenderer"
+            "type": "InteractionSensor"
           },
           "PhysicsComponent": {
             "properties": {
@@ -2174,16 +2488,16 @@
               "PhysicsBodyType": "Static",
               "density": 10.0,
               "halfExtents": [
-                155.0,
-                100.0,
-                10.0
+                130.0,
+                10.0,
+                130.0
               ],
               "height": 10.0,
-              "isTrigger": false,
+              "isTrigger": true,
               "layer": "Default",
               "localOffset": [
                 0.0,
-                100.0,
+                0.0,
                 0.0
               ],
               "radius": 50.0
@@ -2193,9 +2507,9 @@
           "Transform": {
             "properties": {
               "Position": [
-                327.3999938964844,
-                -110.0,
-                -158.69998168945313
+                0.0,
+                0.0,
+                0.0
               ],
               "Rotation": [
                 -0.0,
@@ -2203,7 +2517,7 @@
                 0.0
               ],
               "Scale": [
-                0.8999999761581421,
+                1.0,
                 1.0,
                 1.0
               ]
@@ -2216,19 +2530,48 @@
     },
     {
       "properties": {
-        "ID": 171,
-        "Name": "CameraTrackingPoint",
-        "ParentID": 163,
+        "ID": 379,
+        "Name": "InteractZone",
+        "ParentID": 367,
         "components": {
+          "InteractionZone": {
+            "properties": {
+              "Active": true
+            },
+            "type": "InteractionZone"
+          },
+          "PhysicsComponent": {
+            "properties": {
+              "Active": true,
+              "ColliderType": "Box",
+              "PhysicsBodyType": "Static",
+              "density": 10.0,
+              "halfExtents": [
+                35.0,
+                10.0,
+                35.0
+              ],
+              "height": 10.0,
+              "isTrigger": true,
+              "layer": "Default",
+              "localOffset": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "radius": 50.0
+            },
+            "type": "PhysicsComponent"
+          },
           "Transform": {
             "properties": {
               "Position": [
                 0.0,
-                79.69999694824219,
+                0.0,
                 0.0
               ],
               "Rotation": [
-                0.0,
+                -0.0,
                 0.0,
                 0.0
               ],
