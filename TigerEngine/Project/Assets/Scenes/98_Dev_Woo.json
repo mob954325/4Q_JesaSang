@@ -2,7 +2,7 @@
   "objects": [
     {
       "properties": {
-        "ID": 296,
+        "ID": 142,
         "Name": "Main Camera",
         "ParentID": -1,
         "components": {
@@ -21,12 +21,6 @@
               "Active": true
             },
             "type": "CameraController"
-          },
-          "OcclusionFader": {
-            "properties": {
-              "Active": true
-            },
-            "type": "OcclusionFader"
           },
           "Transform": {
             "properties": {
@@ -54,7 +48,7 @@
     },
     {
       "properties": {
-        "ID": 297,
+        "ID": 143,
         "Name": "DirectionalLight(Sun)",
         "ParentID": -1,
         "components": {
@@ -107,7 +101,7 @@
     },
     {
       "properties": {
-        "ID": 298,
+        "ID": 144,
         "Name": "---------Floor----------",
         "ParentID": -1,
         "components": {
@@ -137,9 +131,9 @@
     },
     {
       "properties": {
-        "ID": 299,
+        "ID": 145,
         "Name": "Floor",
-        "ParentID": 298,
+        "ParentID": 144,
         "components": {
           "FBXData": {
             "properties": {
@@ -239,7 +233,7 @@
     },
     {
       "properties": {
-        "ID": 300,
+        "ID": 146,
         "Name": "---------Wall----------",
         "ParentID": -1,
         "components": {
@@ -269,9 +263,9 @@
     },
     {
       "properties": {
-        "ID": 301,
+        "ID": 147,
         "Name": "Door_Open",
-        "ParentID": 300,
+        "ParentID": 146,
         "components": {
           "FBXData": {
             "properties": {
@@ -348,9 +342,9 @@
     },
     {
       "properties": {
-        "ID": 302,
+        "ID": 148,
         "Name": "Pillar",
-        "ParentID": 300,
+        "ParentID": 146,
         "components": {
           "FBXData": {
             "properties": {
@@ -401,12 +395,6 @@
             },
             "type": "FBXRenderer"
           },
-          "OcclusionFadeObject": {
-            "properties": {
-              "Active": true
-            },
-            "type": "OcclusionFadeObject"
-          },
           "PhysicsComponent": {
             "properties": {
               "Active": true,
@@ -456,9 +444,9 @@
     },
     {
       "properties": {
-        "ID": 303,
+        "ID": 149,
         "Name": "wall_4",
-        "ParentID": 300,
+        "ParentID": 146,
         "components": {
           "FBXData": {
             "properties": {
@@ -471,7 +459,7 @@
           "FBXRenderer": {
             "properties": {
               "Active": true,
-              "Alpha": 1.0,
+              "Alpha": 0.4000000059604645,
               "Diffuse": [
                 1.0,
                 1.0,
@@ -499,7 +487,7 @@
               "IsGround": false,
               "Metalic": 1.0,
               "MetallicOverride": 1.0,
-              "RenderBlendType": "Opaque",
+              "RenderBlendType": "Transparent",
               "Roughness": 1.0,
               "RoughnessOverride": 1.0,
               "UseDiffuseOverride": false,
@@ -508,12 +496,6 @@
               "UseRoughnessOverride": false
             },
             "type": "FBXRenderer"
-          },
-          "OcclusionFadeObject": {
-            "properties": {
-              "Active": true
-            },
-            "type": "OcclusionFadeObject"
           },
           "PhysicsComponent": {
             "properties": {
@@ -541,7 +523,7 @@
           "Transform": {
             "properties": {
               "Position": [
-                -151.1999969482422,
+                -152.60000610351563,
                 -110.0,
                 -150.60000610351563
               ],
@@ -564,9 +546,9 @@
     },
     {
       "properties": {
-        "ID": 304,
+        "ID": 150,
         "Name": "wall_5",
-        "ParentID": 300,
+        "ParentID": 146,
         "components": {
           "FBXData": {
             "properties": {
@@ -617,12 +599,6 @@
             },
             "type": "FBXRenderer"
           },
-          "OcclusionFadeObject": {
-            "properties": {
-              "Active": true
-            },
-            "type": "OcclusionFadeObject"
-          },
           "PhysicsComponent": {
             "properties": {
               "Active": true,
@@ -672,9 +648,9 @@
     },
     {
       "properties": {
-        "ID": 305,
+        "ID": 151,
         "Name": "Room",
-        "ParentID": 298,
+        "ParentID": 144,
         "components": {
           "FBXData": {
             "properties": {
@@ -751,9 +727,9 @@
     },
     {
       "properties": {
-        "ID": 306,
+        "ID": 152,
         "Name": "Room_a_love_room",
-        "ParentID": 298,
+        "ParentID": 144,
         "components": {
           "FBXData": {
             "properties": {
@@ -830,9 +806,9 @@
     },
     {
       "properties": {
-        "ID": 307,
+        "ID": 153,
         "Name": "Room_Kitchen",
-        "ParentID": 298,
+        "ParentID": 144,
         "components": {
           "FBXData": {
             "properties": {
@@ -909,9 +885,9 @@
     },
     {
       "properties": {
-        "ID": 308,
+        "ID": 154,
         "Name": "Room_main_room",
-        "ParentID": 298,
+        "ParentID": 144,
         "components": {
           "FBXData": {
             "properties": {
@@ -988,9 +964,9 @@
     },
     {
       "properties": {
-        "ID": 309,
+        "ID": 155,
         "Name": "Room_saibi",
-        "ParentID": 298,
+        "ParentID": 144,
         "components": {
           "FBXData": {
             "properties": {
@@ -1067,9 +1043,9 @@
     },
     {
       "properties": {
-        "ID": 310,
+        "ID": 156,
         "Name": "Room_Table_of_memorial_ceremony",
-        "ParentID": 298,
+        "ParentID": 144,
         "components": {
           "FBXData": {
             "properties": {
@@ -1146,9 +1122,9 @@
     },
     {
       "properties": {
-        "ID": 311,
+        "ID": 157,
         "Name": "Room_Warehouse",
-        "ParentID": 298,
+        "ParentID": 144,
         "components": {
           "FBXData": {
             "properties": {
@@ -1225,7 +1201,7 @@
     },
     {
       "properties": {
-        "ID": 312,
+        "ID": 158,
         "Name": "---------Object----------",
         "ParentID": -1,
         "components": {
@@ -1255,9 +1231,9 @@
     },
     {
       "properties": {
-        "ID": 313,
+        "ID": 159,
         "Name": "teble",
-        "ParentID": 312,
+        "ParentID": 158,
         "components": {
           "FBXData": {
             "properties": {
@@ -1357,9 +1333,9 @@
     },
     {
       "properties": {
-        "ID": 314,
+        "ID": 160,
         "Name": "cabinet",
-        "ParentID": 312,
+        "ParentID": 158,
         "components": {
           "FBXData": {
             "properties": {
@@ -1459,9 +1435,9 @@
     },
     {
       "properties": {
-        "ID": 315,
+        "ID": 161,
         "Name": "cabinet_Open",
-        "ParentID": 312,
+        "ParentID": 158,
         "components": {
           "FBXData": {
             "properties": {
@@ -1561,9 +1537,9 @@
     },
     {
       "properties": {
-        "ID": 316,
+        "ID": 162,
         "Name": "food",
-        "ParentID": 312,
+        "ParentID": 158,
         "components": {
           "FBXData": {
             "properties": {
@@ -1640,7 +1616,7 @@
     },
     {
       "properties": {
-        "ID": 317,
+        "ID": 163,
         "Name": "Player",
         "ParentID": -1,
         "components": {
@@ -1742,7 +1718,7 @@
     },
     {
       "properties": {
-        "ID": 318,
+        "ID": 164,
         "Name": "-----------------------",
         "ParentID": -1,
         "components": {
@@ -1772,7 +1748,7 @@
     },
     {
       "properties": {
-        "ID": 319,
+        "ID": 165,
         "Name": "CurScene_98_Dev_Woo",
         "ParentID": -1,
         "components": {
@@ -1802,7 +1778,7 @@
     },
     {
       "properties": {
-        "ID": 320,
+        "ID": 166,
         "Name": "-----------------------",
         "ParentID": -1,
         "components": {
@@ -1832,9 +1808,9 @@
     },
     {
       "properties": {
-        "ID": 321,
+        "ID": 167,
         "Name": "wall_5",
-        "ParentID": 300,
+        "ParentID": 146,
         "components": {
           "FBXData": {
             "properties": {
@@ -1884,12 +1860,6 @@
               "UseRoughnessOverride": false
             },
             "type": "FBXRenderer"
-          },
-          "OcclusionFadeObject": {
-            "properties": {
-              "Active": true
-            },
-            "type": "OcclusionFadeObject"
           },
           "PhysicsComponent": {
             "properties": {
@@ -1940,9 +1910,9 @@
     },
     {
       "properties": {
-        "ID": 322,
+        "ID": 168,
         "Name": "wall_5",
-        "ParentID": 300,
+        "ParentID": 146,
         "components": {
           "FBXData": {
             "properties": {
@@ -1992,12 +1962,6 @@
               "UseRoughnessOverride": false
             },
             "type": "FBXRenderer"
-          },
-          "OcclusionFadeObject": {
-            "properties": {
-              "Active": true
-            },
-            "type": "OcclusionFadeObject"
           },
           "PhysicsComponent": {
             "properties": {
@@ -2048,9 +2012,9 @@
     },
     {
       "properties": {
-        "ID": 323,
+        "ID": 169,
         "Name": "wall_5",
-        "ParentID": 300,
+        "ParentID": 146,
         "components": {
           "FBXData": {
             "properties": {
@@ -2101,12 +2065,6 @@
             },
             "type": "FBXRenderer"
           },
-          "OcclusionFadeObject": {
-            "properties": {
-              "Active": true
-            },
-            "type": "OcclusionFadeObject"
-          },
           "PhysicsComponent": {
             "properties": {
               "Active": true,
@@ -2156,9 +2114,9 @@
     },
     {
       "properties": {
-        "ID": 324,
+        "ID": 170,
         "Name": "wall_4",
-        "ParentID": 300,
+        "ParentID": 146,
         "components": {
           "FBXData": {
             "properties": {
@@ -2171,7 +2129,7 @@
           "FBXRenderer": {
             "properties": {
               "Active": true,
-              "Alpha": 1.0,
+              "Alpha": 0.30000001192092896,
               "Diffuse": [
                 1.0,
                 1.0,
@@ -2199,7 +2157,7 @@
               "IsGround": false,
               "Metalic": 1.0,
               "MetallicOverride": 1.0,
-              "RenderBlendType": "Opaque",
+              "RenderBlendType": "Transparent",
               "Roughness": 1.0,
               "RoughnessOverride": 1.0,
               "UseDiffuseOverride": false,
@@ -2208,12 +2166,6 @@
               "UseRoughnessOverride": false
             },
             "type": "FBXRenderer"
-          },
-          "OcclusionFadeObject": {
-            "properties": {
-              "Active": true
-            },
-            "type": "OcclusionFadeObject"
           },
           "PhysicsComponent": {
             "properties": {
@@ -2264,45 +2216,15 @@
     },
     {
       "properties": {
-        "ID": 325,
+        "ID": 171,
         "Name": "CameraTrackingPoint",
-        "ParentID": 317,
+        "ParentID": 163,
         "components": {
           "Transform": {
             "properties": {
               "Position": [
                 0.0,
                 79.69999694824219,
-                0.0
-              ],
-              "Rotation": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ]
-            },
-            "type": "Transform"
-          }
-        }
-      },
-      "type": "GameObject"
-    },
-    {
-      "properties": {
-        "ID": 327,
-        "Name": "OcclusionFadePoint",
-        "ParentID": 317,
-        "components": {
-          "Transform": {
-            "properties": {
-              "Position": [
-                0.0,
-                25.0,
                 0.0
               ],
               "Rotation": [
