@@ -46,7 +46,7 @@ void PlayerController::OnStart()
     camTransform = CameraSystem::Instance().GetCurrCamera()->GetOwner()->GetTransform();
 
     // init fsm
-    AddFSMStates();
+    InitFSMStates();
     ChangeState(PlayerState::Idle);
 
     // init stat
@@ -136,7 +136,7 @@ void PlayerController::Deserialize(nlohmann::json data)
 /*----------------------------------------------------------------*/
 /*-------[ FSM ]--------------------------------------------------*/
 /*----------------------------------------------------------------*/
-void PlayerController::AddFSMStates()
+void PlayerController::InitFSMStates()
 {
     fsmStates[(int)PlayerState::Idle] = new Player_Idle(this);
     fsmStates[(int)PlayerState::Walk] = new Player_Walk(this);
