@@ -1044,8 +1044,8 @@ void Editor::RenderComponentInfo(std::string compName, T* comp)
     if (compName != "Transform")
     {
         // 같은 줄에 오른쪽으로 밀기 (대충)
-        float avail = ImGui::GetContentRegionAvail().x;
-        ImGui::SameLine(ImGui::GetCursorPosX() + avail - 110.0f);
+        // float avail = ImGui::GetContentRegionAvail().x;
+        // ImGui::SameLine(ImGui::GetCursorPosX() + avail - 110.0f);
 
         ImGui::PushID(comp);
         if (ImGui::SmallButton("Remove"))
