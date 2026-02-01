@@ -52,7 +52,7 @@ public:
     std::unique_ptr<PostProcessPass>          postProcessPass{};
     std::unique_ptr<FrustumPass>              frustumPass{};
     // TODO :: Particle Pass
-
+    // std::unique_ptr<UIPass>                UIPass{}
 
 	LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) override;
 	void OnInputProcess(const Keyboard::State& KeyState, const Keyboard::KeyboardStateTracker& KeyTracker,

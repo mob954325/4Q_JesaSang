@@ -137,6 +137,7 @@
     <ClCompile Include="App\Editor.cpp" />
     <ClCompile Include="Components\AnimationController.cpp" />
     <ClCompile Include="Components\Decal.cpp" />
+    <ClCompile Include="Components\RectTransform.cpp" />
     <ClCompile Include="EngineSystem\DecalSystem.cpp" />
     <ClCompile Include="Object\enableable.cpp" />
     <ClCompile Include="RenderPass\Renderable\DecalVolumeMesh.cpp" />
@@ -185,6 +186,7 @@
     <ClCompile Include="RenderQueue\RenderQueue.cpp" />
     <ClCompile Include="Scene\Scene.cpp" />
     <ClCompile Include="RenderPass\Renderable\Skybox.cpp" />
+    <ClCompile Include="Util\FontAtlasBuild.cpp" />
     <ClCompile Include="Util\PathHelper.cpp" />
     <ClCompile Include="Util\DebugDraw.cpp" />
     <ClCompile Include="Util\PhysicsFilterShader.cpp" />
@@ -194,6 +196,7 @@
     <ClInclude Include="App\Editor.h" />
     <ClInclude Include="Components\AnimationController.h" />
     <ClInclude Include="Components\Decal.h" />
+    <ClInclude Include="Components\RectTransform.h" />
     <ClInclude Include="EngineSystem\DecalSystem.h" />
     <ClInclude Include="Object\Enableable.h" />
     <ClInclude Include="RenderPass\Renderable\DecalVolumeMesh.h" />
@@ -250,6 +253,7 @@
     <ClInclude Include="Util\AnimatorParameter.h" />
     <ClInclude Include="Util\CollisionLayer.h" />
     <ClInclude Include="Util\ComponentAutoRegister.h" />
+    <ClInclude Include="Util\FontAtlasBuild.h" />
     <ClInclude Include="Util\JsonHelper.h" />
     <ClInclude Include="Util\PathHelper.h" />
     <ClInclude Include="Util\DebugDraw.h" />
