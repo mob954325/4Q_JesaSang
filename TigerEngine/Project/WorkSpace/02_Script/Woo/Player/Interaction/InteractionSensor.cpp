@@ -40,6 +40,7 @@ void InteractionSensor::Deserialize(nlohmann::json data)
 
 void InteractionSensor::OnTriggerEnter(PhysicsComponent* other)
 {
+    cout << "InteractionSensor : " << other->GetName() << endl;
     if (other->GetOwner()->GetName() == "SearchOB_Item")
     {
         // TODO :: UI
@@ -48,13 +49,12 @@ void InteractionSensor::OnTriggerEnter(PhysicsComponent* other)
 
 void InteractionSensor::OnTriggerStay(PhysicsComponent* other)
 {
-    // TODO :: 이거 테스트용임. 추후 삭제
-    // 트리거 이벤트 호출 되는건지 확인 필요함
     cout << "InteractionSensor : " << other->GetName() << endl;
 }
 
 void InteractionSensor::OnTriggerExit(PhysicsComponent* other)
 {
+    cout << "InteractionSensor : " << other->GetName() << endl;
     if (other->GetOwner()->GetName() == "SearchOB_Item")
     {
         // TODO :: UI
