@@ -21,6 +21,7 @@
 
 #include "../Object/SearchObject.h"
 #include "../Inventory/Inventory.h"
+#include "../Camera/CameraController.h"
 
 
 REGISTER_COMPONENT(PlayerController)
@@ -46,10 +47,10 @@ void PlayerController::OnStart()
     cct = GetOwner()->GetComponent<CharacterControllerComponent>();
     inventory = GetOwner()->GetComponent<Inventory>();
     
-    camTransform = CameraSystem::Instance().GetCurrCamera()->GetOwner()->GetTransform();
+    camController = CameraSystem::Instance().GetCurrCamera()->GetOwner()->GetComponent<CameraController>();
 
     // debug
-    if (!fbxRenderer || !cct || !inventory)
+    if (!fbxRenderer || !cct || !inventory || !camController)
     {
         cout << "[Player] Missing COmponet!" << endl;
     }
@@ -79,6 +80,12 @@ void PlayerController::OnUpdate(float delta)
 
     // interaction cheak
     InteractionCheak(delta);
+
+    // view mode change test (Hide State)
+    if (Input::GetKeyDown(interaction_Key))
+    {
+        camController->ToggleViewMode();
+    }
 
     // Debug----
     //cout << "[Player] State : " << (int)state << endl;

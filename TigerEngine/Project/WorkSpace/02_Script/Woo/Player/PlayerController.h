@@ -10,6 +10,7 @@ class InteractionZone;
 class InteractionSensor;
 class SearchObject;
 class Inventory;
+class CameraController;
 
 // Player State Enum
 enum class PlayerState
@@ -36,7 +37,7 @@ private:
     CharacterControllerComponent* cct = nullptr;
     Inventory* inventory = nullptr;
 
-    Transform* camTransform = nullptr;
+    CameraController* camController = nullptr;
 
     // --- [ State ] ---------------------------
     PlayerState state = PlayerState::None;
