@@ -228,3 +228,13 @@ struct alignas(16) DecalCB
     float upThreshold;
     Vector2 padding;
 };
+
+// UI가 공용으로 사용할 상수 버퍼 CB -> b11
+struct alignas(16) UICBData
+{
+    Matrix  WVP;        // imageWVP
+    Color   color;      // ImageBaseColor
+    Vector4 uvRect;     // L,R,T,B (px)
+    Vector4 params;     // imageParams (x=type, y=fillAmount)
+    Vector4 imageSize;  // (rectW, rectH, texW, texH)
+};
