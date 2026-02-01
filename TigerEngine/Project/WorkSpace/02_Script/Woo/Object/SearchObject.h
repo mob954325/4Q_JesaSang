@@ -21,7 +21,7 @@ private:
     FBXRenderer* fbxRenderer = nullptr;
     
 public:
-    // values
+    // data
     bool     hasItem;
     ItemType itemType = ItemType::None;
     string   itemID;
