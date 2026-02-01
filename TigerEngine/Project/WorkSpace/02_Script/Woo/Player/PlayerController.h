@@ -9,6 +9,7 @@ class IPlayerState;
 class InteractionZone;
 class InteractionSensor;
 class SearchObject;
+class Inventory;
 
 // Player State Enum
 enum class PlayerState
@@ -33,6 +34,7 @@ private:
     Transform* transform = nullptr;
     FBXRenderer* fbxRenderer = nullptr;
     CharacterControllerComponent* cct = nullptr;
+    Inventory* inventory = nullptr;
 
     Transform* camTransform = nullptr;
 
@@ -55,9 +57,10 @@ private:
 
     // interaction
     bool  isPossibleInteraction = false; // 기획자분이 한번에 하나만 가능한 사이즈라고 하심. 중첩된다면 추가 처리필요.
+    SearchObject* curSerachObject;       // 현재 interaction가능한 오브젝트
     float interactionTime  = 3.0f;
     float interactionTimer = 0.0f;
-    SearchObject* serachObject;   // 현재 interaction가능한 오브젝트
+    
 
 
     // --- [ Key ] ---------------------------------
@@ -124,7 +127,7 @@ private:
 public:
     // 외부 Funcs.. TODO
     // Current Interaction Zone Search Object Set
-    void SetInterZoneSearchObect(SearchObject* object);
+    void SetCurSearchObject(SearchObject* object);
 
 
 

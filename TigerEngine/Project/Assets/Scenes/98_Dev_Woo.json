@@ -2,7 +2,7 @@
   "objects": [
     {
       "properties": {
-        "ID": 346,
+        "ID": 352,
         "Name": "Main Camera",
         "ParentID": -1,
         "components": [
@@ -54,7 +54,7 @@
     },
     {
       "properties": {
-        "ID": 347,
+        "ID": 353,
         "Name": "DirectionalLight(Sun)",
         "ParentID": -1,
         "components": [
@@ -107,7 +107,7 @@
     },
     {
       "properties": {
-        "ID": 348,
+        "ID": 354,
         "Name": "---------Floor----------",
         "ParentID": -1,
         "components": [
@@ -137,9 +137,9 @@
     },
     {
       "properties": {
-        "ID": 349,
+        "ID": 355,
         "Name": "Floor",
-        "ParentID": 348,
+        "ParentID": 354,
         "components": [
           {
             "properties": {
@@ -239,7 +239,7 @@
     },
     {
       "properties": {
-        "ID": 350,
+        "ID": 356,
         "Name": "---------Wall----------",
         "ParentID": -1,
         "components": [
@@ -269,9 +269,9 @@
     },
     {
       "properties": {
-        "ID": 351,
+        "ID": 357,
         "Name": "Door_Open",
-        "ParentID": 350,
+        "ParentID": 356,
         "components": [
           {
             "properties": {
@@ -348,9 +348,9 @@
     },
     {
       "properties": {
-        "ID": 352,
+        "ID": 358,
         "Name": "Pillar",
-        "ParentID": 350,
+        "ParentID": 356,
         "components": [
           {
             "properties": {
@@ -456,9 +456,9 @@
     },
     {
       "properties": {
-        "ID": 353,
+        "ID": 359,
         "Name": "wall_4",
-        "ParentID": 350,
+        "ParentID": 356,
         "components": [
           {
             "properties": {
@@ -564,9 +564,9 @@
     },
     {
       "properties": {
-        "ID": 354,
+        "ID": 360,
         "Name": "wall_5",
-        "ParentID": 350,
+        "ParentID": 356,
         "components": [
           {
             "properties": {
@@ -672,9 +672,9 @@
     },
     {
       "properties": {
-        "ID": 355,
+        "ID": 361,
         "Name": "Room",
-        "ParentID": 348,
+        "ParentID": 354,
         "components": [
           {
             "properties": {
@@ -751,9 +751,9 @@
     },
     {
       "properties": {
-        "ID": 356,
+        "ID": 362,
         "Name": "Room_a_love_room",
-        "ParentID": 348,
+        "ParentID": 354,
         "components": [
           {
             "properties": {
@@ -830,9 +830,9 @@
     },
     {
       "properties": {
-        "ID": 357,
+        "ID": 363,
         "Name": "Room_Kitchen",
-        "ParentID": 348,
+        "ParentID": 354,
         "components": [
           {
             "properties": {
@@ -909,9 +909,9 @@
     },
     {
       "properties": {
-        "ID": 358,
+        "ID": 364,
         "Name": "Room_main_room",
-        "ParentID": 348,
+        "ParentID": 354,
         "components": [
           {
             "properties": {
@@ -988,9 +988,9 @@
     },
     {
       "properties": {
-        "ID": 359,
+        "ID": 365,
         "Name": "Room_saibi",
-        "ParentID": 348,
+        "ParentID": 354,
         "components": [
           {
             "properties": {
@@ -1067,9 +1067,9 @@
     },
     {
       "properties": {
-        "ID": 360,
+        "ID": 366,
         "Name": "Room_Table_of_memorial_ceremony",
-        "ParentID": 348,
+        "ParentID": 354,
         "components": [
           {
             "properties": {
@@ -1146,9 +1146,9 @@
     },
     {
       "properties": {
-        "ID": 361,
+        "ID": 367,
         "Name": "Room_Warehouse",
-        "ParentID": 348,
+        "ParentID": 354,
         "components": [
           {
             "properties": {
@@ -1225,7 +1225,7 @@
     },
     {
       "properties": {
-        "ID": 362,
+        "ID": 368,
         "Name": "---------Object----------",
         "ParentID": -1,
         "components": [
@@ -1255,9 +1255,9 @@
     },
     {
       "properties": {
-        "ID": 363,
+        "ID": 369,
         "Name": "teble",
-        "ParentID": 362,
+        "ParentID": 368,
         "components": [
           {
             "properties": {
@@ -1357,9 +1357,9 @@
     },
     {
       "properties": {
-        "ID": 364,
+        "ID": 370,
         "Name": "SearchOB_Item",
-        "ParentID": 362,
+        "ParentID": 368,
         "components": [
           {
             "properties": {
@@ -1497,9 +1497,9 @@
     },
     {
       "properties": {
-        "ID": 365,
+        "ID": 371,
         "Name": "SearchOB_Item",
-        "ParentID": 362,
+        "ParentID": 368,
         "components": [
           {
             "properties": {
@@ -1637,9 +1637,9 @@
     },
     {
       "properties": {
-        "ID": 366,
+        "ID": 372,
         "Name": "food",
-        "ParentID": 362,
+        "ParentID": 368,
         "components": [
           {
             "properties": {
@@ -1716,7 +1716,7 @@
     },
     {
       "properties": {
-        "ID": 367,
+        "ID": 373,
         "Name": "Player",
         "ParentID": -1,
         "components": [
@@ -1724,7 +1724,7 @@
             "properties": {
               "Position": [
                 0.0,
-                -50.900001525878906,
+                -101.80000305175781,
                 0.0
               ],
               "Rotation": [
@@ -1811,6 +1811,12 @@
               "Active": true
             },
             "type": "PlayerController"
+          },
+          {
+            "properties": {
+              "Active": true
+            },
+            "type": "Inventory"
           }
         ]
       },
@@ -1818,7 +1824,7 @@
     },
     {
       "properties": {
-        "ID": 368,
+        "ID": 374,
         "Name": "-----------------------",
         "ParentID": -1,
         "components": [
@@ -1848,7 +1854,7 @@
     },
     {
       "properties": {
-        "ID": 369,
+        "ID": 375,
         "Name": "CurScene_98_Dev_Woo",
         "ParentID": -1,
         "components": [
@@ -1878,7 +1884,7 @@
     },
     {
       "properties": {
-        "ID": 370,
+        "ID": 376,
         "Name": "-----------------------",
         "ParentID": -1,
         "components": [
@@ -1908,9 +1914,9 @@
     },
     {
       "properties": {
-        "ID": 371,
+        "ID": 377,
         "Name": "wall_5",
-        "ParentID": 350,
+        "ParentID": 356,
         "components": [
           {
             "properties": {
@@ -2016,9 +2022,9 @@
     },
     {
       "properties": {
-        "ID": 372,
+        "ID": 378,
         "Name": "wall_5",
-        "ParentID": 350,
+        "ParentID": 356,
         "components": [
           {
             "properties": {
@@ -2124,9 +2130,9 @@
     },
     {
       "properties": {
-        "ID": 373,
+        "ID": 379,
         "Name": "wall_5",
-        "ParentID": 350,
+        "ParentID": 356,
         "components": [
           {
             "properties": {
@@ -2232,9 +2238,9 @@
     },
     {
       "properties": {
-        "ID": 374,
+        "ID": 380,
         "Name": "wall_4",
-        "ParentID": 350,
+        "ParentID": 356,
         "components": [
           {
             "properties": {
@@ -2340,9 +2346,9 @@
     },
     {
       "properties": {
-        "ID": 375,
+        "ID": 381,
         "Name": "CameraTrackingPoint",
-        "ParentID": 367,
+        "ParentID": 373,
         "components": [
           {
             "properties": {
@@ -2370,9 +2376,9 @@
     },
     {
       "properties": {
-        "ID": 376,
+        "ID": 382,
         "Name": "OcclusionFadePoint",
-        "ParentID": 367,
+        "ParentID": 373,
         "components": [
           {
             "properties": {
@@ -2400,9 +2406,9 @@
     },
     {
       "properties": {
-        "ID": 377,
+        "ID": 383,
         "Name": "SearchOB_None",
-        "ParentID": 362,
+        "ParentID": 368,
         "components": [
           {
             "properties": {
@@ -2540,9 +2546,9 @@
     },
     {
       "properties": {
-        "ID": 378,
+        "ID": 384,
         "Name": "InteractionSensor",
-        "ParentID": 367,
+        "ParentID": 373,
         "components": [
           {
             "properties": {
@@ -2599,9 +2605,9 @@
     },
     {
       "properties": {
-        "ID": 379,
+        "ID": 385,
         "Name": "InteractZone",
-        "ParentID": 367,
+        "ParentID": 373,
         "components": [
           {
             "properties": {

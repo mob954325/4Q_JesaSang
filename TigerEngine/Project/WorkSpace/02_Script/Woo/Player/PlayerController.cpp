@@ -20,6 +20,7 @@
 #include "FSM/Player_Die.h"
 
 #include "../Object/SearchObject.h"
+#include "../Inventory/Inventory.h"
 
 
 REGISTER_COMPONENT(PlayerController)
@@ -43,7 +44,18 @@ void PlayerController::OnStart()
     transform = GetOwner()->GetComponent<Transform>();
     fbxRenderer = GetOwner()->GetComponent<FBXRenderer>();
     cct = GetOwner()->GetComponent<CharacterControllerComponent>();
+    inventory = GetOwner()->GetComponent<Inventory>();
+    
     camTransform = CameraSystem::Instance().GetCurrCamera()->GetOwner()->GetTransform();
+
+    // debug
+    if (!fbxRenderer || !cct || !inventory)
+    {
+        cout << "[Player] Missing COmponet!" << endl;
+    }
+
+    // position init (physics)
+    //transform->SetPosition(Vector3::Zero);
 
     // init fsm
     InitFSMStates();
@@ -231,9 +243,16 @@ void PlayerController::Rotation(float delta)
 void PlayerController::InteractionCheak(float delta)
 {
     // interaction x -> reset
-    if (!isInteractionKey || !isPossibleInteraction || serachObject == nullptr)
+    if (!isInteractionKey || !isPossibleInteraction || curSerachObject == nullptr)
     {
         interactionTimer = 0.0f;
+        return;
+    }
+
+    // ingredient inventory full
+    if (curSerachObject->itemType == ItemType::Ingredient && 
+        inventory->IsFull())
+    {
         return;
     }
 
@@ -252,34 +271,31 @@ void PlayerController::InteractionCheak(float delta)
 
 void PlayerController::SerachObjectInteraction()
 {
-    std::unique_ptr<IItem> item = serachObject->Interaction();
+    // search object interaction
+    std::unique_ptr<IItem> item = curSerachObject->Interaction();
     
+    // item get or fail
     if (item)
-    {
-        // TODO 인벤토리에 추가
-        std::cout << "[Player] Get Item : " << item->itemId << std::endl;
-    }
+        inventory->AddItem(std::move(item));
     else
-    {
         std::cout << "[Player] Fail Get Item... " << std::endl;
-    }
 
     // clear
     isPossibleInteraction = false;
-    serachObject = nullptr;
+    curSerachObject = nullptr;
 }
     
 
-void PlayerController::SetInterZoneSearchObect(SearchObject* object)
+void PlayerController::SetCurSearchObject(SearchObject* object)
 {
     if (object)
     {
         isPossibleInteraction = true;
-        serachObject = object;
+        curSerachObject = object;
     }
     else
     {
         isPossibleInteraction = false;
-        serachObject = nullptr;
+        curSerachObject = nullptr;
     }
 }

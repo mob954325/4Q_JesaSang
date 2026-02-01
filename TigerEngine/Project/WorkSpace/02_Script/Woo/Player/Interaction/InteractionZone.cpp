@@ -45,7 +45,7 @@ void InteractionZone::OnTriggerEnter(PhysicsComponent* other)
 {
     if (other->GetOwner()->GetName() == "SearchOB_Item")
     {
-        player->SetInterZoneSearchObect(other->GetOwner()->GetComponent<SearchObject>());
+        player->SetCurSearchObject(other->GetOwner()->GetComponent<SearchObject>());
         // TODO :: UI
     }
 }
@@ -61,7 +61,7 @@ void InteractionZone::OnTriggerExit(PhysicsComponent* other)
 {
     if (other->GetOwner()->GetName() == "SearchOB_Item")
     {
-        player->SetInterZoneSearchObect(nullptr);
+        player->SetCurSearchObject(nullptr);
         // TODO :: UI
     }
 }
