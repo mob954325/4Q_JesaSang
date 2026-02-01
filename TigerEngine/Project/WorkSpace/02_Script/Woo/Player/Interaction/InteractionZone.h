@@ -24,6 +24,7 @@ public:
     // component process
     void OnStart() override;
     void OnUpdate(float delta) override;
+    void OnFixedUpdate(float delta) override;
 
     // json
     nlohmann::json Serialize();

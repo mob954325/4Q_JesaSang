@@ -125,7 +125,7 @@ private:
     void SerachObjectInteraction();
 
 public:
-    // 외부 Funcs.. TODO
+    // 외부 call Funcs..
     // Current Interaction Zone Search Object Set
     void SetCurSearchObject(SearchObject* object);
 

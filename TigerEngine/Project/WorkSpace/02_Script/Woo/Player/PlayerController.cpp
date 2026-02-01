@@ -54,7 +54,7 @@ void PlayerController::OnStart()
         cout << "[Player] Missing COmponet!" << endl;
     }
 
-    // position init (physics)
+    // transform -> physics init
     //transform->SetPosition(Vector3::Zero);
 
     // init fsm

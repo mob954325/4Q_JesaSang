@@ -24,10 +24,16 @@ void InteractionZone::OnStart()
 
 void InteractionZone::OnUpdate(float delta)
 {
+    
+}
+
+void InteractionZone::OnFixedUpdate(float delta)
+{
     // transform->physics udpate
     auto ob = GetOwner();
     auto tr = ob->GetTransform();
-    tr->SetPosition(tr->GetParent()->GetOwner()->GetTransform()->GetWorldPosition());
+    Vector3 upatePos = tr->GetParent()->GetOwner()->GetTransform()->GetWorldPosition();
+    tr->SetPosition(upatePos);
     GetOwner()->GetComponent<PhysicsComponent>()->SyncToPhysics();
 }
 
@@ -43,6 +49,7 @@ void InteractionZone::Deserialize(nlohmann::json data)
 
 void InteractionZone::OnTriggerEnter(PhysicsComponent* other)
 {
+    cout << "InteractionSensor : " << other->GetName() << endl;
     if (other->GetOwner()->GetName() == "SearchOB_Item")
     {
         player->SetCurSearchObject(other->GetOwner()->GetComponent<SearchObject>());
@@ -59,6 +66,7 @@ void InteractionZone::OnTriggerStay(PhysicsComponent* other)
 
 void InteractionZone::OnTriggerExit(PhysicsComponent* other)
 {
+    cout << "InteractionSensor : " << other->GetName() << endl;
     if (other->GetOwner()->GetName() == "SearchOB_Item")
     {
         player->SetCurSearchObject(nullptr);
