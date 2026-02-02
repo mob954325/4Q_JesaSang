@@ -59,7 +59,7 @@ private:
     // interaction
     bool  isPossibleInteraction = false; // 기획자분이 한번에 하나만 가능한 사이즈라고 하심. 중첩된다면 추가 처리필요.
     SearchObject* curSerachObject;       // 현재 interaction가능한 오브젝트
-    float interactionTime  = 3.0f;
+    float interactionTime  = 2.0f;
     float interactionTimer = 0.0f;
     
 

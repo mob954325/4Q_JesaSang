@@ -24,7 +24,8 @@ void InteractionSensor::OnUpdate(float delta)
     // transform->physics udpate
     auto ob = GetOwner();
     auto tr = ob->GetTransform();
-    tr->SetPosition(tr->GetParent()->GetOwner()->GetTransform()->GetWorldPosition());
+    Vector3 upatePos = tr->GetParent()->GetOwner()->GetTransform()->GetWorldPosition() + Vector3(0, -20, 0);
+    tr->SetPosition(upatePos);
     GetOwner()->GetComponent<PhysicsComponent>()->SyncToPhysics();
 }
 
@@ -40,23 +41,18 @@ void InteractionSensor::Deserialize(nlohmann::json data)
 
 void InteractionSensor::OnTriggerEnter(PhysicsComponent* other)
 {
-    cout << "InteractionSensor : " << other->GetName() << endl;
-    if (other->GetOwner()->GetName() == "SearchOB_Item")
+    if (other->GetOwner()->GetName() == "SearchObject")
     {
+        cout << "[InteractionSensor] SearchObject In Sensor Zone" << endl;
         // TODO :: UI
     }
 }
 
-void InteractionSensor::OnTriggerStay(PhysicsComponent* other)
-{
-    cout << "InteractionSensor : " << other->GetName() << endl;
-}
-
 void InteractionSensor::OnTriggerExit(PhysicsComponent* other)
 {
-    cout << "InteractionSensor : " << other->GetName() << endl;
-    if (other->GetOwner()->GetName() == "SearchOB_Item")
+    if (other->GetOwner()->GetName() == "SearchObject")
     {
+        cout << "[InteractionSensor] SearchObject Out Sensor Zone" << endl;
         // TODO :: UI
     }
 }

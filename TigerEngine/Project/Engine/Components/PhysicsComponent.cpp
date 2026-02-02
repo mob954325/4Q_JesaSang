@@ -421,8 +421,9 @@ void PhysicsComponent::CheckTriggers()
 
     for (PxShape* shape : shapes)
     {
-        // Trigger Shape만 처리
-        if (!(shape->getFlags() & PxShapeFlag::eTRIGGER_SHAPE))
+        bool isThisTrigger = shape->getFlags() & PxShapeFlag::eTRIGGER_SHAPE;
+
+        if (!isThisTrigger && !m_IsTrigger)
             continue;
 
         PxGeometryHolder geom = shape->getGeometry();
