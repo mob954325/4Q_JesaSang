@@ -20,7 +20,9 @@ RTTR_REGISTRATION
         .property("WorldMax", &MiniMapTestScript::worldMax)
         .property("MapSize", &MiniMapTestScript::mapSize)
         .property("TotalPieces", &MiniMapTestScript::totalPieces)
-        .property("CollectedPieces", &MiniMapTestScript::collectedPieces);
+        .property("CollectedPieces", &MiniMapTestScript::collectedPieces)
+        .property("TotalItems", &MiniMapTestScript::totalItems)
+        .property("CollectedItems", &MiniMapTestScript::collectedItems);
 }
 
 static Vector2 WorldToMiniMap(const Vector3& worldPos, const Vector3& worldMin, const Vector3& worldMax, const Vector2& mapSize)
@@ -60,20 +62,49 @@ void MiniMapTestScript::OnUpdate(float delta)
         return;
     }
 
+    const Vector3 pos = transform->GetWorldPosition();
+    playerMapPos = WorldToMiniMap(pos, worldMin, worldMax, mapSize);
+
+    // Local test hook: trigger map/item collect events by key.
     if (Input::GetKeyDown(DirectX::Keyboard::Keys::M))
     {
-        const Vector3 pos = transform->GetWorldPosition();
-        const Vector2 mm = WorldToMiniMap(pos, worldMin, worldMax, mapSize);
-        std::cout << "[MiniMapTest] world("
-            << pos.x << ", " << pos.y << ", " << pos.z
-            << ") -> map(" << mm.x << ", " << mm.y << ")" << std::endl;
+        OnPieceCollected();
     }
 
     if (Input::GetKeyDown(DirectX::Keyboard::Keys::O))
     {
-        collectedPieces = std::min(collectedPieces + 1, totalPieces);
-        std::cout << "[MiniMapTest] pieces " << collectedPieces << " / " << totalPieces << std::endl;
+        OnItemCollected();
     }
+
+    if (Input::GetKeyDown(DirectX::Keyboard::Keys::P))
+    {
+        const char* ownerName = GetOwner() ? GetOwner()->GetName().c_str() : "null";
+        std::cout << "[MiniMapTest] owner=" << ownerName << " this=" << this
+            << " player map pos(" << playerMapPos.x << ", " << playerMapPos.y
+            << "), pieces " << collectedPieces << " / " << totalPieces
+            << ", items " << collectedItems << " / " << totalItems << std::endl;
+    }
+}
+
+float MiniMapTestScript::GetProgress01() const
+{
+    if (totalPieces <= 0)
+    {
+        return 0.0f;
+    }
+
+    const float progress = static_cast<float>(collectedPieces) / static_cast<float>(totalPieces);
+    return std::clamp(progress, 0.0f, 1.0f);
+}
+
+void MiniMapTestScript::OnPieceCollected()
+{
+    collectedPieces = std::min(collectedPieces + 1, totalPieces);
+}
+
+void MiniMapTestScript::OnItemCollected()
+{
+    collectedItems = std::min(collectedItems + 1, totalItems);
 }
 
 nlohmann::json MiniMapTestScript::Serialize()
