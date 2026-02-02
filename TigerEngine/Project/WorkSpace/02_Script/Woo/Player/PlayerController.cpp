@@ -260,7 +260,7 @@ void PlayerController::InteractionCheak(float delta)
     if (curSerachObject->itemType == ItemType::Ingredient && 
         inventory->IsFull())
     {
-        cout << "[Player] Inventory Full! interaction x" << endl;
+        cout << "[Player] Inventory Full! Can't interaction" << endl;
         return;
     }
 
