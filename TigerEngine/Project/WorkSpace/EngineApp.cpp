@@ -54,7 +54,7 @@ bool EngineApp::OnInitialize()
     ShaderManager::Instance().Init(dxRenderer->GetDevice(), dxRenderer->GetDeviceContext(), clientWidth, clientHeight);
     AudioManager::Instance().Initialize();
     // AudioManager::Instance().GetSystem().Set3DSettings(1.0f, 0.01f, 1.0f);// 기본 3D 설정 도플러 스케일, 거리 , 감쇠 효과
-    AudioManager::Instance().GetSystem().Set3DSettings(1.0f, 0.01f, 1.0f);
+    AudioManager::Instance().GetSystem().Set3DSettings(0.0f, 0.01f, 1.0f);
     if (!PhysicsSystem::Instance().Initialize()) { return false; }
 
     auto& sm = ShaderManager::Instance();
