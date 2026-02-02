@@ -1,8 +1,6 @@
 #pragma once
 #include "Components/ScriptComponent.h"
 
-class Transform;
-
 class MiniMapTestScript : public ScriptComponent
 {
     RTTR_ENABLE(ScriptComponent)
