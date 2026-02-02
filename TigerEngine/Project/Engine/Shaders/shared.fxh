@@ -13,6 +13,7 @@
 // cbuffer EffectCB : register(b8)
 // cbuffer 성호 : register(b9)
 // cbuffer DecalCB : register(b10)
+// cbuffer UIDataCB : register(b11) // UI용 상수버퍼 추가함 : 26.02.02 이성호
 
 
 // [ Texture ]
@@ -39,12 +40,15 @@
 // Texture2D bloomBTex           : register(t17);
 // Texture2D effectTex           : register(t18);
 // Texture2D decalTex            : register(t19);
+// Texture2D uiImageTex          : register(t20);   // Ui 이미지 텍스처 슬롯 추가 : 26.02.02 이성호
+// Texture2D textAtlasTex        : register(t21);   // ui 텍스트 아틀라스 텍스처 슬롯 추가 : 26.02.02 이성호
 
 
 // [ SamplerState ]
 // SamplerState samLinear           : register(s0);
 // SamplerComparisonState samShadow : register(s1);
 // SamplerState samLinearClamp      : register(s2);
+// SamplerState samPoint            : regsiter(s3); // ui 텍스트에 사용할 샘플러, fliter = Point : 26.02.02 이성호
 
 
 // ------------------
@@ -243,6 +247,15 @@ cbuffer DecalCB : register(b10)
     float2 padding18;
 }
 
+cbuffer UICBData : register(b11)
+{
+    matrix imageWVP;
+    float4 ImageBaseColor;
+    float4 UVRect; // x=leftPx, y=rightPx, z=topPx, w=bottomPx -> slice border(px)
+    float4 imageParams; // x=type, y=fillAmount
+    float4 imageSize; // x=rectW, y=rectH, z=texW,  w=texH
+}
+
 // ----------------------
 //  Vertex Input Layout
 // ----------------------
@@ -285,6 +298,12 @@ struct VS_Particle_INPUT
     float4 color : COLOR0;          // slot 1
 };
 
+struct VS_UIImage_Input // UI input layout으로 VS_QuadImage에 사용 , 26.02.02 : 이성호
+{
+    float3 Pos : POSITION;
+    float2 TexCoord : TEXCOORD0;
+};
+
 // ----------------------
 //  PS Input (VS Output)
 // ----------------------
@@ -321,6 +340,12 @@ struct PS_Particle_INPUT
     float4 pos : SV_POSITION;
     float2 uv : TEXCOORD0;
     float4 color : COLOR0;
+};
+
+struct PS_UIImage_Input // UI PS용으로 PS_QuadText, PS_QuadImage에 사용함, 26.02.02 : 이성호
+{
+    float4 Pos : SV_POSITION;
+    float2 TexCoord : TEXCOORD0;
 };
 
 // ------------------------------------

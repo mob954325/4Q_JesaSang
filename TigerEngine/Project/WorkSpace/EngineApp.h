@@ -18,6 +18,7 @@
 #include "RenderPass/Renderer/BloomPass.h"
 #include "RenderPass/Renderer/PostProcessPass.h"
 #include "RenderPass/Renderer/FrustumPass.h"
+#include "RenderPass/Renderer/UIRenderPass.h"
 
 
 /// <summary>
@@ -52,7 +53,7 @@ public:
     std::unique_ptr<PostProcessPass>          postProcessPass{};
     std::unique_ptr<FrustumPass>              frustumPass{};
     // TODO :: Particle Pass
-
+    std::unique_ptr<UIRenderPass>             uiPass{};
 
 	LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) override;
 	void OnInputProcess(const Keyboard::State& KeyState, const Keyboard::KeyboardStateTracker& KeyTracker,

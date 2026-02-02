@@ -59,6 +59,7 @@ public:
     ComPtr<ID3D11SamplerState>	linearSamplerState;       // linear    
     ComPtr<ID3D11SamplerState>  shadowSamplerState;       // clmap
     ComPtr<ID3D11SamplerState>	linearClamSamplerState;   // linear + clamp    
+    ComPtr<ID3D11SamplerState>  pointSamplerState;        // point
 
     // Blend State
     ComPtr<ID3D11BlendState>  alphaBlendState;          // alpha
@@ -115,6 +116,7 @@ public:
     ComPtr<ID3D11InputLayout> inputLayout_BoneWeightVertex;
     ComPtr<ID3D11InputLayout> inputLayout_Position;
     ComPtr<ID3D11InputLayout> inputLayout_Particle;
+    ComPtr<ID3D11InputLayout> inputLayout_ui;   // 26.02.02 ui가 사용할 inputlayout 추가 : 이성호
 
     // Vertex Shader
     ComPtr<ID3D11VertexShader> VS_ShadowDepth_Rigid;
@@ -126,6 +128,7 @@ public:
     ComPtr<ID3D11VertexShader> VS_LightVolume;
     ComPtr<ID3D11VertexShader> VS_Effect;
     ComPtr<ID3D11VertexShader> VS_Decal;
+    ComPtr<ID3D11VertexShader> VS_UIImage; // 26.02.02 ui 객체들이 사용할 vs 추가 : 이성호
 
     // Pixel Shader
     ComPtr<ID3D11PixelShader> PS_ShadowDepth;
@@ -139,6 +142,8 @@ public:
     ComPtr<ID3D11PixelShader> PS_BloomUpsampleCombine;
     ComPtr<ID3D11PixelShader> PS_PostProcess;
     ComPtr<ID3D11PixelShader> PS_Decal;
+    ComPtr<ID3D11PixelShader> PS_UIImage;   // 26.02.02 ui 이미지 ps 추가 : 이성호
+    ComPtr<ID3D11PixelShader> PS_UIText;    // 26.02.02 ui 텍스트 ps 추가 : 이성호
 
     // CB buffer
     ComPtr<ID3D11Buffer> frameCB;
@@ -151,6 +156,7 @@ public:
     ComPtr<ID3D11Buffer> bloomCB;
     ComPtr<ID3D11Buffer> effectCB;
     ComPtr<ID3D11Buffer> decalCB;
+    ComPtr<ID3D11Buffer> uiCB;      // 26.02.02 ui 상수버퍼 추가 : 이성호
 
     // CB Data
     FrameCB         frameCBData;
@@ -163,6 +169,7 @@ public:
     BloomCB         bloomCBData;
     EffectCB        effectCBData;
     DecalCB         decalCBData;
+    UICBData        uiCBData;       // 26.02.02 ui 상수버퍼 데이터 추가 : 이성호
 
     // Debug Picking 
 #if _DEBUG
