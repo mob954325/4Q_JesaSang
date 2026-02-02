@@ -49,3 +49,9 @@ void RenderSystem::Render(RenderQueue& queue)
         }
     }
 }
+
+void RenderSystem::Clear()
+{
+    comps.clear();
+    while (!readyQueue.empty()) readyQueue.pop();
+}

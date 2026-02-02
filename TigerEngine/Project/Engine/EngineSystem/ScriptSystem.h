@@ -46,7 +46,6 @@ public:
     /// </summary>
     void Update(float delta);
 
-
     /// <summary>
     /// 등록된 컴포넌트 호출
     /// </summary>
@@ -56,6 +55,11 @@ public:
    /// 등록된 컴포넌트 호출
    /// </summary>
     void LateUpdate(float dt);
+
+    /// <summary>
+    /// 모든 컨테이너 비우는 함수
+    /// </summary>
+    void Clear();
 
 private:
     // === 일반 Component ===

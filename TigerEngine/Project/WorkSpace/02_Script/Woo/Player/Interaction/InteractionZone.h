@@ -32,7 +32,6 @@ public:
 
     // trigger event
     void OnTriggerEnter(PhysicsComponent* other) override;
-    void OnTriggerStay(PhysicsComponent* other) override;
     void OnTriggerExit(PhysicsComponent* other) override;
 
 private:

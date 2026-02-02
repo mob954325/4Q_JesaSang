@@ -130,3 +130,12 @@ void ScriptSystem::LateUpdate(float dt)
         }
     }
 }
+
+void ScriptSystem::Clear()
+{
+    comps.clear();
+    while (!readyQueue.empty()) readyQueue.pop();
+
+   scriptComps.clear();
+   scriptCompsInitReady.clear();
+}

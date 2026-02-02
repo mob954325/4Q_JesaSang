@@ -206,7 +206,6 @@ void PhysicsComponent::ApplyFilter()
         data.word0 = (uint32_t)m_Layer;
         data.word1 = PhysicsLayerMatrix::GetMask(m_Layer);
         data.word2 = 0;
-        data.word3 = 0;
 
         m_Shape->setSimulationFilterData(data);
         m_Shape->setQueryFilterData(data);
@@ -335,6 +334,7 @@ void PhysicsComponent::CreateCollider(ColliderType collider, PhysicsBodyType bod
         localPose.q = capsuleRot * localPose.q;
         break;
     }
+    m_Shape->setFlag(PxShapeFlag::eSCENE_QUERY_SHAPE, true);
     m_Shape->setLocalPose(localPose);
 
 
@@ -344,7 +344,7 @@ void PhysicsComponent::CreateCollider(ColliderType collider, PhysicsBodyType bod
     if (d.isTrigger)
     {
         // Trigger는 충돌 계산 X
-        m_Shape->setFlag(PxShapeFlag::eSIMULATION_SHAPE, false);
+        m_Shape->setFlag(PxShapeFlag::eSIMULATION_SHAPE, false); // true 
         m_Shape->setFlag(PxShapeFlag::eTRIGGER_SHAPE, true);
     }
     else
@@ -358,9 +358,15 @@ void PhysicsComponent::CreateCollider(ColliderType collider, PhysicsBodyType bod
     // ----------------------
     // Actor 생성
     // ----------------------
-    if (body == PhysicsBodyType::Static || d.isTrigger)
+    if (d.isTrigger)
     {
-        // Trigger는 무조건 Static 
+        // Trigger는 반드시 Kinematic Dynamic
+        PxRigidDynamic* dyn = px->createRigidDynamic(PxTransform(PxIdentity));
+        dyn->setRigidBodyFlag(PxRigidBodyFlag::eKINEMATIC, true);
+        m_Actor = dyn;
+    }
+    else if (body == PhysicsBodyType::Static)
+    {
         m_Actor = px->createRigidStatic(PxTransform(PxIdentity));
     }
     else
@@ -384,7 +390,7 @@ void PhysicsComponent::CreateCollider(ColliderType collider, PhysicsBodyType bod
     // ----------------------
     // 질량 계산
     // ----------------------
-    if (body == PhysicsBodyType::Dynamic)
+    if (!d.isTrigger && body == PhysicsBodyType::Dynamic)
     {
         PxRigidBodyExt::updateMassAndInertia( // 질량 계산 : Shape 부피 × density
             *static_cast<PxRigidDynamic*>(m_Actor),
@@ -393,7 +399,6 @@ void PhysicsComponent::CreateCollider(ColliderType collider, PhysicsBodyType bod
     }
     
     phys.GetScene()->addActor(*m_Actor); // 물리 씬에 추가 
-    // phys.RegisterComponent(m_Actor, this);
     phys.RegisterComponent(this, m_Actor);
 
 
@@ -403,58 +408,6 @@ void PhysicsComponent::CreateCollider(ColliderType collider, PhysicsBodyType bod
     m_ColliderType = collider;
 
     ApplyFilter(); // 레이어 필터 
-}
-
-
-void PhysicsComponent::CheckTriggers()
-{
-    if (!m_Actor) return; // PxActor* m_Actor; (PhysicsSystem에서 매핑됨)
-
-    PxScene* scene = PhysicsSystem::Instance().GetScene();
-
-    // Actor에 연결된 모든 Shape 가져오기
-    PxU32 shapeCount = m_Actor->getNbShapes();
-    if (shapeCount == 0) return;
-
-    std::vector<PxShape*> shapes(shapeCount);
-    m_Actor->getShapes(shapes.data(), shapeCount);
-
-    for (PxShape* shape : shapes)
-    {
-        // Trigger Shape만 처리
-        if (!(shape->getFlags() & PxShapeFlag::eTRIGGER_SHAPE))
-            continue;
-
-        PxGeometryHolder geom = shape->getGeometry();
-        PxTransform pose = m_Actor->getGlobalPose() * shape->getLocalPose();
-
-        // Overlap Query 수행
-        PxOverlapBufferN<64> hitBuffer;
-        PxFilterData shapeFilter = shape->getQueryFilterData();
-        PxQueryFilterData filterData;
-        filterData.data = shapeFilter; 
-        filterData.flags =
-            PxQueryFlag::eSTATIC |
-            PxQueryFlag::eDYNAMIC |
-            PxQueryFlag::ePREFILTER;
-
-        if (scene->overlap(geom.any(), pose, hitBuffer, filterData))
-        {
-            for (PxU32 i = 0; i < hitBuffer.getNbAnyHits(); ++i)
-            {
-                PxRigidActor* otherActor = hitBuffer.getAnyHit(i).actor;
-                if (!otherActor) continue;
-
-                PhysicsComponent* other = PhysicsSystem::Instance().GetComponent(otherActor);
-                if (!other || other == this)
-                    continue;
-
-                // Trigger <-> Trigger 중복 방지
-                if (this < other)
-                    m_PendingTriggers.insert(other);
-            }
-        }
-    }
 }
 
 

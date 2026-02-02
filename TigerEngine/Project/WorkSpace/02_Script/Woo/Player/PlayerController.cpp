@@ -22,6 +22,7 @@
 #include "../Object/SearchObject.h"
 #include "../Inventory/Inventory.h"
 #include "../Camera/CameraController.h"
+#include "../MiniGame/MiniGameManager.h"
 
 
 REGISTER_COMPONENT(PlayerController)
@@ -82,7 +83,7 @@ void PlayerController::OnUpdate(float delta)
     InteractionCheak(delta);
 
     // view mode change test (Hide State)
-    if (Input::GetKeyDown(interaction_Key))
+    if (Input::GetKeyDown(Keyboard::M))
     {
         camController->ToggleViewMode();
     }
@@ -247,54 +248,81 @@ void PlayerController::Rotation(float delta)
     transform->SetEuler(Vector3(0.0f, newYaw, 0.0f));
 }
 
+/*-------[ Interaction ]----------------------------------*/
 void PlayerController::InteractionCheak(float delta)
+{
+    SerachObjectInteraction(delta);   // 수색 오브젝트 Interaction
+    CookingInteraction(delta);        // 조리대 Interaction
+}
+
+void PlayerController::SerachObjectInteraction(float dt)
 {
     // interaction x -> reset
     if (!isInteractionKey || !isPossibleInteraction || curSerachObject == nullptr)
     {
-        interactionTimer = 0.0f;
+        searchInteractionTimer = 0.0f;
         return;
     }
 
     // ingredient inventory full
-    if (curSerachObject->itemType == ItemType::Ingredient && 
+    if (curSerachObject->itemType == ItemType::Ingredient &&
         inventory->IsFull())
     {
+        cout << "[Player] Inventory Full! Can't interaction" << endl;
         return;
     }
 
     // holding
-    interactionTimer += delta;
-    float progress = interactionTimer / interactionTime;
+    searchInteractionTimer += dt;
+    float progress = searchInteractionTimer / searchInteractionTime;
     if (progress > 1.0f) progress = 1.0f;
 
-    // completion -> interaction
-    if (interactionTimer >= interactionTime)
+    // search object interaction
+    if (searchInteractionTimer >= searchInteractionTime)
     {
-        SerachObjectInteraction();
-        interactionTimer = 0.0f;
+        // search object interaction
+        std::unique_ptr<IItem> item = curSerachObject->Interaction();
+
+        // item get or fail
+        if (item)
+            inventory->AddItem(std::move(item));
+        else
+            std::cout << "[Player] Fail Get Item... " << std::endl;
+
+        // clear
+        isPossibleInteraction = false;
+        curSerachObject = nullptr;
+        searchInteractionTimer = 0.0f;
     }
 }
 
-void PlayerController::SerachObjectInteraction()
+void PlayerController::CookingInteraction(float dt)
 {
-    // search object interaction
-    std::unique_ptr<IItem> item = curSerachObject->Interaction();
-    
-    // item get or fail
-    if (item)
-        inventory->AddItem(std::move(item));
-    else
-        std::cout << "[Player] Fail Get Item... " << std::endl;
+    // interaction x -> reset
+    if (!isInteractionKey || !isPossibleCooking || !inventory->IsFull())
+    {
+        cookInteractionTimer = 0.0f;
+        return;
+    }
 
-    // clear
-    isPossibleInteraction = false;
-    curSerachObject = nullptr;
+    // holding
+    cookInteractionTimer += dt;
+    float progress = cookInteractionTimer / cookInteractionTime;
+    if (progress > 1.0f) progress = 1.0f;
+
+    // cooking interaction
+    if (cookInteractionTimer >= cookInteractionTime)
+    {
+        // mini game start
+        MiniGameManager::Instance()->StartMiniGame(std::move(inventory->TakeCurItem()));
+        cookInteractionTimer = 0.0f;
+    }
 }
     
 
 void PlayerController::SetCurSearchObject(SearchObject* object)
 {
+    // interaction zone에서 search object를 넘겨줌
     if (object)
     {
         isPossibleInteraction = true;

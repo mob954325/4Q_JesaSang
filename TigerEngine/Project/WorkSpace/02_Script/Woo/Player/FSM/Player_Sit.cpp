@@ -2,7 +2,7 @@
 
 void Player_Sit::Enter()
 {
-    cout << "[Player] Enter Sit State" << endl;
+    //cout << "[Player] Enter Sit State" << endl;
 
     // set speed
     player->curSpeed = 0;
@@ -44,5 +44,5 @@ void Player_Sit::FixedUpdate(float deltaTime)
 
 void Player_Sit::Exit()
 {
-    cout << "[Player] Exit Sit State" << endl;
+    //cout << "[Player] Exit Sit State" << endl;
 }
