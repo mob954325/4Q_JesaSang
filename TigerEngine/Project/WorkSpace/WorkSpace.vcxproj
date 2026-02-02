@@ -172,6 +172,11 @@
     <ClInclude Include="02_Script\Woo\Player\FSM\Player_Hit.h" />
     <ClInclude Include="02_Script\Woo\Player\FSM\Player_Die.h" />
     <ClInclude Include="02_Script\Woo\Player\FSM\Player_SitWalk.h" />
+    <ClInclude Include="02_Script\Woo\MiniGame\MiniGameManager.h" />
+    <ClInclude Include="02_Script\Woo\MiniGame\Game\IMiniGame.h" />
+    <ClInclude Include="02_Script\Woo\MiniGame\Game\Game_Assembling.h" />
+    <ClInclude Include="02_Script\Woo\MiniGame\Game\Game_Cutting.h" />
+    <ClInclude Include="02_Script\Woo\MiniGame\Game\Game_FireControl.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="02_Script\Woo\Camera\CameraController.cpp" />
@@ -201,6 +206,12 @@
     <ClCompile Include="02_Script\Woo\Player\FSM\Player_Hit.cpp" />
     <ClCompile Include="02_Script\Woo\Player\FSM\Player_Die.cpp" />
     <ClCompile Include="02_Script\Woo\Player\FSM\Player_SitWalk.cpp" />
+    <ClCompile Include="02_Script\Woo\MiniGame\MiniGameManager.cpp" />
+    <ClCompile Include="02_Script\Woo\MiniGame\Game\IMiniGame.cpp" />
+    <ClCompile Include="02_Script\Woo\MiniGame\Game\Game_Assembling.cpp" />
+    <ClCompile Include="02_Script\Woo\MiniGame\Game\Game_Cutting.cpp" />
+    <ClCompile Include="02_Script\Woo\MiniGame\Game\Game_FireControl.cpp" />
+
     <ClCompile Include="winMain.cpp" />
   </ItemGroup>
   <ItemGroup>
