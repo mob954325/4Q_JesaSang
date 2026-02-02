@@ -21,8 +21,7 @@ class Image : public RenderComponent
 {
     RTTR_ENABLE(RenderComponent)
 public:
-    Image() { Init(); }
-    ~Image() = default;
+    void OnInitialize() override;
 
     nlohmann::json Serialize() override;
     void Deserialize(nlohmann::json data) override;
@@ -45,6 +44,11 @@ public:
     const Vector4& GetBorderPx() const { return sliceBorderPx; }
     void SetBorderPx(const Vector4& value) { sliceBorderPx = value; }
 
+    const std::string& GetPath() const { return path; }
+    void SetPath(const std::string& path) { this->path = path; }
+
+    void ChangeData(std::string path);
+
 private:
     void Init();
 
@@ -60,5 +64,6 @@ private:
     // 9-slice 보더 px (L, R, T, B)
     Vector4 sliceBorderPx{ 0,0,0,0 }; 
 
+    std::string path{};
     bool isMouseCheck = false;
 };

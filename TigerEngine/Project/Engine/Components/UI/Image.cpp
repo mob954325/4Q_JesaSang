@@ -2,6 +2,7 @@
 #include "../../Manager/TextureResourceManager.h"
 #include "../../Object/GameObject.h"
 #include "../../Util/JsonHelper.h"
+#include "../Base/Datas/ReflectionMedtaDatas.hpp"
 
 RTTR_REGISTRATION
 {
@@ -12,7 +13,14 @@ RTTR_REGISTRATION
         .property("color",          &Image::GetColor,       &Image::SetColor)
         .property("fillAmount",     &Image::GetFillAmount,  &Image::SetFillAmount)
         .property("sliceBorderPx",  &Image::GetBorderPx,    &Image::SetBorderPx)
+        .property("path",           &Image::GetPath,        &Image::SetPath)
+            (metadata(META_BROWSE, ""))
         .property("isMouseCheck",   &Image::GetMouseCheck,  &Image::SetMouseCheck);
+}
+
+void Image::OnInitialize()
+{
+    Init();
 }
 
 nlohmann::json Image::Serialize()
@@ -27,7 +35,7 @@ void Image::Deserialize(nlohmann::json data)
 
 void Image::GetTextureByPath(std::string path)
 {
-    resource = TextureResourceMaager::Instance().LoadTextureResourceByPath(path);
+    resource = TextureResourceManager::Instance().LoadTextureResourceByPath(path);
 }
 
 void Image::OnRender(RenderQueue& queue)
@@ -57,6 +65,13 @@ void Image::SetMouseCheck(bool value)
 bool Image::GetMouseCheck() const
 {
     return isMouseCheck;
+}
+
+void Image::ChangeData(std::string path)
+{
+    resource.reset();
+    resource = TextureResourceManager::Instance().LoadTextureResourceByPath(path);
+    this->path = path;
 }
 
 void Image::Init()

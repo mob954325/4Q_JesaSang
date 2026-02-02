@@ -3,12 +3,13 @@
 #include "System/Singleton.h"
 #include "UIData/TextureResource.h"
 
-class TextureResourceMaager : public Singleton<TextureResourceMaager>
+class TextureResourceManager : public Singleton<TextureResourceManager>
 {
 public:
-    TextureResourceMaager(token) {};
-    ~TextureResourceMaager() = default;
+    TextureResourceManager(token) {};
+    ~TextureResourceManager() = default;
 
+    void Init(const ComPtr<ID3D11Device>& d, const ComPtr<ID3D11DeviceContext>& c);
     std::shared_ptr<TextureResource> LoadTextureResourceByPath(std::string path);
 
 private:

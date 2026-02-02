@@ -1,7 +1,13 @@
 #include "TextureResourceManager.h"
 #include "directxtk/WICTextureLoader.h"
 
-std::shared_ptr<TextureResource> TextureResourceMaager::LoadTextureResourceByPath(std::string path)
+void TextureResourceManager::Init(const ComPtr<ID3D11Device>& d, const ComPtr<ID3D11DeviceContext>& c)
+{
+    device = d;
+    context = c;
+}
+
+std::shared_ptr<TextureResource> TextureResourceManager::LoadTextureResourceByPath(std::string path)
 {
     // 1. 이미 로드한 텍스처인지 확인
     auto it = resources.find(path);

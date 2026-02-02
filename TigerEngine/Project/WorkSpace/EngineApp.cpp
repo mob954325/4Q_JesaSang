@@ -11,6 +11,7 @@
 #include "Manager/ShaderManager.h"
 #include "Manager/WorldManager.h"
 #include "Manager/UIManager.h"
+#include "Manager/TextureResourceManager.h"
 
 #include "Entity/Object.h"
 #include "Object/GameObject.h"
@@ -49,7 +50,7 @@ bool EngineApp::OnInitialize()
 	imguiRenderer = std::make_unique<ImguiRenderer>();
 	imguiRenderer->Initialize(hwnd, dxRenderer->GetDevice(), dxRenderer->GetDeviceContext());
 #endif
-
+    
 	// == init system ==
 	FBXResourceManager::Instance().GetDevice(dxRenderer->GetDevice(), dxRenderer->GetDeviceContext());
     ShaderManager::Instance().Init(dxRenderer->GetDevice(), dxRenderer->GetDeviceContext(), clientWidth, clientHeight);
@@ -68,6 +69,7 @@ bool EngineApp::OnInitialize()
     sm.deviceContext = dxRenderer->GetDeviceContext();
 
     UIManager::Instance().SetSize(clientWidth, clientHeight);
+    TextureResourceManager::Instance().Init(dxRenderer->GetDevice(), dxRenderer->GetDeviceContext());
 
     renderQueue = std::make_unique<RenderQueue>();
 
@@ -433,6 +435,7 @@ void EngineApp::OnInputProcess(const Keyboard::State &KeyState, const Keyboard::
 #include "99_Test/AudioTest/AudioKeyTriggerScript.h"
 
 #include "Components/UI/Image.h"
+#include "Components/RectTransform.h"
 
 void EngineApp::RegisterAllComponents()
 {
@@ -459,6 +462,7 @@ void EngineApp::RegisterAllComponents()
     cf.Register<GroundTestScript>("GroundTestScript", ComponentCategory::Script);
     cf.Register<CCTTest>("CCTTestScript", ComponentCategory::Script);
 
+    cf.Register<RectTransform>("RectTransform", ComponentCategory::Other);
     cf.Register<Image>("Image", ComponentCategory::UI);
 
     Woo_Registeration();

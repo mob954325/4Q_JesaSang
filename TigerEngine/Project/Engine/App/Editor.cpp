@@ -21,6 +21,8 @@
 
 #include "../Components/FBXRenderer.h"
 #include "../Util/PathHelper.h"
+#include "../Components/RectTransform.h"
+#include "../Components/UI/Image.h"
 
 // Payload
 // Prefab payload
@@ -807,6 +809,8 @@ void Editor::RenderInspector()
                     auto name = comp->GetName();
                     if (auto it = registered.find(name); it != registered.end())
                     {
+                        if (name == "Transform" && obj->GetComponent<RectTransform>()) continue; // RectTransform 있으면 Transform 무시
+
                         RenderComponentInfo(name, comp);
                         ImGui::NewLine();
                         ImGui::Separator();
@@ -1210,6 +1214,45 @@ void Editor::RenderComponentInfo(std::string compName, T* comp)
         return;
     }
 
+    if (compName == "Image")
+    {
+
+        for (auto& prop : t.get_properties())
+        {
+            std::string keyUITex = "ChooseUITexDlgKey##" + std::to_string((uintptr_t)comp);
+            rttr::variant value = prop.get_value(*comp);
+            std::string name = prop.get_name().to_string();
+            if (!value.is_valid()) continue;
+
+            if (value.is_type<std::string>() && name == "path")
+            {
+                std::string path = value.get_value<std::string>();
+                ImGui::Text("Current Path: %s", path.c_str());
+
+                if (ImGui::Button("Browse texture"))
+                {
+                    IGFD::FileDialogConfig config;
+                    config.path = "../";
+                    ImGuiFileDialog::Instance()->OpenDialog(keyUITex, "Choose File", ".png, .jpg", config);
+                }
+
+                if (ImGuiFileDialog::Instance()->Display(keyUITex))
+                {
+                    if (ImGuiFileDialog::Instance()->IsOk())
+                    {
+                        std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
+                        std::filesystem::path relativePath = std::filesystem::relative(filePathName);
+                        auto* image = dynamic_cast<Image*>(comp);
+                        if (image) image->ChangeData(relativePath.string());
+                    }
+                    ImGuiFileDialog::Instance()->Close();
+                }
+            }
+        }
+        ReadVariants(*comp);
+        return;
+    }
+
     // 기본
     ImGui::PushID(comp);
     ReadVariants(*comp);
@@ -1435,10 +1478,10 @@ void Editor::ReadVariants(rttr::instance inst)
 
         // check metaData
         auto metaBool = prop.get_metadata(META_BOOL);
+        auto metaBrowse = prop.get_metadata(META_BROWSE);
 
         // Render elements
         // ImGui::Text("%s : %s", name.c_str(), value.get_type().get_name().to_string().c_str());
-
         if (value.get_type().is_enumeration())
         {
             rttr::type enumType = value.get_type();
@@ -1541,7 +1584,7 @@ void Editor::ReadVariants(rttr::instance inst)
             if (ImGui::ColorEdit3(name.c_str(), &c.x))
                 prop.set_value(inst, c);
         }
-        else if (value.is_type<string>())
+        else if (value.is_type<string>() && !metaBrowse.is_valid())
         {
             std::string c = value.get_value<std::string>();
 
