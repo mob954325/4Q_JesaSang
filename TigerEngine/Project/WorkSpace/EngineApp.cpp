@@ -441,7 +441,9 @@ void EngineApp::RegisterAllComponents()
 
     cf.Register<AudioListenerComponent>("AudioListenerComponent", ComponentCategory::Audio);
     cf.Register<AudioSourceComponent>("AudioSourceComponent", ComponentCategory::Audio);
-    cf.Register<AudioPlayModeScript>("AudioPlayModeScript", ComponentCategory::Script);
+    cf.Register<AudioTestController>("AudioTestController", ComponentCategory::Script);
+    cf.Register<AudioManagerComponent>("AudioManagerComponent", ComponentCategory::Script);
+    cf.Register<MiniMapTestScript>("MiniMapTestScript", ComponentCategory::Script);
 
     cf.Register<PhysicsComponent>("PhysicsComponent", ComponentCategory::Physics);
     cf.Register<CharacterControllerComponent>("CharacterControllerComponent", ComponentCategory::Physics);
