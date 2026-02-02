@@ -56,8 +56,8 @@ public:
 
     // Collision / Trigger 이벤트 관리 
     std::unordered_set<PhysicsComponent*> m_CollisionActors;  // 현재 접촉 Actor
-    std::unordered_set<PhysicsComponent*> m_TriggerActors;    // 현재 Trigger Actor
-    std::unordered_set<PhysicsComponent*> m_PendingTriggers; // Trigger 수집용
+    // std::unordered_set<PhysicsComponent*> m_TriggerActors;    // 현재 Trigger Actor
+    // std::unordered_set<PhysicsComponent*> m_PendingTriggers; // Trigger 수집용
 
     bool IsTrigger() const { return m_IsTrigger; }
 
@@ -132,7 +132,7 @@ public:
 
 
     // 트리거 체크 
-    void CheckTriggers();
+    // void CheckTriggers();
     
     // --------------------------
     // Transform 연동
@@ -164,36 +164,5 @@ private:
     // 내부 생성기
     // --------------------------
     void CreateCollider(ColliderType collider, PhysicsBodyType body, const ColliderDesc& desc);
-
-
-//public: 
-//    // Getter / Setter (RTTR 전용)
-//
-//    PhysicsBodyType GetBodyType() const { return m_BodyType; }
-//    void SetBodyType(PhysicsBodyType t) { m_BodyType = t; RebuildPhysics(); }
-//
-//    ColliderType GetColliderType() const { return m_ColliderType; }
-//    void SetColliderType(ColliderType t) { m_ColliderType = t; RebuildPhysics(); }
-//
-//    Vector3 GetHalfExtents() const { return m_HalfExtents; }
-//    void SetHalfExtents(Vector3 v) { m_HalfExtents = v; RebuildPhysics(); }
-//
-//    float GetRadius() const { return m_Radius; }
-//    void SetRadius(float v) { m_Radius = v; RebuildPhysics(); }
-//
-//    float GetHeight() const { return m_Height; }
-//    void SetHeight(float v) { m_Height = v; RebuildPhysics(); }
-//
-//    float GetDensity() const { return m_Density; }
-//    void SetDensity(float v) { m_Density = v; RebuildPhysics(); }
-//
-//    Vector3 GetLocalOffset() const { return m_LocalOffset; }
-//    void SetLocalOffset(Vector3 v) { m_LocalOffset = v; RebuildPhysics(); }
-//
-//    // CollisionLayer GetLayer() const { return m_Layer; }
-//    // void SetLayer(CollisionLayer v) { m_Layer = v; ApplyFilter(); }
-//
-//    // bool IsTrigger() const { return m_IsTrigger; }
-//    void SetTrigger(bool v) { m_IsTrigger = v; RebuildPhysics(); }
 
 };

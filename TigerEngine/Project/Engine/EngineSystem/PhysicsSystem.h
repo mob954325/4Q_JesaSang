@@ -14,6 +14,7 @@ using namespace physx;
 
 class PhysicsComponent;
 class PhysicsLayerMatrix;
+
 struct PairHash
 {
     size_t operator()(const std::pair<PhysicsComponent*, PhysicsComponent*>& p) const
@@ -40,16 +41,31 @@ class SimulationEventCallback : public PxSimulationEventCallback
 public:
     // Simulation Shape ↔ Simulation Shape
     virtual void onContact(const PxContactPairHeader& pairHeader, const PxContactPair* pairs, PxU32 nbPairs) override;
+    virtual void onTrigger(PxTriggerPair* pairs, PxU32 nbPairs) override; // Trigger Shape ↔ Simulation Shape
 
-    // 사용 안 함
-        // Trigger 이벤트는 PhysX Simulation Trigger를 사용X 
-        // 모든 Trigger는 Overlap Query + PendingTriggers 방식으로 통합 처리O 
-    virtual void onTrigger(PxTriggerPair* pairs, PxU32 nbPairs) override {} // Trigger Shape ↔ Simulation Shape
     virtual void onConstraintBreak(PxConstraintInfo*, PxU32) override {}
     virtual void onWake(PxActor**, PxU32) override {}
     virtual void onSleep(PxActor**, PxU32) override {}
     virtual void onAdvance(const PxRigidBody* const*, const PxTransform*, const PxU32) override {}
 };
+
+
+class OverlapFilterCallback : public PxQueryFilterCallback
+{
+public:
+    PxQueryHitType::Enum preFilter(
+        const PxFilterData& q,
+        const PxShape* shape,
+        const PxRigidActor* actor,
+        PxHitFlags&) override;
+
+    PxQueryHitType::Enum postFilter(
+        const PxFilterData&,
+        const PxQueryHit&,
+        const PxShape*,
+        const PxRigidActor*) override;
+};
+
 
 
 // ------------------------------
