@@ -156,6 +156,7 @@
     <ClInclude Include="EngineApp.h" />
     <ClInclude Include="99_Test\MiniMapTest\MiniMapTestScript.h" />
     <ClInclude Include="99_Test\AudioTest\AudioTestController.h" />
+    <ClInclude Include="99_Test\AudioTest\AudioListenerSyncScript.h" />
     <ClInclude Include="02_Script\Woo\Player\FSM\IPlayerState.h" />
     <ClInclude Include="99_Test\AudioTest\AudioManagerComponent.h" />
     <ClInclude Include="99_Test\PhysicsTest\CCTTest.h" />
@@ -190,6 +191,7 @@
     <ClCompile Include="EngineApp.cpp" />
     <ClCompile Include="99_Test\MiniMapTest\MiniMapTestScript.cpp" />
     <ClCompile Include="99_Test\AudioTest\AudioTestController.cpp" />
+    <ClCompile Include="99_Test\AudioTest\AudioListenerSyncScript.cpp" />
     <ClCompile Include="02_Script\Woo\Player\FSM\IPlayerState.cpp" />
     <ClCompile Include="99_Test\AudioTest\AudioManagerComponent.cpp" />
     <ClCompile Include="99_Test\PhysicsTest\CCTTest.cpp" />
