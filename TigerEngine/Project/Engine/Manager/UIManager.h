@@ -18,16 +18,13 @@ public:
     void SetSize(int w, int h);
     Vector2 GetSize();
 
-    void Register(UIBase* ui);
-    void UnRegister(UIBase* ui);
+    // void Register(UIBase* ui);
+    // void UnRegister(UIBase* ui);
 
     Matrix GetProjection() const;
 
 protected:
-    /// <summary>
-    /// 등록된 ui 컴포넌트들
-    /// </summary>
-    std::vector<UIBase*> uiComps;
+    // std::vector<UIBase*> uiComps;
 
     // UI ㅡMVP 계산 할 때 사용하는 투영 매트릭스 ( 직교 투영 )
     Matrix proj; 
