@@ -24,11 +24,26 @@ public:
     Image() { Init(); }
     ~Image() = default;
 
+    nlohmann::json Serialize() override;
+    void Deserialize(nlohmann::json data) override;
+
     void GetTextureByPath(std::string path);
     void OnRender(RenderQueue& queue) override;
 
     void SetMouseCheck(bool value);
     bool GetMouseCheck() const;
+
+    ImageType GetType() const { return type; }
+    void SetType(ImageType value) { type = value; }
+
+    const Color& GetColor() const { return color; }
+    void SetColor(const Color& value) { color = value; }
+
+    float GetFillAmount() const { return fillAmount; }
+    void SetFillAmount(float value) { fillAmount = std::clamp(value, 0.0f, 1.0f); }
+
+    const Vector4& GetBorderPx() const { return sliceBorderPx; }
+    void SetBorderPx(const Vector4& value) { sliceBorderPx = value; }
 
 private:
     void Init();
