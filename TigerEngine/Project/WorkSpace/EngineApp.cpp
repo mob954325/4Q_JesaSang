@@ -21,6 +21,7 @@
 #include "EngineSystem/PhysicsSystem.h"
 #include "EngineSystem/AnimationSystem.h"
 #include "EngineSystem/DecalSystem.h"
+#include "EngineSystem/GridSystem.h"
 
 #include "Components/FreeCamera.h"
 #include "Components/FBXData.h"
@@ -56,6 +57,7 @@ bool EngineApp::OnInitialize()
     // AudioManager::Instance().GetSystem().Set3DSettings(1.0f, 0.01f, 1.0f);// 기본 3D 설정 도플러 스케일, 거리 , 감쇠 효과
     AudioManager::Instance().GetSystem().Set3DSettings(1.0f, 0.01f, 1.0f);
     if (!PhysicsSystem::Instance().Initialize()) { return false; }
+    // GridSystem::Instance().Initialize();
 
     auto& sm = ShaderManager::Instance();
     sm.viewport_screen = dxRenderer->GetRenderViewPort();
@@ -412,6 +414,7 @@ void EngineApp::OnInputProcess(const Keyboard::State &KeyState, const Keyboard::
 #include "Components/PhysicsComponent.h"
 #include "Components/CharacterControllerComponent.h"
 #include "Components/AnimationController.h"
+#include "Components/GridComponent.h"
 #include "Manager/ComponentFactory.h"
 
 #include "99_Test/Player/Player1.h"
@@ -447,6 +450,7 @@ void EngineApp::RegisterAllComponents()
 
     cf.Register<PhysicsComponent>("PhysicsComponent", ComponentCategory::Physics);
     cf.Register<CharacterControllerComponent>("CharacterControllerComponent", ComponentCategory::Physics);
+    cf.Register<GridComponent>("GridComponent", ComponentCategory::Physics);
 
     cf.Register<AnimationController>("AnimationController", ComponentCategory::Animation);
 
