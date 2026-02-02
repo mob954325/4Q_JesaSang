@@ -6,7 +6,6 @@
 #include <Helper.h>
 #include "../Object/GameObject.h"
 
-
 // ------------------------------------------------------------
 // PhysicsSystem
 // ------------------------------------------------------------
@@ -60,6 +59,8 @@ bool PhysicsSystem::Initialize()
     m_Dispatcher = PxDefaultCpuDispatcherCreate(2); // CPU 물리 연산을 담당할 스레드 풀 (2 스레드)
     sceneDesc.cpuDispatcher = m_Dispatcher;
     sceneDesc.filterShader = PhysicsFilterShader;
+    sceneDesc.sceneQueryUpdateMode = PxSceneQueryUpdateMode::eBUILD_ENABLED_COMMIT_ENABLED;
+
 
     m_Scene = m_Physics->createScene(sceneDesc);
     if (!m_Scene)
@@ -118,88 +119,88 @@ void PhysicsSystem::Simulate(float dt)
             comp->SyncFromPhysics();
     }
 
-    // 3. Trigger 체크
-    for (auto& it : m_ActorMap)
-    {
-        PhysicsComponent* comp = it.first;
+    //// 3. Trigger 체크
+    //for (auto& it : m_ActorMap)
+    //{
+    //    PhysicsComponent* comp = it.first;
 
-        if (!comp->GetActiveSelf() || !comp->GetOwner()->GetActiveSelf()) continue; // enable 체크 추가 - [26.01.29] 이성호
+    //    if (!comp->GetActiveSelf() || !comp->GetOwner()->GetActiveSelf()) continue; // enable 체크 추가 - [26.01.29] 이성호
 
-        if (comp)
-            comp->CheckTriggers();
-    }
+    //    if (comp)
+    //        comp->CheckTriggers();
+    //}
 
     // 4. CCT 후처리 (Trigger / Collision 이벤트)
     CharacterControllerSystem::Instance().Simulate(dt);
 
     // 4. Trigger 이벤트 해석
-    ResolveTriggerEvents();
+    // ResolveTriggerEvents();
 }
 
 
-void PhysicsSystem::ResolveTriggerEvents()
-{
-    m_TriggerCurr.clear();
-
-    // --------------------------------------------------
-    // 1. 모든 PhysicsComponent에서 Trigger 수집
-    // --------------------------------------------------
-    for (auto& it : m_ActorMap)
-    {
-        PhysicsComponent* comp = it.first;
-
-        if (!comp)
-            continue;
-
-        if (!comp->GetActiveSelf() || !comp->GetOwner()->GetActiveSelf()) continue; // enable 체크 추가 - [26.01.29] 이성호
-
-        for (PhysicsComponent* other : comp->m_PendingTriggers)
-        {
-            // (A,B) == (B,A) 정규화
-            PhysicsComponent* a = comp < other ? comp : other;
-            PhysicsComponent* b = comp < other ? other : comp;
-            m_TriggerCurr.insert(std::make_pair(a, b));
-        }
-
-        comp->m_PendingTriggers.clear();
-    }
-
-    // --------------------------------------------------
-    // 2. Trigger Enter / Stay
-    // --------------------------------------------------
-    for (const auto& pair : m_TriggerCurr)
-    {
-        if (!pair.first->GetActiveSelf() || !pair.first->GetOwner()->GetActiveSelf() ||
-            !pair.second->GetActiveSelf() || !pair.second->GetOwner()->GetActiveSelf()) continue; // enable 체크 추가 - [26.01.29] 이성호
-
-        if (m_TriggerPrev.find(pair) == m_TriggerPrev.end())
-        {
-            pair.first->OnTriggerEnter(pair.second);
-            pair.second->OnTriggerEnter(pair.first);
-        }
-        else
-        {
-            pair.first->OnTriggerStay(pair.second);
-            pair.second->OnTriggerStay(pair.first);
-        }
-    }
-
-    // --------------------------------------------------
-    // 3. Trigger Exit
-    // --------------------------------------------------
-    for (const auto& pair : m_TriggerPrev)
-    {
-        if (!pair.first->GetActiveSelf() || !pair.first->GetOwner()->GetActiveSelf() ||
-            !pair.second->GetActiveSelf() || !pair.second->GetOwner()->GetActiveSelf()) continue; // enable 체크 추가 - [26.01.29] 이성호
-
-        if (m_TriggerCurr.find(pair) == m_TriggerCurr.end())
-        {
-            pair.first->OnTriggerExit(pair.second);
-            pair.second->OnTriggerExit(pair.first);
-        }
-    }
-    m_TriggerPrev = std::move(m_TriggerCurr);
-}
+//void PhysicsSystem::ResolveTriggerEvents()
+//{
+//    m_TriggerCurr.clear();
+//
+//    // --------------------------------------------------
+//    // 1. 모든 PhysicsComponent에서 Trigger 수집
+//    // --------------------------------------------------
+//    for (auto& it : m_ActorMap)
+//    {
+//        PhysicsComponent* comp = it.first;
+//
+//        if (!comp)
+//            continue;
+//
+//        if (!comp->GetActiveSelf() || !comp->GetOwner()->GetActiveSelf()) continue; // enable 체크 추가 - [26.01.29] 이성호
+//
+//        for (PhysicsComponent* other : comp->m_PendingTriggers)
+//        {
+//            // (A,B) == (B,A) 정규화
+//            PhysicsComponent* a = comp < other ? comp : other;
+//            PhysicsComponent* b = comp < other ? other : comp;
+//            m_TriggerCurr.insert(std::make_pair(a, b));
+//        }
+//
+//        comp->m_PendingTriggers.clear();
+//    }
+//
+//    // --------------------------------------------------
+//    // 2. Trigger Enter / Stay
+//    // --------------------------------------------------
+//    for (const auto& pair : m_TriggerCurr)
+//    {
+//        if (!pair.first->GetActiveSelf() || !pair.first->GetOwner()->GetActiveSelf() ||
+//            !pair.second->GetActiveSelf() || !pair.second->GetOwner()->GetActiveSelf()) continue; // enable 체크 추가 - [26.01.29] 이성호
+//
+//        if (m_TriggerPrev.find(pair) == m_TriggerPrev.end())
+//        {
+//            pair.first->OnTriggerEnter(pair.second);
+//            pair.second->OnTriggerEnter(pair.first);
+//        }
+//        else
+//        {
+//            pair.first->OnTriggerStay(pair.second);
+//            pair.second->OnTriggerStay(pair.first);
+//        }
+//    }
+//
+//    // --------------------------------------------------
+//    // 3. Trigger Exit
+//    // --------------------------------------------------
+//    for (const auto& pair : m_TriggerPrev)
+//    {
+//        if (!pair.first->GetActiveSelf() || !pair.first->GetOwner()->GetActiveSelf() ||
+//            !pair.second->GetActiveSelf() || !pair.second->GetOwner()->GetActiveSelf()) continue; // enable 체크 추가 - [26.01.29] 이성호
+//
+//        if (m_TriggerCurr.find(pair) == m_TriggerCurr.end())
+//        {
+//            pair.first->OnTriggerExit(pair.second);
+//            pair.second->OnTriggerExit(pair.first);
+//        }
+//    }
+//    m_TriggerPrev = std::move(m_TriggerCurr);
+//}
 
 
 void PhysicsSystem::RegisterComponent(PhysicsComponent* comp, PxRigidActor* actor)
@@ -254,6 +255,42 @@ void PhysicsSystem::Shutdown()
     PX_RELEASE(m_Pvd);
     PX_RELEASE(m_Foundation);
 }
+
+// ------------------------------------------------------------
+// Trigger Query 필터
+// ------------------------------------------------------------
+PxQueryHitType::Enum OverlapFilterCallback::preFilter(
+    const PxFilterData& q,
+    const PxShape* shape,
+    const PxRigidActor* actor,
+    PxHitFlags&)
+{
+    if (!shape || !actor)
+        return PxQueryHitType::eNONE;
+
+    const PxFilterData& s = shape->getQueryFilterData();
+
+    // 1. 레이어 마스크 검사
+    if ((q.word1 & s.word0) == 0)
+        return PxQueryHitType::eNONE;
+
+    // 2. 한쪽이라도 trigger면 허용
+    if ((q.word2 | s.word2) == 0)
+        return PxQueryHitType::eNONE;
+
+    return PxQueryHitType::eTOUCH; // Trigger 포함
+}
+PxQueryHitType::Enum OverlapFilterCallback::postFilter(
+    const PxFilterData&,
+    const PxQueryHit&,
+    const PxShape*,
+    const PxRigidActor*)
+{
+    return PxQueryHitType::eTOUCH;
+}
+
+
+
 
 // ------------------------------------------------------------
 // Raycast Query 필터
@@ -353,6 +390,36 @@ void SimulationEventCallback::onContact(
         }
     }
 }
+
+void SimulationEventCallback::onTrigger(PxTriggerPair* pairs, PxU32 nbPairs)
+{
+    for (PxU32 i = 0; i < nbPairs; ++i)
+    {
+        const PxTriggerPair& p = pairs[i];
+
+        if (p.flags &
+            (PxTriggerPairFlag::eREMOVED_SHAPE_TRIGGER |
+                PxTriggerPairFlag::eREMOVED_SHAPE_OTHER))
+            continue;
+
+        auto* trigger = PhysicsSystem::Instance().GetComponent(p.triggerActor);
+        auto* other = PhysicsSystem::Instance().GetComponent(p.otherActor);
+
+        if (!trigger || !other) continue;
+
+        if (p.status & PxPairFlag::eNOTIFY_TOUCH_FOUND)
+        {
+            trigger->OnTriggerEnter(other);
+            other->OnTriggerEnter(trigger);
+        }
+        else if (p.status & PxPairFlag::eNOTIFY_TOUCH_LOST)
+        {
+            trigger->OnTriggerExit(other);
+            other->OnTriggerExit(trigger);
+        }
+    }
+}
+
 
 
 // ----------------------------------------------------

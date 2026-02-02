@@ -6,27 +6,27 @@ PxFilterFlags PhysicsFilterShader(
     PxPairFlags& pairFlags,
     const void*, PxU32)
 {
-    const bool isTrigger =
+    const bool isTriggerPair =
         PxFilterObjectIsTrigger(attr0) ||
         PxFilterObjectIsTrigger(attr1);
 
-    // Layer 검사 (Trigger 포함)
-    bool collide = (data0.word0 & data1.word1) && (data1.word0 & data0.word1);
-
-    if (!collide)
+    // 1) Layer mask 검사
+    if (!((data0.word0 & data1.word1) &&
+        (data1.word0 & data0.word1)))
         return PxFilterFlag::eSUPPRESS;
 
-    if (isTrigger)
+    // 2) Trigger ↔ Anything
+    if (isTriggerPair)
     {
         pairFlags =
-            PxPairFlag::eTRIGGER_DEFAULT |
+            PxPairFlag::eTRIGGER_DEFAULT |   // 기본 Trigger 세팅
             PxPairFlag::eNOTIFY_TOUCH_FOUND |
             PxPairFlag::eNOTIFY_TOUCH_LOST;
 
         return PxFilterFlag::eDEFAULT;
     }
 
-    // 일반 Collision
+    // 3) Simulation ↔ Simulation
     pairFlags =
         PxPairFlag::eCONTACT_DEFAULT |
         PxPairFlag::eNOTIFY_TOUCH_FOUND |
