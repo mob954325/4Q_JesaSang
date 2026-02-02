@@ -17,6 +17,7 @@
 #include "FSM/Player_SitWalk.h"
 #include "FSM/Player_Hide.h"
 #include "FSM/Player_Hit.h"
+#include "FSM/Player_Cook.h"
 #include "FSM/Player_Die.h"
 
 #include "../Object/SearchObject.h"
@@ -165,6 +166,7 @@ void PlayerController::InitFSMStates()
     fsmStates[(int)PlayerState::SitWalk] = new Player_SitWalk(this);
     fsmStates[(int)PlayerState::Hide] = new Player_Hide(this);
     fsmStates[(int)PlayerState::Hit] = new Player_Hit(this);
+    fsmStates[(int)PlayerState::Cook] = new Player_Cook(this);
     fsmStates[(int)PlayerState::Die] = new Player_Die(this);
 }
 
@@ -200,19 +202,6 @@ void PlayerController::InputProcess()
     isSitKey = Input::GetKey(sit_Key);
     isRunKey = Input::GetKey(run_Key);
     isInteractionKey = Input::GetKey(interaction_Key);
-
-    // move dir
-    Vector3 input(0, 0, 0);
-
-    if (isMoveLKey) input.x -= 1;
-    if (isMoveRKey) input.x += 1;
-    if (isMoveFKey) input.z += 1;
-    if (isMoveBKey) input.z -= 1;
-
-    if (input.LengthSquared() > 0)
-        input.Normalize();
-
-    this->moveDir = input;
 }
 
 /*-------[ Movement ]----------------------------------*/
@@ -221,7 +210,7 @@ void PlayerController::Move(float delta)
     if (!cct) return;
 
     cct->m_MoveSpeed = curSpeed;
-    cct->MoveCharacter(moveDir, delta);
+    cct->MoveCharacter(lookDir, delta);
 }
 
 static float WrapAngleRad(float a)      // util
@@ -233,10 +222,10 @@ static float WrapAngleRad(float a)      // util
 
 void PlayerController::Rotation(float delta)
 {
-    if (moveDir.LengthSquared() <= 0.0001f)
+    if (lookDir.LengthSquared() <= 0.0001f)
         return;
 
-    Vector3 rotationDir = -moveDir;         // 너 왜 반전이닝?
+    Vector3 rotationDir = -lookDir;         // 너 왜 반전이닝?
 
     float targetYaw = atan2f(rotationDir.x, rotationDir.z);
     float currentYaw = transform->GetYaw();
@@ -315,6 +304,7 @@ void PlayerController::CookingInteraction(float dt)
     {
         // mini game start
         MiniGameManager::Instance()->StartMiniGame(std::move(inventory->TakeCurItem()));
+        ChangeState(PlayerState::Cook);
         cookInteractionTimer = 0.0f;
     }
 }

@@ -8,7 +8,7 @@ void Player_Sit::Enter()
     player->curSpeed = 0;
 
     // set moved dir
-    player->moveDir = Vector3::Zero;
+    player->lookDir = Vector3::Zero;
 }
 
 void Player_Sit::ChangeStateLogic()
@@ -34,7 +34,18 @@ void Player_Sit::ChangeStateLogic()
 
 void Player_Sit::Update(float deltaTime)
 {
+    // look dir
+    Vector3 input(0, 0, 0);
 
+    if (player->isMoveLKey) input.x -= 1;
+    if (player->isMoveRKey) input.x += 1;
+    if (player->isMoveFKey) input.z += 1;
+    if (player->isMoveBKey) input.z -= 1;
+
+    if (input.LengthSquared() > 0)
+        input.Normalize();
+
+    player->lookDir = input;
 }
 
 void Player_Sit::FixedUpdate(float deltaTime)

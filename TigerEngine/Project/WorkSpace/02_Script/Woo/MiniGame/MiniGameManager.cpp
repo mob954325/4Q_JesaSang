@@ -2,12 +2,15 @@
 #include "Util/JsonHelper.h"
 #include "Util/ComponentAutoRegister.h"
 #include "Object/GameObject.h"
+#include "EngineSystem/SceneSystem.h"
 
 #include "../Item/Item.h"
 #include "Game/IMinigame.h"
 #include "Game/Game_Cutting.h"
 #include "Game/Game_FireControl.h"
 #include "Game/Game_Assembling.h"
+
+#include "../Player/PlayerController.h"
 
 
 REGISTER_COMPONENT(MiniGameManager)
@@ -129,4 +132,8 @@ void MiniGameManager::EndMiniGame(bool isSuccess)
             cout << "[MiniGameManager] : Game Fail..." << endl;
         }
     }
+
+    // player fsm change
+    auto* pc = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("Player")->GetComponent<PlayerController>();
+    pc->ChangeState(PlayerState::Idle);
 }
