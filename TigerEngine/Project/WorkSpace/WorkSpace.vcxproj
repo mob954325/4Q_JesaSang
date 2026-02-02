@@ -146,9 +146,18 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="02_Script\Woo\Camera\CameraController.h" />
+    <ClInclude Include="02_Script\Woo\Inventory\Inventory.h" />
+    <ClInclude Include="02_Script\Woo\Item\Item.h" />
+    <ClInclude Include="02_Script\Woo\Object\SearchObject.h" />
+    <ClInclude Include="02_Script\Woo\OcclusionFade\OcclusionFadeObject.h" />
+    <ClInclude Include="02_Script\Woo\OcclusionFade\OcclusionFader.h" />
+    <ClInclude Include="02_Script\Woo\Player\Interaction\InteractionSensor.h" />
+    <ClInclude Include="02_Script\Woo\Player\Interaction\InteractionZone.h" />
     <ClInclude Include="EngineApp.h" />
-    <ClInclude Include="99_Test\AudioTest\AudioPlayModeScript.h" />
+    <ClInclude Include="99_Test\MiniMapTest\MiniMapTestScript.h" />
+    <ClInclude Include="99_Test\AudioTest\AudioTestController.h" />
     <ClInclude Include="02_Script\Woo\Player\FSM\IPlayerState.h" />
+    <ClInclude Include="99_Test\AudioTest\AudioManagerComponent.h" />
     <ClInclude Include="99_Test\PhysicsTest\CCTTest.h" />
     <ClInclude Include="99_Test\PhysicsTest\GroundTestScript.h" />
     <ClInclude Include="99_Test\PhysicsTest\PhysicsTestScript.h" />
@@ -163,22 +172,21 @@
     <ClInclude Include="02_Script\Woo\Player\FSM\Player_Hit.h" />
     <ClInclude Include="02_Script\Woo\Player\FSM\Player_Die.h" />
     <ClInclude Include="02_Script\Woo\Player\FSM\Player_SitWalk.h" />
-    <ClInclude Include="99_Test\AudioTest\AudioListenerSyncScript.h" />
-    <ClInclude Include="99_Test\AudioTest\AudioKeyTriggerScript.h" />
-    <ClInclude Include="99_Test\AudioTest\AudioOrbitScript.h" />
-    <ClInclude Include="02_Script\Woo\OcclusionFade\OcclusionFadeObject.h" />
-    <ClInclude Include="02_Script\Woo\OcclusionFade\OcclusionFader.h" />
-    <ClInclude Include="02_Script\Woo\Object\SearchObject.h" />
-    <ClInclude Include="02_Script\Woo\Item\Item.h" />
-    <ClInclude Include="02_Script\Woo\Player\Interaction\InteractionZone.h" />
-    <ClInclude Include="02_Script\Woo\Player\Interaction\InteractionSensor.h" />
-    <ClInclude Include="02_Script\Woo\Inventory\Inventory.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="02_Script\Woo\Camera\CameraController.cpp" />
+    <ClCompile Include="02_Script\Woo\Inventory\Inventory.cpp" />
+    <ClCompile Include="02_Script\Woo\Item\Item.cpp" />
+    <ClCompile Include="02_Script\Woo\Object\SearchObject.cpp" />
+    <ClCompile Include="02_Script\Woo\OcclusionFade\OcclusionFadeObject.cpp" />
+    <ClCompile Include="02_Script\Woo\OcclusionFade\OcclusionFader.cpp" />
+    <ClCompile Include="02_Script\Woo\Player\Interaction\InteractionSensor.cpp" />
+    <ClCompile Include="02_Script\Woo\Player\Interaction\InteractionZone.cpp" />
     <ClCompile Include="EngineApp.cpp" />
-    <ClCompile Include="99_Test\AudioTest\AudioPlayModeScript.cpp" />
+    <ClCompile Include="99_Test\MiniMapTest\MiniMapTestScript.cpp" />
+    <ClCompile Include="99_Test\AudioTest\AudioTestController.cpp" />
     <ClCompile Include="02_Script\Woo\Player\FSM\IPlayerState.cpp" />
+    <ClCompile Include="99_Test\AudioTest\AudioManagerComponent.cpp" />
     <ClCompile Include="99_Test\PhysicsTest\CCTTest.cpp" />
     <ClCompile Include="99_Test\PhysicsTest\GroundTestScript.cpp" />
     <ClCompile Include="99_Test\PhysicsTest\PhysicsTestScript.cpp" />
@@ -193,16 +201,6 @@
     <ClCompile Include="02_Script\Woo\Player\FSM\Player_Hit.cpp" />
     <ClCompile Include="02_Script\Woo\Player\FSM\Player_Die.cpp" />
     <ClCompile Include="02_Script\Woo\Player\FSM\Player_SitWalk.cpp" />
-    <ClCompile Include="99_Test\AudioTest\AudioListenerSyncScript.cpp" />
-    <ClCompile Include="99_Test\AudioTest\AudioKeyTriggerScript.cpp" />
-    <ClCompile Include="99_Test\AudioTest\AudioOrbitScript.cpp" />
-    <ClCompile Include="02_Script\Woo\OcclusionFade\OcclusionFadeObject.cpp" />
-    <ClCompile Include="02_Script\Woo\OcclusionFade\OcclusionFader.cpp" />
-    <ClCompile Include="02_Script\Woo\Object\SearchObject.cpp" />
-    <ClCompile Include="02_Script\Woo\Item\Item.cpp" />
-    <ClCompile Include="02_Script\Woo\Player\Interaction\InteractionZone.cpp" />
-    <ClCompile Include="02_Script\Woo\Player\Interaction\InteractionSensor.cpp" />
-    <ClCompile Include="02_Script\Woo\Inventory\Inventory.cpp" />
     <ClCompile Include="winMain.cpp" />
   </ItemGroup>
   <ItemGroup>
