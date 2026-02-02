@@ -1354,37 +1354,50 @@ void Editor::RenderDebugGrid()
     auto* grid = GridSystem::Instance().GetMainGrid();
     if (!grid) return;
 
-    // DebugDraw::g_Batch->Begin();
+    float defaultYThickness = 0.01f;
+    float highlightYThickness = 10.0f; // 원점과 걸을 수 없는 그리드 두께
 
-    for (int y = 0; y < grid->height; ++y)
+    int centerX = grid->width / 2;
+    int centerY = grid->height / 2;
+
+    // 중앙 기준 좌표: -centerX ~ +centerX, -centerY ~ +centerY
+    for (int cy = -centerY; cy < grid->height - centerY; ++cy)
     {
-        for (int x = 0; x < grid->width; ++x)
+        for (int cx = -centerX; cx < grid->width - centerX; ++cx)
         {
-            GridCell* cell = grid->GetCell(x, y);
+            GridCell* cell = grid->GetCellFromCenter(cx, cy);
             if (!cell) continue;
 
-            // 그리드 셀 위치 계산
-            Vector3 worldPos = grid->GridToWorld(x, y);
+            // 그리드 월드 위치
+            Vector3 worldPos = grid->GridToWorld(centerX + cx, centerY + cy);
 
-            // 각 셀을 작은 박스로 그리기
             BoundingBox box;
             float halfSize = grid->cellSize * 0.5f;
-
             box.Center = XMFLOAT3(worldPos.x, worldPos.y, worldPos.z);
-            box.Extents = XMFLOAT3(halfSize, 0.01f, halfSize); // y축은 얇게
 
-            // walkable 여부에 따라 색상 변경
-            XMVECTOR color;
-            if (cell->walkable)
-                color = XMVectorSet(1.0f, 1.0f, 1.0f, 1.0f); // 초록
-            else
-                color = XMVectorSet(1.0f, 0.0f, 0.0f, 1.0f); // 빨강
+            float yThickness = defaultYThickness;
+            XMVECTOR color = XMVectorSet(1.0f, 1.0f, 1.0f, 1.0f); // 기본 흰색
+            bool drawCross = false; // X 표시 여부
 
-            DebugDraw::Draw(DebugDraw::g_Batch.get(), box, color);
+            // 원점 (0,0) 중앙 그리드
+            if (cx == 0 && cy == 0)
+            {
+                color = XMVectorSet(0.0f, 0.0f, 0.0f, 1.0f); // 검은색
+                yThickness = highlightYThickness;
+            }
+            // 걸을 수 없는 그리드
+            else if (!cell->walkable)
+            {
+                color = XMVectorSet(1.0f, 0.0f, 0.0f, 1.0f); // 빨간색
+                drawCross = true; // X 표시
+            }
+
+            box.Extents = XMFLOAT3(halfSize, yThickness, halfSize);
+
+            // drawCross가 true인 경우에만 X 표시
+            DebugDraw::Draw(DebugDraw::g_Batch.get(), box, color, drawCross);
         }
     }
-
-    // DebugDraw::g_Batch->End();
 }
 
 

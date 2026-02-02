@@ -42,6 +42,17 @@ void GridComponent::OnInitialize()
             c.walkable = true;
         }
     }
+
+    // 임의로 (1,3) 그리드를 걸을 수 없게 하드코딩
+    int centerX = width / 2;
+    int centerY = height / 2;
+
+    int relX = centerX + (-1); // -1은 원점 기준 x 좌표
+    int relY = centerY + 2;    // 1은 원점 기준 y 좌표
+
+    GridCell* cell = GetCell(relX, relY);
+    if (cell)
+        cell->walkable = false;
 }
 
 
@@ -74,13 +85,18 @@ Vector3 GridComponent::GridToWorld(int x, int y)
     auto t = GetOwner()->GetTransform();
     Vector3 origin = t->GetWorldPosition();
 
-    return 
+    // 전체 그리드 중심을 원점으로 맞추기
+    float offsetX = (width * 0.5f - 0.5f) * cellSize;
+    float offsetZ = (height * 0.5f - 0.5f) * cellSize;
+
+    return // 그리드 좌표를 중점 기준으로 
     {
-        origin.x + x * cellSize + cellSize * 0.5f,
+        origin.x + (x * cellSize) - offsetX,
         origin.y,
-        origin.z + y * cellSize + cellSize * 0.5f
+        origin.z + (y * cellSize) - offsetZ
     };
 }
+
 
 
 bool GridComponent::WorldToGrid(const Vector3& pos, int& outX, int& outY)
@@ -88,10 +104,34 @@ bool GridComponent::WorldToGrid(const Vector3& pos, int& outX, int& outY)
     auto t = GetOwner()->GetTransform();
     Vector3 origin = t->GetWorldPosition();
 
-    Vector3 local = pos - origin;
+    // 원점을 중앙으로 이동
+    float offsetX = (width * 0.5f - 0.5f) * cellSize;
+    float offsetZ = (height * 0.5f - 0.5f) * cellSize;
+
+    Vector3 local;
+    local.x = pos.x - origin.x + offsetX;
+    local.z = pos.z - origin.z + offsetZ;
 
     outX = (int)(local.x / cellSize);
     outY = (int)(local.z / cellSize);
 
     return !(outX < 0 || outY < 0 || outX >= width || outY >= height);
+}
+
+
+GridCell* GridComponent::GetCellFromCenter(int cx, int cy)
+{
+    int centerX = width / 2;
+    int centerY = height / 2;
+
+    int ix = centerX + cx; // 중앙 기준 → 내부 배열 인덱스
+    int iy = centerY + cy;
+
+    return GetCell(ix, iy);
+}
+
+bool GridComponent::IsWalkableFromCenter(int cx, int cy)
+{
+    GridCell* cell = GetCellFromCenter(cx, cy);
+    return cell ? cell->walkable : false;
 }
