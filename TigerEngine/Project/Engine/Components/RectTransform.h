@@ -11,7 +11,7 @@
 /// </remarks>
 class RectTransform : public Transform
 {
-    RTTR_ENABLE(Component)
+    RTTR_ENABLE(Transform)
 public:
     RectTransform() { SetName("RectTransform"); }
     ~RectTransform() = default;
@@ -45,6 +45,4 @@ protected:
     /// 회전 중심 점 위치, ((0,0)은 왼쪽 하단, (1,1)은 오른쪽 상단)
     /// </summary>
     Vector2 pivot{};
-
-    bool isDirty = false;
 };

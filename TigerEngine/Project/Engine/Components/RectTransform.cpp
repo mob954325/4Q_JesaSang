@@ -46,7 +46,7 @@ void RectTransform::SetPos(const Vector3& vec)
 {
     pos = vec;
     SetChildrenDirty();
-    isDirty = true;
+    dirty = true;
 }
 
 const Vector2& RectTransform::GetSize() const
@@ -58,7 +58,7 @@ void RectTransform::SetSize(const Vector2& vec)
 {
     size = vec;
     SetChildrenDirty();
-    isDirty = true;
+    dirty = true;
 }
 
 const Vector2& RectTransform::GetPivot() const
@@ -70,12 +70,12 @@ void RectTransform::SetPivot(const Vector2& vec)
 {
     pivot = vec;
     SetChildrenDirty();
-    isDirty = true;
+    dirty = true;
 }
 
 void RectTransform::UpdateMatricesIfDirty()
 {
-    if (!isDirty) return;
+    if (!dirty) return;
 
     auto& r = GetEuler();
     Matrix T0 = Matrix::CreateTranslation(-pivot.x, -pivot.y, 0.0f);
@@ -94,5 +94,5 @@ void RectTransform::UpdateMatricesIfDirty()
         worldMatrix = localMatrix * parent->GetWorldMatrix();
     }
 
-    isDirty = false;
+    dirty = false;
 }
