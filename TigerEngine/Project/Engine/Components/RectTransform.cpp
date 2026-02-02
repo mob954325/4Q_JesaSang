@@ -68,7 +68,10 @@ const Vector2& RectTransform::GetPivot() const
 
 void RectTransform::SetPivot(const Vector2& vec)
 {
-    pivot = vec;
+    float x = std::clamp(vec.x, 0.0f, 1.0f);
+    float y = std::clamp(vec.y, 0.0f, 1.0f);
+
+    pivot = { x, y };
     SetChildrenDirty();
     dirty = true;
 }
