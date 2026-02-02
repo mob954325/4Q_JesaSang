@@ -2,7 +2,7 @@
   "objects": [
     {
       "properties": {
-        "ID": 113,
+        "ID": 117,
         "Name": "Main Camera",
         "ParentID": -1,
         "components": [
@@ -42,7 +42,7 @@
     },
     {
       "properties": {
-        "ID": 114,
+        "ID": 118,
         "Name": "DirectionalLight(Sun)",
         "ParentID": -1,
         "components": [
@@ -95,7 +95,7 @@
     },
     {
       "properties": {
-        "ID": 115,
+        "ID": 119,
         "Name": "----------------------",
         "ParentID": -1,
         "components": [
@@ -125,7 +125,7 @@
     },
     {
       "properties": {
-        "ID": 116,
+        "ID": 120,
         "Name": "Ground",
         "ParentID": -1,
         "components": [
@@ -204,7 +204,7 @@
     },
     {
       "properties": {
-        "ID": 117,
+        "ID": 121,
         "Name": "CurScene_98_Dev_Ho",
         "ParentID": -1,
         "components": [
@@ -234,7 +234,7 @@
     },
     {
       "properties": {
-        "ID": 118,
+        "ID": 122,
         "Name": "Test_Object_1",
         "ParentID": -1,
         "components": [
@@ -313,9 +313,9 @@
     },
     {
       "properties": {
-        "ID": 119,
+        "ID": 123,
         "Name": "Test_Object_Child_1",
-        "ParentID": 118,
+        "ParentID": 122,
         "components": [
           {
             "properties": {
@@ -388,7 +388,7 @@
           },
           {
             "properties": {
-              "b": -14.800000190734863,
+              "b": 0.0,
               "g": -8.899999618530273,
               "r": -11.800000190734863
             },
@@ -396,7 +396,7 @@
           },
           {
             "properties": {
-              "b": 4.5,
+              "b": 0.0,
               "g": 6.900000095367432,
               "r": 10.100000381469727
             },
@@ -408,9 +408,9 @@
     },
     {
       "properties": {
-        "ID": 120,
+        "ID": 124,
         "Name": "CameraSoket",
-        "ParentID": 119,
+        "ParentID": 123,
         "components": [
           {
             "properties": {
@@ -487,9 +487,9 @@
     },
     {
       "properties": {
-        "ID": 121,
+        "ID": 125,
         "Name": "Sub Camera",
-        "ParentID": 120,
+        "ParentID": 124,
         "components": [
           {
             "properties": {
@@ -527,7 +527,7 @@
     },
     {
       "properties": {
-        "ID": 122,
+        "ID": 126,
         "Name": "Parent",
         "ParentID": -1,
         "components": [
@@ -606,9 +606,9 @@
     },
     {
       "properties": {
-        "ID": 123,
+        "ID": 127,
         "Name": "child1",
-        "ParentID": 122,
+        "ParentID": 126,
         "components": [
           {
             "properties": {
@@ -685,9 +685,9 @@
     },
     {
       "properties": {
-        "ID": 124,
+        "ID": 128,
         "Name": "Child2",
-        "ParentID": 123,
+        "ParentID": 127,
         "components": [
           {
             "properties": {
@@ -764,9 +764,9 @@
     },
     {
       "properties": {
-        "ID": 125,
+        "ID": 129,
         "Name": "NewGameObject",
-        "ParentID": 122,
+        "ParentID": 126,
         "components": [
           {
             "properties": {
@@ -843,9 +843,9 @@
     },
     {
       "properties": {
-        "ID": 126,
+        "ID": 130,
         "Name": "NewGameObject",
-        "ParentID": 125,
+        "ParentID": 129,
         "components": [
           {
             "properties": {
@@ -922,7 +922,7 @@
     },
     {
       "properties": {
-        "ID": 127,
+        "ID": 131,
         "Name": "Parent",
         "ParentID": -1,
         "components": [
@@ -1001,9 +1001,9 @@
     },
     {
       "properties": {
-        "ID": 128,
+        "ID": 132,
         "Name": "child1",
-        "ParentID": 127,
+        "ParentID": 131,
         "components": [
           {
             "properties": {
@@ -1080,9 +1080,9 @@
     },
     {
       "properties": {
-        "ID": 129,
+        "ID": 133,
         "Name": "Child2",
-        "ParentID": 128,
+        "ParentID": 132,
         "components": [
           {
             "properties": {
@@ -1159,9 +1159,9 @@
     },
     {
       "properties": {
-        "ID": 130,
+        "ID": 134,
         "Name": "NewGameObject",
-        "ParentID": 127,
+        "ParentID": 131,
         "components": [
           {
             "properties": {
@@ -1238,9 +1238,9 @@
     },
     {
       "properties": {
-        "ID": 131,
+        "ID": 135,
         "Name": "NewGameObject",
-        "ParentID": 130,
+        "ParentID": 134,
         "components": [
           {
             "properties": {
@@ -1317,7 +1317,7 @@
     },
     {
       "properties": {
-        "ID": 132,
+        "ID": 136,
         "Name": "Parent",
         "ParentID": -1,
         "components": [
@@ -1396,9 +1396,9 @@
     },
     {
       "properties": {
-        "ID": 133,
+        "ID": 137,
         "Name": "child1",
-        "ParentID": 132,
+        "ParentID": 136,
         "components": [
           {
             "properties": {
@@ -1475,9 +1475,9 @@
     },
     {
       "properties": {
-        "ID": 134,
+        "ID": 138,
         "Name": "Child2",
-        "ParentID": 133,
+        "ParentID": 137,
         "components": [
           {
             "properties": {
@@ -1554,9 +1554,9 @@
     },
     {
       "properties": {
-        "ID": 135,
+        "ID": 139,
         "Name": "NewGameObject",
-        "ParentID": 132,
+        "ParentID": 136,
         "components": [
           {
             "properties": {
@@ -1633,9 +1633,9 @@
     },
     {
       "properties": {
-        "ID": 136,
+        "ID": 140,
         "Name": "NewGameObject",
-        "ParentID": 135,
+        "ParentID": 139,
         "components": [
           {
             "properties": {
@@ -1705,6 +1705,178 @@
               "UseRoughnessOverride": false
             },
             "type": "FBXRenderer"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "ID": 142,
+        "Name": "UI1",
+        "ParentID": -1,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "fillAmount": 1.0,
+              "isMouseCheck": false,
+              "path": "..\\Assets\\Resource\\Bricks059_Specular.png",
+              "sliceBorderPx": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "type": "Simple"
+            },
+            "type": "Image"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "Pivot": [
+                0.0,
+                0.0
+              ],
+              "Pos": [
+                150.8000030517578,
+                141.0,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Size": [
+                146.0,
+                174.89999389648438
+              ]
+            },
+            "type": "RectTransform"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "ID": 146,
+        "Name": "UI2",
+        "ParentID": 142,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "color": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ],
+              "fillAmount": 1.0,
+              "isMouseCheck": false,
+              "path": "..\\Assets\\Resource\\DB2X2_L01.png",
+              "sliceBorderPx": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "type": "Simple"
+            },
+            "type": "Image"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "Pivot": [
+                0.0,
+                0.0
+              ],
+              "Pos": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Size": [
+                64.0,
+                91.30000305175781
+              ]
+            },
+            "type": "RectTransform"
           }
         ]
       },
