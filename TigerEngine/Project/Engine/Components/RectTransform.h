@@ -18,16 +18,15 @@ public:
     nlohmann::json Serialize() override;
     void Deserialize(nlohmann::json data) override;
 
-    Vector3 GetPos() const;
+    const Vector3& GetPos() const;
     void SetPos(const Vector3& vec);
-    Vector2 GetSize() const;
+    const Vector2& GetSize() const;
     void SetSize(const Vector2& vec);
-    Vector2 GetPivot() const;
+    const Vector2& GetPivot() const;
     void SetPivot(const Vector2& vec);
 
-    void UpdateMatricesIfDirty() override;
-
 protected:
+    void UpdateMatricesIfDirty() override;
 
     /// <summary>
     /// 앵커를 기준으로 하는 사각형 피벗 포지션 -> transform의 position이랑 다름

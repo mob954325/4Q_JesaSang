@@ -37,7 +37,7 @@ void RectTransform::Deserialize(nlohmann::json data)
     SetChildrenDirty();
 }
 
-Vector3 RectTransform::GetPos() const
+const Vector3& RectTransform::GetPos() const
 {
     return pos;
 }
@@ -49,7 +49,7 @@ void RectTransform::SetPos(const Vector3& vec)
     isDirty = true;
 }
 
-Vector2 RectTransform::GetSize() const
+const Vector2& RectTransform::GetSize() const
 {
     return size;
 }
@@ -61,7 +61,7 @@ void RectTransform::SetSize(const Vector2& vec)
     isDirty = true;
 }
 
-Vector2 RectTransform::GetPivot() const
+const Vector2& RectTransform::GetPivot() const
 {
     return pivot;
 }
