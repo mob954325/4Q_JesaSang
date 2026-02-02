@@ -119,16 +119,16 @@ void PhysicsSystem::Simulate(float dt)
             comp->SyncFromPhysics();
     }
 
-    //// 3. Trigger 체크
-    //for (auto& it : m_ActorMap)
-    //{
-    //    PhysicsComponent* comp = it.first;
+    // 3. Trigger 체크
+    for (auto& it : m_ActorMap)
+    {
+        PhysicsComponent* comp = it.first;
 
-    //    if (!comp->GetActiveSelf() || !comp->GetOwner()->GetActiveSelf()) continue; // enable 체크 추가 - [26.01.29] 이성호
+        if (!comp->GetActiveSelf() || !comp->GetOwner()->GetActiveSelf()) continue; // enable 체크 추가 - [26.01.29] 이성호
 
-    //    if (comp)
-    //        comp->CheckTriggers();
-    //}
+        if (comp)
+            comp->CheckTriggerOverlaps();
+    }
 
     // 4. CCT 후처리 (Trigger / Collision 이벤트)
     CharacterControllerSystem::Instance().Simulate(dt);

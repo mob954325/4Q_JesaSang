@@ -137,7 +137,7 @@ public:
     std::unordered_set<std::pair<PhysicsComponent*, PhysicsComponent*>, PairHash> m_TriggerCurr;
     std::unordered_set<std::pair<PhysicsComponent*, PhysicsComponent*>, PairHash> m_TriggerPrev;
 
-    void ResolveTriggerEvents();
+    // void ResolveTriggerEvents();
 
 private:
     // ------------------------------------------------------
