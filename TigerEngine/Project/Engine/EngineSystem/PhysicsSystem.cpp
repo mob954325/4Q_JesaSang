@@ -123,7 +123,7 @@ void PhysicsSystem::Simulate(float dt)
     {
         PhysicsComponent* comp = it.first;
 
-        if (!comp->GetActiveSelf() || comp->GetOwner()->GetActiveSelf()) continue; // enable 체크 추가 - [26.01.29] 이성호
+        if (!comp->GetActiveSelf() || !comp->GetOwner()->GetActiveSelf()) continue; // enable 체크 추가 - [26.01.29] 이성호
 
         if (comp)
             comp->CheckTriggers();
@@ -151,7 +151,7 @@ void PhysicsSystem::ResolveTriggerEvents()
         if (!comp)
             continue;
 
-        if (!comp->GetActiveSelf() || comp->GetOwner()->GetActiveSelf()) continue; // enable 체크 추가 - [26.01.29] 이성호
+        if (!comp->GetActiveSelf() || !comp->GetOwner()->GetActiveSelf()) continue; // enable 체크 추가 - [26.01.29] 이성호
 
         for (PhysicsComponent* other : comp->m_PendingTriggers)
         {
@@ -169,8 +169,8 @@ void PhysicsSystem::ResolveTriggerEvents()
     // --------------------------------------------------
     for (const auto& pair : m_TriggerCurr)
     {
-        if (!pair.first->GetActiveSelf() || pair.first->GetOwner()->GetActiveSelf() ||
-            !pair.second->GetActiveSelf() || pair.second->GetOwner()->GetActiveSelf()) continue; // enable 체크 추가 - [26.01.29] 이성호
+        if (!pair.first->GetActiveSelf() || !pair.first->GetOwner()->GetActiveSelf() ||
+            !pair.second->GetActiveSelf() || !pair.second->GetOwner()->GetActiveSelf()) continue; // enable 체크 추가 - [26.01.29] 이성호
 
         if (m_TriggerPrev.find(pair) == m_TriggerPrev.end())
         {
@@ -189,8 +189,8 @@ void PhysicsSystem::ResolveTriggerEvents()
     // --------------------------------------------------
     for (const auto& pair : m_TriggerPrev)
     {
-        if (!pair.first->GetActiveSelf() || pair.first->GetOwner()->GetActiveSelf() ||
-            !pair.second->GetActiveSelf() || pair.second->GetOwner()->GetActiveSelf()) continue; // enable 체크 추가 - [26.01.29] 이성호
+        if (!pair.first->GetActiveSelf() || !pair.first->GetOwner()->GetActiveSelf() ||
+            !pair.second->GetActiveSelf() || !pair.second->GetOwner()->GetActiveSelf()) continue; // enable 체크 추가 - [26.01.29] 이성호
 
         if (m_TriggerCurr.find(pair) == m_TriggerCurr.end())
         {

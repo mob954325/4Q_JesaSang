@@ -405,6 +405,7 @@ void PhysicsComponent::CreateCollider(ColliderType collider, PhysicsBodyType bod
     ApplyFilter(); // 레이어 필터 
 }
 
+
 void PhysicsComponent::CheckTriggers()
 {
     if (!m_Actor) return; // PxActor* m_Actor; (PhysicsSystem에서 매핑됨)
@@ -432,6 +433,10 @@ void PhysicsComponent::CheckTriggers()
         PxFilterData shapeFilter = shape->getQueryFilterData();
         PxQueryFilterData filterData;
         filterData.data = shapeFilter; 
+        filterData.flags =
+            PxQueryFlag::eSTATIC |
+            PxQueryFlag::eDYNAMIC |
+            PxQueryFlag::ePREFILTER;
 
         if (scene->overlap(geom.any(), pose, hitBuffer, filterData))
         {
@@ -441,16 +446,16 @@ void PhysicsComponent::CheckTriggers()
                 if (!otherActor) continue;
 
                 PhysicsComponent* other = PhysicsSystem::Instance().GetComponent(otherActor);
-                if (other && other != this)
-                {
+                if (!other || other == this)
+                    continue;
+
+                // Trigger <-> Trigger 중복 방지
+                if (this < other)
                     m_PendingTriggers.insert(other);
-                }
             }
         }
     }
 }
-
-
 
 
 DirectX::XMVECTOR GetActorDebugColor(PxRigidActor* actor)
@@ -468,6 +473,7 @@ DirectX::XMVECTOR GetActorDebugColor(PxRigidActor* actor)
 
     return DirectX::Colors::White;
 }
+
 
 void PhysicsComponent::DrawPhysXActors()
 {
@@ -512,6 +518,7 @@ void PhysicsComponent::DrawPhysXActors()
     // Character Controller는 별도로 그려야 함 
     DrawCharacterControllers();
 }
+
 
 void PhysicsComponent::DrawPhysXShape(PxShape* shape, const PxTransform& actorPose, FXMVECTOR color)
 {
@@ -585,6 +592,7 @@ void PhysicsComponent::DrawPhysXShape(PxShape* shape, const PxTransform& actorPo
         break;
     }
 }
+
 
 void PhysicsComponent::DrawCharacterControllers()
 {
