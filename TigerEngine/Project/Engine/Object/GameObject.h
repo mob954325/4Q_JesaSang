@@ -51,7 +51,7 @@ public:
 	nlohmann::json Serialize() const;
 	void Deserialize(const nlohmann::json objData);
 
-	/// @brief 에디터 오브젝트 피킹을 위한 AABB 업데이트
+	/// @brief 에디터 오브젝트 피킹을 위한 AABB 업데이트 
 	void UpdateAABB();
 	const BoundingBox GetAABB() const { return aabbBox; }
 	void SetAABB(BoundingBox aabb);
@@ -63,6 +63,11 @@ public:
 	/// 게임 오브젝트의 모든 컴포넌트를 지우는 함수
 	/// </summary>
 	void ClearAll();
+
+    std::vector<Transform*> GetChildern();
+    Transform* GetChildByIndex(int index);
+    Transform* GetChildByName(std::string name);
+    Transform* GetParent();    
 
 protected:
 	Scene* currentScene{}; // 현재 게임 오브젝트가 존재하는 씬 참조 변수

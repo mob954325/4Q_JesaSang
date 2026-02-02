@@ -261,6 +261,31 @@ void Transform::SetDirty()
     dirty = true;
 }
 
+Transform* Transform::GetChildByIndex(int index)
+{
+    if (index >= children.size()) return nullptr;
+    if (index < 0) return nullptr;
+
+    return children[index];
+}
+
+Transform* Transform::GetChildByName(std::string name)
+{
+    for (auto it = children.begin(); it != children.end();)
+    {
+        if ((*it)->GetOwner()->GetName() == name)
+        {
+            return (*it);
+        }
+        else
+        {
+            it++;
+        }
+    }
+
+    return nullptr;
+}
+
 void Transform::UpdateMatricesIfDirty()
 {
     if (!dirty) return;
