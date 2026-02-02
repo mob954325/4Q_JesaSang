@@ -1,4 +1,5 @@
 #pragma once
+#include "../Base/pch.h"
 #include "../Components/UI/UIBase.h"
 #include "System/Singleton.h"
 
@@ -17,9 +18,6 @@ public:
     /// </summary>
     void SetSize(int w, int h);
     Vector2 GetSize();
-
-    // void Register(UIBase* ui);
-    // void UnRegister(UIBase* ui);
 
     Matrix GetProjection() const;
 

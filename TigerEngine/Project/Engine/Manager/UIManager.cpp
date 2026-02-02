@@ -17,23 +17,7 @@ Vector2 UIManager::GetSize()
     return { static_cast<float>(width), static_cast<float>(height) };
 }
 
-void UIManager::Register(UIBase* ui)
+Matrix UIManager::GetProjection() const
 {
-    uiComps.push_back(ui);
-}
-
-void UIManager::UnRegister(UIBase* ui)
-{
-    for (auto it = uiComps.begin(); it != uiComps.end();)
-    {
-        if (*it == ui)
-        {
-            uiComps.erase(it);
-            break;
-        }
-        else
-        {
-            it++;
-        }
-    }
+    return proj;
 }
