@@ -136,6 +136,8 @@ void Scene::ClearScene()
     mappedGameObjects.clear();
     LightSystem::Instance().Clear();
     CameraSystem::Instance().Clear();
+    ScriptSystem::Instance().Clear();
+    RenderSystem::Instance().Clear();
 }
 
 bool Scene::SaveToJson(const std::string &filename) const

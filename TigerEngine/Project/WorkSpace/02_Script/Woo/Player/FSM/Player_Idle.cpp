@@ -2,7 +2,7 @@
 
 void Player_Idle::Enter()
 {
-    cout << "[Player] Enter Idle State" << endl;
+    //cout << "[Player] Enter Idle State" << endl;
 
     // set speed
     player->curSpeed = 0;
@@ -48,5 +48,5 @@ void Player_Idle::FixedUpdate(float deltaTime)
 
 void Player_Idle::Exit()
 {
-    cout << "[Player] Exit Idle State" << endl;
+    //cout << "[Player] Exit Idle State" << endl;
 }
