@@ -1,8 +1,7 @@
 #pragma once
-#include "System/Singleton.h"
 #include "Components/ScriptComponent.h"
+#include "Game/IMiniGame.h"
 
-class IMiniGame;
 class IItem;
 
 /* 
@@ -15,18 +14,21 @@ class IItem;
     Minigame은 총 3가지로, Player가 소지한 음식 재료에 따라 다른 미니 게임이 진행됩니다.
 */
 
-class MiniGameManager :  public ScriptComponent, public Singleton<MiniGameManager>
+class MiniGameManager :  public ScriptComponent
 {
     RTTR_ENABLE(ScriptComponent)
 
 private:
+    // singleton
+    inline static MiniGameManager* s_instance = nullptr;
+
     // game
     std::unique_ptr<IMiniGame> currentMiniGame;
     std::unique_ptr<IItem> curIngredient;   // 재료는 게임실패시 반환, 성공시 소멸
 
 public:
     // component process
-    void OnStart() override;
+    void OnInitialize() override;
     void OnUpdate(float delta) override;
     void OnDestory() override;
 
@@ -38,12 +40,12 @@ private:
     // funcs..
     std::unique_ptr<IMiniGame> CreateMinigameForIngredientId(const std::string& foodId);
     void CleanupMinigame();
+    void EndMiniGame(bool isSuccess);
 
 public:
     // 외부 call fucns..
-    void StartMiniGame(std::unique_ptr<IItem> ingredient);         // 플레이어 조리대 인터랙션
-    void EndMiniGame(bool isSuccess);                              // MiniGame 종료 호출 로직
+    static MiniGameManager* Instance() { return s_instance; }
 
-    bool IsPlaying() const { return currentMiniGame != nullptr; }
+    void StartMiniGame(std::unique_ptr<IItem> ingredient);         // 플레이어 조리대 인터랙션
 };
 

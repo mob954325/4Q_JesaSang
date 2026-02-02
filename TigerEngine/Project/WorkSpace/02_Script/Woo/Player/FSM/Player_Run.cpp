@@ -2,7 +2,7 @@
 
 void Player_Run::Enter()
 {
-    cout << "[Player] Enter Run State" << endl;
+    //cout << "[Player] Enter Run State" << endl;
 
     // set speed
     player->curSpeed = player->runSpeed;
@@ -48,6 +48,6 @@ void Player_Run::FixedUpdate(float deltaTime)
 
 void Player_Run::Exit()
 {
-    cout << "[Player] Exit Run State" << endl;
+    //cout << "[Player] Exit Run State" << endl;
 }
 

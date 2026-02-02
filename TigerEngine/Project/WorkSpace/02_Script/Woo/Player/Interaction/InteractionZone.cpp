@@ -49,20 +49,34 @@ void InteractionZone::Deserialize(nlohmann::json data)
 
 void InteractionZone::OnTriggerEnter(PhysicsComponent* other)
 {
+    // Search Object
     if (other->GetOwner()->GetName() == "SearchObject")
     {
         player->SetCurSearchObject(other->GetOwner()->GetComponent<SearchObject>());
         cout << "[InteractionZone] SearchObject In Interaction Zone" << endl;
         // TODO :: UI
     }
+
+    // Kitchin (MiniGame)
+    if (other->GetOwner()->GetName() == "CookingZone")
+    {
+        player->isPossibleCooking = true;
+    }
 }
 
 void InteractionZone::OnTriggerExit(PhysicsComponent* other)
 {
+    // Search Object
     if (other->GetOwner()->GetName() == "SearchObject")
     {
         player->SetCurSearchObject(nullptr);
         cout << "[InteractionZone] SearchObject Out Interaction Zone" << endl;
         // TODO :: UI
+    }
+
+    // Kitchin (MiniGame)
+    if (other->GetOwner()->GetName() == "CookingZone")
+    {
+        player->isPossibleCooking = false;
     }
 }

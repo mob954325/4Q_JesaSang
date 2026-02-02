@@ -11,6 +11,7 @@ class InteractionSensor;
 class SearchObject;
 class Inventory;
 class CameraController;
+class MiniGameManager;
 
 // Player State Enum
 enum class PlayerState
@@ -59,9 +60,13 @@ private:
     // interaction
     bool  isPossibleInteraction = false; // 기획자분이 한번에 하나만 가능한 사이즈라고 하심. 중첩된다면 추가 처리필요.
     SearchObject* curSerachObject;       // 현재 interaction가능한 오브젝트
-    float interactionTime  = 2.0f;
-    float interactionTimer = 0.0f;
-    
+    float searchInteractionTime  = 2.0f;
+    float searchInteractionTimer = 0.0f;
+
+    // cooking mini game
+    bool isPossibleCooking = false;      // 조리대 zone 안에 있는지 flag
+    float cookInteractionTime = 2.0f;
+    float cookInteractionTimer = 0.0f;
 
 
     // --- [ Key ] ---------------------------------
@@ -123,14 +128,13 @@ private:
 
     // Interaction
     void InteractionCheak(float delta);
-    void SerachObjectInteraction();
+    void SerachObjectInteraction(float dt);
+    void CookingInteraction(float dt);
 
 public:
     // 외부 call Funcs..
     // Current Interaction Zone Search Object Set
     void SetCurSearchObject(SearchObject* object);
-
-
 
 
 

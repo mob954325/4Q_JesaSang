@@ -11,6 +11,13 @@
 
 class IMiniGame
 {
+protected:
+    // test
+    float gamePlayTime = 5.0f;
+    float timer = 0.0f;
+    bool isFinished = false;
+    bool isSuccess = false;
+
 public:
     IMiniGame() = default;
     virtual ~IMiniGame() = default;
@@ -18,5 +25,8 @@ public:
     virtual void StartGame() = 0;
     virtual void UpdateGame(float delta) = 0;
     virtual void EndGame() = 0;
+
+    bool IsFinished() { return isFinished; }
+    bool IsSuccess() { return isSuccess; }
 };
 

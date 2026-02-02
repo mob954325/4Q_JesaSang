@@ -19,19 +19,27 @@ RTTR_REGISTRATION
     (rttr::policy::ctor::as_std_shared_ptr);
 }
 
-void MiniGameManager::OnStart()
+void MiniGameManager::OnInitialize()
 {
+    s_instance = this;
 }
 
 void MiniGameManager::OnUpdate(float delta)
 {
     // game update
     if (currentMiniGame)
+    {
         currentMiniGame->UpdateGame(delta);
+        if (currentMiniGame->IsFinished())
+        {
+            EndMiniGame(currentMiniGame->IsSuccess());
+        }
+    }
 }
 
 void MiniGameManager::OnDestory()
 {
+    if (s_instance == this) s_instance = nullptr;
     CleanupMinigame();
 }
 
@@ -111,12 +119,14 @@ void MiniGameManager::EndMiniGame(bool isSuccess)
         if (isSuccess)
         {
             curIngredient.reset();
+            cout << "[MiniGameManager] : Game Success!" << endl;
         }
         // TODO :: 실패시 플레이어에게 반환
         else
         {
             // std::move(curIngredient)  player inventory
             curIngredient.reset();      // 임시
+            cout << "[MiniGameManager] : Game Fail..." << endl;
         }
     }
 }
