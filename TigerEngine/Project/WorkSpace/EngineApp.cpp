@@ -10,6 +10,8 @@
 #include "Manager/AudioManager.h"
 #include "Manager/ShaderManager.h"
 #include "Manager/WorldManager.h"
+#include "Manager/UIManager.h"
+#include "Manager/TextureResourceManager.h"
 
 #include "Entity/Object.h"
 #include "Object/GameObject.h"
@@ -49,7 +51,7 @@ bool EngineApp::OnInitialize()
 	imguiRenderer = std::make_unique<ImguiRenderer>();
 	imguiRenderer->Initialize(hwnd, dxRenderer->GetDevice(), dxRenderer->GetDeviceContext());
 #endif
-
+    
 	// == init system ==
 	FBXResourceManager::Instance().GetDevice(dxRenderer->GetDevice(), dxRenderer->GetDeviceContext());
     ShaderManager::Instance().Init(dxRenderer->GetDevice(), dxRenderer->GetDeviceContext(), clientWidth, clientHeight);
@@ -68,6 +70,8 @@ bool EngineApp::OnInitialize()
     sm.device = dxRenderer->GetDevice();
     sm.deviceContext = dxRenderer->GetDeviceContext();
 
+    UIManager::Instance().SetSize(clientWidth, clientHeight);
+    TextureResourceManager::Instance().Init(dxRenderer->GetDevice(), dxRenderer->GetDeviceContext());
 
     renderQueue = std::make_unique<RenderQueue>();
 
@@ -107,6 +111,7 @@ bool EngineApp::OnInitialize()
     bloomPass = std::make_unique<BloomPass>();
     postProcessPass = std::make_unique<PostProcessPass>();
     frustumPass = std::make_unique<FrustumPass>();
+    uiPass = std::make_unique<UIRenderPass>();
 
     shadowPass->Init();
     geometryPass->Init();
@@ -117,7 +122,7 @@ bool EngineApp::OnInitialize()
     bloomPass->Init();
     postProcessPass->Init();
     frustumPass->Init(dxRenderer->GetDevice(), dxRenderer->GetDeviceContext());
-
+    uiPass->Init(dxRenderer->GetDevice());
 
     // == init world data ==
 	//WorldManager::Instance().shaderResourceView = shadowPass->GetShadowSRV();
@@ -210,6 +215,7 @@ void EngineApp::OnRender()
     dxRenderer->ProcessScene(*renderQueue, *forwardTransparentPass, curCam);
     dxRenderer->ProcessScene(*renderQueue, *bloomPass, curCam);
     dxRenderer->ProcessScene(*renderQueue, *postProcessPass, curCam);
+    dxRenderer->ProcessScene(*renderQueue, *uiPass, curCam);
 
 
 #if _DEBUG
@@ -345,6 +351,8 @@ void EngineApp::ResizeResource()
     sm.depthSRV = dxRenderer->GetDepthSRV();
     sm.viewport_screen = dxRenderer->GetRenderViewPort();
 
+    UIManager::Instance().SetSize(clientWidth, clientHeight);
+
 #if _DEBUG
     // editor 참조
     editor->GetScreenSize(clientWidth, clientHeight);
@@ -429,6 +437,8 @@ void EngineApp::OnInputProcess(const Keyboard::State &KeyState, const Keyboard::
 #include "99_Test/MiniMapTest/MiniMapTestScript.h"
 
 
+#include "Components/UI/Image.h"
+#include "Components/RectTransform.h"
 
 void EngineApp::RegisterAllComponents()
 {
@@ -457,6 +467,9 @@ void EngineApp::RegisterAllComponents()
     cf.Register<PhysicsTestScript>("PhysicsTestScript", ComponentCategory::Script);
     cf.Register<GroundTestScript>("GroundTestScript", ComponentCategory::Script);
     cf.Register<CCTTest>("CCTTestScript", ComponentCategory::Script);
+
+    cf.Register<RectTransform>("RectTransform", ComponentCategory::Other);
+    cf.Register<Image>("Image", ComponentCategory::UI);
 
     Woo_Registeration();
     Moon_Registeration();

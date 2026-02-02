@@ -24,6 +24,7 @@
 
 #include "../Components/FBXRenderer.h"
 #include "../Util/PathHelper.h"
+#include "../Components/UI/Image.h"
 
 
 // Payload
@@ -809,6 +810,7 @@ void Editor::RenderInspector()
                 {
                     auto& registered = ComponentFactory::Instance().GetRegisteredComponents();
                     auto name = comp->GetName();
+
                     if (auto it = registered.find(name); it != registered.end())
                     {
                         RenderComponentInfo(name, comp);
@@ -832,6 +834,7 @@ static const char* CatName(ComponentCategory c)
     case ComponentCategory::Physics:   return "Physics";
     case ComponentCategory::Animation: return "Animation";
     case ComponentCategory::Script:    return "Scripts";
+    case ComponentCategory::UI:        return "UI";
     default:                           return "Others";
     }
 }
@@ -1213,6 +1216,43 @@ void Editor::RenderComponentInfo(std::string compName, T* comp)
         return;
     }
 
+    if (compName == "Image")
+    {
+
+        for (auto& prop : t.get_properties())
+        {
+            std::string keyUITex = "ChooseUITexDlgKey##" + std::to_string((uintptr_t)comp);
+            rttr::variant value = prop.get_value(*comp);
+            std::string name = prop.get_name().to_string();
+            if (!value.is_valid()) continue;
+
+            if (value.is_type<std::string>() && name == "path")
+            {
+                std::string path = value.get_value<std::string>();
+                ImGui::Text("Current Path: %s", path.c_str());
+
+                if (ImGui::Button("Browse texture"))
+                {
+                    IGFD::FileDialogConfig config;
+                    config.path = "../";
+                    ImGuiFileDialog::Instance()->OpenDialog(keyUITex, "Choose File", ".png, .jpg", config);
+                }
+
+                if (ImGuiFileDialog::Instance()->Display(keyUITex))
+                {
+                    if (ImGuiFileDialog::Instance()->IsOk())
+                    {
+                        std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
+                        std::filesystem::path relativePath = std::filesystem::relative(filePathName);
+                        auto* image = dynamic_cast<Image*>(comp);
+                        if (image) image->ChangeData(relativePath.string());
+                    }
+                    ImGuiFileDialog::Instance()->Close();
+                }
+            }
+        }
+    }
+    
     if (compName == "AudioSourceComponent" || compName == "AudioManagerComponent" || compName == "AudioTestController")
     {
         for (auto& prop : t.get_properties())
@@ -1552,10 +1592,10 @@ void Editor::ReadVariants(rttr::instance inst)
 
         // check metaData
         auto metaBool = prop.get_metadata(META_BOOL);
+        auto metaBrowse = prop.get_metadata(META_BROWSE);
 
         // Render elements
         // ImGui::Text("%s : %s", name.c_str(), value.get_type().get_name().to_string().c_str());
-
         if (value.get_type().is_enumeration())
         {
             rttr::type enumType = value.get_type();
@@ -1640,9 +1680,9 @@ void Editor::ReadVariants(rttr::instance inst)
             if (ImGui::Checkbox(name.c_str(), &v))
                 prop.set_value(inst, v);
         }
-        else if (value.is_type<Vector2>())
+        else if (value.is_type<DirectX::SimpleMath::Vector2>())
         {
-            Vector2 vec = value.get_value<SimpleMath::Vector2>();
+            auto vec = value.get_value<DirectX::SimpleMath::Vector2>();
             if (ImGui::DragFloat2(name.c_str(), &vec.x, 0.1f))
                 prop.set_value(inst, vec);
         }
@@ -1652,13 +1692,19 @@ void Editor::ReadVariants(rttr::instance inst)
             if (ImGui::DragFloat3(name.c_str(), &vec.x, 0.1f))
                 prop.set_value(inst, vec);
         }
+        else if (value.is_type<DirectX::SimpleMath::Vector4>())
+        {
+            auto vec = value.get_value<DirectX::SimpleMath::Vector4>();
+            if (ImGui::DragFloat4(name.c_str(), &vec.x, 0.1f))
+                prop.set_value(inst, vec);
+        }
         else if (value.is_type<Color>())
         {
             auto c = value.get_value<Color>();
             if (ImGui::ColorEdit3(name.c_str(), &c.x))
                 prop.set_value(inst, c);
         }
-        else if (value.is_type<string>())
+        else if (value.is_type<string>() && !metaBrowse.is_valid())
         {
             std::string c = value.get_value<std::string>();
 
