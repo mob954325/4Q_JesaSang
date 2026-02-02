@@ -20,6 +20,14 @@ public:
     Vector2 mapSize{ 256.0f, 256.0f };
     int totalPieces = 10;
     int collectedPieces = 0;
+    int totalItems = 6;
+    int collectedItems = 0;
+
+    Vector2 GetPlayerMapPos() const { return playerMapPos; }
+    float GetProgress01() const;
+    void OnPieceCollected();
+    void OnItemCollected();
 
 private:
+    Vector2 playerMapPos{};
 };
