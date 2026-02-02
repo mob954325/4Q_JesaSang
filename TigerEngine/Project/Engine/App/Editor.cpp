@@ -828,6 +828,7 @@ static const char* CatName(ComponentCategory c)
     case ComponentCategory::Physics:   return "Physics";
     case ComponentCategory::Animation: return "Animation";
     case ComponentCategory::Script:    return "Scripts";
+    case ComponentCategory::UI:        return "UI";
     default:                           return "Others";
     }
 }
