@@ -429,27 +429,28 @@ void EngineApp::OnInputProcess(const Keyboard::State &KeyState, const Keyboard::
 
 void EngineApp::RegisterAllComponents()
 {
-    ComponentFactory::Instance().Register<FBXData>("FBXData");
-    ComponentFactory::Instance().Register<FBXRenderer>("FBXRenderer");
-    ComponentFactory::Instance().Register<Transform>("Transform");
-    ComponentFactory::Instance().Register<Camera>("Camera");
-    
-    // ComponentFactory::Instance().Register<Player1>("Player1");
-    ComponentFactory::Instance().Register<Weapon>("Weapon");
-    ComponentFactory::Instance().Register<Light>("Light");
-    ComponentFactory::Instance().Register<Decal>("Decal");
+    auto& cf = ComponentFactory::Instance();
 
-    ComponentFactory::Instance().Register<AudioListenerComponent>("AudioListenerComponent");
-    ComponentFactory::Instance().Register<AudioSourceComponent>("AudioSourceComponent");
-    ComponentFactory::Instance().Register<AudioTestController>("AudioTestController");
-    ComponentFactory::Instance().Register<AudioManagerComponent>("AudioManagerComponent");
-    ComponentFactory::Instance().Register<MiniMapTestScript>("MiniMapTestScript");
-    ComponentFactory::Instance().Register<PhysicsTestScript>("PhysicsTestScript");
-    ComponentFactory::Instance().Register<GroundTestScript>("GroundTestScript");
-    ComponentFactory::Instance().Register<CCTTest>("CCTTestScript");
-    ComponentFactory::Instance().Register<CharacterControllerComponent>("CharacterControllerComponent");
-    ComponentFactory::Instance().Register<PhysicsComponent>("PhysicsComponent");
-    ComponentFactory::Instance().Register<AnimationController>("AnimationController");
+    cf.Register<Transform>("Transform", ComponentCategory::Core);
+    cf.Register<Camera>("Camera", ComponentCategory::Core);
+
+    cf.Register<FBXData>("FBXData", ComponentCategory::Rendering);
+    cf.Register<FBXRenderer>("FBXRenderer", ComponentCategory::Rendering);
+    cf.Register<Light>("Light", ComponentCategory::Rendering);
+    cf.Register<Decal>("Decal", ComponentCategory::Rendering);
+
+    cf.Register<AudioListenerComponent>("AudioListenerComponent", ComponentCategory::Audio);
+    cf.Register<AudioSourceComponent>("AudioSourceComponent", ComponentCategory::Audio);
+    cf.Register<AudioPlayModeScript>("AudioPlayModeScript", ComponentCategory::Script);
+
+    cf.Register<PhysicsComponent>("PhysicsComponent", ComponentCategory::Physics);
+    cf.Register<CharacterControllerComponent>("CharacterControllerComponent", ComponentCategory::Physics);
+
+    cf.Register<AnimationController>("AnimationController", ComponentCategory::Animation);
+
+    cf.Register<PhysicsTestScript>("PhysicsTestScript", ComponentCategory::Script);
+    cf.Register<GroundTestScript>("GroundTestScript", ComponentCategory::Script);
+    cf.Register<CCTTest>("CCTTestScript", ComponentCategory::Script);
 
     Woo_Registeration();
     Moon_Registeration();

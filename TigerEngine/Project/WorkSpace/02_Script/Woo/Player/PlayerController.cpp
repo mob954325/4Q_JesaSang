@@ -19,6 +19,10 @@
 #include "FSM/Player_Hit.h"
 #include "FSM/Player_Die.h"
 
+#include "../Object/SearchObject.h"
+#include "../Inventory/Inventory.h"
+#include "../Camera/CameraController.h"
+
 
 REGISTER_COMPONENT(PlayerController)
 
@@ -41,10 +45,21 @@ void PlayerController::OnStart()
     transform = GetOwner()->GetComponent<Transform>();
     fbxRenderer = GetOwner()->GetComponent<FBXRenderer>();
     cct = GetOwner()->GetComponent<CharacterControllerComponent>();
-    camTransform = CameraSystem::Instance().GetCurrCamera()->GetOwner()->GetTransform();
+    inventory = GetOwner()->GetComponent<Inventory>();
+    
+    camController = CameraSystem::Instance().GetCurrCamera()->GetOwner()->GetComponent<CameraController>();
+
+    // debug
+    if (!fbxRenderer || !cct || !inventory || !camController)
+    {
+        cout << "[Player] Missing COmponet!" << endl;
+    }
+
+    // transform -> physics init
+    //transform->SetPosition(Vector3::Zero);
 
     // init fsm
-    AddFSMStates();
+    InitFSMStates();
     ChangeState(PlayerState::Idle);
 
     // init stat
@@ -61,6 +76,15 @@ void PlayerController::OnUpdate(float delta)
     {
         curState->ChangeStateLogic();
         curState->Update(delta);
+    }
+
+    // interaction cheak
+    InteractionCheak(delta);
+
+    // view mode change test (Hide State)
+    if (Input::GetKeyDown(interaction_Key))
+    {
+        camController->ToggleViewMode();
     }
 
     // Debug----
@@ -90,34 +114,32 @@ void PlayerController::OnDestory()
 
 }
 
+
 /*-------[ Collision Event ]-------------------------------------*/
-void PlayerController::OnCCTTriggerEnter(CharacterControllerComponent*)
-{
-
-}
-
-void PlayerController::OnCCTTriggerStay(CharacterControllerComponent*)
-{
-
-}
-
-void PlayerController::OnCCTTriggerExit(CharacterControllerComponent*)
+void PlayerController::OnTriggerEnter(PhysicsComponent*)
 {
 }
 
-void PlayerController::OnCCTCollisionEnter(CharacterControllerComponent*)
-{
-
-}
-
-void PlayerController::OnCCTCollisionStay(CharacterControllerComponent*)
+void PlayerController::OnTriggerStay(PhysicsComponent*)
 {
 }
 
-void PlayerController::OnCCTCollisionExit(CharacterControllerComponent*)
+void PlayerController::OnTriggerExit(PhysicsComponent*)
 {
-
 }
+
+void PlayerController::OnCollisionEnter(PhysicsComponent*)
+{
+}
+
+void PlayerController::OnCollisionStay(PhysicsComponent*)
+{
+}
+
+void PlayerController::OnCollisionExit(PhysicsComponent*)
+{
+}
+
 
 /*-------[ JSON ]-------------------------------------*/
 nlohmann::json PlayerController::Serialize()
@@ -133,7 +155,7 @@ void PlayerController::Deserialize(nlohmann::json data)
 /*----------------------------------------------------------------*/
 /*-------[ FSM ]--------------------------------------------------*/
 /*----------------------------------------------------------------*/
-void PlayerController::AddFSMStates()
+void PlayerController::InitFSMStates()
 {
     fsmStates[(int)PlayerState::Idle] = new Player_Idle(this);
     fsmStates[(int)PlayerState::Walk] = new Player_Walk(this);
@@ -223,4 +245,64 @@ void PlayerController::Rotation(float delta)
     float newYaw = currentYaw + deltaYaw * turnSpeed * delta;
 
     transform->SetEuler(Vector3(0.0f, newYaw, 0.0f));
+}
+
+void PlayerController::InteractionCheak(float delta)
+{
+    // interaction x -> reset
+    if (!isInteractionKey || !isPossibleInteraction || curSerachObject == nullptr)
+    {
+        interactionTimer = 0.0f;
+        return;
+    }
+
+    // ingredient inventory full
+    if (curSerachObject->itemType == ItemType::Ingredient && 
+        inventory->IsFull())
+    {
+        return;
+    }
+
+    // holding
+    interactionTimer += delta;
+    float progress = interactionTimer / interactionTime;
+    if (progress > 1.0f) progress = 1.0f;
+
+    // completion -> interaction
+    if (interactionTimer >= interactionTime)
+    {
+        SerachObjectInteraction();
+        interactionTimer = 0.0f;
+    }
+}
+
+void PlayerController::SerachObjectInteraction()
+{
+    // search object interaction
+    std::unique_ptr<IItem> item = curSerachObject->Interaction();
+    
+    // item get or fail
+    if (item)
+        inventory->AddItem(std::move(item));
+    else
+        std::cout << "[Player] Fail Get Item... " << std::endl;
+
+    // clear
+    isPossibleInteraction = false;
+    curSerachObject = nullptr;
+}
+    
+
+void PlayerController::SetCurSearchObject(SearchObject* object)
+{
+    if (object)
+    {
+        isPossibleInteraction = true;
+        curSerachObject = object;
+    }
+    else
+    {
+        isPossibleInteraction = false;
+        curSerachObject = nullptr;
+    }
 }

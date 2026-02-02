@@ -18,6 +18,7 @@ RTTR_REGISTRATION
 
 void CameraController::OnInitialize()
 {
+    // get components
     transform = GetOwner()->GetComponent<Transform>();
     targetTr = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("CameraTrackingPoint")->GetComponent<Transform>();
 }
@@ -40,8 +41,12 @@ void CameraController::OnStart()
     isTrackingPivot = false;
     pivotVel = Vector3::Zero;
 
+    // mode params init
+    Vector3 modeOffset, modeEulerDeg;
+    GetModeParams(currentMode, modeOffset, modeEulerDeg);
+
     // camPos Smooth init
-    Vector3 desiredCamPos = pivotPos + quarterOffset;
+    Vector3 desiredCamPos = pivotPos + modeOffset;
     camPosSmooth = desiredCamPos;
 
     // look point init
@@ -49,12 +54,12 @@ void CameraController::OnStart()
     lookPointVel = Vector3::Zero;
 
     // look rotation init
-    lookEulerSmooth = DegToRad(quarterEuler);
+    lookEulerSmooth = DegToRad(modeEulerDeg);
     lookEulerVel = Vector3::Zero;
 
     // cam transform init
     transform->SetPosition(camPosSmooth);
-    transform->SetEuler(DegToRad(quarterEuler));   // 처음은 중앙 고정
+    transform->SetEuler(DegToRad(modeEulerDeg));   // 처음은 중앙 고정
 }
 
 void CameraController::OnLateUpdate(float delta)
@@ -65,75 +70,25 @@ void CameraController::OnLateUpdate(float delta)
         return;
     }
 
-    // target pos update
-    Vector3 targetPos = targetTr->GetWorldPosition();
-    targetPos.z -= 50.0f;
+    // target udpate
+    const Vector3 targetPos = GetTargetPosWithOffset();
 
-    // pivot pos update
+    // pivot udpate
     UpdatePivotByDeadRadius(targetPos, delta);
 
-    // desired cam pos update
-    Vector3 desiredCamPos = pivotPos + quarterOffset;
+    // current view mode (offset/euler, look focus)
+    Vector3 activeOffset, activeEulerDeg;
+    bool useLookFocus = true;
+    ResolveViewParams(delta, activeOffset, activeEulerDeg, useLookFocus);
 
-    // cam smoothing
-    float t = 1.0f - std::exp(-camFollowLambda * delta);
-    camPosSmooth = camPosSmooth + (desiredCamPos - camPosSmooth) * t;
+    // camera position update
+    UpdateCameraPosition(activeOffset, delta);
 
-    // apply position
-    transform->SetPosition(camPosSmooth);
-
-    // apply rotation
-    if (true)
-    {
-        // look point
-        Vector3 targetLookPoint =
-            lookPointSmooth +
-            (targetPos - lookPointSmooth) * lookPointStrength;
-
-        // look point smoothing
-        lookPointSmooth = SmoothDampVec3(
-            lookPointSmooth,
-            targetLookPoint,
-            lookPointVel,
-            lookPointSmoothTime,
-            lookMaxSpeed,
-            delta
-        );
-
-        // desired look euler
-        Vector3 desiredLookEuler = ComputeLookEulerRad(camPosSmooth, lookPointSmooth);
-
-        // dead zone
-        Vector3 diff = desiredLookEuler - lookEulerSmooth;
-        float deadZoneRad = ToRad(lookDeadZoneDeg);
-        if (diff.Length() < deadZoneRad)
-            desiredLookEuler = lookEulerSmooth;
-
-        // followStrength
-        Vector3 limitedLookEuler =
-            lookEulerSmooth +
-            (desiredLookEuler - lookEulerSmooth) * followStrength;
-
-        // look rotation smoothing
-        lookEulerSmooth = SmoothDampVec3(
-            lookEulerSmooth,
-            limitedLookEuler,
-            lookEulerVel,
-            lookSmoothTime,
-            lookMaxSpeed,
-            delta
-        );
-
-        // apply
-        transform->SetEuler(lookEulerSmooth);
-    }
+    // camera rotation upate
+    if (useLookFocus)
+        UpdateLookFocus(targetPos, delta);      // Quarter
     else
-    {
-        // target 고정 rotation
-        //lookEulerSmooth = DegToRad(quarterEuler); // 상태 전환 시 튐 방지용 동기화
-        //lookEulerVel = Vector3::Zero;
-        //transform->SetEuler(lookEulerSmooth);
-    }
+        ApplyBaseEuler(activeEulerDeg);         // Top, mode change(ing)
 }
 
 void CameraController::OnDestory()
@@ -157,13 +112,13 @@ float CameraController::SmoothDamp(float current, float target, float& currentVe
     float omega = 2.0f / smoothTime;
     float x = omega * deltaTime;
 
-    // 근사 exp (Unity 방식)
+    // 근사 exp
     float exp = 1.0f / (1.0f + x + 0.48f * x * x + 0.235f * x * x * x);
 
     float change = current - target;
     float originalTarget = target;
 
-    // 최대 속도 제한 (1프레임에 너무 멀리 못 가게)
+    // 최대 속도 제한
     float maxChange = maxSpeed * smoothTime;
     change = Clamp(change, -maxChange, maxChange);
     target = current - change;
@@ -203,6 +158,152 @@ Vector3 CameraController::ComputeLookEulerRad(const Vector3& camPos, const Vecto
     return Vector3(pitch, yaw, 0.0f);
 }
 
+Vector3 CameraController::GetTargetPosWithOffset() const
+{
+    Vector3 p = targetTr->GetWorldPosition();
+    p.z -= 50.0f;
+    return p;
+}
+
+void CameraController::ResolveViewParams(float dt, Vector3& outOffset, Vector3& outEulerDeg, bool& outUseLookFocus)
+{
+    outUseLookFocus = true;
+    UpdateViewBlend(dt, outOffset, outEulerDeg, outUseLookFocus);
+
+    // top view일때는 look focus(rotation) off
+    if (!isBlendingView && currentMode == ViewMode::Top)
+        outUseLookFocus = false;
+}
+
+void CameraController::UpdateCameraPosition(const Vector3& activeOffset, float dt)
+{
+    const Vector3 desiredCamPos = pivotPos + activeOffset;
+
+    const float lambda = isBlendingView ? viewBlendCamLambda : camFollowLambda;
+    const float t = 1.0f - std::exp(-lambda * dt);
+
+    camPosSmooth = camPosSmooth + (desiredCamPos - camPosSmooth) * t;
+
+    transform->SetPosition(camPosSmooth);
+}
+
+void CameraController::UpdateLookFocus(const Vector3& targetPos, float dt)
+{
+    // look point target (strength blend)
+    const Vector3 targetLookPoint =
+        lookPointSmooth +
+        (targetPos - lookPointSmooth) * lookPointStrength;
+
+    // look point smoothing
+    lookPointSmooth = SmoothDampVec3(
+        lookPointSmooth,
+        targetLookPoint,
+        lookPointVel,
+        lookPointSmoothTime,
+        lookMaxSpeed,
+        dt
+    );
+
+    // desired look euler (rad)
+    Vector3 desiredLookEuler = ComputeLookEulerRad(camPosSmooth, lookPointSmooth);
+
+    // look dead zone (rad)
+    const float deadZoneRad = ToRad(lookDeadZoneDeg);
+    if ((desiredLookEuler - lookEulerSmooth).Length() < deadZoneRad)
+        desiredLookEuler = lookEulerSmooth;
+
+    // follow strength limit
+    const Vector3 limitedLookEuler =
+        lookEulerSmooth +
+        (desiredLookEuler - lookEulerSmooth) * followStrength;
+
+    // look rotation smoothing
+    lookEulerSmooth = SmoothDampVec3(
+        lookEulerSmooth,
+        limitedLookEuler,
+        lookEulerVel,
+        lookSmoothTime,
+        lookMaxSpeed,
+        dt
+    );
+
+    transform->SetEuler(lookEulerSmooth);
+}
+
+void CameraController::ApplyBaseEuler(const Vector3& activeEulerDeg)
+{
+    const Vector3 baseEulerRad = DegToRad(activeEulerDeg);
+
+    transform->SetEuler(baseEulerRad);
+
+    // keep internal state synced
+    lookEulerSmooth = baseEulerRad;
+    lookEulerVel = Vector3::Zero;
+}
+
+
+void CameraController::GetModeParams(ViewMode mode, Vector3& outOffset, Vector3& outEulerDeg) const
+{
+    switch (mode)
+    {
+    case ViewMode::Quarter:
+        outOffset = quarterOffset;
+        outEulerDeg = quarterEuler;
+        break;
+    case ViewMode::Top:
+        outOffset = topOffset;
+        outEulerDeg = topEuler;
+        break;
+    default:
+        outOffset = quarterOffset;
+        outEulerDeg = quarterEuler;
+        break;
+    }
+}
+
+void CameraController::UpdateViewBlend(float dt, Vector3& outOffset, Vector3& outEulerDeg, bool& outUseLookFocus)
+{
+    // view 전환중이 아닐때
+    if (!isBlendingView)
+    {
+        GetModeParams(currentMode, outOffset, outEulerDeg);
+        outUseLookFocus = true;
+        return;
+    }
+
+    // 전환 연출중일떄
+    viewBlendT += dt / std::max(0.0001f, viewBlendDuration);
+    float a = SmoothStep01(viewBlendT); // easing
+
+    Vector3 fromOff, fromEuler, toOff, toEuler;
+    GetModeParams(blendFromMode, fromOff, fromEuler);
+    GetModeParams(blendToMode, toOff, toEuler);
+
+    outOffset = LerpVec3(fromOff, toOff, a);
+    outEulerDeg = LerpVec3(fromEuler, toEuler, a);
+
+    outUseLookFocus = false;    // look focus off (연출용이랑 view mode용이랑 안겹치도록)
+
+    // 전환 연출 완료
+    if (viewBlendT >= 1.0f)
+    {
+        // finish
+        isBlendingView = false;
+        viewBlendT = 0.0f;
+        currentMode = blendToMode;
+
+        // 완료 시점 동기화 (다음 프레임 look focus 켤 때 튐 방지)
+        Vector3 finalOff, finalEulerDeg;
+        GetModeParams(currentMode, finalOff, finalEulerDeg);
+        outOffset = finalOff;
+        outEulerDeg = finalEulerDeg;
+
+        lookEulerSmooth = DegToRad(finalEulerDeg);
+        lookEulerVel = Vector3::Zero;
+        outUseLookFocus = true; // look focus on
+    }
+}
+
 void CameraController::UpdatePivotByDeadRadius(const Vector3& targetWorldPos, float dt)
 {
     // pivot - target dist
@@ -240,4 +341,50 @@ void CameraController::UpdatePivotByDeadRadius(const Vector3& targetWorldPos, fl
     // pivot pos smoothing
     pivotPos = SmoothDampVec3(pivotPos, desiredPivot, pivotVel, pivotSmoothTime, pivotMaxSpeed, dt);
     pivotPos.y = groundY; // y는 고정
+}
+
+void CameraController::SetViewMode(ViewMode mode, bool animate)
+{
+    if (mode == currentMode && !isBlendingView)
+        return;
+
+    if (!animate || viewBlendDuration <= 0.0001f)
+    {
+        currentMode = mode;
+        isBlendingView = false;
+        viewBlendT = 0.0f;
+
+        // 즉시 동기화 (튀김 방지)
+        Vector3 off, eulerDeg;
+        GetModeParams(currentMode, off, eulerDeg);
+
+        camPosSmooth = pivotPos + off;
+        transform->SetPosition(camPosSmooth);
+
+        lookEulerSmooth = DegToRad(eulerDeg);
+        lookEulerVel = Vector3::Zero;
+        transform->SetEuler(lookEulerSmooth);
+        return;
+    }
+
+    // start blend
+    blendFromMode = isBlendingView ? blendToMode : currentMode;
+    blendToMode = mode;
+
+    if (blendToMode == ViewMode::Quarter && targetTr)
+    {
+        Vector3 tp = GetTargetPosWithOffset();
+        lookPointSmooth = tp;
+        lookPointVel = Vector3::Zero;
+        lookEulerSmooth = transform->GetEuler();
+        lookEulerVel = Vector3::Zero;
+    }
+
+    isBlendingView = true;
+    viewBlendT = 0.0f;
+}
+
+void CameraController::ToggleViewMode(bool animate)
+{
+    SetViewMode(currentMode == ViewMode::Quarter ? ViewMode::Top : ViewMode::Quarter, animate);
 }
