@@ -4,6 +4,7 @@
 #include "Datas/Bone.h"
 #include "Datas/FBXResourceData.h"
 #include "Datas/ConstantBuffer.hpp"
+#include "../Manager/UIData/TextureResource.h"    
 
 class GameObject; // 전방선언
 
@@ -34,10 +35,13 @@ struct RenderItem
 /// </summary>
 struct UIRenderItem
 {
+    Matrix worldMat;
     Color color;        // 색상
     Vector4 uvRect;     // L, R, T, B (px)
     Vector4 params;     // x = type, y = fillAmount;
     Vector4 imageSize;  // (rectW, rectH, texW, texH)
+    TextureResource* resource;
+    bool isText = false;
 };
 
 /// <summary>
