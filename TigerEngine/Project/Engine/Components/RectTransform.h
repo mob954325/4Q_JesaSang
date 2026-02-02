@@ -11,8 +11,11 @@
 /// </remarks>
 class RectTransform : public Transform
 {
-    RTTR_ENABLE(Transform)
+    RTTR_ENABLE(Component)
 public:
+    RectTransform() { SetName("RectTransform"); }
+    ~RectTransform() = default;
+
     void OnUpdate(float delta) override;
 
     nlohmann::json Serialize() override;

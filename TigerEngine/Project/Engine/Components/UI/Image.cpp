@@ -6,6 +6,13 @@
 
 RTTR_REGISTRATION
 {
+    rttr::registration::enumeration<ImageType>("ImageType")
+    (
+        rttr::value("Simple", ImageType::Simple),
+        rttr::value("Fill", ImageType::Fill),
+        rttr::value("Sliced", ImageType::Sliced)
+    );
+
     rttr::registration::class_<Image>("Image")
         .constructor<>()
             (rttr::policy::ctor::as_std_shared_ptr)

@@ -61,8 +61,8 @@ private:
     // fillMode에서 사용할 값
     float fillAmount = 1.0f;
 
-    // 9-slice 보더 px (L, R, T, B)
-    Vector4 sliceBorderPx{ 0,0,0,0 }; 
+    // 9-slice 보더 px (L, R, T, B) 
+    Vector4 sliceBorderPx{ 0.0f, 0.0f, 0.0f, 0.0f }; 
 
     std::string path{};
     bool isMouseCheck = false;

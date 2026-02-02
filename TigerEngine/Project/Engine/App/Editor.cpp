@@ -21,7 +21,6 @@
 
 #include "../Components/FBXRenderer.h"
 #include "../Util/PathHelper.h"
-#include "../Components/RectTransform.h"
 #include "../Components/UI/Image.h"
 
 // Payload
@@ -807,10 +806,9 @@ void Editor::RenderInspector()
                 {
                     auto& registered = ComponentFactory::Instance().GetRegisteredComponents();
                     auto name = comp->GetName();
+
                     if (auto it = registered.find(name); it != registered.end())
                     {
-                        if (name == "Transform" && obj->GetComponent<RectTransform>()) continue; // RectTransform 있으면 Transform 무시
-
                         RenderComponentInfo(name, comp);
                         ImGui::NewLine();
                         ImGui::Separator();
@@ -1249,7 +1247,10 @@ void Editor::RenderComponentInfo(std::string compName, T* comp)
                 }
             }
         }
+
+        ImGui::PushID(comp);
         ReadVariants(*comp);
+        ImGui::PopID();
         return;
     }
 
@@ -1566,9 +1567,9 @@ void Editor::ReadVariants(rttr::instance inst)
             if (ImGui::Checkbox(name.c_str(), &v))
                 prop.set_value(inst, v);
         }
-        else if (value.is_type<Vector2>())
+        else if (value.is_type<DirectX::SimpleMath::Vector2>())
         {
-            Vector2 vec = value.get_value<SimpleMath::Vector2>();
+            auto vec = value.get_value<DirectX::SimpleMath::Vector2>();
             if (ImGui::DragFloat2(name.c_str(), &vec.x, 0.1f))
                 prop.set_value(inst, vec);
         }
@@ -1576,6 +1577,12 @@ void Editor::ReadVariants(rttr::instance inst)
         {
             auto vec = value.get_value<DirectX::SimpleMath::Vector3>();
             if (ImGui::DragFloat3(name.c_str(), &vec.x, 0.1f))
+                prop.set_value(inst, vec);
+        }
+        else if (value.is_type<DirectX::SimpleMath::Vector4>())
+        {
+            auto vec = value.get_value<DirectX::SimpleMath::Vector4>();
+            if (ImGui::DragFloat4(name.c_str(), &vec.x, 0.1f))
                 prop.set_value(inst, vec);
         }
         else if (value.is_type<Color>())
