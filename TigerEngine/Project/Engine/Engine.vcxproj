@@ -138,7 +138,9 @@
     <ClCompile Include="Components\AnimationController.cpp" />
     <ClCompile Include="Components\Decal.cpp" />
     <ClCompile Include="Components\RectTransform.cpp" />
+    <ClCompile Include="Components\UI\Image.cpp" />
     <ClCompile Include="EngineSystem\DecalSystem.cpp" />
+    <ClCompile Include="Manager\UIManager.cpp" />
     <ClCompile Include="Object\enableable.cpp" />
     <ClCompile Include="RenderPass\Renderable\DecalVolumeMesh.cpp" />
     <ClCompile Include="RenderPass\Renderer\DecalPass.cpp" />
@@ -195,8 +197,11 @@
   <ItemGroup>
     <ClInclude Include="App\Editor.h" />
     <ClInclude Include="Components\AnimationController.h" />
+    <ClInclude Include="Components\UI\Image.h" />
+    <ClInclude Include="Manager\UIManager.h" />
     <ClInclude Include="Components\Decal.h" />
     <ClInclude Include="Components\RectTransform.h" />
+    <ClInclude Include="Components\UI\UIBase.h" />
     <ClInclude Include="EngineSystem\DecalSystem.h" />
     <ClInclude Include="Object\Enableable.h" />
     <ClInclude Include="RenderPass\Renderable\DecalVolumeMesh.h" />
