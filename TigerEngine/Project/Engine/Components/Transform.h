@@ -59,6 +59,8 @@ public:
 
     Transform* GetParent() const { return parent; }
     const std::vector<Transform*>& GetChildren() const { return children; }
+    Transform* GetChildByIndex(int index);
+    Transform* GetChildByName(std::string name);
 
 private:
     /// <summary>

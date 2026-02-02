@@ -82,7 +82,7 @@ void PlayerController::OnUpdate(float delta)
     InteractionCheak(delta);
 
     // view mode change test (Hide State)
-    if (Input::GetKeyDown(interaction_Key))
+    if (Input::GetKeyDown(Keyboard::M))
     {
         camController->ToggleViewMode();
     }
@@ -260,6 +260,7 @@ void PlayerController::InteractionCheak(float delta)
     if (curSerachObject->itemType == ItemType::Ingredient && 
         inventory->IsFull())
     {
+        cout << "[Player] Inventory Full! interaction x" << endl;
         return;
     }
 
@@ -268,7 +269,7 @@ void PlayerController::InteractionCheak(float delta)
     float progress = interactionTimer / interactionTime;
     if (progress > 1.0f) progress = 1.0f;
 
-    // completion -> interaction
+    // search object interaction
     if (interactionTimer >= interactionTime)
     {
         SerachObjectInteraction();
@@ -295,6 +296,7 @@ void PlayerController::SerachObjectInteraction()
 
 void PlayerController::SetCurSearchObject(SearchObject* object)
 {
+    // interaction zone에서 search object를 넘겨줌
     if (object)
     {
         isPossibleInteraction = true;

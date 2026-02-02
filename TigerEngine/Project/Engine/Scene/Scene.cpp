@@ -77,15 +77,28 @@ GameObject* Scene::AddGameObjectByName(std::string name)
 
 GameObject* Scene::GetGameObjectByName(std::string name)
 {
+    // 이름이 변하지 않았으면 map에서 찾기
     if (auto it = mappedGameObjects.find(name); it != mappedGameObjects.end())
     {
-        auto container = it->second;
+        auto container = it->second;       
         return gameObjects[container.front().second].objPtr; // 무조건 첫번째 반환
     }
-    else
+
+    //NOTE : 이름을 바꾸면 찾을 수 없음.
+    // 따라서 그냥 GameObjects를 for문으로 돌면서 찾기
+    for (auto it = gameObjects.begin(); it != gameObjects.end();)
     {
-        return nullptr; // 없음
+        if ((*it).objPtr->name == name)
+        {
+            return (*it).objPtr; // 같은 이름 중 첫번째로 온 오브젝트 반환
+        }
+        else
+        {
+            it++;
+        }
     }
+
+    return nullptr;
 }
 
 GameObject* Scene::GetGameObject(GameObject* obj)

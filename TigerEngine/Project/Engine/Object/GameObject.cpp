@@ -237,6 +237,28 @@ void GameObject::ClearAll()
     components.clear();
 }
 
+std::vector<Transform*> GameObject::GetChildern()
+{
+    return transform->GetChildren();
+}
+
+Transform* GameObject::GetChildByIndex(int index)
+{
+    if (index >= transform->GetChildren().size()) return nullptr;
+    if (index < 0) return nullptr;
+
+    return transform->GetChildByIndex(index);
+}
+
+Transform* GameObject::GetChildByName(std::string name)
+{
+    return transform->GetChildByName(name);
+}
+
+Transform* GameObject::GetParent()
+{
+    return transform->GetParent();
+}
 
 
 // -----------------------------

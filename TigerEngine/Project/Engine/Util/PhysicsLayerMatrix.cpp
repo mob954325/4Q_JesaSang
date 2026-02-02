@@ -30,9 +30,9 @@ void PhysicsLayerMatrix::Initialize()
     // 여기서 [ 레이어 체크박스 ] 설정 하세요
     // -------------------------------------
 
-    // Plyaer <-> Player : 서로 충도 안험
+    // Plyaer <-> Player : 서로 충도 안함
     s_Matrix[LayerToIndex(CollisionLayer::Player)] &= ~(uint32_t)CollisionLayer::Player;
-    s_Matrix[LayerToIndex(CollisionLayer::Player)] &= ~(uint32_t)CollisionLayer::Player;
+    //s_Matrix[LayerToIndex(CollisionLayer::Player)] &= ~(uint32_t)CollisionLayer::Player;
 
     // [1] IgnoreTest <-> Ball : 서로 충돌 안 함
     s_Matrix[LayerToIndex(CollisionLayer::IgnoreTest)] &= ~(uint32_t)CollisionLayer::Ball;
