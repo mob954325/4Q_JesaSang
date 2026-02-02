@@ -16,12 +16,15 @@
 #include "../EngineSystem/PlayModeSystem.h"
 #include "../Components/Camera.h"
 #include "../EngineSystem/PhysicsSystem.h"
+#include "../EngineSystem/GridSystem.h"
 #include "../Components/CharacterControllerComponent.h"
+#include "../Components/GridComponent.h"
 
 #include "Datas/ReflectionMedtaDatas.hpp"
 
 #include "../Components/FBXRenderer.h"
 #include "../Util/PathHelper.h"
+
 
 // Payload
 // Prefab payload
@@ -1331,6 +1334,9 @@ void Editor::RenderDebugAABBDraw()
             DebugDraw::Draw(DebugDraw::g_Batch.get(), box, color);
         });
 
+    // Grid 
+    RenderDebugGrid();
+
     // PhysX
     if (isPhysicsDebugOpen)
     {
@@ -1342,6 +1348,45 @@ void Editor::RenderDebugAABBDraw()
     // ===============================
     DebugDraw::g_Batch->End();
 }
+
+void Editor::RenderDebugGrid()
+{
+    auto* grid = GridSystem::Instance().GetMainGrid();
+    if (!grid) return;
+
+    // DebugDraw::g_Batch->Begin();
+
+    for (int y = 0; y < grid->height; ++y)
+    {
+        for (int x = 0; x < grid->width; ++x)
+        {
+            GridCell* cell = grid->GetCell(x, y);
+            if (!cell) continue;
+
+            // 그리드 셀 위치 계산
+            Vector3 worldPos = grid->GridToWorld(x, y);
+
+            // 각 셀을 작은 박스로 그리기
+            BoundingBox box;
+            float halfSize = grid->cellSize * 0.5f;
+
+            box.Center = XMFLOAT3(worldPos.x, worldPos.y, worldPos.z);
+            box.Extents = XMFLOAT3(halfSize, 0.01f, halfSize); // y축은 얇게
+
+            // walkable 여부에 따라 색상 변경
+            XMVECTOR color;
+            if (cell->walkable)
+                color = XMVectorSet(1.0f, 1.0f, 1.0f, 1.0f); // 초록
+            else
+                color = XMVectorSet(1.0f, 0.0f, 0.0f, 1.0f); // 빨강
+
+            DebugDraw::Draw(DebugDraw::g_Batch.get(), box, color);
+        }
+    }
+
+    // DebugDraw::g_Batch->End();
+}
+
 
 void Editor::SaveCurrentScene(HWND& hwnd)
 {

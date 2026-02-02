@@ -2,6 +2,7 @@
 #include "../EngineSystem/GridSystem.h"
 #include "../Components/Transform.h"
 #include "../Object/GameObject.h"
+#include "../Util/JsonHelper.h"
 
 RTTR_REGISTRATION
 {
@@ -12,6 +13,17 @@ RTTR_REGISTRATION
         .property("Height", &GridComponent::height)
         .property("CellSize", &GridComponent::cellSize);
 }
+
+nlohmann::json GridComponent::Serialize()
+{
+    return JsonHelper::MakeSaveData(this);
+}
+
+void GridComponent::Deserialize(nlohmann::json data)
+{
+    JsonHelper::SetDataFromJson(this, data);
+}
+
 
 
 void GridComponent::OnInitialize()

@@ -2,7 +2,6 @@
 #include "pch.h"
 #include "../Object/Component.h"
 
-
 struct GridCell
 {
     bool walkable = true;
@@ -14,11 +13,14 @@ struct GridCell
 class GridComponent : public Component
 {
     RTTR_ENABLE(Component)
+public:
+    nlohmann::json Serialize() override;
+    void Deserialize(nlohmann::json data) override;
 
 public:
     int width = 50;
     int height = 50;
-    float cellSize = 1.0f;
+    float cellSize = 100.0f;
 
     std::vector<GridCell> cells;
 
