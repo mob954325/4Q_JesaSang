@@ -58,6 +58,7 @@ public:
     std::unordered_set<PhysicsComponent*> m_CollisionActors;  // 현재 접촉 Actor
     // std::unordered_set<PhysicsComponent*> m_TriggerActors;    // 현재 Trigger Actor
     // std::unordered_set<PhysicsComponent*> m_PendingTriggers; // Trigger 수집용
+    std::unordered_set<PhysicsComponent*> m_ActiveTriggers;
 
     bool IsTrigger() const { return m_IsTrigger; }
 
@@ -133,6 +134,7 @@ public:
 
     // 트리거 체크 
     // void CheckTriggers();
+    void CheckTriggerOverlaps();
     
     // --------------------------
     // Transform 연동

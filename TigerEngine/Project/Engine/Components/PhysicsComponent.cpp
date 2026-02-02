@@ -410,6 +410,74 @@ void PhysicsComponent::CreateCollider(ColliderType collider, PhysicsBodyType bod
     ApplyFilter(); // 레이어 필터 
 }
 
+void PhysicsComponent::CheckTriggerOverlaps()
+{
+    if (!m_Actor || !m_Shape || !m_IsTrigger)
+        return;
+
+    PxScene* scene = PhysicsSystem::Instance().GetScene();
+    if (!scene)
+        return;
+
+    PxGeometryHolder geom = m_Shape->getGeometry();
+    PxTransform pose = m_Actor->getGlobalPose() * m_Shape->getLocalPose();
+
+    PxOverlapBufferN<64> buffer; // 최대 64개까지
+    PxQueryFilterData filter;
+    filter.data = m_Shape->getQueryFilterData();
+    filter.flags = PxQueryFlag::eDYNAMIC | PxQueryFlag::eSTATIC | PxQueryFlag::ePREFILTER;
+
+    if (scene->overlap(geom.any(), pose, buffer, filter))
+    {
+        // 이번 프레임에 겹친 Trigger들
+        std::unordered_set<PhysicsComponent*> currentFrame;
+
+        for (PxU32 i = 0; i < buffer.getNbAnyHits(); ++i)
+        {
+            PxRigidActor* otherActor = buffer.getAnyHit(i).actor;
+            if (!otherActor || otherActor == m_Actor)
+                continue;
+
+            PhysicsComponent* other = PhysicsSystem::Instance().GetComponent(otherActor);
+            if (!other || !other->m_IsTrigger)
+                continue;
+
+            currentFrame.insert(other);
+
+            // 새로 들어온 Trigger
+            if (m_ActiveTriggers.find(other) == m_ActiveTriggers.end())
+                OnTriggerEnter(other);
+
+            // 이미 겹쳐있던 Trigger
+            else
+                OnTriggerStay(other);
+        }
+
+        // 이전 프레임에 있었지만 현재 안 겹친 Trigger
+        for (auto it = m_ActiveTriggers.begin(); it != m_ActiveTriggers.end();)
+        {
+            if (currentFrame.find(*it) == currentFrame.end())
+            {
+                OnTriggerExit(*it);
+                it = m_ActiveTriggers.erase(it);
+            }
+            else
+            {
+                ++it;
+            }
+        }
+
+        // 업데이트
+        m_ActiveTriggers = std::move(currentFrame);
+    }
+    else
+    {
+        // 아무것도 안 겹치면 모든 Trigger 종료
+        for (PhysicsComponent* t : m_ActiveTriggers)
+            OnTriggerExit(t);
+        m_ActiveTriggers.clear();
+    }
+}
 
 DirectX::XMVECTOR GetActorDebugColor(PxRigidActor* actor)
 {
