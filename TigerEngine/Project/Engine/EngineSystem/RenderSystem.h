@@ -33,6 +33,11 @@ public:
     /// </summary>
     void Render(RenderQueue& queue); 
 
+    /// <summary>
+    /// 모든 컨테이너 함수 정리 함수
+    /// </summary>
+    void Clear();
+
 private:
     /// <summary>
     /// 등록된 컴포넌드 목록
