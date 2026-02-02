@@ -62,11 +62,11 @@ public:
     Transform* GetChildByIndex(int index);
     Transform* GetChildByName(std::string name);
 
-private:
+protected:
     /// <summary>
     /// dirty flag 해소 함수
     /// </summary>
-    void UpdateMatricesIfDirty();
+    virtual void UpdateMatricesIfDirty();
 
     Vector3 position{ Vector3::Zero };  // local Position
     Vector3 euler{ Vector3::Zero };     // 오일러 각으로 표현한 라디안 값, local Position

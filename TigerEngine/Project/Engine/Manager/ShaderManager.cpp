@@ -226,6 +226,18 @@ void ShaderManager::CreateSampler(const ComPtr<ID3D11Device>& dev)
         HR_T(dev->CreateSamplerState(&sampDesc, linearClamSamplerState.GetAddressOf()));
     }
 
+    // create smapler state (Point) 
+    {
+        D3D11_SAMPLER_DESC sampDesc = {};
+        sampDesc.Filter = D3D11_FILTER_MIN_MAG_LINEAR_MIP_POINT;
+        sampDesc.AddressU = D3D11_TEXTURE_ADDRESS_CLAMP;
+        sampDesc.AddressV = D3D11_TEXTURE_ADDRESS_CLAMP;
+        sampDesc.AddressW = D3D11_TEXTURE_ADDRESS_CLAMP;
+        sampDesc.ComparisonFunc = D3D11_COMPARISON_NEVER;
+        sampDesc.MinLOD = 0;
+        sampDesc.MaxLOD = 0; // mip이 1개라고 가정함.
+        HR_T(dev->CreateSamplerState(&sampDesc, pointSamplerState.GetAddressOf()));
+    }
 }
 
 void ShaderManager::CreateBS(const ComPtr<ID3D11Device>& dev)
@@ -716,6 +728,42 @@ void ShaderManager::CreateInputLayoutShader(const ComPtr<ID3D11Device>& dev, con
             pixelShaderBuffer->GetBufferSize(), NULL, &PS_Decal));
         SAFE_RELEASE(pixelShaderBuffer);
     }
+
+    //----------------------------
+    // 26.02.02 ui inputlayout ps vs 생성 추가 : 이성호
+    // ui PS, VS
+    {
+        // InputLayout 생성 	+ VS 생성
+        D3D11_INPUT_ELEMENT_DESC layout[] = // 입력 레이아웃.
+        {
+            { "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0,  D3D11_INPUT_PER_VERTEX_DATA, 0 },
+            { "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0 }
+        };
+        
+        // VS_QuadImage
+        ID3DBlob* vertexShaderBuffer = nullptr;
+        std::wstring path = PathHelper::GetExeDir().wstring() + L"\\..\\..\\Engine\\Shaders\\VS_QuadImage.hlsl";
+        HR_T(CompileShaderFromFile(path.c_str(), "main", "vs_5_0", &vertexShaderBuffer));
+        HR_T(dev->CreateInputLayout(layout, ARRAYSIZE(layout), vertexShaderBuffer->GetBufferPointer(), vertexShaderBuffer->GetBufferSize(), &inputLayout_ui));
+        HR_T(dev->CreateVertexShader(vertexShaderBuffer->GetBufferPointer(), vertexShaderBuffer->GetBufferSize(), NULL, VS_UIImage.GetAddressOf()));
+        SAFE_RELEASE(vertexShaderBuffer);
+
+        // PS_QuadImage
+        ID3D10Blob* pixelShaderBuffer = nullptr;
+        path = PathHelper::GetExeDir().wstring() + L"\\..\\..\\Engine\\Shaders\\PS_QuadImage.hlsl";
+        HR_T(CompileShaderFromFile(path.c_str(), "main", "ps_5_0", &pixelShaderBuffer));
+        HR_T(dev->CreatePixelShader(pixelShaderBuffer->GetBufferPointer(),
+            pixelShaderBuffer->GetBufferSize(), NULL, PS_UIImage.GetAddressOf()));
+        SAFE_RELEASE(pixelShaderBuffer);
+
+        // PS_QuadText
+        ID3D10Blob* pixelShaderBuffer2 = nullptr;
+        path = PathHelper::GetExeDir().wstring() + L"\\..\\..\\Engine\\Shaders\\PS_QuadText.hlsl";
+        HR_T(CompileShaderFromFile(path.c_str(), "main", "ps_5_0", &pixelShaderBuffer2));
+        HR_T(dev->CreatePixelShader(pixelShaderBuffer2->GetBufferPointer(),
+            pixelShaderBuffer2->GetBufferSize(), NULL, PS_UIText.GetAddressOf()));
+        SAFE_RELEASE(pixelShaderBuffer2);
+    }
 }
 
 void ShaderManager::CreateCB(const ComPtr<ID3D11Device>& dev)
@@ -818,6 +866,16 @@ void ShaderManager::CreateCB(const ComPtr<ID3D11Device>& dev)
         constBuffer_Desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
         constBuffer_Desc.CPUAccessFlags = 0;
         HR_T(dev->CreateBuffer(&constBuffer_Desc, nullptr, &decalCB));
+    }
+
+    // 11. ui CB
+    {
+        D3D11_BUFFER_DESC bufferDesc{};
+        bufferDesc.Usage = D3D11_USAGE_DEFAULT;
+        bufferDesc.ByteWidth = sizeof(UICBData);
+        bufferDesc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+        bufferDesc.CPUAccessFlags = 0;
+        HR_T(dev->CreateBuffer(&bufferDesc, nullptr, uiCB.GetAddressOf()));
     }
   
 #if _DEBUG

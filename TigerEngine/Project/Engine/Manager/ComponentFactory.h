@@ -5,7 +5,7 @@
 
 enum class ComponentCategory
 {
-    Core, Rendering, Audio, Physics, Animation, Script, Other
+    Core, Rendering, Audio, Physics, Animation, Script, UI, Other
 };
 
 using createCompFunc = std::function<Component* (GameObject*)>;

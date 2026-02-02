@@ -37,7 +37,8 @@ namespace DebugDraw
 
     void XM_CALLCONV Draw(DirectX::PrimitiveBatch<DirectX::VertexPositionColor>* batch,
         const DirectX::BoundingBox& box,
-        DirectX::FXMVECTOR color = DirectX::Colors::White);
+        DirectX::FXMVECTOR color = DirectX::Colors::White
+        , bool cross = false);
 
     void XM_CALLCONV Draw(DirectX::PrimitiveBatch<DirectX::VertexPositionColor>* batch,
         const DirectX::BoundingOrientedBox& obb,
@@ -86,4 +87,9 @@ namespace DebugDraw
         DirectX::FXMVECTOR direction,
         DirectX::FXMVECTOR color = DirectX::XMVectorSet(1, 0, 0, 1),
         bool normalize = true);
+
+    // 대각선 X 모양의 박스 
+    void XM_CALLCONV DrawBoxWithCross(PrimitiveBatch<VertexPositionColor>* batch,
+        const BoundingBox& box,
+        FXMVECTOR color);
 }
