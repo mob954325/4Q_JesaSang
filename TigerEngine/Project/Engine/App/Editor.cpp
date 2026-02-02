@@ -1360,7 +1360,7 @@ void Editor::RenderDebugGrid()
     int centerX = grid->width / 2;
     int centerY = grid->height / 2;
 
-    // 중앙 기준 좌표: -centerX ~ +centerX, -centerY ~ +centerY
+    // 중앙 기준 좌표: -centerX ~ +centerX-1, -centerY ~ +centerY-1
     for (int cy = -centerY; cy < grid->height - centerY; ++cy)
     {
         for (int cx = -centerX; cx < grid->width - centerX; ++cx)
@@ -1368,8 +1368,8 @@ void Editor::RenderDebugGrid()
             GridCell* cell = grid->GetCellFromCenter(cx, cy);
             if (!cell) continue;
 
-            // 그리드 월드 위치
-            Vector3 worldPos = grid->GridToWorld(centerX + cx, centerY + cy);
+            // 중앙 기준 좌표 → 월드 위치
+            Vector3 worldPos = grid->GridToWorldFromCenter(cx, cy);
 
             BoundingBox box;
             float halfSize = grid->cellSize * 0.5f;
@@ -1394,11 +1394,13 @@ void Editor::RenderDebugGrid()
 
             box.Extents = XMFLOAT3(halfSize, yThickness, halfSize);
 
-            // drawCross가 true인 경우에만 X 표시
+            // Draw: drawCross가 true면 X 표시 포함
             DebugDraw::Draw(DebugDraw::g_Batch.get(), box, color, drawCross);
         }
     }
 }
+
+
 
 
 void Editor::SaveCurrentScene(HWND& hwnd)
