@@ -36,6 +36,7 @@ public:
     const AudioManifestEntry* GetEntry(const std::string& id) const;
     std::shared_ptr<AudioClip> GetOrCreateClip(const std::string& id);
     void PreloadAll();
+    std::vector<std::string> GetEntryIds() const;
 
     AudioSystem& GetSystem() { return m_system; }
 

@@ -11,6 +11,7 @@
 #include "../Object/GameObject.h"
 #include "../Util/DebugDraw.h"
 #include "../Manager/WorldManager.h"
+#include "../Manager/AudioManager.h"
 #include "../Manager/Shadermanager.h"
 #include "../EngineSystem/PlayModeSystem.h"
 #include "../Components/Camera.h"
@@ -1206,6 +1207,63 @@ void Editor::RenderComponentInfo(std::string compName, T* comp)
         }
 
         ReadVariants(*comp);
+        return;
+    }
+
+    if (compName == "AudioSourceComponent" || compName == "AudioManagerComponent" || compName == "AudioTestController")
+    {
+        for (auto& prop : t.get_properties())
+        {
+            std::string name = prop.get_name().to_string();
+            if (name.find("ClipId") != std::string::npos)
+            {
+                rttr::variant value = prop.get_value(*comp);
+                if (value.is_valid() && value.is_type<std::string>())
+                {
+                    std::string s = value.get_value<std::string>();
+                    auto ids = AudioManager::Instance().GetEntryIds();
+                    ids.insert(ids.begin(), "<none>");
+
+                    int currentIndex = 0;
+                    for (int i = 1; i < static_cast<int>(ids.size()); ++i)
+                    {
+                        if (ids[i] == s)
+                        {
+                            currentIndex = i;
+                            break;
+                        }
+                    }
+
+                    const char* preview = ids[currentIndex].c_str();
+                    std::string comboId = "AudioClipId##" + std::to_string((uintptr_t)comp) + "_" + name;
+                    if (ImGui::BeginCombo(comboId.c_str(), preview))
+                    {
+                        for (int i = 0; i < static_cast<int>(ids.size()); ++i)
+                        {
+                            bool selected = (i == currentIndex);
+                            if (ImGui::Selectable(ids[i].c_str(), selected))
+                            {
+                                if (i == 0)
+                                {
+                                    prop.set_value(*comp, std::string());
+                                }
+                                else
+                                {
+                                    prop.set_value(*comp, ids[i]);
+                                }
+                            }
+                            if (selected)
+                                ImGui::SetItemDefaultFocus();
+                        }
+                        ImGui::EndCombo();
+                    }
+                }
+            }
+        }
+
+        ImGui::PushID(comp);
+        ReadVariants(*comp);
+        ImGui::PopID();
         return;
     }
 
