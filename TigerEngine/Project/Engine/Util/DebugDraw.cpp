@@ -130,7 +130,7 @@ namespace DebugDraw
     void XM_CALLCONV Draw(PrimitiveBatch<VertexPositionColor> *batch,
                               const BoundingSphere &sphere,
                               FXMVECTOR color, 
-                              bool dashed )
+                              bool dashed)
     {
         const XMVECTOR origin = XMLoadFloat3(&sphere.Center);
 
@@ -147,13 +147,15 @@ namespace DebugDraw
 
     void XM_CALLCONV Draw(PrimitiveBatch<VertexPositionColor>* batch,
         const BoundingBox& box,
-        FXMVECTOR color)
+        FXMVECTOR color,
+        bool cross)
     {
-        XMMATRIX matWorld = XMMatrixScaling(box.Extents.x, box.Extents.y, box.Extents.z);
-        const XMVECTOR position = XMLoadFloat3(&box.Center);
-        matWorld.r[3] = XMVectorSelect(matWorld.r[3], position, g_XMSelect1110);
-
-        DrawCube(batch, matWorld, color);
+        if (cross)
+            DrawBoxWithCross(batch, box, color);
+        else
+            DrawCube(batch, XMMatrixScaling(box.Extents.x, box.Extents.y, box.Extents.z)
+                * XMMatrixTranslationFromVector(XMLoadFloat3(&box.Center)),
+                color);
     }
 
     void XM_CALLCONV Draw(PrimitiveBatch<VertexPositionColor>* batch,
@@ -454,6 +456,39 @@ namespace DebugDraw
         // DebugDraw::Draw(BoundingSphere) 사용
         Draw(batch, topSphere, color, dashed);
         Draw(batch, bottomSphere, color, dashed);
+    }
+
+    void XM_CALLCONV DrawBoxWithCross(PrimitiveBatch<VertexPositionColor>* batch,
+        const BoundingBox& box,
+        FXMVECTOR color)
+    {
+        // 박스의 8개 꼭짓점
+        XMFLOAT3 corners[8];
+        box.GetCorners(corners);
+
+        XMVECTOR v[8];
+        for (int i = 0; i < 8; ++i)
+            v[i] = XMLoadFloat3(&corners[i]);
+
+        // 기존 테두리 12개
+        batch->DrawLine(VertexPositionColor(v[0], color), VertexPositionColor(v[1], color));
+        batch->DrawLine(VertexPositionColor(v[1], color), VertexPositionColor(v[2], color));
+        batch->DrawLine(VertexPositionColor(v[2], color), VertexPositionColor(v[3], color));
+        batch->DrawLine(VertexPositionColor(v[3], color), VertexPositionColor(v[0], color));
+        batch->DrawLine(VertexPositionColor(v[4], color), VertexPositionColor(v[5], color));
+        batch->DrawLine(VertexPositionColor(v[5], color), VertexPositionColor(v[6], color));
+        batch->DrawLine(VertexPositionColor(v[6], color), VertexPositionColor(v[7], color));
+        batch->DrawLine(VertexPositionColor(v[7], color), VertexPositionColor(v[4], color));
+        batch->DrawLine(VertexPositionColor(v[0], color), VertexPositionColor(v[4], color));
+        batch->DrawLine(VertexPositionColor(v[1], color), VertexPositionColor(v[5], color));
+        batch->DrawLine(VertexPositionColor(v[2], color), VertexPositionColor(v[6], color));
+        batch->DrawLine(VertexPositionColor(v[3], color), VertexPositionColor(v[7], color));
+
+        // 대각선 추가 (X 표시)
+        batch->DrawLine(VertexPositionColor(v[0], color), VertexPositionColor(v[6], color));
+        batch->DrawLine(VertexPositionColor(v[1], color), VertexPositionColor(v[7], color));
+        batch->DrawLine(VertexPositionColor(v[2], color), VertexPositionColor(v[4], color));
+        batch->DrawLine(VertexPositionColor(v[3], color), VertexPositionColor(v[5], color));
     }
 
 }

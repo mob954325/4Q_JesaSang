@@ -16,13 +16,16 @@
 #include "../EngineSystem/PlayModeSystem.h"
 #include "../Components/Camera.h"
 #include "../EngineSystem/PhysicsSystem.h"
+#include "../EngineSystem/GridSystem.h"
 #include "../Components/CharacterControllerComponent.h"
+#include "../Components/GridComponent.h"
 
 #include "Datas/ReflectionMedtaDatas.hpp"
 
 #include "../Components/FBXRenderer.h"
 #include "../Util/PathHelper.h"
 #include "../Components/UI/Image.h"
+
 
 // Payload
 // Prefab payload
@@ -1371,6 +1374,9 @@ void Editor::RenderDebugAABBDraw()
             DebugDraw::Draw(DebugDraw::g_Batch.get(), box, color);
         });
 
+    // Grid 
+    RenderDebugGrid();
+
     // PhysX
     if (isPhysicsDebugOpen)
     {
@@ -1382,6 +1388,60 @@ void Editor::RenderDebugAABBDraw()
     // ===============================
     DebugDraw::g_Batch->End();
 }
+
+void Editor::RenderDebugGrid()
+{
+    auto* grid = GridSystem::Instance().GetMainGrid();
+    if (!grid) return;
+
+    float defaultYThickness = 0.01f;
+    float highlightYThickness = 10.0f; // 원점과 걸을 수 없는 그리드 두께
+
+    int centerX = grid->width / 2;
+    int centerY = grid->height / 2;
+
+    // 중앙 기준 좌표: -centerX ~ +centerX-1, -centerY ~ +centerY-1
+    for (int cy = -centerY; cy < grid->height - centerY; ++cy)
+    {
+        for (int cx = -centerX; cx < grid->width - centerX; ++cx)
+        {
+            GridCell* cell = grid->GetCellFromCenter(cx, cy);
+            if (!cell) continue;
+
+            // 중앙 기준 좌표 → 월드 위치
+            Vector3 worldPos = grid->GridToWorldFromCenter(cx, cy);
+
+            BoundingBox box;
+            float halfSize = grid->cellSize * 0.5f;
+            box.Center = XMFLOAT3(worldPos.x, worldPos.y, worldPos.z);
+
+            float yThickness = defaultYThickness;
+            XMVECTOR color = XMVectorSet(1.0f, 1.0f, 1.0f, 1.0f); // 기본 흰색
+            bool drawCross = false; // X 표시 여부
+
+            // 원점 (0,0) 중앙 그리드
+            if (cx == 0 && cy == 0)
+            {
+                color = XMVectorSet(0.0f, 0.0f, 0.0f, 1.0f); // 검은색
+                yThickness = highlightYThickness;
+            }
+            // 걸을 수 없는 그리드
+            else if (!cell->walkable)
+            {
+                color = XMVectorSet(1.0f, 0.0f, 0.0f, 1.0f); // 빨간색
+                drawCross = true; // X 표시
+            }
+
+            box.Extents = XMFLOAT3(halfSize, yThickness, halfSize);
+
+            // Draw: drawCross가 true면 X 표시 포함
+            DebugDraw::Draw(DebugDraw::g_Batch.get(), box, color, drawCross);
+        }
+    }
+}
+
+
+
 
 void Editor::SaveCurrentScene(HWND& hwnd)
 {

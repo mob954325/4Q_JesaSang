@@ -1,0 +1,46 @@
+#pragma once
+#include "pch.h"
+#include "../Object/Component.h"
+
+struct GridCell
+{
+    bool walkable = true;
+    int x = 0;
+    int y = 0;
+};
+
+
+class GridComponent : public Component
+{
+    RTTR_ENABLE(Component)
+public:
+    nlohmann::json Serialize() override;
+    void Deserialize(nlohmann::json data) override;
+
+public:
+    int width = 50;
+    int height = 50;
+    float cellSize = 100.0f;
+
+    std::vector<GridCell> cells;
+
+public:
+    GridComponent() = default;
+    ~GridComponent() = default;
+
+    void OnInitialize() override;
+    void OnDestory() override;
+
+    GridCell* GetCell(int x, int y);
+    bool IsWalkable(int x, int y);
+
+    Vector3 GridToWorld(int x, int y);
+    bool WorldToGrid(const Vector3& pos, int& outX, int& outY);
+
+
+    // (0,0) 을 중점으로 해서 좌표 가져오도록 하는 메소드 : 우리가 흔히 아는 좌표계 
+    GridCell* GetCellFromCenter(int cx, int cy);
+    bool IsWalkableFromCenter(int cx, int cy); 
+    Vector3 GridToWorldFromCenter(int cx, int cy);
+    void SetWalkableFromCenter(int cx, int cy, bool walkable); 
+};

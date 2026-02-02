@@ -139,9 +139,11 @@
     <ClCompile Include="Components\Decal.cpp" />
     <ClCompile Include="Components\RectTransform.cpp" />
     <ClCompile Include="Components\UI\Image.cpp" />
-    <ClCompile Include="EngineSystem\DecalSystem.cpp" />
     <ClCompile Include="Manager\TextureResourceManager.cpp" />
     <ClCompile Include="Manager\UIManager.cpp" />
+    <ClCompile Include="Components\GridComponent.cpp" />
+    <ClCompile Include="EngineSystem\DecalSystem.cpp" />
+    <ClCompile Include="EngineSystem\GridSystem.cpp" />
     <ClCompile Include="Object\enableable.cpp" />
     <ClCompile Include="RenderPass\Renderable\DecalVolumeMesh.cpp" />
     <ClCompile Include="RenderPass\Renderer\DecalPass.cpp" />
@@ -207,7 +209,9 @@
     <ClInclude Include="Components\Decal.h" />
     <ClInclude Include="Components\RectTransform.h" />
     <ClInclude Include="Components\UI\UIBase.h" />
+    <ClInclude Include="Components\GridComponent.h" />
     <ClInclude Include="EngineSystem\DecalSystem.h" />
+    <ClInclude Include="EngineSystem\GridSystem.h" />
     <ClInclude Include="Object\Enableable.h" />
     <ClInclude Include="RenderPass\Renderable\DecalVolumeMesh.h" />
     <ClInclude Include="RenderPass\Renderable\UIQuadMesh.h" />
