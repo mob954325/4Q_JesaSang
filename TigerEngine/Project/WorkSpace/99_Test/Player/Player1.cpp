@@ -4,6 +4,7 @@
 #include "Object/Component.h"
 #include "Components/FBXRenderer.h"
 #include "Util/ComponentAutoRegister.h"
+#include "../Engine/EngineSystem/SceneSystem.h"
 
 REGISTER_COMPONENT(Player1);
 
@@ -19,13 +20,30 @@ RTTR_REGISTRATION
 
 void Player1::OnInitialize()
 {
+    cout << "== Player1 init ==\n";
     weapon = GetOwner()->AddComponent<Weapon>();
-    cout << "[Player1 | PlayModeTest] : OnInitalize() 1\n";
+
+    cout << "GameObject add\n";
+    auto weaponObj = SceneUtil::CreateGameObject("TestWeapon");
+
+    GetOwner()->GetTransform()->AddChild(weaponObj->GetTransform());
+    auto objIndex = GetOwner()->GetChildByIndex(0);
+    cout << "Find Obj index" << objIndex << " : " << objIndex->GetName() << "\n";
+
+    auto objName = GetOwner()->GetChildByName("TestWeapon");
+    cout << "Find Obj name " << objName->GetName() << " : " << objIndex->GetName() << "\n";
+
+    cout << "[Player1 | PlayModeTest] : OnInitalize() 1\n";    
 }
 
 void Player1::OnStart()
 {
     cout << "[Player1 | PlayModeTest] : OnStart() 2\n";
+    GameObject* obj = SceneUtil::GetObjectByName("Weapon");
+
+    if(obj)
+        cout << "SceneUtiltest : " << obj->GetName() << endl;
+
 }
 
 void Player1::OnUpdate(float delta)
