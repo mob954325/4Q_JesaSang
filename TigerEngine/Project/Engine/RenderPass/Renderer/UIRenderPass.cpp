@@ -54,7 +54,7 @@ void UIRenderPass::Execute(ComPtr<ID3D11DeviceContext>& context, RenderQueue& qu
         context->PSSetConstantBuffers(11, 1, sm.uiCB.GetAddressOf());	// ps 상수 버퍼 설정
         context->PSSetShader(sm.PS_UIImage.Get(), nullptr, 0);					// ps 바인딩
 
-        context->PSSetShaderResources(0, 1, item.resource->srv.GetAddressOf());			// 텍스처 리소스 바인딩
+        context->PSSetShaderResources(20, 1, item.resource->srv.GetAddressOf());			// 텍스처 리소스 바인딩
 
         context->DrawIndexed(6, 0, 0);	// 쿼드 그리기
     }   
