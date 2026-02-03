@@ -1,5 +1,7 @@
 #include "GridComponent.h"
 #include "../EngineSystem/GridSystem.h"
+#include "../EngineSystem/PhysicsSystem.h"
+#include "../Components/PhysicsComponent.h"
 #include "../Components/Transform.h"
 #include "../Object/GameObject.h"
 #include "../Util/JsonHelper.h"
@@ -25,13 +27,331 @@ void GridComponent::Deserialize(nlohmann::json data)
 }
 
 
+void DebugPrintBlock(
+    const std::string& obj,
+    int gx, int gy,
+    int cx, int cy,
+    const Vector3& worldPos,
+    ColliderType type)
+{
+    std::cout
+        << "[" << obj << "]  "
+        << "Grid(" << gx << "," << gy << ")  "
+        << "Center(" << cx << "," << cy << ")  "
+        << "World(" << worldPos.x << "," << worldPos.z << ")  "
+        << "Type(" << (int)type << ")\n";
+}
+
+
+
 
 void GridComponent::OnInitialize()
 {
     GridSystem::Instance().Register(this);
 
     // 셀 배열 초기화 
+    ResizeGrid(width, height);
+
+    // 임의로 (-1,2) 그리드를 걸을 수 없게 설정
+    //SetWalkableFromCenter(-1, 2, false);
+    //SetWalkableFromCenter(3, -4, false);
+}
+
+void GridComponent::OnStart()
+{
+    // Physics 기반 자동 차단
+    BuildBlockedFromPhysics();
+}
+
+void GridComponent::OnDestory()
+{
+    GridSystem::Instance().UnRegister(this);
+}
+
+void GridComponent::BuildBlockedFromPhysics()
+{
+    for (auto& c : cells)
+        c.walkable = true;
+
+    auto& map = PhysicsSystem::Instance().m_ActorMap;
+
+    std::cout << "\n==== Physics → Grid Mapping (AABB based, Center Origin) ====\n";
+
+    int centerX = (width - 1) / 2;
+    int centerY = (height - 1) / 2;
+
+    for (auto& pair : map)
+    {
+        PhysicsComponent* phys = pair.first;
+        if (!phys || !phys->m_Actor) continue;
+        if (phys->IsTrigger()) continue;
+        if (phys->GetLayer() & CollisionLayer::Ground) continue;
+
+        auto owner = phys->GetOwner();
+        std::string objName = owner ? owner->GetName() : "Unknown";
+
+        Transform* tr = phys->transform;
+        if (!tr) continue;
+
+        // Vector3 pos = tr->GetWorldPosition();
+        Vector3 pos = tr->GetLocalPosition();
+
+        // -----------------------
+        // 1. 월드 AABB
+        // -----------------------
+        Vector3 minW, maxW;
+
+        if (phys->m_ColliderType == ColliderType::Box)
+        {
+            PxBounds3 b = phys->m_Actor->getWorldBounds();
+
+            std::cout << "\n[" << objName << "] PxBounds\n";
+            std::cout << "  min = (" << b.minimum.x * 100 << ", " << b.minimum.y * 100 << ", " << b.minimum.z * 100 << ")\n";
+            std::cout << "  max = (" << b.maximum.x * 100 << ", " << b.maximum.y * 100 << ", " << b.maximum.z * 100 << ")\n";
+
+            std::cout << "  TransformPos = (" << pos.x << ", " << pos.y << ", " << pos.z << ")\n";
+
+            minW = { b.minimum.x * 100, 0, b.minimum.z * 100 };
+            maxW = { b.maximum.x * 100, 0, b.maximum.z * 100 };
+        }
+        else
+        {
+            float r = 0.0f;
+            switch (phys->m_ColliderType)
+            {
+            case ColliderType::Sphere:  r = phys->m_Radius; break;
+            case ColliderType::Capsule: r = phys->m_Radius; break;
+            default: r = phys->m_HalfExtents.x; break;
+            }
+
+            minW = { pos.x - r, 0, pos.z - r };
+            maxW = { pos.x + r, 0, pos.z + r };
+        }
+
+        // -----------------------
+        // 2. AABB → 중앙 기준 Grid
+        // -----------------------
+        int minCX, minCY;
+        int maxCX, maxCY;
+
+        if (!WorldToGridFromCenter(minW, minCX, minCY)) continue;
+        if (!WorldToGridFromCenter(maxW, maxCX, maxCY)) continue;
+
+        std::cout << "\n[" << objName << "] "
+            << "CenterGridRange: (" << minCX << "," << minCY
+            << ") ~ (" << maxCX << "," << maxCY << ")\n";
+
+        // -----------------------
+        // 3. 중앙 기준 → 내부 인덱스 변환
+        // -----------------------
+        int minX = centerX + minCX;
+        int minY = centerY + minCY;
+        int maxX = centerX + maxCX;
+        int maxY = centerY + maxCY;
+
+        for (int y = minY; y <= maxY; ++y)
+        {
+            for (int x = minX; x <= maxX; ++x)
+            {
+                if (auto* cell = GetCell(x, y))
+                {
+                    cell->walkable = false;
+
+                    int cx = x - centerX;
+                    int cy = y - centerY;
+                    Vector3 cellWorld = GridToWorld(x, y);
+
+                    DebugPrintBlock(
+                        objName,
+                        x, y,
+                        cx, cy,
+                        cellWorld,
+                        phys->m_ColliderType);
+                }
+            }
+        }
+    }
+
+    std::cout << "===========================================\n";
+}
+
+
+//void GridComponent::BuildBlockedFromPhysics()
+//{
+//    // 전부 Walkable로 리셋
+//    for (auto& c : cells)
+//        c.walkable = true;
+//
+//    auto& map = PhysicsSystem::Instance().m_ActorMap;
+//
+//    for (auto& pair : map)
+//    {
+//        PhysicsComponent* phys = pair.first;
+//        if (!phys || !phys->m_Actor) continue;
+//
+//        // Trigger Collider 제외
+//        if (phys->IsTrigger()) continue;
+//
+//        // Ground Layer 제외 
+//        if (phys->GetLayer() & CollisionLayer::Ground) continue;
+//
+//        Transform* tr = phys->transform;  //Transform* tr = phys->GetOwner()->GetTransform();
+//        if (!tr) continue;
+//
+//        Vector3 pos = tr->GetWorldPosition();
+//
+//        int gx, gy;
+//        if (!WorldToGrid(pos, gx, gy))
+//            continue;
+//
+//        // Collider 크기만큼 확장
+//        float worldRadius = 0.0f;
+//        switch (phys->m_ColliderType)
+//        {
+//        case ColliderType::Box:     worldRadius = phys->m_HalfExtents.x; break;
+//        case ColliderType::Sphere:  worldRadius = phys->m_Radius; break;
+//        case ColliderType::Capsule: worldRadius = phys->m_Radius; break;
+//        default:                    worldRadius = phys->m_HalfExtents.x; break;
+//        }
+//
+//        int radius = (int)(worldRadius / cellSize); // +1;
+//        for (int y = -radius; y <= radius; ++y)
+//        {
+//            for (int x = -radius; x <= radius; ++x)
+//            {
+//                if (auto* cell = /*GetCell*/GetCellFromCenter(gx + x, gy + y))
+//                    cell->walkable = false;
+//            }
+//        }
+//    }
+//
+//    std::cout << "==== Blocked Grid Cells ====\n";
+//
+//    for (auto& c : cells)
+//    {
+//        if (!c.walkable)
+//        {
+//            // 내부 인덱스 → 중앙 기준 좌표로 변환
+//            int cx = c.x - (width / 2);
+//            int cy = c.y - (height / 2);
+//
+//            std::cout << "Blocked: ("
+//                << cx << ", "
+//                << cy << ")\n";
+//        }
+//    }
+//
+//    std::cout << "============================\n";
+//}
+
+
+// 수동 
+//void GridComponent::BuildBlockedFromPhysics()
+//{
+//    for (auto& c : cells)
+//        c.walkable = true;
+//
+//    auto& map = PhysicsSystem::Instance().m_ActorMap;
+//
+//    std::cout << "\n==== Physics → Grid Mapping Debug ====\n";
+//
+//    int centerX = (width - 1) / 2;
+//    int centerY = (height - 1) / 2;
+//
+//    for (auto& pair : map)
+//    {
+//        PhysicsComponent* phys = pair.first;
+//        if (!phys || !phys->m_Actor) continue;
+//        if (phys->IsTrigger()) continue;
+//        if (phys->GetLayer() & CollisionLayer::Ground) continue;
+//
+//        auto owner = phys->GetOwner();
+//        std::string objName = owner ? owner->GetName() : "Unknown";
+//
+//        Transform* tr = phys->transform;
+//        if (!tr) continue;
+//
+//        Vector3 pos = tr->GetWorldPosition();
+//
+//        int gx, gy;
+//        if (!WorldToGrid(pos, gx, gy))
+//        {
+//            std::cout << "[OUT OF GRID] " << objName
+//                << " world(" << pos.x << "," << pos.z << ")\n";
+//            continue;
+//        }
+//
+//        float worldRadius = 0.0f;
+//        switch (phys->m_ColliderType)
+//        {
+//        case ColliderType::Box:     worldRadius = phys->m_HalfExtents.x; break;
+//        case ColliderType::Sphere:  worldRadius = phys->m_Radius; break;
+//        case ColliderType::Capsule: worldRadius = phys->m_Radius; break;
+//        default:                    worldRadius = phys->m_HalfExtents.x; break;
+//        }
+//
+//        /*int radius = (int)ceil(worldRadius / cellSize);
+//
+//        std::cout << "\n[" << objName << "] base Grid("
+//            << gx << "," << gy << ") radius=" << radius
+//            << " world(" << pos.x << "," << pos.z << ")\n";
+//
+//        for (int y = -radius; y <= radius; ++y)
+//        {
+//            for (int x = -radius; x <= radius; ++x)
+//            {
+//                int ix = gx + x;
+//                int iy = gy + y;
+//
+//                if (auto* cell = GetCell(ix, iy))
+//                {
+//                    cell->walkable = false;
+//
+//                    int cx = ix - centerX;
+//                    int cy = iy - centerY;
+//
+//                    Vector3 cellWorld = GridToWorld(ix, iy);
+//
+//                    DebugPrintBlock(
+//                        objName,
+//                        ix, iy,
+//                        cx, cy,
+//                        cellWorld,
+//                        phys->m_ColliderType);
+//                }
+//            }
+//        }*/
+//
+//        if (auto* cell = GetCell(gx, gy))
+//        {
+//            cell->walkable = false;
+//
+//            int cx = gx - centerX;
+//            int cy = gy - centerY;
+//            Vector3 cellWorld = GridToWorld(gx, gy);
+//
+//            DebugPrintBlock(
+//                objName,
+//                gx, gy,
+//                cx, cy,
+//                cellWorld,
+//                phys->m_ColliderType);
+//        }
+//    }
+//
+//    std::cout << "=====================================\n";
+//}
+
+
+// Width 와 Height에 의해 재설정되는 그리드 cell 
+void GridComponent::ResizeGrid(int newWidth, int newHeight)
+{
+    width = newWidth;
+    height = newHeight;
+
+    cells.clear();
     cells.resize(width * height);
+
     for (int y = 0; y < height; ++y)
     {
         for (int x = 0; x < width; ++x)
@@ -42,15 +362,6 @@ void GridComponent::OnInitialize()
             c.walkable = true;
         }
     }
-
-    // 임의로 (-1,2) 그리드를 걸을 수 없게 설정
-    SetWalkableFromCenter(-1, 2, false);
-    SetWalkableFromCenter(3, -4, false);
-}
-
-void GridComponent::OnDestory()
-{
-    GridSystem::Instance().UnRegister(this);
 }
 
 
@@ -77,8 +388,8 @@ bool GridComponent::IsWalkable(int x, int y)
 //----------------------------------------
 GridCell* GridComponent::GetCellFromCenter(int cx, int cy)
 {
-    int centerX = width / 2;
-    int centerY = height / 2;
+    int centerX = (width - 1) / 2;
+    int centerY = (height - 1) / 2;
 
     int ix = centerX + cx; // 중앙 기준 → 내부 배열 인덱스
     int iy = centerY + cy;
@@ -110,7 +421,8 @@ void GridComponent::SetWalkableFromCenter(int cx, int cy, bool walkable)
 Vector3 GridComponent::GridToWorld(int x, int y)
 {
     auto t = GetOwner()->GetTransform();
-    Vector3 origin = t->GetWorldPosition();
+    // Vector3 origin = t->GetWorldPosition();
+    Vector3 origin = t->GetLocalPosition();
 
     float offsetX = (width * 0.5f - 0.5f) * cellSize;
     float offsetZ = (height * 0.5f - 0.5f) * cellSize;
@@ -126,18 +438,16 @@ Vector3 GridComponent::GridToWorld(int x, int y)
 bool GridComponent::WorldToGrid(const Vector3& pos, int& outX, int& outY)
 {
     auto t = GetOwner()->GetTransform();
-    Vector3 origin = t->GetWorldPosition();
+    Vector3 origin = t->GetLocalPosition(); // 그리드 중심
 
     float offsetX = (width * 0.5f - 0.5f) * cellSize;
     float offsetZ = (height * 0.5f - 0.5f) * cellSize;
 
-    // 셀 중앙 기준으로 보정
-    Vector3 local;
-    local.x = pos.x - origin.x + offsetX - 0.5f * cellSize;
-    local.z = pos.z - origin.z + offsetZ - 0.5f * cellSize;
+    float localX = pos.x - origin.x + offsetX;
+    float localZ = pos.z - origin.z + offsetZ;
 
-    outX = static_cast<int>(local.x / cellSize);
-    outY = static_cast<int>(local.z / cellSize);
+    outX = (int)floor(localX / cellSize);
+    outY = (int)floor(localZ / cellSize);
 
     return !(outX < 0 || outY < 0 || outX >= width || outY >= height);
 }
@@ -157,4 +467,33 @@ Vector3 GridComponent::GridToWorldFromCenter(int cx, int cy)
         origin.y,
         origin.z + offsetZ
     };
+
+    //auto t = GetOwner()->GetTransform();
+    //Vector3 origin = t->GetWorldPosition();
+
+    //return {
+    //    origin.x + (cx + 0.5f) * cellSize,
+    //    origin.y,
+    //    origin.z + (cy + 0.5f) * cellSize
+    //};
+}
+
+bool GridComponent::WorldToGridFromCenter(const Vector3& pos, int& outCX, int& outCY)
+{
+    auto t = GetOwner()->GetTransform();
+    Vector3 origin = t->GetWorldPosition(); // 그리드 중앙
+
+    float localX = pos.x - origin.x;
+    float localZ = pos.z - origin.z;
+
+    outCX = (int)floor(localX / cellSize + 0.5f);
+    outCY = (int)floor(localZ / cellSize + 0.5f);
+
+    int centerX = (width - 1) / 2;
+    int centerY = (height - 1) / 2;
+
+    int ix = centerX + outCX;
+    int iy = centerY + outCY;
+
+    return !(ix < 0 || iy < 0 || ix >= width || iy >= height);
 }

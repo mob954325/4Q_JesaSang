@@ -1397,13 +1397,19 @@ void Editor::RenderDebugGrid()
     float defaultYThickness = 0.01f;
     float highlightYThickness = 10.0f; // 원점과 걸을 수 없는 그리드 두께
 
-    int centerX = grid->width / 2;
-    int centerY = grid->height / 2;
+    /*int centerX = grid->width / 2;
+    int centerY = grid->height / 2;*/
+    int centerX = (grid->width - 1) / 2;
+    int centerY = (grid->height - 1) / 2;
+
 
     // 중앙 기준 좌표: -centerX ~ +centerX-1, -centerY ~ +centerY-1
-    for (int cy = -centerY; cy < grid->height - centerY; ++cy)
+    //for (int cy = -centerY; cy < grid->height - centerY; ++cy)
+    //{
+    //    for (int cx = -centerX; cx < grid->width - centerX; ++cx)
+    for (int cy = -centerY; cy <= centerY; ++cy)
     {
-        for (int cx = -centerX; cx < grid->width - centerX; ++cx)
+        for (int cx = -centerX; cx <= centerX; ++cx)
         {
             GridCell* cell = grid->GetCellFromCenter(cx, cy);
             if (!cell) continue;

@@ -36,6 +36,7 @@ public:
     const Vector3& GetEuler() const { return euler; }
     void SetEuler(const Vector3& rad);            // Euler : 주로 클라이언트가 편하게 계산하기 위해 사용
     const Quaternion& GetQuaternion() const { return quaternion; }
+    Quaternion GetWorldQuaternion();
     void SetQuaternion(const Quaternion& quat);    // Quaternion : 엔진 내부 계산할 때 사용 
     float GetYaw() const; // Y축 회전값 (Yaw) getter (rad)
 
