@@ -74,7 +74,10 @@ inline Handle ObjectSystem::Create()
 	slots[index].ptr = t;
     t->SetId(++ObjID);
 
-	return  Handle{ index, slots[index].generation };
+    Handle handle = { index, slots[index].generation };
+    t->SetHandle(handle);
+
+	return handle;
 }
 
 template<DerivedOfObject T>

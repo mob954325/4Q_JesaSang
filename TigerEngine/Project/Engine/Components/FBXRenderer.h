@@ -12,6 +12,7 @@ class FBXRenderer : public RenderComponent
 public:
     // [Component Process] -----------------
 	void OnInitialize() override;
+    void OnEnable() override;
 	void OnStart() override;
 	void OnUpdate(float delta) override;
     void OnDestory() override;

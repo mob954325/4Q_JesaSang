@@ -5,6 +5,8 @@
 #include "../EngineSystem/RenderSystem.h"
 #include "System/InputSystem.h"
 
+#include "../Components/ScriptComponent.h"
+
 RTTR_REGISTRATION
 {
     rttr::registration::class_<Enableable>("Enableable")

@@ -1,4 +1,5 @@
 #include "ScriptSystem.h"
+#include "../Components/ScriptComponent.h"
 #include "../EngineSystem/PlayModeSystem.h"
 #include "../Object/GameObject.h"
 

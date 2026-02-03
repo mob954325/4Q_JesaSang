@@ -15,8 +15,24 @@ class Enableable : public Object
     RTTR_ENABLE()
 public:
     bool GetActiveSelf() const { return isActive; }
-    void SetActive(bool value) { isActive = value; }
+    void SetActive(bool value)
+    {
+        isActive = value;
+        if (isActive) Enable();
+        else Disable();
+    }
 
 protected:
-    bool isActive = true;
+
+    /// <summary>
+    /// 활성화 시 등록 함수
+    /// </summary>
+    virtual void Enable() {};
+
+    /// <summary>
+    /// 활성화 시 등록 해제 함수
+    /// </summary>
+    virtual void Disable() {};
+
+    bool isActive = false;
 };

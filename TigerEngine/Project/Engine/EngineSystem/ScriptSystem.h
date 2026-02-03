@@ -1,8 +1,8 @@
 #pragma once
 #include "System/Singleton.h"
-#include "../Object/Component.h"
-#include "../Components/ScriptComponent.h"
 #include <queue>
+
+class Component; // 순환 참조 방지
 
 /// <summary>
 /// 렌더링을 하지 않는 단순 컴포넌트를 상속받은 컴포넌트들을 관리합니다.

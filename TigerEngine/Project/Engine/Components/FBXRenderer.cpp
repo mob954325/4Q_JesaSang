@@ -50,13 +50,19 @@ RTTR_REGISTRATION
 
 void FBXRenderer::OnInitialize()
 {
+    std::cout <<"FBXRenderer : OnInitialize\n";
     fbxData = owner->GetComponent<FBXData>();
 	if(fbxData != nullptr) CreateBoneInfo(); 
 }
 
+void FBXRenderer::OnEnable()
+{
+    std::cout << "FBXRenderer : OnEnable\n";
+}
+
 void FBXRenderer::OnStart()
 {
-    cout << "RenderComponent_OnStart() : FBXRenderer OnStart() check...\n"; // RenderComponent OnStart 체크
+    cout << "FBXRenderer : OnStart\n"; // RenderComponent OnStart 체크
 }
 
 void FBXRenderer::OnUpdate(float delta)
