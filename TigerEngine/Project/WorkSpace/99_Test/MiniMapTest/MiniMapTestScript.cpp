@@ -5,7 +5,8 @@
 #include "System/InputSystem.h"
 #include "Util/ComponentAutoRegister.h"
 #include "Util/JsonHelper.h"
-
+#include "EngineSystem/SceneSystem.h"
+#include "MiniMapManager.h"
 #include <algorithm>
 #include <iostream>
 
@@ -65,26 +66,9 @@ void MiniMapTestScript::OnUpdate(float delta)
 
     const Vector3 pos = transform->GetWorldPosition();
     playerMapPos = WorldToMiniMap(pos, worldMin, worldMax, mapSize);
-
-    // Local test hook: trigger map/item collect events by key.
-    if (Input::GetKeyDown(DirectX::Keyboard::Keys::M))
-    {
-        OnPieceCollected();
-    }
-
-    if (Input::GetKeyDown(DirectX::Keyboard::Keys::O))
-    {
-        OnItemCollected();
-    }
-
-    if (Input::GetKeyDown(DirectX::Keyboard::Keys::P))
-    {
-        const char* ownerName = GetOwner() ? GetOwner()->GetName().c_str() : "null";
-        std::cout << "[MiniMapTest] owner=" << ownerName << " this=" << this
-            << " player map pos(" << playerMapPos.x << ", " << playerMapPos.y
-            << "), pieces " << collectedPieces << " / " << totalPieces
-            << ", items " << collectedItems << " / " << totalItems << std::endl;
-    }
+#if defined(_DEBUG)
+    HandleDebugInput(delta);
+#endif
 }
 
 float MiniMapTestScript::GetProgress01() const
@@ -116,6 +100,52 @@ void MiniMapTestScript::TriggerPieceCollected()
 void MiniMapTestScript::TriggerItemCollected()
 {
     OnItemCollected();
+}
+
+void MiniMapTestScript::HandleDebugInput(float delta)
+{
+    (void)delta;
+    static bool wasNDown = false;
+    static bool wasODown = false;
+    static bool wasPDown = false;
+    const bool isNDown = Input::GetKey(DirectX::Keyboard::Keys::N);
+    const bool isODown = Input::GetKey(DirectX::Keyboard::Keys::O);
+    const bool isPDown = Input::GetKey(DirectX::Keyboard::Keys::P);
+
+    // Local test hook: trigger map/item collect events by key.
+    if (isNDown && !wasNDown)
+    {
+        auto scene = SceneSystem::Instance().GetCurrentScene();
+        if (scene)
+        {
+            if (auto ctrl = scene->GetGameObjectByName("UI_MiniMap_Controller"))
+            {
+                if (auto mgr = ctrl->GetComponent<MiniMapManager>())
+                {
+                    const int index = std::min(collectedPieces, 5);
+                    mgr->TriggerPieceCollected(index);
+                }
+            }
+        }
+    }
+
+    if (isODown && !wasODown)
+    {
+        OnItemCollected();
+    }
+
+    if (isPDown && !wasPDown)
+    {
+        const char* ownerName = GetOwner() ? GetOwner()->GetName().c_str() : "null";
+        std::cout << "[MiniMapTest] owner=" << ownerName << " this=" << this
+            << " player map pos(" << playerMapPos.x << ", " << playerMapPos.y
+            << "), pieces " << collectedPieces << " / " << totalPieces
+            << ", items " << collectedItems << " / " << totalItems << std::endl;
+    }
+
+    wasNDown = isNDown;
+    wasODown = isODown;
+    wasPDown = isPDown;
 }
 
 nlohmann::json MiniMapTestScript::Serialize()
