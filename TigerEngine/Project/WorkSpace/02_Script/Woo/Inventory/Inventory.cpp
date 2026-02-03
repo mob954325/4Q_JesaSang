@@ -31,17 +31,17 @@ void Inventory::Deserialize(nlohmann::json data)
     JsonHelper::SetDataFromJson(this, data);
 }
 
-bool Inventory::IsFull()
+bool Inventory::HasItem()
 {
-    return ingredient != nullptr;
+    return item != nullptr;
 }
 
 void Inventory::AddItem(std::unique_ptr<IItem> item)
 {
-    if (item->itemType == ItemType::Ingredient)
+    if (item->itemType == ItemType::Ingredient || item->itemType == ItemType::Food)
     {
-        ingredient = std::move(item);
-        std::cout << "[Inventory] Add Ingredient : " << ingredient->itemId << std::endl;
+        this->item = std::move(item);
+        std::cout << "[Inventory] Add Item : " << this->item->itemId << std::endl;
     }
     else if (item->itemType == ItemType::Piece)
     {
@@ -52,11 +52,17 @@ void Inventory::AddItem(std::unique_ptr<IItem> item)
 
 void Inventory::DropItem()
 {
-    ingredient.reset();
-    // TODO :: 재단에 올라감
+    // 제단에 올리감
+    item.reset();
+}
+
+std::string Inventory::GetCurItemID()
+{
+    if (item) return item->itemId;
+    else return "";
 }
 
 std::unique_ptr<IItem> Inventory::TakeCurItem()
 {
-    return std::move(ingredient);
+    return std::move(item);
 }

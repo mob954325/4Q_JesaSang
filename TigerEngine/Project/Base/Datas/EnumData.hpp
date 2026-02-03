@@ -70,5 +70,5 @@ enum class CollisionLayer : uint32_t
 
 enum class ItemType
 {
-    Ingredient, Piece, None
+    Ingredient, Piece, Food, None
 };
