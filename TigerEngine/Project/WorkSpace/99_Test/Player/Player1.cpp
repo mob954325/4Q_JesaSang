@@ -5,6 +5,7 @@
 #include "Components/FBXRenderer.h"
 #include "Util/ComponentAutoRegister.h"
 #include "../Engine/EngineSystem/SceneSystem.h"
+#include "Util/PrefabUtil.h"
 
 REGISTER_COMPONENT(Player1);
 
@@ -52,6 +53,8 @@ void Player1::OnStart()
     if(obj)
         cout << "SceneUtiltest : " << obj->GetName() << endl;
 
+    GameObject* instantiated = PrefabUtil::Instantiate("Test1");
+    instantiated->GetTransform()->SetParent(this->GetOwner()->GetTransform());
 }
 
 void Player1::OnDisable()

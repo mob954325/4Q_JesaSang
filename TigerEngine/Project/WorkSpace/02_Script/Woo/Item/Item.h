@@ -22,12 +22,44 @@ public:
 class Ingredient : public IItem
 {
 public:
-    Ingredient(ItemType type, std::string id) : IItem(type, id) {}
+    Ingredient(std::string id) : IItem(ItemType::Ingredient, id) {}
+    
+    /*
+    * [ID]
+        Ingredient_Apple
+        Ingredient_Pear
+        Ingredient_Batter
+        Ingredient_Tofu
+        Ingredient_Sanjeok
+        Ingredient_Donggeurangttaeng
+    */
 };
 
 // 지도 조각 Item
 class Piece : public IItem
 {
 public:
-    Piece(ItemType type, std::string id) : IItem(type, id) {}
+    Piece(std::string id) : IItem(ItemType::Piece, id) {}
+    /*
+        [ID]
+        TODO..
+    */
+};
+
+
+// 완성된 음식 Item
+class Food : public IItem
+{
+public:
+    Food(std::string id) : IItem(ItemType::Food, id) {}
+    
+    /*
+    * [ID]
+        Apple
+        Pear
+        Batter
+        Tofu
+        Sanjeok
+        Donggeurangttaeng
+    */
 };

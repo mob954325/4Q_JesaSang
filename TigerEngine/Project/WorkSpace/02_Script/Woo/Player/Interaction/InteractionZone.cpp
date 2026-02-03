@@ -52,8 +52,13 @@ void InteractionZone::OnTriggerEnter(PhysicsComponent* other)
     // Search Object
     if (other->GetOwner()->GetName() == "SearchObject")
     {
-        player->SetCurSearchObject(other->GetOwner()->GetComponent<SearchObject>());
-        cout << "[InteractionZone] SearchObject In Interaction Zone" << endl;
+        auto searchOB = other->GetOwner()->GetComponent<SearchObject>();
+        if(searchOB && !searchOB->isSearched)
+        {
+            player->SetCurSearchObject(searchOB);
+            cout << "[InteractionZone] SearchObject In Interaction Zone" << endl;
+        }
+
         // TODO :: UI
     }
 
@@ -69,8 +74,13 @@ void InteractionZone::OnTriggerExit(PhysicsComponent* other)
     // Search Object
     if (other->GetOwner()->GetName() == "SearchObject")
     {
-        player->SetCurSearchObject(nullptr);
-        cout << "[InteractionZone] SearchObject Out Interaction Zone" << endl;
+        auto searchOB = other->GetOwner()->GetComponent<SearchObject>();
+        if (searchOB && !searchOB->isSearched)
+        {
+            player->SetCurSearchObject(nullptr);
+            cout << "[InteractionZone] SearchObject In Interaction Zone" << endl;
+        }
+
         // TODO :: UI
     }
 

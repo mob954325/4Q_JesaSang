@@ -56,7 +56,7 @@ enum class CollisionLayer : uint32_t
     Trigger = 1 << 4,
     Projectile = 1 << 5,
     Ball = 1 << 6,
-    IgnoreTest = 1 << 7 // 테스트 하려고 임시로 만듦, 추후 삭제 ㄱㄱ
+    Ground = 1 << 7 // Grid에서 Ground는 탐색영역으로 감지한다. 
 };
 
 
@@ -70,5 +70,5 @@ enum class CollisionLayer : uint32_t
 
 enum class ItemType
 {
-    Ingredient, Piece, None
+    Ingredient, Piece, Food, None
 };

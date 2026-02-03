@@ -12,6 +12,8 @@ class SearchObject;
 class Inventory;
 class CameraController;
 class MiniGameManager;
+class PlayerItemVisualizer;
+class IItem;
 
 // Player State Enum
 enum class PlayerState
@@ -37,6 +39,7 @@ private:
     FBXRenderer* fbxRenderer = nullptr;
     CharacterControllerComponent* cct = nullptr;
     Inventory* inventory = nullptr;
+    PlayerItemVisualizer* visualizer = nullptr;
 
     CameraController* camController = nullptr;
 
@@ -131,11 +134,16 @@ private:
     void SerachObjectInteraction(float dt);
     void CookingInteraction(float dt);
 
+
 public:
     // 외부 call Funcs..
     // Current Interaction Zone Search Object Set
     void SetCurSearchObject(SearchObject* object);
 
+
+    // MiniGame Return Login
+    void ReceiveMiniGameResult(std::unique_ptr<IItem> ingredient, bool isSuccess);
+    void ReceiveMiniGameItem(std::unique_ptr<IItem> ingredient);
 
 
 
