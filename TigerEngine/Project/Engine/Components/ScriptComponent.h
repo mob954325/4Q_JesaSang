@@ -21,7 +21,7 @@ protected:
     {
         auto ptr = ObjectSystem::Instance().Get<Component>(handle);
         ScriptSystem::Instance().RegisterScript(ptr);
-        OnEnable();
+        // OnEnable(); // System에서 확인함
     }
 
     void Disable() override
