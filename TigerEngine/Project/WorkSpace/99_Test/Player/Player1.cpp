@@ -21,25 +21,25 @@ RTTR_REGISTRATION
 
 void Player1::OnInitialize()
 {
-    cout << "== Player1 init ==\n";
+    // cout << "== Player1 init ==\n";
     weapon = GetOwner()->AddComponent<Weapon>();
 
-    cout << "GameObject add\n";
+    // cout << "GameObject add\n";
     auto weaponObj = SceneUtil::CreateGameObject("TestWeapon");
 
     GetOwner()->GetTransform()->AddChild(weaponObj->GetTransform());
     auto objIndex = GetOwner()->GetChildByIndex(0);
-    cout << "Find Obj index" << objIndex << " : " << objIndex->GetName() << "\n";
+    // cout << "Find Obj index" << objIndex << " : " << objIndex->GetName() << "\n";
 
     auto objName = GetOwner()->GetChildByName("TestWeapon");
-    cout << "Find Obj name " << objName->GetName() << " : " << objIndex->GetName() << "\n";
+    // cout << "Find Obj name " << objName->GetName() << " : " << objIndex->GetName() << "\n";
 
-    cout << "[Player1 | PlayModeTest] : OnInitalize() 1\n";    
+    // cout << "[Player1 | PlayModeTest] : OnInitalize() 1\n";    
 }
 
 void Player1::OnEnable()
 {
-    cout << "[Player1 | PlayModeTest] : OnEnable() 2\n";    
+    // cout << "[Player1 | PlayModeTest] : OnEnable() 2\n";    
     soket = SceneUtil::CreateGameObject("PlayerSoket");
     soket->SetParent(GetOwner());
 
@@ -47,11 +47,11 @@ void Player1::OnEnable()
 
 void Player1::OnStart()
 {
-    cout << "[Player1 | PlayModeTest] : OnStart() 3\n";    
+    // cout << "[Player1 | PlayModeTest] : OnStart() 3\n";    
     GameObject* obj = SceneUtil::GetObjectByName("Weapon");
 
-    if(obj)
-        cout << "SceneUtiltest : " << obj->GetName() << endl;
+    // if(obj)
+        // cout << "SceneUtiltest : " << obj->GetName() << endl;
 
     GameObject* instantiated = PrefabUtil::Instantiate("Test1");
     instantiated->GetTransform()->SetParent(this->GetOwner()->GetTransform());
@@ -59,12 +59,12 @@ void Player1::OnStart()
 
 void Player1::OnDisable()
 {
-    cout << "[Player1 | PlayModeTest] : OnDisable() 4\n";
+    // cout << "[Player1 | PlayModeTest] : OnDisable() 4\n";
 }
 
 void Player1::OnDestory()
 {
-    cout << "[Player1 | PlayModeTest] : OnDestory() 5\n";
+    // cout << "[Player1 | PlayModeTest] : OnDestory() 5\n";
 }
 
 void Player1::OnUpdate(float delta)

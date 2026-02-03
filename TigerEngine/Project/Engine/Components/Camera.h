@@ -10,11 +10,7 @@ class Camera : public Component
 	RTTR_ENABLE(Component)
 public:
 	Camera() { SetName("Camera"); } 
-	~Camera() {};
-
-    // register enable
-    void Enable_Inner() override;
-    void Disable_Inner() override;
+    ~Camera() {};
 
 	Vector3 GetForward();
 	Vector3 GetRight();
@@ -31,6 +27,8 @@ public:
 	void OnStart() override;
 	void OnUpdate(float delta) override;
     void OnDestory() override;
+    void Enable_Inner() override;
+    void Disable_Inner() override;
 
 	float GetSpeed() const { return moveSpeed; }
 	void SetSpeed(float value) {  moveSpeed = value; }

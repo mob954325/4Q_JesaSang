@@ -84,7 +84,6 @@ public:
     bool IsStart() { return isStart; }
     void SetStartTrue() { isStart = true; }
 
-protected:
     // Transform, FBXData, FreeCamera
     void Enable_Inner() override 
     { 

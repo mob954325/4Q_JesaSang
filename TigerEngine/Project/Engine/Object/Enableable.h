@@ -24,7 +24,6 @@ public:
         else Disable_Inner();
     }
 
-protected:
     /// <summary>
     /// 활성화 시 등록 함수
     /// </summary>
@@ -35,5 +34,6 @@ protected:
     /// </summary>
     virtual void Disable_Inner() {}  // Engine Component 정의시 필수 override 필요
 
+protected:
     bool isActive = true;
 };

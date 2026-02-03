@@ -18,12 +18,13 @@ RTTR_REGISTRATION
 void Camera::Enable_Inner()
 {
     CameraSystem::Instance().Register(this);
-
+    OnEnable();
 }
 
 void Camera::Disable_Inner()
 {
     CameraSystem::Instance().RemoveCamera(this);
+    OnDisable();
 }
 
 Vector3 Camera::GetForward()

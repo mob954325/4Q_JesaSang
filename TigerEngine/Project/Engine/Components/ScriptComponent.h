@@ -16,7 +16,6 @@ public:
 
     bool IsPlayModeOnly() override { return true; }
 
-protected:
     void Enable_Inner() override
     {
         auto ptr = ObjectSystem::Instance().Get<Component>(handle);

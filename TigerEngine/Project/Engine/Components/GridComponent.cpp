@@ -55,6 +55,7 @@ void GridComponent::OnInitialize()
 void GridComponent::Enable_Inner()
 {
     GridSystem::Instance().Register(this);
+    OnEnable();
 }
 
 void GridComponent::OnStart()
@@ -71,6 +72,7 @@ void GridComponent::OnDestory()
 void GridComponent::Disable_Inner()
 {
     GridSystem::Instance().UnRegister(this);
+    OnDisable();
 }
 
 void GridComponent::BuildBlockedFromPhysics()

@@ -65,6 +65,18 @@ void Decal::ChangeData(std::string path)
     }
 }
 
+void Decal::Enable_Inner()
+{
+    DecalSystem::Instance().Register(this);
+    OnEnable();
+}
+
+void Decal::Disable_Inner()
+{
+    DecalSystem::Instance().UnRegister(this);
+    OnDisable();
+}
+
 std::wstring ToWString(const std::string& str)
 {
     if (str.empty())

@@ -18,7 +18,8 @@ public:
     void OnDisable() override;
     void OnDestory() override;
     void OnRender(RenderQueue& queue) override;
-
+    void Enable_Inner() override;
+    void Disable_Inner() override;
 	
     // [Json Process] -----------------
 	nlohmann::json Serialize() override;

@@ -127,10 +127,7 @@ void PhysicsComponent::OnCCTCollisionExit(CharacterControllerComponent* cct)
 void PhysicsComponent::OnInitialize()
 {
     transform = GetOwner()->GetTransform();
-}
 
-void PhysicsComponent::OnStart()
-{
     // 우정 0128 | PhysicsComponent에서 스스로 collider Create
     ColliderDesc d;
     d.halfExtents = m_HalfExtents;
@@ -144,14 +141,25 @@ void PhysicsComponent::OnStart()
     SetLayer(m_Layer);
 }
 
+void PhysicsComponent::OnStart()
+{
+
+}
+
 void PhysicsComponent::Enable_Inner()
 {
     PhysicsSystem::Instance().RegisterComponent(this, m_Actor);
+    OnEnable();
+
+    cout << owner->GetName() << " : pc enalbe_inner\n";
+
 }
 
 void PhysicsComponent::Disable_Inner()
 {
     PhysicsSystem::Instance().UnregisterComponent(this);
+    OnDisable();
+    cout << owner->GetName() << " : pc Disable_Inner\n";
 }
 
 PhysicsComponent::~PhysicsComponent()

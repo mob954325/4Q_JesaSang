@@ -110,6 +110,17 @@ void PhysicsSystem::Simulate(float dt)
     m_Scene->simulate(dt);      // 물리 연산 요청 (비동기)
     m_Scene->fetchResults(true);// 결과가 끝날 때까지 대기 후 적용
 
+    // 1.1 컴포넌트 start 체크
+    for (auto& it : m_ActorMap)
+    {
+        PhysicsComponent* comp = it.first;
+        if (!comp->IsStart())
+        {
+            comp->OnStart();
+            comp->SetStartTrue();
+        }
+    }
+
     // 2. Actor 위치 동기화
     for (auto& it : m_ActorMap)
     {

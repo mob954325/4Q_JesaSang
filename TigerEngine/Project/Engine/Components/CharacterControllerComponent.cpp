@@ -67,7 +67,9 @@ void CharacterControllerComponent::OnInitialize()
     transform = GetOwner()->GetTransform();
 
     if (!m_Controller)
+    {
         CreateCharacterCollider(m_Radius, m_Height, m_Offset);
+    }
 }
 
 void CharacterControllerComponent::OnStart()
@@ -82,6 +84,9 @@ void CharacterControllerComponent::OnDestory()
 void CharacterControllerComponent::Enable_Inner()
 {
     CharacterControllerSystem::Instance().RegisterComponent(this, m_Controller);
+    OnEnable();
+
+    cout << owner->GetName() << " : ccc enalbe_inner\n";
 }
 
 void CharacterControllerComponent::Disable_Inner()
@@ -90,7 +95,10 @@ void CharacterControllerComponent::Disable_Inner()
     {
         CharacterControllerSystem::Instance().UnRegisterComponent(this);
         m_Controller = nullptr;
+        OnDisable();
+        cout << owner->GetName() << " : ccc Disable_Inner has m_controller\n";
     }
+    cout << owner->GetName() << " : ccc Disable_Inner end\n";
 }
 
 

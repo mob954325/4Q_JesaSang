@@ -112,6 +112,7 @@ void CameraSystem::FreeCameraUpdate(float delta)
     }
 }
 
+#include "../Components/FreeCamera.h"
 
 Handle CameraSystem::CreateFreeCamera(int clientWidth, int clientHeight, Scene *currScene)
 {
@@ -119,6 +120,7 @@ Handle CameraSystem::CreateFreeCamera(int clientWidth, int clientHeight, Scene *
     freeCamObj = ObjectSystem::Instance().Get<GameObject>(handle);
 	freeCamObj->SetName("FreeCamera");
     freeCamera = freeCamObj->AddComponent<Camera>();
+    freeCamObj->AddComponent<FreeCamera>();
 
 	freeCamera->SetProjection(DirectX::XM_PIDIV2, clientWidth, clientHeight, 0.1, 3000);
 
