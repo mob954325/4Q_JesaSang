@@ -33,6 +33,6 @@ public:
     void OnStart() override;
     void OnFixedUpdate(float dt) override;
 
-private:
     void PickRandomTarget();
+    void MoveAgent(const Vector3& dir, float speed, float dt);
 };

@@ -39,13 +39,12 @@ void AgentComponent::OnInitialize()
 void AgentComponent::OnStart()
 {
     cct = GetOwner()->GetComponent<CharacterControllerComponent>();
+
     auto grid = GridSystem::Instance().GetMainGrid();
     if (!grid) return;
 
     auto tr = GetOwner()->GetTransform();
     grid->WorldToGridFromCenter(tr->GetWorldPosition(), cx, cy);
-
-    PickRandomTarget();
 }
 
 void AgentComponent::PickRandomTarget()
@@ -54,6 +53,8 @@ void AgentComponent::PickRandomTarget()
     if (!grid) return;
 
     int range = 10;
+
+    hasTarget = false;
 
     for (int i = 0; i < 20; ++i)
     {
@@ -68,31 +69,17 @@ void AgentComponent::PickRandomTarget()
             return;
         }
     }
+
+    std::cout << "[AgentComponent] No valid target found\n";
+}
+
+void AgentComponent::MoveAgent(const Vector3& dir, float speed, float dt)
+{
+    if (cct)
+        cct->MoveAI(dir, speed, dt);
 }
 
 void AgentComponent::OnFixedUpdate(float dt)
 {
-    if (!cct || !hasTarget) { std::cout << "[AgentComponent] OnFixedUpdate is NULL" << std::endl; return; }
 
-    auto grid = GridSystem::Instance().GetMainGrid();
-    Vector3 targetPos = grid->GridToWorldFromCenter(targetCX, targetCY);
-
-    Vector3 pos = GetOwner()->GetTransform()->GetWorldPosition();
-    Vector3 dir = targetPos - pos;
-
-    if (dir.Length() < reachDist)
-    {
-        cx = targetCX;
-        cy = targetCY;
-        hasTarget = false;
-        PickRandomTarget();
-        return;
-    }
-
-    dir.y = 0;
-    dir.Normalize();
-
-    // 여기서 CCT 이동
-    std::cout << "[AgentComponent] OnFixedUpdate MoveAI" << std::endl;
-    cct->MoveAI(dir, patrolSpeed, dt);
 }
