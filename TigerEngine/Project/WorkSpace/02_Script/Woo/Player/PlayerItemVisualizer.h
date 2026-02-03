@@ -6,7 +6,7 @@
     [ PlayerItemVisualizer Script Component ]
 
     플레이어의 inventory에 있는 Ingrediant와 Food의 비주얼 연출을 관리하는 컴포넌트
-    On, Off, 연출 등을 관리합니다.
+    플레이어 머리 위에 뜰 Item(ingredient/food)의 On, Off, 연출을 관리합니다.
 */
 
 class PlayerItemVisualizer : public ScriptComponent

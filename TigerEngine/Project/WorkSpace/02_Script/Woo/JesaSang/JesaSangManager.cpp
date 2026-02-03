@@ -3,7 +3,7 @@
 #include "Util/ComponentAutoRegister.h"
 #include "Object/GameObject.h"
 #include "EngineSystem/SceneSystem.h"
-
+#include "../Item/Item.h"
 
 REGISTER_COMPONENT(JesaSangManager)
 
@@ -32,11 +32,6 @@ void JesaSangManager::OnStart()
         std::cout << "[JesaSangManager] Missing GameObject!" << endl;
 }
 
-void JesaSangManager::OnUpdate(float delta)
-{
-    
-}
-
 void JesaSangManager::OnDestory()
 {
    
@@ -50,4 +45,41 @@ nlohmann::json JesaSangManager::Serialize()
 void JesaSangManager::Deserialize(nlohmann::json data)
 {
     JsonHelper::SetDataFromJson(this, data);
+}
+
+/*
+    [Food Item ID]
+    Apple
+    Pear
+    Batter
+    Tofu
+    Sanjeok
+    Donggeurangttaeng
+*/
+void JesaSangManager::ReceiveFood(std::unique_ptr<IItem> food)
+{
+    string foodID = food->itemId;
+    if (foodID.empty())
+    {
+        std::cout << "[JesaSangManager] Food ID NULL!" << endl;
+        return;
+    }
+
+    // 음식 올리기
+    if (foodID == "Apple" && apple)
+        apple->SetActive(true);
+    else if (foodID == "Pear" && pear)
+        pear->SetActive(true);
+    else if (foodID == "Batter" && batter)
+        batter->SetActive(true);
+    else if (foodID == "Tofu" && tofu)
+        tofu->SetActive(true);
+    else if (foodID == "Sanjeok" && sanjeok)
+        sanjeok->SetActive(true);
+    else if (foodID == "Donggeurangttaeng" && dong)
+        dong->SetActive(true);
+
+    // 전달받은 Food Item은 할일 끝났으니 쏘멸
+    std::cout << "[JesaSangManager] Put Food : " << food->itemId << endl;
+    food.reset();
 }
