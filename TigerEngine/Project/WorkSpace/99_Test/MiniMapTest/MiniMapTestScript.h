@@ -27,6 +27,9 @@ public:
     float GetProgress01() const;
     void OnPieceCollected();
     void OnItemCollected();
+    // External trigger hooks (call from gameplay code on pickup)
+    void TriggerPieceCollected();
+    void TriggerItemCollected();
 
 private:
     Vector2 playerMapPos{};

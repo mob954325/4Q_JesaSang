@@ -34,7 +34,8 @@ static Vector2 WorldToMiniMap(const Vector3& worldPos, const Vector3& worldMin, 
 
     Vector2 out;
     out.x = std::clamp(nx, 0.0f, 1.0f) * mapSize.x;
-    out.y = std::clamp(nz, 0.0f, 1.0f) * mapSize.y;
+    // Flip Y so up in world maps to up on minimap.
+    out.y = (1.0f - std::clamp(nz, 0.0f, 1.0f)) * mapSize.y;
     return out;
 }
 
@@ -105,6 +106,16 @@ void MiniMapTestScript::OnPieceCollected()
 void MiniMapTestScript::OnItemCollected()
 {
     collectedItems = std::min(collectedItems + 1, totalItems);
+}
+
+void MiniMapTestScript::TriggerPieceCollected()
+{
+    OnPieceCollected();
+}
+
+void MiniMapTestScript::TriggerItemCollected()
+{
+    OnItemCollected();
 }
 
 nlohmann::json MiniMapTestScript::Serialize()
