@@ -45,15 +45,7 @@ void GameObject::RemoveComponent(Component* comp)
         auto objPtr = ObjectSystem::Instance().Get<Component>(*it);
         if (objPtr == comp)
         {
-            if (auto renderComp = dynamic_cast<RenderComponent*>(objPtr))
-            {
-                RenderSystem::Instance().UnRegister(renderComp);
-            }
-            else
-            {
-                ScriptSystem::Instance().UnRegister(objPtr);
-            }
-
+            objPtr->SetActive(false);
             objPtr->OnDestory();
             ObjectSystem::Instance().Destory(*it);
             handles.erase(it);
@@ -195,6 +187,7 @@ void GameObject::Initialize()
     aabbBoxExtent = { 10.0f, 10.0f, 10.0f };
     aabbBox = { {0.0f, 0.0f, 0.0f}, aabbBoxExtent };
     transform = AddComponent<Transform>();
+    SetActive(true); // 게임 오브젝트 enable = true
 }
 
 void GameObject::SetAABB(BoundingBox aabb)
@@ -222,15 +215,7 @@ void GameObject::ClearAll()
     for (auto it = handles.begin(); it != handles.end();)
     {
         auto objPtr = ObjectSystem::Instance().Get<Component>(*it);
-        if (auto renderComp = dynamic_cast<RenderComponent*>(objPtr))
-        {
-            RenderSystem::Instance().UnRegister(renderComp);
-        }
-        else
-        {
-            ScriptSystem::Instance().UnRegister(objPtr);
-        }
-
+        objPtr->SetActive(false);
         objPtr->OnDestory();
         ObjectSystem::Instance().Destory(*it);
         it = handles.erase(it);
