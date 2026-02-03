@@ -38,6 +38,9 @@ nlohmann::json Image::Serialize()
 void Image::Deserialize(nlohmann::json data)
 {
     JsonHelper::SetDataFromJson(this, data);
+
+    resource.reset();
+    GetTextureByPath(path);
 }
 
 void Image::GetTextureByPath(std::string path)
@@ -51,6 +54,9 @@ void Image::OnRender(RenderQueue& queue)
 
     // ItemData 채우기
     UIRenderItem data;
+    auto rect = GetOwner()->GetComponent<RectTransform>();
+    if (!rect) return;
+
     data.worldMat = rect->GetWorldMatrix();
     data.color = color;
 
@@ -83,5 +89,6 @@ void Image::ChangeData(std::string path)
 
 void Image::Init()
 {
-    rect = GetOwner()->AddComponent<RectTransform>();
+    // if(!GetOwner()->GetComponent<RectTransform>())
+    //     rect = GetOwner()->AddComponent<RectTransform>();
 }
