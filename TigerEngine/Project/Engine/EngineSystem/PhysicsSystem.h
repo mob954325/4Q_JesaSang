@@ -121,7 +121,7 @@ public:
     void Simulate(float dt); // 물리 시뮬레이션 1프레임 수행 
     void Shutdown();
 
-    void RegisterComponent(PhysicsComponent* comp, PxRigidActor* actor);
+    void RegisterComponent(PhysicsComponent* comp, PxRigidActor*& actor);
     void UnregisterComponent(PhysicsComponent* comp);
 
     // getter 

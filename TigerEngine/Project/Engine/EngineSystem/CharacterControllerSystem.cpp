@@ -195,7 +195,9 @@ void CharacterControllerSystem::RegisterComponent(CharacterControllerComponent* 
 {
     // if (comp && cct)
     if (comp)
+    {
         m_CCTMap[comp] = cct;
+    }
 }
 
 void CharacterControllerSystem::UnRegisterComponent(CharacterControllerComponent* comp)

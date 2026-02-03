@@ -81,13 +81,13 @@ public:
     CollisionLayer m_Layer = CollisionLayer::Default;
     bool m_IsTrigger = false;
 
-
     // [ 런타임 전용 ]
     PxRigidActor* m_Actor = nullptr;
     PxShape* m_Shape = nullptr;
 
     std::unordered_set<PxRigidActor*> m_CCTActors;
 
+    bool m_firstRegister = false; // 직렬화 대상 아님
 public:
     PhysicsComponent() = default;
     ~PhysicsComponent();

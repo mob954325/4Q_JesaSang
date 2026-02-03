@@ -66,7 +66,7 @@ public:
     CollisionMask  m_Mask;
     bool m_IsTrigger;
 
-
+    bool m_firstRegister = false; // 직렬화 대상 아님
 
 public:
     // -----------------------------

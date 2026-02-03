@@ -46,11 +46,15 @@ void CharacterControllerComponent::Deserialize(nlohmann::json data)
 {
     JsonHelper::SetDataFromJson(this, data);
 
-    // -------------------------
-    // CCT 재생성
-    // -------------------------
-    // CreateCharacterCollider(m_Radius, m_Height, m_Offset);
-    // SetLayer(m_Layer);
+    // data 수정 ...
+    if (!m_Controller)
+    {
+        CreateCharacterCollider(m_Radius, m_Height, m_Offset);
+    }
+
+    CharacterControllerSystem::Instance().RegisterComponent(this, m_Controller);
+
+    m_firstRegister = true;
 }
 
 void CharacterControllerComponent::OnCollisionEnter(PhysicsComponent* other) { if (GetOwner()) GetOwner()->BroadcastCollisionEnter(other); }
@@ -65,11 +69,6 @@ void CharacterControllerComponent::OnTriggerExit(PhysicsComponent* other) { if (
 void CharacterControllerComponent::OnInitialize()
 {
     transform = GetOwner()->GetTransform();
-
-    if (!m_Controller)
-    {
-        CreateCharacterCollider(m_Radius, m_Height, m_Offset);
-    }
 }
 
 void CharacterControllerComponent::OnStart()
@@ -83,10 +82,12 @@ void CharacterControllerComponent::OnDestory()
 
 void CharacterControllerComponent::Enable_Inner()
 {
-    CharacterControllerSystem::Instance().RegisterComponent(this, m_Controller);
-    OnEnable();
+    if(m_firstRegister)
+    {
+        CharacterControllerSystem::Instance().RegisterComponent(this, m_Controller);
+    }
 
-    cout << owner->GetName() << " : ccc enalbe_inner\n";
+    OnEnable();
 }
 
 void CharacterControllerComponent::Disable_Inner()
@@ -96,9 +97,7 @@ void CharacterControllerComponent::Disable_Inner()
         CharacterControllerSystem::Instance().UnRegisterComponent(this);
         m_Controller = nullptr;
         OnDisable();
-        cout << owner->GetName() << " : ccc Disable_Inner has m_controller\n";
     }
-    cout << owner->GetName() << " : ccc Disable_Inner end\n";
 }
 
 

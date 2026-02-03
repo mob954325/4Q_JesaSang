@@ -214,7 +214,7 @@ void PhysicsSystem::Simulate(float dt)
 //}
 
 
-void PhysicsSystem::RegisterComponent(PhysicsComponent* comp, PxRigidActor* actor)
+void PhysicsSystem::RegisterComponent(PhysicsComponent* comp, PxRigidActor*& actor)
 {
     m_ActorMap[comp] = actor;
 }
