@@ -47,6 +47,7 @@ public:
     void DropItem();
 
     std::string GetCurItemID();
+    ItemType GetCurItemType();
     std::unique_ptr<IItem> TakeCurItem();
 };
 

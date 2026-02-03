@@ -22,8 +22,10 @@
 
 #include "../Object/SearchObject.h"
 #include "../Inventory/Inventory.h"
+#include "../Item/Item.h"
 #include "../Camera/CameraController.h"
 #include "../MiniGame/MiniGameManager.h"
+#include "../JesaSang/JesaSangManager.h"
 #include "PlayerItemVisualizer.h"
 
 
@@ -243,8 +245,9 @@ void PlayerController::Rotation(float delta)
 /*-------[ Interaction ]----------------------------------*/
 void PlayerController::InteractionCheak(float delta)
 {
-    SerachObjectInteraction(delta);   // 수색 오브젝트 Interaction
-    CookingInteraction(delta);        // 조리대 Interaction
+    SerachObjectInteraction(delta);   // 수색 오브젝트 수색 Interaction
+    CookingInteraction(delta);        // 조리대 미니게임 시작 Interaction
+    PutFoodInteraction(delta);        // 제자상 음식 올리기 Interaction
 }
 
 void PlayerController::SerachObjectInteraction(float dt)
@@ -312,6 +315,33 @@ void PlayerController::CookingInteraction(float dt)
         MiniGameManager::Instance()->StartMiniGame(std::move(inventory->TakeCurItem()));
         ChangeState(PlayerState::Cook);
         cookInteractionTimer = 0.0f;
+    }
+}
+
+void PlayerController::PutFoodInteraction(float dt)
+{
+    // interaction x -> reset
+    if (!isInteractionKey || !isPossiblePutFood || 
+        !inventory->HasItem() || inventory->GetCurItemType() != ItemType::Food)
+    {
+        putFoodInteractionTimer = 0.0f;
+        return;
+    }
+
+    // holding
+    putFoodInteractionTimer += dt;
+    float progress = putFoodInteractionTimer / putFoodInteractionTime;
+    if (progress > 1.0f) progress = 1.0f;
+
+    // 제사상에 음식 올리기 interaction
+    if (putFoodInteractionTimer >= putFoodInteractionTime)
+    {
+        std::unique_ptr<IItem> food = inventory->TakeCurItem();
+        JesaSangManager::Instance()->ReceiveFood(std::move(food));
+        visualizer->VisualOffItem();
+        
+        // clear
+        putFoodInteractionTimer = 0.0f;
     }
 }
     

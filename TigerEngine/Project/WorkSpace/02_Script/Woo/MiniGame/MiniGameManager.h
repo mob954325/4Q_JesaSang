@@ -25,7 +25,7 @@ private:
 
     // game
     std::unique_ptr<IMiniGame> currentMiniGame;
-    std::unique_ptr<IItem> curIngredient;   // 재료는 게임실패시 반환, 성공시 소멸
+    std::unique_ptr<IItem> curIngredient;
 
 public:
     // data
