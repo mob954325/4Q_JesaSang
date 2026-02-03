@@ -53,6 +53,7 @@ public:
     GridCell* GetCellFromCenter(int cx, int cy);
     bool IsWalkableFromCenter(int cx, int cy); 
     Vector3 GridToWorldFromCenter(int cx, int cy);
+    bool WorldToGridFromCenter(const Vector3& pos, int& outCX, int& outCY);
     void SetWalkableFromCenter(int cx, int cy, bool walkable); 
 
     // Width / Height 변경 시 호출

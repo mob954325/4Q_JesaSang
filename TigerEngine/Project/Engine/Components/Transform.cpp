@@ -162,6 +162,17 @@ void Transform::SetQuaternion(const Quaternion& q)
     SetChildrenDirty();
 }
 
+Quaternion Transform::GetWorldQuaternion()
+{
+    UpdateMatricesIfDirty();
+
+    if (!parent)
+        return quaternion;
+
+    return quaternion * parent->GetWorldQuaternion();
+}
+
+
 void Transform::SetScale(const Vector3& s)
 {
     scale = s;
