@@ -3,6 +3,7 @@
 #include "Util/ComponentAutoRegister.h"
 #include "Object/GameObject.h"
 #include "EngineSystem/SceneSystem.h"
+#include "System/InputSystem.h"
 
 #include "../Item/Item.h"
 #include "Game/IMinigame.h"
@@ -30,7 +31,7 @@ void MiniGameManager::OnInitialize()
 void MiniGameManager::OnUpdate(float delta)
 {
     // game update
-    if (currentMiniGame)
+    if (isPlaying && currentMiniGame)
     {
         currentMiniGame->UpdateGame(delta);
         if (currentMiniGame->IsFinished())
@@ -38,6 +39,9 @@ void MiniGameManager::OnUpdate(float delta)
             EndMiniGame(currentMiniGame->IsSuccess());
         }
     }
+
+    // stop cheking
+    StopChecking();
 }
 
 void MiniGameManager::OnDestory()
@@ -104,10 +108,14 @@ void MiniGameManager::StartMiniGame(std::unique_ptr<IItem> ingredient)
 
     // start game
     currentMiniGame->StartGame();
+    isPlaying = true;
 }
 
+// 미니게임 종료시 (성공/실패+패널티)
 void MiniGameManager::EndMiniGame(bool isSuccess)
 {
+    isPlaying = false;
+
     // end game
     if (currentMiniGame)
     {
@@ -115,25 +123,54 @@ void MiniGameManager::EndMiniGame(bool isSuccess)
         currentMiniGame.reset();
     }
 
-    // ingredient
-    if (curIngredient)
-    { 
-        // 게임 성공이면 재료 소멸
-        if (isSuccess)
-        {
-            curIngredient.reset();
-            cout << "[MiniGameManager] : Game Success!" << endl;
-        }
-        // TODO :: 실패시 플레이어에게 반환
-        else
-        {
-            // std::move(curIngredient)  player inventory
-            curIngredient.reset();      // 임시
-            cout << "[MiniGameManager] : Game Fail..." << endl;
-        }
+    // get playercontroller
+    auto* pc = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("Player")->GetComponent<PlayerController>();
+    if (!pc)
+    {
+        cout << "[MiniGameManager] Missing Player Controller!" << endl;
+        return;
     }
 
+    // result return
+    if (curIngredient)
+        pc->ReceiveMiniGameResult(std::move(curIngredient), isSuccess);
+
     // player fsm change
-    auto* pc = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("Player")->GetComponent<PlayerController>();
     pc->ChangeState(PlayerState::Idle);
+}
+
+// 미니게임 강제 종료시 (재료만 반환)
+void MiniGameManager::StopMiniGame()
+{
+    isPlaying = false;
+
+    // end game
+    if (currentMiniGame)
+    {
+        currentMiniGame->EndGame();
+        currentMiniGame.reset();
+    }
+
+    // get playercontroller
+    auto* pc = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("Player")->GetComponent<PlayerController>();
+    if (!pc) 
+    {
+        cout << "[MiniGameManager] Missing Player Controller!" << endl;
+        return;
+    }
+
+    // ingredient 돌려주기
+    if (curIngredient)
+        pc->ReceiveMiniGameItem(std::move(curIngredient));
+
+    // player fsm change
+    pc->ChangeState(PlayerState::Idle);
+}
+
+void MiniGameManager::StopChecking()
+{
+    if (Input::GetKeyDown(stop_key))
+    {
+        StopMiniGame();
+    }
 }

@@ -34,6 +34,20 @@ void PlayerItemVisualizer::OnStart()
     if (!ingre_apple || !ingre_pear || !ingre_batter || !ingre_sanjeok || !ingre_dong ||
         !food_apple || !food_pear || !food_batter || !food_sanjeok || !food_dong)
         std::cout << "[JesaSangManager] Missing GameObject!" << endl;
+
+    ingre_apple->SetActive(false);
+    ingre_pear->SetActive(false);
+    ingre_batter->SetActive(false);
+    ingre_tofu->SetActive(false);
+    ingre_sanjeok->SetActive(false);
+    ingre_dong->SetActive(false);
+
+    food_apple->SetActive(false);
+    food_pear->SetActive(false);
+    food_batter->SetActive(false);
+    food_tofu->SetActive(false);
+    food_sanjeok->SetActive(false);
+    food_dong->SetActive(false);
 }
 
 nlohmann::json PlayerItemVisualizer::Serialize()

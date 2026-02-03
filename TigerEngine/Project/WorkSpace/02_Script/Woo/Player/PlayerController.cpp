@@ -329,3 +329,47 @@ void PlayerController::SetCurSearchObject(SearchObject* object)
         curSerachObject = nullptr;
     }
 }
+
+void PlayerController::ReceiveMiniGameResult(unique_ptr<IItem> ingredient, bool isSuccess)
+{
+    if (isSuccess)
+    {
+        string ingreID = ingredient->itemId;
+
+        // 성공시 음식 생성
+        std::unique_ptr<IItem> food;
+        if (ingreID == "Ingredient_Apple") food = make_unique<Food>("Apple");
+        else if (ingreID == "Ingredient_Pear") food = make_unique<Food>("Pear");
+        else if (ingreID == "Ingredient_Batter") food = make_unique<Food>("Batter");
+        else if (ingreID == "Ingredient_Tofu") food = make_unique<Food>("Tofu");
+        else if (ingreID == "Ingredient_Sanjeok") food = make_unique<Food>("Sanjeok");
+        else if (ingreID == "Ingredient_Donggeurangttaeng") food = make_unique<Food>("Donggeurangttaeng");
+        else cout << "NO!!!!!!!!!!!!!!!! ingredent id isanham." << endl;
+
+        cout << "[Player] Cooking Success! Get Food : " << food->itemId << endl;
+
+        // 재료 사용
+        ingredient.reset();
+
+        // 인벤토리에 완성된 음식 추가
+        visualizer->VisualOnItem(food->itemId);
+        inventory->AddItem(std::move(food));
+    }
+    else
+    {
+        cout << "[Player] Cooking Fail.. Get Ingredient : " << ingredient->itemId << endl;
+
+        // 실패시 재료 다시 돌려받음
+        visualizer->VisualOnItem(ingredient->itemId);
+        inventory->AddItem(std::move(ingredient));
+
+        // TODO :: 소음, AI 트리거 발생
+    }
+}
+
+void PlayerController::ReceiveMiniGameItem(unique_ptr<IItem> ingredient)
+{
+    // ESC로 미니게임 강제종료시 재료반 다시 돌려받음
+    visualizer->VisualOnItem(ingredient->itemId);
+    inventory->AddItem(std::move(ingredient));
+}
