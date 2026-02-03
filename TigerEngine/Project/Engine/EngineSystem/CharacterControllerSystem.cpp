@@ -184,7 +184,7 @@ void CharacterControllerSystem::Simulate(float dt)
 }
 
 
-void CharacterControllerSystem::RegisterComponent(CharacterControllerComponent* comp, PxController* cct)
+void CharacterControllerSystem::RegisterComponent(CharacterControllerComponent* comp, PxController*& cct)
 {
     if (comp && cct)
         m_CCTMap[comp] = cct;

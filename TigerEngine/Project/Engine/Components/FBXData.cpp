@@ -24,7 +24,6 @@ void FBXData::OnInitialize()
     auto renderer = owner->GetComponent<FBXRenderer>();
     if(renderer != nullptr) renderer->OnInitialize();
     cout << "Component : OnInitialize() 1\n";
-
 }
 
 void FBXData::OnEnable()

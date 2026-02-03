@@ -76,6 +76,16 @@ void CharacterControllerComponent::OnStart()
 
 void CharacterControllerComponent::OnDestory()
 {
+    
+}
+
+void CharacterControllerComponent::Enable_Inner()
+{
+    CharacterControllerSystem::Instance().RegisterComponent(this, m_Controller);
+}
+
+void CharacterControllerComponent::Disable_Inner()
+{
     if (m_Controller)
     {
         CharacterControllerSystem::Instance().UnRegisterComponent(this);
@@ -109,8 +119,6 @@ void CharacterControllerComponent::CreateCharacterCollider(float radius, float h
         height * WORLD_TO_PHYSX,
         10.0f   // density (사실상 무의미) density는 반드시 > 0
     );
-
-    CharacterControllerSystem::Instance().RegisterComponent(this, m_Controller);
 
     SetLayer(CollisionLayer::Default); // 초기 레이어 적용
 }

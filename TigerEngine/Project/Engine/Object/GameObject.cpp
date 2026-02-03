@@ -195,7 +195,6 @@ void GameObject::Initialize()
     aabbBoxExtent = { 10.0f, 10.0f, 10.0f };
     aabbBox = { {0.0f, 0.0f, 0.0f}, aabbBoxExtent };
     transform = AddComponent<Transform>();
-    SetActive(true); // 게임 오브젝트 enable = true
 }
 
 void GameObject::SetAABB(BoundingBox aabb)

@@ -15,6 +15,17 @@ RTTR_REGISTRATION
 		.property("angle", 	    &Camera::GetPovAngle, 		&Camera::SetPovAngle);
 }
 
+void Camera::Enable_Inner()
+{
+    CameraSystem::Instance().Register(this);
+
+}
+
+void Camera::Disable_Inner()
+{
+    CameraSystem::Instance().RemoveCamera(this);
+}
+
 Vector3 Camera::GetForward()
 {
 	Matrix world = owner->GetTransform()->GetWorldMatrix();
@@ -77,7 +88,6 @@ void Camera::SetInputVec(const Vector3 &inputVec)
 
 void Camera::OnInitialize()
 {
-    CameraSystem::Instance().Register(this);
     Vector2 screen = CameraSystem::Instance().GetScreenSize();
     screenWidth = screen.x;
     screenHeight = screen.y;
@@ -101,7 +111,7 @@ void Camera::OnUpdate(float delta)
 
 void Camera::OnDestory()
 {
-    CameraSystem::Instance().RemoveCamera(this);
+    
 }
 
 void Camera::SetProjection(float povAngle, int width, int height, float targetNear, float targetFar)

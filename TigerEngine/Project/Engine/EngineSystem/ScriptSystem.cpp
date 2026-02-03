@@ -8,7 +8,9 @@ void ScriptSystem::CheckReadyQueue()
     while (!readyQueue.empty())
     {
         auto comp = readyQueue.front();
+
         comp->OnStart();
+        comp->SetStartTrue();
         readyQueue.pop();
     }
 }
@@ -17,7 +19,6 @@ void ScriptSystem::Register(Component* comp)
 {
     readyQueue.push(comp);
     comps.push_back(comp);
-    comp->OnInitialize();
 }
 
 void ScriptSystem::RegisterScript(Component* comp)
@@ -57,13 +58,8 @@ void ScriptSystem::Update(float delta)
     {
         if (!e->GetOwner()->GetActiveSelf()) continue;  // Object 활성화 여부
         if (!e->GetActiveSelf()) continue;              // 컴포넌트 활성화 여부
-
-        if (!e->IsStart())
-        {
-            e->IsStart();
-            e->SetStartTrue();
-        }
-        else
+        
+        if(e->IsStart())
         {
             e->OnUpdate(delta);
         }
@@ -71,20 +67,21 @@ void ScriptSystem::Update(float delta)
 
     if (PlayModeSystem::Instance().IsPlaying())
     {
+        // Initialize는 Addcomponent시에 최초 1회만 호출됩니다. Play 모드에는 호출되지 않습니다.
         // 1. 등록된 init 해소
 
-        for (auto it = scriptCompsInitReady.begin(); it != scriptCompsInitReady.end();)
-        {
-            if (!(*it)->GetOwner()->GetActiveSelf() || !(*it)->GetActiveSelf())
-            {
-                it++;
-            }
-            else
-            {
-                (*it)->OnInitialize();
-                it = scriptCompsInitReady.erase(it);
-            }
-        }
+        //for (auto it = scriptCompsInitReady.begin(); it != scriptCompsInitReady.end();)
+        //{
+        //    if (!(*it)->GetOwner()->GetActiveSelf() || !(*it)->GetActiveSelf())
+        //    {
+        //        it++;
+        //    }
+        //    else
+        //    {
+        //        (*it)->OnInitialize();
+        //        it = scriptCompsInitReady.erase(it);
+        //    }
+        //}
 
         // 3. 사용자 정의 component update
         for (auto& e : scriptComps)

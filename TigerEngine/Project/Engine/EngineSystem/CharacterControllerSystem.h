@@ -83,7 +83,7 @@ public:
     void Simulate(float dt);
     void Shutdown();
 
-    void RegisterComponent(CharacterControllerComponent* comp, PxController* cct);
+    void RegisterComponent(CharacterControllerComponent* comp, PxController*& cct);
     void UnRegisterComponent(CharacterControllerComponent* comp);
 
     PxControllerManager* GetControllerManager() const { return m_ControllerManager; }

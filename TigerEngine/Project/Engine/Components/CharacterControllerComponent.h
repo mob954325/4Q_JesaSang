@@ -26,6 +26,10 @@ public:
     void OnStart() override; 
     void OnDestory() override;
 
+    // register enable
+    void Enable_Inner() override;
+    void Disable_Inner() override;
+
 public:
     Transform* transform = nullptr;
 

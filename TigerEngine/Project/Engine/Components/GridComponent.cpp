@@ -44,14 +44,17 @@ void DebugPrintBlock(
 
 void GridComponent::OnInitialize()
 {
-    GridSystem::Instance().Register(this);
-
     // 셀 배열 초기화 
     ResizeGrid(width, height);
 
     // 임의로 (-1,2) 그리드를 걸을 수 없게 설정
     //SetWalkableFromCenter(-1, 2, false);
     //SetWalkableFromCenter(3, -4, false);
+}
+
+void GridComponent::Enable_Inner()
+{
+    GridSystem::Instance().Register(this);
 }
 
 void GridComponent::OnStart()
@@ -61,6 +64,11 @@ void GridComponent::OnStart()
 }
 
 void GridComponent::OnDestory()
+{
+    
+}
+
+void GridComponent::Disable_Inner()
 {
     GridSystem::Instance().UnRegister(this);
 }

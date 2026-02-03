@@ -12,6 +12,10 @@ public:
 	Camera() { SetName("Camera"); } 
 	~Camera() {};
 
+    // register enable
+    void Enable_Inner() override;
+    void Disable_Inner() override;
+
 	Vector3 GetForward();
 	Vector3 GetRight();
 	Matrix GetView();

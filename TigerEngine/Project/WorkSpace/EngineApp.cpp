@@ -94,7 +94,6 @@ bool EngineApp::OnInitialize()
 #if _DEBUG
 	auto freeCamHandle = CameraSystem::Instance().CreateFreeCamera(clientWidth, clientHeight, SceneSystem::Instance().GetCurrentScene().get());
     auto freeCamObjPtr = ObjectSystem::Instance().Get<GameObject>(freeCamHandle);
-    freeCamObjPtr->AddComponent<FreeCamera>();
 #endif
 
     // == find scene ==

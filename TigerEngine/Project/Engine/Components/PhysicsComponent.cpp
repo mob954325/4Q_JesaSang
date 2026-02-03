@@ -144,9 +144,19 @@ void PhysicsComponent::OnStart()
     SetLayer(m_Layer);
 }
 
-PhysicsComponent::~PhysicsComponent()
+void PhysicsComponent::Enable_Inner()
+{
+    PhysicsSystem::Instance().RegisterComponent(this, m_Actor);
+}
+
+void PhysicsComponent::Disable_Inner()
 {
     PhysicsSystem::Instance().UnregisterComponent(this);
+}
+
+PhysicsComponent::~PhysicsComponent()
+{
+    
 }
 
 
@@ -383,7 +393,6 @@ void PhysicsComponent::CreateCollider(ColliderType collider, PhysicsBodyType bod
     }
     
     phys.GetScene()->addActor(*m_Actor); // 물리 씬에 추가 
-    phys.RegisterComponent(this, m_Actor);
 
 
     SyncToPhysics(); // 좌표 연결 

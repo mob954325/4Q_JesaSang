@@ -17,19 +17,20 @@ public:
     bool IsPlayModeOnly() override { return true; }
 
 protected:
-    void Enable() override
+    void Enable_Inner() override
     {
         auto ptr = ObjectSystem::Instance().Get<Component>(handle);
         ScriptSystem::Instance().RegisterScript(ptr);
-        // OnEnable(); // System에서 확인함
+        OnEnable();
     }
 
-    void Disable() override
+    void Disable_Inner() override
     {
         auto ptr = ObjectSystem::Instance().Get<Component>(handle);
         ScriptSystem::Instance().UnRegisterScript(ptr);
         OnDisable();
     }
+
 public:
     virtual void OnCollisionEnter(PhysicsComponent*) {}
     virtual void OnCollisionStay(PhysicsComponent*) {}
