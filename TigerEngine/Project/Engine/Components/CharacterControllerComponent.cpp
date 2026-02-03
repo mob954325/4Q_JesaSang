@@ -188,6 +188,74 @@ void CharacterControllerComponent::MoveCharacter(const Vector3& wishDir, float f
     m_Controller->move(move, 0.01f, fixedDt, filters);
 }
 
+void CharacterControllerComponent::MovePlayer(const Vector3& inputDir, float playerSpeed, float dt)
+{
+    InternalMove(inputDir, playerSpeed, true, true, dt);
+}
+void CharacterControllerComponent::MoveAI( const Vector3& moveDir, float aiSpeed, float dt)
+{
+    InternalMove(moveDir, aiSpeed, true, false, dt);
+}
+
+
+// [ 공통 코어 움직임 ]
+void CharacterControllerComponent::InternalMove(
+    const Vector3& horizontalDir,
+    float speed,           
+    bool applyGravity,
+    bool allowJump,
+    float fixedDt)
+{
+    if (!m_Controller) return;  // 방어코드 !! 유니티 내부도 이렇게 방어 한다고 함 
+
+    PxVec3 velocity(0, 0, 0);
+
+    if (horizontalDir.LengthSquared() > 0.0f)
+    {
+        Vector3 d = horizontalDir;
+        d.Normalize();
+        velocity.x = d.x * speed;
+        velocity.z = d.z * speed;
+    }
+
+    PxControllerState state;
+    m_Controller->getState(state);
+    bool isGrounded = state.collisionFlags & PxControllerCollisionFlag::eCOLLISION_DOWN;
+
+    if (applyGravity)
+    {
+        if (isGrounded)
+        {
+            if (allowJump && m_RequestJump)
+            {
+                m_VerticalVelocity = m_JumpSpeed;
+                m_RequestJump = false;
+            }
+            else if (m_VerticalVelocity < 0.0f)
+            {
+                m_VerticalVelocity = m_MinDown;
+            }
+        }
+        else
+        {
+            m_VerticalVelocity += -9.8f * fixedDt;
+        }
+        velocity.y = m_VerticalVelocity;
+    }
+    else
+    {
+        velocity.y = 0.0f;
+    }
+
+    PxVec3 move = velocity * fixedDt;
+
+    CCTQueryFilter queryFilter(nullptr);
+    PxControllerFilters filters(&m_FilterData, &queryFilter, nullptr);
+
+    m_Controller->move(move, 0.01f, fixedDt, filters);
+}
+
+
 void CharacterControllerComponent::Jump()
 {
     if (!m_Controller || m_RequestJump)

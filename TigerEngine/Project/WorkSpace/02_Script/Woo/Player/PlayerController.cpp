@@ -211,8 +211,9 @@ void PlayerController::Move(float delta)
 {
     if (!cct) return;
 
-    cct->m_MoveSpeed = curSpeed;
-    cct->MoveCharacter(lookDir, delta);
+    // cct->m_MoveSpeed = curSpeed;
+    cct->MovePlayer(lookDir, curSpeed, delta);
+    // cct->MoveCharacter(lookDir, delta);
 }
 
 static float WrapAngleRad(float a)      // util
