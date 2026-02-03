@@ -4,9 +4,8 @@
 #include <string> 
 #include <vector>
 #include "../Scene/Scene.h"
-#include "../EngineSystem/RenderSystem.h"
-#include "../EngineSystem/ScriptSystem.h"
 #include "Enableable.h"
+#include "../Components/CharacterControllerComponent.h"
 
 class RenderComponent; // NOTE : Component 있는 거랑 순환 참조 조심하기
 class PhysicsComponent;
@@ -68,6 +67,8 @@ public:
     Transform* GetChildByIndex(int index);
     Transform* GetChildByName(std::string name);
     Transform* GetParent();    
+    void SetParent(GameObject* obj);
+    void SetParent(Transform* tran);
 
 protected:
 	Scene* currentScene{}; // 현재 게임 오브젝트가 존재하는 씬 참조 변수
@@ -116,22 +117,7 @@ inline T* GameObject::AddComponent()
 	comp->SetOwner(this);
 	components.push_back(comp);
 	handles.push_back(handle);
-
- 	if (auto renderComp = dynamic_cast<RenderComponent*>(comp))
-	{
-        // 렌더 컴포넌트
-        RenderSystem::Instance().Register(renderComp);
-	}
-    else if(auto scriptComp = dynamic_cast<ScriptComponent*>(comp))
-    {
-        // 사용자 정의 컴포넌트
-        ScriptSystem::Instance().RegisterScript(scriptComp);
-    }
-    else
-    {
-        // 엔진 기본 컴포넌트
-        ScriptSystem::Instance().Register(comp);
-    }
+    comp->SetActive(true); // NOTE : 컴포넌트 등록 후 바로 활성화
 
 	return comp;
 }

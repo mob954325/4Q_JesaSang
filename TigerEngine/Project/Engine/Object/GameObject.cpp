@@ -5,6 +5,8 @@
 #include "../EngineSystem/RenderSystem.h"
 #include "System/InputSystem.h"
 
+#include "../Components/ScriptComponent.h"
+
 RTTR_REGISTRATION
 {
     rttr::registration::class_<Enableable>("Enableable")
@@ -43,15 +45,7 @@ void GameObject::RemoveComponent(Component* comp)
         auto objPtr = ObjectSystem::Instance().Get<Component>(*it);
         if (objPtr == comp)
         {
-            if (auto renderComp = dynamic_cast<RenderComponent*>(objPtr))
-            {
-                RenderSystem::Instance().UnRegister(renderComp);
-            }
-            else
-            {
-                ScriptSystem::Instance().UnRegister(objPtr);
-            }
-
+            objPtr->SetActive(false);
             objPtr->OnDestory();
             ObjectSystem::Instance().Destory(*it);
             handles.erase(it);
@@ -193,6 +187,7 @@ void GameObject::Initialize()
     aabbBoxExtent = { 10.0f, 10.0f, 10.0f };
     aabbBox = { {0.0f, 0.0f, 0.0f}, aabbBoxExtent };
     transform = AddComponent<Transform>();
+    SetActive(true); // 게임 오브젝트 enable = true
 }
 
 void GameObject::SetAABB(BoundingBox aabb)
@@ -220,15 +215,7 @@ void GameObject::ClearAll()
     for (auto it = handles.begin(); it != handles.end();)
     {
         auto objPtr = ObjectSystem::Instance().Get<Component>(*it);
-        if (auto renderComp = dynamic_cast<RenderComponent*>(objPtr))
-        {
-            RenderSystem::Instance().UnRegister(renderComp);
-        }
-        else
-        {
-            ScriptSystem::Instance().UnRegister(objPtr);
-        }
-
+        objPtr->SetActive(false);
         objPtr->OnDestory();
         ObjectSystem::Instance().Destory(*it);
         it = handles.erase(it);
@@ -258,6 +245,17 @@ Transform* GameObject::GetChildByName(std::string name)
 Transform* GameObject::GetParent()
 {
     return transform->GetParent();
+}
+
+void GameObject::SetParent(GameObject* obj)
+{
+    if (obj == nullptr) return;
+    transform->SetParent(obj->GetTransform());
+}
+
+void GameObject::SetParent(Transform* tran)
+{
+    transform->SetParent(tran);
 }
 
 
