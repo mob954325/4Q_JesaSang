@@ -1,5 +1,7 @@
 #include "RenderSystem.h"
 #include "System/TimeSystem.h"
+#include "../Components/RenderComponent.h"
+#include "../RenderQueue/RenderQueue.h"
 #include "../Object/GameObject.h"
 
 void RenderSystem::CheckReadyQueue()

@@ -11,7 +11,10 @@ class Player1 : public ScriptComponent
     RTTR_ENABLE(ScriptComponent)
 public:
     void OnInitialize() override;
+    void OnEnable() override;
     void OnStart() override;
+    void OnDisable() override;
+    void OnDestory() override;
     void OnUpdate(float delta) override;
 
     nlohmann::json Serialize() override;
@@ -22,6 +25,7 @@ public:
     float b = 0.0f;
 
 private:
+    GameObject* soket{};
     Weapon* weapon{};
 };
 
