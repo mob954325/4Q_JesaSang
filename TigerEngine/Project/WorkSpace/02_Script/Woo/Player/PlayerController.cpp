@@ -24,6 +24,7 @@
 #include "../Inventory/Inventory.h"
 #include "../Camera/CameraController.h"
 #include "../MiniGame/MiniGameManager.h"
+#include "PlayerItemVisualizer.h"
 
 
 REGISTER_COMPONENT(PlayerController)
@@ -48,6 +49,7 @@ void PlayerController::OnStart()
     fbxRenderer = GetOwner()->GetComponent<FBXRenderer>();
     cct = GetOwner()->GetComponent<CharacterControllerComponent>();
     inventory = GetOwner()->GetComponent<Inventory>();
+    visualizer = GetOwner()->GetComponent<PlayerItemVisualizer>();
     
     camController = CameraSystem::Instance().GetCurrCamera()->GetOwner()->GetComponent<CameraController>();
 
@@ -254,7 +256,7 @@ void PlayerController::SerachObjectInteraction(float dt)
     }
 
     // inventory full
-    if (inventory->IsFull())
+    if (inventory->HasItem())
     {
         cout << "[Player] Inventory Full! Can't interaction" << endl;
         return;
@@ -273,7 +275,10 @@ void PlayerController::SerachObjectInteraction(float dt)
 
         // item get or fail
         if (item)
+        {
+            visualizer->VisualOnItem(item->itemId);
             inventory->AddItem(std::move(item));
+        }
         else
             std::cout << "[Player] Fail Get Item... " << std::endl;
 
@@ -287,7 +292,7 @@ void PlayerController::SerachObjectInteraction(float dt)
 void PlayerController::CookingInteraction(float dt)
 {
     // interaction x -> reset
-    if (!isInteractionKey || !isPossibleCooking || !inventory->IsFull())
+    if (!isInteractionKey || !isPossibleCooking || !inventory->HasItem())
     {
         cookInteractionTimer = 0.0f;
         return;
@@ -302,6 +307,7 @@ void PlayerController::CookingInteraction(float dt)
     if (cookInteractionTimer >= cookInteractionTime)
     {
         // mini game start
+        visualizer->VisualOffItem();
         MiniGameManager::Instance()->StartMiniGame(std::move(inventory->TakeCurItem()));
         ChangeState(PlayerState::Cook);
         cookInteractionTimer = 0.0f;

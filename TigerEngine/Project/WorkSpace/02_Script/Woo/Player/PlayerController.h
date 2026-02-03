@@ -12,6 +12,7 @@ class SearchObject;
 class Inventory;
 class CameraController;
 class MiniGameManager;
+class PlayerItemVisualizer;
 
 // Player State Enum
 enum class PlayerState
@@ -37,6 +38,7 @@ private:
     FBXRenderer* fbxRenderer = nullptr;
     CharacterControllerComponent* cct = nullptr;
     Inventory* inventory = nullptr;
+    PlayerItemVisualizer* visualizer = nullptr;
 
     CameraController* camController = nullptr;
 

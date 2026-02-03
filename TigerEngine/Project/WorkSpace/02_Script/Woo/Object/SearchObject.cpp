@@ -38,9 +38,9 @@ void SearchObject::OnStart()
     if (hasItem)
     {
         if (itemType == ItemType::Ingredient)
-            item = std::make_unique<Ingredient>(itemType, itemID);
+            item = std::make_unique<Ingredient>(itemID);
         else if (itemType == ItemType::Piece)
-            item = std::make_unique<Piece>(itemType, itemID);
+            item = std::make_unique<Piece>(itemID);
     }
 }
 

@@ -179,6 +179,7 @@
     <ClInclude Include="02_Script\Woo\MiniGame\Game\Game_FireControl.h" />
     <ClInclude Include="02_Script\Woo\Player\FSM\Player_Cook.h" />
     <ClInclude Include="02_Script\Woo\JesaSang\JesaSangManager.h" />
+    <ClInclude Include="02_Script\Woo\Player\PlayerItemVisualizer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="02_Script\Woo\Camera\CameraController.cpp" />
@@ -215,6 +216,7 @@
     <ClCompile Include="02_Script\Woo\MiniGame\Game\Game_FireControl.cpp" />
     <ClCompile Include="02_Script\Woo\Player\FSM\Player_Cook.cpp" />
     <ClCompile Include="02_Script\Woo\JesaSang\JesaSangManager.cpp" />
+    <ClCompile Include="02_Script\Woo\Player\PlayerItemVisualizer.cpp" />
     <ClCompile Include="winMain.cpp" />
   </ItemGroup>
   <ItemGroup>
