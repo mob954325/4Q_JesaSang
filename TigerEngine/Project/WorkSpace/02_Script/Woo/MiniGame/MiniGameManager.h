@@ -5,7 +5,7 @@
 class IItem;
 
 /* 
-    [ MiniGameManager Script Component ]
+    [ MiniGameManager Script Component ] <Singleton>
     
     음식에 맞는 미니게임을 실행시키고, 미니게임 라이프 사이클을 관리하는 매니저
 
