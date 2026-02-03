@@ -247,6 +247,17 @@ Transform* GameObject::GetParent()
     return transform->GetParent();
 }
 
+void GameObject::SetParent(GameObject* obj)
+{
+    if (obj == nullptr) return;
+    transform->SetParent(obj->GetTransform());
+}
+
+void GameObject::SetParent(Transform* tran)
+{
+    transform->SetParent(tran);
+}
+
 
 // -----------------------------
 // Physics 충돌 이벤트 

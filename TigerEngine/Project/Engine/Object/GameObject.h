@@ -67,6 +67,8 @@ public:
     Transform* GetChildByIndex(int index);
     Transform* GetChildByName(std::string name);
     Transform* GetParent();    
+    void SetParent(GameObject* obj);
+    void SetParent(Transform* tran);
 
 protected:
 	Scene* currentScene{}; // 현재 게임 오브젝트가 존재하는 씬 참조 변수
