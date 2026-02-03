@@ -71,8 +71,15 @@ std::unique_ptr<IItem> SearchObject::Interaction()
 
     // 수색한 오브젝트 표시
     fbxRenderer->SetDiffuse(interactionDiffuse);
+    isSearched = true;
 
     // 플레이어 아이템 습득
-    if (!hasItem) return nullptr;
+    if (!hasItem)
+    {
+        SetActive(false);
+        return nullptr;
+    }
+
+    SetActive(false);
     return std::move(item);
 }

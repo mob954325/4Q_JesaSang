@@ -121,7 +121,7 @@ void OcclusionFadeObject::StartFadeIn()
     }
 
     BeginFade(fadeInOpacity);
-    cout << "[OcclusionFadeObject] StartFadeIn" << endl;
+    //cout << "[OcclusionFadeObject] StartFadeIn" << endl;
 }
 
 void OcclusionFadeObject::StartFadeOut()
@@ -132,5 +132,5 @@ void OcclusionFadeObject::StartFadeOut()
     }
 
     BeginFade(1.0f);
-    cout << "[OcclusionFadeObject] StartFadeOut" << endl;
+    //cout << "[OcclusionFadeObject] StartFadeOut" << endl;
 }

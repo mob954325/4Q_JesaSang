@@ -253,9 +253,8 @@ void PlayerController::SerachObjectInteraction(float dt)
         return;
     }
 
-    // ingredient inventory full
-    if (curSerachObject->itemType == ItemType::Ingredient &&
-        inventory->IsFull())
+    // inventory full
+    if (inventory->IsFull())
     {
         cout << "[Player] Inventory Full! Can't interaction" << endl;
         return;
