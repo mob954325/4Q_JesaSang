@@ -1,4 +1,5 @@
 #include "ScriptSystem.h"
+#include "../Components/ScriptComponent.h"
 #include "../EngineSystem/PlayModeSystem.h"
 #include "../Object/GameObject.h"
 
@@ -88,7 +89,12 @@ void ScriptSystem::Update(float delta)
         // 3. 사용자 정의 component update
         for (auto& e : scriptComps)
         {
-            if (!e->GetOwner()->GetActiveSelf() || !e->GetActiveSelf()) continue;
+            // NOTE : 호출 순서를 위해서 Update에서 한꺼번에 처리
+            if (!e->GetOwner()->GetActiveSelf() || !e->GetActiveSelf()) continue; // 1. 첫 OnEnable이 활성화 체크
+
+            if(!e->IsStart()) e->OnEnable(); // isStart 체크 이유 : 만약 중간에 disable 되지않고 실행되면, OnEnable -> OnStart 순으로 실행됨이 보장되기때문에.
+
+            if (!e->GetOwner()->GetActiveSelf() || !e->GetActiveSelf()) continue; // 2. OnEnable에서 Disable를 호출했으면 Start를 호출하지 않고 큐를 isStart를 체크하지 않는다.
                 
             if (!e->IsStart())
             {

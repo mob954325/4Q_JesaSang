@@ -10,7 +10,9 @@ class FBXData : public Component
     RTTR_ENABLE(Component)
 public:
     void OnInitialize() override;
+    void OnEnable() override;
     void OnStart() override;
+    void OnDisable() override;
     void OnDestory() override;
 
     std::vector<Mesh>& GetMesh();

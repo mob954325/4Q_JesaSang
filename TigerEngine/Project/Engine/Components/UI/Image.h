@@ -6,7 +6,7 @@
 enum class ImageType
 {
     Simple,		// 기본 이미지 출력
-    Sliced,		// 이미지 중간 부분만 늘려지는거 ( 9-Sliced는 아님 )
+    Sliced,		// 9-Sliced
     Fill		// 이미지 채우기
 };
 
@@ -53,7 +53,7 @@ private:
     void Init();
 
     std::shared_ptr<TextureResource> resource{};
-    RectTransform* rect;
+    // RectTransform* rect;
 
     ImageType type = ImageType::Simple;
     Color color{};

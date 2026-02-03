@@ -4,7 +4,7 @@
 
 RTTR_REGISTRATION
 {
-        rttr::registration::class_<RectTransform>("RectTransform")
+        rttr::registration::class_<RectTransform>("RectTransform") // NOTE : 로드시 rect가 두 개임 ??
         .constructor<>()
             (rttr::policy::ctor::as_std_shared_ptr)
         .property("Pos",    &RectTransform::GetPos,    &RectTransform::SetPos)
@@ -28,6 +28,7 @@ void RectTransform::OnUpdate(float delta)
 
 nlohmann::json RectTransform::Serialize()
 {
+    // transform 내용 저장 -> rect가 가진 transform 
     return JsonHelper::MakeSaveData(this);
 }
 
