@@ -27,7 +27,7 @@ protected:
     void Disable() override
     {
         auto ptr = ObjectSystem::Instance().Get<Component>(handle);
-        ScriptSystem::Instance().RegisterScript(ptr);
+        ScriptSystem::Instance().UnRegisterScript(ptr);
         OnDisable();
     }
 public:
