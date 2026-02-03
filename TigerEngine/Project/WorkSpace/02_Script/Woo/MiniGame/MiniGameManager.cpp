@@ -59,15 +59,15 @@ void MiniGameManager::Deserialize(nlohmann::json data)
 std::unique_ptr<IMiniGame> MiniGameManager::CreateMinigameForIngredientId(const std::string& foodId)
 {
     // 음식 재료에 따른 미니게임 선택
-    if (foodId == "Apple" || foodId == "Pear")
+    if (foodId == "Ingredient_Apple" || foodId == "Ingredient_Pear")
     {
         return std::make_unique<Game_Cutting>();
     }
-    if (foodId == "Batter" || foodId == "Tofu")
+    if (foodId == "Ingredient_Batter" || foodId == "Ingredient_Tofu")
     {
         return std::make_unique<Game_FireControl>();
     }
-    if (foodId == "Sanjeok" || foodId == "Donggeurangttaeng")
+    if (foodId == "Ingredient_Sanjeok" || foodId == "Ingredient_Donggeurangttaeng")
     {
         return std::make_unique<Game_Assembling>();
     }
