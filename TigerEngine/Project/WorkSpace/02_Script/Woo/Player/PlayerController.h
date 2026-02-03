@@ -16,7 +16,7 @@ class MiniGameManager;
 // Player State Enum
 enum class PlayerState
 {
-    Idle, Walk, Run, Sit, SitWalk, Hide, Hit, Die, None
+    Idle, Walk, Run, Sit, SitWalk, Hide, Hit, Cook, Die, None
 };
 
 /*
@@ -43,7 +43,7 @@ private:
     // --- [ State ] ---------------------------
     PlayerState state = PlayerState::None;
     IPlayerState* curState;
-    IPlayerState* fsmStates[8];
+    IPlayerState* fsmStates[9];
 
     // --- [ Stat ] --------------------------------
     // values (inspector)
@@ -55,7 +55,7 @@ private:
     // --- [ Controll ] ----------------------------
     // cur stat
     float curSpeed = 0.0f;
-    Vector3 moveDir = Vector3::Zero;
+    Vector3 lookDir = Vector3::Zero;
 
     // interaction
     bool  isPossibleInteraction = false; // 기획자분이 한번에 하나만 가능한 사이즈라고 하심. 중첩된다면 추가 처리필요.
@@ -149,8 +149,10 @@ public:
     friend class Player_SitWalk;
     friend class Player_Hide;
     friend class Player_Hit;
+    friend class Player_Cook;
     friend class Player_Die;
     friend class InteractionZone;
     friend class InteractionSensor;
+    friend class MiniGameManager;
 };
 

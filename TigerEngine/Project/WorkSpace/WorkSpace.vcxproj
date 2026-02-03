@@ -178,6 +178,7 @@
     <ClInclude Include="02_Script\Woo\MiniGame\Game\Game_Assembling.h" />
     <ClInclude Include="02_Script\Woo\MiniGame\Game\Game_Cutting.h" />
     <ClInclude Include="02_Script\Woo\MiniGame\Game\Game_FireControl.h" />
+    <ClInclude Include="02_Script\Woo\Player\FSM\Player_Cook.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="02_Script\Woo\Camera\CameraController.cpp" />
@@ -213,7 +214,7 @@
     <ClCompile Include="02_Script\Woo\MiniGame\Game\Game_Assembling.cpp" />
     <ClCompile Include="02_Script\Woo\MiniGame\Game\Game_Cutting.cpp" />
     <ClCompile Include="02_Script\Woo\MiniGame\Game\Game_FireControl.cpp" />
-
+    <ClCompile Include="02_Script\Woo\Player\FSM\Player_Cook.cpp" />
     <ClCompile Include="winMain.cpp" />
   </ItemGroup>
   <ItemGroup>
