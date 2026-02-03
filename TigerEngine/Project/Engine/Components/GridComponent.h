@@ -9,6 +9,14 @@ struct GridCell
     int y = 0;
 };
 
+// 에디터에서 지정할 좌표 목록
+struct WalkableOverride
+{
+    int cx = 0; // 중앙 기준 X
+    int cy = 0; // 중앙 기준 Y
+    bool walkable = false;
+};
+
 
 class GridComponent : public Component
 {
@@ -23,12 +31,15 @@ public:
     float cellSize = 100.0f;
 
     std::vector<GridCell> cells;
+    std::vector<WalkableOverride> walkableOverrides;
 
 public:
     GridComponent() = default;
     ~GridComponent() = default;
 
     void OnInitialize() override;
+
+    void OnStart() override;
     void OnDestory() override;
 
     GridCell* GetCell(int x, int y);
@@ -43,4 +54,10 @@ public:
     bool IsWalkableFromCenter(int cx, int cy); 
     Vector3 GridToWorldFromCenter(int cx, int cy);
     void SetWalkableFromCenter(int cx, int cy, bool walkable); 
+
+    // Width / Height 변경 시 호출
+    void ResizeGrid(int newWidth, int newHeight);
+
+    // 씬에 있는 Trigger 아닌 Collider는 Grid 차단 
+    void BuildBlockedFromPhysics();
 };

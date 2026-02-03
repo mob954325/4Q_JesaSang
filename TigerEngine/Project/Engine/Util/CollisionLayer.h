@@ -13,10 +13,20 @@ using CollisionMask = uint32_t;
 inline CollisionMask operator|(CollisionLayer a, CollisionLayer b)
 {
     return (CollisionMask)a | (CollisionMask)b;
+    return (CollisionMask)a | (CollisionMask)b;
 }
 
 // 여러 개 이어서 쓸 수 있게
 inline CollisionMask operator|(CollisionMask a, CollisionLayer b)
 {
     return a | (CollisionMask)b;
+}
+
+
+// --------------------------------------------------
+// Layer AND 연산자
+// --------------------------------------------------
+inline bool operator&(CollisionLayer a, CollisionLayer b)
+{
+    return ((CollisionMask)a & (CollisionMask)b) != 0;
 }

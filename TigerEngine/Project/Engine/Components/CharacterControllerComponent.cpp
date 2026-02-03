@@ -21,7 +21,7 @@ RTTR_REGISTRATION
             rttr::value("Trigger", CollisionLayer::Trigger),
             rttr::value("Projectile", CollisionLayer::Projectile),
             rttr::value("Ball", CollisionLayer::Ball),
-            rttr::value("IgnoreTest", CollisionLayer::IgnoreTest)
+            rttr::value("Ground", CollisionLayer::Ground)
             );
 
     rttr::registration::class_<CharacterControllerComponent>("CharacterControllerComponent")

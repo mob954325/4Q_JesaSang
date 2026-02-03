@@ -33,7 +33,7 @@ RTTR_REGISTRATION
             rttr::value("Trigger", CollisionLayer::Trigger),
             rttr::value("Projectile", CollisionLayer::Projectile),
             rttr::value("Ball", CollisionLayer::Ball),
-            rttr::value("IgnoreTest", CollisionLayer::IgnoreTest)
+            rttr::value("Ground", CollisionLayer::Ground)
             );
 
     rttr::registration::class_<PhysicsComponent>("PhysicsComponent")
@@ -60,20 +60,6 @@ nlohmann::json PhysicsComponent::Serialize()
 void PhysicsComponent::Deserialize(nlohmann::json data)
 {
     JsonHelper::SetDataFromJson(this, data);
-
-    //// -------------------------
-    //// PhysX 재생성
-    //// -------------------------
-    //ColliderDesc d;
-    //d.halfExtents = m_HalfExtents;
-    //d.radius = m_Radius;
-    //d.height = m_Height;
-    //d.density = m_Density;
-    //d.localOffset = m_LocalOffset;
-    //d.isTrigger = m_IsTrigger;
-
-    //CreateCollider(m_ColliderType, m_BodyType, d); // Note : 반드시 PysicsSystem.Initialize()가 호출된 뒤에 호출되야함.
-    //SetLayer(m_Layer);
 }
 
 void PhysicsComponent::OnCollisionEnter(PhysicsComponent* other)
@@ -141,8 +127,6 @@ void PhysicsComponent::OnCCTCollisionExit(CharacterControllerComponent* cct)
 void PhysicsComponent::OnInitialize()
 {
     transform = GetOwner()->GetTransform();
-
-    
 }
 
 void PhysicsComponent::OnStart()
