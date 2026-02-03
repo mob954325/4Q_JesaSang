@@ -90,6 +90,11 @@ void FBXRenderer::OnUpdate(float delta)
     }
 }
 
+void FBXRenderer::OnDisable()
+{
+    std::cout << "FBXRenderer : OnDisable\n";
+}
+
 void FBXRenderer::OnDestory()
 {
     Vector3 center = { 0.0f, 0.0f, 0.0f };
@@ -99,6 +104,8 @@ void FBXRenderer::OnDestory()
     Vector3 max = center + extent;
 
     GetOwner()->SetAABB(min, max, center);
+
+    std::cout << "FBXRenderer : OnDestory\n";
 }
 
 void FBXRenderer::OnRender(RenderQueue& queue)

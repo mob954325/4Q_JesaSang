@@ -15,6 +15,7 @@ public:
     void OnEnable() override;
 	void OnStart() override;
 	void OnUpdate(float delta) override;
+    void OnDisable() override;
     void OnDestory() override;
     void OnRender(RenderQueue& queue) override;
 

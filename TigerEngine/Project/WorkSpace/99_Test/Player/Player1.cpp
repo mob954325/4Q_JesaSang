@@ -36,14 +36,29 @@ void Player1::OnInitialize()
     cout << "[Player1 | PlayModeTest] : OnInitalize() 1\n";    
 }
 
+void Player1::OnEnable()
+{
+    cout << "[Player1 | PlayModeTest] : OnEnable() 2\n";    
+}
+
 void Player1::OnStart()
 {
-    cout << "[Player1 | PlayModeTest] : OnStart() 2\n";
+    cout << "[Player1 | PlayModeTest] : OnStart() 3\n";    
     GameObject* obj = SceneUtil::GetObjectByName("Weapon");
 
     if(obj)
         cout << "SceneUtiltest : " << obj->GetName() << endl;
 
+}
+
+void Player1::OnDisable()
+{
+    cout << "[Player1 | PlayModeTest] : OnDisable() 4\n";
+}
+
+void Player1::OnDestory()
+{
+    cout << "[Player1 | PlayModeTest] : OnDestory() 5\n";
 }
 
 void Player1::OnUpdate(float delta)
