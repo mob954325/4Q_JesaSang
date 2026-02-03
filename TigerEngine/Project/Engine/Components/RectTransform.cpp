@@ -77,6 +77,21 @@ void RectTransform::SetPivot(const Vector2& vec)
     dirty = true;
 }
 
+void RectTransform::SetChildrenDirty()
+{
+    auto ownerChildren = GetOwner()->GetTransform()->GetChildren();
+    for (auto& child : ownerChildren)
+    {
+        child->SetDirty();
+        auto rect = child->GetOwner()->GetComponent<RectTransform>();
+        if (rect)
+        {
+            rect->SetDirty();
+            rect->SetChildrenDirty();
+        }
+    }
+}
+
 void RectTransform::UpdateMatricesIfDirty()
 {
     if (!dirty) return;
@@ -89,13 +104,15 @@ void RectTransform::UpdateMatricesIfDirty()
 
     localMatrix = T0 * S * R * T1;
 
-    if (!parent)
+    auto parentTran = GetOwner()->GetParent();
+    if (!parentTran)
     {
         worldMatrix = localMatrix;
     }
     else
     {
-        worldMatrix = localMatrix * parent->GetWorldMatrix();
+        auto parentRect = parentTran->GetOwner()->GetComponent<RectTransform>();
+        worldMatrix = localMatrix * parentRect->GetWorldMatrix();
     }
 
     dirty = false;
