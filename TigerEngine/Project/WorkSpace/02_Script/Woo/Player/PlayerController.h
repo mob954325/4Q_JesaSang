@@ -12,6 +12,7 @@ class SearchObject;
 class Inventory;
 class CameraController;
 class MiniGameManager;
+class JesaSangManager;
 class PlayerItemVisualizer;
 class IItem;
 
@@ -50,9 +51,9 @@ private:
 
     // --- [ Stat ] --------------------------------
     // values (inspector)
-    float walkSpeed = 2.5f;
-    float runSpeed = 4.0f;
-    float sitSpeed = 1.0f;
+    float walkSpeed = 1.0f;
+    float runSpeed = 1.8f;
+    float sitSpeed = 0.6f;
         
 
     // --- [ Controll ] ----------------------------
@@ -60,11 +61,16 @@ private:
     float curSpeed = 0.0f;
     Vector3 lookDir = Vector3::Zero;
 
-    // interaction
+    // search object interaction
     bool  isPossibleInteraction = false; // 기획자분이 한번에 하나만 가능한 사이즈라고 하심. 중첩된다면 추가 처리필요.
     SearchObject* curSerachObject;       // 현재 interaction가능한 오브젝트
     float searchInteractionTime  = 2.0f;
     float searchInteractionTimer = 0.0f;
+
+    // jesasang interaction
+    bool isPossiblePutFood;
+    float putFoodInteractionTime = 2.0f;
+    float putFoodInteractionTimer = 0.0f;
 
     // cooking mini game
     bool isPossibleCooking = false;      // 조리대 zone 안에 있는지 flag
@@ -133,6 +139,7 @@ private:
     void InteractionCheak(float delta);
     void SerachObjectInteraction(float dt);
     void CookingInteraction(float dt);
+    void PutFoodInteraction(float dt);
 
 
 public:

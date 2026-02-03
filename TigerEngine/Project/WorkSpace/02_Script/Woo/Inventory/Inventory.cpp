@@ -62,6 +62,12 @@ std::string Inventory::GetCurItemID()
     else return "";
 }
 
+ItemType Inventory::GetCurItemType()
+{
+    if (item) return item->itemType;
+    else return ItemType::None;
+}
+
 std::unique_ptr<IItem> Inventory::TakeCurItem()
 {
     return std::move(item);

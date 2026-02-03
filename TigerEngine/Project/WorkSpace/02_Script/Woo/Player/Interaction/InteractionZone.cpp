@@ -66,6 +66,14 @@ void InteractionZone::OnTriggerEnter(PhysicsComponent* other)
     if (other->GetOwner()->GetName() == "CookingZone")
     {
         player->isPossibleCooking = true;
+        cout << "[InteractionZone] CookingZone In Interaction Zone" << endl;
+    }
+
+    // JesaSang
+    if (other->GetOwner()->GetName() == "JesaSang")
+    {
+        player->isPossiblePutFood = true;
+        cout << "[InteractionZone] JesaSang In Interaction Zone" << endl;
     }
 }
 
@@ -78,7 +86,7 @@ void InteractionZone::OnTriggerExit(PhysicsComponent* other)
         if (searchOB && !searchOB->isSearched)
         {
             player->SetCurSearchObject(nullptr);
-            cout << "[InteractionZone] SearchObject In Interaction Zone" << endl;
+            cout << "[InteractionZone] SearchObject Out Interaction Zone" << endl;
         }
 
         // TODO :: UI
@@ -88,5 +96,12 @@ void InteractionZone::OnTriggerExit(PhysicsComponent* other)
     if (other->GetOwner()->GetName() == "CookingZone")
     {
         player->isPossibleCooking = false;
+        cout << "[InteractionZone] CookingZone Out Interaction Zone" << endl;
+    }
+
+    if (other->GetOwner()->GetName() == "JesaSang")
+    {
+        player->isPossiblePutFood = false;
+        cout << "[InteractionZone] JesaSang Out Interaction Zone" << endl;
     }
 }
