@@ -43,7 +43,7 @@ void InteractionSensor::OnTriggerEnter(PhysicsComponent* other)
 {
     if (other->GetOwner()->GetName() == "SearchObject")
     {
-        cout << "[InteractionSensor] SearchObject In Sensor Zone" << endl;
+        //cout << "[InteractionSensor] SearchObject In Sensor Zone" << endl;
         // TODO :: UI
     }
 }
@@ -52,7 +52,7 @@ void InteractionSensor::OnTriggerExit(PhysicsComponent* other)
 {
     if (other->GetOwner()->GetName() == "SearchObject")
     {
-        cout << "[InteractionSensor] SearchObject Out Sensor Zone" << endl;
+        //cout << "[InteractionSensor] SearchObject Out Sensor Zone" << endl;
         // TODO :: UI
     }
 }

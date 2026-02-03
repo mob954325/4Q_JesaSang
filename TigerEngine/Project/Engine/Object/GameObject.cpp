@@ -4,6 +4,7 @@
 #include "../EngineSystem/ScriptSystem.h"
 #include "../EngineSystem/RenderSystem.h"
 #include "System/InputSystem.h"
+#include "../EngineSystem/PlayModeSystem.h"
 
 #include "../Components/ScriptComponent.h"
 
@@ -266,6 +267,9 @@ void GameObject::SetParent(Transform* tran)
 // Rigid
 void GameObject::BroadcastCollisionEnter(PhysicsComponent* other)
 {
+    // 우정 0203 | 에디터모드 충돌 방지코드 추가
+    if (!PlayModeSystem::Instance().IsPlaying()) return;
+
     for (auto c : components)
         if (auto s = dynamic_cast<ScriptComponent*>(c))
             s->OnCollisionEnter(other);
@@ -273,6 +277,9 @@ void GameObject::BroadcastCollisionEnter(PhysicsComponent* other)
 
 void GameObject::BroadcastCollisionStay(PhysicsComponent* other)
 {
+    // 우정 0203 | 에디터모드 충돌 방지코드 추가
+    if (!PlayModeSystem::Instance().IsPlaying()) return;
+
     for (auto c : components)
         if (auto s = dynamic_cast<ScriptComponent*>(c))
             s->OnCollisionStay(other);
@@ -280,6 +287,9 @@ void GameObject::BroadcastCollisionStay(PhysicsComponent* other)
 
 void GameObject::BroadcastCollisionExit(PhysicsComponent* other)
 {
+    // 우정 0203 | 에디터모드 충돌 방지코드 추가
+    if (!PlayModeSystem::Instance().IsPlaying()) return;
+
     for (auto c : components)
         if (auto s = dynamic_cast<ScriptComponent*>(c))
             s->OnCollisionExit(other);
@@ -289,6 +299,9 @@ void GameObject::BroadcastCollisionExit(PhysicsComponent* other)
 // Trigger
 void GameObject::BroadcastTriggerEnter(PhysicsComponent* other)
 {
+    // 우정 0203 | 에디터모드 충돌 방지코드 추가
+    if (!PlayModeSystem::Instance().IsPlaying()) return;
+
     for (auto c : components)
         if (auto s = dynamic_cast<ScriptComponent*>(c))
             s->OnTriggerEnter(other);
@@ -296,6 +309,9 @@ void GameObject::BroadcastTriggerEnter(PhysicsComponent* other)
 
 void GameObject::BroadcastTriggerStay(PhysicsComponent* other)
 {
+    // 우정 0203 | 에디터모드 충돌 방지코드 추가
+    if (!PlayModeSystem::Instance().IsPlaying()) return;
+
     for (auto c : components)
         if (auto s = dynamic_cast<ScriptComponent*>(c))
             s->OnTriggerStay(other);
@@ -303,6 +319,9 @@ void GameObject::BroadcastTriggerStay(PhysicsComponent* other)
 
 void GameObject::BroadcastTriggerExit(PhysicsComponent* other)
 {
+    // 우정 0203 | 에디터모드 충돌 방지코드 추가
+    if (!PlayModeSystem::Instance().IsPlaying()) return;
+
     for (auto c : components)
         if (auto s = dynamic_cast<ScriptComponent*>(c))
             s->OnTriggerExit(other);
@@ -312,6 +331,9 @@ void GameObject::BroadcastTriggerExit(PhysicsComponent* other)
 // CCT Trigger
 void GameObject::BroadcastCCTTriggerEnter(CharacterControllerComponent* cct)
 {
+    // 우정 0203 | 에디터모드 충돌 방지코드 추가
+    if (!PlayModeSystem::Instance().IsPlaying()) return;
+
     for (auto c : components)
         if (auto s = dynamic_cast<ScriptComponent*>(c))
             s->OnCCTTriggerEnter(cct);
@@ -319,6 +341,9 @@ void GameObject::BroadcastCCTTriggerEnter(CharacterControllerComponent* cct)
 
 void GameObject::BroadcastCCTTriggerStay(CharacterControllerComponent* cct)
 {
+    // 우정 0203 | 에디터모드 충돌 방지코드 추가
+    if (!PlayModeSystem::Instance().IsPlaying()) return;
+
     for (auto c : components)
         if (auto s = dynamic_cast<ScriptComponent*>(c))
             s->OnCCTTriggerStay(cct);
@@ -326,6 +351,9 @@ void GameObject::BroadcastCCTTriggerStay(CharacterControllerComponent* cct)
 
 void GameObject::BroadcastCCTTriggerExit(CharacterControllerComponent* cct)
 {
+    // 우정 0203 | 에디터모드 충돌 방지코드 추가
+    if (!PlayModeSystem::Instance().IsPlaying()) return;
+
     for (auto c : components)
         if (auto s = dynamic_cast<ScriptComponent*>(c))
             s->OnCCTTriggerExit(cct);
@@ -335,6 +363,9 @@ void GameObject::BroadcastCCTTriggerExit(CharacterControllerComponent* cct)
 // CCT Collision
 void GameObject::BroadcastCCTCollisionEnter(CharacterControllerComponent* cct)
 {
+    // 우정 0203 | 에디터모드 충돌 방지코드 추가
+    if (!PlayModeSystem::Instance().IsPlaying()) return;
+
     for (auto c : components)
         if (auto s = dynamic_cast<ScriptComponent*>(c))
             s->OnCCTCollisionEnter(cct);
@@ -342,6 +373,9 @@ void GameObject::BroadcastCCTCollisionEnter(CharacterControllerComponent* cct)
 
 void GameObject::BroadcastCCTCollisionStay(CharacterControllerComponent* cct)
 {
+    // 우정 0203 | 에디터모드 충돌 방지코드 추가
+    if (!PlayModeSystem::Instance().IsPlaying()) return;
+
     for (auto c : components)
         if (auto s = dynamic_cast<ScriptComponent*>(c))
             s->OnCCTCollisionStay(cct);
@@ -349,6 +383,9 @@ void GameObject::BroadcastCCTCollisionStay(CharacterControllerComponent* cct)
 
 void GameObject::BroadcastCCTCollisionExit(CharacterControllerComponent* cct)
 {
+    // 우정 0203 | 에디터모드 충돌 방지코드 추가
+    if (!PlayModeSystem::Instance().IsPlaying()) return;
+
     for (auto c : components)
         if (auto s = dynamic_cast<ScriptComponent*>(c))
             s->OnCCTCollisionExit(cct);

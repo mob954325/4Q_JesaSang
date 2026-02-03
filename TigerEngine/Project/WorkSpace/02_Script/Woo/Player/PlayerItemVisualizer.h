@@ -1,0 +1,46 @@
+#pragma once
+#include "Components/ScriptComponent.h"
+#include "../Item/Item.h"
+
+/*
+    [ PlayerItemVisualizer Script Component ]
+
+    플레이어의 inventory에 있는 Ingrediant와 Food의 비주얼 연출을 관리하는 컴포넌트
+    On, Off, 연출 등을 관리합니다.
+*/
+
+class PlayerItemVisualizer : public ScriptComponent
+{
+    RTTR_ENABLE(ScriptComponent)
+
+private:
+    // gameobjects
+    GameObject* ingre_apple = nullptr;
+    GameObject* ingre_pear = nullptr;
+    GameObject* ingre_batter = nullptr;
+    GameObject* ingre_tofu = nullptr;
+    GameObject* ingre_sanjeok = nullptr;
+    GameObject* ingre_dong = nullptr;
+
+    // gameobjects
+    GameObject* food_apple = nullptr;
+    GameObject* food_pear = nullptr;
+    GameObject* food_batter = nullptr;
+    GameObject* food_tofu = nullptr;
+    GameObject* food_sanjeok = nullptr;
+    GameObject* food_dong = nullptr;
+
+public:
+    // component process
+    void OnStart() override;
+
+    // json
+    nlohmann::json Serialize();
+    void Deserialize(nlohmann::json data);
+
+public:
+    // 외부 call funcs..
+    void VisualOnItem(std::string itemID);
+    void VisualOffItem();
+};
+

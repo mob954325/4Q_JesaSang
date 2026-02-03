@@ -24,6 +24,7 @@
 #include "../Inventory/Inventory.h"
 #include "../Camera/CameraController.h"
 #include "../MiniGame/MiniGameManager.h"
+#include "PlayerItemVisualizer.h"
 
 
 REGISTER_COMPONENT(PlayerController)
@@ -48,6 +49,7 @@ void PlayerController::OnStart()
     fbxRenderer = GetOwner()->GetComponent<FBXRenderer>();
     cct = GetOwner()->GetComponent<CharacterControllerComponent>();
     inventory = GetOwner()->GetComponent<Inventory>();
+    visualizer = GetOwner()->GetComponent<PlayerItemVisualizer>();
     
     camController = CameraSystem::Instance().GetCurrCamera()->GetOwner()->GetComponent<CameraController>();
 
@@ -253,9 +255,8 @@ void PlayerController::SerachObjectInteraction(float dt)
         return;
     }
 
-    // ingredient inventory full
-    if (curSerachObject->itemType == ItemType::Ingredient &&
-        inventory->IsFull())
+    // inventory full
+    if (inventory->HasItem())
     {
         cout << "[Player] Inventory Full! Can't interaction" << endl;
         return;
@@ -274,7 +275,10 @@ void PlayerController::SerachObjectInteraction(float dt)
 
         // item get or fail
         if (item)
+        {
+            visualizer->VisualOnItem(item->itemId);
             inventory->AddItem(std::move(item));
+        }
         else
             std::cout << "[Player] Fail Get Item... " << std::endl;
 
@@ -288,7 +292,7 @@ void PlayerController::SerachObjectInteraction(float dt)
 void PlayerController::CookingInteraction(float dt)
 {
     // interaction x -> reset
-    if (!isInteractionKey || !isPossibleCooking || !inventory->IsFull())
+    if (!isInteractionKey || !isPossibleCooking || !inventory->HasItem())
     {
         cookInteractionTimer = 0.0f;
         return;
@@ -303,6 +307,7 @@ void PlayerController::CookingInteraction(float dt)
     if (cookInteractionTimer >= cookInteractionTime)
     {
         // mini game start
+        visualizer->VisualOffItem();
         MiniGameManager::Instance()->StartMiniGame(std::move(inventory->TakeCurItem()));
         ChangeState(PlayerState::Cook);
         cookInteractionTimer = 0.0f;
@@ -323,4 +328,48 @@ void PlayerController::SetCurSearchObject(SearchObject* object)
         isPossibleInteraction = false;
         curSerachObject = nullptr;
     }
+}
+
+void PlayerController::ReceiveMiniGameResult(unique_ptr<IItem> ingredient, bool isSuccess)
+{
+    if (isSuccess)
+    {
+        string ingreID = ingredient->itemId;
+
+        // 성공시 음식 생성
+        std::unique_ptr<IItem> food;
+        if (ingreID == "Ingredient_Apple") food = make_unique<Food>("Apple");
+        else if (ingreID == "Ingredient_Pear") food = make_unique<Food>("Pear");
+        else if (ingreID == "Ingredient_Batter") food = make_unique<Food>("Batter");
+        else if (ingreID == "Ingredient_Tofu") food = make_unique<Food>("Tofu");
+        else if (ingreID == "Ingredient_Sanjeok") food = make_unique<Food>("Sanjeok");
+        else if (ingreID == "Ingredient_Donggeurangttaeng") food = make_unique<Food>("Donggeurangttaeng");
+        else cout << "NO!!!!!!!!!!!!!!!! ingredent id isanham." << endl;
+
+        cout << "[Player] Cooking Success! Get Food : " << food->itemId << endl;
+
+        // 재료 사용
+        ingredient.reset();
+
+        // 인벤토리에 완성된 음식 추가
+        visualizer->VisualOnItem(food->itemId);
+        inventory->AddItem(std::move(food));
+    }
+    else
+    {
+        cout << "[Player] Cooking Fail.. Get Ingredient : " << ingredient->itemId << endl;
+
+        // 실패시 재료 다시 돌려받음
+        visualizer->VisualOnItem(ingredient->itemId);
+        inventory->AddItem(std::move(ingredient));
+
+        // TODO :: 소음, AI 트리거 발생
+    }
+}
+
+void PlayerController::ReceiveMiniGameItem(unique_ptr<IItem> ingredient)
+{
+    // ESC로 미니게임 강제종료시 재료반 다시 돌려받음
+    visualizer->VisualOnItem(ingredient->itemId);
+    inventory->AddItem(std::move(ingredient));
 }

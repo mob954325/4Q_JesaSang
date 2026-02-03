@@ -1,11 +1,12 @@
 #pragma once
 #include "Components/ScriptComponent.h"
 #include "Game/IMiniGame.h"
+#include <directxtk/Keyboard.h>
 
 class IItem;
 
 /* 
-    [ MiniGameManager Script Component ]
+    [ MiniGameManager Script Component ] <Singleton>
     
     음식에 맞는 미니게임을 실행시키고, 미니게임 라이프 사이클을 관리하는 매니저
 
@@ -27,6 +28,13 @@ private:
     std::unique_ptr<IItem> curIngredient;   // 재료는 게임실패시 반환, 성공시 소멸
 
 public:
+    // data
+    Keyboard::Keys stop_key = Keyboard::Escape;
+
+    // controll
+    bool isPlaying;
+
+public:
     // component process
     void OnInitialize() override;
     void OnUpdate(float delta) override;
@@ -38,9 +46,14 @@ public:
 
 private:
     // funcs..
+    // start/end
     std::unique_ptr<IMiniGame> CreateMinigameForIngredientId(const std::string& foodId);
+    void EndMiniGame(bool isSuccess);   // 미니게임 종료시 (성공/실패+패널티)
+    void StopMiniGame();                // 미니게임 강제 종료시 (재료만 반환)
     void CleanupMinigame();
-    void EndMiniGame(bool isSuccess);
+
+    // update
+    void StopChecking();
 
 public:
     // 외부 call fucns..
