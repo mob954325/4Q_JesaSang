@@ -84,7 +84,7 @@ public:
     ~CharacterControllerComponent();
 
     void CreateCharacterCollider(float radius, float height, const Vector3& offset);
-    void MoveCharacter(const Vector3& wishDir, float fixedDt);
+   
 
     // 공통 움직임 함수. 추후 MoveCharacter도 이걸로 합쳐야함 | 02.03 문선민 
     void InternalMove(
@@ -114,4 +114,5 @@ public:
 
 private:
     // void ApplyFilter();
+    void MoveCharacter(const Vector3& wishDir, float fixedDt);
 };
