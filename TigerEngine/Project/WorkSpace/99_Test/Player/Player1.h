@@ -25,6 +25,7 @@ public:
     float b = 0.0f;
 
 private:
+    GameObject* soket{};
     Weapon* weapon{};
 };
 

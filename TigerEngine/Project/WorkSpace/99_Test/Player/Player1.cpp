@@ -39,6 +39,9 @@ void Player1::OnInitialize()
 void Player1::OnEnable()
 {
     cout << "[Player1 | PlayModeTest] : OnEnable() 2\n";    
+    soket = SceneUtil::CreateGameObject("PlayerSoket");
+    soket->SetParent(GetOwner());
+
 }
 
 void Player1::OnStart()
