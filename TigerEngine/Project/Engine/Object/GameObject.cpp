@@ -13,8 +13,7 @@ RTTR_REGISTRATION
     rttr::registration::class_<Enableable>("Enableable")
         .property("Active", &Enableable::GetActiveSelf, &Enableable::SetActive);
 
-    rttr::registration::class_<GameObject>("GameObject")
-        
+    rttr::registration::class_<GameObject>("GameObject")        
         .property("Name", &GameObject::name);
 }
 
@@ -120,6 +119,7 @@ nlohmann::json GameObject::Serialize() const
     }
     datas["properties"]["ParentID"] = parentID;
     datas["properties"]["ID"] = static_cast<int>(GetId());
+    datas["properties"]["Active"] = static_cast<int>(GetActiveSelf());
 
     // 오브젝트 내용 직렬화화
     for(auto& prop : t.get_properties())
@@ -150,9 +150,16 @@ void GameObject::Deserialize(const nlohmann::json objData)
     // objData : data["objects"]["properties"]
 
     rttr::type t = rttr::type::get(*this);
-    if(!objData.contains("components")) return;
+    if(!objData.contains("components")) 
+        return;
 
     const auto& registered = ComponentFactory::Instance().GetRegisteredComponents();
+
+    if (objData.contains("Active"))
+    {
+        int boolAlpha = objData["Active"];
+        SetActive(static_cast<bool>(boolAlpha));
+    }
 
     for(auto& prop : objData["components"])
     {
