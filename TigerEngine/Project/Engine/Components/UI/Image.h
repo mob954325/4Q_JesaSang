@@ -53,7 +53,7 @@ private:
     void Init();
 
     std::shared_ptr<TextureResource> resource{};
-    RectTransform* rect;
+    // RectTransform* rect;
 
     ImageType type = ImageType::Simple;
     Color color{};

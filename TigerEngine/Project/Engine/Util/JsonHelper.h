@@ -54,15 +54,20 @@ nlohmann::json JsonHelper::MakeSaveData(const T* typePtr)
             auto v = value.get_value<std::string>();
             datas["properties"][propName] = v;
         }
-        else if (value.is_type<Vector2>())
+        else if (value.is_type<SimpleMath::Vector2>())
         {
             Vector2 v = value.get_value<SimpleMath::Vector2>();
             datas["properties"][propName] = { v.x, v.y };
         }
-        else if (value.is_type<Vector3>())
+        else if (value.is_type<SimpleMath::Vector3>())
         {
             Vector3 v = value.get_value<SimpleMath::Vector3>();
             datas["properties"][propName] = { v.x, v.y, v.z };
+        }
+        else if (value.is_type<SimpleMath::Vector4>())
+        {
+            Vector4 v = value.get_value<SimpleMath::Vector4>();
+            datas["properties"][propName] = { v.x, v.y, v.z, v.w };
         }
         else if (value.is_type<DirectX::SimpleMath::Quaternion>())
         {
@@ -137,6 +142,11 @@ inline void JsonHelper::SetDataFromJson(T* typePtr, nlohmann::json data)
         else if (value.is_type<SimpleMath::Vector3>())
         {
             Vector3 value = { propData[propName][0], propData[propName][1], propData[propName][2] };
+            prop.set_value(*typePtr, value);
+        }
+        else if (value.is_type<SimpleMath::Vector4>())
+        {
+            Vector4 value = { propData[propName][0], propData[propName][1], propData[propName][2], propData[propName][3] };
             prop.set_value(*typePtr, value);
         }
         else if (value.is_type<DirectX::SimpleMath::Quaternion>())
