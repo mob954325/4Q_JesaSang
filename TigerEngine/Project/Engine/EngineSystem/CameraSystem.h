@@ -35,10 +35,7 @@ public:
 
     int SetCurrCamera(int index);
 
-    Camera* GetCurrCamera() 
-    { 
-        return registered[currCameraIndex];
-    }
+    Camera* GetCurrCamera();
 
     void NextCamera() 
     { 

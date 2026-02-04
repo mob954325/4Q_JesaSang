@@ -22,10 +22,13 @@ void CameraSystem::Register(Camera *cam)
 {
     registered.push_back(cam);
     mappedRegistered[mappedRegistered.size()] = cam;
+    cout << cam->GetName() << "cam register\n";
 }
 
 void CameraSystem::RemoveCamera(Camera *cam)
 {
+    if (cam->GetOwner()->GetName() == "FreeCamera") return; // NOTE : Editor 카메라는 무시한다.
+
     // vector에서 제거
     for(auto it = registered.begin(); it != registered.end();)
     {
@@ -72,6 +75,11 @@ int CameraSystem::SetCurrCamera(int index)
     return currCameraIndex;
 }
 
+Camera* CameraSystem::GetCurrCamera()
+{
+    return registered[currCameraIndex];
+}
+
 Camera *CameraSystem::GetCameraByIndex(int index)
 {
     if(auto it = mappedRegistered.find(index); it != mappedRegistered.end())
@@ -87,8 +95,10 @@ Camera *CameraSystem::GetCameraByIndex(int index)
 
 void CameraSystem::Clear()
 {
-    registered.clear();
-    mappedRegistered.clear();
+    for (auto& cam : registered)
+    {
+        RemoveCamera(cam);
+    }
 }
 
 void CameraSystem::LightCameraUpdate(float delta)
@@ -120,7 +130,11 @@ Handle CameraSystem::CreateFreeCamera(int clientWidth, int clientHeight, Scene *
     freeCamObj = ObjectSystem::Instance().Get<GameObject>(handle);
 	freeCamObj->SetName("FreeCamera");
     freeCamera = freeCamObj->AddComponent<Camera>();
-    freeCamObj->AddComponent<FreeCamera>();
+    auto freecam = freeCamObj->AddComponent<FreeCamera>();
+
+    freeCamObj->Enable_Inner(); // 게임 오브젝트 active
+    freeCamera->Enable_Inner(); // 카메라 컴포넌트 active
+    freecam->Enable_Inner();    // freeCamera active 
 
 	freeCamera->SetProjection(DirectX::XM_PIDIV2, clientWidth, clientHeight, 0.1, 3000);
 
