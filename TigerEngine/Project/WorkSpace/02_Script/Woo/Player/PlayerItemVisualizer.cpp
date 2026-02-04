@@ -3,6 +3,7 @@
 #include "Util/ComponentAutoRegister.h"
 #include "Object/GameObject.h"
 #include "EngineSystem/SceneSystem.h"
+#include "Components/FBXRenderer.h"
 
 REGISTER_COMPONENT(PlayerItemVisualizer)
 
@@ -132,4 +133,42 @@ void PlayerItemVisualizer::VisualOffItem()
     if (food_tofu)     food_tofu->SetActive(false);
     if (food_sanjeok)  food_sanjeok->SetActive(false);
     if (food_dong)     food_dong->SetActive(false);
+}
+
+void PlayerItemVisualizer::VisualRenderOn()
+{
+    // Ingredient
+    if (ingre_apple)   ingre_apple->GetComponent<FBXRenderer>()->SetActive(true);
+    if (ingre_pear)    ingre_pear->GetComponent<FBXRenderer>()->SetActive(true);
+    if (ingre_batter)  ingre_batter->GetComponent<FBXRenderer>()->SetActive(true);
+    if (ingre_tofu)    ingre_tofu->GetComponent<FBXRenderer>()->SetActive(true);
+    if (ingre_sanjeok) ingre_sanjeok->GetComponent<FBXRenderer>()->SetActive(true);
+    if (ingre_dong)    ingre_dong->GetComponent<FBXRenderer>()->SetActive(true);
+
+    // Food
+    if (food_apple)    food_apple->GetComponent<FBXRenderer>()->SetActive(true);
+    if (food_pear)     food_pear->GetComponent<FBXRenderer>()->SetActive(true);
+    if (food_batter)   food_batter->GetComponent<FBXRenderer>()->SetActive(true);
+    if (food_tofu)     food_tofu->GetComponent<FBXRenderer>()->SetActive(true);
+    if (food_sanjeok)  food_sanjeok->GetComponent<FBXRenderer>()->SetActive(true);
+    if (food_dong)     food_dong->GetComponent<FBXRenderer>()->SetActive(true);
+}
+
+void PlayerItemVisualizer::VisualRenderOff()
+{
+    // Ingredient
+    if (ingre_apple)   ingre_apple->GetComponent<FBXRenderer>()->SetActive(false);
+    if (ingre_pear)    ingre_pear->GetComponent<FBXRenderer>()->SetActive(false);
+    if (ingre_batter)  ingre_batter->GetComponent<FBXRenderer>()->SetActive(false);
+    if (ingre_tofu)    ingre_tofu->GetComponent<FBXRenderer>()->SetActive(false);
+    if (ingre_sanjeok) ingre_sanjeok->GetComponent<FBXRenderer>()->SetActive(false);
+    if (ingre_dong)    ingre_dong->GetComponent<FBXRenderer>()->SetActive(false);
+
+    // Food
+    if (food_apple)    food_apple->GetComponent<FBXRenderer>()->SetActive(false);
+    if (food_pear)     food_pear->GetComponent<FBXRenderer>()->SetActive(false);
+    if (food_batter)   food_batter->GetComponent<FBXRenderer>()->SetActive(false);
+    if (food_tofu)     food_tofu->GetComponent<FBXRenderer>()->SetActive(false);
+    if (food_sanjeok)  food_sanjeok->GetComponent<FBXRenderer>()->SetActive(false);
+    if (food_dong)     food_dong->GetComponent<FBXRenderer>()->SetActive(false);
 }

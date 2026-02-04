@@ -9,6 +9,7 @@ class IPlayerState;
 class InteractionZone;
 class InteractionSensor;
 class SearchObject;
+class HideObject;
 class Inventory;
 class CameraController;
 class MiniGameManager;
@@ -62,10 +63,14 @@ private:
     Vector3 lookDir = Vector3::Zero;
 
     // search object interaction
-    bool  isPossibleSearch = false;      // 기획자분이 한번에 하나만 가능한 사이즈라고 하심. 중첩된다면 추가 처리필요.
-    SearchObject* curSerachObject;       // 현재 interaction가능한 오브젝트
+    bool  isPossibleSearch = false;            // 기획자분이 한번에 하나만 가능한 사이즈라고 하심. 중첩된다면 추가 처리필요.
+    SearchObject* curSerachObject = nullptr;   // 현재 search 가능한 오브젝트
     float searchTime  = 2.0f;
     float searchTimer = 0.0f;
+
+    // hide object interaction
+    bool  isPossibleHide = false;
+    HideObject* curHideObject = nullptr;      // 현재 은신 가능한 오브젝트
 
     // jesasang interaction
     bool isPossiblePutFood;
@@ -142,6 +147,7 @@ private:
     // Interaction
     void InteractionCheak(float delta);
     void SerachObjectInteraction(float dt);
+    void HideObjectInteraction(float dt);
     void CookingInteraction(float dt);
     void PutFoodJesaSangInteraction(float dt);
     void GetItemAltarInteraction(float dt);
@@ -149,8 +155,8 @@ private:
 
 public:
     // 외부 call Funcs..
-    // Current Interaction Zone Search Object Set
     void SetCurSearchObject(SearchObject* object);
+    void SetCurHideObject(HideObject* object);
 
 
     // MiniGame Return Login

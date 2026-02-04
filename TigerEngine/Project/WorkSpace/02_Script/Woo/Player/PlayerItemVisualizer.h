@@ -39,7 +39,10 @@ public:
 
 public:
     // 외부 call funcs..
-    void VisualOnItem(std::string itemID);
-    void VisualOffItem();
+    void VisualOnItem(std::string itemID);      // GameObect Active
+    void VisualOffItem();                       // GameObect Active
+
+    void VisualRenderOn();          // Render Active (Hide용)
+    void VisualRenderOff();         // Render Active (Hide용)
 };
 

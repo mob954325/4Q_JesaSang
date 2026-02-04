@@ -182,6 +182,7 @@
     <ClInclude Include="02_Script\Woo\Player\FSM\Player_Cook.h" />
     <ClInclude Include="02_Script\Woo\JesaSang\JesaSangManager.h" />
     <ClInclude Include="02_Script\Woo\Player\PlayerItemVisualizer.h" />
+    <ClInclude Include="02_Script\Woo\Object\HideObject.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="02_Script\Moon\AI\AdultGhostController.cpp" />
@@ -221,6 +222,7 @@
     <ClCompile Include="02_Script\Woo\Player\FSM\Player_Cook.cpp" />
     <ClCompile Include="02_Script\Woo\JesaSang\JesaSangManager.cpp" />
     <ClCompile Include="02_Script\Woo\Player\PlayerItemVisualizer.cpp" />
+    <ClCompile Include="02_Script\Woo\Object\HideObject.cpp" />
     <ClCompile Include="winMain.cpp" />
   </ItemGroup>
   <ItemGroup>
