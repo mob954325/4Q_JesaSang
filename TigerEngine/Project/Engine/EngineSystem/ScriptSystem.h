@@ -80,7 +80,12 @@ private:
     std::vector<Component*> scriptComps{};
 
     /// <summary>
-    /// 지연 등록을 위한 펜딩 벡터 
+    /// component 지연 등록을 위한 펜딩 벡터 
+    /// </summary>
+    std::vector<Component*> pending_components{};
+
+    /// <summary>
+    /// script component 지연 등록을 위한 펜딩 벡터 
     /// </summary>
     std::vector<Component*> pending_scriptComponents{};
 };

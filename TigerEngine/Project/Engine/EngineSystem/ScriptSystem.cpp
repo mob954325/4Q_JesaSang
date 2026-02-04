@@ -13,13 +13,15 @@ void ScriptSystem::CheckReadyQueue()
         comp->SetStartTrue();
 
         readyQueue.pop();
-        comps.push_back(comp);
     }
 }
 
 void ScriptSystem::Register(Component* comp)
 {
-    readyQueue.push(comp);
+    if(comp->IsStart())
+        readyQueue.push(comp);
+
+    pending_components.push_back(comp);
 }
 
 void ScriptSystem::RegisterScript(Component* comp)
@@ -54,17 +56,22 @@ void ScriptSystem::UnRegisterScript(Component* comp)
 void ScriptSystem::Update(float delta)
 {
     // 일반 component update
+    for (auto& e : pending_components)
+    {
+        comps.push_back(e);
+    }
+    pending_components.clear();
+
     for (auto& e : comps)
     {
-        if (!e->GetOwner()->GetActiveSelf()) continue;  // Object 활성화 여부
-        if (!e->GetActiveSelf()) continue;              // 컴포넌트 활성화 여부
-        
         if(e->IsStart())
         {
             e->OnUpdate(delta);
         }
     }
 
+
+    // 스크립트 컴포넌트 업데이트
     if (PlayModeSystem::Instance().IsPlaying())
     {
         for (auto& e : pending_scriptComponents)
