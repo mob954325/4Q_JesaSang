@@ -240,17 +240,18 @@ void PlayerController::Rotation(float delta)
 /*-------[ Interaction ]----------------------------------*/
 void PlayerController::InteractionCheak(float delta)
 {
-    SerachObjectInteraction(delta);   // 수색 오브젝트 수색 Interaction
-    CookingInteraction(delta);        // 조리대 미니게임 시작 Interaction
-    PutFoodInteraction(delta);        // 제자상 음식 올리기 Interaction
+    SerachObjectInteraction(delta);     // 수색 오브젝트 수색 Interaction
+    CookingInteraction(delta);          // 조리대 미니게임 시작 Interaction
+    PutFoodJesaSangInteraction(delta);  // 제자상 음식 올리기 Interaction
+    GetFoodAltarInteraction(delta);     // 제단에서 아이템 가져오기 Interaction
 }
 
 void PlayerController::SerachObjectInteraction(float dt)
 {
     // interaction x -> reset
-    if (!isInteractionKey || !isPossibleInteraction || curSerachObject == nullptr)
+    if (!isInteractionKey || !isPossibleSearch || curSerachObject == nullptr)
     {
-        searchInteractionTimer = 0.0f;
+        searchTimer = 0.0f;
         return;
     }
 
@@ -262,12 +263,12 @@ void PlayerController::SerachObjectInteraction(float dt)
     }
 
     // holding
-    searchInteractionTimer += dt;
-    float progress = searchInteractionTimer / searchInteractionTime;
+    searchTimer += dt;
+    float progress = searchTimer / searchTime;
     if (progress > 1.0f) progress = 1.0f;
 
     // search object interaction
-    if (searchInteractionTimer >= searchInteractionTime)
+    if (searchTimer >= searchTime)
     {
         // search object interaction
         std::unique_ptr<IItem> item = curSerachObject->Interaction();
@@ -282,9 +283,9 @@ void PlayerController::SerachObjectInteraction(float dt)
             std::cout << "[Player] Fail Get Item... " << std::endl;
 
         // clear
-        isPossibleInteraction = false;
+        isPossibleSearch = false;
         curSerachObject = nullptr;
-        searchInteractionTimer = 0.0f;
+        searchTimer = 0.0f;
     }
 }
 
@@ -297,7 +298,7 @@ void PlayerController::CookingInteraction(float dt)
         return;
     }
 
-    // ingredient
+    // ingredient (
     if (inventory->GetCurItemType() != ItemType::Ingredient)
     {
         cookInteractionTimer = 0.0f;
@@ -320,30 +321,61 @@ void PlayerController::CookingInteraction(float dt)
     }
 }
 
-void PlayerController::PutFoodInteraction(float dt)
+void PlayerController::PutFoodJesaSangInteraction(float dt)
 {
     // interaction x -> reset
-    if (!isInteractionKey || !isPossiblePutFood || 
-        !inventory->HasItem() || inventory->GetCurItemType() != ItemType::Food)
+    if (!isInteractionKey || !isPossibleGetFood ||
+        inventory->HasItem() || inventory->GetCurItemType() != ItemType::Food)
     {
-        putFoodInteractionTimer = 0.0f;
+        putFoodTimer = 0.0f;
         return;
     }
 
     // holding
-    putFoodInteractionTimer += dt;
-    float progress = putFoodInteractionTimer / putFoodInteractionTime;
+    putFoodTimer += dt;
+    float progress = putFoodTimer / putFoodTime;
     if (progress > 1.0f) progress = 1.0f;
 
     // 제사상에 음식 올리기 interaction
-    if (putFoodInteractionTimer >= putFoodInteractionTime)
+    if (putFoodTimer >= putFoodTime)
     {
         std::unique_ptr<IItem> food = inventory->TakeCurItem();
         JesaSangManager::Instance()->ReceiveFood(std::move(food));
         visualizer->VisualOffItem();
-        
+
         // clear
-        putFoodInteractionTimer = 0.0f;
+        putFoodTimer = 0.0f;
+    }
+}
+
+void PlayerController::GetFoodAltarInteraction(float dt)
+{
+    // interaction x -> reset
+    if (!isInteractionKey || !isPossiblePutFood)
+    {
+        getItemAltarTimer = 0.0f;
+        return;
+    }
+
+    // inventory full
+    if (inventory->HasItem())
+    {
+        cout << "[Player] Inventory Full! Can't interaction" << endl;
+        return;
+    }
+
+    // holding
+    getItemAltarTimer += dt;
+    float progress = getItemAltarTimer / getItemAltarTime;
+    if (progress > 1.0f) progress = 1.0f;
+
+    // 제단 아이엠(재료/음식) 가져오기 interaction
+    if (getItemAltarTimer >= getItemAltarTime)
+    {
+        // TODO :: Item get (AltarManager)
+
+        // clear
+        getItemAltarTimer = 0.0f;
     }
 }
     
@@ -353,12 +385,12 @@ void PlayerController::SetCurSearchObject(SearchObject* object)
     // interaction zone에서 search object를 넘겨줌
     if (object)
     {
-        isPossibleInteraction = true;
+        isPossibleSearch = true;
         curSerachObject = object;
     }
     else
     {
-        isPossibleInteraction = false;
+        isPossibleSearch = false;
         curSerachObject = nullptr;
     }
 }

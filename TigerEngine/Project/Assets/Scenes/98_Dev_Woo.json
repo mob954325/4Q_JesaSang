@@ -2,7 +2,8 @@
   "objects": [
     {
       "properties": {
-        "ID": 612,
+        "Active": 1,
+        "ID": 321,
         "Name": "Main Camera",
         "ParentID": -1,
         "components": [
@@ -54,7 +55,8 @@
     },
     {
       "properties": {
-        "ID": 613,
+        "Active": 1,
+        "ID": 322,
         "Name": "DirectionalLight(Sun)",
         "ParentID": -1,
         "components": [
@@ -107,7 +109,8 @@
     },
     {
       "properties": {
-        "ID": 614,
+        "Active": 1,
+        "ID": 323,
         "Name": "---------Floor----------",
         "ParentID": -1,
         "components": [
@@ -137,9 +140,10 @@
     },
     {
       "properties": {
-        "ID": 615,
+        "Active": 1,
+        "ID": 324,
         "Name": "Floor",
-        "ParentID": 614,
+        "ParentID": 323,
         "components": [
           {
             "properties": {
@@ -239,7 +243,8 @@
     },
     {
       "properties": {
-        "ID": 616,
+        "Active": 1,
+        "ID": 325,
         "Name": "---------Wall----------",
         "ParentID": -1,
         "components": [
@@ -269,9 +274,10 @@
     },
     {
       "properties": {
-        "ID": 617,
+        "Active": 1,
+        "ID": 326,
         "Name": "Door_Open",
-        "ParentID": 616,
+        "ParentID": 325,
         "components": [
           {
             "properties": {
@@ -348,9 +354,10 @@
     },
     {
       "properties": {
-        "ID": 618,
+        "Active": 1,
+        "ID": 327,
         "Name": "Pillar",
-        "ParentID": 616,
+        "ParentID": 325,
         "components": [
           {
             "properties": {
@@ -456,9 +463,10 @@
     },
     {
       "properties": {
-        "ID": 619,
+        "Active": 1,
+        "ID": 328,
         "Name": "wall_4",
-        "ParentID": 616,
+        "ParentID": 325,
         "components": [
           {
             "properties": {
@@ -564,9 +572,10 @@
     },
     {
       "properties": {
-        "ID": 620,
+        "Active": 1,
+        "ID": 329,
         "Name": "wall_5",
-        "ParentID": 616,
+        "ParentID": 325,
         "components": [
           {
             "properties": {
@@ -672,9 +681,10 @@
     },
     {
       "properties": {
-        "ID": 621,
+        "Active": 1,
+        "ID": 330,
         "Name": "Room",
-        "ParentID": 614,
+        "ParentID": 323,
         "components": [
           {
             "properties": {
@@ -751,9 +761,10 @@
     },
     {
       "properties": {
-        "ID": 622,
+        "Active": 1,
+        "ID": 331,
         "Name": "Room_a_love_room",
-        "ParentID": 614,
+        "ParentID": 323,
         "components": [
           {
             "properties": {
@@ -830,9 +841,10 @@
     },
     {
       "properties": {
-        "ID": 623,
+        "Active": 1,
+        "ID": 332,
         "Name": "Room_Kitchen",
-        "ParentID": 614,
+        "ParentID": 323,
         "components": [
           {
             "properties": {
@@ -909,9 +921,10 @@
     },
     {
       "properties": {
-        "ID": 624,
+        "Active": 1,
+        "ID": 333,
         "Name": "Room_main_room",
-        "ParentID": 614,
+        "ParentID": 323,
         "components": [
           {
             "properties": {
@@ -988,9 +1001,10 @@
     },
     {
       "properties": {
-        "ID": 625,
+        "Active": 1,
+        "ID": 334,
         "Name": "Room_saibi",
-        "ParentID": 614,
+        "ParentID": 323,
         "components": [
           {
             "properties": {
@@ -1067,9 +1081,10 @@
     },
     {
       "properties": {
-        "ID": 626,
+        "Active": 1,
+        "ID": 335,
         "Name": "Room_Table_of_memorial_ceremony",
-        "ParentID": 614,
+        "ParentID": 323,
         "components": [
           {
             "properties": {
@@ -1146,9 +1161,10 @@
     },
     {
       "properties": {
-        "ID": 627,
+        "Active": 1,
+        "ID": 336,
         "Name": "Room_Warehouse",
-        "ParentID": 614,
+        "ParentID": 323,
         "components": [
           {
             "properties": {
@@ -1225,7 +1241,8 @@
     },
     {
       "properties": {
-        "ID": 628,
+        "Active": 1,
+        "ID": 337,
         "Name": "---------Object----------",
         "ParentID": -1,
         "components": [
@@ -1255,7 +1272,8 @@
     },
     {
       "properties": {
-        "ID": 629,
+        "Active": 1,
+        "ID": 338,
         "Name": "JesaSang",
         "ParentID": -1,
         "components": [
@@ -1363,9 +1381,10 @@
     },
     {
       "properties": {
-        "ID": 630,
+        "Active": 1,
+        "ID": 339,
         "Name": "SearchObject",
-        "ParentID": 628,
+        "ParentID": 337,
         "components": [
           {
             "properties": {
@@ -1480,9 +1499,10 @@
     },
     {
       "properties": {
-        "ID": 631,
+        "Active": 1,
+        "ID": 340,
         "Name": "SearchObject",
-        "ParentID": 628,
+        "ParentID": 337,
         "components": [
           {
             "properties": {
@@ -1597,9 +1617,10 @@
     },
     {
       "properties": {
-        "ID": 632,
+        "Active": 1,
+        "ID": 341,
         "Name": "baseFood",
-        "ParentID": 629,
+        "ParentID": 338,
         "components": [
           {
             "properties": {
@@ -1676,7 +1697,8 @@
     },
     {
       "properties": {
-        "ID": 633,
+        "Active": 1,
+        "ID": 342,
         "Name": "Player",
         "ParentID": -1,
         "components": [
@@ -1790,7 +1812,8 @@
     },
     {
       "properties": {
-        "ID": 634,
+        "Active": 1,
+        "ID": 343,
         "Name": "-----------------------",
         "ParentID": -1,
         "components": [
@@ -1820,7 +1843,8 @@
     },
     {
       "properties": {
-        "ID": 635,
+        "Active": 1,
+        "ID": 344,
         "Name": "CurScene_98_Dev_Woo",
         "ParentID": -1,
         "components": [
@@ -1850,7 +1874,8 @@
     },
     {
       "properties": {
-        "ID": 636,
+        "Active": 1,
+        "ID": 345,
         "Name": "-----------------------",
         "ParentID": -1,
         "components": [
@@ -1880,9 +1905,10 @@
     },
     {
       "properties": {
-        "ID": 637,
+        "Active": 1,
+        "ID": 346,
         "Name": "wall_5",
-        "ParentID": 616,
+        "ParentID": 325,
         "components": [
           {
             "properties": {
@@ -1988,9 +2014,10 @@
     },
     {
       "properties": {
-        "ID": 638,
+        "Active": 1,
+        "ID": 347,
         "Name": "wall_5",
-        "ParentID": 616,
+        "ParentID": 325,
         "components": [
           {
             "properties": {
@@ -2096,9 +2123,10 @@
     },
     {
       "properties": {
-        "ID": 639,
+        "Active": 1,
+        "ID": 348,
         "Name": "wall_5",
-        "ParentID": 616,
+        "ParentID": 325,
         "components": [
           {
             "properties": {
@@ -2204,9 +2232,10 @@
     },
     {
       "properties": {
-        "ID": 640,
+        "Active": 1,
+        "ID": 349,
         "Name": "wall_4",
-        "ParentID": 616,
+        "ParentID": 325,
         "components": [
           {
             "properties": {
@@ -2312,9 +2341,10 @@
     },
     {
       "properties": {
-        "ID": 641,
+        "Active": 1,
+        "ID": 350,
         "Name": "CameraTrackingPoint",
-        "ParentID": 633,
+        "ParentID": 342,
         "components": [
           {
             "properties": {
@@ -2342,9 +2372,10 @@
     },
     {
       "properties": {
-        "ID": 642,
+        "Active": 1,
+        "ID": 351,
         "Name": "OcclusionFadePoint",
-        "ParentID": 633,
+        "ParentID": 342,
         "components": [
           {
             "properties": {
@@ -2372,9 +2403,10 @@
     },
     {
       "properties": {
-        "ID": 643,
+        "Active": 1,
+        "ID": 352,
         "Name": "SearchObject",
-        "ParentID": 628,
+        "ParentID": 337,
         "components": [
           {
             "properties": {
@@ -2489,9 +2521,10 @@
     },
     {
       "properties": {
-        "ID": 644,
+        "Active": 1,
+        "ID": 353,
         "Name": "InteractionSensor",
-        "ParentID": 633,
+        "ParentID": 342,
         "components": [
           {
             "properties": {
@@ -2548,9 +2581,10 @@
     },
     {
       "properties": {
-        "ID": 645,
+        "Active": 1,
+        "ID": 354,
         "Name": "InteractZone",
-        "ParentID": 633,
+        "ParentID": 342,
         "components": [
           {
             "properties": {
@@ -2607,7 +2641,8 @@
     },
     {
       "properties": {
-        "ID": 646,
+        "Active": 1,
+        "ID": 355,
         "Name": "Kitchen",
         "ParentID": -1,
         "components": [
@@ -2686,9 +2721,10 @@
     },
     {
       "properties": {
-        "ID": 647,
+        "Active": 1,
+        "ID": 356,
         "Name": "MiniGameManager",
-        "ParentID": 666,
+        "ParentID": 375,
         "components": [
           {
             "properties": {
@@ -2722,9 +2758,10 @@
     },
     {
       "properties": {
-        "ID": 648,
+        "Active": 1,
+        "ID": 357,
         "Name": "CookingZone",
-        "ParentID": 646,
+        "ParentID": 355,
         "components": [
           {
             "properties": {
@@ -2775,9 +2812,10 @@
     },
     {
       "properties": {
-        "ID": 649,
+        "Active": 1,
+        "ID": 358,
         "Name": "SearchObject",
-        "ParentID": 628,
+        "ParentID": 337,
         "components": [
           {
             "properties": {
@@ -2892,9 +2930,10 @@
     },
     {
       "properties": {
-        "ID": 650,
+        "Active": 1,
+        "ID": 359,
         "Name": "SearchObject",
-        "ParentID": 628,
+        "ParentID": 337,
         "components": [
           {
             "properties": {
@@ -3009,9 +3048,10 @@
     },
     {
       "properties": {
-        "ID": 651,
+        "Active": 1,
+        "ID": 360,
         "Name": "SearchObject",
-        "ParentID": 628,
+        "ParentID": 337,
         "components": [
           {
             "properties": {
@@ -3126,9 +3166,10 @@
     },
     {
       "properties": {
-        "ID": 652,
+        "Active": 1,
+        "ID": 361,
         "Name": "SearchObject",
-        "ParentID": 628,
+        "ParentID": 337,
         "components": [
           {
             "properties": {
@@ -3243,9 +3284,10 @@
     },
     {
       "properties": {
-        "ID": 653,
+        "Active": 1,
+        "ID": 362,
         "Name": "SearchObject",
-        "ParentID": 628,
+        "ParentID": 337,
         "components": [
           {
             "properties": {
@@ -3360,9 +3402,10 @@
     },
     {
       "properties": {
-        "ID": 654,
+        "Active": 0,
+        "ID": 363,
         "Name": "Apple",
-        "ParentID": 629,
+        "ParentID": 338,
         "components": [
           {
             "properties": {
@@ -3439,9 +3482,10 @@
     },
     {
       "properties": {
-        "ID": 655,
+        "Active": 0,
+        "ID": 364,
         "Name": "Pear",
-        "ParentID": 629,
+        "ParentID": 338,
         "components": [
           {
             "properties": {
@@ -3518,9 +3562,10 @@
     },
     {
       "properties": {
-        "ID": 656,
+        "Active": 0,
+        "ID": 365,
         "Name": "Batter",
-        "ParentID": 629,
+        "ParentID": 338,
         "components": [
           {
             "properties": {
@@ -3597,9 +3642,10 @@
     },
     {
       "properties": {
-        "ID": 657,
+        "Active": 0,
+        "ID": 366,
         "Name": "Tofu",
-        "ParentID": 629,
+        "ParentID": 338,
         "components": [
           {
             "properties": {
@@ -3676,9 +3722,10 @@
     },
     {
       "properties": {
-        "ID": 658,
+        "Active": 0,
+        "ID": 367,
         "Name": "Sanjeok",
-        "ParentID": 629,
+        "ParentID": 338,
         "components": [
           {
             "properties": {
@@ -3755,9 +3802,10 @@
     },
     {
       "properties": {
-        "ID": 659,
+        "Active": 0,
+        "ID": 368,
         "Name": "Donggeurangttaeng",
-        "ParentID": 629,
+        "ParentID": 338,
         "components": [
           {
             "properties": {
@@ -3834,9 +3882,10 @@
     },
     {
       "properties": {
-        "ID": 660,
+        "Active": 0,
+        "ID": 369,
         "Name": "Visual_Ingre_Apple",
-        "ParentID": 667,
+        "ParentID": 376,
         "components": [
           {
             "properties": {
@@ -3913,9 +3962,10 @@
     },
     {
       "properties": {
-        "ID": 661,
+        "Active": 0,
+        "ID": 370,
         "Name": "Visual_Ingre_Batter",
-        "ParentID": 667,
+        "ParentID": 376,
         "components": [
           {
             "properties": {
@@ -3992,9 +4042,10 @@
     },
     {
       "properties": {
-        "ID": 662,
+        "Active": 0,
+        "ID": 371,
         "Name": "Visual_Ingre_Donggeurangttaeng",
-        "ParentID": 667,
+        "ParentID": 376,
         "components": [
           {
             "properties": {
@@ -4071,9 +4122,10 @@
     },
     {
       "properties": {
-        "ID": 663,
+        "Active": 0,
+        "ID": 372,
         "Name": "Visual_Ingre_Pear",
-        "ParentID": 667,
+        "ParentID": 376,
         "components": [
           {
             "properties": {
@@ -4150,9 +4202,10 @@
     },
     {
       "properties": {
-        "ID": 664,
+        "Active": 0,
+        "ID": 373,
         "Name": "Visual_Ingre_Sanjeok",
-        "ParentID": 667,
+        "ParentID": 376,
         "components": [
           {
             "properties": {
@@ -4229,9 +4282,10 @@
     },
     {
       "properties": {
-        "ID": 665,
+        "Active": 0,
+        "ID": 374,
         "Name": "Visual_Ingre_Tofu",
-        "ParentID": 667,
+        "ParentID": 376,
         "components": [
           {
             "properties": {
@@ -4308,7 +4362,8 @@
     },
     {
       "properties": {
-        "ID": 666,
+        "Active": 1,
+        "ID": 375,
         "Name": "Managers",
         "ParentID": -1,
         "components": [
@@ -4338,9 +4393,10 @@
     },
     {
       "properties": {
-        "ID": 667,
+        "Active": 1,
+        "ID": 376,
         "Name": "ItemVisualizer",
-        "ParentID": 633,
+        "ParentID": 342,
         "components": [
           {
             "properties": {
@@ -4368,9 +4424,10 @@
     },
     {
       "properties": {
-        "ID": 668,
+        "Active": 0,
+        "ID": 377,
         "Name": "Visual_Apple",
-        "ParentID": 667,
+        "ParentID": 376,
         "components": [
           {
             "properties": {
@@ -4447,9 +4504,10 @@
     },
     {
       "properties": {
-        "ID": 669,
+        "Active": 0,
+        "ID": 378,
         "Name": "Visual_Pear",
-        "ParentID": 667,
+        "ParentID": 376,
         "components": [
           {
             "properties": {
@@ -4526,9 +4584,10 @@
     },
     {
       "properties": {
-        "ID": 670,
+        "Active": 0,
+        "ID": 379,
         "Name": "Visual_Batter",
-        "ParentID": 667,
+        "ParentID": 376,
         "components": [
           {
             "properties": {
@@ -4605,9 +4664,10 @@
     },
     {
       "properties": {
-        "ID": 671,
+        "Active": 0,
+        "ID": 380,
         "Name": "Visual_Tofu",
-        "ParentID": 667,
+        "ParentID": 376,
         "components": [
           {
             "properties": {
@@ -4684,9 +4744,10 @@
     },
     {
       "properties": {
-        "ID": 672,
+        "Active": 0,
+        "ID": 381,
         "Name": "Visual_Sanjeok",
-        "ParentID": 667,
+        "ParentID": 376,
         "components": [
           {
             "properties": {
@@ -4763,9 +4824,10 @@
     },
     {
       "properties": {
-        "ID": 673,
+        "Active": 0,
+        "ID": 382,
         "Name": "Visual_Donggeurangttaeng",
-        "ParentID": 667,
+        "ParentID": 376,
         "components": [
           {
             "properties": {
@@ -4791,6 +4853,1155 @@
             "properties": {
               "Active": true,
               "DataPath": "..\\Assets\\Resource\\FBX\\New_Food\\Korean_st_meatball.fbx",
+              "IsStatic": false
+            },
+            "type": "FBXData"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "Alpha": 1.0,
+              "Diffuse": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "DiffuseOverride": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Emissive": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "EmissiveOverride": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "IsGround": false,
+              "Metalic": 1.0,
+              "MetallicOverride": 1.0,
+              "RenderBlendType": "Opaque",
+              "Roughness": 1.0,
+              "RoughnessOverride": 1.0,
+              "UseDiffuseOverride": false,
+              "UseEmissiveOverride": false,
+              "UseMetallicOverride": false,
+              "UseRoughnessOverride": false
+            },
+            "type": "FBXRenderer"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": 1,
+        "ID": 383,
+        "Name": "Altar",
+        "ParentID": -1,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                546.7999877929688,
+                -100.0,
+                -300.0
+              ],
+              "Rotation": [
+                -0.0,
+                1.5707963705062866,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "DataPath": "..\\Assets\\Resource\\FBX\\Table\\teble.fbx",
+              "IsStatic": false
+            },
+            "type": "FBXData"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "Alpha": 1.0,
+              "Diffuse": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "DiffuseOverride": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Emissive": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "EmissiveOverride": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "IsGround": false,
+              "Metalic": 1.0,
+              "MetallicOverride": 1.0,
+              "RenderBlendType": "Opaque",
+              "Roughness": 1.0,
+              "RoughnessOverride": 1.0,
+              "UseDiffuseOverride": false,
+              "UseEmissiveOverride": false,
+              "UseMetallicOverride": false,
+              "UseRoughnessOverride": false
+            },
+            "type": "FBXRenderer"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "ColliderType": "Box",
+              "PhysicsBodyType": "Static",
+              "density": 10.0,
+              "halfExtents": [
+                70.0,
+                100.0,
+                70.0
+              ],
+              "height": 10.0,
+              "isTrigger": true,
+              "layer": "Default",
+              "localOffset": [
+                0.0,
+                100.0,
+                0.0
+              ],
+              "radius": 50.0
+            },
+            "type": "PhysicsComponent"
+          },
+          {
+            "properties": {
+              "Active": true
+            },
+            "type": "AltarManager"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": 1,
+        "ID": 384,
+        "Name": "baseFood",
+        "ParentID": 383,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "DataPath": "..\\Assets\\Resource\\FBX\\New_Food\\food.fbx",
+              "IsStatic": false
+            },
+            "type": "FBXData"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "Alpha": 1.0,
+              "Diffuse": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "DiffuseOverride": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Emissive": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "EmissiveOverride": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "IsGround": false,
+              "Metalic": 1.0,
+              "MetallicOverride": 1.0,
+              "RenderBlendType": "Opaque",
+              "Roughness": 1.0,
+              "RoughnessOverride": 1.0,
+              "UseDiffuseOverride": false,
+              "UseEmissiveOverride": false,
+              "UseMetallicOverride": false,
+              "UseRoughnessOverride": false
+            },
+            "type": "FBXRenderer"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": 0,
+        "ID": 385,
+        "Name": "Alta_Apple",
+        "ParentID": 383,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "DataPath": "..\\Assets\\Resource\\FBX\\New_Food\\apple.fbx",
+              "IsStatic": false
+            },
+            "type": "FBXData"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "Alpha": 1.0,
+              "Diffuse": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "DiffuseOverride": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Emissive": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "EmissiveOverride": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "IsGround": false,
+              "Metalic": 1.0,
+              "MetallicOverride": 1.0,
+              "RenderBlendType": "Opaque",
+              "Roughness": 1.0,
+              "RoughnessOverride": 1.0,
+              "UseDiffuseOverride": false,
+              "UseEmissiveOverride": false,
+              "UseMetallicOverride": false,
+              "UseRoughnessOverride": false
+            },
+            "type": "FBXRenderer"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": 0,
+        "ID": 386,
+        "Name": "Alta_Pear",
+        "ParentID": 383,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "DataPath": "..\\Assets\\Resource\\FBX\\New_Food\\pear.fbx",
+              "IsStatic": false
+            },
+            "type": "FBXData"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "Alpha": 1.0,
+              "Diffuse": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "DiffuseOverride": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Emissive": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "EmissiveOverride": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "IsGround": false,
+              "Metalic": 1.0,
+              "MetallicOverride": 1.0,
+              "RenderBlendType": "Opaque",
+              "Roughness": 1.0,
+              "RoughnessOverride": 1.0,
+              "UseDiffuseOverride": false,
+              "UseEmissiveOverride": false,
+              "UseMetallicOverride": false,
+              "UseRoughnessOverride": false
+            },
+            "type": "FBXRenderer"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": 0,
+        "ID": 387,
+        "Name": "Alta_Batter",
+        "ParentID": 383,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "DataPath": "..\\Assets\\Resource\\FBX\\New_Food\\skewer_pancake.fbx",
+              "IsStatic": false
+            },
+            "type": "FBXData"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "Alpha": 1.0,
+              "Diffuse": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "DiffuseOverride": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Emissive": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "EmissiveOverride": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "IsGround": false,
+              "Metalic": 1.0,
+              "MetallicOverride": 1.0,
+              "RenderBlendType": "Opaque",
+              "Roughness": 1.0,
+              "RoughnessOverride": 1.0,
+              "UseDiffuseOverride": false,
+              "UseEmissiveOverride": false,
+              "UseMetallicOverride": false,
+              "UseRoughnessOverride": false
+            },
+            "type": "FBXRenderer"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": 0,
+        "ID": 388,
+        "Name": "Alta_Tofu",
+        "ParentID": 383,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "DataPath": "..\\Assets\\Resource\\FBX\\New_Food\\tofu.fbx",
+              "IsStatic": false
+            },
+            "type": "FBXData"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "Alpha": 1.0,
+              "Diffuse": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "DiffuseOverride": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Emissive": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "EmissiveOverride": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "IsGround": false,
+              "Metalic": 1.0,
+              "MetallicOverride": 1.0,
+              "RenderBlendType": "Opaque",
+              "Roughness": 1.0,
+              "RoughnessOverride": 1.0,
+              "UseDiffuseOverride": false,
+              "UseEmissiveOverride": false,
+              "UseMetallicOverride": false,
+              "UseRoughnessOverride": false
+            },
+            "type": "FBXRenderer"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": 0,
+        "ID": 389,
+        "Name": "Alta_Sanjeok",
+        "ParentID": 383,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "DataPath": "..\\Assets\\Resource\\FBX\\New_Food\\Korean_st_Pancake.fbx",
+              "IsStatic": true
+            },
+            "type": "FBXData"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "Alpha": 1.0,
+              "Diffuse": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "DiffuseOverride": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Emissive": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "EmissiveOverride": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "IsGround": false,
+              "Metalic": 1.0,
+              "MetallicOverride": 1.0,
+              "RenderBlendType": "Opaque",
+              "Roughness": 1.0,
+              "RoughnessOverride": 1.0,
+              "UseDiffuseOverride": false,
+              "UseEmissiveOverride": false,
+              "UseMetallicOverride": false,
+              "UseRoughnessOverride": false
+            },
+            "type": "FBXRenderer"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": 0,
+        "ID": 390,
+        "Name": "Alta_Donggeurangttaeng",
+        "ParentID": 383,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "DataPath": "..\\Assets\\Resource\\FBX\\New_Food\\Korean_st_meatball.fbx",
+              "IsStatic": false
+            },
+            "type": "FBXData"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "Alpha": 1.0,
+              "Diffuse": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "DiffuseOverride": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Emissive": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "EmissiveOverride": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "IsGround": false,
+              "Metalic": 1.0,
+              "MetallicOverride": 1.0,
+              "RenderBlendType": "Opaque",
+              "Roughness": 1.0,
+              "RoughnessOverride": 1.0,
+              "UseDiffuseOverride": false,
+              "UseEmissiveOverride": false,
+              "UseMetallicOverride": false,
+              "UseRoughnessOverride": false
+            },
+            "type": "FBXRenderer"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": 1,
+        "ID": 481,
+        "Name": "Alta_Ingre_Apple",
+        "ParentID": 383,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "DataPath": "",
+              "IsStatic": false
+            },
+            "type": "FBXData"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "Alpha": 1.0,
+              "Diffuse": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "DiffuseOverride": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Emissive": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "EmissiveOverride": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "IsGround": false,
+              "Metalic": 1.0,
+              "MetallicOverride": 1.0,
+              "RenderBlendType": "Opaque",
+              "Roughness": 1.0,
+              "RoughnessOverride": 1.0,
+              "UseDiffuseOverride": false,
+              "UseEmissiveOverride": false,
+              "UseMetallicOverride": false,
+              "UseRoughnessOverride": false
+            },
+            "type": "FBXRenderer"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": 1,
+        "ID": 483,
+        "Name": "Alta_Ingre_Pear",
+        "ParentID": 383,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "DataPath": "",
+              "IsStatic": false
+            },
+            "type": "FBXData"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "Alpha": 1.0,
+              "Diffuse": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "DiffuseOverride": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Emissive": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "EmissiveOverride": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "IsGround": false,
+              "Metalic": 1.0,
+              "MetallicOverride": 1.0,
+              "RenderBlendType": "Opaque",
+              "Roughness": 1.0,
+              "RoughnessOverride": 1.0,
+              "UseDiffuseOverride": false,
+              "UseEmissiveOverride": false,
+              "UseMetallicOverride": false,
+              "UseRoughnessOverride": false
+            },
+            "type": "FBXRenderer"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": 1,
+        "ID": 485,
+        "Name": "Alta_Ingre_Batter",
+        "ParentID": 383,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "DataPath": "",
+              "IsStatic": false
+            },
+            "type": "FBXData"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "Alpha": 1.0,
+              "Diffuse": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "DiffuseOverride": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Emissive": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "EmissiveOverride": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "IsGround": false,
+              "Metalic": 1.0,
+              "MetallicOverride": 1.0,
+              "RenderBlendType": "Opaque",
+              "Roughness": 1.0,
+              "RoughnessOverride": 1.0,
+              "UseDiffuseOverride": false,
+              "UseEmissiveOverride": false,
+              "UseMetallicOverride": false,
+              "UseRoughnessOverride": false
+            },
+            "type": "FBXRenderer"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": 1,
+        "ID": 487,
+        "Name": "Alta_Ingre_Tofu",
+        "ParentID": 383,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "DataPath": "",
+              "IsStatic": false
+            },
+            "type": "FBXData"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "Alpha": 1.0,
+              "Diffuse": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "DiffuseOverride": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Emissive": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "EmissiveOverride": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "IsGround": false,
+              "Metalic": 1.0,
+              "MetallicOverride": 1.0,
+              "RenderBlendType": "Opaque",
+              "Roughness": 1.0,
+              "RoughnessOverride": 1.0,
+              "UseDiffuseOverride": false,
+              "UseEmissiveOverride": false,
+              "UseMetallicOverride": false,
+              "UseRoughnessOverride": false
+            },
+            "type": "FBXRenderer"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": 1,
+        "ID": 489,
+        "Name": "Alta_Ingre_Sanjeok",
+        "ParentID": 383,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "DataPath": "",
+              "IsStatic": false
+            },
+            "type": "FBXData"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "Alpha": 1.0,
+              "Diffuse": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "DiffuseOverride": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Emissive": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "EmissiveOverride": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "IsGround": false,
+              "Metalic": 1.0,
+              "MetallicOverride": 1.0,
+              "RenderBlendType": "Opaque",
+              "Roughness": 1.0,
+              "RoughnessOverride": 1.0,
+              "UseDiffuseOverride": false,
+              "UseEmissiveOverride": false,
+              "UseMetallicOverride": false,
+              "UseRoughnessOverride": false
+            },
+            "type": "FBXRenderer"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": 1,
+        "ID": 491,
+        "Name": "Alta_Ingre_Donggeurangttaeng",
+        "ParentID": 383,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "DataPath": "",
               "IsStatic": false
             },
             "type": "FBXData"
