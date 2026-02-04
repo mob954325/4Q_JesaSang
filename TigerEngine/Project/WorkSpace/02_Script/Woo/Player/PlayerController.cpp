@@ -26,6 +26,7 @@
 #include "../Camera/CameraController.h"
 #include "../MiniGame/MiniGameManager.h"
 #include "../JesaSang/JesaSangManager.h"
+#include "../Altar/AltarManager.h"
 #include "PlayerItemVisualizer.h"
 
 
@@ -56,9 +57,6 @@ void PlayerController::OnStart()
         cout << "[Player] Missing COmponet!" << endl;
     }
 
-    // transform -> physics init
-    //transform->SetPosition(Vector3::Zero);
-
     // init fsm
     InitFSMStates();
     ChangeState(PlayerState::Idle);
@@ -82,8 +80,15 @@ void PlayerController::OnUpdate(float delta)
     // interaction cheak
     InteractionCheak(delta);
 
+    // ----- test --------------
+    // ai attack test
+    if (Input::GetKeyDown(Keyboard::Q))
+    {
+        TakeAttack();
+    }
+
     // view mode change test (Hide State)
-    if (Input::GetKeyDown(Keyboard::M))
+    if (Input::GetKeyDown(Keyboard::W))
     {
         camController->ToggleViewMode();
     }
@@ -242,8 +247,8 @@ void PlayerController::InteractionCheak(float delta)
 {
     SerachObjectInteraction(delta);     // 수색 오브젝트 수색 Interaction
     CookingInteraction(delta);          // 조리대 미니게임 시작 Interaction
-    PutFoodJesaSangInteraction(delta);  // 제자상 음식 올리기 Interaction
-    GetFoodAltarInteraction(delta);     // 제단에서 아이템 가져오기 Interaction
+    PutFoodJesaSangInteraction(delta);  // 제사상 음식 올리기 Interaction
+    GetItemAltarInteraction(delta);     // 제단에서 아이템 가져오기 Interaction
 }
 
 void PlayerController::SerachObjectInteraction(float dt)
@@ -298,7 +303,7 @@ void PlayerController::CookingInteraction(float dt)
         return;
     }
 
-    // ingredient (
+    // ingredient
     if (inventory->GetCurItemType() != ItemType::Ingredient)
     {
         cookInteractionTimer = 0.0f;
@@ -324,8 +329,8 @@ void PlayerController::CookingInteraction(float dt)
 void PlayerController::PutFoodJesaSangInteraction(float dt)
 {
     // interaction x -> reset
-    if (!isInteractionKey || !isPossibleGetFood ||
-        inventory->HasItem() || inventory->GetCurItemType() != ItemType::Food)
+    if (!isInteractionKey || !isPossiblePutFood ||
+        !inventory->HasItem() || inventory->GetCurItemType() != ItemType::Food)
     {
         putFoodTimer = 0.0f;
         return;
@@ -348,10 +353,10 @@ void PlayerController::PutFoodJesaSangInteraction(float dt)
     }
 }
 
-void PlayerController::GetFoodAltarInteraction(float dt)
+void PlayerController::GetItemAltarInteraction(float dt)
 {
     // interaction x -> reset
-    if (!isInteractionKey || !isPossiblePutFood)
+    if (!isInteractionKey || !isPossibleGetFood || !AltarManager::Instance()->HasItem())
     {
         getItemAltarTimer = 0.0f;
         return;
@@ -372,7 +377,9 @@ void PlayerController::GetFoodAltarInteraction(float dt)
     // 제단 아이엠(재료/음식) 가져오기 interaction
     if (getItemAltarTimer >= getItemAltarTime)
     {
-        // TODO :: Item get (AltarManager)
+        std::unique_ptr<IItem> item = AltarManager::Instance()->GetItem();
+        visualizer->VisualOnItem(item->itemId);
+        inventory->AddItem(std::move(item));
 
         // clear
         getItemAltarTimer = 0.0f;
@@ -380,6 +387,7 @@ void PlayerController::GetFoodAltarInteraction(float dt)
 }
     
 
+/*----------- 외부 호출 Funcs.. -------------------------*/
 void PlayerController::SetCurSearchObject(SearchObject* object)
 {
     // interaction zone에서 search object를 넘겨줌
@@ -437,4 +445,16 @@ void PlayerController::ReceiveMiniGameItem(unique_ptr<IItem> ingredient)
     // ESC로 미니게임 강제종료시 재료반 다시 돌려받음
     visualizer->VisualOnItem(ingredient->itemId);
     inventory->AddItem(std::move(ingredient));
+}
+
+void PlayerController::TakeAttack()
+{
+    cout << "[Player] Take Damage! " << endl;
+
+    if (inventory->HasItem())
+    {
+        std::unique_ptr<IItem> item =  inventory->TakeCurItem();
+        AltarManager::Instance()->ReceiveItem(std::move(item));
+        cout << "[Player] Drop Item... " << endl;
+    }
 }

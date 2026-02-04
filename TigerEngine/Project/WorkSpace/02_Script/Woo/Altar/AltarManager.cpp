@@ -115,7 +115,7 @@ void AltarManager::VisualItem(std::string itemID, bool isActive)
         cout << "[AltarManager] Unknown itemID: " << itemID << endl;
 }
 
-void AltarManager::ReceiveFood(std::unique_ptr<IItem> item)
+void AltarManager::ReceiveItem(std::unique_ptr<IItem> item)
 {
     if (!item) {
         cout << "[AltarManager] item null !" << endl;
@@ -129,7 +129,8 @@ void AltarManager::ReceiveFood(std::unique_ptr<IItem> item)
     }
 
     // 새 아이템 제단에 올리기
-    VisualItem(curItem->itemId, true);
+    cout << "[AltarManager] Received Item :  " << item->itemId << endl;
+    VisualItem(item->itemId, true);
     curItem = std::move(item);
 }
 

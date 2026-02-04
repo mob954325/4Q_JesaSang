@@ -144,7 +144,7 @@ private:
     void SerachObjectInteraction(float dt);
     void CookingInteraction(float dt);
     void PutFoodJesaSangInteraction(float dt);
-    void GetFoodAltarInteraction(float dt);
+    void GetItemAltarInteraction(float dt);
 
 
 public:
@@ -156,6 +156,10 @@ public:
     // MiniGame Return Login
     void ReceiveMiniGameResult(std::unique_ptr<IItem> ingredient, bool isSuccess);
     void ReceiveMiniGameItem(std::unique_ptr<IItem> ingredient);
+
+
+    // AI
+    void TakeAttack();      // AI에게 공격 당했을 때
 
 
 

@@ -62,7 +62,7 @@ public:
     static AltarManager* Instance() { return s_instance; }
 
     bool HasItem() const { return (curItem != nullptr); }
-    void ReceiveFood(std::unique_ptr<IItem> item);  // 제단에 아이템 올리기
+    void ReceiveItem(std::unique_ptr<IItem> item);  // 제단에 아이템 올리기
     std::unique_ptr<IItem> GetItem();               // 제단 아아템 회수하기
 };
 
