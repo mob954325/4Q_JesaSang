@@ -1,7 +1,6 @@
 #include "SearchObject.h"
 #include "Util/JsonHelper.h"
 #include "Util/ComponentAutoRegister.h"
-#include "System/InputSystem.h"
 
 REGISTER_COMPONENT(SearchObject)
 
@@ -42,17 +41,6 @@ void SearchObject::OnStart()
         else if (itemType == ItemType::Piece)
             item = std::make_unique<Piece>(itemID);
     }
-}
-
-void SearchObject::OnUpdate(float delta)
-{
-    // Test
-    //if(Input::GetKeyDown(Keyboard::F))
-    //{
-    //    auto item = Interaction();
-    //    if (item) cout << "item " << item->itemId << " get!" << endl;
-    //    else cout << "this object has none item" << endl;
-    //}
 }
 
 nlohmann::json SearchObject::Serialize()
