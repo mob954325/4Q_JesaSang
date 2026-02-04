@@ -22,6 +22,9 @@ void Player_Hide::ChangeStateLogic()
     if(Input::GetKeyDown(player->interaction_Key))
     {
         player->ChangeState(PlayerState::Idle);
+
+        // 중단할때만 종료 로직 추가
+        player->curHideObject->StopHide();
     }
 }
 

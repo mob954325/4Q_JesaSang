@@ -25,15 +25,15 @@ private:
 
     // data
     float hideDurationTime = 10.0f;     // 최대 은신 시간
-    float hideCoolTime = 1.0f;          // 재은신 쿨타임
+    float reHideCoolTime = 1.0f;        // 재은신 쿨타임
 
     // controlls
     bool isAILooking = false;           // AI가 이 오브젝트를 보고 있는가
     bool isHiding = false;              // 현재 은신 중인가
-    bool isCoolTime = false;            // 쿨타임이 찼는가
+    bool reHideReady = false;           // 재은신 쿨타임이 찼는가
 
-    float hideDurationTimer;
-    float hideCoolTimer;
+    float hideDurationTimer = 0.0f;
+    float reHideCoolTimer = 0.0f;
 
 public:
     // component process
@@ -49,6 +49,7 @@ public :
     // 외부 call funcs..
     bool IsPossibleHide();
     void StartHide(PlayerController* p);
-    void SetAILook(bool isLook);
+    void StopHide();
+    void SetAILook(bool isLook);        // TODO :: 선민이 AI 시야 연결
 };
 
