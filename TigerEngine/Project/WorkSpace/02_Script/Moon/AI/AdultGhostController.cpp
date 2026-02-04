@@ -25,7 +25,11 @@ void AdultGhostController::Deserialize(nlohmann::json data)
 void AdultGhostController::OnStart()
 {
     agent = GetOwner()->GetComponent<AgentComponent>();
-    if (!agent) return;
+    if (!agent) 
+    { 
+        std::cout << "[AdultGhostController] OnStart() agent is NULL" << std::endl;
+        return; 
+    }
 
     agent->PickRandomTarget(); // 목표 좌표 찾기 
 }
@@ -45,7 +49,11 @@ void AdultGhostController::OnFixedUpdate(float dt)
     // 디버그 출력: 목표 좌표와 현재 위치 확인
     if (agent->hasTarget)
     {
-        std::cout << "[DEBUG] Agent Current: (" << agent->cx << "," << agent->cy << ") "
+        //std::cout << "[AdultGhostController] Current: (" << agent->cx << "," << agent->cy << ") "
+        //    << "Target: (" << agent->targetCX << "," << agent->targetCY << ") "
+        //    << "Remaining Path: " << agent->path.size() << std::endl;
+
+        std::cout << "[AdultGhostController] \"" << GetOwner()->GetName() << "\" Current: (" << agent->cx << "," << agent->cy << ") "
             << "Target: (" << agent->targetCX << "," << agent->targetCY << ") "
             << "Remaining Path: " << agent->path.size() << std::endl;
     }

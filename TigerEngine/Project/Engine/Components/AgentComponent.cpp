@@ -26,20 +26,23 @@ void AgentComponent::Deserialize(nlohmann::json data)
     JsonHelper::SetDataFromJson(this, data);
 }
 
-AgentComponent::~AgentComponent()
+void AgentComponent::Enable_Inner()
 {
-    
+    AgentSystem::Instance().Register(this);
 }
+
+void AgentComponent::Disable_Inner()
+{
+    AgentSystem::Instance().UnRegister(this);
+}
+
+// --------------------------------------------------------------------------- 
 
 
 void AgentComponent::OnInitialize()
 {
-    
-}
-
-void AgentComponent::OnStart()
-{
     cct = GetOwner()->GetComponent<CharacterControllerComponent>();
+    if (!cct) return;
 
     auto grid = GridSystem::Instance().GetMainGrid();
     if (!grid) return;
@@ -48,7 +51,13 @@ void AgentComponent::OnStart()
     grid->WorldToGridFromCenter(tr->GetWorldPosition(), cx, cy);
 }
 
+void AgentComponent::OnStart()
+{
+}
+
+// -----------------------------------------
 // 무작위 목표(Grid 좌표)를 선택하는 함수
+// -----------------------------------------
 void AgentComponent::PickRandomTarget()
 {
     auto grid = GridSystem::Instance().GetMainGrid();
@@ -114,29 +123,20 @@ void AgentComponent::OnFixedUpdate(float dt)
         MoveAgent(dir, patrolSpeed, dt);
     }
 
-    // 디버그 출력
-    std::cout << "[DEBUG] Current: (" << cx << "," << cy << ") "
-        << "Next: (" << next.first << "," << next.second << ") "
-        << "Path size: " << path.size() << std::endl;
+    //// 디버그 출력
+    //std::cout << "[AgentComponent] Current: (" << cx << "," << cy << ") "
+    //    << "Next: (" << next.first << "," << next.second << ") "
+    //    << "Path size: " << path.size() << std::endl;
 }
 
 void AgentComponent::MoveAgent(const Vector3& dir, float speed, float dt)
 {
     if (cct)
+    {
         cct->MoveAI(dir, speed, dt);
-}
-
-void AgentComponent::OnFixedUpdate(float dt)
-{
-
-}
-
-void AgentComponent::Enable_Inner()
-{
-    AgentSystem::Instance().Register(this);
-}
-
-void AgentComponent::Disable_Inner()
-{
-    AgentSystem::Instance().UnRegister(this);
+    }
+    else
+    {
+        std::cout << "[AgentComponent] MoveAgent에서 cct 가 NULL입니다." << std::endl;
+    }
 }

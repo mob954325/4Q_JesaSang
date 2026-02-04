@@ -13,7 +13,7 @@ public:
     void Deserialize(nlohmann::json data) override;
 
     AgentComponent() = default;
-    ~AgentComponent();
+    ~AgentComponent() = default;
 
     CharacterControllerComponent* cct = nullptr;
 

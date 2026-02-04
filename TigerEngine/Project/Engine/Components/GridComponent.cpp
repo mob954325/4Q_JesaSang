@@ -26,7 +26,6 @@ void GridComponent::Deserialize(nlohmann::json data)
     JsonHelper::SetDataFromJson(this, data);
 }
 
-
 void DebugPrintBlock(
     const std::string& obj,
     int gx, int gy,
@@ -46,7 +45,9 @@ void GridComponent::OnInitialize()
 {
     // 셀 배열 초기화 
     ResizeGrid(width, height);
-
+    // Physics 기반 자동 차단
+    BuildBlockedFromPhysics();
+     
     // 임의로 (-1,2) 그리드를 걸을 수 없게 설정
     //SetWalkableFromCenter(-1, 2, false);
     //SetWalkableFromCenter(3, -4, false);
@@ -60,8 +61,8 @@ void GridComponent::Enable_Inner()
 
 void GridComponent::OnStart()
 {
-    // Physics 기반 자동 차단
-    BuildBlockedFromPhysics();
+    //// Physics 기반 자동 차단
+    //BuildBlockedFromPhysics();
 }
 
 void GridComponent::OnDestory()
@@ -100,7 +101,6 @@ void GridComponent::BuildBlockedFromPhysics()
         Transform* tr = phys->transform;
         if (!tr) continue;
 
-        // Vector3 pos = tr->GetWorldPosition();
         Vector3 pos = tr->GetLocalPosition();
 
         // -----------------------
