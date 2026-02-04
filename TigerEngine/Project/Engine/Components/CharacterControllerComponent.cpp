@@ -115,78 +115,78 @@ void CharacterControllerComponent::CreateCharacterCollider(float radius, float h
     SetLayer(CollisionLayer::Default); // 초기 레이어 적용
 }
 
-void CharacterControllerComponent::MoveCharacter(const Vector3& wishDir, float fixedDt)
-{
-    if (!m_Controller) // 방어코드 !! 유니티 내부도 이렇게 방어 한다고 함 
-    {
-        return;
-    }
-
-    auto& sys = CharacterControllerSystem::Instance();
-    sys.GetHitReport().owner = this;
-
-    // --------------------
-    // 1. 수평 이동속도 (m/s) + 입력 방향 (정규화, PhysX 기준)
-    // --------------------
-    PxVec3 velocity(0, 0, 0);
-    if (wishDir.LengthSquared() > 0.0f)
-    {
-        PxVec3 dir(wishDir.x, 0, wishDir.z);
-        dir.normalize();
-        velocity.x = dir.x * m_MoveSpeed;
-        velocity.z = dir.z * m_MoveSpeed;
-    }
-
-
-    // --------------------
-    // 2. 지면 체크 
-    // --------------------
-    PxControllerState state;
-    m_Controller->getState(state);
-    bool isGrounded = state.collisionFlags & PxControllerCollisionFlag::eCOLLISION_DOWN;
-
-
-    // --------------------
-    // 3. 점프 처리
-    // --------------------
-    if (isGrounded)
-    {
-        if (m_RequestJump)
-        {
-            m_VerticalVelocity = m_JumpSpeed;
-            m_RequestJump = false;
-        }
-        else if (m_VerticalVelocity < 0.0f)
-        {
-            m_VerticalVelocity = m_MinDown;
-        }
-    }
-    else
-    {
-        m_VerticalVelocity += -9.8f * fixedDt;
-    }
-
-    velocity.y = m_VerticalVelocity;
-
-
-    // --------------------
-    // 4. 이동 거리
-    // --------------------
-    PxVec3 move = velocity * fixedDt;
-
-
-    // --------------------
-    // 5. 필터
-    // --------------------
-    CCTQueryFilter queryFilter(nullptr); // 필요 시 자신 필터 설정
-    PxControllerFilters filters(&m_FilterData, &queryFilter, nullptr);
-
-
-    // --------------------
-    // 6. 이동
-    // --------------------
-    m_Controller->move(move, 0.01f, fixedDt, filters);
-}
+//void CharacterControllerComponent::MoveCharacter(const Vector3& wishDir, float fixedDt)
+//{
+//    if (!m_Controller) // 방어코드 !! 유니티 내부도 이렇게 방어 한다고 함 
+//    {
+//        return;
+//    }
+//
+//    auto& sys = CharacterControllerSystem::Instance();
+//    sys.GetHitReport().owner = this;
+//
+//    // --------------------
+//    // 1. 수평 이동속도 (m/s) + 입력 방향 (정규화, PhysX 기준)
+//    // --------------------
+//    PxVec3 velocity(0, 0, 0);
+//    if (wishDir.LengthSquared() > 0.0f)
+//    {
+//        PxVec3 dir(wishDir.x, 0, wishDir.z);
+//        dir.normalize();
+//        velocity.x = dir.x * m_MoveSpeed;
+//        velocity.z = dir.z * m_MoveSpeed;
+//    }
+//
+//
+//    // --------------------
+//    // 2. 지면 체크 
+//    // --------------------
+//    PxControllerState state;
+//    m_Controller->getState(state);
+//    bool isGrounded = state.collisionFlags & PxControllerCollisionFlag::eCOLLISION_DOWN;
+//
+//
+//    // --------------------
+//    // 3. 점프 처리
+//    // --------------------
+//    if (isGrounded)
+//    {
+//        if (m_RequestJump)
+//        {
+//            m_VerticalVelocity = m_JumpSpeed;
+//            m_RequestJump = false;
+//        }
+//        else if (m_VerticalVelocity < 0.0f)
+//        {
+//            m_VerticalVelocity = m_MinDown;
+//        }
+//    }
+//    else
+//    {
+//        m_VerticalVelocity += -9.8f * fixedDt;
+//    }
+//
+//    velocity.y = m_VerticalVelocity;
+//
+//
+//    // --------------------
+//    // 4. 이동 거리
+//    // --------------------
+//    PxVec3 move = velocity * fixedDt;
+//
+//
+//    // --------------------
+//    // 5. 필터
+//    // --------------------
+//    CCTQueryFilter queryFilter(nullptr); // 필요 시 자신 필터 설정
+//    PxControllerFilters filters(&m_FilterData, &queryFilter, nullptr);
+//
+//
+//    // --------------------
+//    // 6. 이동
+//    // --------------------
+//    m_Controller->move(move, 0.01f, fixedDt, filters);
+//}
 
 void CharacterControllerComponent::MovePlayer(const Vector3& inputDir, float playerSpeed, float dt)
 {

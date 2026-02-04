@@ -27,31 +27,30 @@ void AdultGhostController::OnStart()
     agent = GetOwner()->GetComponent<AgentComponent>();
     if (!agent) return;
 
-    agent->PickRandomTarget();
+    agent->PickRandomTarget(); // 목표 좌표 찾기 
 }
+
 
 void AdultGhostController::OnFixedUpdate(float dt)
 {
-    if (!agent || !agent->hasTarget) { std::cout << "[AdultGhostController] OnFixedUpdate is NULL" << std::endl; return; }
-
-    auto grid = GridSystem::Instance().GetMainGrid();
-    Vector3 targetPos = grid->GridToWorldFromCenter(agent->targetCX, agent->targetCY);
-
-    Vector3 pos = GetOwner()->GetTransform()->GetWorldPosition();
-    Vector3 dir = targetPos - pos;
-
-    if (dir.Length() < reachDist)
+    if (!agent)
     {
-        agent->cx = agent->targetCX;
-        agent->cy = agent->targetCY;
-        agent->hasTarget = false;
-        agent->PickRandomTarget();
+        std::cout << "[AdultGhostController] No agent attached!\n";
         return;
     }
 
-    dir.y = 0;
-    dir.Normalize();
+    // AgentComponent의 경로 따라 이동 처리
+    agent->OnFixedUpdate(dt);
 
-    std::cout << "[AdultGhostController] OnFixedUpdate MoveAgent" << std::endl;
-    agent->MoveAgent(dir, patrolSpeed, dt);
+    // 디버그 출력: 목표 좌표와 현재 위치 확인
+    if (agent->hasTarget)
+    {
+        std::cout << "[DEBUG] Agent Current: (" << agent->cx << "," << agent->cy << ") "
+            << "Target: (" << agent->targetCX << "," << agent->targetCY << ") "
+            << "Remaining Path: " << agent->path.size() << std::endl;
+    }
+    else
+    {
+        std::cout << "[DEBUG] Agent has no target, picking new target next frame.\n";
+    }
 }

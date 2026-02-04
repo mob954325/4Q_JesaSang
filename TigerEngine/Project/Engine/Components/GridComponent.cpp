@@ -318,3 +318,89 @@ bool GridComponent::WorldToGridFromCenter(const Vector3& pos, int& outCX, int& o
 
     return !(ix < 0 || iy < 0 || ix >= width || iy >= height);
 }
+
+
+// ================================================================
+// A* (에이스타) 길찾기 
+// ================================================================
+
+#include <queue>
+#include <unordered_map>
+#include <functional>
+
+struct Node
+{
+    int x, y;
+    float gCost, hCost;
+    Node* parent = nullptr;
+
+    float fCost() const { return gCost + hCost; }
+};
+
+struct NodeCmp
+{
+    bool operator()(const Node* a, const Node* b) const
+    {
+        return a->fCost() > b->fCost(); // min-heap
+    }
+};
+
+// 중앙 기준 좌표로 시작/목표 받아 -> walkable 한 칸씩 이동하는 경로를 반환
+std::vector<std::pair<int, int>> GridComponent::FindPath(int startCX, int startCY, int endCX, int endCY)
+{
+    std::vector<std::pair<int, int>> finalPath;
+
+    auto cmp = [](Node* a, Node* b) { return a->fCost() > b->fCost(); };
+    std::priority_queue<Node*, std::vector<Node*>, NodeCmp> openSet;
+    std::unordered_map<int, Node*> allNodes;
+
+    auto hash = [this](int x, int y) { return (y + (width / 2)) * width + (x + (width / 2)); };
+
+    Node* start = new Node{ startCX, startCY, 0, float(abs(endCX - startCX) + abs(endCY - startCY)), nullptr };
+    openSet.push(start);
+    allNodes[hash(startCX, startCY)] = start;
+
+    std::vector<std::pair<int, int>> directions = { {1,0},{-1,0},{0,1},{0,-1} };
+
+    while (!openSet.empty())
+    {
+        Node* current = openSet.top();
+        openSet.pop();
+
+        if (current->x == endCX && current->y == endCY)
+        {
+            // 경로 역추적
+            while (current)
+            {
+                finalPath.push_back({ current->x, current->y });
+                current = current->parent;
+            }
+            std::reverse(finalPath.begin(), finalPath.end());
+            break;
+        }
+
+        for (auto& dir : directions)
+        {
+            int nx = current->x + dir.first;
+            int ny = current->y + dir.second;
+
+            if (!IsWalkableFromCenter(nx, ny)) continue;
+
+            int key = hash(nx, ny);
+            float gNew = current->gCost + 1;
+
+            if (allNodes.find(key) == allNodes.end() || gNew < allNodes[key]->gCost)
+            {
+                float h = float(abs(endCX - nx) + abs(endCY - ny));
+                Node* neighbor = new Node{ nx, ny, gNew, h, current };
+                openSet.push(neighbor);
+                allNodes[key] = neighbor;
+            }
+        }
+    }
+
+    // 동적할당 해제
+    for (auto& pair : allNodes) delete pair.second;
+
+    return finalPath;
+}
