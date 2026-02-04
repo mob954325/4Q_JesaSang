@@ -47,6 +47,8 @@ inline void ComponentFactory::Register(std::string compName, ComponentCategory c
             if (auto sp = comp)
             {
                 sp->SetName(name);
+                sp->SetActive(true); // 해당 컴포넌트 활성화 ( false -> true )
+                cout << name << " : factory call \n";
             }
             return comp;
         };

@@ -35,5 +35,5 @@ public:
     virtual void Disable_Inner() {}  // Engine Component 정의시 필수 override 필요
 
 protected:
-    bool isActive = true;
+    bool isActive = false;
 };

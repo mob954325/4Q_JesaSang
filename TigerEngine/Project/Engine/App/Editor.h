@@ -112,6 +112,10 @@ private:
     void CheckObjectDeleteKey();
     bool isHierarchyFocused = false;
 
+    // check camerainfo
+    void RenderCameraPanel();
+    bool isCameraPanelOepn = false;
+
 public:
 	void OnInputProcess(const Keyboard::State& KeyState, const Keyboard::KeyboardStateTracker& KeyTracker,
 		const Mouse::State& MouseState, const Mouse::ButtonStateTracker& MouseTracker) override;
