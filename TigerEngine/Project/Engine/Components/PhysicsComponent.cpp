@@ -60,6 +60,22 @@ nlohmann::json PhysicsComponent::Serialize()
 void PhysicsComponent::Deserialize(nlohmann::json data)
 {
     JsonHelper::SetDataFromJson(this, data);
+
+    // create collider : Oninit, OnEnable이 이미 끝난 뒤임.
+    ColliderDesc d;
+    d.halfExtents = m_HalfExtents;
+    d.radius = m_Radius;
+    d.height = m_Height;
+    d.density = m_Density;
+    d.localOffset = m_LocalOffset;
+    d.isTrigger = m_IsTrigger;
+    CreateCollider(m_ColliderType, m_BodyType, d);
+
+    PhysicsSystem::Instance().RegisterComponent(this, m_Actor);
+
+    m_firstRegister = true;
+    // 1. 이건 load 시 등록 -> isFirstRegister가 true
+    // 2. 액티브 디엑티브 했을 때 재등록 RegisterComponent -> inner에서 isFirstRegister가 true 일 때만 호출
 }
 
 void PhysicsComponent::OnCollisionEnter(PhysicsComponent* other)
@@ -131,22 +147,41 @@ void PhysicsComponent::OnInitialize()
 
 void PhysicsComponent::OnStart()
 {
-    // 우정 0128 | PhysicsComponent에서 스스로 collider Create
-    ColliderDesc d;
-    d.halfExtents = m_HalfExtents;
-    d.radius = m_Radius;
-    d.height = m_Height;
-    d.density = m_Density;
-    d.localOffset = m_LocalOffset;
-    d.isTrigger = m_IsTrigger;
-
-    CreateCollider(m_ColliderType, m_BodyType, d);
     SetLayer(m_Layer);
+}
+
+void PhysicsComponent::Enable_Inner()
+{
+    // NOTE : PVD 테스트 안함
+    if (m_firstRegister)
+    {
+        ColliderDesc d;
+        d.halfExtents = m_HalfExtents;
+        d.radius = m_Radius;
+        d.height = m_Height;
+        d.density = m_Density;
+        d.localOffset = m_LocalOffset;
+        d.isTrigger = m_IsTrigger;
+        CreateCollider(m_ColliderType, m_BodyType, d);
+
+        PhysicsSystem::Instance().RegisterComponent(this, m_Actor); 
+    }
+
+    OnEnable();
+
+    cout << owner->GetName() << " : pc enalbe_inner\n";
+}
+
+void PhysicsComponent::Disable_Inner()
+{
+    PhysicsSystem::Instance().UnregisterComponent(this);
+    OnDisable();
+    cout << owner->GetName() << " : pc Disable_Inner\n";
 }
 
 PhysicsComponent::~PhysicsComponent()
 {
-    PhysicsSystem::Instance().UnregisterComponent(this);
+    
 }
 
 
@@ -383,7 +418,6 @@ void PhysicsComponent::CreateCollider(ColliderType collider, PhysicsBodyType bod
     }
     
     phys.GetScene()->addActor(*m_Actor); // 물리 씬에 추가 
-    phys.RegisterComponent(this, m_Actor);
 
 
     SyncToPhysics(); // 좌표 연결 

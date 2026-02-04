@@ -31,6 +31,10 @@ public:
     void OnStart() override;
     void OnFixedUpdate(float dt) override;
 
+    // register enable
+    void Enable_Inner() override;
+    void Disable_Inner() override;
+
     void PickRandomTarget();
     void MoveAgent(const Vector3& dir, float speed, float dt);
 };

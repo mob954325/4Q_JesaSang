@@ -19,6 +19,9 @@ public:
     void OnUpdate(float delta) override;
     void OnDestory() override;
 
+    void Enable_Inner() override;
+    void Disable_Inner() override;
+
     nlohmann::json Serialize() override;
     void Deserialize(nlohmann::json data) override;
 

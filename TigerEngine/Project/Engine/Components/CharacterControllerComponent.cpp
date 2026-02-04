@@ -46,11 +46,15 @@ void CharacterControllerComponent::Deserialize(nlohmann::json data)
 {
     JsonHelper::SetDataFromJson(this, data);
 
-    // -------------------------
-    // CCT 재생성
-    // -------------------------
-    // CreateCharacterCollider(m_Radius, m_Height, m_Offset);
-    // SetLayer(m_Layer);
+    // data 수정 ...
+    if (!m_Controller)
+    {
+        CreateCharacterCollider(m_Radius, m_Height, m_Offset);
+    }
+
+    CharacterControllerSystem::Instance().RegisterComponent(this, m_Controller);
+
+    m_firstRegister = true;
 }
 
 void CharacterControllerComponent::OnCollisionEnter(PhysicsComponent* other) { if (GetOwner()) GetOwner()->BroadcastCollisionEnter(other); }
@@ -65,9 +69,6 @@ void CharacterControllerComponent::OnTriggerExit(PhysicsComponent* other) { if (
 void CharacterControllerComponent::OnInitialize()
 {
     transform = GetOwner()->GetTransform();
-
-    if (!m_Controller)
-        CreateCharacterCollider(m_Radius, m_Height, m_Offset);
 }
 
 void CharacterControllerComponent::OnStart()
@@ -76,10 +77,27 @@ void CharacterControllerComponent::OnStart()
 
 void CharacterControllerComponent::OnDestory()
 {
+    
+}
+
+void CharacterControllerComponent::Enable_Inner()
+{
+    if(m_firstRegister)
+    {
+        CreateCharacterCollider(m_Radius, m_Height, m_Offset);
+        CharacterControllerSystem::Instance().RegisterComponent(this, m_Controller);
+    }
+
+    OnEnable();
+}
+
+void CharacterControllerComponent::Disable_Inner()
+{
     if (m_Controller)
     {
         CharacterControllerSystem::Instance().UnRegisterComponent(this);
         m_Controller = nullptr;
+        OnDisable();
     }
 }
 
@@ -109,8 +127,6 @@ void CharacterControllerComponent::CreateCharacterCollider(float radius, float h
         height * WORLD_TO_PHYSX,
         10.0f   // density (사실상 무의미) density는 반드시 > 0
     );
-
-    CharacterControllerSystem::Instance().RegisterComponent(this, m_Controller);
 
     SetLayer(CollisionLayer::Default); // 초기 레이어 적용
 }

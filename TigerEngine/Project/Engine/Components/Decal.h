@@ -45,6 +45,9 @@ public:
     void Deserialize(nlohmann::json data);
 
     void ChangeData(std::string path);
+
+    void Enable_Inner() override;
+    void Disable_Inner() override;
 };
 
 // util

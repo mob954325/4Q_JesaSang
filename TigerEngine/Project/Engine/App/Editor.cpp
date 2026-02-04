@@ -1212,7 +1212,9 @@ void Editor::RenderComponentInfo(std::string compName, T* comp)
             }
         }
 
+        ImGui::PushID(comp);
         ReadVariants(*comp);
+        ImGui::PopID();
         return;
     }
 

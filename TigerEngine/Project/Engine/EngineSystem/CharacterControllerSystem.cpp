@@ -172,22 +172,32 @@ void CharacterControllerSystem::Simulate(float dt)
 
     for (auto& it : m_CCTMap)
     {
+        int a = 0;
+        
         CharacterControllerComponent* comp = it.first;
-        if (comp)
+        if (!comp) continue; // 컴포넌트 없으면 다음꺼
+
+        if (!comp->IsStart())
         {
-            comp->SyncFromController();
-            comp->ResolveCollisions();
-            comp->CheckTriggers();      // CCT 위치 기반 Overlap Query
-            comp->ResolveTriggers();    // 수집만 진행 
+            comp->OnStart();
+            comp->SetStartTrue();
         }
+
+        comp->SyncFromController();
+        comp->ResolveCollisions();
+        comp->CheckTriggers();      // CCT 위치 기반 Overlap Query
+        comp->ResolveTriggers();    // 수집만 진행 
     }
 }
 
 
-void CharacterControllerSystem::RegisterComponent(CharacterControllerComponent* comp, PxController* cct)
+void CharacterControllerSystem::RegisterComponent(CharacterControllerComponent* comp, PxController*& cct)
 {
-    if (comp && cct)
+    // if (comp && cct)
+    if (comp)
+    {
         m_CCTMap[comp] = cct;
+    }
 }
 
 void CharacterControllerSystem::UnRegisterComponent(CharacterControllerComponent* comp)

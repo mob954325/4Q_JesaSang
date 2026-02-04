@@ -41,14 +41,16 @@ Light::Light()
     outerAngle = 30.0f;
 }
 
-void Light::OnInitialize()
+void Light::Enable_Inner()
 {
     LightSystem::Instance().Register(this);
+    OnEnable();
 }
 
-void Light::OnDestory()
+void Light::Disable_Inner()
 {
     LightSystem::Instance().UnRegister(this);
+    OnDisable();
 }
 
 nlohmann::json Light::Serialize()

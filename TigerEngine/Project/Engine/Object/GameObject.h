@@ -38,6 +38,9 @@ public:
 	bool IsDestory();
 	void Destory();
 
+    void Enable_Inner() override;
+    void Disable_Inner() override;
+
 	std::string GetName() const;
 	void SetName(std::string str);
 
@@ -115,9 +118,10 @@ inline T* GameObject::AddComponent()
 	Handle handle = ObjectSystem::Instance().Create<T>();
 	auto comp = ObjectSystem::Instance().Get<T>(handle);
 	comp->SetOwner(this);
+    comp->OnInitialize();
+    comp->Enable_Inner();
 	components.push_back(comp);
 	handles.push_back(handle);
-    comp->SetActive(true); // NOTE : 컴포넌트 등록 후 바로 활성화
 
 	return comp;
 }
