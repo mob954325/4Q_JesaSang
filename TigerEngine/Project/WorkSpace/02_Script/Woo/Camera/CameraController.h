@@ -86,7 +86,6 @@ private:
 
 
 public:
-    void OnInitialize() override;
     void OnStart() override;
     void OnLateUpdate(float delta) override;
     void OnDestory() override;

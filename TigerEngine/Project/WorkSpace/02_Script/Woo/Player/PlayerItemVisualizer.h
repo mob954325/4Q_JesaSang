@@ -14,7 +14,7 @@ class PlayerItemVisualizer : public ScriptComponent
     RTTR_ENABLE(ScriptComponent)
 
 private:
-    // gameobjects
+    // visual gameobjects
     GameObject* ingre_apple = nullptr;
     GameObject* ingre_pear = nullptr;
     GameObject* ingre_batter = nullptr;
@@ -22,7 +22,6 @@ private:
     GameObject* ingre_sanjeok = nullptr;
     GameObject* ingre_dong = nullptr;
 
-    // gameobjects
     GameObject* food_apple = nullptr;
     GameObject* food_pear = nullptr;
     GameObject* food_batter = nullptr;

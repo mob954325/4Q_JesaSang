@@ -50,12 +50,6 @@ void Inventory::AddItem(std::unique_ptr<IItem> item)
     }
 }
 
-void Inventory::DropItem()
-{
-    // 제단에 올리감
-    item.reset();
-}
-
 std::string Inventory::GetCurItemID()
 {
     if (item) return item->itemId;

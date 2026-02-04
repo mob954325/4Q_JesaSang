@@ -44,7 +44,6 @@ public:
     // 외부 call fucns..
     bool HasItem();
     void AddItem(std::unique_ptr<IItem> item);
-    void DropItem();
 
     std::string GetCurItemID();
     ItemType GetCurItemType();

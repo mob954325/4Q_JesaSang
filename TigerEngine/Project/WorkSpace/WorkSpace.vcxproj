@@ -146,6 +146,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="02_Script\Moon\AI\AdultGhostController.h" />
+    <ClInclude Include="02_Script\Woo\Altar\AltarManager.h" />
     <ClInclude Include="02_Script\Woo\Camera\CameraController.h" />
     <ClInclude Include="02_Script\Woo\Inventory\Inventory.h" />
     <ClInclude Include="02_Script\Woo\Item\Item.h" />
@@ -184,6 +185,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="02_Script\Moon\AI\AdultGhostController.cpp" />
+    <ClCompile Include="02_Script\Woo\Altar\AltarManager.cpp" />
     <ClCompile Include="02_Script\Woo\Camera\CameraController.cpp" />
     <ClCompile Include="02_Script\Woo\Inventory\Inventory.cpp" />
     <ClCompile Include="02_Script\Woo\Item\Item.cpp" />
