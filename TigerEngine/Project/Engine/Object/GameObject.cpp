@@ -370,6 +370,15 @@ void GameObject::BroadcastCCTCollisionExit(CharacterControllerComponent* cct)
 
 void GameObject::Enable_Inner()
 {
+    auto children = GetChildern();
+
+    // 자식 오브젝트 모두 활성화
+    for (auto& child : children)
+    {
+        child->GetOwner()->SetActive(true);
+    }
+
+    // 내 컴포넌트 활성화
     for (auto comp : components)
     {
         comp->SetActive(true);
@@ -378,6 +387,14 @@ void GameObject::Enable_Inner()
 
 void GameObject::Disable_Inner()
 {
+    auto children = GetChildern();
+
+    // 자식 오브젝트 모두 비활성화
+    for (auto& child : children)
+    {
+        child->GetOwner()->SetActive(false);
+    }
+
     for (auto comp : components)
     {
         comp->SetActive(false);
