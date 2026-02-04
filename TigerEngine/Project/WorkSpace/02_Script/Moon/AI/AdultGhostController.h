@@ -15,9 +15,6 @@ private:
     AgentComponent* agent = nullptr;
     GridComponent* grid = nullptr;
 
-    float patrolSpeed = 1.0f;
-    float reachDist = 300.0f;
-
 public:
     void OnStart() override;
     void OnFixedUpdate(float dt) override;
