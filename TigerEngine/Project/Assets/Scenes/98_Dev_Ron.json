@@ -35,23 +35,6 @@
           },
           {
             "properties": {
-              "Active": true,
-              "AutoPlay": true,
-              "ClipId": "SFX_OneShot",
-              "EnableKeyTrigger": false,
-              "EnableListenerSync": true,
-              "EnableOrbit": false,
-              "EnablePlayModeAuto": false,
-              "Height": 0.0,
-              "ListenerVelScale": 0.009999999776482582,
-              "Radius": 300.0,
-              "Speed": 1.0,
-              "TriggerKey": 90
-            },
-            "type": "AudioTestController"
-          },
-          {
-            "properties": {
               "angle": 1.5707963705062866,
               "farDist": 2000.0,
               "moveSpeed": 100.0,
@@ -311,12 +294,12 @@
           {
             "properties": {
               "Active": true,
-              "AutoPlay": false,
-              "ClipId": "SFX_OneShot",
-              "EnableKeyTrigger": true,
+              "AutoPlay": true,
+              "ClipId": "",
+              "EnableKeyTrigger": false,
               "EnableListenerSync": false,
               "EnableOrbit": true,
-              "EnablePlayModeAuto": false,
+              "EnablePlayModeAuto": true,
               "Height": 0.0,
               "ListenerVelScale": 0.009999999776482582,
               "Radius": 100.0,

@@ -21,24 +21,20 @@ void AudioListenerSyncScript::OnInitialize()
 {
 }
 
-void AudioListenerSyncScript::OnStart()
-{
-    if (auto owner = GetOwner())
-    {
-        m_Transform = owner->GetTransform();
-        m_Listener = owner->GetComponent<AudioListenerComponent>();
-    }
-
-    if (m_Transform)
-    {
-        m_PrevPos = m_Transform->GetWorldPosition();
-    }
-}
-
 void AudioListenerSyncScript::OnUpdate(float delta)
 {
     if (!enableSync || !m_Transform || !m_Listener || delta <= 0.0f)
     {
+        if (auto owner = GetOwner())
+        {
+            if (!m_Transform) m_Transform = owner->GetTransform();
+            if (!m_Listener) m_Listener = owner->GetComponent<AudioListenerComponent>();
+            if (!m_HasInit && m_Transform)
+            {
+                m_PrevPos = m_Transform->GetWorldPosition();
+                m_HasInit = true;
+            }
+        }
         return;
     }
 
