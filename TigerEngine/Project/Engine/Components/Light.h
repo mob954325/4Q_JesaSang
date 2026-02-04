@@ -33,8 +33,10 @@ public:
     // component process
     Light();
     ~Light() override = default;
-    void OnInitialize() override;
-    void OnDestory() override;
+
+    // register enable
+    void Enable_Inner() override;
+    void Disable_Inner() override;
 
     // json
     nlohmann::json Serialize();

@@ -8,6 +8,8 @@ class AnimationSystem : public Singleton<AnimationSystem>
 private:
     std::vector<AnimationController*> comps{};
 
+    std::vector<AnimationController*> pending_anims{};
+
 public:
     AnimationSystem(token) {}
     ~AnimationSystem() = default;

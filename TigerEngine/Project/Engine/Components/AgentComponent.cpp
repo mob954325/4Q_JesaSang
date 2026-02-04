@@ -27,13 +27,13 @@ void AgentComponent::Deserialize(nlohmann::json data)
 
 AgentComponent::~AgentComponent()
 {
-    AgentSystem::Instance().UnRegister(this);
+    
 }
 
 
 void AgentComponent::OnInitialize()
 {
-    AgentSystem::Instance().Register(this);
+    
 }
 
 void AgentComponent::OnStart()
@@ -82,4 +82,14 @@ void AgentComponent::MoveAgent(const Vector3& dir, float speed, float dt)
 void AgentComponent::OnFixedUpdate(float dt)
 {
 
+}
+
+void AgentComponent::Enable_Inner()
+{
+    AgentSystem::Instance().Register(this);
+}
+
+void AgentComponent::Disable_Inner()
+{
+    AgentSystem::Instance().UnRegister(this);
 }

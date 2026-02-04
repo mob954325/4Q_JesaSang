@@ -26,7 +26,6 @@
 #include "EngineSystem/GridSystem.h"
 #include "EngineSystem/AgentSystem.h"
 
-#include "Components/FreeCamera.h"
 #include "Components/FBXData.h"
 
 namespace fs = std::filesystem;
@@ -93,8 +92,6 @@ bool EngineApp::OnInitialize()
 
 #if _DEBUG
 	auto freeCamHandle = CameraSystem::Instance().CreateFreeCamera(clientWidth, clientHeight, SceneSystem::Instance().GetCurrentScene().get());
-    auto freeCamObjPtr = ObjectSystem::Instance().Get<GameObject>(freeCamHandle);
-    freeCamObjPtr->AddComponent<FreeCamera>();
 #endif
 
     // == find scene ==
@@ -240,8 +237,12 @@ void EngineApp::OnFixedUpdate()
     while (m_PhysicsAccumulator >= fixedDt)
     {
         SceneSystem::Instance().FixedUpdateScene(fixedDt);
-        PhysicsSystem::Instance().Simulate(fixedDt);
-        AgentSystem::Instance().FixedUpdate(fixedDt);
+
+        if (PlayModeSystem::Instance().IsPlaying())
+        {
+            PhysicsSystem::Instance().Simulate(fixedDt);
+            AgentSystem::Instance().FixedUpdate(fixedDt);
+        }
 
         m_PhysicsAccumulator -= fixedDt;
     }
