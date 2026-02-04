@@ -4,6 +4,9 @@
 // Player FSM - [HIT STATE]
 class Player_Hit : public IPlayerState
 {
+private:
+    float timer = 0.0f;
+
 public:
     Player_Hit(PlayerController* _player)
         : IPlayerState(_player) {
