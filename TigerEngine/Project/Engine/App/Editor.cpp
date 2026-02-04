@@ -865,6 +865,7 @@ void Editor::DrawAddComponentPopup(GameObject* obj)
                 if (ImGui::MenuItem(e->name.c_str()))
                 {
                     e->creator(obj);
+                    
                     ImGui::CloseCurrentPopup();
                 }
             }

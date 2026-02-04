@@ -132,9 +132,7 @@ Handle CameraSystem::CreateFreeCamera(int clientWidth, int clientHeight, Scene *
     freeCamera = freeCamObj->AddComponent<Camera>();
     auto freecam = freeCamObj->AddComponent<FreeCamera>();
 
-    freeCamObj->Enable_Inner(); // 게임 오브젝트 active
-    freeCamera->Enable_Inner(); // 카메라 컴포넌트 active
-    freecam->Enable_Inner();    // freeCamera active 
+    freeCamObj->SetActive(true); // 게임 오브젝트에 있는 모든 컴포넌트 활성화
 
 	freeCamera->SetProjection(DirectX::XM_PIDIV2, clientWidth, clientHeight, 0.1, 3000);
 

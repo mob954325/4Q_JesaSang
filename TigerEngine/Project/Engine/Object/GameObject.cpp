@@ -119,7 +119,7 @@ nlohmann::json GameObject::Serialize() const
     }
     datas["properties"]["ParentID"] = parentID;
     datas["properties"]["ID"] = static_cast<int>(GetId());
-    datas["properties"]["Active"] = static_cast<int>(GetActiveSelf());
+    datas["properties"]["Active"] = GetActiveSelf();
 
     // 오브젝트 내용 직렬화화
     for(auto& prop : t.get_properties())
@@ -155,12 +155,6 @@ void GameObject::Deserialize(const nlohmann::json objData)
 
     const auto& registered = ComponentFactory::Instance().GetRegisteredComponents();
 
-    if (objData.contains("Active"))
-    {
-        int boolAlpha = objData["Active"];
-        SetActive(static_cast<bool>(boolAlpha));
-    }
-
     for(auto& prop : objData["components"])
     {
         if(!prop.contains("type")) continue;
@@ -179,6 +173,19 @@ void GameObject::Deserialize(const nlohmann::json objData)
             Component* createdComp = it->second.creator(this);
             createdComp->Deserialize(prop);
         }          
+    }
+
+    if (objData.contains("Active"))
+    {
+        bool isActive = objData["Active"];
+        if (isActive)
+        {
+            SetActive(true); // 자기 자신 활성화 
+        }
+        else
+        {
+            SetActive(false); // 비활성화
+        }
     }
 }
 
@@ -365,10 +372,7 @@ void GameObject::Enable_Inner()
 {
     for (auto comp : components)
     {
-        if (comp->GetActiveSelf())
-        {
-            comp->Enable_Inner();
-        }
+        comp->SetActive(true);
     }
 }
 
@@ -376,9 +380,6 @@ void GameObject::Disable_Inner()
 {
     for (auto comp : components)
     {
-        if (comp->GetActiveSelf())
-        {
-            comp->Disable_Inner();
-        }
+        comp->SetActive(false);
     }
 }

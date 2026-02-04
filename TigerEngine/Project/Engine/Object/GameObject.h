@@ -119,7 +119,6 @@ inline T* GameObject::AddComponent()
 	auto comp = ObjectSystem::Instance().Get<T>(handle);
 	comp->SetOwner(this);
     comp->OnInitialize();
-    comp->Enable_Inner();
 	components.push_back(comp);
 	handles.push_back(handle);
 

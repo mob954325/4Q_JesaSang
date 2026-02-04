@@ -72,6 +72,8 @@ GameObject* Scene::AddGameObjectByName(std::string name)
     int index = static_cast<int>(gameObjects.size());
     gameObjects.push_back({ obj, handle });
     mappedGameObjects[name].push_back({ handle, index });
+    obj->SetActive(true);
+
     return obj;
 }
 
