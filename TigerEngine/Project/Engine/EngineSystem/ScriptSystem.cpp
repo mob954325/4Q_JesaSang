@@ -31,6 +31,15 @@ void ScriptSystem::RegisterScript(Component* comp)
 
 void ScriptSystem::UnRegister(Component* comp)
 {
+    for (auto it = pending_components.begin(); it != pending_components.end(); it++)
+    {
+        if (*it == comp)
+        {
+            pending_components.erase(it);
+            return;
+        }
+    }
+
     for (auto it = comps.begin(); it != comps.end(); it++)
     {
         if (*it == comp)
@@ -43,6 +52,15 @@ void ScriptSystem::UnRegister(Component* comp)
 
 void ScriptSystem::UnRegisterScript(Component* comp)
 {
+    for (auto it = pending_scriptComponents.begin(); it != pending_scriptComponents.end(); it++)
+    {
+        if (*it == comp)
+        {
+            pending_scriptComponents.erase(it);
+            return;
+        }
+    }
+
     for (auto it = scriptComps.begin(); it != scriptComps.end(); it++)
     {
         if (*it == comp)
