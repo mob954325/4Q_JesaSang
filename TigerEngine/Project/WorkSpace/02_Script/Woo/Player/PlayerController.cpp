@@ -297,6 +297,13 @@ void PlayerController::CookingInteraction(float dt)
         return;
     }
 
+    // ingredient
+    if (inventory->GetCurItemType() != ItemType::Ingredient)
+    {
+        cookInteractionTimer = 0.0f;
+        return;
+    }
+
     // holding
     cookInteractionTimer += dt;
     float progress = cookInteractionTimer / cookInteractionTime;
