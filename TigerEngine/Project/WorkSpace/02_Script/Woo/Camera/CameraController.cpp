@@ -16,10 +16,6 @@ RTTR_REGISTRATION
         (rttr::policy::ctor::as_std_shared_ptr);
 }
 
-void CameraController::OnInitialize()
-{
-}
-
 void CameraController::OnStart()
 {
     // get components

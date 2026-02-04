@@ -28,12 +28,12 @@ RTTR_REGISTRATION
 
 void Decal::OnInitialize()
 {
-    DecalSystem::Instance().Register(this);
+    
 }
 
 void Decal::OnDestory()
 {
-    DecalSystem::Instance().UnRegister(this);
+    
 }
 
 nlohmann::json Decal::Serialize()

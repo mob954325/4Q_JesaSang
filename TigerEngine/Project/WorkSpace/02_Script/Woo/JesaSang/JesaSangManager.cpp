@@ -14,11 +14,14 @@ RTTR_REGISTRATION
     (rttr::policy::ctor::as_std_shared_ptr);
 }
 
-void JesaSangManager::OnStart()
+void JesaSangManager::OnInitialize()
 {
     // singleton
     s_instance = this;
+}
 
+void JesaSangManager::OnStart()
+{
     // gameobject find
     const auto& sceneSystem = SceneSystem::Instance().GetCurrentScene();
     apple = sceneSystem->GetGameObjectByName("Apple");

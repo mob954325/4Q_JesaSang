@@ -39,11 +39,6 @@ RTTR_REGISTRATION
 }
 
 /*-------[ Component Process ]-------------------------------------*/
-void PlayerController::OnInitialize()
-{
-    
-}
-
 void PlayerController::OnStart()
 {
     // get components

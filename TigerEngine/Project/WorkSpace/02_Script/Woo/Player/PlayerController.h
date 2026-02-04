@@ -101,7 +101,6 @@ private:
 
 public:
     // Component process
-    void OnInitialize() override;
     void OnStart() override;
     void OnUpdate(float delta) override;
     void OnFixedUpdate(float delta) override;
