@@ -84,6 +84,7 @@ void CharacterControllerComponent::Enable_Inner()
 {
     if(m_firstRegister)
     {
+        CreateCharacterCollider(m_Radius, m_Height, m_Offset);
         CharacterControllerSystem::Instance().RegisterComponent(this, m_Controller);
     }
 
