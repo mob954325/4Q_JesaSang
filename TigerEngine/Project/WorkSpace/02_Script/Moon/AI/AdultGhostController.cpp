@@ -2,6 +2,8 @@
 #include "Object/GameObject.h"
 #include "Util/JsonHelper.h"
 #include "Util/ComponentAutoRegister.h"
+#include "EngineSystem/SceneSystem.h"
+#include "Components/VisionComponent.h"
 
 REGISTER_COMPONENT(AdultGhostController)
 
@@ -22,13 +24,19 @@ void AdultGhostController::Deserialize(nlohmann::json data)
     JsonHelper::SetDataFromJson(this, data);
 }
 
+
+// ------------------------------------------
+
+
 void AdultGhostController::OnStart()
 {
     agent = GetOwner()->GetComponent<AgentComponent>();
-    if (!agent) 
-    { 
-        std::cout << "[AdultGhostController] OnStart() agent is NULL" << std::endl;
-        return; 
+    vision = GetOwner()->GetComponent<VisionComponent>();
+
+    if (!agent || !vision)
+    {
+        std::cout << "[AdultGhostController] agent or vision missing" << std::endl;
+        return;
     }
 
     agent->PickRandomTarget(); // 목표 좌표 찾기 
@@ -37,28 +45,28 @@ void AdultGhostController::OnStart()
 
 void AdultGhostController::OnFixedUpdate(float dt)
 {
-    if (!agent)
-    {
-        std::cout << "[AdultGhostController] No agent attached!\n";
-        return;
-    }
+    if (!agent || !vision) return;
 
-    // AgentComponent의 경로 따라 이동 처리
-    agent->OnFixedUpdate(dt);
+    // AgentComponent의 경로 따라 이동
+    agent->OnFixedUpdate(dt); 
 
-    // 디버그 출력: 목표 좌표와 현재 위치 확인
-    if (agent->hasTarget)
-    {
-        //std::cout << "[AdultGhostController] Current: (" << agent->cx << "," << agent->cy << ") "
-        //    << "Target: (" << agent->targetCX << "," << agent->targetCY << ") "
-        //    << "Remaining Path: " << agent->path.size() << std::endl;
+    // 디버그
+    //if (agent->hasTarget)
+    //{
+    //    std::cout << "[AdultGhostController] \"" << GetOwner()->GetName()
+    //        << "\" Current: (" << agent->cx << "," << agent->cy << ") "
+    //        << "Target: (" << agent->targetCX << "," << agent->targetCY << ") "
+    //        << "Remaining Path: " << agent->path.size() << std::endl;
+    //}
 
-        std::cout << "[AdultGhostController] \"" << GetOwner()->GetName() << "\" Current: (" << agent->cx << "," << agent->cy << ") "
-            << "Target: (" << agent->targetCX << "," << agent->targetCY << ") "
-            << "Remaining Path: " << agent->path.size() << std::endl;
-    }
-    else
+
+    // [시야 감지] 플레이어 탐지
+    auto* player = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("Player");
+    if (player)
     {
-        std::cout << "[DEBUG] Agent has no target, picking new target next frame.\n";
+        if (vision->CheckVision(player, 30, 400, targetMask, occlusionMask))
+        {
+            std::cout << "[AdultGhostController]" << GetOwner()->GetName() << " is PLAYER FOUND !" << std::endl;
+        }
     }
 }

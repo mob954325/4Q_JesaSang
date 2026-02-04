@@ -140,6 +140,7 @@
     <ClCompile Include="Components\Decal.cpp" />
     <ClCompile Include="Components\RectTransform.cpp" />
     <ClCompile Include="Components\UI\Image.cpp" />
+    <ClCompile Include="Components\VisionComponent.cpp" />
     <ClCompile Include="EngineSystem\AgentSystem.cpp" />
     <ClCompile Include="Manager\TextureResourceManager.cpp" />
     <ClCompile Include="Manager\UIManager.cpp" />
@@ -206,6 +207,7 @@
     <ClInclude Include="Components\AgentComponent.h" />
     <ClInclude Include="Components\AnimationController.h" />
     <ClInclude Include="Components\UI\Image.h" />
+    <ClInclude Include="Components\VisionComponent.h" />
     <ClInclude Include="EngineSystem\AgentSystem.h" />
     <ClInclude Include="Manager\TextureResourceManager.h" />
     <ClInclude Include="Manager\UIData\TextureResource.h" />
