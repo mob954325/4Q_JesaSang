@@ -313,3 +313,51 @@ void Transform::UpdateMatricesIfDirty()
 
     dirty = false;
 }
+
+Vector3 Transform::GetForward()
+{
+    UpdateMatricesIfDirty();
+
+    // DirectX row-major 기준: 3번째 row가 forward
+    Vector3 f = Vector3(
+        worldMatrix._31,
+        worldMatrix._32,
+        worldMatrix._33
+    );
+
+    f.Normalize();
+    return f;
+}
+
+Vector3 Transform::GetRight()
+{
+    UpdateMatricesIfDirty();
+
+    Vector3 r = Vector3(
+        worldMatrix._11,
+        worldMatrix._12,
+        worldMatrix._13
+    );
+
+    r.Normalize();
+    return r;
+}
+
+Vector3 Transform::GetUp()
+{
+    UpdateMatricesIfDirty();
+
+    Vector3 u = Vector3(
+        worldMatrix._21,
+        worldMatrix._22,
+        worldMatrix._23
+    );
+
+    u.Normalize();
+    return u;
+}
+
+Vector3 Transform::GetLocalForward()
+{
+    return Vector3::Transform(Vector3::Forward, quaternion);
+}

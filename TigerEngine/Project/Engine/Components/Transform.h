@@ -63,6 +63,12 @@ public:
     Transform* GetChildByIndex(int index);
     Transform* GetChildByName(std::string name);
 
+    // Direction
+    Vector3 GetForward();   // 바라보는 방향 (월드 기준)
+    Vector3 GetRight();
+    Vector3 GetUp();
+    Vector3 GetLocalForward(); // 로컬 방향 
+
 protected:
     /// <summary>
     /// dirty flag 해소 함수
