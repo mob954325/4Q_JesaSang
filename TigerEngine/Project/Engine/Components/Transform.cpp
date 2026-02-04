@@ -199,6 +199,7 @@ void Transform::AddChild(Transform* transPtr)
 {
     if (transPtr == nullptr) return;
     children.push_back(transPtr);
+    transPtr->SetDirty();
 }
 
 void Transform::RemoveChild(Transform* transPtr)

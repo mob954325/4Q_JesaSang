@@ -54,9 +54,11 @@ public:
     void RemoveChild(Transform* transPtr);
     bool SetParent(Transform* transPtr);
     void RemoveChildren();
-    void RemoveSelfAtParent();  // 부모에서 자신을 스스로 제거함
-    void SetChildrenDirty();    // 모든 자식 dirty 플래그 활성화
-    void SetDirty();            // dirty = true; 
+    void RemoveSelfAtParent();              // 부모에서 자신을 스스로 제거함
+    void SetDirty();                        // dirty = true; 
+    virtual void UpdateMatricesIfDirty();   // dirty flag 해소 함수
+    virtual void SetChildrenDirty();        // 모든 자식 dirty 플래그 활성화
+
 
     Transform* GetParent() const { return parent; }
     const std::vector<Transform*>& GetChildren() const { return children; }
@@ -69,11 +71,9 @@ public:
     Vector3 GetUp();
     Vector3 GetLocalForward(); // 로컬 방향 
 
+
 protected:
-    /// <summary>
-    /// dirty flag 해소 함수
-    /// </summary>
-    virtual void UpdateMatricesIfDirty();
+    
 
     Vector3 position{ Vector3::Zero };  // local Position
     Vector3 euler{ Vector3::Zero };     // 오일러 각으로 표현한 라디안 값, local Position
