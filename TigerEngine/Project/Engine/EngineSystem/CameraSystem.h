@@ -31,6 +31,8 @@ public:
     void Register(Camera* cam);
     void RemoveCamera(Camera* cam);
     Camera* GetCameraByIndex(int index);
+    void SetCurrCameraByName(std::string name);
+
     std::vector<Camera*> GetAllCamera() { return registered; }
 
     int SetCurrCamera(int index);

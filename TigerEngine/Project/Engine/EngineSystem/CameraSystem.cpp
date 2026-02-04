@@ -77,7 +77,21 @@ int CameraSystem::SetCurrCamera(int index)
 
 Camera* CameraSystem::GetCurrCamera()
 {
-    return registered[currCameraIndex];
+    if (registered.size() == 1)
+    {
+        return registered[currCameraIndex];
+    }
+    else
+    {
+        if (registered[currCameraIndex]->GetOwner()->GetName() == "FreeCamera") // 현재 카메라가 프리캠이면 다음 카메라로 실행
+        {
+            NextCamera(); // ++; -> 만약 여기서도 프리캠밖에 없으면 프리캠으로 잡힐 것임.
+        }
+
+        return registered[currCameraIndex];
+    }
+
+    return registered[currCameraIndex]; // 예외 
 }
 
 Camera *CameraSystem::GetCameraByIndex(int index)
@@ -91,6 +105,20 @@ Camera *CameraSystem::GetCameraByIndex(int index)
 
         return nullptr;
     }
+}
+
+void CameraSystem::SetCurrCameraByName(std::string name)
+{
+    for (int i = 0; i < registered.size(); i++)
+    {
+        if (registered[i]->GetOwner()->GetName() == name)
+        {
+            currCameraIndex = i;
+            return;
+        }
+    }
+
+    currCameraIndex = 0; // 없으면 freeCam, mainCamera 반환
 }
 
 void CameraSystem::Clear()
