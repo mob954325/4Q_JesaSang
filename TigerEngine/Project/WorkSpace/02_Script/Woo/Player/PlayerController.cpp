@@ -306,10 +306,7 @@ void PlayerController::HideObjectInteraction(float dt)
     if (Input::GetKeyDown(interaction_Key) && curHideObject->IsPossibleHide())
     {
         ChangeState(PlayerState::Hide);
-        fbxRenderer->SetActive(false);
-        visualizer->VisualRenderOff();
-        camController->SetTargetTransform(curHideObject->GetOwner()->GetTransform());
-        camController->SetViewMode(CameraController::ViewMode::Top);
+        curHideObject->StartHide(this);
     }
 }
 

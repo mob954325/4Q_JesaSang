@@ -1,6 +1,8 @@
 #pragma once
 #include "Components/ScriptComponent.h"
 
+class PlayerController;
+
 /*
     [ HideObject Script Component ]
 
@@ -19,16 +21,19 @@ class HideObject : public ScriptComponent
 
 private:
     // components
-
+    PlayerController* player = nullptr;
 
     // data
-    float hideDurationTime = 10.0f;     // 숨어있을 수 있는 시간
-    float hideCoolTime = 1.0f;          // 한번 숨고 다시 숨을 수 있는 쿨타임
+    float hideDurationTime = 10.0f;     // 최대 은신 시간
+    float hideCoolTime = 1.0f;          // 재은신 쿨타임
 
     // controlls
-    bool  isPossibleHide = false;        // 어른 유령 시야 x + CoolTime
-    float hideDurationTimer = 10.0f;
-    float hideCoolTimer = 1.0f;
+    bool isAILooking = false;           // AI가 이 오브젝트를 보고 있는가
+    bool isHiding = false;              // 현재 은신 중인가
+    bool isCoolTime = false;            // 쿨타임이 찼는가
+
+    float hideDurationTimer;
+    float hideCoolTimer;
 
 public:
     // component process
@@ -43,6 +48,7 @@ public:
 public : 
     // 외부 call funcs..
     bool IsPossibleHide();
+    void StartHide(PlayerController* p);
     void SetAILook(bool isLook);
 };
 

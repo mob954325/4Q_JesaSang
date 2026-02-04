@@ -1,13 +1,28 @@
 #include "Player_Hide.h"
+#include "../../Player/PlayerItemVisualizer.h"
+#include "System/InputSystem.h"
+#include "../../Camera/CameraController.h"
+#include "../../Object/HideObject.h"
 
 void Player_Hide::Enter()
 {
-    cout << "[Player] Enter Hide State" << endl;
+    // player render off
+    player->fbxRenderer->SetActive(false);
+    player->visualizer->VisualRenderOff();
+
+    // camera view mode change
+    player->camController->SetTargetTransform(player->curHideObject->GetOwner()->GetTransform());
+    player->camController->SetViewMode(CameraController::ViewMode::Top);
+
+    //cout << "[Player] Enter Hide State" << endl;
 }
 
 void Player_Hide::ChangeStateLogic()
 {
-
+    if(Input::GetKeyDown(player->interaction_Key))
+    {
+        player->ChangeState(PlayerState::Idle);
+    }
 }
 
 void Player_Hide::Update(float deltaTime)
@@ -22,5 +37,13 @@ void Player_Hide::FixedUpdate(float deltaTime)
 
 void Player_Hide::Exit()
 {
-    cout << "[Player] Exit Hide State" << endl;
+    // player render on
+    player->fbxRenderer->SetActive(true);
+    player->visualizer->VisualRenderOn();
+
+    // camera view mode change
+    player->camController->SetTargetTransform(player->transform);
+    player->camController->SetViewMode(CameraController::ViewMode::Quarter);
+
+    //cout << "[Player] Exit Hide State" << endl;
 }

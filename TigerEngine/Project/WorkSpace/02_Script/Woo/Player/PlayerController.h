@@ -184,5 +184,6 @@ public:
     friend class InteractionZone;
     friend class InteractionSensor;
     friend class MiniGameManager;
+    friend class HideObject;
 };
 
