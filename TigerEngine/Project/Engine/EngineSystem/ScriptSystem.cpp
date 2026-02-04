@@ -18,7 +18,7 @@ void ScriptSystem::CheckReadyQueue()
 
 void ScriptSystem::Register(Component* comp)
 {
-    if(comp->IsStart())
+    if(!comp->IsStart())
         readyQueue.push(comp);
 
     pending_components.push_back(comp);
