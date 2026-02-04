@@ -2,6 +2,8 @@
 #include "Components/ScriptComponent.h"
 #include "../Item/Item.h"
 
+class FBXRenderer;
+
 /*
     [ PlayerItemVisualizer Script Component ]
 
@@ -14,6 +16,9 @@ class PlayerItemVisualizer : public ScriptComponent
     RTTR_ENABLE(ScriptComponent)
 
 private:
+    // cur visual
+    std::string curItemID = "";
+
     // visual gameobjects
     GameObject* ingre_apple = nullptr;
     GameObject* ingre_pear = nullptr;
