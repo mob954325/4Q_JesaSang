@@ -92,15 +92,27 @@ void RectTransform::SetChildrenDirty()
     }
 }
 
+Matrix RectTransform::RemoveScale(Matrix& m)
+{
+    Vector3 s, t;
+    Quaternion q;
+    m.Decompose(s, q, t); // scale, rotation, translation
+
+    Matrix R = Matrix::CreateFromQuaternion(q);
+    Matrix T = Matrix::CreateTranslation(t);
+    return R * T; // (scale 제외)
+}
+
 void RectTransform::UpdateMatricesIfDirty()
 {
     if (!dirty) return;
 
     auto& r = GetEuler();
+
     Matrix T0 = Matrix::CreateTranslation(-pivot.x, -pivot.y, 0.0f);
-    Matrix S = Matrix::CreateScale({ size.x, size.y, 1.0f });
+    Matrix S = Matrix::CreateScale({ size.x, size.y, 1.0f });         // size = px
     Matrix R = Matrix::CreateFromYawPitchRoll(r.y, r.x, r.z);
-    Matrix T1 = Matrix::CreateTranslation({ pos.x, pos.y, 0 });
+    Matrix T1 = Matrix::CreateTranslation({ pos.x, pos.y, 0.0f });
 
     localMatrix = T0 * S * R * T1;
 
@@ -112,7 +124,16 @@ void RectTransform::UpdateMatricesIfDirty()
     else
     {
         auto parentRect = parentTran->GetOwner()->GetComponent<RectTransform>();
-        worldMatrix = localMatrix * parentRect->GetWorldMatrix();
+        if (parentRect)
+        {
+            Matrix parentNoScale = RemoveScale(parentRect->GetWorldMatrix());
+            worldMatrix = localMatrix * parentNoScale;   // ✅ 부모 스케일 미상속
+        }
+        else
+        {
+            // 부모가 일반 Transform이면 기존대로(원하면 이것도 NoScale 적용 가능)
+            worldMatrix = localMatrix * parentTran->GetWorldMatrix();
+        }
     }
 
     dirty = false;
