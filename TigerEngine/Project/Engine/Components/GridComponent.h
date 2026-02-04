@@ -65,4 +65,8 @@ public:
 
     // 씬에 있는 Trigger 아닌 Collider는 Grid 차단 
     void BuildBlockedFromPhysics();
+
+
+    // [ A* ]
+    std::vector<std::pair<int, int>> FindPath(int startCX, int startCY, int endCX, int endCY);
 };
