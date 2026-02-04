@@ -130,7 +130,7 @@ void Editor::Render(HWND &hwnd)
     RenderPrefabWindow(hwnd);
     RenderCameraPanel();
     RenderGizmoSettings();
-    RenderWorldGrid();
+    // RenderWorldGrid();
     RenderGizmo();
 
     ImGui::Begin("DebugPickItem");
