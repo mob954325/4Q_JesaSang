@@ -87,20 +87,6 @@ void PlayerController::OnUpdate(float delta)
     {
         TakeAttack();
     }
-
-    // view mode change test (Hide State)
-    if (Input::GetKeyDown(Keyboard::W))
-    {
-        camController->ToggleViewMode();
-    }
-
-    // Debug----
-    //cout << "[Player] State : " << (int)state << endl;
-    //cout << "[Player] Walk MoveDir : (" << moveDir.x << ", " << moveDir.y << ", " << moveDir.z << ")" << endl;
-    //cout << "[Player] Current Speed : " << curSpeed << endl;
-
-    //cout << "L:" << isMoveLKey << " R:" << isMoveRKey << " F:" << isMoveFKey << " B:" << isMoveBKey
-    //    << " Sit:" << isSitKey << " Run:" << isRunKey << " Interact:" << isInteractionKey << endl;
 }
 
 void PlayerController::OnFixedUpdate(float delta)
@@ -482,10 +468,14 @@ void PlayerController::TakeAttack()
 {
     cout << "[Player] Take Damage! " << endl;
 
+    // 아이템이 있다면 제단에 올라감
     if (inventory->HasItem())
     {
         std::unique_ptr<IItem> item =  inventory->TakeCurItem();
         AltarManager::Instance()->ReceiveItem(std::move(item));
         cout << "[Player] Drop Item... " << endl;
     }
+
+    // Hit (패닉)
+    ChangeState(PlayerState::Hit);
 }

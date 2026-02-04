@@ -29,7 +29,8 @@ enum class PlayerState
      1) FSM
      2) Input
      3) Movement
-     4) TODO :: Interaction...
+     4) Interaction
+     5) TODO..
 */
 class PlayerController : public ScriptComponent
 {
@@ -51,16 +52,20 @@ private:
     IPlayerState* fsmStates[9];
 
     // --- [ Stat ] --------------------------------
-    // values (inspector)
-    float walkSpeed = 2.5f;   //1.0f;
-    float runSpeed  = 4.0f;   //1.8f;
-    float sitSpeed = 1.0f;   //0.6f;
-        
+    // data
+    float walkSpeed = 2.5f; 
+    float runSpeed  = 4.0f; 
+    float sitSpeed = 1.0f;  
+    float hitSpeedUpRate = 2.0f;        // walkSpeed * 2.0f
+
 
     // --- [ Controll ] ----------------------------
     // cur stat
     float curSpeed = 0.0f;
     Vector3 lookDir = Vector3::Zero;
+
+    // hit (패닉)
+    float hitDuration = 5.0f;
 
     // search object interaction
     bool  isPossibleSearch = false;            // 기획자분이 한번에 하나만 가능한 사이즈라고 하심. 중첩된다면 추가 처리필요.
