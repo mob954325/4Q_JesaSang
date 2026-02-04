@@ -75,6 +75,11 @@ int CameraSystem::SetCurrCamera(int index)
     return currCameraIndex;
 }
 
+int CameraSystem::GetCurrCameraIndex() const
+{
+    return currCameraIndex;
+}
+
 Camera* CameraSystem::GetCurrCamera()
 {
     if (registered.size() == 1)
@@ -119,6 +124,11 @@ void CameraSystem::SetCurrCameraByName(std::string name)
     }
 
     currCameraIndex = 0; // 없으면 freeCam, mainCamera 반환
+}
+
+void CameraSystem::SetCurrCameraToFreeCamera()
+{
+    currCameraIndex = 0;
 }
 
 void CameraSystem::Clear()
