@@ -75,6 +75,13 @@ void InteractionZone::OnTriggerEnter(PhysicsComponent* other)
         player->isPossiblePutFood = true;
         cout << "[InteractionZone] JesaSang In Interaction Zone" << endl;
     }
+
+    // Altar
+    if (other->GetOwner()->GetName() == "Altar")
+    {
+        player->isPossibleGetFood = true;
+        cout << "[InteractionZone] Altar In Interaction Zone" << endl;
+    }
 }
 
 void InteractionZone::OnTriggerExit(PhysicsComponent* other)
@@ -99,9 +106,17 @@ void InteractionZone::OnTriggerExit(PhysicsComponent* other)
         cout << "[InteractionZone] CookingZone Out Interaction Zone" << endl;
     }
 
+    // JesaSang
     if (other->GetOwner()->GetName() == "JesaSang")
     {
         player->isPossiblePutFood = false;
         cout << "[InteractionZone] JesaSang Out Interaction Zone" << endl;
+    }
+
+    // Altar
+    if (other->GetOwner()->GetName() == "Altar")
+    {
+        player->isPossibleGetFood = false;
+        cout << "[InteractionZone] Altar Out Interaction Zone" << endl;
     }
 }

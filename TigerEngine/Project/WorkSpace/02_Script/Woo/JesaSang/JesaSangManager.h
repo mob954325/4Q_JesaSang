@@ -30,6 +30,7 @@ private:
 
 public:
     // component process
+    void OnInitialize() override;
     void OnStart() override;
     void OnDestory() override;
 

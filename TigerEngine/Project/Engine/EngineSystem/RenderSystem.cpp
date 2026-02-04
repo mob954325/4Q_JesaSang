@@ -25,6 +25,15 @@ void RenderSystem::Register(RenderComponent* comp)
 
 void RenderSystem::UnRegister(RenderComponent* comp)
 {
+    for (auto it = pending_renderComponents.begin(); it != pending_renderComponents.end(); it++)
+    {
+        if (*it == comp)
+        {
+            pending_renderComponents.erase(it);
+            return;
+        }
+    }
+
     for (auto it = comps.begin(); it != comps.end(); it++)
     {
         if (*it == comp)

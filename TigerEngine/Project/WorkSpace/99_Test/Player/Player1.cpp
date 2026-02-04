@@ -6,6 +6,7 @@
 #include "Util/ComponentAutoRegister.h"
 #include "../Engine/EngineSystem/SceneSystem.h"
 #include "Util/PrefabUtil.h"
+#include "../Engine//EngineSystem/CameraSystem.h"
 
 REGISTER_COMPONENT(Player1);
 
@@ -92,6 +93,13 @@ void Player1::OnUpdate(float delta)
         trans->Translate({ -1.f, 0, 0 });
     else if (Input::GetKey(DirectX::Keyboard::Keys::D))
         trans->Translate({ 1.f, 0, 0 });
+
+    if (Input::GetKey(DirectX::Keyboard::Keys::Z))
+        CameraSystem::Instance().SetCurrCameraByName("cam1");
+    if (Input::GetKey(DirectX::Keyboard::Keys::X))
+        CameraSystem::Instance().SetCurrCameraByName("cam2");
+    if (Input::GetKey(DirectX::Keyboard::Keys::C))
+        CameraSystem::Instance().SetCurrCameraByName("cam3");
 }
 
 nlohmann::json Player1::Serialize()

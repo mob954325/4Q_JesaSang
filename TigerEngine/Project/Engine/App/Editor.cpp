@@ -127,6 +127,7 @@ void Editor::Render(HWND &hwnd)
     RenderWorldSettings();
     RenderShadowMap();
     RenderPrefabWindow(hwnd);
+    RenderCameraPanel();
 
     ImGui::Begin("DebugPickItem");
     {
@@ -187,6 +188,14 @@ void Editor::RenderMenuBar(HWND& hwnd)
             if (ImGui::MenuItem("World Setting"))
             {
                 isWorldSettingOpen = !isWorldSettingOpen;
+            }
+            ImGui::EndMenu();
+        }
+        if (ImGui::BeginMenu("Camera"))
+        {
+            if (ImGui::MenuItem("Camera Setting"))
+            {
+                isCameraPanelOepn = !isCameraPanelOepn;
             }
             ImGui::EndMenu();
         }
@@ -866,6 +875,7 @@ void Editor::DrawAddComponentPopup(GameObject* obj)
                 if (ImGui::MenuItem(e->name.c_str()))
                 {
                     e->creator(obj);
+                    
                     ImGui::CloseCurrentPopup();
                 }
             }
@@ -892,6 +902,7 @@ void Editor::RenderPlayModeControls()
     if (ImGui::Button("Play"))
     {
         playMode.SetPlayMode(PlayModeState::Playing);
+        CameraSystem::Instance().NextCamera();
     }
     ImGui::PopStyleColor(3);
 
@@ -907,6 +918,7 @@ void Editor::RenderPlayModeControls()
         if (currentState == PlayModeState::Playing)
         {
             playMode.SetPlayMode(PlayModeState::Paused);
+            CameraSystem::Instance().SetCurrCameraToFreeCamera();
         }
         else if (currentState == PlayModeState::Paused)
         {
@@ -926,6 +938,7 @@ void Editor::RenderPlayModeControls()
     {
         playMode.SetPlayMode(PlayModeState::Stopped);
         SceneSystem::Instance().GetCurrentScene()->ReloadScene();
+        CameraSystem::Instance().SetCurrCameraToFreeCamera();
     }
     ImGui::PopStyleColor(3);
 
@@ -1787,6 +1800,20 @@ void Editor::CheckObjectDeleteKey()
         selectedObject = nullptr;
         victim->Destory();
     }
+}
+
+void Editor::RenderCameraPanel()
+{
+    if (!isCameraPanelOepn) return;
+
+    ImGui::Begin("CameraPanel");
+    {
+        int curr = CameraSystem::Instance().GetCurrCameraIndex();
+        int maxSize = CameraSystem::Instance().GetAllCamera().size();
+        ImGui::SliderInt("index", &curr, 0, maxSize - 1);
+        CameraSystem::Instance().SetCurrCamera(curr);
+    }
+    ImGui::End();
 }
 
 void Editor::OnInputProcess(const Keyboard::State &KeyState, const Keyboard::KeyboardStateTracker &KeyTracker, const Mouse::State &MouseState, const Mouse::ButtonStateTracker &MouseTracker)
