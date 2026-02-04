@@ -2,7 +2,7 @@
   "objects": [
     {
       "properties": {
-        "Active": 1,
+        "Active": 0,
         "ID": 215,
         "Name": "Main Camera",
         "ParentID": -1,
@@ -671,7 +671,7 @@
     },
     {
       "properties": {
-        "Active": 1,
+        "Active": 0,
         "ID": 225,
         "Name": "UI_MiniMap_Complete",
         "ParentID": -1,
@@ -2179,9 +2179,15 @@
             "properties": {
               "Active": true,
               "BaseMapObjectName": "UI_MiniMap_Base",
+              "BottomRightMargin": [
+                20.0,
+                20.0
+              ],
+              "CompleteMapObjectName": "UI_MiniMap_Complete",
               "DebugShowAllItemPings": true,
               "DebugShowAllPieces": false,
               "GaugeObjectName": "UI_MiniMap_GaugeFill",
+              "GaugeBgObjectName": "UI_MiniMap_GaugeBG",
               "ItemWorldPos1": [
                 -300.0,
                 0.0,
@@ -2213,6 +2219,7 @@
                 100.0
               ],
               "MainPingObjectName": "UI_MiniMap_MainPing",
+              "PlaceBottomRight": true,
               "PieceObjectName1": "UI_MiniMap_Piece_01",
               "PieceObjectName2": "UI_MiniMap_Piece_02",
               "PieceObjectName3": "UI_MiniMap_Piece_03",
@@ -2225,7 +2232,9 @@
               "PingObjectName4": "UI_MiniMap_ItemPing_04",
               "PingObjectName5": "UI_MiniMap_ItemPing_05",
               "PingObjectName6": "UI_MiniMap_ItemPing_06",
-              "PlayerObjectName": "Player"
+              "PlayerObjectName": "Player",
+              "ShiftLeftByMapCount": 1,
+              "ShowCompleteOnFull": false
             },
             "type": "MiniMapManager"
           }

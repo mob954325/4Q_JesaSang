@@ -22,8 +22,12 @@ public:
 
     std::string playerObjectName = "Player";
     std::string baseMapObjectName = "UI_MiniMap_Base";
+    std::string completeMapObjectName = "UI_MiniMap_Complete";
     std::string mainPingObjectName = "UI_MiniMap_MainPing";
     std::string gaugeObjectName = "UI_MiniMap_GaugeFill";
+    std::string gaugeBgObjectName = "UI_MiniMap_GaugeBG";
+    std::string baseMapPath = "..\\Assets\\Resource\\MiniMap\\BaseMap.png";
+    std::string completeMapPath = "..\\Assets\\Resource\\MiniMap\\CompleteMap.png";
 
     std::string itemPingObjectName1 = "UI_MiniMap_ItemPing_01";
     std::string itemPingObjectName2 = "UI_MiniMap_ItemPing_02";
@@ -47,6 +51,10 @@ public:
     Vector3 itemWorldPos6{ 200.0f, 0.0f, 100.0f };
     bool debugShowAllItemPings = true;
     bool debugShowAllPieces = true;
+    bool placeBottomRight = true;
+    Vector2 bottomRightMargin{ 20.0f, 20.0f };
+    int shiftLeftByMapCount = 1;
+    bool showCompleteOnFull = false;
 
     // External trigger hooks (call from gameplay code on pickup)
     void TriggerItemPing(int index, const Vector3& worldPos);
@@ -59,15 +67,23 @@ public:
 
 private:
     MiniMapTestScript* m_Map = nullptr;
+    GameObject* m_BaseObject = nullptr;
+    GameObject* m_CompleteObject = nullptr;
     RectTransform* m_BaseRect = nullptr;
+    RectTransform* m_CompleteRect = nullptr;
     RectTransform* m_MainPingRect = nullptr;
     RectTransform* m_GaugeRect = nullptr;
+    RectTransform* m_GaugeBgRect = nullptr;
     RectTransform* m_ItemPingRects[6]{};
     RectTransform* m_PieceRects[6]{};
     Image* m_PieceImages[6]{};
+    Image* m_BaseImage = nullptr;
+    Image* m_CompleteImage = nullptr;
     Image* m_MainPingImage = nullptr;
     Image* m_ItemPingImages[6]{};
     Image* m_TreasureImage = nullptr;
+    RectTransform* m_TreasureRect = nullptr;
+    bool m_UsingCompleteMap = false;
 
     Vector2 m_GaugeBaseSize{};
     bool m_HasGaugeBaseSize = false;
@@ -75,6 +91,8 @@ private:
     Vector3 m_ItemWorldPos[6]{};
     bool m_ItemActive[6]{};
     bool m_PieceActive[6]{};
+    bool m_LayoutApplied = false;
 
     void BumpPingRenderOrder();
+    void ApplyLayout();
 };

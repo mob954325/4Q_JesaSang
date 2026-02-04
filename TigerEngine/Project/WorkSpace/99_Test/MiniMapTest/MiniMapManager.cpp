@@ -3,6 +3,7 @@
 #include "EngineSystem/SceneSystem.h"
 #include "Components/RectTransform.h"
 #include "Components/UI/Image.h"
+#include "Manager/UIManager.h"
 #include "Object/GameObject.h"
 #include "Util/ComponentAutoRegister.h"
 #include "Util/JsonHelper.h"
@@ -20,8 +21,12 @@ RTTR_REGISTRATION
         (rttr::policy::ctor::as_std_shared_ptr)
         .property("PlayerObjectName", &MiniMapManager::playerObjectName)
         .property("BaseMapObjectName", &MiniMapManager::baseMapObjectName)
+        .property("CompleteMapObjectName", &MiniMapManager::completeMapObjectName)
         .property("MainPingObjectName", &MiniMapManager::mainPingObjectName)
         .property("GaugeObjectName", &MiniMapManager::gaugeObjectName)
+        .property("GaugeBgObjectName", &MiniMapManager::gaugeBgObjectName)
+        .property("BaseMapPath", &MiniMapManager::baseMapPath)
+        .property("CompleteMapPath", &MiniMapManager::completeMapPath)
         .property("PingObjectName1", &MiniMapManager::itemPingObjectName1)
         .property("PingObjectName2", &MiniMapManager::itemPingObjectName2)
         .property("PingObjectName3", &MiniMapManager::itemPingObjectName3)
@@ -41,7 +46,11 @@ RTTR_REGISTRATION
         .property("ItemWorldPos5", &MiniMapManager::itemWorldPos5)
         .property("ItemWorldPos6", &MiniMapManager::itemWorldPos6)
         .property("DebugShowAllItemPings", &MiniMapManager::debugShowAllItemPings)
-        .property("DebugShowAllPieces", &MiniMapManager::debugShowAllPieces);
+        .property("DebugShowAllPieces", &MiniMapManager::debugShowAllPieces)
+        .property("PlaceBottomRight", &MiniMapManager::placeBottomRight)
+        .property("BottomRightMargin", &MiniMapManager::bottomRightMargin)
+        .property("ShiftLeftByMapCount", &MiniMapManager::shiftLeftByMapCount)
+        .property("ShowCompleteOnFull", &MiniMapManager::showCompleteOnFull);
 }
 
 static Vector2 WorldToMiniMap(const Vector3& worldPos, const Vector3& worldMin, const Vector3& worldMax, const Vector2& mapSize)
@@ -125,6 +134,14 @@ static void SetImageActive(Image* image, bool active)
     }
 }
 
+static void SetImageAlpha(Image* image, float alpha)
+{
+    if (!image) return;
+    Color c = image->GetColor();
+    c.w = std::clamp(alpha, 0.0f, 1.0f);
+    image->SetColor(c);
+}
+
 static void BumpRenderOrder(Image* image)
 {
     if (!image || !image->GetActiveSelf())
@@ -145,6 +162,7 @@ static int ClampItemIndex(int index)
 
 static constexpr float kPingZOffset = 2.0f;
 static constexpr float kPieceZOffset = -1.0f;
+static constexpr float kCompleteZOffset = -2.0f;
 
 static void InitActive(RectTransform* rect, Image* image, bool active)
 {
@@ -157,6 +175,16 @@ static void SetZ(RectTransform* rect, float z)
     if (!rect) return;
     Vector3 pos = rect->GetPos();
     pos.z = z;
+    rect->SetPos(pos);
+}
+
+static void ShiftRect(RectTransform* rect, const Vector3& delta)
+{
+    if (!rect) return;
+    Vector3 pos = rect->GetPos();
+    pos.x += delta.x;
+    pos.y += delta.y;
+    pos.z += delta.z;
     rect->SetPos(pos);
 }
 
@@ -182,10 +210,23 @@ void MiniMapManager::OnStart()
         LogMissing("player object", playerObjectName);
     }
 
+    if (auto obj = scene->GetGameObjectByName(baseMapObjectName))
+    {
+        m_BaseObject = obj;
+    }
+    if (auto obj = scene->GetGameObjectByName(completeMapObjectName))
+    {
+        m_CompleteObject = obj;
+    }
+
     m_BaseRect = GetRectOrLog(scene, baseMapObjectName, "RectTransform on base map object");
+    m_BaseImage = GetImage(scene, baseMapObjectName);
+    m_CompleteRect = GetRectOrLog(scene, completeMapObjectName, "RectTransform on complete map object");
+    m_CompleteImage = GetImage(scene, completeMapObjectName);
     m_MainPingRect = GetRectOrLog(scene, mainPingObjectName, "RectTransform on main ping object");
     m_MainPingImage = GetImage(scene, mainPingObjectName);
     m_GaugeRect = GetRectOrLog(scene, gaugeObjectName, "RectTransform on gauge object");
+    m_GaugeBgRect = GetRectOrLog(scene, gaugeBgObjectName, "RectTransform on gauge bg object");
     if (m_GaugeRect)
     {
         m_GaugeBaseSize = m_GaugeRect->GetSize();
@@ -215,6 +256,34 @@ void MiniMapManager::OnStart()
     }
 
     m_TreasureImage = GetImage(scene, "UI_MiniMap_Treasure");
+    m_TreasureRect = GetRectOrLog(scene, "UI_MiniMap_Treasure", "RectTransform on treasure object");
+
+    if (m_BaseImage)
+    {
+        SetImageActive(m_BaseImage, true);
+        if (!baseMapPath.empty())
+        {
+            m_BaseImage->ChangeData(baseMapPath);
+            m_UsingCompleteMap = false;
+        }
+        SetImageAlpha(m_BaseImage, 1.0f);
+    }
+    if (m_CompleteImage)
+    {
+        SetImageActive(m_CompleteImage, false);
+        SetRectActive(m_CompleteRect, false);
+        SetImageAlpha(m_CompleteImage, 0.0f);
+    }
+    if (m_BaseObject)
+    {
+        m_BaseObject->SetActive(true);
+    }
+    if (m_CompleteObject)
+    {
+        m_CompleteObject->SetActive(false);
+    }
+
+    ApplyLayout();
 
     m_ItemWorldPos[0] = itemWorldPos1;
     m_ItemWorldPos[1] = itemWorldPos2;
@@ -238,6 +307,7 @@ void MiniMapManager::OnStart()
     if (m_BaseRect)
     {
         const float baseZ = m_BaseRect->GetPos().z;
+        SetZ(m_CompleteRect, baseZ + kCompleteZOffset);
         for (int i = 0; i < 6; ++i)
         {
             SetZ(m_PieceRects[i], baseZ + kPieceZOffset);
@@ -252,6 +322,31 @@ void MiniMapManager::OnUpdate(float delta)
     if (!m_Map || !m_BaseRect)
     {
         return;
+    }
+
+    if (!m_LayoutApplied)
+    {
+        ApplyLayout();
+    }
+
+    if (m_BaseImage)
+    {
+        const float progress = std::clamp(m_Map->GetProgress01(), 0.0f, 1.0f);
+        const bool complete = showCompleteOnFull && progress >= 0.999f;
+        const bool wantComplete = complete && !completeMapPath.empty();
+        if (wantComplete != m_UsingCompleteMap)
+        {
+            m_BaseImage->ChangeData(wantComplete ? completeMapPath : baseMapPath);
+            m_UsingCompleteMap = wantComplete;
+        }
+        SetImageActive(m_BaseImage, true);
+        SetRectActive(m_BaseRect, true);
+        SetImageAlpha(m_BaseImage, 1.0f);
+        if (m_CompleteImage)
+        {
+            SetImageAlpha(m_CompleteImage, complete ? 1.0f : 0.0f);
+        }
+        if (m_CompleteObject) m_CompleteObject->SetActive(false);
     }
 
     const Vector3 basePos = m_BaseRect->GetPos();
@@ -283,6 +378,42 @@ void MiniMapManager::OnUpdate(float delta)
         size.x = m_GaugeBaseSize.x * progress;
         m_GaugeRect->SetSize(size);
     }
+}
+
+void MiniMapManager::ApplyLayout()
+{
+    if (!placeBottomRight || !m_BaseRect || m_LayoutApplied)
+    {
+        return;
+    }
+
+    const Vector2 screen = UIManager::Instance().GetSize();
+    const Vector2 size = m_BaseRect->GetSize();
+    if (screen.x <= 0.0f || screen.y <= 0.0f || size.x <= 0.0f || size.y <= 0.0f)
+    {
+        return;
+    }
+
+    const Vector3 current = m_BaseRect->GetPos();
+    const Vector3 target(
+        screen.x - size.x - bottomRightMargin.x - (size.x * static_cast<float>(std::max(0, shiftLeftByMapCount))),
+        screen.y - size.y - bottomRightMargin.y,
+        current.z
+    );
+    const Vector3 delta = target - current;
+
+    ShiftRect(m_BaseRect, delta);
+    ShiftRect(m_CompleteRect, delta);
+    ShiftRect(m_GaugeRect, delta);
+    ShiftRect(m_GaugeBgRect, delta);
+    ShiftRect(m_MainPingRect, delta);
+    ShiftRect(m_TreasureRect, delta);
+    for (int i = 0; i < 6; ++i)
+    {
+        ShiftRect(m_ItemPingRects[i], delta);
+        ShiftRect(m_PieceRects[i], delta);
+    }
+    m_LayoutApplied = true;
 }
 
 nlohmann::json MiniMapManager::Serialize()
