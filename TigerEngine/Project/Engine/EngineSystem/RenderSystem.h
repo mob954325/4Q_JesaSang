@@ -51,5 +51,10 @@ private:
     /// OnStart 실행하지 않는 컴포넌트 모음
     /// </summary>
     std::queue<Component*> readyQueue{};
+
+    /// <summary>
+    /// 지연 등록을 위한 펜딩 벡터 
+    /// </summary>
+    std::vector<RenderComponent*> pending_renderComponents{};
 };
 

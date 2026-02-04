@@ -135,10 +135,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="App\Editor.cpp" />
+    <ClCompile Include="Components\AgentComponent.cpp" />
     <ClCompile Include="Components\AnimationController.cpp" />
     <ClCompile Include="Components\Decal.cpp" />
     <ClCompile Include="Components\RectTransform.cpp" />
     <ClCompile Include="Components\UI\Image.cpp" />
+    <ClCompile Include="EngineSystem\AgentSystem.cpp" />
     <ClCompile Include="Manager\TextureResourceManager.cpp" />
     <ClCompile Include="Manager\UIManager.cpp" />
     <ClCompile Include="Components\GridComponent.cpp" />
@@ -201,8 +203,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App\Editor.h" />
+    <ClInclude Include="Components\AgentComponent.h" />
     <ClInclude Include="Components\AnimationController.h" />
     <ClInclude Include="Components\UI\Image.h" />
+    <ClInclude Include="EngineSystem\AgentSystem.h" />
     <ClInclude Include="Manager\TextureResourceManager.h" />
     <ClInclude Include="Manager\UIData\TextureResource.h" />
     <ClInclude Include="Manager\UIManager.h" />

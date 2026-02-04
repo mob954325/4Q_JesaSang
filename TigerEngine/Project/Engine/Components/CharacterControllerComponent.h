@@ -26,6 +26,10 @@ public:
     void OnStart() override; 
     void OnDestory() override;
 
+    // register enable
+    void Enable_Inner() override;
+    void Disable_Inner() override;
+
 public:
     Transform* transform = nullptr;
 
@@ -62,7 +66,7 @@ public:
     CollisionMask  m_Mask;
     bool m_IsTrigger;
 
-
+    bool m_firstRegister = false; // 직렬화 대상 아님
 
 public:
     // -----------------------------

@@ -84,15 +84,16 @@ public:
     bool IsStart() { return isStart; }
     void SetStartTrue() { isStart = true; }
 
-protected:
-    void Enable() override 
+    // Transform, FBXData, FreeCamera
+    void Enable_Inner() override 
     { 
         auto ptr = ObjectSystem::Instance().Get<Component>(handle);
         ScriptSystem::Instance().Register(ptr);
         OnEnable();
     }
 
-    void Disable() override 
+    // Transform, FBXData, FreeCamera
+    void Disable_Inner() override 
     {
         auto ptr = ObjectSystem::Instance().Get<Component>(handle);
         ScriptSystem::Instance().UnRegister(ptr);

@@ -51,9 +51,9 @@ private:
 
     // --- [ Stat ] --------------------------------
     // values (inspector)
-    float walkSpeed = 1.0f;
-    float runSpeed = 1.8f;
-    float sitSpeed = 0.6f;
+    float walkSpeed = 2.5f;   //1.0f;
+    float runSpeed  = 4.0f;   //1.8f;
+    float sitSpeed = 1.0f;   //0.6f;
         
 
     // --- [ Controll ] ----------------------------

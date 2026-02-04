@@ -24,8 +24,8 @@
 #include "EngineSystem/AnimationSystem.h"
 #include "EngineSystem/DecalSystem.h"
 #include "EngineSystem/GridSystem.h"
+#include "EngineSystem/AgentSystem.h"
 
-#include "Components/FreeCamera.h"
 #include "Components/FBXData.h"
 
 namespace fs = std::filesystem;
@@ -92,8 +92,6 @@ bool EngineApp::OnInitialize()
 
 #if _DEBUG
 	auto freeCamHandle = CameraSystem::Instance().CreateFreeCamera(clientWidth, clientHeight, SceneSystem::Instance().GetCurrentScene().get());
-    auto freeCamObjPtr = ObjectSystem::Instance().Get<GameObject>(freeCamHandle);
-    freeCamObjPtr->AddComponent<FreeCamera>();
 #endif
 
     // == find scene ==
@@ -239,7 +237,12 @@ void EngineApp::OnFixedUpdate()
     while (m_PhysicsAccumulator >= fixedDt)
     {
         SceneSystem::Instance().FixedUpdateScene(fixedDt);
-        PhysicsSystem::Instance().Simulate(fixedDt);
+
+        if (PlayModeSystem::Instance().IsPlaying())
+        {
+            PhysicsSystem::Instance().Simulate(fixedDt);
+            AgentSystem::Instance().FixedUpdate(fixedDt);
+        }
 
         m_PhysicsAccumulator -= fixedDt;
     }
@@ -423,6 +426,7 @@ void EngineApp::OnInputProcess(const Keyboard::State &KeyState, const Keyboard::
 #include "Components/CharacterControllerComponent.h"
 #include "Components/AnimationController.h"
 #include "Components/GridComponent.h"
+#include "Components/AgentComponent.h"
 #include "Manager/ComponentFactory.h"
 
 #include "99_Test/Player/Player1.h"
@@ -461,6 +465,7 @@ void EngineApp::RegisterAllComponents()
     cf.Register<PhysicsComponent>("PhysicsComponent", ComponentCategory::Physics);
     cf.Register<CharacterControllerComponent>("CharacterControllerComponent", ComponentCategory::Physics);
     cf.Register<GridComponent>("GridComponent", ComponentCategory::Physics);
+    cf.Register<AgentComponent>("AgentComponent", ComponentCategory::Physics);
 
     cf.Register<AnimationController>("AnimationController", ComponentCategory::Animation);
 

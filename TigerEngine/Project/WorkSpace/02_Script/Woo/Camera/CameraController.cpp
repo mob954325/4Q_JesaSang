@@ -18,17 +18,13 @@ RTTR_REGISTRATION
 
 void CameraController::OnInitialize()
 {
-    // get components
-    transform = GetOwner()->GetComponent<Transform>();
-    targetTr = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("CameraTrackingPoint")->GetComponent<Transform>();
 }
 
 void CameraController::OnStart()
 {
-    if(!transform)
-        transform = GetOwner()->GetComponent<Transform>();
-    if (!targetTr)
-        targetTr = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("CameraTrackingPoint")->GetComponent<Transform>();
+    // get components
+    transform = GetOwner()->GetComponent<Transform>();
+    targetTr = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("CameraTrackingPoint")->GetComponent<Transform>();
 
     Vector3 targetPos = targetTr->GetWorldPosition();
     targetPos.z -= 50.0f;

@@ -42,6 +42,10 @@ public:
     void OnStart() override;
     void OnDestory() override;
 
+    // register enable
+    void Enable_Inner() override;
+    void Disable_Inner() override;
+
     GridCell* GetCell(int x, int y);
     bool IsWalkable(int x, int y);
 
@@ -61,4 +65,8 @@ public:
 
     // 씬에 있는 Trigger 아닌 Collider는 Grid 차단 
     void BuildBlockedFromPhysics();
+
+
+    // [ A* ]
+    std::vector<std::pair<int, int>> FindPath(int startCX, int startCY, int endCX, int endCY);
 };

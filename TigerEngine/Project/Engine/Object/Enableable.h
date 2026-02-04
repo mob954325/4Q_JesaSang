@@ -17,22 +17,23 @@ public:
     bool GetActiveSelf() const { return isActive; }
     void SetActive(bool value)
     {
-        isActive = value;
-        if (isActive) Enable();
-        else Disable();
-    }
+        if (isActive == value) return;
 
-protected:
+        isActive = value;
+        if (isActive) Enable_Inner();
+        else Disable_Inner();
+    }
 
     /// <summary>
     /// 활성화 시 등록 함수
     /// </summary>
-    virtual void Enable() {};
+    virtual void Enable_Inner() {}   // Engine Component 정의시 필수 override 필요
 
     /// <summary>
     /// 활성화 시 등록 해제 함수
     /// </summary>
-    virtual void Disable() {};
+    virtual void Disable_Inner() {}  // Engine Component 정의시 필수 override 필요
 
-    bool isActive = false;
+protected:
+    bool isActive = true;
 };

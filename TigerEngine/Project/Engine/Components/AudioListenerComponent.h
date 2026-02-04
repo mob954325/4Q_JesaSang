@@ -26,6 +26,9 @@ public:
     void SetFallback(const AudioTransform& transform);
     void Update();
 
+    void Enable_Inner() override;
+    void Disable_Inner() override;
+
 private:
     AudioSystem* m_System = nullptr;
     AudioListener m_Listener{};

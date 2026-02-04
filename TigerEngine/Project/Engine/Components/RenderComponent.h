@@ -18,15 +18,15 @@ public:
     /// </summary>
     /// <param name="context"></param>
     virtual void OnRender(RenderQueue& queue) = 0;
-protected:
-    void Enable() override
+
+    void Enable_Inner() override
     {
         auto ptr = ObjectSystem::Instance().Get<RenderComponent>(handle);
         RenderSystem::Instance().Register(ptr);
         OnEnable();
     }
 
-    void Disable() override
+    void Disable_Inner() override
     {
         auto ptr = ObjectSystem::Instance().Get<RenderComponent>(handle);
         RenderSystem::Instance().UnRegister(ptr);
