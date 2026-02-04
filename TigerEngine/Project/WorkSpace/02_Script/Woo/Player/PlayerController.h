@@ -62,15 +62,20 @@ private:
     Vector3 lookDir = Vector3::Zero;
 
     // search object interaction
-    bool  isPossibleInteraction = false; // 기획자분이 한번에 하나만 가능한 사이즈라고 하심. 중첩된다면 추가 처리필요.
+    bool  isPossibleSearch = false;      // 기획자분이 한번에 하나만 가능한 사이즈라고 하심. 중첩된다면 추가 처리필요.
     SearchObject* curSerachObject;       // 현재 interaction가능한 오브젝트
-    float searchInteractionTime  = 2.0f;
-    float searchInteractionTimer = 0.0f;
+    float searchTime  = 2.0f;
+    float searchTimer = 0.0f;
 
     // jesasang interaction
     bool isPossiblePutFood;
-    float putFoodInteractionTime = 2.0f;
-    float putFoodInteractionTimer = 0.0f;
+    float putFoodTime = 2.0f;
+    float putFoodTimer = 0.0f;
+
+    // altar interaction
+    bool isPossibleGetFood;
+    float getItemAltarTime = 2.0f;
+    float getItemAltarTimer = 0.0f;
 
     // cooking mini game
     bool isPossibleCooking = false;      // 조리대 zone 안에 있는지 flag
@@ -101,7 +106,6 @@ private:
 
 public:
     // Component process
-    void OnInitialize() override;
     void OnStart() override;
     void OnUpdate(float delta) override;
     void OnFixedUpdate(float delta) override;
@@ -139,7 +143,8 @@ private:
     void InteractionCheak(float delta);
     void SerachObjectInteraction(float dt);
     void CookingInteraction(float dt);
-    void PutFoodInteraction(float dt);
+    void PutFoodJesaSangInteraction(float dt);
+    void GetItemAltarInteraction(float dt);
 
 
 public:
@@ -151,6 +156,10 @@ public:
     // MiniGame Return Login
     void ReceiveMiniGameResult(std::unique_ptr<IItem> ingredient, bool isSuccess);
     void ReceiveMiniGameItem(std::unique_ptr<IItem> ingredient);
+
+
+    // AI
+    void TakeAttack();      // AI에게 공격 당했을 때
 
 
 

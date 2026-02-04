@@ -90,12 +90,12 @@ bool EngineApp::OnInitialize()
 	// create free camera
 	CameraSystem::Instance().SetScreenSize(clientWidth, clientHeight);
 
-#if _DEBUG
-	auto freeCamHandle = CameraSystem::Instance().CreateFreeCamera(clientWidth, clientHeight, SceneSystem::Instance().GetCurrentScene().get());
-#endif
-
     // == find scene ==
-    LoadSavedFirstScene();
+    LoadSavedFirstScene(); // SceneClear 호출해서 객채 생성은 이 코드 이후에 해야함 
+
+#if _DEBUG
+    auto freeCamHandle = CameraSystem::Instance().CreateFreeCamera(clientWidth, clientHeight, SceneSystem::Instance().GetCurrentScene().get());
+#endif
 
 
 	// == init renderpass ==

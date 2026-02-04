@@ -28,6 +28,11 @@ public:
     const Vector2& GetPivot() const;
     void SetPivot(const Vector2& vec);
 
+    // rectTransform의 계층 구조는 사용하지 않고 OWner의 구조에 있는 children를 dirty 활성화
+    void SetChildrenDirty() override;
+
+    Matrix RemoveScale(Matrix& m);
+
 protected:
     void UpdateMatricesIfDirty() override;
 
