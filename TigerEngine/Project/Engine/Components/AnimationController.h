@@ -24,10 +24,11 @@ private:
     AnimationState* CurrentState = nullptr;
 
 public:
-    void Initialize(const SkeletonInfo* skeleton);
+    // void Initialize(const SkeletonInfo* skeleton);
+    void OnInitialize() override;
     void AddState(std::unique_ptr<AnimationState> state);
     void ChangeState(const std::string& name, float blendTime = 0.2f);
-    void Update(float dt);
+    void OnUpdate(float delta) override;
     void Enable_Inner() override;
     void Disable_Inner() override;
 

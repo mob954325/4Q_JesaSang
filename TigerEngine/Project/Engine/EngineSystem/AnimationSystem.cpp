@@ -7,14 +7,18 @@ void AnimationSystem::Register(AnimationController* comp)
 
 void AnimationSystem::UnRegister(AnimationController* comp)
 {
-    for (auto it = comps.begin(); it != comps.end(); it++)
-    {
-        if (*it == comp)
-        {
-            comps.erase(it);
-            return;
-        }
-    }
+    // To. 성호 
+    // 미안하다 성호야.. 열심히 너가 넣어줬더라...? 
+    // 구조 안 맞춰놨던거라... 이거 사라졌어.......... 
+
+    //for (auto it = comps.begin(); it != comps.end(); it++)
+    //{
+    //    if (*it == comp)
+    //    {
+    //        comps.erase(it);
+    //        return;
+    //    }
+    //}
 
     for (auto it = pending_anims.begin(); it != pending_anims.end(); it++)
     {
@@ -35,11 +39,11 @@ void AnimationSystem::Update(float dt)
     pending_anims.clear();
 
 
-    for (auto* controller : comps)
-    {
-        if (controller)
-            controller->Update(dt);
-    }
+    //for (auto* controller : comps)
+    //{
+    //    if (controller)
+    //        controller->OnUpdate(dt);
+    //}
 }
 
 std::vector<AnimationController*> AnimationSystem::GetComponents()
