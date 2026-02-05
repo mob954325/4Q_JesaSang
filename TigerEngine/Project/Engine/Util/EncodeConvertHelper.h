@@ -20,3 +20,16 @@ static std::wstring Utf8ToWString(const std::string& s)
     MultiByteToWideChar(CP_UTF8, 0, s.c_str(), (int)s.size(), out.data(), size);
     return out;
 }
+
+namespace nlohmann {
+    template <>
+    struct adl_serializer<std::wstring> {
+        static void to_json(json& j, const std::wstring& str) {
+            j = WStringToUtf8(str);
+        }
+
+        static void from_json(const json& j, std::wstring& str) {
+            str = Utf8ToWString(j.get<std::string>());
+        }
+    };
+}
