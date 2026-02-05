@@ -49,6 +49,13 @@ public:
 	GameObject* GetGameObjectByName(std::string name);
 
     /// <summary>
+    /// 이름으로 게임 오브젝트들 찾기 (동명이인 전부)      // 우정 0205 | 추가함!
+    /// </summary>
+    /// <param name="name">찾을 이름</param>
+    /// <returns>같은 이름의 오브젝트 포인터 배열</returns>
+    std::vector<GameObject*> GetGameObjectsByName(const std::string& name);
+
+    /// <summary>
     /// 게임 오브젝트 찾기 ( 포인터로 찾음 )
     /// </summary>
     /// <param name="obj">찾을 게임 오브젝트 포인터</param>
