@@ -467,7 +467,16 @@ void PlayerController::ReceiveMiniGameItem(unique_ptr<IItem> ingredient)
 
 void PlayerController::TakeAttack()
 {
+    // 이미 죽은상태 return
     if (state == PlayerState::Die) return;
+
+    // 무적상태 return
+    if (isPlayerInvincible)
+    {
+        cout << "[Player] TakeAttack Fail! isPlayerInvincible" << endl;
+        return;
+    }
+    
     cout << "[Player] Take Damage! " << endl;
 
     // 아이템이 있다면 제단에 올라감
@@ -492,13 +501,12 @@ void PlayerController::TakeAttack()
     }
 
     // Hit (패닉)
-    if (state != PlayerState::Hit)
-    {
+    if(state != PlayerState::Hit)
         ChangeState(PlayerState::Hit);
-    }
     else
     {
-        // 이미 패닉상태였다면
+        // 이미 패닉상태였을경우 재시작 (무적상태는 위에서 return)
+        ChangeState(PlayerState::Idle);
+        ChangeState(PlayerState::Hit);
     }
-    
 }

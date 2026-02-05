@@ -7,6 +7,9 @@ void Player_Hit::Enter()
     // set speed
     player->curSpeed = player->walkSpeed * player->hitSpeedUpRate;
 
+    // 3초동안은 무적상태
+    player->isPlayerInvincible = true;
+
     // timer init
     hitTimer = 0.0f;
     invincibleTimer = 0.0f;
@@ -52,6 +55,13 @@ void Player_Hit::Update(float deltaTime)
     invincibleTimer += deltaTime;
     renderDirectorTimer += deltaTime;
 
+    // 무적상태 끝
+    if (player->isPlayerInvincible && invincibleTimer >= player->hitInvincibleTime)
+    {
+        player->isPlayerInvincible = false;
+        std::cout << "[Player] Hit Invencible Time End." << std::endl;
+    }
+
     // 플레이어 깜빡거리는 연출
     if (renderDirectorTimer >= renderDirectorTime)
     {
@@ -80,6 +90,9 @@ void Player_Hit::FixedUpdate(float deltaTime)
 
 void Player_Hit::Exit()
 {
+    // 무적상태 flag clear
+    player->isPlayerInvincible = false;
+
     // 렌더 다시 on
     player->fbxRenderer->SetActive(true);
 

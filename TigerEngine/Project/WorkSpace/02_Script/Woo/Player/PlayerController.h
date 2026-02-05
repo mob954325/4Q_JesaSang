@@ -72,6 +72,9 @@ private:
     float curSpeed = 0.0f;
     Vector3 lookDir = Vector3::Zero;
 
+    // hit invincible
+    bool isPlayerInvincible = false;        // 플레이어가 현재 무적상태인가?
+
     // search object interaction
     bool  isPossibleSearch = false;            // 기획자분이 한번에 하나만 가능한 사이즈라고 하심. 중첩된다면 추가 처리필요.
     SearchObject* curSerachObject = nullptr;   // 현재 search 가능한 오브젝트
