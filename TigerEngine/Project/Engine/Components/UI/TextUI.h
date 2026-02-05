@@ -2,16 +2,18 @@
 #include "../../Components/RenderComponent.h"
 #include "../../Manager/UIData/TextResource.h"
 #include "UITextDatas.h"
+#include "../../RenderPass/Renderable/UIQuadVertex.h"
 
 class TextUI : public RenderComponent
 {
+    RTTR_ENABLE(RenderComponent)
 public:
     void OnRender(RenderQueue& queue) override;
 
     /// <summary>
     /// 경로에 있는 폰트 가져오기
     /// </summary>
-    void LoadFontAltas(const std::wstring fontFilePath, float fontPx, int atlasW, int atlasH, int paddingPx);
+    void LoadFontAltas(const std::wstring fontFilePath, float fontPx = 32, int atlasW = 2048, int atlasH = 2048, int paddingPx = 1);
 
     std::wstring GetText() const;
     void SetText(std::wstring wstr);
@@ -21,7 +23,9 @@ public:
 
     bool IsDirty() const;
 
-private:
+    const std::shared_ptr<TextResource>& GetResoucre();
+
+    // 자원
     std::shared_ptr<TextResource> resource{}; // atlas
 
     Color color{};          // 글자 색깔

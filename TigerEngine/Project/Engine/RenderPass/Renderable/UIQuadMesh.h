@@ -1,15 +1,6 @@
 #pragma once
 #include "pch.h"
-
-
-struct UIQuadVertex // vs
-{
-    Vector3 pos;
-    Vector2 uv;
-
-    UIQuadVertex(float x, float y, float z, float u, float v) : pos(x, y, z), uv(u, v) {}
-    UIQuadVertex(Vector3 p, Vector2 u) : pos(p), uv(u) {}
-};
+#include "UIQuadVertex.h"`
 
 /*
     [ UI Quad Mesh ]
@@ -22,6 +13,8 @@ struct UIQuadVertex // vs
 class UIQuadMesh
 {
 private:
+    ComPtr<ID3D11Device> device{};
+
     // VB, IB
     ComPtr<ID3D11Buffer> vertexBuffer{};
     ComPtr<ID3D11Buffer> indexBuffer{};
@@ -40,8 +33,12 @@ public:
     UINT GetOffset() const;
 
     // ===== Text =====
-    std::vector<UIQuadVertex> cpuVerts; // 복사할 정점 데이터
-    std::vector<uint16_t> cpuInds;      // 인덱스 데이터
+    void CreateTextBuffers(uint32_t maxGlyphsInit = 256);
+    void EnsureTextCapacity(uint32_t glyphCountNeeded); // 현재 확보한 Glyphs 값을 넘어가면 2배 키우는 함수
+    void UploadTextVB(const ComPtr<ID3D11DeviceContext>& ctx, const std::vector<UIQuadVertex>& verts);
+
+    ComPtr<ID3D11Buffer> textVB;
+    ComPtr<ID3D11Buffer> textIB;
 
     uint32_t maxGlyphs = 256;
 };

@@ -442,6 +442,7 @@ void EngineApp::OnInputProcess(const Keyboard::State &KeyState, const Keyboard::
 
 #include "Components/UI/Image.h"
 #include "Components/RectTransform.h"
+#include "Components/UI/TextUI.h"
 
 void EngineApp::RegisterAllComponents()
 {
@@ -494,4 +495,7 @@ void EngineApp::Ron_Registeration()
 
 void EngineApp::Ho_Registeration()
 {
+    auto& cf = ComponentFactory::Instance();
+
+    cf.Register<TextUI>("TextUI", ComponentCategory::UI);
 }

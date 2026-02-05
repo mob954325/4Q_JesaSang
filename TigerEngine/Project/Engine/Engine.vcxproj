@@ -225,6 +225,7 @@
     <ClInclude Include="Object\Enableable.h" />
     <ClInclude Include="RenderPass\Renderable\DecalVolumeMesh.h" />
     <ClInclude Include="RenderPass\Renderable\UIQuadMesh.h" />
+    <ClInclude Include="RenderPass\Renderable\UIQuadVertex.h" />
     <ClInclude Include="RenderPass\Renderer\DecalPass.h" />
     <ClInclude Include="EngineSystem\AnimationSystem.h" />
     <ClInclude Include="RenderPass\Renderer\ForwardTransparentPass.h" />

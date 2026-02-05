@@ -1,10 +1,13 @@
 #include "UIRenderPass.h"
 #include "../../Manager/ShaderManager.h"
 #include "../../Manager/UIManager.h"
+#include "../../Object/GameObject.h"
+#include "../../Components/UI/TextUI.h"
 
 void UIRenderPass::Init(const ComPtr<ID3D11Device>& device)
 {
     mesh.Create(device);
+    mesh.CreateTextBuffers(512);
 }
 
 void UIRenderPass::Execute(ComPtr<ID3D11DeviceContext>& context, RenderQueue& queue, Camera* cam)
@@ -15,15 +18,7 @@ void UIRenderPass::Execute(ComPtr<ID3D11DeviceContext>& context, RenderQueue& qu
     context->OMSetBlendState(sm.alphaBlendState.Get(), nullptr, 0xffffffff);	//
 
     // ia
-    auto& indexBuffer = mesh.GetIndexBuffer();
-    auto& vertexBuffer = mesh.GetVertexBuffer();
-
     context->IASetInputLayout(sm.inputLayout_ui.Get());
-    context->IASetIndexBuffer(indexBuffer.Get(), DXGI_FORMAT_R16_UINT, 0);
-
-    UINT stride = mesh.GetStride();
-    UINT offset = mesh.GetOffset();
-    context->IASetVertexBuffers(0, 1, vertexBuffer.GetAddressOf(), &stride, &offset);
 
     // vs rs
     context->PSSetSamplers(0, 1, sm.linearSamplerState.GetAddressOf());
@@ -52,11 +47,61 @@ void UIRenderPass::Execute(ComPtr<ID3D11DeviceContext>& context, RenderQueue& qu
 
         context->VSSetConstantBuffers(11, 1, sm.uiCB.GetAddressOf());	// vs 상수 버퍼 설정
         context->PSSetConstantBuffers(11, 1, sm.uiCB.GetAddressOf());	// ps 상수 버퍼 설정
-        context->PSSetShader(sm.PS_UIImage.Get(), nullptr, 0);					// ps 바인딩
 
-        context->PSSetShaderResources(20, 1, item.resource->srv.GetAddressOf());			// 텍스처 리소스 바인딩
+        if (!item.isText)
+        {
+            auto& indexBuffer = mesh.GetIndexBuffer();
+            auto& vertexBuffer = mesh.GetVertexBuffer();
 
-        context->DrawIndexed(6, 0, 0);	// 쿼드 그리기
+            UINT stride = mesh.GetStride();
+            UINT offset = mesh.GetOffset();
+
+            context->IASetIndexBuffer(indexBuffer.Get(), DXGI_FORMAT_R16_UINT, 0);
+            context->IASetVertexBuffers(0, 1, vertexBuffer.GetAddressOf(), &stride, &offset);
+
+            context->PSSetShader(sm.PS_UIImage.Get(), nullptr, 0);					// ps 바인딩
+            context->PSSetShaderResources(20, 1, item.resource->srv.GetAddressOf());			// 텍스처 리소스 바인딩
+            context->DrawIndexed(6, 0, 0);	// 쿼드 그리기
+        }
+        else
+        {
+            TextUI* t = item.textComp;
+            auto resource = t->GetResoucre();
+            if (!t || !resource || !resource->atlas.srv) continue; // 자원이 존재하지 않음
+
+            Vector2 rectSize = Vector2(item.imageSize.x, item.imageSize.y);
+
+            if (item.geometryDirty)
+            {
+                UIManager::Instance().RebuildGeometry(
+                    t->fontPath,             // path
+                    t->GetText(),            // text
+                    rectSize,                // size
+                    t->alignType,            // align
+                    t->resource.get(),
+                    t->cpuVerts,
+                    t->indexCount
+                );
+            }
+
+            if (t->indexCount == 0 || t->cpuVerts.empty()) continue;
+
+            uint32_t glyphCount = (uint32_t)(t->cpuVerts.size() / 4);
+
+            // 텍스트 파이프라인 바인딩 (PS만 다르게)
+            UINT stride = sizeof(UIQuadVertex);
+            UINT offset = 0;
+            context->IASetVertexBuffers(0, 1, mesh.textVB.GetAddressOf(), &stride, &offset);
+            context->IASetIndexBuffer(mesh.textIB.Get(), DXGI_FORMAT_R16_UINT, 0);
+
+            mesh.EnsureTextCapacity(glyphCount);
+            mesh.UploadTextVB(context, t->cpuVerts);
+
+            context->PSSetShader(sm.PS_UIText.Get(), nullptr, 0); // 알파 텍스트용 PS
+            context->PSSetShaderResources(21, 1, t->resource->atlas.srv.GetAddressOf());
+
+            context->DrawIndexed((UINT)t->indexCount, 0, 0);
+        }
     }   
 }
 
