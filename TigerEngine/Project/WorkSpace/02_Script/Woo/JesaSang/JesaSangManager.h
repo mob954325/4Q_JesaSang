@@ -20,7 +20,15 @@ private:
     // singleton
     inline static JesaSangManager* s_instance = nullptr;
 
-    // gameobjects
+    // has item (현재 제사상에 올라온 음식)
+    bool hasApple = false;
+    bool hasPear = false;
+    bool hasBatter = false;
+    bool hasTofu = false;
+    bool hasSanjeok = false;
+    bool hasDong = false;
+
+    // visual gameobjects
     GameObject* apple = nullptr;
     GameObject* pear = nullptr;
     GameObject* batter = nullptr;
@@ -37,6 +45,10 @@ public:
     // json
     nlohmann::json Serialize();
     void Deserialize(nlohmann::json data);
+
+private:
+    // funcs
+    bool HasAllFood();
 
 public:
     // 외부 call fucns..

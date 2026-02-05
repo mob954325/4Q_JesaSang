@@ -184,6 +184,7 @@
     <ClInclude Include="02_Script\Woo\JesaSang\JesaSangManager.h" />
     <ClInclude Include="02_Script\Woo\Player\PlayerItemVisualizer.h" />
     <ClInclude Include="02_Script\Woo\Object\HideObject.h" />
+    <ClInclude Include="02_Script\Woo\Manager\GameManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="02_Script\Moon\AI\AdultGhostController.cpp" />
@@ -225,6 +226,7 @@
     <ClCompile Include="02_Script\Woo\JesaSang\JesaSangManager.cpp" />
     <ClCompile Include="02_Script\Woo\Player\PlayerItemVisualizer.cpp" />
     <ClCompile Include="02_Script\Woo\Object\HideObject.cpp" />
+    <ClCompile Include="02_Script\Woo\Manager\GameManager.cpp" />
     <ClCompile Include="winMain.cpp" />
   </ItemGroup>
   <ItemGroup>

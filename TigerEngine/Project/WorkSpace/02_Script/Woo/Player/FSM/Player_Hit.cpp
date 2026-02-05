@@ -2,19 +2,24 @@
 
 void Player_Hit::Enter()
 {
-    //cout << "[Player] Enter Hit State" << endl;
+    cout << "[Player] Enter Hit State (life : " << player->curLife << ")" << endl;
 
     // set speed
     player->curSpeed = player->walkSpeed * player->hitSpeedUpRate;
 
+    // 3초동안은 무적상태
+    player->isPlayerInvincible = true;
+
     // timer init
-    timer = 0.0f;
+    hitTimer = 0.0f;
+    invincibleTimer = 0.0f;
+    renderDirectorTimer = renderDirectorTime;
 }
 
 void Player_Hit::ChangeStateLogic()
 {
     // hit duration 후 자동 change
-    if (timer >= player->hitDuration)
+    if (hitTimer >= player->hitDuration)
     {
         const bool isMove =
             player->isMoveLKey || player->isMoveRKey ||
@@ -46,7 +51,23 @@ void Player_Hit::ChangeStateLogic()
 void Player_Hit::Update(float deltaTime)
 {
     // timer
-    timer += deltaTime;
+    hitTimer += deltaTime;
+    invincibleTimer += deltaTime;
+    renderDirectorTimer += deltaTime;
+
+    // 무적상태 끝
+    if (player->isPlayerInvincible && invincibleTimer >= player->hitInvincibleTime)
+    {
+        player->isPlayerInvincible = false;
+        std::cout << "[Player] Hit Invencible Time End." << std::endl;
+    }
+
+    // 플레이어 깜빡거리는 연출
+    if (renderDirectorTimer >= renderDirectorTime)
+    {
+        player->fbxRenderer->SetActive(!player->fbxRenderer->GetActiveSelf());
+        renderDirectorTimer = 0.0f;
+    }
 
     // look dir
     Vector3 input(0, 0, 0);
@@ -69,5 +90,11 @@ void Player_Hit::FixedUpdate(float deltaTime)
 
 void Player_Hit::Exit()
 {
-    //cout << "[Player] Exit Hit State" << endl;
+    // 무적상태 flag clear
+    player->isPlayerInvincible = false;
+
+    // 렌더 다시 on
+    player->fbxRenderer->SetActive(true);
+
+    cout << "[Player] Exit Hit State" << endl;
 }
