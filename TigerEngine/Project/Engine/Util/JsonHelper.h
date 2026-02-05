@@ -1,6 +1,7 @@
 #pragma once
 #include "pch.h"
 #include "../Base/Datas/EnumData.hpp"
+#include "EncodeConvertHelper.h"
 
 class JsonHelper
 {
@@ -91,6 +92,12 @@ nlohmann::json JsonHelper::MakeSaveData(const T* typePtr)
                 datas["properties"][propName] = enumName;
             else
                 datas["properties"][propName] = nullptr;
+        }
+        else if (value.is_type<std::wstring>())
+        {
+            const std::wstring ws = value.get_value<std::wstring>();
+            const std::string utf8 = WStringToUtf8(ws);
+            datas["properties"][propName] = utf8; // JSON에는 항상 string(UTF-8)
         }
     }
 
@@ -199,6 +206,23 @@ inline void JsonHelper::SetDataFromJson(T* typePtr, nlohmann::json data)
 
             if (enumVar.is_valid())
                 prop.set_value(*typePtr, enumVar);
+        }
+        else if (value.is_type<std::wstring>())
+        {
+            // null 처리(저장할 때 nullptr 넣는 케이스가 있을 수 있으니)
+            if (propData[propName].is_null())
+            {
+                prop.set_value(*typePtr, std::wstring{});
+                continue;
+            }
+
+            if (!propData[propName].is_string())
+                continue; // 타입 불일치 방어
+
+            const std::string utf8 = propData[propName].get<std::string>();
+            const std::wstring ws = Utf8ToWString(utf8);
+
+            prop.set_value(*typePtr, ws);
         }
     }
 }
