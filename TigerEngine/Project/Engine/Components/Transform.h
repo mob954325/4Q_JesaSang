@@ -36,6 +36,7 @@ public:
     const Vector3& GetEuler() const { return euler; }
     void SetEuler(const Vector3& rad);            // Euler : 주로 클라이언트가 편하게 계산하기 위해 사용
     const Quaternion& GetQuaternion() const { return quaternion; }
+    Quaternion GetWorldQuaternion();
     void SetQuaternion(const Quaternion& quat);    // Quaternion : 엔진 내부 계산할 때 사용 
     float GetYaw() const; // Y축 회전값 (Yaw) getter (rad)
 
@@ -53,18 +54,21 @@ public:
     void RemoveChild(Transform* transPtr);
     bool SetParent(Transform* transPtr);
     void RemoveChildren();
-    void RemoveSelfAtParent();  // 부모에서 자신을 스스로 제거함
-    void SetChildrenDirty();    // 모든 자식 dirty 플래그 활성화
-    void SetDirty();            // dirty = true; 
+    void RemoveSelfAtParent();              // 부모에서 자신을 스스로 제거함
+    void SetDirty();                        // dirty = true; 
+    virtual void UpdateMatricesIfDirty();   // dirty flag 해소 함수
+    virtual void SetChildrenDirty();        // 모든 자식 dirty 플래그 활성화
+
 
     Transform* GetParent() const { return parent; }
     const std::vector<Transform*>& GetChildren() const { return children; }
+    Transform* GetChildByIndex(int index);
+    Transform* GetChildByName(std::string name);
 
-private:
-    /// <summary>
-    /// dirty flag 해소 함수
-    /// </summary>
-    void UpdateMatricesIfDirty();
+
+
+protected:
+    
 
     Vector3 position{ Vector3::Zero };  // local Position
     Vector3 euler{ Vector3::Zero };     // 오일러 각으로 표현한 라디안 값, local Position

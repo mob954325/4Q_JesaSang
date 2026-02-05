@@ -122,3 +122,15 @@ void AnimationController::Deserialize(nlohmann::json data)
         rttr::variant value = prop.get_value(*this);
     }
 }
+
+void AnimationController::Enable_Inner()
+{
+    AnimationSystem::Instance().Register(this);
+    OnEnable();
+}
+
+void AnimationController::Disable_Inner()
+{
+    AnimationSystem::Instance().UnRegister(this);
+    OnDisable();
+}

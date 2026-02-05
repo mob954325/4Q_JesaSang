@@ -26,6 +26,10 @@ public:
     void OnStart() override; 
     void OnDestory() override;
 
+    // register enable
+    void Enable_Inner() override;
+    void Disable_Inner() override;
+
 public:
     Transform* transform = nullptr;
 
@@ -62,7 +66,7 @@ public:
     CollisionMask  m_Mask;
     bool m_IsTrigger;
 
-
+    bool m_firstRegister = false; // 직렬화 대상 아님
 
 public:
     // -----------------------------
@@ -84,7 +88,18 @@ public:
     ~CharacterControllerComponent();
 
     void CreateCharacterCollider(float radius, float height, const Vector3& offset);
-    void MoveCharacter(const Vector3& wishDir, float fixedDt);
+   
+
+    // 공통 움직임 함수. 추후 MoveCharacter도 이걸로 합쳐야함 | 02.03 문선민 
+    void InternalMove(
+        const Vector3& horizontalDir,
+        float speed,            
+        bool applyGravity,
+        bool allowJump,
+        float fixedDt);
+    void MovePlayer(const Vector3& inputDir, float playerSpeed, float dt);
+    void MoveAI(const Vector3& inputDir, float aiSpeed, float dt);
+
     void Jump();
 
     void SyncFromController();
@@ -103,4 +118,5 @@ public:
 
 private:
     // void ApplyFilter();
+    void MoveCharacter(const Vector3& wishDir, float fixedDt);
 };

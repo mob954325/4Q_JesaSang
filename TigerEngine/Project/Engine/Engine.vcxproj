@@ -135,14 +135,24 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="App\Editor.cpp" />
+    <ClCompile Include="Components\AgentComponent.cpp" />
     <ClCompile Include="Components\AnimationController.cpp" />
     <ClCompile Include="Components\Decal.cpp" />
+    <ClCompile Include="Components\RectTransform.cpp" />
+    <ClCompile Include="Components\UI\Image.cpp" />
+    <ClCompile Include="EngineSystem\AgentSystem.cpp" />
+    <ClCompile Include="Manager\TextureResourceManager.cpp" />
+    <ClCompile Include="Manager\UIManager.cpp" />
+    <ClCompile Include="Components\GridComponent.cpp" />
     <ClCompile Include="EngineSystem\DecalSystem.cpp" />
+    <ClCompile Include="EngineSystem\GridSystem.cpp" />
     <ClCompile Include="Object\enableable.cpp" />
     <ClCompile Include="RenderPass\Renderable\DecalVolumeMesh.cpp" />
     <ClCompile Include="RenderPass\Renderer\DecalPass.cpp" />
     <ClCompile Include="EngineSystem\AnimationSystem.cpp" />
     <ClCompile Include="RenderPass\Renderer\ForwardTransparentPass.cpp" />
+    <ClCompile Include="RenderPass\Renderer\UIRenderPass.cpp" />
+    <ClCompile Include="RenderPass\Renderable\UIQuadMesh.cpp" />
     <ClCompile Include="Util\Animator.cpp" />
     <ClCompile Include="Components\AudioListenerComponent.cpp" />
     <ClCompile Include="Components\AudioSourceComponent.cpp" />
@@ -185,6 +195,7 @@
     <ClCompile Include="RenderQueue\RenderQueue.cpp" />
     <ClCompile Include="Scene\Scene.cpp" />
     <ClCompile Include="RenderPass\Renderable\Skybox.cpp" />
+    <ClCompile Include="Util\FontAtlasBuild.cpp" />
     <ClCompile Include="Util\PathHelper.cpp" />
     <ClCompile Include="Util\DebugDraw.cpp" />
     <ClCompile Include="Util\PhysicsFilterShader.cpp" />
@@ -192,14 +203,26 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App\Editor.h" />
+    <ClInclude Include="Components\AgentComponent.h" />
     <ClInclude Include="Components\AnimationController.h" />
+    <ClInclude Include="Components\UI\Image.h" />
+    <ClInclude Include="EngineSystem\AgentSystem.h" />
+    <ClInclude Include="Manager\TextureResourceManager.h" />
+    <ClInclude Include="Manager\UIData\TextureResource.h" />
+    <ClInclude Include="Manager\UIManager.h" />
     <ClInclude Include="Components\Decal.h" />
+    <ClInclude Include="Components\RectTransform.h" />
+    <ClInclude Include="Components\UI\UIBase.h" />
+    <ClInclude Include="Components\GridComponent.h" />
     <ClInclude Include="EngineSystem\DecalSystem.h" />
+    <ClInclude Include="EngineSystem\GridSystem.h" />
     <ClInclude Include="Object\Enableable.h" />
     <ClInclude Include="RenderPass\Renderable\DecalVolumeMesh.h" />
+    <ClInclude Include="RenderPass\Renderable\UIQuadMesh.h" />
     <ClInclude Include="RenderPass\Renderer\DecalPass.h" />
     <ClInclude Include="EngineSystem\AnimationSystem.h" />
     <ClInclude Include="RenderPass\Renderer\ForwardTransparentPass.h" />
+    <ClInclude Include="RenderPass\Renderer\UIRenderPass.h" />
     <ClInclude Include="Util\Animator.h" />
     <ClInclude Include="Components\AudioListenerComponent.h" />
     <ClInclude Include="Components\AudioSourceComponent.h" />
@@ -250,6 +273,7 @@
     <ClInclude Include="Util\AnimatorParameter.h" />
     <ClInclude Include="Util\CollisionLayer.h" />
     <ClInclude Include="Util\ComponentAutoRegister.h" />
+    <ClInclude Include="Util\FontAtlasBuild.h" />
     <ClInclude Include="Util\JsonHelper.h" />
     <ClInclude Include="Util\PathHelper.h" />
     <ClInclude Include="Util\DebugDraw.h" />
@@ -257,6 +281,7 @@
     <ClInclude Include="Util\PhysicsFilterShader.h" />
     <ClInclude Include="Util\PhysicsLayerMatrix.h" />
     <ClInclude Include="Util\PhysXUtils.h" />
+    <ClInclude Include="Util\PrefabUtil.h" />
     <ClInclude Include="Util\RaycastHit.h" />
   </ItemGroup>
   <ItemGroup>
@@ -337,6 +362,18 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
     </FxCompile>
+    <FxCompile Include="Shaders\PS_QuadImage.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
+    </FxCompile>
+    <FxCompile Include="Shaders\PS_QuadText.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
+    </FxCompile>
     <FxCompile Include="Shaders\PS_ShadowDepth.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
@@ -380,6 +417,12 @@
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
     </FxCompile>
     <FxCompile Include="Shaders\VS_LightVolume.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
+    </FxCompile>
+    <FxCompile Include="Shaders\VS_QuadImage.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>

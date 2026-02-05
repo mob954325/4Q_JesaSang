@@ -28,12 +28,12 @@ RTTR_REGISTRATION
 
 void Decal::OnInitialize()
 {
-    DecalSystem::Instance().Register(this);
+    
 }
 
 void Decal::OnDestory()
 {
-    DecalSystem::Instance().UnRegister(this);
+    
 }
 
 nlohmann::json Decal::Serialize()
@@ -63,6 +63,18 @@ void Decal::ChangeData(std::string path)
         std::wstring wpath = ToWString(decalTexturePath);
         CreateTextureFromFile(device, wpath.c_str(), decalSRV.GetAddressOf(), TextureColorSpace::SRGB);
     }
+}
+
+void Decal::Enable_Inner()
+{
+    DecalSystem::Instance().Register(this);
+    OnEnable();
+}
+
+void Decal::Disable_Inner()
+{
+    DecalSystem::Instance().UnRegister(this);
+    OnDisable();
 }
 
 std::wstring ToWString(const std::string& str)

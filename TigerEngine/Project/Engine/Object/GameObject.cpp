@@ -4,14 +4,16 @@
 #include "../EngineSystem/ScriptSystem.h"
 #include "../EngineSystem/RenderSystem.h"
 #include "System/InputSystem.h"
+#include "../EngineSystem/PlayModeSystem.h"
+
+#include "../Components/ScriptComponent.h"
 
 RTTR_REGISTRATION
 {
     rttr::registration::class_<Enableable>("Enableable")
         .property("Active", &Enableable::GetActiveSelf, &Enableable::SetActive);
 
-    rttr::registration::class_<GameObject>("GameObject")
-        
+    rttr::registration::class_<GameObject>("GameObject")        
         .property("Name", &GameObject::name);
 }
 
@@ -43,15 +45,7 @@ void GameObject::RemoveComponent(Component* comp)
         auto objPtr = ObjectSystem::Instance().Get<Component>(*it);
         if (objPtr == comp)
         {
-            if (auto renderComp = dynamic_cast<RenderComponent*>(objPtr))
-            {
-                RenderSystem::Instance().UnRegister(renderComp);
-            }
-            else
-            {
-                ScriptSystem::Instance().UnRegister(objPtr);
-            }
-
+            objPtr->SetActive(false);
             objPtr->OnDestory();
             ObjectSystem::Instance().Destory(*it);
             handles.erase(it);
@@ -125,6 +119,7 @@ nlohmann::json GameObject::Serialize() const
     }
     datas["properties"]["ParentID"] = parentID;
     datas["properties"]["ID"] = static_cast<int>(GetId());
+    datas["properties"]["Active"] = GetActiveSelf();
 
     // 오브젝트 내용 직렬화화
     for(auto& prop : t.get_properties())
@@ -139,12 +134,12 @@ nlohmann::json GameObject::Serialize() const
     }
 
     // 컴포넌트 내용 직렬화
-    datas["properties"]["components"] = nlohmann::json::object();
+    datas["properties"]["components"] = nlohmann::json::array();
     auto& comps = datas["properties"]["components"];
 
     for (auto& comp : components)
     {
-        comps[comp->GetName()] = comp->Serialize();
+        comps.push_back(comp->Serialize());
     }
     
     return datas;
@@ -155,7 +150,8 @@ void GameObject::Deserialize(const nlohmann::json objData)
     // objData : data["objects"]["properties"]
 
     rttr::type t = rttr::type::get(*this);
-    if(!objData.contains("components")) return;
+    if(!objData.contains("components")) 
+        return;
 
     const auto& registered = ComponentFactory::Instance().GetRegisteredComponents();
 
@@ -168,20 +164,27 @@ void GameObject::Deserialize(const nlohmann::json objData)
         {
             auto trans = this->GetComponent<Transform>();
             trans->Deserialize(prop);
+            continue;
         }
-        else    // 그 외 컴포넌트는 추가한다.
-        {
-            // 컴포넌트를 찾아서 factory에 등록되어있으면 컴포넌트 추가
-            for (auto [name, entry] : registered)
-            {
-                if (compName == name)
-                {                   
-                    auto createdComp = entry.creator(this);
-                    createdComp->Deserialize(prop);
 
-                    break;
-                }
-            }            
+        auto it = registered.find(compName);
+        if (it != registered.end())
+        {
+            Component* createdComp = it->second.creator(this);
+            createdComp->Deserialize(prop);
+        }          
+    }
+
+    if (objData.contains("Active"))
+    {
+        bool isActive = objData["Active"];
+        if (isActive)
+        {
+            SetActive(true); // 자기 자신 활성화 
+        }
+        else
+        {
+            SetActive(false); // 비활성화
         }
     }
 }
@@ -226,15 +229,7 @@ void GameObject::ClearAll()
     for (auto it = handles.begin(); it != handles.end();)
     {
         auto objPtr = ObjectSystem::Instance().Get<Component>(*it);
-        if (auto renderComp = dynamic_cast<RenderComponent*>(objPtr))
-        {
-            RenderSystem::Instance().UnRegister(renderComp);
-        }
-        else
-        {
-            ScriptSystem::Instance().UnRegister(objPtr);
-        }
-
+        objPtr->SetActive(false);
         objPtr->OnDestory();
         ObjectSystem::Instance().Destory(*it);
         it = handles.erase(it);
@@ -243,6 +238,39 @@ void GameObject::ClearAll()
     components.clear();
 }
 
+std::vector<Transform*> GameObject::GetChildern()
+{
+    return transform->GetChildren();
+}
+
+Transform* GameObject::GetChildByIndex(int index)
+{
+    if (index >= transform->GetChildren().size()) return nullptr;
+    if (index < 0) return nullptr;
+
+    return transform->GetChildByIndex(index);
+}
+
+Transform* GameObject::GetChildByName(std::string name)
+{
+    return transform->GetChildByName(name);
+}
+
+Transform* GameObject::GetParent()
+{
+    return transform->GetParent();
+}
+
+void GameObject::SetParent(GameObject* obj)
+{
+    if (obj == nullptr) return;
+    transform->SetParent(obj->GetTransform());
+}
+
+void GameObject::SetParent(Transform* tran)
+{
+    transform->SetParent(tran);
+}
 
 
 // -----------------------------
@@ -338,4 +366,37 @@ void GameObject::BroadcastCCTCollisionExit(CharacterControllerComponent* cct)
     for (auto c : components)
         if (auto s = dynamic_cast<ScriptComponent*>(c))
             s->OnCCTCollisionExit(cct);
+}
+
+void GameObject::Enable_Inner()
+{
+    auto children = GetChildern();
+
+    // 자식 오브젝트 모두 활성화
+    for (auto& child : children)
+    {
+        child->GetOwner()->SetActive(true);
+    }
+
+    // 내 컴포넌트 활성화
+    for (auto comp : components)
+    {
+        comp->SetActive(true);
+    }
+}
+
+void GameObject::Disable_Inner()
+{
+    auto children = GetChildern();
+
+    // 자식 오브젝트 모두 비활성화
+    for (auto& child : children)
+    {
+        child->GetOwner()->SetActive(false);
+    }
+
+    for (auto comp : components)
+    {
+        comp->SetActive(false);
+    }
 }

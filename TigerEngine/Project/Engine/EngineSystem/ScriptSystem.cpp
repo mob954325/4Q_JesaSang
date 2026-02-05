@@ -1,4 +1,5 @@
 #include "ScriptSystem.h"
+#include "../Components/ScriptComponent.h"
 #include "../EngineSystem/PlayModeSystem.h"
 #include "../Object/GameObject.h"
 
@@ -7,26 +8,38 @@ void ScriptSystem::CheckReadyQueue()
     while (!readyQueue.empty())
     {
         auto comp = readyQueue.front();
+
         comp->OnStart();
+        comp->SetStartTrue();
+
         readyQueue.pop();
     }
 }
 
 void ScriptSystem::Register(Component* comp)
 {
-    readyQueue.push(comp);
-    comps.push_back(comp);
-    comp->OnInitialize();
+    if(!comp->IsStart())
+        readyQueue.push(comp);
+
+    pending_components.push_back(comp);
 }
 
 void ScriptSystem::RegisterScript(Component* comp)
 {
-    scriptComps.push_back(comp);
-    scriptCompsInitReady.push_back(comp);
+    pending_scriptComponents.push_back(comp);
 }
 
 void ScriptSystem::UnRegister(Component* comp)
 {
+    for (auto it = pending_components.begin(); it != pending_components.end(); it++)
+    {
+        if (*it == comp)
+        {
+            pending_components.erase(it);
+            return;
+        }
+    }
+
     for (auto it = comps.begin(); it != comps.end(); it++)
     {
         if (*it == comp)
@@ -39,6 +52,15 @@ void ScriptSystem::UnRegister(Component* comp)
 
 void ScriptSystem::UnRegisterScript(Component* comp)
 {
+    for (auto it = pending_scriptComponents.begin(); it != pending_scriptComponents.end(); it++)
+    {
+        if (*it == comp)
+        {
+            pending_scriptComponents.erase(it);
+            return;
+        }
+    }
+
     for (auto it = scriptComps.begin(); it != scriptComps.end(); it++)
     {
         if (*it == comp)
@@ -52,45 +74,35 @@ void ScriptSystem::UnRegisterScript(Component* comp)
 void ScriptSystem::Update(float delta)
 {
     // 일반 component update
+    for (auto& e : pending_components)
+    {
+        comps.push_back(e);
+    }
+    pending_components.clear();
+
     for (auto& e : comps)
     {
-        if (!e->GetOwner()->GetActiveSelf()) continue;  // Object 활성화 여부
-        if (!e->GetActiveSelf()) continue;              // 컴포넌트 활성화 여부
-
-        if (!e->IsStart())
-        {
-            e->IsStart();
-            e->SetStartTrue();
-        }
-        else
+        if(e->IsStart())
         {
             e->OnUpdate(delta);
         }
     }
 
+
+    // 스크립트 컴포넌트 업데이트
     if (PlayModeSystem::Instance().IsPlaying())
     {
-        // 1. 등록된 init 해소
-
-        for (auto it = scriptCompsInitReady.begin(); it != scriptCompsInitReady.end();)
+        for (auto& e : pending_scriptComponents)
         {
-            if (!(*it)->GetOwner()->GetActiveSelf() || !(*it)->GetActiveSelf())
-            {
-                it++;
-            }
-            else
-            {
-                (*it)->OnInitialize();
-                it = scriptCompsInitReady.erase(it);
-            }
+            scriptComps.push_back(e);
         }
+        pending_scriptComponents.clear();
 
-        // 3. 사용자 정의 component update
+        // 사용자 정의 component update
         for (auto& e : scriptComps)
         {
-            if (!e->GetOwner()->GetActiveSelf() || !e->GetActiveSelf()) continue;
-                
-            if (!e->IsStart())
+            // 이전 이벤트 함수 Oninitialize(), OnEnable은 AddComponent 시 호출됩니다.
+            if (!e->IsStart()) // start 해소
             {
                 e->OnStart();
                 e->SetStartTrue();
@@ -110,7 +122,11 @@ void ScriptSystem::FixedUpdate(float dt)
         // 사용자 정의 component update
         for (auto& e : scriptComps)
         {
-            if (!e->GetOwner()->GetActiveSelf() || !e->GetActiveSelf()) continue;
+            for (auto& e : pending_scriptComponents)
+            {
+                scriptComps.push_back(e);
+            }
+            pending_scriptComponents.clear();
 
             e->OnFixedUpdate(dt);
         }
@@ -124,9 +140,22 @@ void ScriptSystem::LateUpdate(float dt)
         // 사용자 정의 component update
         for (auto& e : scriptComps)
         {
-            if (!e->GetOwner()->GetActiveSelf() || !e->GetActiveSelf()) continue;
+            for (auto& e : pending_scriptComponents)
+            {
+                scriptComps.push_back(e);
+            }
+            pending_scriptComponents.clear();
 
             e->OnLateUpdate(dt);
         }
     }
+}
+
+void ScriptSystem::Clear()
+{
+    comps.clear();
+    while (!readyQueue.empty()) readyQueue.pop();
+
+   scriptComps.clear();
+   pending_scriptComponents.clear();
 }

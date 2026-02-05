@@ -99,12 +99,6 @@ void OcclusionFader::OnUpdate(float delta)
 
 void OcclusionFader::OnDestory()
 {
-    for (OcclusionFadeObject* obj : previousHits)
-    {
-        if (obj)
-            obj->StartFadeOut();
-    }
-
     previousHits.clear();
     currentHits.clear();
     hitBuffer.clear();
@@ -126,6 +120,17 @@ OcclusionFadeObject* OcclusionFader::FindFadeObjectFromHit(const RaycastHit& hit
 
     GameObject* hitObject = hit.component->GetOwner();
     if (!hitObject) return nullptr;
+
+    // target 뒤에 있으면 return
+    Vector3 origin = transform->GetWorldPosition();
+    Vector3 targetPos = targetTr->GetWorldPosition();
+
+    float targetDist = (targetPos - origin).Length();
+    Vector3 hitPos = ToDXVec3(hit.point);
+    float hitDist = (hitPos - origin).Length();
+
+    if (hitDist > targetDist)
+        return nullptr;
 
     // hit gameoject의 occlusion fade object 컴포넌트 반환
     if (OcclusionFadeObject* fadeComp = hitObject->GetComponent<OcclusionFadeObject>())

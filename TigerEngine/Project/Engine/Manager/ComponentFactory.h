@@ -5,10 +5,10 @@
 
 enum class ComponentCategory
 {
-    Core, Rendering, Audio, Physics, Animation, Script, Other
+    Core, Rendering, Audio, Physics, Animation, Script, UI, Other
 };
 
-using createCompFunc = std::function<Component*(GameObject*)>;
+using createCompFunc = std::function<Component* (GameObject*)>;
 
 struct ComponentEntry
 {
@@ -16,6 +16,8 @@ struct ComponentEntry
     ComponentCategory category;
     createCompFunc creator;
 };
+
+using createCompFunc = std::function<Component*(GameObject*)>;
 
 /// @brief 컴포넌트 조회용 클래스
 /// 엔진에 사용하는 모든 컴포넌트들은 해당 클래스에 등록된다.
@@ -45,6 +47,8 @@ inline void ComponentFactory::Register(std::string compName, ComponentCategory c
             if (auto sp = comp)
             {
                 sp->SetName(name);
+                sp->SetActive(true); // 해당 컴포넌트 활성화 ( false -> true )
+                cout << name << " : factory call \n";
             }
             return comp;
         };

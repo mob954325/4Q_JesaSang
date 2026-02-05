@@ -162,6 +162,17 @@ void Transform::SetQuaternion(const Quaternion& q)
     SetChildrenDirty();
 }
 
+Quaternion Transform::GetWorldQuaternion()
+{
+    UpdateMatricesIfDirty();
+
+    if (!parent)
+        return quaternion;
+
+    return quaternion * parent->GetWorldQuaternion();
+}
+
+
 void Transform::SetScale(const Vector3& s)
 {
     scale = s;
@@ -188,6 +199,7 @@ void Transform::AddChild(Transform* transPtr)
 {
     if (transPtr == nullptr) return;
     children.push_back(transPtr);
+    transPtr->SetDirty();
 }
 
 void Transform::RemoveChild(Transform* transPtr)
@@ -259,6 +271,31 @@ void Transform::SetChildrenDirty()
 void Transform::SetDirty()
 {
     dirty = true;
+}
+
+Transform* Transform::GetChildByIndex(int index)
+{
+    if (index >= children.size()) return nullptr;
+    if (index < 0) return nullptr;
+
+    return children[index];
+}
+
+Transform* Transform::GetChildByName(std::string name)
+{
+    for (auto it = children.begin(); it != children.end();)
+    {
+        if ((*it)->GetOwner()->GetName() == name)
+        {
+            return (*it);
+        }
+        else
+        {
+            it++;
+        }
+    }
+
+    return nullptr;
 }
 
 void Transform::UpdateMatricesIfDirty()

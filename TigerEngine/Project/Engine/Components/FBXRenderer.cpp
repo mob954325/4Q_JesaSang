@@ -50,13 +50,19 @@ RTTR_REGISTRATION
 
 void FBXRenderer::OnInitialize()
 {
+    // std::cout <<"FBXRenderer : OnInitialize\n";
     fbxData = owner->GetComponent<FBXData>();
 	if(fbxData != nullptr) CreateBoneInfo(); 
 }
 
+void FBXRenderer::OnEnable()
+{
+    // std::cout << "FBXRenderer : OnEnable\n";
+}
+
 void FBXRenderer::OnStart()
 {
-    cout << "RenderComponent_OnStart() : FBXRenderer OnStart() check...\n"; // RenderComponent OnStart 체크
+    // std::cout << "FBXRenderer : OnStart\n"; // RenderComponent OnStart 체크
 }
 
 void FBXRenderer::OnUpdate(float delta)
@@ -84,6 +90,11 @@ void FBXRenderer::OnUpdate(float delta)
     }
 }
 
+void FBXRenderer::OnDisable()
+{
+    // std::cout << "FBXRenderer : OnDisable\n";
+}
+
 void FBXRenderer::OnDestory()
 {
     Vector3 center = { 0.0f, 0.0f, 0.0f };
@@ -93,6 +104,8 @@ void FBXRenderer::OnDestory()
     Vector3 max = center + extent;
 
     GetOwner()->SetAABB(min, max, center);
+
+    // std::cout << "FBXRenderer : OnDestory\n";
 }
 
 void FBXRenderer::OnRender(RenderQueue& queue)
@@ -140,6 +153,18 @@ void FBXRenderer::OnRender(RenderQueue& queue)
         else if (renderBlendType == RenderBlendType::Transparent)
             queue.AddTransparentQueue(item);
     }
+}
+
+void FBXRenderer::Enable_Inner()
+{
+    RenderSystem::Instance().Register(this);
+    OnEnable();
+}
+
+void FBXRenderer::Disable_Inner()
+{
+    RenderSystem::Instance().UnRegister(this);
+    OnDisable();
 }
 
 void FBXRenderer::CreateBoneInfo()

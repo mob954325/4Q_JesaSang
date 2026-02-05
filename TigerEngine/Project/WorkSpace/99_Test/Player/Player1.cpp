@@ -4,6 +4,9 @@
 #include "Object/Component.h"
 #include "Components/FBXRenderer.h"
 #include "Util/ComponentAutoRegister.h"
+#include "../Engine/EngineSystem/SceneSystem.h"
+#include "Util/PrefabUtil.h"
+#include "../Engine//EngineSystem/CameraSystem.h"
 
 REGISTER_COMPONENT(Player1);
 
@@ -19,13 +22,50 @@ RTTR_REGISTRATION
 
 void Player1::OnInitialize()
 {
+    // cout << "== Player1 init ==\n";
     weapon = GetOwner()->AddComponent<Weapon>();
-    cout << "[Player1 | PlayModeTest] : OnInitalize() 1\n";
+
+    // cout << "GameObject add\n";
+    auto weaponObj = SceneUtil::CreateGameObject("TestWeapon");
+
+    GetOwner()->GetTransform()->AddChild(weaponObj->GetTransform());
+    auto objIndex = GetOwner()->GetChildByIndex(0);
+    // cout << "Find Obj index" << objIndex << " : " << objIndex->GetName() << "\n";
+
+    auto objName = GetOwner()->GetChildByName("TestWeapon");
+    // cout << "Find Obj name " << objName->GetName() << " : " << objIndex->GetName() << "\n";
+
+    // cout << "[Player1 | PlayModeTest] : OnInitalize() 1\n";    
+}
+
+void Player1::OnEnable()
+{
+    // cout << "[Player1 | PlayModeTest] : OnEnable() 2\n";    
+    soket = SceneUtil::CreateGameObject("PlayerSoket");
+    soket->SetParent(GetOwner());
+
 }
 
 void Player1::OnStart()
 {
-    cout << "[Player1 | PlayModeTest] : OnStart() 2\n";
+    // cout << "[Player1 | PlayModeTest] : OnStart() 3\n";    
+    GameObject* obj = SceneUtil::GetObjectByName("Weapon");
+
+    // if(obj)
+        // cout << "SceneUtiltest : " << obj->GetName() << endl;
+
+    GameObject* instantiated = PrefabUtil::Instantiate("Test1");
+    instantiated->GetTransform()->SetParent(this->GetOwner()->GetTransform());
+}
+
+void Player1::OnDisable()
+{
+    // cout << "[Player1 | PlayModeTest] : OnDisable() 4\n";
+}
+
+void Player1::OnDestory()
+{
+    // cout << "[Player1 | PlayModeTest] : OnDestory() 5\n";
 }
 
 void Player1::OnUpdate(float delta)
@@ -53,6 +93,13 @@ void Player1::OnUpdate(float delta)
         trans->Translate({ -1.f, 0, 0 });
     else if (Input::GetKey(DirectX::Keyboard::Keys::D))
         trans->Translate({ 1.f, 0, 0 });
+
+    if (Input::GetKey(DirectX::Keyboard::Keys::Z))
+        CameraSystem::Instance().SetCurrCameraByName("cam1");
+    if (Input::GetKey(DirectX::Keyboard::Keys::X))
+        CameraSystem::Instance().SetCurrCameraByName("cam2");
+    if (Input::GetKey(DirectX::Keyboard::Keys::C))
+        CameraSystem::Instance().SetCurrCameraByName("cam3");
 }
 
 nlohmann::json Player1::Serialize()

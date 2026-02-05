@@ -16,6 +16,20 @@ public:
 
     bool IsPlayModeOnly() override { return true; }
 
+    void Enable_Inner() override
+    {
+        auto ptr = ObjectSystem::Instance().Get<Component>(handle);
+        ScriptSystem::Instance().RegisterScript(ptr);
+        OnEnable();
+    }
+
+    void Disable_Inner() override
+    {
+        auto ptr = ObjectSystem::Instance().Get<Component>(handle);
+        ScriptSystem::Instance().UnRegisterScript(ptr);
+        OnDisable();
+    }
+
 public:
     virtual void OnCollisionEnter(PhysicsComponent*) {}
     virtual void OnCollisionStay(PhysicsComponent*) {}

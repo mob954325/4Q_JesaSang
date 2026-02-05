@@ -21,7 +21,7 @@ RTTR_REGISTRATION
             rttr::value("Trigger", CollisionLayer::Trigger),
             rttr::value("Projectile", CollisionLayer::Projectile),
             rttr::value("Ball", CollisionLayer::Ball),
-            rttr::value("IgnoreTest", CollisionLayer::IgnoreTest)
+            rttr::value("Ground", CollisionLayer::Ground)
             );
 
     rttr::registration::class_<CharacterControllerComponent>("CharacterControllerComponent")
@@ -46,11 +46,15 @@ void CharacterControllerComponent::Deserialize(nlohmann::json data)
 {
     JsonHelper::SetDataFromJson(this, data);
 
-    // -------------------------
-    // CCT 재생성
-    // -------------------------
-    // CreateCharacterCollider(m_Radius, m_Height, m_Offset);
-    // SetLayer(m_Layer);
+    // data 수정 ...
+    if (!m_Controller)
+    {
+        CreateCharacterCollider(m_Radius, m_Height, m_Offset);
+    }
+
+    CharacterControllerSystem::Instance().RegisterComponent(this, m_Controller);
+
+    m_firstRegister = true;
 }
 
 void CharacterControllerComponent::OnCollisionEnter(PhysicsComponent* other) { if (GetOwner()) GetOwner()->BroadcastCollisionEnter(other); }
@@ -65,9 +69,6 @@ void CharacterControllerComponent::OnTriggerExit(PhysicsComponent* other) { if (
 void CharacterControllerComponent::OnInitialize()
 {
     transform = GetOwner()->GetTransform();
-
-    if (!m_Controller)
-        CreateCharacterCollider(m_Radius, m_Height, m_Offset);
 }
 
 void CharacterControllerComponent::OnStart()
@@ -76,10 +77,27 @@ void CharacterControllerComponent::OnStart()
 
 void CharacterControllerComponent::OnDestory()
 {
+    
+}
+
+void CharacterControllerComponent::Enable_Inner()
+{
+    if(m_firstRegister)
+    {
+        CreateCharacterCollider(m_Radius, m_Height, m_Offset);
+        CharacterControllerSystem::Instance().RegisterComponent(this, m_Controller);
+    }
+
+    OnEnable();
+}
+
+void CharacterControllerComponent::Disable_Inner()
+{
     if (m_Controller)
     {
         CharacterControllerSystem::Instance().UnRegisterComponent(this);
         m_Controller = nullptr;
+        OnDisable();
     }
 }
 
@@ -110,83 +128,149 @@ void CharacterControllerComponent::CreateCharacterCollider(float radius, float h
         10.0f   // density (사실상 무의미) density는 반드시 > 0
     );
 
-    CharacterControllerSystem::Instance().RegisterComponent(this, m_Controller);
-
     SetLayer(CollisionLayer::Default); // 초기 레이어 적용
 }
 
-void CharacterControllerComponent::MoveCharacter(const Vector3& wishDir, float fixedDt)
+//void CharacterControllerComponent::MoveCharacter(const Vector3& wishDir, float fixedDt)
+//{
+//    if (!m_Controller) // 방어코드 !! 유니티 내부도 이렇게 방어 한다고 함 
+//    {
+//        return;
+//    }
+//
+//    auto& sys = CharacterControllerSystem::Instance();
+//    sys.GetHitReport().owner = this;
+//
+//    // --------------------
+//    // 1. 수평 이동속도 (m/s) + 입력 방향 (정규화, PhysX 기준)
+//    // --------------------
+//    PxVec3 velocity(0, 0, 0);
+//    if (wishDir.LengthSquared() > 0.0f)
+//    {
+//        PxVec3 dir(wishDir.x, 0, wishDir.z);
+//        dir.normalize();
+//        velocity.x = dir.x * m_MoveSpeed;
+//        velocity.z = dir.z * m_MoveSpeed;
+//    }
+//
+//
+//    // --------------------
+//    // 2. 지면 체크 
+//    // --------------------
+//    PxControllerState state;
+//    m_Controller->getState(state);
+//    bool isGrounded = state.collisionFlags & PxControllerCollisionFlag::eCOLLISION_DOWN;
+//
+//
+//    // --------------------
+//    // 3. 점프 처리
+//    // --------------------
+//    if (isGrounded)
+//    {
+//        if (m_RequestJump)
+//        {
+//            m_VerticalVelocity = m_JumpSpeed;
+//            m_RequestJump = false;
+//        }
+//        else if (m_VerticalVelocity < 0.0f)
+//        {
+//            m_VerticalVelocity = m_MinDown;
+//        }
+//    }
+//    else
+//    {
+//        m_VerticalVelocity += -9.8f * fixedDt;
+//    }
+//
+//    velocity.y = m_VerticalVelocity;
+//
+//
+//    // --------------------
+//    // 4. 이동 거리
+//    // --------------------
+//    PxVec3 move = velocity * fixedDt;
+//
+//
+//    // --------------------
+//    // 5. 필터
+//    // --------------------
+//    CCTQueryFilter queryFilter(nullptr); // 필요 시 자신 필터 설정
+//    PxControllerFilters filters(&m_FilterData, &queryFilter, nullptr);
+//
+//
+//    // --------------------
+//    // 6. 이동
+//    // --------------------
+//    m_Controller->move(move, 0.01f, fixedDt, filters);
+//}
+
+void CharacterControllerComponent::MovePlayer(const Vector3& inputDir, float playerSpeed, float dt)
 {
-    if (!m_Controller) // 방어코드 !! 유니티 내부도 이렇게 방어 한다고 함 
-    {
-        return;
-    }
+    InternalMove(inputDir, playerSpeed, true, true, dt);
+}
+void CharacterControllerComponent::MoveAI( const Vector3& moveDir, float aiSpeed, float dt)
+{
+    InternalMove(moveDir, aiSpeed, true, false, dt);
+}
 
-    auto& sys = CharacterControllerSystem::Instance();
-    sys.GetHitReport().owner = this;
 
-    // --------------------
-    // 1. 수평 이동속도 (m/s) + 입력 방향 (정규화, PhysX 기준)
-    // --------------------
+// [ 공통 코어 움직임 ]
+void CharacterControllerComponent::InternalMove(
+    const Vector3& horizontalDir,
+    float speed,           
+    bool applyGravity,
+    bool allowJump,
+    float fixedDt)
+{
+    if (!m_Controller) return;  // 방어코드 !! 유니티 내부도 이렇게 방어 한다고 함 
+
     PxVec3 velocity(0, 0, 0);
-    if (wishDir.LengthSquared() > 0.0f)
+
+    if (horizontalDir.LengthSquared() > 0.0f)
     {
-        PxVec3 dir(wishDir.x, 0, wishDir.z);
-        dir.normalize();
-        velocity.x = dir.x * m_MoveSpeed;
-        velocity.z = dir.z * m_MoveSpeed;
+        Vector3 d = horizontalDir;
+        d.Normalize();
+        velocity.x = d.x * speed;
+        velocity.z = d.z * speed;
     }
 
-
-    // --------------------
-    // 2. 지면 체크 
-    // --------------------
     PxControllerState state;
     m_Controller->getState(state);
     bool isGrounded = state.collisionFlags & PxControllerCollisionFlag::eCOLLISION_DOWN;
 
-
-    // --------------------
-    // 3. 점프 처리
-    // --------------------
-    if (isGrounded)
+    if (applyGravity)
     {
-        if (m_RequestJump)
+        if (isGrounded)
         {
-            m_VerticalVelocity = m_JumpSpeed;
-            m_RequestJump = false;
+            if (allowJump && m_RequestJump)
+            {
+                m_VerticalVelocity = m_JumpSpeed;
+                m_RequestJump = false;
+            }
+            else if (m_VerticalVelocity < 0.0f)
+            {
+                m_VerticalVelocity = m_MinDown;
+            }
         }
-        else if (m_VerticalVelocity < 0.0f)
+        else
         {
-            m_VerticalVelocity = m_MinDown;
+            m_VerticalVelocity += -9.8f * fixedDt;
         }
+        velocity.y = m_VerticalVelocity;
     }
     else
     {
-        m_VerticalVelocity += -9.8f * fixedDt;
+        velocity.y = 0.0f;
     }
 
-    velocity.y = m_VerticalVelocity;
-
-
-    // --------------------
-    // 4. 이동 거리
-    // --------------------
     PxVec3 move = velocity * fixedDt;
 
-
-    // --------------------
-    // 5. 필터
-    // --------------------
-    CCTQueryFilter queryFilter(nullptr); // 필요 시 자신 필터 설정
+    CCTQueryFilter queryFilter(nullptr);
     PxControllerFilters filters(&m_FilterData, &queryFilter, nullptr);
 
-
-    // --------------------
-    // 6. 이동
-    // --------------------
     m_Controller->move(move, 0.01f, fixedDt, filters);
 }
+
 
 void CharacterControllerComponent::Jump()
 {

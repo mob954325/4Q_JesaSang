@@ -1,8 +1,8 @@
 #pragma once
 #include "System/Singleton.h"
-#include "../Object/Component.h"
-#include "../Components/ScriptComponent.h"
 #include <queue>
+
+class Component; // 순환 참조 방지
 
 /// <summary>
 /// 렌더링을 하지 않는 단순 컴포넌트를 상속받은 컴포넌트들을 관리합니다.
@@ -46,7 +46,6 @@ public:
     /// </summary>
     void Update(float delta);
 
-
     /// <summary>
     /// 등록된 컴포넌트 호출
     /// </summary>
@@ -56,6 +55,11 @@ public:
    /// 등록된 컴포넌트 호출
    /// </summary>
     void LateUpdate(float dt);
+
+    /// <summary>
+    /// 모든 컨테이너 비우는 함수
+    /// </summary>
+    void Clear();
 
 private:
     // === 일반 Component ===
@@ -76,7 +80,12 @@ private:
     std::vector<Component*> scriptComps{};
 
     /// <summary>
-    /// 스크립트 컴포넌트 initialize 레디 목록 
+    /// component 지연 등록을 위한 펜딩 벡터 
     /// </summary>
-    std::vector<Component*> scriptCompsInitReady{};
+    std::vector<Component*> pending_components{};
+
+    /// <summary>
+    /// script component 지연 등록을 위한 펜딩 벡터 
+    /// </summary>
+    std::vector<Component*> pending_scriptComponents{};
 };

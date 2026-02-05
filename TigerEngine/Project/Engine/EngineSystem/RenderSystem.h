@@ -1,7 +1,10 @@
 #pragma once
 #include "System/Singleton.h"
-#include "../Components/RenderComponent.h"
 #include <queue>
+
+class RenderComponent; // 순환 참조 방지
+class RenderQueue;
+class Component;
 
 /// <summary>
 /// 렌더 컴포넌트(RenderComponent)를 상속받은 컴포넌트들을 관리합니다.
@@ -31,7 +34,12 @@ public:
     /// <summary>
     /// 등록된 렌더 컴포넌트의 커맨드를 Queue에 추가한다.
     /// </summary>
-    void Render(RenderQueue& queue); 
+    void Render(RenderQueue& queue);
+
+    /// <summary>
+    /// 모든 컨테이너 함수 정리 함수
+    /// </summary>
+    void Clear();
 
 private:
     /// <summary>
@@ -43,5 +51,10 @@ private:
     /// OnStart 실행하지 않는 컴포넌트 모음
     /// </summary>
     std::queue<Component*> readyQueue{};
+
+    /// <summary>
+    /// 지연 등록을 위한 펜딩 벡터 
+    /// </summary>
+    std::vector<RenderComponent*> pending_renderComponents{};
 };
 

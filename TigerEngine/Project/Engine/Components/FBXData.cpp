@@ -23,15 +23,27 @@ void FBXData::OnInitialize()
 
     auto renderer = owner->GetComponent<FBXRenderer>();
     if(renderer != nullptr) renderer->OnInitialize();
+    // cout << "Component : OnInitialize() 1\n";
+}
+
+void FBXData::OnEnable()
+{
+    // cout << "Component : OnEnable() 2\n";
 }
 
 void FBXData::OnStart()
 {
-    cout << "Component_OnStart() : FBXDatat OnStart() check...\n"; // Component OnStart 체크
+    // cout << "Component : OnStart() 3\n";
+}
+
+void FBXData::OnDisable()
+{
+    // cout << "Component : OnDisable() 4\n";
 }
 
 void FBXData::OnDestory()
 {
+    // cout << "Component : OnDestory() 5\n";
 }
 
 std::vector<Mesh>& FBXData::GetMesh()

@@ -17,7 +17,18 @@
 #include "FSM/Player_SitWalk.h"
 #include "FSM/Player_Hide.h"
 #include "FSM/Player_Hit.h"
+#include "FSM/Player_Cook.h"
 #include "FSM/Player_Die.h"
+
+#include "../Object/SearchObject.h"
+#include "../Object/HideObject.h"
+#include "../Inventory/Inventory.h"
+#include "../Item/Item.h"
+#include "../Camera/CameraController.h"
+#include "../MiniGame/MiniGameManager.h"
+#include "../JesaSang/JesaSangManager.h"
+#include "../Altar/AltarManager.h"
+#include "PlayerItemVisualizer.h"
 
 
 REGISTER_COMPONENT(PlayerController)
@@ -30,18 +41,22 @@ RTTR_REGISTRATION
 }
 
 /*-------[ Component Process ]-------------------------------------*/
-void PlayerController::OnInitialize()
-{
-    
-}
-
 void PlayerController::OnStart()
 {
     // get components
     transform = GetOwner()->GetComponent<Transform>();
     fbxRenderer = GetOwner()->GetComponent<FBXRenderer>();
     cct = GetOwner()->GetComponent<CharacterControllerComponent>();
-    camTransform = CameraSystem::Instance().GetCurrCamera()->GetOwner()->GetTransform();
+    inventory = GetOwner()->GetComponent<Inventory>();
+    visualizer = GetOwner()->GetComponent<PlayerItemVisualizer>();
+    
+    camController = CameraSystem::Instance().GetCurrCamera()->GetOwner()->GetComponent<CameraController>();
+
+    // debug
+    if (!fbxRenderer || !cct || !inventory || !camController)
+    {
+        cout << "[Player] Missing COmponet!" << endl;
+    }
 
     // init fsm
     InitFSMStates();
@@ -63,13 +78,15 @@ void PlayerController::OnUpdate(float delta)
         curState->Update(delta);
     }
 
-    // Debug----
-    //cout << "[Player] State : " << (int)state << endl;
-    //cout << "[Player] Walk MoveDir : (" << moveDir.x << ", " << moveDir.y << ", " << moveDir.z << ")" << endl;
-    //cout << "[Player] Current Speed : " << curSpeed << endl;
+    // interaction cheak
+    InteractionCheak(delta);
 
-    //cout << "L:" << isMoveLKey << " R:" << isMoveRKey << " F:" << isMoveFKey << " B:" << isMoveBKey
-    //    << " Sit:" << isSitKey << " Run:" << isRunKey << " Interact:" << isInteractionKey << endl;
+    // ----- test --------------
+    // ai attack test
+    if (Input::GetKeyDown(Keyboard::Q))
+    {
+        TakeAttack();
+    }
 }
 
 void PlayerController::OnFixedUpdate(float delta)
@@ -90,34 +107,32 @@ void PlayerController::OnDestory()
 
 }
 
+
 /*-------[ Collision Event ]-------------------------------------*/
-void PlayerController::OnCCTTriggerEnter(CharacterControllerComponent*)
-{
-
-}
-
-void PlayerController::OnCCTTriggerStay(CharacterControllerComponent*)
-{
-
-}
-
-void PlayerController::OnCCTTriggerExit(CharacterControllerComponent*)
+void PlayerController::OnTriggerEnter(PhysicsComponent*)
 {
 }
 
-void PlayerController::OnCCTCollisionEnter(CharacterControllerComponent*)
-{
-
-}
-
-void PlayerController::OnCCTCollisionStay(CharacterControllerComponent*)
+void PlayerController::OnTriggerStay(PhysicsComponent*)
 {
 }
 
-void PlayerController::OnCCTCollisionExit(CharacterControllerComponent*)
+void PlayerController::OnTriggerExit(PhysicsComponent*)
 {
-
 }
+
+void PlayerController::OnCollisionEnter(PhysicsComponent*)
+{
+}
+
+void PlayerController::OnCollisionStay(PhysicsComponent*)
+{
+}
+
+void PlayerController::OnCollisionExit(PhysicsComponent*)
+{
+}
+
 
 /*-------[ JSON ]-------------------------------------*/
 nlohmann::json PlayerController::Serialize()
@@ -142,6 +157,7 @@ void PlayerController::InitFSMStates()
     fsmStates[(int)PlayerState::SitWalk] = new Player_SitWalk(this);
     fsmStates[(int)PlayerState::Hide] = new Player_Hide(this);
     fsmStates[(int)PlayerState::Hit] = new Player_Hit(this);
+    fsmStates[(int)PlayerState::Cook] = new Player_Cook(this);
     fsmStates[(int)PlayerState::Die] = new Player_Die(this);
 }
 
@@ -177,19 +193,6 @@ void PlayerController::InputProcess()
     isSitKey = Input::GetKey(sit_Key);
     isRunKey = Input::GetKey(run_Key);
     isInteractionKey = Input::GetKey(interaction_Key);
-
-    // move dir
-    Vector3 input(0, 0, 0);
-
-    if (isMoveLKey) input.x -= 1;
-    if (isMoveRKey) input.x += 1;
-    if (isMoveFKey) input.z += 1;
-    if (isMoveBKey) input.z -= 1;
-
-    if (input.LengthSquared() > 0)
-        input.Normalize();
-
-    this->moveDir = input;
 }
 
 /*-------[ Movement ]----------------------------------*/
@@ -197,8 +200,9 @@ void PlayerController::Move(float delta)
 {
     if (!cct) return;
 
-    cct->m_MoveSpeed = curSpeed;
-    cct->MoveCharacter(moveDir, delta);
+    // cct->m_MoveSpeed = curSpeed;
+    cct->MovePlayer(lookDir, curSpeed, delta);
+    // cct->MoveCharacter(lookDir, delta);
 }
 
 static float WrapAngleRad(float a)      // util
@@ -210,10 +214,10 @@ static float WrapAngleRad(float a)      // util
 
 void PlayerController::Rotation(float delta)
 {
-    if (moveDir.LengthSquared() <= 0.0001f)
+    if (lookDir.LengthSquared() <= 0.0001f)
         return;
 
-    Vector3 rotationDir = -moveDir;         // 너 왜 반전이닝?
+    Vector3 rotationDir = -lookDir;         // 너 왜 반전이닝?
 
     float targetYaw = atan2f(rotationDir.x, rotationDir.z);
     float currentYaw = transform->GetYaw();
@@ -223,4 +227,255 @@ void PlayerController::Rotation(float delta)
     float newYaw = currentYaw + deltaYaw * turnSpeed * delta;
 
     transform->SetEuler(Vector3(0.0f, newYaw, 0.0f));
+}
+
+/*-------[ Interaction ]----------------------------------*/
+void PlayerController::InteractionCheak(float delta)
+{
+    SerachObjectInteraction(delta);     // 수색 오브젝트 수색 Interaction
+    HideObjectInteraction(delta);       // 은신 오브젝트 은신 Interaction
+    CookingInteraction(delta);          // 조리대 미니게임 시작 Interaction
+    PutFoodJesaSangInteraction(delta);  // 제사상 음식 올리기 Interaction
+    GetItemAltarInteraction(delta);     // 제단에서 아이템 가져오기 Interaction
+}
+
+void PlayerController::SerachObjectInteraction(float dt)
+{
+    // interaction x -> reset
+    if (!isInteractionKey || !isPossibleSearch || curSerachObject == nullptr)
+    {
+        searchTimer = 0.0f;
+        return;
+    }
+
+    // inventory full
+    if (inventory->HasItem())
+    {
+        cout << "[Player] Inventory Full! Can't interaction" << endl;
+        return;
+    }
+
+    // holding
+    searchTimer += dt;
+    float progress = searchTimer / searchTime;
+    if (progress > 1.0f) progress = 1.0f;
+
+    // search object interaction
+    if (searchTimer >= searchTime)
+    {
+        // search object interaction
+        std::unique_ptr<IItem> item = curSerachObject->Interaction();
+
+        // item get or fail
+        if (item)
+        {
+            visualizer->VisualOnItem(item->itemId);
+            inventory->AddItem(std::move(item));
+        }
+        else
+            std::cout << "[Player] Fail Get Item... " << std::endl;
+
+        // clear
+        isPossibleSearch = false;
+        curSerachObject = nullptr;
+        searchTimer = 0.0f;
+    }
+}
+
+void PlayerController::HideObjectInteraction(float dt)
+{
+    // interaction x
+    if (!isPossibleHide || !curHideObject)
+        return;
+
+    // hide
+    if (Input::GetKeyDown(interaction_Key) && curHideObject->IsPossibleHide())
+    {
+        ChangeState(PlayerState::Hide);
+        curHideObject->StartHide(this);
+    }
+}
+
+void PlayerController::CookingInteraction(float dt)
+{
+    // interaction x -> reset
+    if (!isInteractionKey || !isPossibleCooking || !inventory->HasItem())
+    {
+        cookInteractionTimer = 0.0f;
+        return;
+    }
+
+    // ingredient
+    if (inventory->GetCurItemType() != ItemType::Ingredient)
+    {
+        cookInteractionTimer = 0.0f;
+        return;
+    }
+
+    // holding
+    cookInteractionTimer += dt;
+    float progress = cookInteractionTimer / cookInteractionTime;
+    if (progress > 1.0f) progress = 1.0f;
+
+    // cooking interaction
+    if (cookInteractionTimer >= cookInteractionTime)
+    {
+        // mini game start
+        visualizer->VisualOffItem();
+        MiniGameManager::Instance()->StartMiniGame(std::move(inventory->TakeCurItem()));
+        ChangeState(PlayerState::Cook);
+        cookInteractionTimer = 0.0f;
+    }
+}
+
+void PlayerController::PutFoodJesaSangInteraction(float dt)
+{
+    // interaction x -> reset
+    if (!isInteractionKey || !isPossiblePutFood ||
+        !inventory->HasItem() || inventory->GetCurItemType() != ItemType::Food)
+    {
+        putFoodTimer = 0.0f;
+        return;
+    }
+
+    // holding
+    putFoodTimer += dt;
+    float progress = putFoodTimer / putFoodTime;
+    if (progress > 1.0f) progress = 1.0f;
+
+    // 제사상에 음식 올리기 interaction
+    if (putFoodTimer >= putFoodTime)
+    {
+        std::unique_ptr<IItem> food = inventory->TakeCurItem();
+        JesaSangManager::Instance()->ReceiveFood(std::move(food));
+        visualizer->VisualOffItem();
+
+        // clear
+        putFoodTimer = 0.0f;
+    }
+}
+
+void PlayerController::GetItemAltarInteraction(float dt)
+{
+    // interaction x -> reset
+    if (!isInteractionKey || !isPossibleGetFood || !AltarManager::Instance()->HasItem())
+    {
+        getItemAltarTimer = 0.0f;
+        return;
+    }
+
+    // inventory full
+    if (inventory->HasItem())
+    {
+        cout << "[Player] Inventory Full! Can't interaction" << endl;
+        return;
+    }
+
+    // holding
+    getItemAltarTimer += dt;
+    float progress = getItemAltarTimer / getItemAltarTime;
+    if (progress > 1.0f) progress = 1.0f;
+
+    // 제단 아이엠(재료/음식) 가져오기 interaction
+    if (getItemAltarTimer >= getItemAltarTime)
+    {
+        std::unique_ptr<IItem> item = AltarManager::Instance()->GetItem();
+        visualizer->VisualOnItem(item->itemId);
+        inventory->AddItem(std::move(item));
+
+        // clear
+        getItemAltarTimer = 0.0f;
+    }
+}
+    
+
+/*----------- 외부 호출 Funcs.. -------------------------*/
+void PlayerController::SetCurSearchObject(SearchObject* object)
+{
+    // interaction zone에서 search object를 넘겨줌
+    if (object)
+    {
+        isPossibleSearch = true;
+        curSerachObject = object;
+    }
+    else
+    {
+        isPossibleSearch = false;
+        curSerachObject = nullptr;
+    }
+}
+
+void PlayerController::SetCurHideObject(HideObject* object)
+{
+    // interaction zone에서 hide object를 넘겨줌
+    if (object)
+    {
+        isPossibleHide = true;
+        curHideObject = object;
+    }
+    else
+    {
+        isPossibleHide = false;
+        curHideObject = nullptr;
+    }
+}
+
+void PlayerController::ReceiveMiniGameResult(unique_ptr<IItem> ingredient, bool isSuccess)
+{
+    if (isSuccess)
+    {
+        string ingreID = ingredient->itemId;
+
+        // 성공시 음식 생성
+        std::unique_ptr<IItem> food;
+        if (ingreID == "Ingredient_Apple") food = make_unique<Food>("Apple");
+        else if (ingreID == "Ingredient_Pear") food = make_unique<Food>("Pear");
+        else if (ingreID == "Ingredient_Batter") food = make_unique<Food>("Batter");
+        else if (ingreID == "Ingredient_Tofu") food = make_unique<Food>("Tofu");
+        else if (ingreID == "Ingredient_Sanjeok") food = make_unique<Food>("Sanjeok");
+        else if (ingreID == "Ingredient_Donggeurangttaeng") food = make_unique<Food>("Donggeurangttaeng");
+        else cout << "NO!!!!!!!!!!!!!!!! ingredent id isanham." << endl;
+
+        cout << "[Player] Cooking Success! Get Food : " << food->itemId << endl;
+
+        // 재료 사용
+        ingredient.reset();
+
+        // 인벤토리에 완성된 음식 추가
+        visualizer->VisualOnItem(food->itemId);
+        inventory->AddItem(std::move(food));
+    }
+    else
+    {
+        cout << "[Player] Cooking Fail.. Get Ingredient : " << ingredient->itemId << endl;
+
+        // 실패시 재료 다시 돌려받음
+        visualizer->VisualOnItem(ingredient->itemId);
+        inventory->AddItem(std::move(ingredient));
+
+        // TODO :: 소음, AI 트리거 발생
+    }
+}
+
+void PlayerController::ReceiveMiniGameItem(unique_ptr<IItem> ingredient)
+{
+    // ESC로 미니게임 강제종료시 재료반 다시 돌려받음
+    visualizer->VisualOnItem(ingredient->itemId);
+    inventory->AddItem(std::move(ingredient));
+}
+
+void PlayerController::TakeAttack()
+{
+    cout << "[Player] Take Damage! " << endl;
+
+    // 아이템이 있다면 제단에 올라감
+    if (inventory->HasItem())
+    {
+        std::unique_ptr<IItem> item =  inventory->TakeCurItem();
+        AltarManager::Instance()->ReceiveItem(std::move(item));
+        cout << "[Player] Drop Item... " << endl;
+    }
+
+    // Hit (패닉)
+    ChangeState(PlayerState::Hit);
 }

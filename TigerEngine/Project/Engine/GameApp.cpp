@@ -118,6 +118,8 @@ bool GameApp::Initialize(UINT Width, UINT Height)
 		return false;
 	}
 
+    ConsoleInitialize();
+
 	// 윈도우 보이기
 	ShowWindow(hwnd, SW_SHOW);
 	UpdateWindow(hwnd);
@@ -133,8 +135,6 @@ bool GameApp::Initialize(UINT Width, UINT Height)
 
 	// 타이머 초기화
 	GameTimer::Instance().Reset();
-
-    ConsoleInitialize();
 
 	return true;
 }

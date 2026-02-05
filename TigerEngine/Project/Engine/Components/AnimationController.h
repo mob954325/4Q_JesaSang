@@ -28,6 +28,8 @@ public:
     void AddState(std::unique_ptr<AnimationState> state);
     void ChangeState(const std::string& name, float blendTime = 0.2f);
     void Update(float dt);
+    void Enable_Inner() override;
+    void Disable_Inner() override;
 
     AnimationState* GetCurrentState() const { return CurrentState; }
 

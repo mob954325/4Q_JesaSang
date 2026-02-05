@@ -157,7 +157,7 @@ void CCTTest::CCTMoveExample(float dt)
     // CCT의 물리 연산을 담당 
     // 즉, 이 코드는 무슨일이 있어도 실행 되고 있어야함. 지우지 마세요 
     // ----------------------------
-    cctComp->MoveCharacter(moveDir, dt);
+    //cctComp->MoveCharacter(moveDir, dt);
 }
 
 

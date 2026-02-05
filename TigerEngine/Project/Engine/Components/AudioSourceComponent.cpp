@@ -213,3 +213,13 @@ bool AudioSourceComponent::IsPlaying() const
 {
     return m_Source.IsPlaying();
 }
+
+void AudioSourceComponent::Enable_Inner()
+{
+    OnEnable();
+}
+
+void AudioSourceComponent::Disable_Inner()
+{
+    OnDisable();
+}

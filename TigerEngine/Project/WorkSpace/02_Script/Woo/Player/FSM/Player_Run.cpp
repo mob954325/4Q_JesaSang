@@ -2,7 +2,7 @@
 
 void Player_Run::Enter()
 {
-    cout << "[Player] Enter Run State" << endl;
+    //cout << "[Player] Enter Run State" << endl;
 
     // set speed
     player->curSpeed = player->runSpeed;
@@ -38,7 +38,18 @@ void Player_Run::ChangeStateLogic()
 
 void Player_Run::Update(float deltaTime)
 {
-    
+    // look dir
+    Vector3 input(0, 0, 0);
+
+    if (player->isMoveLKey) input.x -= 1;
+    if (player->isMoveRKey) input.x += 1;
+    if (player->isMoveFKey) input.z += 1;
+    if (player->isMoveBKey) input.z -= 1;
+
+    if (input.LengthSquared() > 0)
+        input.Normalize();
+
+    player->lookDir = input;
 }
 
 void Player_Run::FixedUpdate(float deltaTime)
@@ -48,6 +59,6 @@ void Player_Run::FixedUpdate(float deltaTime)
 
 void Player_Run::Exit()
 {
-    cout << "[Player] Exit Run State" << endl;
+    //cout << "[Player] Exit Run State" << endl;
 }
 

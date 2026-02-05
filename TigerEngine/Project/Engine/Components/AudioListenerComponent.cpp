@@ -62,3 +62,13 @@ void AudioListenerComponent::Update()
     m_Listener.Set(t.position, t.velocity, t.forward, t.up);
     m_Listener.Apply(m_System->GetSystem());
 }
+
+void AudioListenerComponent::Enable_Inner()
+{
+    OnEnable();
+}
+
+void AudioListenerComponent::Disable_Inner()
+{
+    OnDisable();
+}

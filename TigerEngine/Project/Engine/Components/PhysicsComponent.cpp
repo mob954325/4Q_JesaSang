@@ -33,7 +33,7 @@ RTTR_REGISTRATION
             rttr::value("Trigger", CollisionLayer::Trigger),
             rttr::value("Projectile", CollisionLayer::Projectile),
             rttr::value("Ball", CollisionLayer::Ball),
-            rttr::value("IgnoreTest", CollisionLayer::IgnoreTest)
+            rttr::value("Ground", CollisionLayer::Ground)
             );
 
     rttr::registration::class_<PhysicsComponent>("PhysicsComponent")
@@ -61,19 +61,21 @@ void PhysicsComponent::Deserialize(nlohmann::json data)
 {
     JsonHelper::SetDataFromJson(this, data);
 
-    //// -------------------------
-    //// PhysX 재생성
-    //// -------------------------
-    //ColliderDesc d;
-    //d.halfExtents = m_HalfExtents;
-    //d.radius = m_Radius;
-    //d.height = m_Height;
-    //d.density = m_Density;
-    //d.localOffset = m_LocalOffset;
-    //d.isTrigger = m_IsTrigger;
+    // create collider : Oninit, OnEnable이 이미 끝난 뒤임.
+    ColliderDesc d;
+    d.halfExtents = m_HalfExtents;
+    d.radius = m_Radius;
+    d.height = m_Height;
+    d.density = m_Density;
+    d.localOffset = m_LocalOffset;
+    d.isTrigger = m_IsTrigger;
+    CreateCollider(m_ColliderType, m_BodyType, d);
 
-    //CreateCollider(m_ColliderType, m_BodyType, d); // Note : 반드시 PysicsSystem.Initialize()가 호출된 뒤에 호출되야함.
-    //SetLayer(m_Layer);
+    PhysicsSystem::Instance().RegisterComponent(this, m_Actor);
+
+    m_firstRegister = true;
+    // 1. 이건 load 시 등록 -> isFirstRegister가 true
+    // 2. 액티브 디엑티브 했을 때 재등록 RegisterComponent -> inner에서 isFirstRegister가 true 일 때만 호출
 }
 
 void PhysicsComponent::OnCollisionEnter(PhysicsComponent* other)
@@ -141,28 +143,45 @@ void PhysicsComponent::OnCCTCollisionExit(CharacterControllerComponent* cct)
 void PhysicsComponent::OnInitialize()
 {
     transform = GetOwner()->GetTransform();
-
-    
 }
 
 void PhysicsComponent::OnStart()
 {
-    // 우정 0128 | PhysicsComponent에서 스스로 collider Create
-    ColliderDesc d;
-    d.halfExtents = m_HalfExtents;
-    d.radius = m_Radius;
-    d.height = m_Height;
-    d.density = m_Density;
-    d.localOffset = m_LocalOffset;
-    d.isTrigger = m_IsTrigger;
-
-    CreateCollider(m_ColliderType, m_BodyType, d);
     SetLayer(m_Layer);
+}
+
+void PhysicsComponent::Enable_Inner()
+{
+    // NOTE : PVD 테스트 안함
+    if (m_firstRegister)
+    {
+        ColliderDesc d;
+        d.halfExtents = m_HalfExtents;
+        d.radius = m_Radius;
+        d.height = m_Height;
+        d.density = m_Density;
+        d.localOffset = m_LocalOffset;
+        d.isTrigger = m_IsTrigger;
+        CreateCollider(m_ColliderType, m_BodyType, d);
+
+        PhysicsSystem::Instance().RegisterComponent(this, m_Actor); 
+    }
+
+    OnEnable();
+
+    cout << owner->GetName() << " : pc enalbe_inner\n";
+}
+
+void PhysicsComponent::Disable_Inner()
+{
+    PhysicsSystem::Instance().UnregisterComponent(this);
+    OnDisable();
+    cout << owner->GetName() << " : pc Disable_Inner\n";
 }
 
 PhysicsComponent::~PhysicsComponent()
 {
-    PhysicsSystem::Instance().UnregisterComponent(this);
+    
 }
 
 
@@ -206,7 +225,6 @@ void PhysicsComponent::ApplyFilter()
         data.word0 = (uint32_t)m_Layer;
         data.word1 = PhysicsLayerMatrix::GetMask(m_Layer);
         data.word2 = 0;
-        data.word3 = 0;
 
         m_Shape->setSimulationFilterData(data);
         m_Shape->setQueryFilterData(data);
@@ -335,6 +353,7 @@ void PhysicsComponent::CreateCollider(ColliderType collider, PhysicsBodyType bod
         localPose.q = capsuleRot * localPose.q;
         break;
     }
+    m_Shape->setFlag(PxShapeFlag::eSCENE_QUERY_SHAPE, true);
     m_Shape->setLocalPose(localPose);
 
 
@@ -344,7 +363,7 @@ void PhysicsComponent::CreateCollider(ColliderType collider, PhysicsBodyType bod
     if (d.isTrigger)
     {
         // Trigger는 충돌 계산 X
-        m_Shape->setFlag(PxShapeFlag::eSIMULATION_SHAPE, false);
+        m_Shape->setFlag(PxShapeFlag::eSIMULATION_SHAPE, false); // true 
         m_Shape->setFlag(PxShapeFlag::eTRIGGER_SHAPE, true);
     }
     else
@@ -358,9 +377,15 @@ void PhysicsComponent::CreateCollider(ColliderType collider, PhysicsBodyType bod
     // ----------------------
     // Actor 생성
     // ----------------------
-    if (body == PhysicsBodyType::Static || d.isTrigger)
+    if (d.isTrigger)
     {
-        // Trigger는 무조건 Static 
+        // Trigger는 반드시 Kinematic Dynamic
+        PxRigidDynamic* dyn = px->createRigidDynamic(PxTransform(PxIdentity));
+        dyn->setRigidBodyFlag(PxRigidBodyFlag::eKINEMATIC, true);
+        m_Actor = dyn;
+    }
+    else if (body == PhysicsBodyType::Static)
+    {
         m_Actor = px->createRigidStatic(PxTransform(PxIdentity));
     }
     else
@@ -384,7 +409,7 @@ void PhysicsComponent::CreateCollider(ColliderType collider, PhysicsBodyType bod
     // ----------------------
     // 질량 계산
     // ----------------------
-    if (body == PhysicsBodyType::Dynamic)
+    if (!d.isTrigger && body == PhysicsBodyType::Dynamic)
     {
         PxRigidBodyExt::updateMassAndInertia( // 질량 계산 : Shape 부피 × density
             *static_cast<PxRigidDynamic*>(m_Actor),
@@ -393,8 +418,6 @@ void PhysicsComponent::CreateCollider(ColliderType collider, PhysicsBodyType bod
     }
     
     phys.GetScene()->addActor(*m_Actor); // 물리 씬에 추가 
-    // phys.RegisterComponent(m_Actor, this);
-    phys.RegisterComponent(this, m_Actor);
 
 
     SyncToPhysics(); // 좌표 연결 
@@ -405,53 +428,74 @@ void PhysicsComponent::CreateCollider(ColliderType collider, PhysicsBodyType bod
     ApplyFilter(); // 레이어 필터 
 }
 
-void PhysicsComponent::CheckTriggers()
+void PhysicsComponent::CheckTriggerOverlaps()
 {
-    if (!m_Actor) return; // PxActor* m_Actor; (PhysicsSystem에서 매핑됨)
+    if (!m_Actor || !m_Shape || !m_IsTrigger)
+        return;
 
     PxScene* scene = PhysicsSystem::Instance().GetScene();
+    if (!scene)
+        return;
 
-    // Actor에 연결된 모든 Shape 가져오기
-    PxU32 shapeCount = m_Actor->getNbShapes();
-    if (shapeCount == 0) return;
+    PxGeometryHolder geom = m_Shape->getGeometry();
+    PxTransform pose = m_Actor->getGlobalPose() * m_Shape->getLocalPose();
 
-    std::vector<PxShape*> shapes(shapeCount);
-    m_Actor->getShapes(shapes.data(), shapeCount);
+    PxOverlapBufferN<64> buffer; // 최대 64개까지
+    PxQueryFilterData filter;
+    filter.data = m_Shape->getQueryFilterData();
+    filter.flags = PxQueryFlag::eDYNAMIC | PxQueryFlag::eSTATIC | PxQueryFlag::ePREFILTER;
 
-    for (PxShape* shape : shapes)
+    if (scene->overlap(geom.any(), pose, buffer, filter))
     {
-        // Trigger Shape만 처리
-        if (!(shape->getFlags() & PxShapeFlag::eTRIGGER_SHAPE))
-            continue;
+        // 이번 프레임에 겹친 Trigger들
+        std::unordered_set<PhysicsComponent*> currentFrame;
 
-        PxGeometryHolder geom = shape->getGeometry();
-        PxTransform pose = m_Actor->getGlobalPose() * shape->getLocalPose();
-
-        // Overlap Query 수행
-        PxOverlapBufferN<64> hitBuffer;
-        PxFilterData shapeFilter = shape->getQueryFilterData();
-        PxQueryFilterData filterData;
-        filterData.data = shapeFilter; 
-
-        if (scene->overlap(geom.any(), pose, hitBuffer, filterData))
+        for (PxU32 i = 0; i < buffer.getNbAnyHits(); ++i)
         {
-            for (PxU32 i = 0; i < hitBuffer.getNbAnyHits(); ++i)
-            {
-                PxRigidActor* otherActor = hitBuffer.getAnyHit(i).actor;
-                if (!otherActor) continue;
+            PxRigidActor* otherActor = buffer.getAnyHit(i).actor;
+            if (!otherActor || otherActor == m_Actor)
+                continue;
 
-                PhysicsComponent* other = PhysicsSystem::Instance().GetComponent(otherActor);
-                if (other && other != this)
-                {
-                    m_PendingTriggers.insert(other);
-                }
+            PhysicsComponent* other = PhysicsSystem::Instance().GetComponent(otherActor);
+            if (!other || !other->m_IsTrigger)
+                continue;
+
+            currentFrame.insert(other);
+
+            // 새로 들어온 Trigger
+            if (m_ActiveTriggers.find(other) == m_ActiveTriggers.end())
+                OnTriggerEnter(other);
+
+            // 이미 겹쳐있던 Trigger
+            else
+                OnTriggerStay(other);
+        }
+
+        // 이전 프레임에 있었지만 현재 안 겹친 Trigger
+        for (auto it = m_ActiveTriggers.begin(); it != m_ActiveTriggers.end();)
+        {
+            if (currentFrame.find(*it) == currentFrame.end())
+            {
+                OnTriggerExit(*it);
+                it = m_ActiveTriggers.erase(it);
+            }
+            else
+            {
+                ++it;
             }
         }
+
+        // 업데이트
+        m_ActiveTriggers = std::move(currentFrame);
+    }
+    else
+    {
+        // 아무것도 안 겹치면 모든 Trigger 종료
+        for (PhysicsComponent* t : m_ActiveTriggers)
+            OnTriggerExit(t);
+        m_ActiveTriggers.clear();
     }
 }
-
-
-
 
 DirectX::XMVECTOR GetActorDebugColor(PxRigidActor* actor)
 {
@@ -468,6 +512,7 @@ DirectX::XMVECTOR GetActorDebugColor(PxRigidActor* actor)
 
     return DirectX::Colors::White;
 }
+
 
 void PhysicsComponent::DrawPhysXActors()
 {
@@ -512,6 +557,7 @@ void PhysicsComponent::DrawPhysXActors()
     // Character Controller는 별도로 그려야 함 
     DrawCharacterControllers();
 }
+
 
 void PhysicsComponent::DrawPhysXShape(PxShape* shape, const PxTransform& actorPose, FXMVECTOR color)
 {
@@ -585,6 +631,7 @@ void PhysicsComponent::DrawPhysXShape(PxShape* shape, const PxTransform& actorPo
         break;
     }
 }
+
 
 void PhysicsComponent::DrawCharacterControllers()
 {

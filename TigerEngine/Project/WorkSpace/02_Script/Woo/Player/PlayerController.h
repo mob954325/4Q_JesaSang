@@ -6,11 +6,21 @@
 #include <directxtk/Keyboard.h>
 
 class IPlayerState;
+class InteractionZone;
+class InteractionSensor;
+class SearchObject;
+class HideObject;
+class Inventory;
+class CameraController;
+class MiniGameManager;
+class JesaSangManager;
+class PlayerItemVisualizer;
+class IItem;
 
 // Player State Enum
 enum class PlayerState
 {
-    Idle, Walk, Run, Sit, SitWalk, Hide, Hit, Die, None
+    Idle, Walk, Run, Sit, SitWalk, Hide, Hit, Cook, Die, None
 };
 
 /*
@@ -19,7 +29,8 @@ enum class PlayerState
      1) FSM
      2) Input
      3) Movement
-     4) TODO :: Interaction...
+     4) Interaction
+     5) TODO..
 */
 class PlayerController : public ScriptComponent
 {
@@ -30,24 +41,56 @@ private:
     Transform* transform = nullptr;
     FBXRenderer* fbxRenderer = nullptr;
     CharacterControllerComponent* cct = nullptr;
+    Inventory* inventory = nullptr;
+    PlayerItemVisualizer* visualizer = nullptr;
 
-    Transform* camTransform = nullptr;
+    CameraController* camController = nullptr;
 
     // --- [ State ] ---------------------------
     PlayerState state = PlayerState::None;
     IPlayerState* curState;
-    IPlayerState* fsmStates[8];
+    IPlayerState* fsmStates[9];
 
     // --- [ Stat ] --------------------------------
-    // values (inspector)
-    float walkSpeed = 2.5f;
-    float runSpeed = 4.0f;
-    float sitSpeed = 1.0f;
-        
+    // data
+    float walkSpeed = 2.5f; 
+    float runSpeed  = 4.0f; 
+    float sitSpeed = 1.0f;  
+    float hitSpeedUpRate = 2.0f;        // walkSpeed * 2.0f
+
 
     // --- [ Controll ] ----------------------------
+    // cur stat
     float curSpeed = 0.0f;
-    Vector3 moveDir = Vector3::Zero;
+    Vector3 lookDir = Vector3::Zero;
+
+    // hit (패닉)
+    float hitDuration = 5.0f;
+
+    // search object interaction
+    bool  isPossibleSearch = false;            // 기획자분이 한번에 하나만 가능한 사이즈라고 하심. 중첩된다면 추가 처리필요.
+    SearchObject* curSerachObject = nullptr;   // 현재 search 가능한 오브젝트
+    float searchTime  = 2.0f;
+    float searchTimer = 0.0f;
+
+    // hide object interaction
+    bool  isPossibleHide = false;
+    HideObject* curHideObject = nullptr;      // 현재 은신 가능한 오브젝트
+
+    // jesasang interaction
+    bool isPossiblePutFood;
+    float putFoodTime = 2.0f;
+    float putFoodTimer = 0.0f;
+
+    // altar interaction
+    bool isPossibleGetFood;
+    float getItemAltarTime = 2.0f;
+    float getItemAltarTimer = 0.0f;
+
+    // cooking mini game
+    bool isPossibleCooking = false;      // 조리대 zone 안에 있는지 flag
+    float cookInteractionTime = 2.0f;
+    float cookInteractionTimer = 0.0f;
 
 
     // --- [ Key ] ---------------------------------
@@ -73,20 +116,19 @@ private:
 
 public:
     // Component process
-    void OnInitialize() override;
     void OnStart() override;
     void OnUpdate(float delta) override;
     void OnFixedUpdate(float delta) override;
     void OnDestory() override;
 
     // Collsion event
-    void OnCCTTriggerEnter(CharacterControllerComponent*) override;
-    void OnCCTTriggerStay(CharacterControllerComponent*) override;
-    void OnCCTTriggerExit(CharacterControllerComponent*) override;
+    void OnTriggerEnter(PhysicsComponent*) override;
+    void OnTriggerStay(PhysicsComponent*) override;
+    void OnTriggerExit(PhysicsComponent*) override;
 
-    void OnCCTCollisionEnter(CharacterControllerComponent*) override;
-    void OnCCTCollisionStay(CharacterControllerComponent*) override;
-    void OnCCTCollisionExit(CharacterControllerComponent*) override;
+    void OnCollisionEnter(PhysicsComponent*) override;
+    void OnCollisionStay(PhysicsComponent*) override;
+    void OnCollisionExit(PhysicsComponent*) override;
 
     // Json
     nlohmann::json Serialize();
@@ -107,12 +149,28 @@ private:
     void Move(float delta);
     void Rotation(float delta);
 
+    // Interaction
+    void InteractionCheak(float delta);
+    void SerachObjectInteraction(float dt);
+    void HideObjectInteraction(float dt);
+    void CookingInteraction(float dt);
+    void PutFoodJesaSangInteraction(float dt);
+    void GetItemAltarInteraction(float dt);
+
+
 public:
-    // 외부 Funcs.. TODO
+    // 외부 call Funcs..
+    void SetCurSearchObject(SearchObject* object);
+    void SetCurHideObject(HideObject* object);
 
 
+    // MiniGame Return Login
+    void ReceiveMiniGameResult(std::unique_ptr<IItem> ingredient, bool isSuccess);
+    void ReceiveMiniGameItem(std::unique_ptr<IItem> ingredient);
 
 
+    // AI
+    void TakeAttack();      // AI에게 공격 당했을 때
 
 
 
@@ -126,6 +184,11 @@ public:
     friend class Player_SitWalk;
     friend class Player_Hide;
     friend class Player_Hit;
+    friend class Player_Cook;
     friend class Player_Die;
+    friend class InteractionZone;
+    friend class InteractionSensor;
+    friend class MiniGameManager;
+    friend class HideObject;
 };
 

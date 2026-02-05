@@ -1,6 +1,7 @@
 #pragma once
 #include "pch.h"
 #include "System/ObjectSystem.h"
+#include "../EngineSystem/ScriptSystem.h"
 #include "Enableable.h"
 
 class GameObject; // forward declear
@@ -14,7 +15,6 @@ protected:
 
     bool isStart = false;   // OnStart를 호출 했는가?
 
-
 public:
 	Component() = default;
 	virtual ~Component() = default;
@@ -23,6 +23,16 @@ public:
 	/// Component가 처음 실행될 때 실행됩니다.
 	/// </summary>
 	virtual void OnInitialize() {};
+
+    /// <summary>
+    /// 컴포넌트가 사용할 활성화 함수
+    /// </summary>
+    virtual void OnEnable() {};
+
+    /// <summary>
+    /// 컴포넌트가 사용할 비활성화 함수
+    /// </summary>
+    virtual void OnDisable() {};
 
 	/// <summary>
 	/// OnUpdate()를 실행하기 전 ***한 번*** 실행됩니다.
@@ -35,7 +45,7 @@ public:
 	virtual void OnUpdate(float delta) {};
 
     /// <summary>
-    /// 
+    /// 매 물리 프레임마다 업데이트합니다.
     /// </summary>
     virtual void OnFixedUpdate(float delta) {};
 
@@ -73,4 +83,20 @@ public:
 
     bool IsStart() { return isStart; }
     void SetStartTrue() { isStart = true; }
+
+    // Transform, FBXData, FreeCamera
+    void Enable_Inner() override 
+    { 
+        auto ptr = ObjectSystem::Instance().Get<Component>(handle);
+        ScriptSystem::Instance().Register(ptr);
+        OnEnable();
+    }
+
+    // Transform, FBXData, FreeCamera
+    void Disable_Inner() override 
+    {
+        auto ptr = ObjectSystem::Instance().Get<Component>(handle);
+        ScriptSystem::Instance().UnRegister(ptr);
+        OnDisable();
+    }
 };

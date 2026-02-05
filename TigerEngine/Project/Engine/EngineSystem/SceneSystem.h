@@ -25,3 +25,8 @@ private:
 	std::shared_ptr<Scene> currentScene{};
 };
 
+namespace SceneUtil
+{
+    inline GameObject* GetObjectByName(std::string name) { return SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName(name); }
+    inline GameObject* CreateGameObject(std::string name = "nonamed") { return SceneSystem::Instance().GetCurrentScene()->AddGameObjectByName(name); }
+}

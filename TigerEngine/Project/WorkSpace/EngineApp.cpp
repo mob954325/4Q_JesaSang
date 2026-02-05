@@ -8,6 +8,8 @@
 #include "Manager/AudioManager.h"
 #include "Manager/ShaderManager.h"
 #include "Manager/WorldManager.h"
+#include "Manager/UIManager.h"
+#include "Manager/TextureResourceManager.h"
 
 #include "Entity/Object.h"
 #include "Object/GameObject.h"
@@ -19,8 +21,9 @@
 #include "EngineSystem/PhysicsSystem.h"
 #include "EngineSystem/AnimationSystem.h"
 #include "EngineSystem/DecalSystem.h"
+#include "EngineSystem/GridSystem.h"
+#include "EngineSystem/AgentSystem.h"
 
-#include "Components/FreeCamera.h"
 #include "Components/FBXData.h"
 
 namespace fs = std::filesystem;
@@ -44,14 +47,14 @@ bool EngineApp::OnInitialize()
 	dxRenderer = std::static_pointer_cast<DirectX11Renderer>(renderer); 
 	imguiRenderer = std::make_unique<ImguiRenderer>();
 	imguiRenderer->Initialize(hwnd, dxRenderer->GetDevice(), dxRenderer->GetDeviceContext());
-
 	// == init system ==
 	FBXResourceManager::Instance().GetDevice(dxRenderer->GetDevice(), dxRenderer->GetDeviceContext());
     ShaderManager::Instance().Init(dxRenderer->GetDevice(), dxRenderer->GetDeviceContext(), clientWidth, clientHeight);
     AudioManager::Instance().Initialize();
     // AudioManager::Instance().GetSystem().Set3DSettings(1.0f, 0.01f, 1.0f);// 기본 3D 설정 도플러 스케일, 거리 , 감쇠 효과
-    AudioManager::Instance().GetSystem().Set3DSettings(1.0f, 0.01f, 1.0f);
+    AudioManager::Instance().GetSystem().Set3DSettings(0.0f, 0.01f, 1.0f);
     if (!PhysicsSystem::Instance().Initialize()) { return false; }
+    // GridSystem::Instance().Initialize();
 
     auto& sm = ShaderManager::Instance();
     sm.viewport_screen = dxRenderer->GetRenderViewPort();
@@ -62,6 +65,8 @@ bool EngineApp::OnInitialize()
     sm.device = dxRenderer->GetDevice();
     sm.deviceContext = dxRenderer->GetDeviceContext();
 
+    UIManager::Instance().SetSize(clientWidth, clientHeight);
+    TextureResourceManager::Instance().Init(dxRenderer->GetDevice(), dxRenderer->GetDeviceContext());
 
     renderQueue = std::make_unique<RenderQueue>();
 
@@ -78,12 +83,12 @@ bool EngineApp::OnInitialize()
 	// create free camera
 	CameraSystem::Instance().SetScreenSize(clientWidth, clientHeight);
 
-	auto freeCamHandle = CameraSystem::Instance().CreateFreeCamera(clientWidth, clientHeight, SceneSystem::Instance().GetCurrentScene().get());
-    auto freeCamObjPtr = ObjectSystem::Instance().Get<GameObject>(freeCamHandle);
-    freeCamObjPtr->AddComponent<FreeCamera>();
-
     // == find scene ==
-    LoadSavedFirstScene();
+    LoadSavedFirstScene(); // SceneClear 호출해서 객채 생성은 이 코드 이후에 해야함 
+
+#if _DEBUG
+    auto freeCamHandle = CameraSystem::Instance().CreateFreeCamera(clientWidth, clientHeight, SceneSystem::Instance().GetCurrentScene().get());
+#endif
 
 
 	// == init renderpass ==
@@ -97,6 +102,7 @@ bool EngineApp::OnInitialize()
     bloomPass = std::make_unique<BloomPass>();
     postProcessPass = std::make_unique<PostProcessPass>();
     frustumPass = std::make_unique<FrustumPass>();
+    uiPass = std::make_unique<UIRenderPass>();
 
     shadowPass->Init();
     geometryPass->Init();
@@ -107,7 +113,7 @@ bool EngineApp::OnInitialize()
     bloomPass->Init();
     postProcessPass->Init();
     frustumPass->Init(dxRenderer->GetDevice(), dxRenderer->GetDeviceContext());
-
+    uiPass->Init(dxRenderer->GetDevice());
 
     // == init world data ==
 	//WorldManager::Instance().shaderResourceView = shadowPass->GetShadowSRV();
@@ -195,6 +201,7 @@ void EngineApp::OnRender()
     dxRenderer->ProcessScene(*renderQueue, *forwardTransparentPass, curCam);
     dxRenderer->ProcessScene(*renderQueue, *bloomPass, curCam);
     dxRenderer->ProcessScene(*renderQueue, *postProcessPass, curCam);
+    dxRenderer->ProcessScene(*renderQueue, *uiPass, curCam);
 
 
 	editor->Render(hwnd); 	// 엔진 오버레이 렌더링
@@ -216,7 +223,12 @@ void EngineApp::OnFixedUpdate()
     while (m_PhysicsAccumulator >= fixedDt)
     {
         SceneSystem::Instance().FixedUpdateScene(fixedDt);
-        PhysicsSystem::Instance().Simulate(fixedDt);
+
+        if (PlayModeSystem::Instance().IsPlaying())
+        {
+            PhysicsSystem::Instance().Simulate(fixedDt);
+            AgentSystem::Instance().FixedUpdate(fixedDt);
+        }
 
         m_PhysicsAccumulator -= fixedDt;
     }
@@ -379,6 +391,8 @@ void EngineApp::OnInputProcess(const Keyboard::State &KeyState, const Keyboard::
 #include "Components/PhysicsComponent.h"
 #include "Components/CharacterControllerComponent.h"
 #include "Components/AnimationController.h"
+#include "Components/GridComponent.h"
+#include "Components/AgentComponent.h"
 #include "Manager/ComponentFactory.h"
 
 #include "99_Test/Player/Player1.h"
@@ -388,11 +402,13 @@ void EngineApp::OnInputProcess(const Keyboard::State &KeyState, const Keyboard::
 #include "99_Test/PhysicsTest/PhysicsTestScript.h"
 #include "99_Test/PhysicsTest/GroundTestScript.h"
 #include "99_Test/PhysicsTest/CCTTest.h"
-#include "99_Test/AudioTest/AudioPlayModeScript.h"
-#include "99_Test/AudioTest/AudioListenerSyncScript.h"
-#include "99_Test/AudioTest/AudioOrbitScript.h"
-#include "99_Test/AudioTest/AudioKeyTriggerScript.h"
+#include "99_Test/AudioTest/AudioTestController.h"
+#include "99_Test/AudioTest/AudioManagerComponent.h"
+#include "99_Test/MiniMapTest/MiniMapTestScript.h"
 
+
+#include "Components/UI/Image.h"
+#include "Components/RectTransform.h"
 
 void EngineApp::RegisterAllComponents()
 {
@@ -408,16 +424,23 @@ void EngineApp::RegisterAllComponents()
 
     cf.Register<AudioListenerComponent>("AudioListenerComponent", ComponentCategory::Audio);
     cf.Register<AudioSourceComponent>("AudioSourceComponent", ComponentCategory::Audio);
-    cf.Register<AudioPlayModeScript>("AudioPlayModeScript", ComponentCategory::Script);
+    cf.Register<AudioTestController>("AudioTestController", ComponentCategory::Script);
+    cf.Register<AudioManagerComponent>("AudioManagerComponent", ComponentCategory::Script);
+    cf.Register<MiniMapTestScript>("MiniMapTestScript", ComponentCategory::Script);
 
     cf.Register<PhysicsComponent>("PhysicsComponent", ComponentCategory::Physics);
     cf.Register<CharacterControllerComponent>("CharacterControllerComponent", ComponentCategory::Physics);
+    cf.Register<GridComponent>("GridComponent", ComponentCategory::Physics);
+    cf.Register<AgentComponent>("AgentComponent", ComponentCategory::Physics);
 
     cf.Register<AnimationController>("AnimationController", ComponentCategory::Animation);
 
     cf.Register<PhysicsTestScript>("PhysicsTestScript", ComponentCategory::Script);
     cf.Register<GroundTestScript>("GroundTestScript", ComponentCategory::Script);
     cf.Register<CCTTest>("CCTTestScript", ComponentCategory::Script);
+
+    cf.Register<RectTransform>("RectTransform", ComponentCategory::Other);
+    cf.Register<Image>("Image", ComponentCategory::UI);
 
     Woo_Registeration();
     Moon_Registeration();
@@ -427,7 +450,6 @@ void EngineApp::RegisterAllComponents()
 
 void EngineApp::Woo_Registeration()
 {    
-    
 }
 
 void EngineApp::Moon_Registeration()

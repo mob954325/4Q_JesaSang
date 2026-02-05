@@ -54,15 +54,20 @@ nlohmann::json JsonHelper::MakeSaveData(const T* typePtr)
             auto v = value.get_value<std::string>();
             datas["properties"][propName] = v;
         }
-        else if (value.is_type<Vector2>())
+        else if (value.is_type<SimpleMath::Vector2>())
         {
             Vector2 v = value.get_value<SimpleMath::Vector2>();
             datas["properties"][propName] = { v.x, v.y };
         }
-        else if (value.is_type<Vector3>())
+        else if (value.is_type<SimpleMath::Vector3>())
         {
             Vector3 v = value.get_value<SimpleMath::Vector3>();
             datas["properties"][propName] = { v.x, v.y, v.z };
+        }
+        else if (value.is_type<SimpleMath::Vector4>())
+        {
+            Vector4 v = value.get_value<SimpleMath::Vector4>();
+            datas["properties"][propName] = { v.x, v.y, v.z, v.w };
         }
         else if (value.is_type<DirectX::SimpleMath::Quaternion>())
         {
@@ -102,6 +107,14 @@ inline void JsonHelper::SetDataFromJson(T* typePtr, nlohmann::json data)
     {
         std::string propName = prop.get_name().to_string();
         rttr::variant value = prop.get_value(*typePtr);
+
+        if (propName == "Active" && !propData.contains(propName))
+        {
+            // NOTE : 예외 처리 active 플래그가 없으면 한 번 등록 , 
+            // 중간에 Json 내용이 계속 변경되어서 씬 로드시 중요한 플래그 함수는 해당 분기와 같이 처리한다.
+            typePtr->SetActive(true);
+        }
+
         if (!propData.contains(propName)) continue;
 
         if (value.is_type<float>())
@@ -117,7 +130,18 @@ inline void JsonHelper::SetDataFromJson(T* typePtr, nlohmann::json data)
         else if (value.is_type<bool>())
         {
             bool data = propData[propName];
-            prop.set_value(*typePtr, data);
+            if (propName == "Active")
+            {
+                // NOTE : 초기값은 false이므로 Disable_Inner 호출
+                if (!data)
+                {
+                    typePtr->SetActive(false); 
+                }
+            }
+            else
+            {
+                prop.set_value(typePtr, data);
+            }
         }
         else if (value.is_type<Color>())
         {
@@ -137,6 +161,11 @@ inline void JsonHelper::SetDataFromJson(T* typePtr, nlohmann::json data)
         else if (value.is_type<SimpleMath::Vector3>())
         {
             Vector3 value = { propData[propName][0], propData[propName][1], propData[propName][2] };
+            prop.set_value(*typePtr, value);
+        }
+        else if (value.is_type<SimpleMath::Vector4>())
+        {
+            Vector4 value = { propData[propName][0], propData[propName][1], propData[propName][2], propData[propName][3] };
             prop.set_value(*typePtr, value);
         }
         else if (value.is_type<DirectX::SimpleMath::Quaternion>())

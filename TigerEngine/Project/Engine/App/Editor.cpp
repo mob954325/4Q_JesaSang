@@ -10,16 +10,21 @@
 #include "../Object/GameObject.h"
 #include "../Util/DebugDraw.h"
 #include "../Manager/WorldManager.h"
+#include "../Manager/AudioManager.h"
 #include "../Manager/Shadermanager.h"
 #include "../EngineSystem/PlayModeSystem.h"
 #include "../Components/Camera.h"
 #include "../EngineSystem/PhysicsSystem.h"
+#include "../EngineSystem/GridSystem.h"
 #include "../Components/CharacterControllerComponent.h"
+#include "../Components/GridComponent.h"
 
 #include "Datas/ReflectionMedtaDatas.hpp"
 
 #include "../Components/FBXRenderer.h"
 #include "../Util/PathHelper.h"
+#include "../Components/UI/Image.h"
+
 
 // Payload
 // Prefab payload
@@ -112,6 +117,8 @@ void Editor::Update()
 
 void Editor::Render(HWND &hwnd)
 {
+    ImGuizmo::BeginFrame();
+
     RenderMenuBar(hwnd);
     RenderHierarchy();
     RenderInspector();
@@ -120,6 +127,10 @@ void Editor::Render(HWND &hwnd)
     RenderWorldSettings();
     RenderShadowMap();
     RenderPrefabWindow(hwnd);
+    RenderCameraPanel();
+    RenderGizmoSettings();
+    // RenderWorldGrid();
+    RenderGizmo();
 
     ImGui::Begin("DebugPickItem");
     {
@@ -180,6 +191,14 @@ void Editor::RenderMenuBar(HWND& hwnd)
             if (ImGui::MenuItem("World Setting"))
             {
                 isWorldSettingOpen = !isWorldSettingOpen;
+            }
+            ImGui::EndMenu();
+        }
+        if (ImGui::BeginMenu("Camera"))
+        {
+            if (ImGui::MenuItem("Camera Setting"))
+            {
+                isCameraPanelOepn = !isCameraPanelOepn;
             }
             ImGui::EndMenu();
         }
@@ -789,7 +808,7 @@ void Editor::RenderInspector()
                     ImGui::OpenPopup("ComponentMenu"); // 1. popup 열라고 명령 
                     // open component menu
                     // - select component -> ???
-                    // - call obj->AddComponent<T>()  
+                    // - call obj->AddComponent<T>()
                 }
 
                 // 2. 해당 ID를 가진 팝업이 열려있는지 확인하고 그림
@@ -800,13 +819,11 @@ void Editor::RenderInspector()
                 }
 
                 /* ------------------------------- 컴포넌트 내용 출력 ------------------------------- */
-
                 for (auto& comp : obj->GetComponents())
                 {
                     auto& registered = ComponentFactory::Instance().GetRegisteredComponents();
                     auto name = comp->GetName();
 
-                    // 등록된 컴포넌트만 UI 렌더
                     if (auto it = registered.find(name); it != registered.end())
                     {
                         RenderComponentInfo(name, comp);
@@ -830,6 +847,7 @@ static const char* CatName(ComponentCategory c)
     case ComponentCategory::Physics:   return "Physics";
     case ComponentCategory::Animation: return "Animation";
     case ComponentCategory::Script:    return "Scripts";
+    case ComponentCategory::UI:        return "UI";
     default:                           return "Others";
     }
 }
@@ -860,6 +878,7 @@ void Editor::DrawAddComponentPopup(GameObject* obj)
                 if (ImGui::MenuItem(e->name.c_str()))
                 {
                     e->creator(obj);
+                    
                     ImGui::CloseCurrentPopup();
                 }
             }
@@ -886,6 +905,7 @@ void Editor::RenderPlayModeControls()
     if (ImGui::Button("Play"))
     {
         playMode.SetPlayMode(PlayModeState::Playing);
+        CameraSystem::Instance().NextCamera();
     }
     ImGui::PopStyleColor(3);
 
@@ -901,6 +921,7 @@ void Editor::RenderPlayModeControls()
         if (currentState == PlayModeState::Playing)
         {
             playMode.SetPlayMode(PlayModeState::Paused);
+            CameraSystem::Instance().SetCurrCameraToFreeCamera();
         }
         else if (currentState == PlayModeState::Paused)
         {
@@ -920,6 +941,7 @@ void Editor::RenderPlayModeControls()
     {
         playMode.SetPlayMode(PlayModeState::Stopped);
         SceneSystem::Instance().GetCurrentScene()->ReloadScene();
+        CameraSystem::Instance().SetCurrCameraToFreeCamera();
     }
     ImGui::PopStyleColor(3);
 
@@ -1003,6 +1025,196 @@ void Editor::RenderShadowMap()
     }
 }
 
+void Editor::RenderGizmoSettings()
+{
+    if (!ImGui::Begin("Gizmo"))
+    {
+        ImGui::End();
+        return;
+    }
+
+    ImGui::Checkbox("Enable Gizmo", &isGizmoEnabled);
+    ImGui::Checkbox("World Grid", &isWorldGridEnabled);
+    ImGui::DragFloat("Grid Size", &worldGridSize, 0.1f, 0.1f, 1000.0f);
+
+    ImGui::Separator();
+
+    if (ImGui::RadioButton("Translate (W)", gizmoOperation == ImGuizmo::TRANSLATE))
+        gizmoOperation = ImGuizmo::TRANSLATE;
+    ImGui::SameLine();
+    if (ImGui::RadioButton("Rotate (E)", gizmoOperation == ImGuizmo::ROTATE))
+        gizmoOperation = ImGuizmo::ROTATE;
+    ImGui::SameLine();
+    if (ImGui::RadioButton("Scale (R)", gizmoOperation == ImGuizmo::SCALE))
+        gizmoOperation = ImGuizmo::SCALE;
+
+    if (gizmoOperation != ImGuizmo::SCALE)
+    {
+        if (ImGui::RadioButton("Local", gizmoMode == ImGuizmo::LOCAL))
+            gizmoMode = ImGuizmo::LOCAL;
+        ImGui::SameLine();
+        if (ImGui::RadioButton("World", gizmoMode == ImGuizmo::WORLD))
+            gizmoMode = ImGuizmo::WORLD;
+    }
+
+    ImGui::Checkbox("Snap", &useGizmoSnap);
+    if (useGizmoSnap)
+    {
+        if (gizmoOperation == ImGuizmo::TRANSLATE)
+        {
+            ImGui::DragFloat3("Snap (Move)", &snapTranslation.x, 0.1f, 0.0f, 1000.0f);
+        }
+        else if (gizmoOperation == ImGuizmo::ROTATE)
+        {
+            ImGui::DragFloat("Snap (Rotate)", &snapRotation, 0.1f, 0.0f, 360.0f);
+        }
+        else if (gizmoOperation == ImGuizmo::SCALE)
+        {
+            ImGui::DragFloat("Snap (Scale)", &snapScale, 0.01f, 0.0f, 100.0f);
+        }
+    }
+
+    ImGuiIO& io = ImGui::GetIO();
+    if (!io.WantCaptureKeyboard && !io.WantTextInput)
+    {
+        if (ImGui::IsKeyPressed(ImGuiKey_W))
+            gizmoOperation = ImGuizmo::TRANSLATE;
+        if (ImGui::IsKeyPressed(ImGuiKey_E))
+            gizmoOperation = ImGuizmo::ROTATE;
+        if (ImGui::IsKeyPressed(ImGuiKey_R))
+            gizmoOperation = ImGuizmo::SCALE;
+        if (ImGui::IsKeyPressed(ImGuiKey_Q))
+            gizmoMode = (gizmoMode == ImGuizmo::LOCAL) ? ImGuizmo::WORLD : ImGuizmo::LOCAL;
+    }
+
+    ImGui::End();
+}
+
+void Editor::RenderWorldGrid()
+{
+    if (!isWorldGridEnabled)
+        return;
+
+    Camera* cam = CameraSystem::Instance().GetFreeCamera();
+    if (!cam)
+        return;
+
+    ImGuiViewport* viewport = ImGui::GetMainViewport();
+    ImGuizmo::SetDrawlist(ImGui::GetForegroundDrawList());
+    ImGuizmo::SetRect(viewport->Pos.x, viewport->Pos.y, viewport->Size.x, viewport->Size.y);
+
+    Matrix view = cam->GetView();
+    Matrix projection = cam->GetProjection();
+    Matrix identity = Matrix::Identity;
+
+    ImGuizmo::DrawGrid(reinterpret_cast<const float*>(&view), reinterpret_cast<const float*>(&projection),
+        reinterpret_cast<const float*>(&identity), worldGridSize);
+}
+
+void Editor::RenderGizmo()
+{
+    if (!isGizmoEnabled)
+        return;
+    if (!selectedObject || selectedObject->IsDestory())
+        return;
+    if (PlayModeSystem::Instance().IsPlaying())
+        return;
+
+    Transform* transform = selectedObject->GetTransform();
+    if (!transform)
+        return;
+
+    Camera* cam = CameraSystem::Instance().GetFreeCamera();
+    if (!cam)
+        return;
+
+    Matrix view = cam->GetView();
+    Matrix projection = cam->GetProjection();
+    Matrix world = transform->GetWorldMatrix();
+
+    float matrix[16];
+    memcpy(matrix, &world, sizeof(matrix));
+
+    ImGuiViewport* viewport = ImGui::GetMainViewport();
+    ImGuizmo::SetDrawlist(ImGui::GetForegroundDrawList());
+    ImGuizmo::SetRect(viewport->Pos.x, viewport->Pos.y, viewport->Size.x, viewport->Size.y);
+    ImGuizmo::SetOrthographic(false);
+
+    float snapValues[3] = {};
+    const float* snapPtr = nullptr;
+    if (useGizmoSnap)
+    {
+        if (gizmoOperation == ImGuizmo::TRANSLATE)
+        {
+            snapValues[0] = snapTranslation.x;
+            snapValues[1] = snapTranslation.y;
+            snapValues[2] = snapTranslation.z;
+            snapPtr = snapValues;
+        }
+        else if (gizmoOperation == ImGuizmo::ROTATE)
+        {
+            snapValues[0] = snapRotation;
+            snapValues[1] = snapRotation;
+            snapValues[2] = snapRotation;
+            snapPtr = snapValues;
+        }
+        else if (gizmoOperation == ImGuizmo::SCALE)
+        {
+            snapValues[0] = snapScale;
+            snapValues[1] = snapScale;
+            snapValues[2] = snapScale;
+            snapPtr = snapValues;
+        }
+    }
+
+    bool manipulated = ImGuizmo::Manipulate(
+        reinterpret_cast<const float*>(&view),
+        reinterpret_cast<const float*>(&projection),
+        gizmoOperation,
+        gizmoMode,
+        matrix,
+        nullptr,
+        snapPtr
+    );
+
+    if (manipulated && ImGuizmo::IsUsing())
+    {
+        Matrix newWorld;
+        memcpy(&newWorld, matrix, sizeof(matrix));
+        ApplyGizmoToTransform(transform, newWorld);
+    }
+}
+
+void Editor::ApplyGizmoToTransform(Transform* transform, const Matrix& worldMatrix)
+{
+    if (!transform)
+        return;
+
+    Matrix localMatrix = worldMatrix;
+    if (Transform* parent = transform->GetParent())
+    {
+        Matrix parentWorld = parent->GetWorldMatrix();
+        Matrix invParent = parentWorld.Invert();
+        localMatrix = worldMatrix * invParent;
+    }
+
+    DirectX::XMVECTOR scale;
+    DirectX::XMVECTOR rot;
+    DirectX::XMVECTOR pos;
+    if (DirectX::XMMatrixDecompose(&scale, &rot, &pos, localMatrix))
+    {
+        transform->SetScale(Vector3(scale));
+        transform->SetQuaternion(Quaternion(rot));
+        transform->SetPosition(Vector3(pos));
+
+        GameObject* owner = transform->GetOwner();
+        if (auto phys = owner->GetComponent<PhysicsComponent>())
+            phys->SyncToPhysics();
+        if (auto cct = owner->GetComponent<CharacterControllerComponent>())
+            cct->Teleport(Vector3(pos));
+    }
+}
+
 void Editor::RenderWorldManager()
 {
     // Read
@@ -1046,8 +1258,8 @@ void Editor::RenderComponentInfo(std::string compName, T* comp)
     if (compName != "Transform")
     {
         // 같은 줄에 오른쪽으로 밀기 (대충)
-        float avail = ImGui::GetContentRegionAvail().x;
-        ImGui::SameLine(ImGui::GetCursorPosX() + avail - 110.0f);
+        // float avail = ImGui::GetContentRegionAvail().x;
+        // ImGui::SameLine(ImGui::GetCursorPosX() + avail - 110.0f);
 
         ImGui::PushID(comp);
         if (ImGui::SmallButton("Remove"))
@@ -1207,7 +1419,103 @@ void Editor::RenderComponentInfo(std::string compName, T* comp)
             }
         }
 
+        ImGui::PushID(comp);
         ReadVariants(*comp);
+        ImGui::PopID();
+        return;
+    }
+
+    if (compName == "Image")
+    {
+
+        for (auto& prop : t.get_properties())
+        {
+            std::string keyUITex = "ChooseUITexDlgKey##" + std::to_string((uintptr_t)comp);
+            rttr::variant value = prop.get_value(*comp);
+            std::string name = prop.get_name().to_string();
+            if (!value.is_valid()) continue;
+
+            if (value.is_type<std::string>() && name == "path")
+            {
+                std::string path = value.get_value<std::string>();
+                ImGui::Text("Current Path: %s", path.c_str());
+
+                if (ImGui::Button("Browse texture"))
+                {
+                    IGFD::FileDialogConfig config;
+                    config.path = "../";
+                    ImGuiFileDialog::Instance()->OpenDialog(keyUITex, "Choose File", ".png, .jpg", config);
+                }
+
+                if (ImGuiFileDialog::Instance()->Display(keyUITex))
+                {
+                    if (ImGuiFileDialog::Instance()->IsOk())
+                    {
+                        std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
+                        std::filesystem::path relativePath = std::filesystem::relative(filePathName);
+                        auto* image = dynamic_cast<Image*>(comp);
+                        if (image) image->ChangeData(relativePath.string());
+                    }
+                    ImGuiFileDialog::Instance()->Close();
+                }
+            }
+        }
+    }
+    
+    if (compName == "AudioSourceComponent" || compName == "AudioManagerComponent" || compName == "AudioTestController")
+    {
+        for (auto& prop : t.get_properties())
+        {
+            std::string name = prop.get_name().to_string();
+            if (name.find("ClipId") != std::string::npos)
+            {
+                rttr::variant value = prop.get_value(*comp);
+                if (value.is_valid() && value.is_type<std::string>())
+                {
+                    std::string s = value.get_value<std::string>();
+                    auto ids = AudioManager::Instance().GetEntryIds();
+                    ids.insert(ids.begin(), "<none>");
+
+                    int currentIndex = 0;
+                    for (int i = 1; i < static_cast<int>(ids.size()); ++i)
+                    {
+                        if (ids[i] == s)
+                        {
+                            currentIndex = i;
+                            break;
+                        }
+                    }
+
+                    const char* preview = ids[currentIndex].c_str();
+                    std::string comboId = "AudioClipId##" + std::to_string((uintptr_t)comp) + "_" + name;
+                    if (ImGui::BeginCombo(comboId.c_str(), preview))
+                    {
+                        for (int i = 0; i < static_cast<int>(ids.size()); ++i)
+                        {
+                            bool selected = (i == currentIndex);
+                            if (ImGui::Selectable(ids[i].c_str(), selected))
+                            {
+                                if (i == 0)
+                                {
+                                    prop.set_value(*comp, std::string());
+                                }
+                                else
+                                {
+                                    prop.set_value(*comp, ids[i]);
+                                }
+                            }
+                            if (selected)
+                                ImGui::SetItemDefaultFocus();
+                        }
+                        ImGui::EndCombo();
+                    }
+                }
+            }
+        }
+
+        ImGui::PushID(comp);
+        ReadVariants(*comp);
+        ImGui::PopID();
         return;
     }
 
@@ -1275,6 +1583,9 @@ void Editor::RenderDebugAABBDraw()
             DebugDraw::Draw(DebugDraw::g_Batch.get(), box, color);
         });
 
+    // Grid 
+    RenderDebugGrid();
+
     // PhysX
     if (isPhysicsDebugOpen)
     {
@@ -1286,6 +1597,66 @@ void Editor::RenderDebugAABBDraw()
     // ===============================
     DebugDraw::g_Batch->End();
 }
+
+void Editor::RenderDebugGrid()
+{
+    auto* grid = GridSystem::Instance().GetMainGrid();
+    if (!grid) return;
+
+    float defaultYThickness = 0.01f;
+    float highlightYThickness = 10.0f; // 원점과 걸을 수 없는 그리드 두께
+
+    /*int centerX = grid->width / 2;
+    int centerY = grid->height / 2;*/
+    int centerX = (grid->width - 1) / 2;
+    int centerY = (grid->height - 1) / 2;
+
+
+    // 중앙 기준 좌표: -centerX ~ +centerX-1, -centerY ~ +centerY-1
+    //for (int cy = -centerY; cy < grid->height - centerY; ++cy)
+    //{
+    //    for (int cx = -centerX; cx < grid->width - centerX; ++cx)
+    for (int cy = -centerY; cy <= centerY; ++cy)
+    {
+        for (int cx = -centerX; cx <= centerX; ++cx)
+        {
+            GridCell* cell = grid->GetCellFromCenter(cx, cy);
+            if (!cell) continue;
+
+            // 중앙 기준 좌표 → 월드 위치
+            Vector3 worldPos = grid->GridToWorldFromCenter(cx, cy);
+
+            BoundingBox box;
+            float halfSize = grid->cellSize * 0.5f;
+            box.Center = XMFLOAT3(worldPos.x, worldPos.y, worldPos.z);
+
+            float yThickness = defaultYThickness;
+            XMVECTOR color = XMVectorSet(1.0f, 1.0f, 1.0f, 1.0f); // 기본 흰색
+            bool drawCross = false; // X 표시 여부
+
+            // 원점 (0,0) 중앙 그리드
+            if (cx == 0 && cy == 0)
+            {
+                color = XMVectorSet(0.0f, 0.0f, 0.0f, 1.0f); // 검은색
+                yThickness = highlightYThickness;
+            }
+            // 걸을 수 없는 그리드
+            else if (!cell->walkable)
+            {
+                color = XMVectorSet(1.0f, 0.0f, 0.0f, 1.0f); // 빨간색
+                drawCross = true; // X 표시
+            }
+
+            box.Extents = XMFLOAT3(halfSize, yThickness, halfSize);
+
+            // Draw: drawCross가 true면 X 표시 포함
+            DebugDraw::Draw(DebugDraw::g_Batch.get(), box, color, drawCross);
+        }
+    }
+}
+
+
+
 
 void Editor::SaveCurrentScene(HWND& hwnd)
 {
@@ -1393,7 +1764,9 @@ void Editor::CheckObjectPicking()
 
     bool allowWorldPick =
         !io.WantCaptureMouse       // ImGui가 마우스를 쓰는 중이면 차단
-        && !io.WantTextInput;      // (선택) 텍스트 입력 중이면 차단
+        && !io.WantTextInput       // (선택) 텍스트 입력 중이면 차단
+        && !ImGuizmo::IsOver()
+        && !ImGuizmo::IsUsing();
 
     if (isMouseLeftClick && allowWorldPick && !isAABBPicking)
     {
@@ -1436,10 +1809,10 @@ void Editor::ReadVariants(rttr::instance inst)
 
         // check metaData
         auto metaBool = prop.get_metadata(META_BOOL);
+        auto metaBrowse = prop.get_metadata(META_BROWSE);
 
         // Render elements
         // ImGui::Text("%s : %s", name.c_str(), value.get_type().get_name().to_string().c_str());
-
         if (value.get_type().is_enumeration())
         {
             rttr::type enumType = value.get_type();
@@ -1524,9 +1897,9 @@ void Editor::ReadVariants(rttr::instance inst)
             if (ImGui::Checkbox(name.c_str(), &v))
                 prop.set_value(inst, v);
         }
-        else if (value.is_type<Vector2>())
+        else if (value.is_type<DirectX::SimpleMath::Vector2>())
         {
-            Vector2 vec = value.get_value<SimpleMath::Vector2>();
+            auto vec = value.get_value<DirectX::SimpleMath::Vector2>();
             if (ImGui::DragFloat2(name.c_str(), &vec.x, 0.1f))
                 prop.set_value(inst, vec);
         }
@@ -1536,11 +1909,41 @@ void Editor::ReadVariants(rttr::instance inst)
             if (ImGui::DragFloat3(name.c_str(), &vec.x, 0.1f))
                 prop.set_value(inst, vec);
         }
+        else if (value.is_type<DirectX::SimpleMath::Vector4>())
+        {
+            auto vec = value.get_value<DirectX::SimpleMath::Vector4>();
+            if (ImGui::DragFloat4(name.c_str(), &vec.x, 0.1f))
+                prop.set_value(inst, vec);
+        }
         else if (value.is_type<Color>())
         {
             auto c = value.get_value<Color>();
             if (ImGui::ColorEdit3(name.c_str(), &c.x))
                 prop.set_value(inst, c);
+        }
+        else if (value.is_type<string>() && !metaBrowse.is_valid())
+        {
+            std::string c = value.get_value<std::string>();
+
+            if (ImGui::InputText(
+                name.c_str(),
+                c.data(),
+                c.capacity() + 1,
+                ImGuiInputTextFlags_CallbackResize,
+                [](ImGuiInputTextCallbackData* data) -> int
+                {
+                    if (data->EventFlag == ImGuiInputTextFlags_CallbackResize)
+                    {
+                        auto* str = static_cast<std::string*>(data->UserData);
+                        str->resize(data->BufTextLen);
+                        data->Buf = str->data();
+                    }
+                    return 0;
+                },
+                &c))
+            {
+                prop.set_value(inst, c);
+            }
         }
     }
 }
@@ -1582,13 +1985,27 @@ void Editor::CheckObjectDeleteKey()
     }
 }
 
+void Editor::RenderCameraPanel()
+{
+    if (!isCameraPanelOepn) return;
+
+    ImGui::Begin("CameraPanel");
+    {
+        int curr = CameraSystem::Instance().GetCurrCameraIndex();
+        int maxSize = CameraSystem::Instance().GetAllCamera().size();
+        ImGui::SliderInt("index", &curr, 0, maxSize - 1);
+        CameraSystem::Instance().SetCurrCamera(curr);
+    }
+    ImGui::End();
+}
+
 void Editor::OnInputProcess(const Keyboard::State &KeyState, const Keyboard::KeyboardStateTracker &KeyTracker, const Mouse::State &MouseState, const Mouse::ButtonStateTracker &MouseTracker)
 {
     isAABBPicking = false;
 
     if (MouseTracker.leftButton == Mouse::ButtonStateTracker::PRESSED)
     {
-        if (!ImGui::GetIO().WantCaptureMouse)
+        if (!ImGui::GetIO().WantCaptureMouse && !ImGuizmo::IsOver() && !ImGuizmo::IsUsing())
         {
             // 마우스 스크린 좌표를 [0, 1] -> [-1, 1] 로 변경
             float x = (2.0f * MouseState.x) / screenWidth - 1.0f;
@@ -1626,3 +2043,4 @@ void Editor::OnInputProcess(const Keyboard::State &KeyState, const Keyboard::Key
         }
     }
 }
+#endif
