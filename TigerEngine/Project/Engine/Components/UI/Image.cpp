@@ -51,9 +51,10 @@ void Image::GetTextureByPath(std::string path)
 void Image::OnRender(RenderQueue& queue)
 {
     if (!resource) return;
+    if (!resource->srv) return;
 
     // ItemData 채우기
-    UIRenderItem data;
+    ImageUIRenderItem data;
     auto rect = GetOwner()->GetComponent<RectTransform>();
     if (!rect) return;
 
