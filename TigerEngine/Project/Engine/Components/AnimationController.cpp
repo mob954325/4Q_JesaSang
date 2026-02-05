@@ -23,43 +23,26 @@ void AnimationController::Deserialize(nlohmann::json data)
 
 void AnimationController::Enable_Inner()
 {
-    ScriptSystem::Instance().Register(this); 
-    //AnimationSystem::Instance().Register(this);
+    ScriptSystem::Instance().Register(this); // AnimationSystem X 
     OnEnable();
 }
 
 void AnimationController::Disable_Inner()
 {
-    ScriptSystem::Instance().UnRegister(this);
-    //AnimationSystem::Instance().UnRegister(this);
+    ScriptSystem::Instance().UnRegister(this); // AnimationSystem X 
     OnDisable();
 }
 
 
+// ------------------------------------------------------
+
 void AnimationController::OnInitialize()
 {
-    // AnimatorInstance.Initialize(skeleton);
-
-    // FBXData에서 skeletal info 가져오기
     auto fbx = GetOwner()->GetComponent<FBXData>();
     if (fbx && fbx->GetFBXInfo())
     {
-        // Initialize(&fbx->GetFBXInfo()->skeletalInfo);  // Animator 초기화
-        AnimatorInstance.Initialize(&fbx->GetFBXInfo()->skeletalInfo);
+        AnimatorInstance.Initialize(&fbx->GetFBXInfo()->skeletalInfo); // Animator 초기화
     }
-}
-
-void AnimationController::OnStart()
-{
-    //// FBXData에서 skeletal info 가져오기
-    //auto fbx = GetOwner()->GetComponent<FBXData>();
-    //if (fbx && fbx->GetFBXInfo())
-    //{
-    //    // Initialize(&fbx->GetFBXInfo()->skeletalInfo);  // Animator 초기화
-    //    AnimatorInstance.Initialize(&fbx->GetFBXInfo()->skeletalInfo);
-    //}
-
-    // AnimationSystem::Instance().Register(this);
 }
 
 void AnimationController::OnUpdate(float delta)
@@ -70,11 +53,6 @@ void AnimationController::OnUpdate(float delta)
     }
 
     AnimatorInstance.Update(delta);
-}
-
-void AnimationController::OnDestory()
-{
-    // AnimationSystem::Instance().UnRegister(this);
 }
 
 
@@ -122,5 +100,3 @@ const Animation* AnimationController::FindClip(const std::string& name)
     }
     return nullptr;
 }
-
-
