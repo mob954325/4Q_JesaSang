@@ -15,35 +15,25 @@ RTTR_REGISTRATION
 
 void FBXData::OnInitialize()
 {
-    //isStatic = false;
-    //path = "..\\Assets\\Resource\\sphere.fbx";
-    //fbxAsset = FBXResourceManager::Instance().LoadStaticFBXByPath("..\\Assets\\Resource\\sphere.fbx");
-    //meshes = fbxAsset->meshes; 
-    //owner->SetAABB(fbxAsset->boxMin, fbxAsset->boxMax, fbxAsset->boxCenter);
-
-    auto renderer = owner->GetComponent<FBXRenderer>();
-    if(renderer != nullptr) renderer->OnInitialize();
-    // cout << "Component : OnInitialize() 1\n";
 }
 
 void FBXData::OnEnable()
 {
     // cout << "Component : OnEnable() 2\n";
+    auto renderer = owner->GetComponent<FBXRenderer>();
+    if (renderer != nullptr) renderer->SetData(this); // Renderer은 있는데 data가 없었으면
 }
 
 void FBXData::OnStart()
 {
-    // cout << "Component : OnStart() 3\n";
 }
 
 void FBXData::OnDisable()
 {
-    // cout << "Component : OnDisable() 4\n";
 }
 
 void FBXData::OnDestory()
 {
-    // cout << "Component : OnDestory() 5\n";
 }
 
 std::vector<Mesh>& FBXData::GetMesh()
