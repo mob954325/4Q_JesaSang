@@ -4,6 +4,9 @@
 #include "../../Util/JsonHelper.h"
 #include "../Base/Datas/ReflectionMedtaDatas.hpp"
 
+#include <directXTK/Mouse.h>
+#include <directXTK/Keyboard.h>
+
 RTTR_REGISTRATION
 {
     rttr::registration::enumeration<ImageType>("ImageType")
@@ -30,12 +33,32 @@ RTTR_REGISTRATION
             (metadata(META_BROWSE, ""))
         .property("isMouseCheck",   &Image::GetMouseCheck,  &Image::SetMouseCheck)
         .property("imageType",      &Image::GetType,        &Image::SetType)
-        .property("drawSpacetype",  &Image::GetDrawSpace,  &Image::SetDrawSpace);
+        .property("drawSpacetype",  &Image::GetDrawSpace,  &Image::SetDrawSpace)
+        .property("isMouseCheck",   &Image::GetMouseCheck,  &Image::SetMouseCheck);
 }
 
 void Image::OnInitialize()
 {
     Init();
+}
+
+void Image::OnUpdate(float delta)
+{
+    if (isMouseCheck)
+    {
+        CheckMouseHover();
+
+        auto ms = DirectX::Mouse::Get().GetState();
+        bool curLeft = (ms.leftButton != 0);
+
+        if (curLeft && !prevLeft && isMouseHover)
+        {
+            // 여기서 "좌클릭 1회" 처리 (Pressed 순간)
+            std::cout << "image Clicked!!!\n";
+        }
+
+        prevLeft = curLeft;
+    }
 }
 
 nlohmann::json Image::Serialize()
@@ -105,4 +128,25 @@ void Image::Init()
 {
     // if(!GetOwner()->GetComponent<RectTransform>())
     //     rect = GetOwner()->AddComponent<RectTransform>();
+}
+
+void Image::CheckMouseHover()
+{
+    // Note : Mouse 충돌 테스트
+    // 접근 : 마우스 위치를 로컬 쿼드 좌표로 옮겨서 내부 판정을 시작한다. ( world.invert )
+    //		쿼드가 유닛값이므로 (0-1)로 내부판정을 한다.
+    int mouseX = DirectX::Mouse::Get().GetState().x;
+    int mouseY = DirectX::Mouse::Get().GetState().y;
+
+    auto rect = GetOwner()->GetComponent<RectTransform>();
+
+    if (!rect) return;
+
+    Matrix invWorld = rect->GetWorldMatrix().Invert();
+    Vector3 mouseWorld(mouseX, mouseY, 0.0f);
+    Vector3 local = Vector3::Transform(mouseWorld, invWorld);
+
+    // 유닛 쿼드 내부 판정 (0-1)
+    isMouseHover = (local.x >= 0.0f && local.x <= 1.0f) &&
+        (local.y >= 0.0f && local.y <= 1.0f);
 }

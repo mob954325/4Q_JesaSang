@@ -23,6 +23,7 @@ class Image : public RenderComponent
     RTTR_ENABLE(RenderComponent)
 public:
     void OnInitialize() override;
+    void OnUpdate(float delta) override;
 
     nlohmann::json Serialize() override;
     void Deserialize(nlohmann::json data) override;
@@ -55,7 +56,7 @@ public:
 
 private:
     void Init();
-
+    
     std::shared_ptr<TextureResource> resource{};
     // RectTransform* rect;
 
@@ -70,5 +71,8 @@ private:
     Vector4 sliceBorderPx{ 0.0f, 0.0f, 0.0f, 0.0f }; 
 
     std::string path{};
-    bool isMouseCheck = false;
+    bool isMouseCheck = false;  // 마우스 체크 확인
+    bool isMouseHover = false;  // 마우스가 겹치는지 확인
+    bool prevLeft = false;      // 마우스 이전에 클릭했는지 저장 변수
+    void CheckMouseHover();
 };
