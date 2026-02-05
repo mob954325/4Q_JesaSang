@@ -1,6 +1,8 @@
 #pragma once
 #include "Components/ScriptComponent.h"
 #include "Components/FBXRenderer.h"
+#include "Components/FBXData.h"
+#include "Components/AnimationController.h"
 #include "Components/CharacterControllerComponent.h"
 
 #include <directxtk/Keyboard.h>
@@ -40,7 +42,11 @@ private:
     // --- [ Component ] ---------------------------
     Transform* transform = nullptr;
     FBXRenderer* fbxRenderer = nullptr;
+    FBXData* fbxData = nullptr;
+    AnimationController* animController = nullptr;
     CharacterControllerComponent* cct = nullptr;
+
+
     Inventory* inventory = nullptr;
     PlayerItemVisualizer* visualizer = nullptr;
 
@@ -155,6 +161,9 @@ private:
     // FSM
     void InitFSMStates();
     void ChangeState(PlayerState state);
+
+    // Animation
+    void LoadAnimation();
 
     // Init
     void InitStat();
