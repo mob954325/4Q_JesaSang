@@ -215,7 +215,25 @@ void Editor::RenderHierarchy()
     isHierarchyFocused = ImGui::IsWindowFocused(ImGuiFocusedFlags_RootAndChildWindows); // focus 확인
 
     if (ImGui::Button("Create GameObject"))
-        SceneSystem::Instance().GetCurrentScene()->AddGameObjectByName("NewGameObject");
+    {
+        auto scene = SceneSystem::Instance().GetCurrentScene();
+        if (scene)
+        {
+            GameObject* created = scene->AddGameObjectByName("NewGameObject");
+            if (created)
+            {
+                std::vector<std::string> datas;
+                CollectSubtree(created, datas);
+
+                auto cmd = std::make_unique<CreateDeleteCommand>();
+                cmd->isCreate = true;
+                cmd->parentId = -1;
+                cmd->subtreeJsons = std::move(datas);
+                cmd->representativeRootId = created->GetId();
+                PushCommand(std::move(cmd));
+            }
+        }
+    }
 
     auto scene = SceneSystem::Instance().GetCurrentScene();
     if (!scene) { ImGui::End(); return; }
@@ -298,6 +316,21 @@ void Editor::DrawHierarchyNode(GameObject* obj)
 
                     if (!wouldCreateCycle)
                     {
+                        int oldParentId = -1;
+                        if (auto* oldP = dtr->GetParent())
+                            if (auto* opObj = oldP->GetOwner())
+                                oldParentId = (int)opObj->GetId();
+
+                        int newParentId = -1;
+                        if (auto* npObj = tr->GetOwner())
+                            newParentId = (int)npObj->GetId();
+
+                        auto cmd = std::make_unique<ReparentCommand>();
+                        cmd->objectId = dragged->GetId();
+                        cmd->oldParentId = oldParentId;
+                        cmd->newParentId = newParentId;
+                        PushCommand(std::move(cmd));
+
                         dtr->SetParent(tr);
                     }
                 }
@@ -356,6 +389,17 @@ void Editor::DrawHierarchyDropSpace()
                 Transform* dtr = dragged->GetComponent<Transform>();
                 if (dtr)
                 {
+                    int oldParentId = -1;
+                    if (auto* oldP = dtr->GetParent())
+                        if (auto* opObj = oldP->GetOwner())
+                            oldParentId = (int)opObj->GetId();
+
+                    auto cmd = std::make_unique<ReparentCommand>();
+                    cmd->objectId = dragged->GetId();
+                    cmd->oldParentId = oldParentId;
+                    cmd->newParentId = -1;
+                    PushCommand(std::move(cmd));
+
                     dtr->RemoveSelfAtParent(); // 부모 해제
                 }
             }
@@ -546,6 +590,11 @@ std::string Editor::MakeUniquePrefabName(const std::string& base, const std::vec
 
 GameObject* Editor::InstantiatePrefabFromJson(const std::vector<std::string>& jsonStrs, Transform* attachParent)
 {
+    return InstantiatePrefabFromJson(jsonStrs, attachParent, /*preserveIds*/false);
+}
+
+GameObject* Editor::InstantiatePrefabFromJson(const std::vector<std::string>& jsonStrs, Transform* attachParent, bool preserveIds)
+{
     auto scene = SceneSystem::Instance().GetCurrentScene();
     if (!scene) return nullptr;
 
@@ -554,7 +603,7 @@ GameObject* Editor::InstantiatePrefabFromJson(const std::vector<std::string>& js
     std::vector<GameObject*> created;
     created.reserve(jsonStrs.size());
 
-    std::vector<int> parentIDs;      // 생성 순서대로 ParentID 저장 (-1 가능)
+    std::vector<int> parentIDs;
     parentIDs.reserve(jsonStrs.size());
 
     // 1) 전부 생성 + Deserialize + ID/ParentID 수집
@@ -584,8 +633,7 @@ GameObject* Editor::InstantiatePrefabFromJson(const std::vector<std::string>& js
 
     if (created.empty()) return nullptr;
 
-    // 2) 계층 재구성 (씬 로드 로직과 동일)
-    // created[i] <-> parentIDs[i] 1:1 매칭
+    // 2) 계층 재구성
     if (!parentIDs.empty() && parentIDs.size() == created.size())
     {
         for (int i = 0; i < (int)created.size(); ++i)
@@ -610,8 +658,7 @@ GameObject* Editor::InstantiatePrefabFromJson(const std::vector<std::string>& js
         }
     }
 
-    // 3) Hierarchy에 드랍한 경우: 루트들(ParentID == -1)만 attachParent 아래로
-    // 생성한 오브젝트 끼리의ID여서 충돌날 일 없음
+    // 3) Hierarchy 드랍 시: 루트들만 attachParent 아래로
     if (attachParent)
     {
         for (int i = 0; i < (int)created.size(); ++i)
@@ -624,21 +671,26 @@ GameObject* Editor::InstantiatePrefabFromJson(const std::vector<std::string>& js
         }
     }
 
-    // 3-1) 구성 후 ObjID 충돌 방지를 위한 ID 재구성
-    for (int i = 0; i < (int)created.size(); ++i)
+    // 3-1) 일반 Instantiate는 ID 충돌 방지 위해 재할당
+    // Undo/Redo 복원은 preserveIds=true로 원래 ID 유지
+    if (!preserveIds)
     {
-        if (!created[i]) continue;
-
-        created[i]->SetId(ObjectSystem::Instance().GetNewID()); // 새 ID 갱신
+        for (int i = 0; i < (int)created.size(); ++i)
+        {
+            if (!created[i]) continue;
+            created[i]->SetId(ObjectSystem::Instance().GetNewID());
+        }
     }
 
-    // 4) 반환값: 첫 번째 루트(ParentID == -1)를 대표로 반환
+    // 4) 첫 루트 반환
     for (int i = 0; i < (int)created.size(); ++i)
     {
         if (created[i] && parentIDs[i] == -1)
             return created[i];
     }
+    return created.front();
 }
+
 
 void Editor::CollectSubtree(GameObject* root, std::vector<std::string>& out)
 {
@@ -799,8 +851,7 @@ void Editor::RenderInspector()
                 /* -------------------------------- transform ------------------------------- */
                 if (ImGui::Button("Destory"))
                 {
-                    selectedObject = nullptr;
-                    obj->Destory();
+                    DestroyObjectWithUndo(obj);
                 }
 
                 /* ---------------------------- add component 내용 ---------------------------- */
@@ -1279,34 +1330,111 @@ void Editor::RenderComponentInfo(std::string compName, T* comp)
             std::string name = prop.get_name().to_string();
             if (!value.is_valid()) continue;
 
+            // Rotation은 Degree UI / Rad 저장
             if (value.is_type<DirectX::SimpleMath::Vector3>() && name == "Rotation")
             {
-                auto rot = value.get_value<DirectX::SimpleMath::Vector3>();
+                auto rotRad = value.get_value<DirectX::SimpleMath::Vector3>();
                 DirectX::SimpleMath::Vector3 eulerDegree =
                 {
-                    XMConvertToDegrees(rot.x),
-                    XMConvertToDegrees(rot.y),
-                    XMConvertToDegrees(rot.z)
+                    XMConvertToDegrees(rotRad.x),
+                    XMConvertToDegrees(rotRad.y),
+                    XMConvertToDegrees(rotRad.z)
                 };
 
-                if (ImGui::DragFloat3("Rotation", &eulerDegree.x, 0.1f))
+                TransformEditCommand::Kind kind = TransformEditCommand::Kind::RotationRad;
+                uintptr_t key = MakeTransformSessionKey(comp, kind);
+
+                ImGui::DragFloat3("Rotation", &eulerDegree.x, 0.1f);
+
+                if (ImGui::IsItemActivated())
                 {
-                    rot = {
+                    TransformEditSession s;
+                    s.start = rotRad; // before (rad)
+                    s.kind = kind;
+                    s.active = true;
+                    transformSessions[key] = s;
+                }
+
+                if (ImGui::IsItemEdited())
+                {
+                    DirectX::SimpleMath::Vector3 newRotRad =
+                    {
                         XMConvertToRadians(eulerDegree.x),
                         XMConvertToRadians(eulerDegree.y),
                         XMConvertToRadians(eulerDegree.z)
                     };
-                    prop.set_value(*comp, rot);
+                    prop.set_value(*comp, newRotRad);
 
                     GameObject* owner = comp->GetOwner();
                     if (auto phys = owner->GetComponent<PhysicsComponent>())
                         phys->SyncToPhysics();
                 }
+
+                if (ImGui::IsItemDeactivatedAfterEdit())
+                {
+                    DirectX::SimpleMath::Vector3 newRotRad =
+                    {
+                        XMConvertToRadians(eulerDegree.x),
+                        XMConvertToRadians(eulerDegree.y),
+                        XMConvertToRadians(eulerDegree.z)
+                    };
+
+                    auto it = transformSessions.find(key);
+                    if (it != transformSessions.end() && it->second.active)
+                    {
+                        auto before = it->second.start;
+                        auto after = newRotRad;
+
+                        if (before.x != after.x || before.y != after.y || before.z != after.z)
+                        {
+                            auto cmd = std::make_unique<TransformEditCommand>();
+                            cmd->objectId = comp->GetOwner()->GetId();
+                            cmd->before = before;
+                            cmd->after = after;
+                            cmd->kind = kind;
+                            PushCommand(std::move(cmd));
+                        }
+                        transformSessions.erase(it);
+                    }
+                }
             }
             else if (value.is_type<DirectX::SimpleMath::Vector3>())
             {
                 auto vec = value.get_value<DirectX::SimpleMath::Vector3>();
-                if (ImGui::DragFloat3(name.c_str(), &vec.x, 0.1f))
+
+                TransformEditCommand::Kind kind = TransformEditCommand::Kind::Position;
+                if (name == "Scale") kind = TransformEditCommand::Kind::Scale;
+                else if (name == "Position") kind = TransformEditCommand::Kind::Position;
+                else
+                {
+                    // 다른 Vector3 프로퍼티면 기존 동작만 (undo 기록 제외)
+                    if (ImGui::DragFloat3(name.c_str(), &vec.x, 0.1f))
+                    {
+                        prop.set_value(*comp, vec);
+
+                        GameObject* owner = comp->GetOwner();
+                        if (auto phys = owner->GetComponent<PhysicsComponent>())
+                            phys->SyncToPhysics();
+                        if (auto cct = owner->GetComponent<CharacterControllerComponent>())
+                            cct->Teleport(vec);
+                    }
+                    continue;
+                }
+
+                uintptr_t key = MakeTransformSessionKey(comp, kind);
+
+                ImGui::DragFloat3(name.c_str(), &vec.x, 0.1f);
+
+                if (ImGui::IsItemActivated())
+                {
+                    TransformEditSession s;
+                    s.start = value.get_value<DirectX::SimpleMath::Vector3>(); // before
+                    s.kind = kind;
+                    s.active = true;
+                    transformSessions[key] = s;
+                }
+
+                if (ImGui::IsItemEdited())
                 {
                     prop.set_value(*comp, vec);
 
@@ -1314,12 +1442,37 @@ void Editor::RenderComponentInfo(std::string compName, T* comp)
                     if (auto phys = owner->GetComponent<PhysicsComponent>())
                         phys->SyncToPhysics();
                     if (auto cct = owner->GetComponent<CharacterControllerComponent>())
-                        cct->Teleport(vec);
+                    {
+                        if (kind == TransformEditCommand::Kind::Position)
+                            cct->Teleport(vec);
+                    }
+                }
+
+                if (ImGui::IsItemDeactivatedAfterEdit())
+                {
+                    auto it = transformSessions.find(key);
+                    if (it != transformSessions.end() && it->second.active)
+                    {
+                        auto before = it->second.start;
+                        auto after = vec;
+
+                        if (before.x != after.x || before.y != after.y || before.z != after.z)
+                        {
+                            auto cmd = std::make_unique<TransformEditCommand>();
+                            cmd->objectId = comp->GetOwner()->GetId();
+                            cmd->before = before;
+                            cmd->after = after;
+                            cmd->kind = kind;
+                            PushCommand(std::move(cmd));
+                        }
+                        transformSessions.erase(it);
+                    }
                 }
             }
         }
         return;
     }
+
 
     if (compName == "FBXData")
     {
@@ -1989,8 +2142,7 @@ void Editor::CheckObjectDeleteKey()
             return;
         }
 
-        selectedObject = nullptr;
-        victim->Destory();
+        DestroyObjectWithUndo(victim);
     }
 }
 
@@ -2011,6 +2163,19 @@ void Editor::RenderCameraPanel()
 void Editor::OnInputProcess(const Keyboard::State &KeyState, const Keyboard::KeyboardStateTracker &KeyTracker, const Mouse::State &MouseState, const Mouse::ButtonStateTracker &MouseTracker)
 {
     isAABBPicking = false;
+
+    ImGuiIO& io = ImGui::GetIO();
+    if (!io.WantTextInput)
+    {
+        const bool ctrl = KeyState.LeftControl || KeyState.RightControl;
+        const bool shift = KeyState.LeftShift || KeyState.RightShift;
+
+        if (ctrl && !shift && KeyTracker.pressed.Z)
+            Undo();
+
+        if (ctrl && shift && KeyTracker.pressed.Z)
+            Redo();
+    }
 
     if (MouseTracker.leftButton == Mouse::ButtonStateTracker::PRESSED)
     {
@@ -2052,3 +2217,221 @@ void Editor::OnInputProcess(const Keyboard::State &KeyState, const Keyboard::Key
         }
     }
 }
+
+
+void Editor::TransformEditCommand::Undo(Editor& ed) { ed.ApplyTransform(objectId, kind, before); }
+void Editor::TransformEditCommand::Redo(Editor& ed) { ed.ApplyTransform(objectId, kind, after); }
+
+void Editor::ReparentCommand::Undo(Editor& ed) { ed.ApplyReparent(objectId, oldParentId); }
+void Editor::ReparentCommand::Redo(Editor& ed) { ed.ApplyReparent(objectId, newParentId); }
+
+void Editor::CreateDeleteCommand::Undo(Editor& ed)
+{
+    if (isCreate)
+    {
+        // create undo == delete
+        ed.DestroyObjectById(representativeRootId);
+    }
+    else
+    {
+        // delete undo == restore
+        Transform* parentTr = nullptr;
+        if (parentId != -1)
+        {
+            if (auto* p = ed.FindGameObjectById((uint32_t)parentId))
+                parentTr = p->GetTransform();
+        }
+        ed.InstantiatePrefabFromJson(subtreeJsons, parentTr, /*preserveIds*/true);
+    }
+}
+
+void Editor::CreateDeleteCommand::Redo(Editor& ed)
+{
+    if (isCreate)
+    {
+        // create redo == recreate
+        Transform* parentTr = nullptr;
+        if (parentId != -1)
+        {
+            if (auto* p = ed.FindGameObjectById((uint32_t)parentId))
+                parentTr = p->GetTransform();
+        }
+        ed.InstantiatePrefabFromJson(subtreeJsons, parentTr, /*preserveIds*/true);
+    }
+    else
+    {
+        // delete redo == delete again
+        ed.DestroyObjectById(representativeRootId);
+    }
+}
+
+void Editor::PushCommand(std::unique_ptr<ICommand> cmd)
+{
+    if (!cmd) return;
+
+    redoStack.clear(); // 새 작업 시 redo 폐기
+    undoStack.push_back(std::move(cmd));
+
+    if (undoStack.size() > maxHistory)
+        undoStack.erase(undoStack.begin());
+}
+
+void Editor::Undo()
+{
+    if (undoStack.empty()) return;
+
+    auto cmd = std::move(undoStack.back());
+    undoStack.pop_back();
+
+    cmd->Undo(*this);
+    redoStack.push_back(std::move(cmd));
+}
+
+void Editor::Redo()
+{
+    if (redoStack.empty()) return;
+
+    auto cmd = std::move(redoStack.back());
+    redoStack.pop_back();
+
+    cmd->Redo(*this);
+    undoStack.push_back(std::move(cmd));
+}
+
+uintptr_t Editor::MakeTransformSessionKey(void* compPtr, TransformEditCommand::Kind kind) const
+{
+    return ((uintptr_t)compPtr) ^ (0x9E3779B97F4A7C15ull * (uintptr_t)kind);
+}
+
+GameObject* Editor::FindGameObjectById(uint32_t id)
+{
+    GameObject* found = nullptr;
+    auto scene = SceneSystem::Instance().GetCurrentScene();
+    if (!scene) return nullptr;
+
+    scene->ForEachGameObject([&](GameObject* obj)
+        {
+            if (!obj || obj->IsDestory()) return;
+            if (obj->GetId() == id) found = obj;
+        });
+    return found;
+}
+
+void Editor::ApplyReparent(uint32_t objId, int parentId)
+{
+    auto* obj = FindGameObjectById(objId);
+    if (!obj) return;
+
+    Transform* tr = obj->GetTransform();
+    if (!tr) return;
+
+    if (parentId == -1)
+    {
+        tr->RemoveSelfAtParent();
+        return;
+    }
+
+    auto* parentObj = FindGameObjectById((uint32_t)parentId);
+    if (!parentObj) return;
+
+    Transform* parentTr = parentObj->GetTransform();
+    if (!parentTr) return;
+
+    // 순환 방지
+    Transform* ancestor = parentTr;
+    while (ancestor)
+    {
+        if (ancestor == tr) return;
+        ancestor = ancestor->GetParent();
+    }
+
+    tr->SetParent(parentTr);
+}
+
+void Editor::ApplyTransform(uint32_t objId, TransformEditCommand::Kind kind, const DirectX::SimpleMath::Vector3& v)
+{
+    auto* obj = FindGameObjectById(objId);
+    if (!obj) return;
+
+    auto* tr = obj->GetComponent<Transform>();
+    if (!tr) return;
+
+    rttr::type t = rttr::type::get(*tr);
+
+    switch (kind)
+    {
+    case TransformEditCommand::Kind::Position:
+    {
+        auto p = t.get_property("Position");
+        if (p.is_valid()) p.set_value(*tr, v);
+        break;
+    }
+    case TransformEditCommand::Kind::RotationRad:
+    {
+        auto p = t.get_property("Rotation");
+        if (p.is_valid()) p.set_value(*tr, v);
+        break;
+    }
+    case TransformEditCommand::Kind::Scale:
+    {
+        auto p = t.get_property("Scale");
+        if (p.is_valid()) p.set_value(*tr, v);
+        break;
+    }
+    }
+
+    if (auto phys = obj->GetComponent<PhysicsComponent>())
+        phys->SyncToPhysics();
+
+    if (auto cct = obj->GetComponent<CharacterControllerComponent>())
+    {
+        if (kind == TransformEditCommand::Kind::Position)
+            cct->Teleport(v);
+    }
+}
+
+void Editor::DestroyObjectById(uint32_t id)
+{
+    auto* obj = FindGameObjectById(id);
+    if (!obj) return;
+
+    if (selectedObject == obj) selectedObject = nullptr;
+    obj->Destory();
+}
+
+void Editor::DestroyObjectWithUndo(GameObject* victim)
+{
+    if (!victim || victim->IsDestory()) return;
+
+    // 카메라 1개 남았을 때 삭제 방지 (기존 정책 유지)
+    if (victim->GetComponent<Camera>() && CameraSystem::Instance().GetAllCamera().size() == 1)
+    {
+        MessageBoxA(NULL, "Scene need at least one camera.", "Delete not allowed", 0);
+        return;
+    }
+
+    std::vector<std::string> datas;
+    CollectSubtree(victim, datas);
+
+    int parentId = -1;
+    if (auto* tr = victim->GetTransform())
+    {
+        if (auto* p = tr->GetParent())
+        {
+            if (auto* po = p->GetOwner())
+                parentId = (int)po->GetId();
+        }
+    }
+
+    auto cmd = std::make_unique<CreateDeleteCommand>();
+    cmd->isCreate = false; // delete command
+    cmd->parentId = parentId;
+    cmd->subtreeJsons = std::move(datas);
+    cmd->representativeRootId = victim->GetId();
+
+    PushCommand(std::move(cmd));
+
+    if (selectedObject == victim) selectedObject = nullptr;
+    victim->Destory();
+}
+
