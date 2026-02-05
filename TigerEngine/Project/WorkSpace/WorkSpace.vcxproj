@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -187,6 +187,7 @@
     <ClInclude Include="02_Script\Woo\Player\PlayerItemVisualizer.h" />
     <ClInclude Include="02_Script\Woo\Object\HideObject.h" />
     <ClInclude Include="02_Script\Woo\Manager\GameManager.h" />
+    <ClInclude Include="99_Test\Intro\IntroCutSceneController.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="02_Script\Moon\AI\AdultGhostController.cpp" />
@@ -232,6 +233,7 @@
     <ClCompile Include="02_Script\Woo\Object\HideObject.cpp" />
     <ClCompile Include="02_Script\Woo\Manager\GameManager.cpp" />
     <ClCompile Include="winMain.cpp" />
+    <ClCompile Include="99_Test\Intro\IntroCutSceneController.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Engine\Engine.vcxproj">
