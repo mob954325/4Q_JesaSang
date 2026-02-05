@@ -44,6 +44,8 @@ struct ImageUIRenderItem
     Vector4 imageSize;  // (rectW, rectH, texW, texH)
     int zOrder = -1;    // 정렬 순서
 
+    bool isWorldSpace = false;
+
     // 이미지 리소스
     TextureResource* resource = nullptr; 
 

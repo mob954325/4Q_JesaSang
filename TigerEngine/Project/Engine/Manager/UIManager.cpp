@@ -1,4 +1,5 @@
 #include "UIManager.h"
+#include "../EngineSystem/CameraSystem.h"
 
 // === Util ===
 // UTF16 CodePoint 찾기
@@ -59,7 +60,7 @@ void UIManager::SetSize(int w, int h)
     width = w;
     height = h;
 
-    proj = XMMatrixOrthographicOffCenterLH(
+    screenProj = XMMatrixOrthographicOffCenterLH(
         0.0f, (float)width,		// left, right
         (float)height, 0.0f,	// bottom, top
         0.0f, 1.0f				// near, far
@@ -73,7 +74,7 @@ Vector2 UIManager::GetSize()
 
 Matrix UIManager::GetProjection() const
 {
-    return proj;
+    return screenProj;
 }
 
 void UIManager::LoadFontAtlas(const std::wstring fontFilePath, TextResource* resource)

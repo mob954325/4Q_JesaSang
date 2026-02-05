@@ -43,7 +43,7 @@ protected:
     // std::vector<UIBase*> uiComps;    
 
     // UI ㅡMVP 계산 할 때 사용하는 투영 매트릭스 ( 직교 투영 )
-    Matrix proj; 
+    Matrix screenProj;  // orthographic
 
     int width{};
     int height{};

@@ -10,6 +10,12 @@ enum class ImageType
     Fill		// 이미지 채우기
 };
 
+enum class DrawSpaceType
+{
+    Screen,
+    World
+};
+
 /// <summary>
 /// UI 이미지 컴포넌트 
 /// GameObject에 RectTransform을 추가한다. -> Transform, RectTransform 둘 다 가지고 있음.
@@ -35,6 +41,9 @@ public:
     ImageType GetType() const { return type; }
     void SetType(ImageType value) { type = value; }
 
+    DrawSpaceType GetDrawSpace() const { return drawSpacetype; }
+    void SetDrawSpace(DrawSpaceType value) { drawSpacetype = value; }
+
     const Color& GetColor() const { return color; }
     void SetColor(const Color& value) { color = value; }
 
@@ -55,6 +64,7 @@ private:
     std::shared_ptr<TextureResource> resource{};
     // RectTransform* rect;
 
+    DrawSpaceType drawSpacetype = DrawSpaceType::Screen;
     ImageType type = ImageType::Simple;
     Color color{};
 

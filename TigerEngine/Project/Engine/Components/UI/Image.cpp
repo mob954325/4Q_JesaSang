@@ -13,6 +13,12 @@ RTTR_REGISTRATION
         rttr::value("Sliced", ImageType::Sliced)
     );
 
+    rttr::registration::enumeration<DrawSpaceType>("DrawSpaceType")
+    (
+        rttr::value("Screen", DrawSpaceType::Screen),
+        rttr::value("World", DrawSpaceType::World)
+    );
+
     rttr::registration::class_<Image>("Image")
         .constructor<>()
             (rttr::policy::ctor::as_std_shared_ptr)
@@ -22,7 +28,9 @@ RTTR_REGISTRATION
         .property("sliceBorderPx",  &Image::GetBorderPx,    &Image::SetBorderPx)
         .property("path",           &Image::GetPath,        &Image::SetPath)
             (metadata(META_BROWSE, ""))
-        .property("isMouseCheck",   &Image::GetMouseCheck,  &Image::SetMouseCheck);
+        .property("isMouseCheck",   &Image::GetMouseCheck,  &Image::SetMouseCheck)
+        .property("imageType",      &Image::GetType,        &Image::SetType)
+        .property("drawSpacetype",  &Image::GetDrawSpace,  &Image::SetDrawSpace);
 }
 
 void Image::OnInitialize()
@@ -67,6 +75,11 @@ void Image::OnRender(RenderQueue& queue)
     data.uvRect = sliceBorderPx;
     data.resource = resource.get();
     data.isText = false;
+
+    if (drawSpacetype == DrawSpaceType::World)
+        data.isWorldSpace = true;
+    else
+        data.isWorldSpace = false;
 
     queue.AddUIRenderQueue(data); // NOTE : 이러면 sort를 renderpass에서 처리하면되니까 canvas는 왜 필요한거지
 }

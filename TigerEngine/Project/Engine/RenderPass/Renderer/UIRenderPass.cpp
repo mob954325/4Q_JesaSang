@@ -3,6 +3,7 @@
 #include "../../Manager/UIManager.h"
 #include "../../Object/GameObject.h"
 #include "../../Components/UI/TextUI.h"
+#include "../../EngineSystem/CameraSystem.h"
 
 void UIRenderPass::Init(const ComPtr<ID3D11Device>& device)
 {
@@ -30,7 +31,15 @@ void UIRenderPass::Execute(ComPtr<ID3D11DeviceContext>& context, RenderQueue& qu
     auto& renderQueue = queue.GetUIRenderQueue();
     for (auto& item : renderQueue)
     {
-        Matrix mvp = item.worldMat * um.GetProjection();	// UI에서  view는 보통 identity
+        Matrix mvp;
+        if (!item.isWorldSpace)
+            mvp = item.worldMat * um.GetProjection();	// UI에서  view는 보통 identity
+        else
+        {
+            Camera* cam = CameraSystem::Instance().GetCurrCamera();
+            mvp = item.worldMat * cam->GetView() * cam->GetProjection();
+        }
+
         sm.uiCBData.WVP = mvp.Transpose();
         sm.uiCBData.color = item.color;
 
