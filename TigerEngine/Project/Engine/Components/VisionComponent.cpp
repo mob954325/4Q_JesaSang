@@ -65,17 +65,22 @@ bool VisionComponent::CheckVision(
     toTarget.Normalize();
 
 
-   // FOV 체크
-    float dot = forward.Dot(toTarget);
+   // FOV 체크 
+    Vector3 flatForward = forward;
+    flatForward.y = 0;
+    flatForward.Normalize();
+
+    Vector3 flatToTarget = toTarget;
+    flatToTarget.y = 0;
+    flatToTarget.Normalize();
+
+    float dot = flatForward.Dot(flatToTarget);
     float limit = cosf(Deg2Rad(fov * 0.5f));
-    if (dot < limit)
-        return false;
+    if (dot < limit) return false;
 
-
-    // PhysX 단위 변환 (이걸 안해주고있었음..) 
+    // PhysX
     PxVec3 originPx = ToPx(origin);
-    PxVec3 dirPx = ToPx(toTarget);
-
+    PxVec3 dirPx(toTarget.x, toTarget.y, toTarget.z);
     float maxDistPx = maxDistance * WORLD_TO_PHYSX;
 
     std::vector<RaycastHit> hits;
@@ -84,12 +89,10 @@ bool VisionComponent::CheckVision(
         dirPx,
         maxDistPx,
         hits,
-        CollisionLayer::Default,
+        CollisionLayer::Vision,   // Floor 제외
         QueryTriggerInteraction::Ignore,
-        false)) // 첫 BLOCK만
-    {
+        false))
         return false;
-    }
 
 
     auto* first = hits.front().component;
@@ -110,8 +113,13 @@ void VisionComponent::DrawDebugVision()
 
     auto* tr = GetOwner()->GetTransform();
     Vector3 origin = tr->GetWorldPosition();
+    origin.y += 100.0f;               // CheckVision과 동일
     Vector3 forward = tr->GetForward();
     Vector3 right = tr->GetRight();
+
+    // PhysX 변환
+    PxVec3 originPx = ToPx(origin);
+    float maxDistPx = m_LastDebug.dist * WORLD_TO_PHYSX;
 
     const int SEGMENTS = 32;
     float halfRad = Deg2Rad(m_LastDebug.fov * 0.5f);
@@ -123,22 +131,26 @@ void VisionComponent::DrawDebugVision()
         float t = -halfRad + (halfRad * 2.f) * (float(i) / SEGMENTS);
 
         Vector3 dir = forward * cosf(t) + right * sinf(t);
+        dir.y = 0;              // FOV 평면 기준
         dir.Normalize();
+
+        PxVec3 dirPx(dir.x, dir.y, dir.z);
 
         std::vector<RaycastHit> hits;
         float drawDist = m_LastDebug.dist;
 
         if (PhysicsSystem::Instance().Raycast(
-            PxVec3(origin.x, origin.y, origin.z),
-            PxVec3(dir.x, dir.y, dir.z),
-            m_LastDebug.dist,
+            originPx,
+            dirPx,
+            maxDistPx,
             hits,
-            CollisionLayer::World,          
+            CollisionLayer::Vision,          
             QueryTriggerInteraction::Ignore,
             false                             // BLOCK 하나
         ))
         {
-            drawDist = hits[0].distance;
+            // PhysX → World 단위 변환
+            drawDist = hits[0].distance * PHYSX_TO_WORLD;
         }
 
         XMVECTOR end = o + XMVectorSet(dir.x, dir.y, dir.z, 0) * drawDist;
