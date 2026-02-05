@@ -118,7 +118,7 @@ bool EngineApp::OnInitialize()
 
  
 
-    PlayModeSystem::Instance().SetPlayMode(PlayModeState::Playing);
+    // PlayModeSystem::Instance().SetPlayMode(PlayModeState::Playing);
 
 	return true;
 }
