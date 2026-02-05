@@ -98,6 +98,8 @@ void TrapObject::NotifyAIInRange()
     // TODO :: 선민이 AI 찾아서 Call 하는 함수 호출
     /*
         파동 발생한 즉시 월드의 AI를 모두 찾아서 dist > waveLength보다 크다면 AI Called
+        - Ghost_Adult <AdultGhostController>
+        - Ghost_Baby
     */
 
     //auto baby_AIs = SceneSystem::Instance().GetCurrentScene()->GetGameObjectsByName("baby_AIs");

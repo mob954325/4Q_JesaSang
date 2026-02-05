@@ -109,7 +109,7 @@ struct alignas(16) OffsetMatrixCB
 {
     // bone offset matrix
     // vertex데이터에 참조할 index 4개가 들어있음
-    Matrix boneOffset[128];
+    Matrix boneOffset[256];
 };
 
 // PoseMatrix -> b5
@@ -118,7 +118,7 @@ struct alignas(16) PoseMatrixCB
     // bone world matrix
     // bone의 local matrix(animation)을 계층 구조에 따라 누적한 bone transform 배열
     // vertex데이터에 참조할 index 4개가 들어있음
-    Matrix bonePose[128];
+    Matrix bonePose[256];
 };
 
 // PostProcess CB -> b6
