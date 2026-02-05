@@ -14,6 +14,9 @@ void Player_Hide::Enter()
     player->camController->SetTargetTransform(player->curHideObject->GetOwner()->GetTransform());
     player->camController->SetViewMode(CameraController::ViewMode::Top);
 
+    // set speed
+    player->curSpeed = 0;
+
     //cout << "[Player] Enter Hide State" << endl;
 }
 
@@ -21,10 +24,8 @@ void Player_Hide::ChangeStateLogic()
 {
     if(Input::GetKeyDown(player->interaction_Key))
     {
+        player->curHideObject->StopHide();      // 중단할때만 종료 로직 추가
         player->ChangeState(PlayerState::Idle);
-
-        // 중단할때만 종료 로직 추가
-        player->curHideObject->StopHide();
     }
 }
 
