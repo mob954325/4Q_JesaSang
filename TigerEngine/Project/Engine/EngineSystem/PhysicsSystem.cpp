@@ -144,74 +144,7 @@ void PhysicsSystem::Simulate(float dt)
     // 4. CCT 후처리 (Trigger / Collision 이벤트)
     CharacterControllerSystem::Instance().Simulate(dt);
 
-    // 4. Trigger 이벤트 해석
-    // ResolveTriggerEvents();
 }
-
-
-//void PhysicsSystem::ResolveTriggerEvents()
-//{
-//    m_TriggerCurr.clear();
-//
-//    // --------------------------------------------------
-//    // 1. 모든 PhysicsComponent에서 Trigger 수집
-//    // --------------------------------------------------
-//    for (auto& it : m_ActorMap)
-//    {
-//        PhysicsComponent* comp = it.first;
-//
-//        if (!comp)
-//            continue;
-//
-//        if (!comp->GetActiveSelf() || !comp->GetOwner()->GetActiveSelf()) continue; // enable 체크 추가 - [26.01.29] 이성호
-//
-//        for (PhysicsComponent* other : comp->m_PendingTriggers)
-//        {
-//            // (A,B) == (B,A) 정규화
-//            PhysicsComponent* a = comp < other ? comp : other;
-//            PhysicsComponent* b = comp < other ? other : comp;
-//            m_TriggerCurr.insert(std::make_pair(a, b));
-//        }
-//
-//        comp->m_PendingTriggers.clear();
-//    }
-//
-//    // --------------------------------------------------
-//    // 2. Trigger Enter / Stay
-//    // --------------------------------------------------
-//    for (const auto& pair : m_TriggerCurr)
-//    {
-//        if (!pair.first->GetActiveSelf() || !pair.first->GetOwner()->GetActiveSelf() ||
-//            !pair.second->GetActiveSelf() || !pair.second->GetOwner()->GetActiveSelf()) continue; // enable 체크 추가 - [26.01.29] 이성호
-//
-//        if (m_TriggerPrev.find(pair) == m_TriggerPrev.end())
-//        {
-//            pair.first->OnTriggerEnter(pair.second);
-//            pair.second->OnTriggerEnter(pair.first);
-//        }
-//        else
-//        {
-//            pair.first->OnTriggerStay(pair.second);
-//            pair.second->OnTriggerStay(pair.first);
-//        }
-//    }
-//
-//    // --------------------------------------------------
-//    // 3. Trigger Exit
-//    // --------------------------------------------------
-//    for (const auto& pair : m_TriggerPrev)
-//    {
-//        if (!pair.first->GetActiveSelf() || !pair.first->GetOwner()->GetActiveSelf() ||
-//            !pair.second->GetActiveSelf() || !pair.second->GetOwner()->GetActiveSelf()) continue; // enable 체크 추가 - [26.01.29] 이성호
-//
-//        if (m_TriggerCurr.find(pair) == m_TriggerCurr.end())
-//        {
-//            pair.first->OnTriggerExit(pair.second);
-//            pair.second->OnTriggerExit(pair.first);
-//        }
-//    }
-//    m_TriggerPrev = std::move(m_TriggerCurr);
-//}
 
 
 void PhysicsSystem::RegisterComponent(PhysicsComponent* comp, PxRigidActor*& actor)
@@ -330,19 +263,13 @@ PxQueryHitType::Enum RaycastFilterCallback::preFilter(
     }
 
     // Raycast 레이어 필터링 : CanCollide 대신 안전하게 양방향 체크
-    //CollisionMask rayMask = PhysicsLayerMatrix::GetMask(m_RaycastLayer);    // rayMask:   Raycast가 감지할 수 있는 레이어들의 마스크
-    //CollisionMask actorMask = PhysicsLayerMatrix::GetMask(comp->GetLayer());// actorMask: Actor가 충돌할 수 있는 레이어들의 비트 마스크
+    CollisionMask rayMask = PhysicsLayerMatrix::GetMask(m_RaycastLayer);    // rayMask:   Raycast가 감지할 수 있는 레이어들의 마스크
+    CollisionMask actorMask = PhysicsLayerMatrix::GetMask(comp->GetLayer());// actorMask: Actor가 충돌할 수 있는 레이어들의 비트 마스크
 
-    //if (((rayMask & (uint32_t)comp->GetLayer()) == 0) || ((actorMask & (uint32_t)m_RaycastLayer) == 0))
-    //{
-    //    return PxQueryHitType::eNONE;
-    //}
-
-    CollisionMask actorLayer = (CollisionMask)comp->GetLayer();
-
-    // 마스크 판정 (OR 중 하나라도 맞으면 통과)
-    if ((m_RaycastMask & actorLayer) == 0)
+    if (((rayMask & (uint32_t)comp->GetLayer()) == 0) || ((actorMask & (uint32_t)m_RaycastLayer) == 0))
+    {
         return PxQueryHitType::eNONE;
+    }
 
     // 단일 감지 vs 다중 감지 
     if (m_AllHits)
@@ -443,7 +370,6 @@ void SimulationEventCallback::onTrigger(PxTriggerPair* pairs, PxU32 nbPairs)
 // [ Raycast ] 
 // ----------------------------------------------------
 
-// 단일 레이어 
 bool PhysicsSystem::Raycast(
     const PxVec3& origin,
     const PxVec3& direction,
@@ -537,32 +463,34 @@ bool PhysicsSystem::Raycast(
     return !outHits.empty();
 }
 
-// 다중 마스크 
-bool PhysicsSystem::Raycast(
+bool PhysicsSystem::RaycastVision(
     const PxVec3& origin,
     const PxVec3& direction,
     float maxDistance,
-    std::vector<RaycastHit>& outHits,
-    CollisionMask mask,
-    QueryTriggerInteraction triggerInteraction,
-    bool bAllHits)
+    RaycastHit& outHit,                  
+    QueryTriggerInteraction triggerInteraction)
 {
-    outHits.clear();
     if (!m_Scene) return false;
 
-    const PxU32 maxHits = 128;
-    PxRaycastHit hitArray[maxHits];
-    PxRaycastBuffer hitBuffer(hitArray, maxHits);
+    PxRaycastHit hit;
+    PxRaycastBuffer hitBuffer(&hit, 1);
 
     PxQueryFilterData filterData;
-    filterData.flags = PxQueryFlag::eSTATIC | PxQueryFlag::eDYNAMIC | PxQueryFlag::ePREFILTER;
+    filterData.flags =
+        PxQueryFlag::eSTATIC |
+        PxQueryFlag::eDYNAMIC |
+        PxQueryFlag::ePREFILTER;
 
-    filterData.data.word0 = mask; //여러 레이어
-    filterData.data.word1 = mask;
+    // BroadPhase 필터 제거 (모두 통과)
+    filterData.data.word0 = 0;
+    filterData.data.word1 = 0;
 
-    RaycastFilterCallback filterCallback(mask, triggerInteraction, bAllHits);
+    RaycastFilterCallback filterCallback(
+        CollisionLayer::Default,
+        triggerInteraction,
+        false); // BLOCK
 
-    PxHitFlags hitFlags = PxHitFlag::eDEFAULT | PxHitFlag::eMESH_MULTIPLE;
+    PxHitFlags hitFlags = PxHitFlag::eDEFAULT;
 
     bool bHit = m_Scene->raycast(
         origin,
@@ -571,57 +499,34 @@ bool PhysicsSystem::Raycast(
         hitBuffer,
         hitFlags,
         filterData,
-        &filterCallback
-    );
+        &filterCallback);
 
-    if (!bHit) return false;
+    if (!bHit || !hitBuffer.hasBlock)
+        return false;
 
-    std::unordered_set<PxRigidActor*> hitActors;
+    const PxRaycastHit& pxHit = hitBuffer.block;
 
-    auto ProcessHit = [&](const PxRaycastHit& pxHit)
-        {
-            PxShape* shape = pxHit.shape;
-            PxRigidActor* actor = pxHit.actor;
-            if (!actor || !shape) return;
+    PxShape* shape = pxHit.shape;
+    PxRigidActor* actor = pxHit.actor;
+    if (!shape || !actor) return false;
 
-            if (hitActors.find(actor) != hitActors.end()) return;
-            hitActors.insert(actor);
+    PhysicsComponent* comp = GetComponent(actor);
+    if (!comp) return false;
 
-            PhysicsComponent* comp = GetComponent(pxHit.actor);
-            if (!comp) return;
+    bool isTrigger = shape->getFlags() & PxShapeFlag::eTRIGGER_SHAPE;
+    if (isTrigger && triggerInteraction == QueryTriggerInteraction::Ignore)
+        return false;
 
-            bool isTrigger = shape->getFlags() & PxShapeFlag::eTRIGGER_SHAPE;
-            if (isTrigger && triggerInteraction == QueryTriggerInteraction::Ignore)
-                return;
+    outHit.component = comp;
+    outHit.point = pxHit.position;
+    outHit.normal = pxHit.normal;
+    outHit.distance = pxHit.distance;
+    outHit.shape = shape;
+    outHit.actor = actor;
 
-            // 마스크 필터
-            if (!(mask & (CollisionMask)comp->GetLayer()))
-                return;
-
-            RaycastHit hitInfo;
-            hitInfo.component = comp;
-            hitInfo.point = pxHit.position;
-            hitInfo.normal = pxHit.normal;
-            hitInfo.distance = pxHit.distance;
-            hitInfo.shape = shape;
-            hitInfo.actor = pxHit.actor;
-
-            outHits.push_back(hitInfo);
-        };
-
-    if (bAllHits)
-    {
-        for (PxU32 i = 0; i < hitBuffer.getNbAnyHits(); ++i)
-            ProcessHit(hitBuffer.getAnyHit(i));
-    }
-    else
-    {
-        if (hitBuffer.hasBlock)
-            ProcessHit(hitBuffer.block);
-    }
-
-    return !outHits.empty();
+    return true;
 }
+
 
 
 void PhysicsSystem::DrawPhysXActors()
