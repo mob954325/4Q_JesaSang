@@ -427,6 +427,7 @@ void EngineApp::OnInputProcess(const Keyboard::State &KeyState, const Keyboard::
 #include "Components/AnimationController.h"
 #include "Components/GridComponent.h"
 #include "Components/AgentComponent.h"
+#include "Components/VisionComponent.h"
 #include "Manager/ComponentFactory.h"
 
 #include "99_Test/Player/Player1.h"
@@ -466,6 +467,7 @@ void EngineApp::RegisterAllComponents()
     cf.Register<CharacterControllerComponent>("CharacterControllerComponent", ComponentCategory::Physics);
     cf.Register<GridComponent>("GridComponent", ComponentCategory::Physics);
     cf.Register<AgentComponent>("AgentComponent", ComponentCategory::Physics);
+    cf.Register<VisionComponent>("VisionComponent", ComponentCategory::Physics);
 
     cf.Register<AnimationController>("AnimationController", ComponentCategory::Animation);
 

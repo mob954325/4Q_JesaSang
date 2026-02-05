@@ -61,8 +61,6 @@ void GridComponent::Enable_Inner()
 
 void GridComponent::OnStart()
 {
-    //// Physics 기반 자동 차단
-    //BuildBlockedFromPhysics();
 }
 
 void GridComponent::OnDestory()

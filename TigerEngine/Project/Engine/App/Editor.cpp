@@ -25,6 +25,7 @@
 #include "../Components/FBXRenderer.h"
 #include "../Util/PathHelper.h"
 #include "../Components/UI/Image.h"
+#include "../Components/VisionComponent.h"
 
 
 // Payload
@@ -1587,6 +1588,9 @@ void Editor::RenderDebugAABBDraw()
     // Grid 
     RenderDebugGrid();
 
+    // Vision Ray
+    RenderDebugVision();
+
     // PhysX
     if (isPhysicsDebugOpen)
     {
@@ -1656,6 +1660,15 @@ void Editor::RenderDebugGrid()
     }
 }
 
+
+void Editor::RenderDebugVision()
+{
+    SceneSystem::Instance().GetCurrentScene()->ForEachGameObject([&](GameObject* go)
+        {
+            if (auto* vision = go->GetComponent<VisionComponent>())
+                vision->DrawDebugVision();
+        });
+}
 
 
 

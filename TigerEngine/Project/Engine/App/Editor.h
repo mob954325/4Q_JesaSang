@@ -61,6 +61,7 @@ private:
     void RenderCameraFrustum();
     void RenderDebugAABBDraw();
     void RenderDebugGrid();
+    void RenderDebugVision();
 
     // Reender RTTR
     template<typename T>

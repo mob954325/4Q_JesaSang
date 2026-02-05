@@ -2,8 +2,8 @@
   "objects": [
     {
       "properties": {
-        "Active": 1,
-        "ID": 985,
+        "Active": true,
+        "ID": 215,
         "Name": "Main Camera",
         "ParentID": -1,
         "components": [
@@ -55,8 +55,8 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 986,
+        "Active": true,
+        "ID": 216,
         "Name": "DirectionalLight(Sun)",
         "ParentID": -1,
         "components": [
@@ -109,8 +109,8 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 987,
+        "Active": true,
+        "ID": 217,
         "Name": "---------Floor----------",
         "ParentID": -1,
         "components": [
@@ -140,10 +140,10 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 988,
+        "Active": true,
+        "ID": 218,
         "Name": "Floor",
-        "ParentID": 987,
+        "ParentID": 217,
         "components": [
           {
             "properties": {
@@ -221,9 +221,9 @@
               "PhysicsBodyType": "Static",
               "density": 10.0,
               "halfExtents": [
-                2000.0,
+                2500.0,
                 10.0,
-                2000.0
+                2500.0
               ],
               "height": 10.0,
               "isTrigger": false,
@@ -243,8 +243,8 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 989,
+        "Active": true,
+        "ID": 219,
         "Name": "---------Wall----------",
         "ParentID": -1,
         "components": [
@@ -274,10 +274,10 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 990,
+        "Active": true,
+        "ID": 220,
         "Name": "Door_Open",
-        "ParentID": 989,
+        "ParentID": 219,
         "components": [
           {
             "properties": {
@@ -354,10 +354,10 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 991,
+        "Active": true,
+        "ID": 221,
         "Name": "Pillar",
-        "ParentID": 989,
+        "ParentID": 219,
         "components": [
           {
             "properties": {
@@ -463,10 +463,10 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 992,
+        "Active": true,
+        "ID": 222,
         "Name": "wall_4",
-        "ParentID": 989,
+        "ParentID": 219,
         "components": [
           {
             "properties": {
@@ -572,10 +572,10 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 993,
+        "Active": true,
+        "ID": 223,
         "Name": "wall_5",
-        "ParentID": 989,
+        "ParentID": 219,
         "components": [
           {
             "properties": {
@@ -681,10 +681,10 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 994,
+        "Active": true,
+        "ID": 224,
         "Name": "Room",
-        "ParentID": 987,
+        "ParentID": 217,
         "components": [
           {
             "properties": {
@@ -761,10 +761,10 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 995,
+        "Active": true,
+        "ID": 225,
         "Name": "Room_a_love_room",
-        "ParentID": 987,
+        "ParentID": 217,
         "components": [
           {
             "properties": {
@@ -841,10 +841,10 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 996,
+        "Active": true,
+        "ID": 226,
         "Name": "Room_Kitchen",
-        "ParentID": 987,
+        "ParentID": 217,
         "components": [
           {
             "properties": {
@@ -921,10 +921,10 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 997,
+        "Active": true,
+        "ID": 227,
         "Name": "Room_main_room",
-        "ParentID": 987,
+        "ParentID": 217,
         "components": [
           {
             "properties": {
@@ -1001,10 +1001,10 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 998,
+        "Active": true,
+        "ID": 228,
         "Name": "Room_saibi",
-        "ParentID": 987,
+        "ParentID": 217,
         "components": [
           {
             "properties": {
@@ -1081,10 +1081,10 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 999,
+        "Active": true,
+        "ID": 229,
         "Name": "Room_Table_of_memorial_ceremony",
-        "ParentID": 987,
+        "ParentID": 217,
         "components": [
           {
             "properties": {
@@ -1161,10 +1161,10 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 1000,
+        "Active": true,
+        "ID": 230,
         "Name": "Room_Warehouse",
-        "ParentID": 987,
+        "ParentID": 217,
         "components": [
           {
             "properties": {
@@ -1241,8 +1241,8 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 1001,
+        "Active": true,
+        "ID": 231,
         "Name": "---------Object----------",
         "ParentID": -1,
         "components": [
@@ -1272,10 +1272,10 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 1002,
+        "Active": true,
+        "ID": 232,
         "Name": "teble",
-        "ParentID": 1001,
+        "ParentID": 231,
         "components": [
           {
             "properties": {
@@ -1375,10 +1375,10 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 1003,
+        "Active": true,
+        "ID": 233,
         "Name": "SearchObject",
-        "ParentID": 1001,
+        "ParentID": 231,
         "components": [
           {
             "properties": {
@@ -1493,10 +1493,10 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 1004,
+        "Active": true,
+        "ID": 234,
         "Name": "SearchObject",
-        "ParentID": 1001,
+        "ParentID": 231,
         "components": [
           {
             "properties": {
@@ -1611,10 +1611,10 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 1005,
+        "Active": true,
+        "ID": 235,
         "Name": "food",
-        "ParentID": 1001,
+        "ParentID": 231,
         "components": [
           {
             "properties": {
@@ -1691,10 +1691,10 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 1006,
+        "Active": true,
+        "ID": 236,
         "Name": "Player",
-        "ParentID": 1025,
+        "ParentID": 255,
         "components": [
           {
             "properties": {
@@ -1736,7 +1736,7 @@
           {
             "properties": {
               "Active": true,
-              "DataPath": "..\\Assets\\Resource\\FBX\\Player\\charcter_test.fbx",
+              "DataPath": "..\\Assets\\Resource\\Girl.fbx",
               "IsStatic": false
             },
             "type": "FBXData"
@@ -1793,6 +1793,18 @@
               "Active": true
             },
             "type": "Inventory"
+          },
+          {
+            "properties": {
+              "Active": true
+            },
+            "type": "AnimationController"
+          },
+          {
+            "properties": {
+              "Active": true
+            },
+            "type": "PlayerAnimationTest"
           }
         ]
       },
@@ -1800,8 +1812,8 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 1007,
+        "Active": true,
+        "ID": 237,
         "Name": "-----------------------",
         "ParentID": -1,
         "components": [
@@ -1831,8 +1843,8 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 1008,
+        "Active": true,
+        "ID": 238,
         "Name": "CurScene_98_Dev_Woo",
         "ParentID": -1,
         "components": [
@@ -1862,8 +1874,8 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 1009,
+        "Active": true,
+        "ID": 239,
         "Name": "-----------------------",
         "ParentID": -1,
         "components": [
@@ -1893,10 +1905,10 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 1010,
+        "Active": true,
+        "ID": 240,
         "Name": "wall_5",
-        "ParentID": 989,
+        "ParentID": 219,
         "components": [
           {
             "properties": {
@@ -2002,10 +2014,10 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 1011,
+        "Active": true,
+        "ID": 241,
         "Name": "wall_5",
-        "ParentID": 989,
+        "ParentID": 219,
         "components": [
           {
             "properties": {
@@ -2111,10 +2123,10 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 1012,
+        "Active": true,
+        "ID": 242,
         "Name": "wall_5",
-        "ParentID": 989,
+        "ParentID": 219,
         "components": [
           {
             "properties": {
@@ -2220,10 +2232,10 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 1013,
+        "Active": true,
+        "ID": 243,
         "Name": "wall_4",
-        "ParentID": 989,
+        "ParentID": 219,
         "components": [
           {
             "properties": {
@@ -2329,10 +2341,10 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 1014,
+        "Active": true,
+        "ID": 244,
         "Name": "CameraTrackingPoint",
-        "ParentID": 1006,
+        "ParentID": 236,
         "components": [
           {
             "properties": {
@@ -2360,10 +2372,10 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 1015,
+        "Active": true,
+        "ID": 245,
         "Name": "OcclusionFadePoint",
-        "ParentID": 1006,
+        "ParentID": 236,
         "components": [
           {
             "properties": {
@@ -2391,10 +2403,10 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 1016,
+        "Active": true,
+        "ID": 246,
         "Name": "SearchObject",
-        "ParentID": 1001,
+        "ParentID": 231,
         "components": [
           {
             "properties": {
@@ -2509,10 +2521,10 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 1017,
+        "Active": true,
+        "ID": 247,
         "Name": "InteractionSensor",
-        "ParentID": 1006,
+        "ParentID": 236,
         "components": [
           {
             "properties": {
@@ -2569,10 +2581,10 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 1018,
+        "Active": true,
+        "ID": 248,
         "Name": "InteractZone",
-        "ParentID": 1006,
+        "ParentID": 236,
         "components": [
           {
             "properties": {
@@ -2629,8 +2641,8 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 1019,
+        "Active": true,
+        "ID": 249,
         "Name": "Kitchen",
         "ParentID": -1,
         "components": [
@@ -2709,8 +2721,8 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 1020,
+        "Active": true,
+        "ID": 250,
         "Name": "-----------------------",
         "ParentID": -1,
         "components": [
@@ -2740,8 +2752,8 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 1021,
+        "Active": true,
+        "ID": 251,
         "Name": "MiniGameManager",
         "ParentID": -1,
         "components": [
@@ -2777,10 +2789,10 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 1022,
+        "Active": true,
+        "ID": 252,
         "Name": "CookingZone",
-        "ParentID": 1019,
+        "ParentID": 249,
         "components": [
           {
             "properties": {
@@ -2831,8 +2843,8 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 1023,
+        "Active": true,
+        "ID": 253,
         "Name": "Grid",
         "ParentID": -1,
         "components": [
@@ -2871,17 +2883,17 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 1024,
+        "Active": true,
+        "ID": 254,
         "Name": "AI_1",
-        "ParentID": 1028,
+        "ParentID": 258,
         "components": [
           {
             "properties": {
               "Position": [
-                -1581.8829345703125,
-                -50.0,
-                896.5925903320313
+                -234.6999969482422,
+                -46.79999923706055,
+                -304.1000061035156
               ],
               "Rotation": [
                 0.0,
@@ -2926,6 +2938,12 @@
               "Active": true
             },
             "type": "AdultGhostController"
+          },
+          {
+            "properties": {
+              "Active": true
+            },
+            "type": "VisionComponent"
           }
         ]
       },
@@ -2933,8 +2951,8 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 1025,
+        "Active": true,
+        "ID": 255,
         "Name": "--------Player--------",
         "ParentID": -1,
         "components": [
@@ -2964,17 +2982,17 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 1026,
+        "Active": true,
+        "ID": 256,
         "Name": "DynamicBox",
         "ParentID": -1,
         "components": [
           {
             "properties": {
               "Position": [
-                -138.6870880126953,
-                110.00057220458984,
-                219.6118621826172
+                183.81300354003906,
+                295.4010009765625,
+                110.21199798583984
               ],
               "Rotation": [
                 1.5706642866134644,
@@ -3018,17 +3036,17 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 1027,
+        "Active": true,
+        "ID": 257,
         "Name": "AI_2",
-        "ParentID": 1028,
+        "ParentID": 258,
         "components": [
           {
             "properties": {
               "Position": [
-                319.443115234375,
+                936.6430053710938,
                 -50.0,
-                -499.9972839355469
+                -19.797000885009766
               ],
               "Rotation": [
                 0.0,
@@ -3073,6 +3091,12 @@
               "Active": true
             },
             "type": "AdultGhostController"
+          },
+          {
+            "properties": {
+              "Active": true
+            },
+            "type": "VisionComponent"
           }
         ]
       },
@@ -3080,8 +3104,8 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 1028,
+        "Active": true,
+        "ID": 258,
         "Name": "---------AI----------",
         "ParentID": -1,
         "components": [
@@ -3111,10 +3135,10 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 1029,
+        "Active": true,
+        "ID": 259,
         "Name": "AI_3",
-        "ParentID": 1028,
+        "ParentID": 258,
         "components": [
           {
             "properties": {
@@ -3166,6 +3190,172 @@
               "Active": true
             },
             "type": "AdultGhostController"
+          },
+          {
+            "properties": {
+              "Active": true
+            },
+            "type": "VisionComponent"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 260,
+        "Name": "Test_Player",
+        "ParentID": -1,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                105.19999694824219,
+                164.8000030517578,
+                -313.6000061035156
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "DataPath": "..\\Assets\\Resource\\Girl.fbx",
+              "IsStatic": false
+            },
+            "type": "FBXData"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "Alpha": 1.0,
+              "Diffuse": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "DiffuseOverride": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Emissive": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "EmissiveOverride": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "IsGround": false,
+              "Metalic": 1.0,
+              "MetallicOverride": 1.0,
+              "RenderBlendType": "Opaque",
+              "Roughness": 1.0,
+              "RoughnessOverride": 1.0,
+              "UseDiffuseOverride": false,
+              "UseEmissiveOverride": false,
+              "UseMetallicOverride": false,
+              "UseRoughnessOverride": false
+            },
+            "type": "FBXRenderer"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 262,
+        "Name": "NewGameObject",
+        "ParentID": -1,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                14.399999618530273,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "DataPath": "..\\Assets\\Resource\\Animation\\Player_Test.fbx",
+              "IsStatic": false
+            },
+            "type": "FBXData"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "Alpha": 1.0,
+              "Diffuse": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "DiffuseOverride": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Emissive": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "EmissiveOverride": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "IsGround": false,
+              "Metalic": 1.0,
+              "MetallicOverride": 1.0,
+              "RenderBlendType": "Opaque",
+              "Roughness": 1.0,
+              "RoughnessOverride": 1.0,
+              "UseDiffuseOverride": false,
+              "UseEmissiveOverride": false,
+              "UseMetallicOverride": false,
+              "UseRoughnessOverride": false
+            },
+            "type": "FBXRenderer"
           }
         ]
       },
