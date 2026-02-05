@@ -8,6 +8,9 @@
 #include <directXTK/Mouse.h>
 #include <directXTK/Keyboard.h>
 
+#include <directXTK/Mouse.h>
+#include <directXTK/Keyboard.h>
+
 RTTR_REGISTRATION
 {
     rttr::registration::enumeration<ImageType>("ImageType")

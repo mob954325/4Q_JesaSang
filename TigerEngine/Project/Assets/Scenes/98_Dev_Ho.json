@@ -959,6 +959,95 @@
         ]
       },
       "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": 1,
+        "ID": 49,
+        "Name": "NewGameObject",
+        "ParentID": -1,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "color": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ],
+              "drawSpacetype": "Screen",
+              "fillAmount": 1.0,
+              "imageType": "Simple",
+              "isMouseCheck": true,
+              "path": "..\\Assets\\Resource\\Bricks059_Specular.png",
+              "sliceBorderPx": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "type": "Simple"
+            },
+            "type": "Image"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "Pivot": [
+                0.0,
+                0.0
+              ],
+              "Pos": [
+                810.7000122070313,
+                133.10000610351563,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.4000000059604645
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Size": [
+                387.79998779296875,
+                278.70001220703125
+              ]
+            },
+            "type": "RectTransform"
+          }
+        ]
+      },
+      "type": "GameObject"
     }
   ],
   "worldData": [
