@@ -146,6 +146,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="02_Script\Moon\AI\AdultGhostController.h" />
+    <ClInclude Include="02_Script\Moon\AnimationTest\PlayerAnimationTest.h" />
     <ClInclude Include="02_Script\Woo\Altar\AltarManager.h" />
     <ClInclude Include="02_Script\Woo\Camera\CameraController.h" />
     <ClInclude Include="02_Script\Woo\Inventory\Inventory.h" />
@@ -184,9 +185,12 @@
     <ClInclude Include="02_Script\Woo\Player\FSM\Player_Cook.h" />
     <ClInclude Include="02_Script\Woo\JesaSang\JesaSangManager.h" />
     <ClInclude Include="02_Script\Woo\Player\PlayerItemVisualizer.h" />
+    <ClInclude Include="02_Script\Woo\Object\HideObject.h" />
+    <ClInclude Include="02_Script\Woo\Manager\GameManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="02_Script\Moon\AI\AdultGhostController.cpp" />
+    <ClCompile Include="02_Script\Moon\AnimationTest\PlayerAnimationTest.cpp" />
     <ClCompile Include="02_Script\Woo\Altar\AltarManager.cpp" />
     <ClCompile Include="02_Script\Woo\Camera\CameraController.cpp" />
     <ClCompile Include="02_Script\Woo\Inventory\Inventory.cpp" />
@@ -225,6 +229,8 @@
     <ClCompile Include="02_Script\Woo\Player\FSM\Player_Cook.cpp" />
     <ClCompile Include="02_Script\Woo\JesaSang\JesaSangManager.cpp" />
     <ClCompile Include="02_Script\Woo\Player\PlayerItemVisualizer.cpp" />
+    <ClCompile Include="02_Script\Woo\Object\HideObject.cpp" />
+    <ClCompile Include="02_Script\Woo\Manager\GameManager.cpp" />
     <ClCompile Include="winMain.cpp" />
   </ItemGroup>
   <ItemGroup>

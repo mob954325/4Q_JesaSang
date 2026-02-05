@@ -3,6 +3,7 @@
 #include "pch.h"
 #include "System/InputSystem.h"
 #include "../Object/GameObject.h"
+#include "../../Externals/imguizmo/ImGuizmo.h"
 
 struct PrefabEntry
 {
@@ -60,10 +61,17 @@ private:
     void RenderCameraFrustum();
     void RenderDebugAABBDraw();
     void RenderDebugGrid();
+    void RenderDebugVision();
 
     // Reender RTTR
     template<typename T>
     void RenderComponentInfo(std::string name, T* comp);
+
+    // Gizmo
+    void RenderGizmoSettings();
+    void RenderWorldGrid();
+    void RenderGizmo();
+    void ApplyGizmoToTransform(Transform* transform, const Matrix& worldMatrix);
     
     GameObject* selectedObject; // 현재 inspector 정보를 보고 있는 게임 오브젝트
 
@@ -115,6 +123,16 @@ private:
     // check camerainfo
     void RenderCameraPanel();
     bool isCameraPanelOepn = false;
+    // Gizmo state
+    bool isGizmoEnabled = true;
+    bool isWorldGridEnabled = true;
+    bool useGizmoSnap = false;
+    ImGuizmo::OPERATION gizmoOperation = ImGuizmo::TRANSLATE;
+    ImGuizmo::MODE gizmoMode = ImGuizmo::WORLD;
+    Vector3 snapTranslation = Vector3(1.0f, 1.0f, 1.0f);
+    float snapRotation = 15.0f; // degrees
+    float snapScale = 0.1f;
+    float worldGridSize = 10.0f;
 
 public:
 	void OnInputProcess(const Keyboard::State& KeyState, const Keyboard::KeyboardStateTracker& KeyTracker,

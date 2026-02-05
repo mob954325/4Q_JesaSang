@@ -147,6 +147,12 @@
     <ClInclude Include="imguiFileDialog\dirent\dirent.h" />
     <ClInclude Include="imguiFileDialog\ImGuiFileDialog.h" />
     <ClInclude Include="imguiFileDialog\ImGuiFileDialogConfig.h" />
+    <ClInclude Include="imguizmo\GraphEditor.h" />
+    <ClInclude Include="imguizmo\ImCurveEdit.h" />
+    <ClInclude Include="imguizmo\ImGradient.h" />
+    <ClInclude Include="imguizmo\ImGuizmo.h" />
+    <ClInclude Include="imguizmo\ImSequencer.h" />
+    <ClInclude Include="imguizmo\ImZoomSlider.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AudioModule_FMOD\src\AudioClip.cpp" />
@@ -154,6 +160,11 @@
     <ClCompile Include="AudioModule_FMOD\src\AudioSource.cpp" />
     <ClCompile Include="AudioModule_FMOD\src\AudioSystem.cpp" />
     <ClCompile Include="imguiFileDialog\ImGuiFileDialog.cpp" />
+    <ClCompile Include="imguizmo\GraphEditor.cpp" />
+    <ClCompile Include="imguizmo\ImCurveEdit.cpp" />
+    <ClCompile Include="imguizmo\ImGradient.cpp" />
+    <ClCompile Include="imguizmo\ImGuizmo.cpp" />
+    <ClCompile Include="imguizmo\ImSequencer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="AudioModule_FMOD\fmod\bin\fmod.dll" />

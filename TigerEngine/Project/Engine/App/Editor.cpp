@@ -25,6 +25,7 @@
 #include "../Components/FBXRenderer.h"
 #include "../Util/PathHelper.h"
 #include "../Components/UI/Image.h"
+#include "../Components/VisionComponent.h"
 
 
 // Payload
@@ -118,6 +119,8 @@ void Editor::Update()
 
 void Editor::Render(HWND &hwnd)
 {
+    ImGuizmo::BeginFrame();
+
     RenderMenuBar(hwnd);
     RenderHierarchy();
     RenderInspector();
@@ -127,6 +130,9 @@ void Editor::Render(HWND &hwnd)
     RenderShadowMap();
     RenderPrefabWindow(hwnd);
     RenderCameraPanel();
+    RenderGizmoSettings();
+    // RenderWorldGrid();
+    RenderGizmo();
 
     ImGui::Begin("DebugPickItem");
     {
@@ -1021,6 +1027,196 @@ void Editor::RenderShadowMap()
     }
 }
 
+void Editor::RenderGizmoSettings()
+{
+    if (!ImGui::Begin("Gizmo"))
+    {
+        ImGui::End();
+        return;
+    }
+
+    ImGui::Checkbox("Enable Gizmo", &isGizmoEnabled);
+    ImGui::Checkbox("World Grid", &isWorldGridEnabled);
+    ImGui::DragFloat("Grid Size", &worldGridSize, 0.1f, 0.1f, 1000.0f);
+
+    ImGui::Separator();
+
+    if (ImGui::RadioButton("Translate (W)", gizmoOperation == ImGuizmo::TRANSLATE))
+        gizmoOperation = ImGuizmo::TRANSLATE;
+    ImGui::SameLine();
+    if (ImGui::RadioButton("Rotate (E)", gizmoOperation == ImGuizmo::ROTATE))
+        gizmoOperation = ImGuizmo::ROTATE;
+    ImGui::SameLine();
+    if (ImGui::RadioButton("Scale (R)", gizmoOperation == ImGuizmo::SCALE))
+        gizmoOperation = ImGuizmo::SCALE;
+
+    if (gizmoOperation != ImGuizmo::SCALE)
+    {
+        if (ImGui::RadioButton("Local", gizmoMode == ImGuizmo::LOCAL))
+            gizmoMode = ImGuizmo::LOCAL;
+        ImGui::SameLine();
+        if (ImGui::RadioButton("World", gizmoMode == ImGuizmo::WORLD))
+            gizmoMode = ImGuizmo::WORLD;
+    }
+
+    ImGui::Checkbox("Snap", &useGizmoSnap);
+    if (useGizmoSnap)
+    {
+        if (gizmoOperation == ImGuizmo::TRANSLATE)
+        {
+            ImGui::DragFloat3("Snap (Move)", &snapTranslation.x, 0.1f, 0.0f, 1000.0f);
+        }
+        else if (gizmoOperation == ImGuizmo::ROTATE)
+        {
+            ImGui::DragFloat("Snap (Rotate)", &snapRotation, 0.1f, 0.0f, 360.0f);
+        }
+        else if (gizmoOperation == ImGuizmo::SCALE)
+        {
+            ImGui::DragFloat("Snap (Scale)", &snapScale, 0.01f, 0.0f, 100.0f);
+        }
+    }
+
+    ImGuiIO& io = ImGui::GetIO();
+    if (!io.WantCaptureKeyboard && !io.WantTextInput)
+    {
+        if (ImGui::IsKeyPressed(ImGuiKey_W))
+            gizmoOperation = ImGuizmo::TRANSLATE;
+        if (ImGui::IsKeyPressed(ImGuiKey_E))
+            gizmoOperation = ImGuizmo::ROTATE;
+        if (ImGui::IsKeyPressed(ImGuiKey_R))
+            gizmoOperation = ImGuizmo::SCALE;
+        if (ImGui::IsKeyPressed(ImGuiKey_Q))
+            gizmoMode = (gizmoMode == ImGuizmo::LOCAL) ? ImGuizmo::WORLD : ImGuizmo::LOCAL;
+    }
+
+    ImGui::End();
+}
+
+void Editor::RenderWorldGrid()
+{
+    if (!isWorldGridEnabled)
+        return;
+
+    Camera* cam = CameraSystem::Instance().GetFreeCamera();
+    if (!cam)
+        return;
+
+    ImGuiViewport* viewport = ImGui::GetMainViewport();
+    ImGuizmo::SetDrawlist(ImGui::GetForegroundDrawList());
+    ImGuizmo::SetRect(viewport->Pos.x, viewport->Pos.y, viewport->Size.x, viewport->Size.y);
+
+    Matrix view = cam->GetView();
+    Matrix projection = cam->GetProjection();
+    Matrix identity = Matrix::Identity;
+
+    ImGuizmo::DrawGrid(reinterpret_cast<const float*>(&view), reinterpret_cast<const float*>(&projection),
+        reinterpret_cast<const float*>(&identity), worldGridSize);
+}
+
+void Editor::RenderGizmo()
+{
+    if (!isGizmoEnabled)
+        return;
+    if (!selectedObject || selectedObject->IsDestory())
+        return;
+    if (PlayModeSystem::Instance().IsPlaying())
+        return;
+
+    Transform* transform = selectedObject->GetTransform();
+    if (!transform)
+        return;
+
+    Camera* cam = CameraSystem::Instance().GetFreeCamera();
+    if (!cam)
+        return;
+
+    Matrix view = cam->GetView();
+    Matrix projection = cam->GetProjection();
+    Matrix world = transform->GetWorldMatrix();
+
+    float matrix[16];
+    memcpy(matrix, &world, sizeof(matrix));
+
+    ImGuiViewport* viewport = ImGui::GetMainViewport();
+    ImGuizmo::SetDrawlist(ImGui::GetForegroundDrawList());
+    ImGuizmo::SetRect(viewport->Pos.x, viewport->Pos.y, viewport->Size.x, viewport->Size.y);
+    ImGuizmo::SetOrthographic(false);
+
+    float snapValues[3] = {};
+    const float* snapPtr = nullptr;
+    if (useGizmoSnap)
+    {
+        if (gizmoOperation == ImGuizmo::TRANSLATE)
+        {
+            snapValues[0] = snapTranslation.x;
+            snapValues[1] = snapTranslation.y;
+            snapValues[2] = snapTranslation.z;
+            snapPtr = snapValues;
+        }
+        else if (gizmoOperation == ImGuizmo::ROTATE)
+        {
+            snapValues[0] = snapRotation;
+            snapValues[1] = snapRotation;
+            snapValues[2] = snapRotation;
+            snapPtr = snapValues;
+        }
+        else if (gizmoOperation == ImGuizmo::SCALE)
+        {
+            snapValues[0] = snapScale;
+            snapValues[1] = snapScale;
+            snapValues[2] = snapScale;
+            snapPtr = snapValues;
+        }
+    }
+
+    bool manipulated = ImGuizmo::Manipulate(
+        reinterpret_cast<const float*>(&view),
+        reinterpret_cast<const float*>(&projection),
+        gizmoOperation,
+        gizmoMode,
+        matrix,
+        nullptr,
+        snapPtr
+    );
+
+    if (manipulated && ImGuizmo::IsUsing())
+    {
+        Matrix newWorld;
+        memcpy(&newWorld, matrix, sizeof(matrix));
+        ApplyGizmoToTransform(transform, newWorld);
+    }
+}
+
+void Editor::ApplyGizmoToTransform(Transform* transform, const Matrix& worldMatrix)
+{
+    if (!transform)
+        return;
+
+    Matrix localMatrix = worldMatrix;
+    if (Transform* parent = transform->GetParent())
+    {
+        Matrix parentWorld = parent->GetWorldMatrix();
+        Matrix invParent = parentWorld.Invert();
+        localMatrix = worldMatrix * invParent;
+    }
+
+    DirectX::XMVECTOR scale;
+    DirectX::XMVECTOR rot;
+    DirectX::XMVECTOR pos;
+    if (DirectX::XMMatrixDecompose(&scale, &rot, &pos, localMatrix))
+    {
+        transform->SetScale(Vector3(scale));
+        transform->SetQuaternion(Quaternion(rot));
+        transform->SetPosition(Vector3(pos));
+
+        GameObject* owner = transform->GetOwner();
+        if (auto phys = owner->GetComponent<PhysicsComponent>())
+            phys->SyncToPhysics();
+        if (auto cct = owner->GetComponent<CharacterControllerComponent>())
+            cct->Teleport(Vector3(pos));
+    }
+}
+
 void Editor::RenderWorldManager()
 {
     // Read
@@ -1392,6 +1588,9 @@ void Editor::RenderDebugAABBDraw()
     // Grid 
     RenderDebugGrid();
 
+    // Vision Ray
+    RenderDebugVision();
+
     // PhysX
     if (isPhysicsDebugOpen)
     {
@@ -1461,6 +1660,15 @@ void Editor::RenderDebugGrid()
     }
 }
 
+
+void Editor::RenderDebugVision()
+{
+    SceneSystem::Instance().GetCurrentScene()->ForEachGameObject([&](GameObject* go)
+        {
+            if (auto* vision = go->GetComponent<VisionComponent>())
+                vision->DrawDebugVision();
+        });
+}
 
 
 
@@ -1570,7 +1778,9 @@ void Editor::CheckObjectPicking()
 
     bool allowWorldPick =
         !io.WantCaptureMouse       // ImGui가 마우스를 쓰는 중이면 차단
-        && !io.WantTextInput;      // (선택) 텍스트 입력 중이면 차단
+        && !io.WantTextInput       // (선택) 텍스트 입력 중이면 차단
+        && !ImGuizmo::IsOver()
+        && !ImGuizmo::IsUsing();
 
     if (isMouseLeftClick && allowWorldPick && !isAABBPicking)
     {
@@ -1809,7 +2019,7 @@ void Editor::OnInputProcess(const Keyboard::State &KeyState, const Keyboard::Key
 
     if (MouseTracker.leftButton == Mouse::ButtonStateTracker::PRESSED)
     {
-        if (!ImGui::GetIO().WantCaptureMouse)
+        if (!ImGui::GetIO().WantCaptureMouse && !ImGuizmo::IsOver() && !ImGuizmo::IsUsing())
         {
             // 마우스 스크린 좌표를 [0, 1] -> [-1, 1] 로 변경
             float x = (2.0f * MouseState.x) / screenWidth - 1.0f;

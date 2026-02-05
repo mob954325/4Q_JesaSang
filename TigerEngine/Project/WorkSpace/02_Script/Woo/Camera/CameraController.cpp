@@ -380,3 +380,9 @@ void CameraController::ToggleViewMode(bool animate)
 {
     SetViewMode(currentMode == ViewMode::Quarter ? ViewMode::Top : ViewMode::Quarter, animate);
 }
+
+void CameraController::SetTargetTransform(Transform* tr)
+{
+    if (!tr) return;
+    targetTr = tr;
+}

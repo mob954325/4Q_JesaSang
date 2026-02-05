@@ -74,11 +74,23 @@ public:
 class RaycastFilterCallback : public PxQueryFilterCallback
 {
 public:
+    // 단일 레이어 
     RaycastFilterCallback(
         CollisionLayer raycastLayer,
         QueryTriggerInteraction triggerInteraction,
         bool bAllHits)
-        : m_RaycastLayer(raycastLayer)
+        : m_RaycastMask((CollisionMask)raycastLayer)
+        , m_TriggerInteraction(triggerInteraction)
+        , m_AllHits(bAllHits)
+    {
+    }
+
+    // 다중 마스크 
+    RaycastFilterCallback(
+        CollisionMask raycastMask,
+        QueryTriggerInteraction triggerInteraction,
+        bool bAllHits)
+        : m_RaycastMask(raycastMask)
         , m_TriggerInteraction(triggerInteraction)
         , m_AllHits(bAllHits)
     {
@@ -97,7 +109,8 @@ public:
         const PxRigidActor* actor) override;
 
 private:
-    CollisionLayer m_RaycastLayer;
+    // CollisionLayer m_RaycastLayer;
+    CollisionMask m_RaycastMask;
     QueryTriggerInteraction m_TriggerInteraction;
     bool m_AllHits;
 };
@@ -173,13 +186,22 @@ private:
 
 
 public:
-    // Raycast
+    // Raycast 단일 레이어 
     bool Raycast(
         const PxVec3& origin,
         const PxVec3& direction,
         float maxDistance,
         std::vector<RaycastHit>& outHits,
         CollisionLayer layer,
+        QueryTriggerInteraction triggerInteraction,
+        bool bAllHits);
+    // Raycast 다중 마스크 
+    bool Raycast(
+        const PxVec3& origin,
+        const PxVec3& direction,
+        float maxDistance,
+        std::vector<RaycastHit>& outHits,
+        CollisionMask mask,
         QueryTriggerInteraction triggerInteraction,
         bool bAllHits);
 

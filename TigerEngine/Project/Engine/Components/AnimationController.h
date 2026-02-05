@@ -16,34 +16,31 @@ class AnimationController : public Component
     RTTR_ENABLE(Component)
 
 public:
-    Animator AnimatorInstance; // 실제 애니메이션 재생기
-    AnimatorParameter Params;
+    nlohmann::json Serialize() override;
+    void Deserialize(nlohmann::json data) override;
 
 private:
     std::unordered_map<std::string, std::unique_ptr<AnimationState>> States;
     AnimationState* CurrentState = nullptr;
 
 public:
-    void Initialize(const SkeletonInfo* skeleton);
-    void AddState(std::unique_ptr<AnimationState> state);
-    void ChangeState(const std::string& name, float blendTime = 0.2f);
-    void Update(float dt);
+    Animator AnimatorInstance; // 실제 애니메이션 재생기
+    AnimatorParameter Params;
+
+    void OnInitialize() override;
+    void OnUpdate(float delta) override;
     void Enable_Inner() override;
     void Disable_Inner() override;
 
-    AnimationState* GetCurrentState() const { return CurrentState; }
-
+    void AddState(std::unique_ptr<AnimationState> state);
+    void ChangeState(const std::string& name, float blendTime = 0.2f);
     const Animation* FindClip(const std::string& name);
 
-    // AnimationSystem 등록/해제
-    void OnStart() override;
-    void OnDestory() override;
-
-    nlohmann::json Serialize() override;
-    void Deserialize(nlohmann::json data) override;
+    AnimationState* GetCurrentState() const { return CurrentState; }
 
 
-public: // [ 디버그용 ] ---------- 아마 안쓰려나..? -------------- 
+
+public: 
 
     // States 읽기용 getter
     const std::unordered_map<std::string, std::unique_ptr<AnimationState>>& GetStates() const

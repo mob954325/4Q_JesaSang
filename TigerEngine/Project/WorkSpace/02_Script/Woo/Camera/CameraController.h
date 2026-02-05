@@ -132,4 +132,6 @@ public:
     // 외부 call funcs..
     void SetViewMode(ViewMode mode, bool animate = true);
     void ToggleViewMode(bool animate = true);
+
+    void SetTargetTransform(Transform* tr);
 };
