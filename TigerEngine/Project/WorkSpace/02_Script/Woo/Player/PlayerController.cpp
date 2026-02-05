@@ -468,13 +468,20 @@ void PlayerController::ReceiveMiniGameItem(unique_ptr<IItem> ingredient)
 void PlayerController::TakeAttack()
 {
     if (state == PlayerState::Die) return;
-
     cout << "[Player] Take Damage! " << endl;
 
-    // Life
-    curLife--;
+    // 아이템이 있다면 제단에 올라감
+    if (inventory->HasItem())
+    {
+        std::unique_ptr<IItem> item = inventory->TakeCurItem();
+        visualizer->VisualOffItem();
+        AltarManager::Instance()->ReceiveItem(std::move(item));
+        cout << "[Player] Drop Item... " << endl;
+    }
 
     // Die
+    curLife--;
+    
     if (curLife <= 0)
     {
         curLife = 0;
@@ -484,15 +491,14 @@ void PlayerController::TakeAttack()
         return;
     }
 
-    // 아이템이 있다면 제단에 올라감
-    if (inventory->HasItem())
-    {
-        std::unique_ptr<IItem> item =  inventory->TakeCurItem();
-        visualizer->VisualOffItem();
-        AltarManager::Instance()->ReceiveItem(std::move(item));
-        cout << "[Player] Drop Item... " << endl;
-    }
-
     // Hit (패닉)
-    ChangeState(PlayerState::Hit);
+    if (state != PlayerState::Hit)
+    {
+        ChangeState(PlayerState::Hit);
+    }
+    else
+    {
+        // 이미 패닉상태였다면
+    }
+    
 }

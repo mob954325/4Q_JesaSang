@@ -51,14 +51,19 @@ private:
     IPlayerState* curState;
     IPlayerState* fsmStates[9];
 
-    // --- [ Stat ] --------------------------------
-    // data
+    // --- [ Stat (Data) ] --------------------------------
+    // life
     int life = 5;
 
+    // speed
     float walkSpeed = 2.5f; 
     float runSpeed  = 4.0f; 
     float sitSpeed = 1.0f;  
     float hitSpeedUpRate = 2.0f;        // walkSpeed * 2.0f
+
+    // hit
+    float hitDuration = 5.0f;           // 패닉 유지시간
+    float hitInvincibleTime = 3.0f;     // 패닉 무적타임
 
 
     // --- [ Controll ] ----------------------------
@@ -66,9 +71,6 @@ private:
     int curLife;
     float curSpeed = 0.0f;
     Vector3 lookDir = Vector3::Zero;
-
-    // hit (패닉)
-    float hitDuration = 5.0f;
 
     // search object interaction
     bool  isPossibleSearch = false;            // 기획자분이 한번에 하나만 가능한 사이즈라고 하심. 중첩된다면 추가 처리필요.
