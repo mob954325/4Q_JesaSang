@@ -3,6 +3,7 @@
 #include "Util/ComponentAutoRegister.h"
 #include "Object/GameObject.h"
 #include "../Player/PlayerController.h"
+#include "EngineSystem/SceneSystem.h"
 
 REGISTER_COMPONENT(TrapObject)
 
@@ -98,4 +99,17 @@ void TrapObject::NotifyAIInRange()
     /*
         파동 발생한 즉시 월드의 AI를 모두 찾아서 dist > waveLength보다 크다면 AI Called
     */
+
+    //auto baby_AIs = SceneSystem::Instance().GetCurrentScene()->GetGameObjectsByName("baby_AIs");
+    //auto ancestor_AIs = SceneSystem::Instance().GetCurrentScene()->GetGameObjectsByName("ancestor_AIs");
+
+
+    // test
+
+    auto searchObect = SceneSystem::Instance().GetCurrentScene()->GetGameObjectsByName("SearchObject");
+    if (searchObect.empty()) cout << "searchObects : empty!" << endl;
+    else
+    {
+        cout << "searchObect cout : " << searchObect.size() << endl;
+    }
 }
