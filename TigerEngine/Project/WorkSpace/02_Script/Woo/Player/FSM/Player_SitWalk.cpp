@@ -1,4 +1,5 @@
 #include "Player_SitWalk.h"
+#include "../../Inventory/Inventory.h"
 
 void Player_SitWalk::Enter()
 {
@@ -6,6 +7,13 @@ void Player_SitWalk::Enter()
 
     // set speed
     player->curSpeed = player->sitSpeed;
+
+    // set sense radius
+    player->curSenseRadius = player->sitSenseRadius;
+    if (player->inventory->GetCurItemType() == ItemType::Ingredient)
+        player->curSenseRadius += player->ingreSenseRadius;
+    else if (player->inventory->GetCurItemType() == ItemType::Food)
+        player->curSenseRadius += player->foodSenseRadius;
 }
 
 void Player_SitWalk::ChangeStateLogic()

@@ -50,15 +50,19 @@ RTTR_REGISTRATION
 
 void FBXRenderer::OnInitialize()
 {
+    // std::cout <<"FBXRenderer : OnInitialize\n";
+    fbxData = owner->GetComponent<FBXData>();
+	if(fbxData != nullptr) CreateBoneInfo(); 
 }
 
 void FBXRenderer::OnEnable()
 {
-    SetData(owner->GetComponent<FBXData>());
+    // std::cout << "FBXRenderer : OnEnable\n";
 }
 
 void FBXRenderer::OnStart()
 {
+    // std::cout << "FBXRenderer : OnStart\n"; // RenderComponent OnStart 체크
 }
 
 void FBXRenderer::OnUpdate(float delta)
@@ -89,7 +93,6 @@ void FBXRenderer::OnUpdate(float delta)
 void FBXRenderer::OnDisable()
 {
     // std::cout << "FBXRenderer : OnDisable\n";
-    SetData(nullptr); // 등록 해제 시 데이터 제거
 }
 
 void FBXRenderer::OnDestory()
@@ -286,10 +289,4 @@ void FBXRenderer::SetRoughnessOverride(float value)
     roughnessOverride = value;
     for (auto& material : fbxData->GetMesh())
         material.GetMaterial().roughnessOverride = roughnessOverride;
-}
-
-void FBXRenderer::SetData(FBXData* data)
-{
-    fbxData = data;
-    if (fbxData != nullptr) CreateBoneInfo();
 }

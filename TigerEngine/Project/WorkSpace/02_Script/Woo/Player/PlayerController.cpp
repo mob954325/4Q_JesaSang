@@ -175,6 +175,8 @@ void PlayerController::ChangeState(PlayerState nextState)
 
     if(curState)
         curState->Enter();
+
+    cout << "[Player] Current Sense Radius : " << curSenseRadius << endl;
 }
 
 /*-------[ Init ]-------------------------------------*/
@@ -509,4 +511,9 @@ void PlayerController::TakeAttack()
         ChangeState(PlayerState::Idle);
         ChangeState(PlayerState::Hit);
     }
+}
+
+float PlayerController::GetCurSenseRadiuse() const
+{
+    return curSenseRadius;
 }
