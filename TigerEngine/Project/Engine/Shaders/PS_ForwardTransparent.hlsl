@@ -33,6 +33,7 @@ SamplerState samLinearClamp : register(s2);
 
 float4 main(PS_INPUT input) : SV_TARGET
 {
+    return float4(1, 1, 1, 1);
     // --- [Default] ----------------------------------
     // color
     float3 base_color = float3(1.0f, 1.0f, 1.0f);
