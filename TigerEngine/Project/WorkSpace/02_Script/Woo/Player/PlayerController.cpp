@@ -512,3 +512,8 @@ void PlayerController::TakeAttack()
         ChangeState(PlayerState::Hit);
     }
 }
+
+float PlayerController::GetCurSenseRadiuse() const
+{
+    return curSenseRadius;
+}
