@@ -211,6 +211,7 @@
     <ClInclude Include="Components\VisionComponent.h" />
     <ClInclude Include="EngineSystem\AgentSystem.h" />
     <ClInclude Include="Components\UI\TextUI.h" />
+    <ClInclude Include="Components\UI\UITextDatas.h" />
     <ClInclude Include="Manager\TextureResourceManager.h" />
     <ClInclude Include="Manager\UIData\TextureResource.h" />
     <ClInclude Include="Manager\UIData\TextResource.h" />

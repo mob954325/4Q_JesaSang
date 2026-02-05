@@ -42,4 +42,6 @@ public:
     // ===== Text =====
     std::vector<UIQuadVertex> cpuVerts; // 복사할 정점 데이터
     std::vector<uint16_t> cpuInds;      // 인덱스 데이터
+
+    uint32_t maxGlyphs = 256;
 };

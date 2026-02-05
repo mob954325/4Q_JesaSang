@@ -5,6 +5,8 @@
 #include "Datas/FBXResourceData.h"
 #include "Datas/ConstantBuffer.hpp"
 #include "../Manager/UIData/TextureResource.h"    
+#include "../Components/UI/TextUI.h"
+
 
 class GameObject; // 전방선언
 
@@ -40,14 +42,15 @@ struct ImageUIRenderItem
     Vector4 uvRect;     // L, R, T, B (px)
     Vector4 params;     // x = type, y = fillAmount;
     Vector4 imageSize;  // (rectW, rectH, texW, texH)
-    TextureResource* resource;      
-
     int zOrder = -1;    // 정렬 순서
 
-    // === Text ===
-    TextResource* resource;      
+    // 이미지 리소스
+    TextureResource* resource = nullptr; 
+
+    // 텍스트 리소스
+    TextUI* textComp = nullptr;   // cpuVerts, indexCount, align, text, resource 접근
     bool isText = false;
-    bool geometryDirty = false;     // 리소스 변화 여부
+    bool geometryDirty = false;
 };
 
 /// <summary>

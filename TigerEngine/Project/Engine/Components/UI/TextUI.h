@@ -1,20 +1,7 @@
 #pragma once
 #include "../../Components/RenderComponent.h"
 #include "../../Manager/UIData/TextResource.h"
-
-struct GlyphDraw
-{
-    float x, y;   // 글리프 top-left (캔버스 좌표, y-down)
-    float w, h;   // 글리프 bitmap size
-    float u0, v0, u1, v1;
-    int advance;
-};
-
-// 정렬 타입
-enum class HAlign
-{
-    Left, Center, Right
-};
+#include "UITextDatas.h"
 
 class TextUI : public RenderComponent
 {
@@ -24,12 +11,7 @@ public:
     /// <summary>
     /// 경로에 있는 폰트 가져오기
     /// </summary>
-    void LoadFontAltas(const std::wstring fontFilePath, float fontPx, int atlasW, int altasH, int paddingPx);
-
-    /// <summary>
-    /// Builder로 재빌드가 필요한지, 추가해야하는지 확인해주고 설정
-    /// </summary>
-    void EnsureAltasForText(const std::vector<uint32_t>& cps);
+    void LoadFontAltas(const std::wstring fontFilePath, float fontPx, int atlasW, int atlasH, int paddingPx);
 
     std::wstring GetText() const;
     void SetText(std::wstring wstr);
@@ -47,9 +29,10 @@ private:
     
     HAlign alignType = HAlign::Left; // 폰트 정렬 타입
     std::wstring fontPath;			// 폰트 위치
-    float fontPx = 0;				// 폰트 크기
-    int atlasW = 0, atlasH = 0, paddingPx = 1; // 아틀라스 크기, 패딩 크기
 
     bool geometryDirty = true;
     uint32_t maxGlyphs = 256; // 초기값
+
+    std::vector<UIQuadVertex> cpuVerts{};
+    int indexCount = 0;
 };

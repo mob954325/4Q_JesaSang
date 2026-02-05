@@ -12,6 +12,7 @@
 #include "Manager/WorldManager.h"
 #include "Manager/UIManager.h"
 #include "Manager/TextureResourceManager.h"
+#include "Manager/UIManager.h"
 
 #include "Entity/Object.h"
 #include "Object/GameObject.h"
@@ -71,6 +72,7 @@ bool EngineApp::OnInitialize()
     sm.deviceContext = dxRenderer->GetDeviceContext();
 
     UIManager::Instance().SetSize(clientWidth, clientHeight);
+    UIManager::Instance().Init(dxRenderer->GetDevice(), dxRenderer->GetDeviceContext());
     TextureResourceManager::Instance().Init(dxRenderer->GetDevice(), dxRenderer->GetDeviceContext());
 
     renderQueue = std::make_unique<RenderQueue>();
