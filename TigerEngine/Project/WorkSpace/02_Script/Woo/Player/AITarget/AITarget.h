@@ -6,7 +6,7 @@
 /*
     [ AITarget Script Component ]
 
-    
+
 */
 
 class AITarget : public ScriptComponent
@@ -16,7 +16,6 @@ class AITarget : public ScriptComponent
 private:
     // components
     Transform* tr;
-    Transform* playerTr;
 
     // members..
 
@@ -29,4 +28,3 @@ public:
     nlohmann::json Serialize();
     void Deserialize(nlohmann::json data);
 };
-
