@@ -66,9 +66,6 @@ public:
 
     // [Bone] -----------------
     void CreateBoneInfo();
-
-    // [FBXData]
-    void SetData(FBXData* data);
     
 private:
     // FBX Asset Data
