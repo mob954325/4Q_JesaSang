@@ -28,7 +28,6 @@ void PlayerAnimationTest::Deserialize(nlohmann::json data)
 
 void PlayerAnimationTest::OnInitialize()
 {
-    // animController = GetOwner()->GetComponent<AnimationController>();
 }
 
 //void PlayerAnimationTest::OnStart()

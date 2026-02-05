@@ -11,7 +11,6 @@ private:
     nlohmann::json Serialize();
     void Deserialize(nlohmann::json data);
 
-    // CharacterControllerComponent* cctComp = nullptr;
     AnimationController* animController = nullptr;
     FBXData* fbxData = nullptr;
 
