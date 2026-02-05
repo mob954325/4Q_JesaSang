@@ -5,7 +5,6 @@
 #include "Datas/FBXResourceData.h"
 #include "Datas/ConstantBuffer.hpp"
 #include "../Manager/UIData/TextureResource.h"    
-#include "../Components/UI/TextUI.h"
 
 
 
