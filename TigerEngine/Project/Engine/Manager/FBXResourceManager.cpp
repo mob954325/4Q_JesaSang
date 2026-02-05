@@ -271,36 +271,10 @@ std::vector<Texture> FBXResourceManager::loadMaterialTextures(
         // CreateTextureFromFile용 wide path
         const std::wstring wfullpath = fullPath.wstring();
 
-        // ===== 추가: 로드 성공한 것만 cout + push =====
-        HRESULT hr = S_OK;
-
         if (typeName == TEXTURE_DIFFUSE)
-            hr = CreateTextureFromFile(device.Get(), wfullpath.c_str(),
-                texture.pTexture.GetAddressOf(), TextureColorSpace::SRGB);
+            CreateTextureFromFile(device.Get(), wfullpath.c_str(), texture.pTexture.GetAddressOf(), TextureColorSpace::SRGB);
         else
-            hr = CreateTextureFromFile(device.Get(), wfullpath.c_str(),
-                texture.pTexture.GetAddressOf(), TextureColorSpace::LINEAR);
-
-        if (SUCCEEDED(hr) && texture.pTexture)
-        {
-            std::cout
-                << "[Texture Loaded OK] type=" << typeName
-                << " ref=\"" << texRef << "\""
-                << " full=\"" << fullpathUtf8 << "\""
-                << "\n";
-        }
-        else
-        {
-            // 실패한 건 등록 안 함 (원하면 아래 로그 주석 해제)
-            std::cout
-                << "[Texture Load FAILED] type=" << typeName
-                << " ref=\"" << texRef << "\""
-                << " full=\"" << fullpathUtf8 << "\""
-                << " hr=0x" << std::hex << (unsigned long)hr << std::dec
-                << "\n";
-            continue;
-        }
-        // ============================================
+            CreateTextureFromFile(device.Get(), wfullpath.c_str(), texture.pTexture.GetAddressOf(), TextureColorSpace::LINEAR);
 
         texture.type = typeName;
         texture.path = texRef;
@@ -460,7 +434,6 @@ std::shared_ptr<FBXResourceAsset> FBXResourceManager::LoadFBXByPath(std::string 
 		if (!it->second.expired())
 		{
 			shared_ptr<FBXResourceAsset> assetPtr = it->second.lock();
-            std::cout << path << " alreay exist \n";
 			return assetPtr;
 		}
 		else
@@ -565,8 +538,6 @@ std::shared_ptr<FBXResourceAsset> FBXResourceManager::LoadFBXByPath(std::string 
 	// map에 저장하기
 	weak_ptr<FBXResourceAsset> weakAsset = sharedAsset;
 	assets.insert({ path, weakAsset });
-
-    std::cout << path << " first create exist \n";
 
 	return sharedAsset;
 }
