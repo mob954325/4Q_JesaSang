@@ -16,6 +16,7 @@ class AITarget : public ScriptComponent
 private:
     // components
     Transform* tr;
+    Transform* playerTr;
 
     // members..
 
