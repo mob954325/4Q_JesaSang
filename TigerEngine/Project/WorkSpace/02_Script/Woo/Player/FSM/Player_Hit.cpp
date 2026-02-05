@@ -1,4 +1,5 @@
 #include "Player_Hit.h"
+#include "../../Inventory/Inventory.h"
 
 void Player_Hit::Enter()
 {
@@ -6,6 +7,13 @@ void Player_Hit::Enter()
 
     // set speed
     player->curSpeed = player->walkSpeed * player->hitSpeedUpRate;
+
+    // set sense radius
+    player->curSenseRadius = player->walkSenseRadius;
+    if (player->inventory->GetCurItemType() == ItemType::Ingredient)
+        player->curSenseRadius += player->ingreSenseRadius;
+    else if (player->inventory->GetCurItemType() == ItemType::Food)
+        player->curSenseRadius += player->foodSenseRadius;
 
     // 3초동안은 무적상태
     player->isPlayerInvincible = true;

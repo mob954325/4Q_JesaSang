@@ -187,6 +187,7 @@
     <ClInclude Include="02_Script\Woo\Player\PlayerItemVisualizer.h" />
     <ClInclude Include="02_Script\Woo\Object\HideObject.h" />
     <ClInclude Include="02_Script\Woo\Manager\GameManager.h" />
+    <ClInclude Include="02_Script\Woo\Object\TrapObject.h" />	
     <ClInclude Include="99_Test\Intro\IntroCutSceneController.h" />
   </ItemGroup>
   <ItemGroup>
@@ -232,6 +233,7 @@
     <ClCompile Include="02_Script\Woo\Player\PlayerItemVisualizer.cpp" />
     <ClCompile Include="02_Script\Woo\Object\HideObject.cpp" />
     <ClCompile Include="02_Script\Woo\Manager\GameManager.cpp" />
+    <ClCompile Include="02_Script\Woo\Object\TrapObject.cpp" />
     <ClCompile Include="winMain.cpp" />
     <ClCompile Include="99_Test\Intro\IntroCutSceneController.cpp" />
   </ItemGroup>

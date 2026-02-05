@@ -1,4 +1,5 @@
 #include "Player_Die.h"
+#include "../../Inventory/Inventory.h"
 
 void Player_Die::Enter()
 {
@@ -6,6 +7,9 @@ void Player_Die::Enter()
 
     // set speed
     player->curSpeed = 0;
+
+    // set sense radius
+    player->curSenseRadius = 0;
 }
 
 void Player_Die::ChangeStateLogic()

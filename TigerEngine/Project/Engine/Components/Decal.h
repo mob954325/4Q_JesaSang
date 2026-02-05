@@ -22,6 +22,9 @@ public:
     // opacity
     float opacity = 1.0f;
 
+    // ground decal?
+    bool isGroundDecal = false;
+
     // ground
     float upThreshold = 0.9f;
 

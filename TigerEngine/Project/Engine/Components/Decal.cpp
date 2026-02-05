@@ -20,6 +20,7 @@ RTTR_REGISTRATION
             (rttr::policy::ctor::as_std_shared_ptr)
         .property("DecalType",     &Decal::type)
         .property("Opacity",       &Decal::opacity)
+        .property("IsGroundDecal", &Decal::isGroundDecal)
         .property("UpThreshold",   &Decal::upThreshold)
         .property("Tiling",        &Decal::tiling)
         .property("Offset",        &Decal::offset)
