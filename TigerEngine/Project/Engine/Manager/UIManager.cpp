@@ -55,7 +55,55 @@ void UIManager::Init(const ComPtr<ID3D11Device>& dev, const ComPtr<ID3D11DeviceC
     context = ctx;
 }
 
-void UIManager::Init(ComPtr<ID3D11Device>& dev, ComPtr<ID3D11DeviceContext>& ctx)
+// === Util ===
+// UTF16 CodePoint 찾기
+static void DecodeUTF16ToCodepoints(const std::wstring& s, std::vector<uint32_t>& out)
+{
+    out.clear();
+    out.reserve(s.size());
+
+    // Windows wchar_t는 UTF-16. 한글은 BMP라 대부분 1개 wchar_t지만
+    // 이모지 등 surrogate pair도 안전하게 처리.
+    for (size_t i = 0; i < s.size(); ++i)
+    {
+        uint32_t wc = (uint32_t)s[i]; // 한글자 값 코드
+
+        if (wc >= 0xD800 && wc <= 0xDBFF && (i + 1) < s.size()) // 한글이면 좌표 찾기 ( codePoint )
+        {
+            uint32_t wc2 = (uint32_t)s[i + 1];
+            if (wc2 >= 0xDC00 && wc2 <= 0xDFFF)
+            {
+                uint32_t high = wc - 0xD800;
+                uint32_t low = wc2 - 0xDC00;
+                uint32_t cp = (high << 10) + low + 0x10000;
+                out.push_back(cp);
+                ++i;
+                continue;
+            }
+        }
+
+        out.push_back(wc);
+    }
+}
+
+// 라인 짜르기
+static void SplitLines(const std::vector<uint32_t>& cps,
+    std::vector<std::pair<size_t, size_t>>& lines)
+{
+    lines.clear();
+    size_t start = 0;
+    for (size_t i = 0; i < cps.size(); ++i)
+    {
+        if (cps[i] == (uint32_t)L'\n') // 글자에 줄 바꿈 문자가 있으면 쪼개기 ( lines 컨테이너에 push )
+        {
+            lines.push_back({ start, i }); // [start, i)
+            start = i + 1;
+        }
+    }
+    lines.push_back({ start, cps.size() });
+}
+
+void UIManager::Init(const ComPtr<ID3D11Device>& dev, const ComPtr<ID3D11DeviceContext>& ctx)
 {
     device = dev;
     context = ctx;
