@@ -29,6 +29,7 @@
 #include "../JesaSang/JesaSangManager.h"
 #include "../Altar/AltarManager.h"
 #include "PlayerItemVisualizer.h"
+#include "../Manager/GameManager.h"
 
 
 REGISTER_COMPONENT(PlayerController)
@@ -478,7 +479,7 @@ void PlayerController::TakeAttack()
     {
         curLife = 0;
         ChangeState(PlayerState::Die);
-        // TODO :: GameManager
+        GameManager::Instance()->GameOver();
 
         return;
     }
