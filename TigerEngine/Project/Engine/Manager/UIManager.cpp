@@ -86,7 +86,7 @@ void UIManager::LoadFontAtlas(const std::wstring fontFilePath, TextResource* res
 
 void UIManager::RebuildGeometry(std::wstring path,
                                 std::wstring text, 
-                                Vector2& size, // size
+                                Vector2& offset,
                                 HAlign alignType,
                                 TextResource* resource, 
                                 std::vector<UIQuadVertex>& cpuVerts, 
@@ -119,8 +119,8 @@ void UIManager::RebuildGeometry(std::wstring path,
         float lineW = MeasureWidthCP(resource, cps, lb, le);
         float offsetX = 0.0f;
 
-        if (alignType == HAlign::Center) offsetX = (size.x - lineW) * 0.5f;
-        else if (alignType == HAlign::Right) offsetX = (size.x - lineW);
+        if (alignType == HAlign::Center) offsetX = (offset.x - lineW) * 0.5f;
+        else if (alignType == HAlign::Right) offsetX = (offset.x - lineW);
 
         float penX = offsetX;
         float baselineY = penY;

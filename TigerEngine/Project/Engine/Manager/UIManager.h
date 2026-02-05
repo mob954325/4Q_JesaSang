@@ -31,7 +31,7 @@ public:
     void LoadFontAtlas( const std::wstring fontFilePath, TextResource* resource);
     void RebuildGeometry(std::wstring path,                         // 폰트 경로
                          std::wstring wstr,                         // textui 글자
-                         Vector2& size,                       // 사용하는 rect
+                         Vector2& offset,                           // offset
                          HAlign alignType,                          // 정렬 타입
                          TextResource* resource,                    // textui 리소스
                          std::vector<UIQuadVertex>& cpuVerts,       // 정점 데이터

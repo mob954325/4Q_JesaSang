@@ -280,6 +280,7 @@
     <ClInclude Include="Util\AnimatorParameter.h" />
     <ClInclude Include="Util\CollisionLayer.h" />
     <ClInclude Include="Util\ComponentAutoRegister.h" />
+    <ClInclude Include="Util\EncodeConvertHelper.h" />
     <ClInclude Include="Util\FontAtlasBuild.h" />
     <ClInclude Include="Util\JsonHelper.h" />
     <ClInclude Include="Util\PathHelper.h" />

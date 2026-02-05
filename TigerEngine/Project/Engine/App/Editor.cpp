@@ -1559,7 +1559,7 @@ void Editor::RenderComponentInfo(std::string compName, T* comp)
 
                         // 기존 로직 유지: Decal이면 ChangeData 호출 (string 필요시 utf8 전달)
                         auto* textUI = dynamic_cast<TextUI*>(comp);
-                        if (textUI) textUI->LoadFontAltas(relativeW);
+                        if (textUI) textUI->LoadFontAtlas(relativeW);
                     }
                     ImGuiFileDialog::Instance()->Close();
                 }

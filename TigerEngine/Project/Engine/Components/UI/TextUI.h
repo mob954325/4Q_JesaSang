@@ -4,6 +4,11 @@
 #include "UITextDatas.h"
 #include "../../RenderPass/Renderable/UIQuadVertex.h"
 
+
+/// <summary>
+/// text 그리는 컴포넌트
+/// 최초 폰트 경로를 얻을 때 리소스가 생성되며 이후 .reset을 사용해 초기화 후 갱신
+/// </summary>
 class TextUI : public RenderComponent
 {
     RTTR_ENABLE(RenderComponent)
@@ -13,7 +18,7 @@ public:
     /// <summary>
     /// 경로에 있는 폰트 가져오기
     /// </summary>
-    void LoadFontAltas(const std::wstring fontFilePath, float fontPx = 32, int atlasW = 2048, int atlasH = 2048, int paddingPx = 1);
+    void LoadFontAtlas(const std::wstring fontFilePath, int atlasW = 2048, int atlasH = 2048, int paddingPx = 1);
 
     std::wstring GetText() const;
     void SetText(std::wstring wstr);
@@ -25,6 +30,14 @@ public:
 
     const std::shared_ptr<TextResource>& GetResoucre();
 
+    int GetFontSize() const;
+    void SetFontSize(int px); // NOTE 아틀라스 크기보다 폰트양이 많으면 터지기 때문에 적당히 키운다. 
+
+    nlohmann::json Serialize() override;
+    void Deserialize(nlohmann::json data) override;
+
+
+// Private:
     // 자원
     std::shared_ptr<TextResource> resource{}; // atlas
 
@@ -33,6 +46,11 @@ public:
     
     HAlign alignType = HAlign::Left; // 폰트 정렬 타입
     std::wstring fontPath;			// 폰트 위치
+
+    int fontSize = 1; // px
+    int atlasW = 2048;
+    int atlasH = 2048;
+    int paddingPx = 1;
 
     bool geometryDirty = true;
     uint32_t maxGlyphs = 256; // 초기값

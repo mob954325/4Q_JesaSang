@@ -69,6 +69,7 @@ void UIRenderPass::Execute(ComPtr<ID3D11DeviceContext>& context, RenderQueue& qu
             auto resource = t->GetResoucre();
             if (!t || !resource || !resource->atlas.srv) continue; // 자원이 존재하지 않음
 
+            int fontPx = t->fontSize;
             Vector2 rectSize = Vector2(item.imageSize.x, item.imageSize.y);
 
             if (item.geometryDirty)
