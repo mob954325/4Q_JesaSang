@@ -55,6 +55,12 @@ void UIManager::Init(const ComPtr<ID3D11Device>& dev, const ComPtr<ID3D11DeviceC
     context = ctx;
 }
 
+void UIManager::Init(ComPtr<ID3D11Device>& dev, ComPtr<ID3D11DeviceContext>& ctx)
+{
+    device = dev;
+    context = ctx;
+}
+
 void UIManager::SetSize(int w, int h)
 {
     width = w;
