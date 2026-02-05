@@ -3,6 +3,7 @@
 #include "System/InputSystem.h"
 #include "../../Camera/CameraController.h"
 #include "../../Object/HideObject.h"
+#include "../../Inventory/Inventory.h"
 
 void Player_Hide::Enter()
 {
@@ -16,6 +17,9 @@ void Player_Hide::Enter()
 
     // set speed
     player->curSpeed = 0;
+
+    // set sense radius
+    player->curSenseRadius = 0;
 
     //cout << "[Player] Enter Hide State" << endl;
 }
