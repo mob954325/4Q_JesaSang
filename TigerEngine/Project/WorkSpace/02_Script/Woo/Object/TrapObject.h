@@ -21,11 +21,11 @@ class TrapObject : public ScriptComponent
 
 private:
     // cur
-    float wavelength = 0.0f;
+    float waveRadius = 0.0f;
 
     // data
-    float walkWaveLength = 1.5;
-    float runWaveLength = 3.0;
+    float walkWaveRadius = 1.5;
+    float runWaveRadius = 3.0;
     float coolTime = 5.0f;
 
     // rewave cool time

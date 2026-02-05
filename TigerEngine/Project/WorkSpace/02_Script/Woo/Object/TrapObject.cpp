@@ -32,7 +32,7 @@ void TrapObject::OnUpdate(float delta)
 
         // clear
         coolTimer = 0.0f;
-        wavelength = 0.0f;
+        waveRadius = 0.0f;
     }
 }
 
@@ -62,11 +62,11 @@ void TrapObject::OnCCTTriggerEnter(CharacterControllerComponent* other)
     switch (state)
     {
     case PlayerState::Walk:
-        wavelength = walkWaveLength;
+        waveRadius = walkWaveRadius;
         break;
     case PlayerState::Run:
     case PlayerState::Hit:
-        wavelength = runWaveLength;
+        waveRadius = runWaveRadius;
         break;
     default:
         return; // 파장 발생 안 함
@@ -89,10 +89,13 @@ void TrapObject::StartTriggerWave()
     isPossibleWave = false;
     coolTimer = 0.0f;
 
-    cout << "[TrapObject] : Start Trap Trigger Wave. Range : " << wavelength << endl;
+    cout << "[TrapObject] : Start Trap Trigger Wave. Range : " << waveRadius << endl;
 }
 
 void TrapObject::NotifyAIInRange()
 {
     // TODO :: 선민이 AI 찾아서 Call 하는 함수 호출
+    /*
+        파동 발생한 즉시 월드의 AI를 모두 찾아서 dist > waveLength보다 크다면 AI Called
+    */
 }
