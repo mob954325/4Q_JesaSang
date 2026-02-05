@@ -29,8 +29,13 @@ public:
     float ambVolume = 1.0f;
 
 private:
+    void EnsureInitialized();
+    void ApplySettings();
+
     AudioSource m_Bgm{};
     AudioSource m_Amb{};
+    bool m_Initialized = false;
+    bool m_Dirty = true;
     bool m_HasStarted = false;
     bool m_WasPaused = false;
 
