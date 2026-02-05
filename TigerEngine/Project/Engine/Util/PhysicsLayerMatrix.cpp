@@ -38,8 +38,6 @@ void PhysicsLayerMatrix::Initialize()
     s_Matrix[LayerToIndex(CollisionLayer::Ground)] &= ~(uint32_t)CollisionLayer::Vision;
     s_Matrix[LayerToIndex(CollisionLayer::Vision)] &= ~(uint32_t)CollisionLayer::Ground;
 
-    // Vision 과 Player 
-    s_Matrix[LayerToIndex(CollisionLayer::Vision)] & (uint32_t)CollisionLayer::Player;
 
     // IgnoreTest <-> Ball : 서로 충돌 안 함
     //s_Matrix[LayerToIndex(CollisionLayer::IgnoreTest)] &= ~(uint32_t)CollisionLayer::Ball;

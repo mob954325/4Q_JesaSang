@@ -64,7 +64,7 @@ void AdultGhostController::OnFixedUpdate(float dt)
     auto* player = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("Player");
     if (player)
     {
-        std::cout << "[player]" << player->GetName() << " is " << (int)player->GetComponent<CharacterControllerComponent>()->GetLayer() << std::endl;
+        // std::cout << "[player]" << player->GetName() << " is " << (int)player->GetComponent<CharacterControllerComponent>()->GetLayer() << std::endl;
         if (vision->CheckVision(player, 90, 400))
         {
             std::cout << "[AdultGhostController]" << GetOwner()->GetName() << " is PLAYER FOUND !" << std::endl;

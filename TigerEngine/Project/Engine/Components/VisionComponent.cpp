@@ -4,6 +4,7 @@
 #include "../Components/Transform.h"
 #include "../Object/GameObject.h"
 #include "../Util/PhysXUtils.h"
+#include "../Util/PhysicsLayerMatrix.h"
 
 
 static float Deg2Rad(float deg)
@@ -50,11 +51,11 @@ bool VisionComponent::CheckVision(
     m_LastDebug.dist = maxDistance;
     m_LastDebug.valid = true;
 
-    auto* selfTr = GetOwner()->GetTransform();
-    auto* targetTr = target->GetTransform();
+    auto* selfTr = GetOwner()->GetTransform();  //GetOwner()->GetTransform();
+    auto* targetTr = target->GetTransform();  //target->GetTransform();
 
     Vector3 origin = selfTr->GetWorldPosition();
-    origin.y += 100.0f;
+    origin.y += 50.0f;
     // origin.z += 20.0f;
     Vector3 forward = selfTr->GetForward();
 
@@ -89,20 +90,49 @@ bool VisionComponent::CheckVision(
         dirPx,
         maxDistPx,
         hits,
-        CollisionLayer::Vision,   // Floor 제외
+        CollisionLayer::Default, 
         QueryTriggerInteraction::Ignore,
-        false))
-        return false;
-
-
-    auto* first = hits.front().component;
-    if (first)
+        true)) // 모든 히트 수집
     {
-        auto* obj = first->GetOwner();
-        std::cout << "[Vision] Ray hit -> " << "Object: " << obj->GetName() << " | Layer: " << (uint32_t)first->GetLayer() << std::endl;
+        return false;
     }
 
-    return first && first->GetOwner() == target;
+    // 거리 순 정렬 (가장 가까운 히트가 front)
+    std::sort(hits.begin(), hits.end(),
+        [](const RaycastHit& a, const RaycastHit& b)
+        {
+            return a.distance < b.distance;
+        });
+
+    // 첫 번째 유효 히트 찾기
+    PhysicsComponent* firstComp = nullptr;
+    for (auto& hit : hits)
+    {
+        if (!hit.component) continue;
+
+        bool isTrigger = hit.shape->getFlags() & PxShapeFlag::eTRIGGER_SHAPE;
+        if (isTrigger) continue; // Trigger 무시
+
+        if (!PhysicsLayerMatrix::CanCollide(CollisionLayer::Default, hit.component->GetLayer()))
+            continue;
+
+        std::cout << "  Object: " << hit.component->GetOwner()->GetName()
+            << " | Layer: " << (uint32_t)hit.component->GetLayer()
+            << " | Distance: " << hit.distance
+            << std::endl;
+
+        firstComp = hit.component;
+        break;
+    }
+
+    if (firstComp)
+    {
+        auto* obj = firstComp->GetOwner();
+        std::cout << "[Vision] Ray hit -> Object: " << obj->GetName() << " | Layer: " << (uint32_t)firstComp->GetLayer() << std::endl;
+    }
+
+    // 타겟과 첫 히트 객체 비교
+    return firstComp && firstComp->GetOwner() == target;
 }
 
 
@@ -113,7 +143,7 @@ void VisionComponent::DrawDebugVision()
 
     auto* tr = GetOwner()->GetTransform();
     Vector3 origin = tr->GetWorldPosition();
-    origin.y += 100.0f;               // CheckVision과 동일
+    origin.y += 50.0f;               // CheckVision과 동일
     Vector3 forward = tr->GetForward();
     Vector3 right = tr->GetRight();
 
@@ -144,7 +174,7 @@ void VisionComponent::DrawDebugVision()
             dirPx,
             maxDistPx,
             hits,
-            CollisionLayer::Vision,          
+            CollisionLayer::Default,          
             QueryTriggerInteraction::Ignore,
             false                             // BLOCK 하나
         ))
