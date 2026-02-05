@@ -1,4 +1,5 @@
 #include "Player_Idle.h"
+#include "../../Inventory/Inventory.h"
 
 void Player_Idle::Enter()
 {
@@ -6,6 +7,13 @@ void Player_Idle::Enter()
 
     // set speed
     player->curSpeed = 0;
+
+    // set sense radius
+    player->curSenseRadius = player->idleSenseRadius;
+    if (player->inventory->GetCurItemType() == ItemType::Ingredient)
+        player->curSenseRadius += player->ingreSenseRadius;
+    else if (player->inventory->GetCurItemType() == ItemType::Food)
+        player->curSenseRadius += player->foodSenseRadius;
 }
 
 void Player_Idle::ChangeStateLogic()

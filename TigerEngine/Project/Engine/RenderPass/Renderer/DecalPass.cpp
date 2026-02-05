@@ -27,11 +27,6 @@ void DecalPass::Execute(ComPtr<ID3D11DeviceContext>& context, RenderQueue& queue
     context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
     context->IASetInputLayout(sm.inputLayout_Position.Get());
 
-    // DSS - Stencil Test(ground)
-    const UINT stencilRef = 0x01;   // Stencil Reference Value
-    context->OMSetDepthStencilState(sm.groundTestDSS.Get(), stencilRef);   // groudn decal
-    //context->OMSetDepthStencilState(sm.depthTestOnlyDSS.Get(), 0);       // all object decal
-
     // Shader
     context->VSSetShader(sm.VS_Decal.Get(), nullptr, 0);
     context->PSSetShader(sm.PS_Decal.Get(), nullptr, 0);
@@ -55,10 +50,18 @@ void DecalPass::Execute(ComPtr<ID3D11DeviceContext>& context, RenderQueue& queue
     sm.transformCBData.invViewProjection = XMMatrixTranspose(XMMatrixInverse(nullptr, view * projection));
     context->UpdateSubresource(sm.transformCB.Get(), 0, nullptr, &sm.transformCBData, 0, 0);
 
+    const UINT stencilRef = 0x01;   // Stencil Reference Value
+
     // Render
     auto decals = DecalSystem::Instance().GetComponents();
     for(Decal* decal : decals)
     {
+        // DSS - Stencil Test(ground or all)
+        if(decal->isGroundDecal)
+            context->OMSetDepthStencilState(sm.groundTestDSS.Get(), stencilRef); 
+        else
+            context->OMSetDepthStencilState(sm.depthTestOnlyDSS.Get(), 0);       
+
         decalVolume->UpdateWolrd(decal);
         decalVolume->Draw(context, decal);
     }

@@ -25,61 +25,15 @@ RTTR_REGISTRATION
 
 void AudioManagerComponent::OnInitialize()
 {
-    auto& system = AudioManager::Instance().GetSystem();
-    if (auto* fmodSystem = system.GetSystem())
-    {
-        m_Bgm.Init(fmodSystem);
-        m_Amb.Init(fmodSystem);
-    }
+    EnsureInitialized();
 }
 
 void AudioManagerComponent::OnUpdate(float delta)
 {
     (void)delta;
 
-    auto& system = AudioManager::Instance().GetSystem();
-
-    // apply inspector changes live
-    if (bgmGroup != m_LastBgmGroup && !bgmGroup.empty())
-    {
-        m_Bgm.SetChannelGroup(system.GetOrCreateChannelGroup(bgmGroup));
-        m_LastBgmGroup = bgmGroup;
-    }
-    if (ambGroup != m_LastAmbGroup && !ambGroup.empty())
-    {
-        m_Amb.SetChannelGroup(system.GetOrCreateChannelGroup(ambGroup));
-        m_LastAmbGroup = ambGroup;
-    }
-    if (bgmClipId != m_LastBgmClipId && !bgmClipId.empty())
-    {
-        m_Bgm.SetClip(AudioManager::Instance().GetOrCreateClip(bgmClipId));
-        m_LastBgmClipId = bgmClipId;
-    }
-    if (ambClipId != m_LastAmbClipId && !ambClipId.empty())
-    {
-        m_Amb.SetClip(AudioManager::Instance().GetOrCreateClip(ambClipId));
-        m_LastAmbClipId = ambClipId;
-    }
-    if (loopBgm != m_LastLoopBgm)
-    {
-        m_Bgm.SetLoop(loopBgm);
-        m_LastLoopBgm = loopBgm;
-    }
-    if (loopAmb != m_LastLoopAmb)
-    {
-        m_Amb.SetLoop(loopAmb);
-        m_LastLoopAmb = loopAmb;
-    }
-    if (bgmVolume != m_LastBgmVolume)
-    {
-        m_Bgm.SetVolume(bgmVolume);
-        m_LastBgmVolume = bgmVolume;
-    }
-    if (ambVolume != m_LastAmbVolume)
-    {
-        m_Amb.SetVolume(ambVolume);
-        m_LastAmbVolume = ambVolume;
-    }
+    EnsureInitialized();
+    ApplySettings();
 
     PlayModeState curr = PlayModeSystem::Instance().GetPlayMode();
 
@@ -135,6 +89,8 @@ void AudioManagerComponent::OnDestory()
     m_Amb.Stop();
     m_HasStarted = false;
     m_WasPaused = false;
+    m_Initialized = false;
+    m_Dirty = true;
 }
 
 nlohmann::json AudioManagerComponent::Serialize()
@@ -145,4 +101,84 @@ nlohmann::json AudioManagerComponent::Serialize()
 void AudioManagerComponent::Deserialize(nlohmann::json data)
 {
     JsonHelper::SetDataFromJson(this, data);
+    m_Dirty = true;
+}
+
+void AudioManagerComponent::EnsureInitialized()
+{
+    if (m_Initialized)
+    {
+        return;
+    }
+
+    auto& system = AudioManager::Instance().GetSystem();
+    if (auto* fmodSystem = system.GetSystem())
+    {
+        m_Bgm.Init(fmodSystem);
+        m_Amb.Init(fmodSystem);
+        m_Initialized = true;
+    }
+}
+
+void AudioManagerComponent::ApplySettings()
+{
+    if (!m_Initialized)
+    {
+        return;
+    }
+
+    auto& system = AudioManager::Instance().GetSystem();
+
+    const bool groupChanged = bgmGroup != m_LastBgmGroup || ambGroup != m_LastAmbGroup;
+    const bool clipChanged = bgmClipId != m_LastBgmClipId || ambClipId != m_LastAmbClipId;
+    const bool loopChanged = loopBgm != m_LastLoopBgm || loopAmb != m_LastLoopAmb;
+    const bool volumeChanged = bgmVolume != m_LastBgmVolume || ambVolume != m_LastAmbVolume;
+
+    if (!m_Dirty && !groupChanged && !clipChanged && !loopChanged && !volumeChanged)
+    {
+        return;
+    }
+
+    if (!bgmGroup.empty() && (m_Dirty || bgmGroup != m_LastBgmGroup))
+    {
+        m_Bgm.SetChannelGroup(system.GetOrCreateChannelGroup(bgmGroup));
+        m_LastBgmGroup = bgmGroup;
+    }
+    if (!ambGroup.empty() && (m_Dirty || ambGroup != m_LastAmbGroup))
+    {
+        m_Amb.SetChannelGroup(system.GetOrCreateChannelGroup(ambGroup));
+        m_LastAmbGroup = ambGroup;
+    }
+    if (!bgmClipId.empty() && (m_Dirty || bgmClipId != m_LastBgmClipId))
+    {
+        m_Bgm.SetClip(AudioManager::Instance().GetOrCreateClip(bgmClipId));
+        m_LastBgmClipId = bgmClipId;
+    }
+    if (!ambClipId.empty() && (m_Dirty || ambClipId != m_LastAmbClipId))
+    {
+        m_Amb.SetClip(AudioManager::Instance().GetOrCreateClip(ambClipId));
+        m_LastAmbClipId = ambClipId;
+    }
+    if (m_Dirty || loopBgm != m_LastLoopBgm)
+    {
+        m_Bgm.SetLoop(loopBgm);
+        m_LastLoopBgm = loopBgm;
+    }
+    if (m_Dirty || loopAmb != m_LastLoopAmb)
+    {
+        m_Amb.SetLoop(loopAmb);
+        m_LastLoopAmb = loopAmb;
+    }
+    if (m_Dirty || bgmVolume != m_LastBgmVolume)
+    {
+        m_Bgm.SetVolume(bgmVolume);
+        m_LastBgmVolume = bgmVolume;
+    }
+    if (m_Dirty || ambVolume != m_LastAmbVolume)
+    {
+        m_Amb.SetVolume(ambVolume);
+        m_LastAmbVolume = ambVolume;
+    }
+
+    m_Dirty = false;
 }

@@ -10,14 +10,21 @@ RTTR_REGISTRATION
             (rttr::policy::ctor::as_std_shared_ptr);
 }
 
-void AudioListenerComponent::OnInitialize()
+void AudioListenerComponent::OnStart()
 {
-    Init(&AudioManager::Instance().GetSystem());
+    if (!m_System)
+    {
+        Init(&AudioManager::Instance().GetSystem());
+    }
 }
 
 void AudioListenerComponent::OnUpdate(float delta)
 {
     (void)delta;
+    if (!m_System)
+    {
+        Init(&AudioManager::Instance().GetSystem());
+    }
     Update();
 }
 
@@ -65,10 +72,10 @@ void AudioListenerComponent::Update()
 
 void AudioListenerComponent::Enable_Inner()
 {
-    OnEnable();
+    Component::Enable_Inner();
 }
 
 void AudioListenerComponent::Disable_Inner()
 {
-    OnDisable();
+    Component::Disable_Inner();
 }

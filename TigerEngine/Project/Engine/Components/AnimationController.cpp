@@ -1,6 +1,7 @@
 #include "AnimationController.h"
 #include"../Object/GameObject.h"
 #include "../Components/FBXData.h"
+#include "../Util/JsonHelper.h"
 
 
 RTTR_REGISTRATION
@@ -10,36 +11,48 @@ RTTR_REGISTRATION
             (rttr::policy::ctor::as_std_shared_ptr);
 }
 
-void AnimationController::Initialize(const SkeletonInfo* skeleton)
+nlohmann::json AnimationController::Serialize()
 {
-    AnimatorInstance.Initialize(skeleton);
+    return JsonHelper::MakeSaveData(this);
 }
 
-void AnimationController::OnStart()
+void AnimationController::Deserialize(nlohmann::json data)
 {
-    // FBXData에서 skeletal info 가져오기
+    JsonHelper::SetDataFromJson(this, data);
+}
+
+void AnimationController::Enable_Inner()
+{
+    ScriptSystem::Instance().Register(this); // AnimationSystem X 
+    OnEnable();
+}
+
+void AnimationController::Disable_Inner()
+{
+    ScriptSystem::Instance().UnRegister(this); // AnimationSystem X 
+    OnDisable();
+}
+
+
+// ------------------------------------------------------
+
+void AnimationController::OnInitialize()
+{
     auto fbx = GetOwner()->GetComponent<FBXData>();
     if (fbx && fbx->GetFBXInfo())
     {
-        Initialize(&fbx->GetFBXInfo()->skeletalInfo);  // Animator 초기화
+        AnimatorInstance.Initialize(&fbx->GetFBXInfo()->skeletalInfo); // Animator 초기화
     }
-
-    AnimationSystem::Instance().Register(this);
 }
 
-void AnimationController::Update(float dt)
+void AnimationController::OnUpdate(float delta)
 {
     if (CurrentState)
     {
-        CurrentState->OnUpdate(dt);
+        CurrentState->OnUpdate(delta);
     }
 
-    AnimatorInstance.Update(dt);
-}
-
-void AnimationController::OnDestory()
-{
-    AnimationSystem::Instance().UnRegister(this);
+    AnimatorInstance.Update(delta);
 }
 
 
@@ -86,51 +99,4 @@ const Animation* AnimationController::FindClip(const std::string& name)
             return &anim;
     }
     return nullptr;
-}
-
-
-nlohmann::json AnimationController::Serialize()
-{
-    nlohmann::json datas;
-
-    rttr::type t = rttr::type::get(*this);
-    datas["type"] = t.get_name().to_string();
-    datas["properties"] = nlohmann::json::object(); // 객체 생성
-
-    for (auto& prop : t.get_properties())
-    {
-        std::string propName = prop.get_name().to_string();
-        rttr::variant value = prop.get_value(*this);
-        if (value.is_type<float>())
-        {
-            auto v = value.get_value<float>();
-            datas["properties"][propName] = v;
-        }
-    }
-
-    return datas;
-}
-
-void AnimationController::Deserialize(nlohmann::json data)
-{
-    auto propData = data["properties"];
-
-    rttr::type t = rttr::type::get(*this);
-    for (auto& prop : t.get_properties())
-    {
-        std::string propName = prop.get_name().to_string();
-        rttr::variant value = prop.get_value(*this);
-    }
-}
-
-void AnimationController::Enable_Inner()
-{
-    AnimationSystem::Instance().Register(this);
-    OnEnable();
-}
-
-void AnimationController::Disable_Inner()
-{
-    AnimationSystem::Instance().UnRegister(this);
-    OnDisable();
 }

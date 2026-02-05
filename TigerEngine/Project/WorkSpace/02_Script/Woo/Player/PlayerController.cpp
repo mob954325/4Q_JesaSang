@@ -29,6 +29,7 @@
 #include "../JesaSang/JesaSangManager.h"
 #include "../Altar/AltarManager.h"
 #include "PlayerItemVisualizer.h"
+#include "../Manager/GameManager.h"
 
 
 REGISTER_COMPONENT(PlayerController)
@@ -179,7 +180,7 @@ void PlayerController::ChangeState(PlayerState nextState)
 /*-------[ Init ]-------------------------------------*/
 void PlayerController::InitStat()
 {
-
+    curLife = life;
 }
 
 /*-------[ Input ]-------------------------------------*/
@@ -389,6 +390,11 @@ void PlayerController::GetItemAltarInteraction(float dt)
 }
     
 
+PlayerState PlayerController::GetPlayerState()
+{
+    return state;
+}
+
 /*----------- 외부 호출 Funcs.. -------------------------*/
 void PlayerController::SetCurSearchObject(SearchObject* object)
 {
@@ -466,16 +472,51 @@ void PlayerController::ReceiveMiniGameItem(unique_ptr<IItem> ingredient)
 
 void PlayerController::TakeAttack()
 {
+    // 이미 죽은상태 return
+    if (state == PlayerState::Die) return;
+
+    // 무적상태 return
+    if (isPlayerInvincible)
+    {
+        cout << "[Player] TakeAttack Fail! isPlayerInvincible" << endl;
+        return;
+    }
+    
     cout << "[Player] Take Damage! " << endl;
 
     // 아이템이 있다면 제단에 올라감
     if (inventory->HasItem())
     {
-        std::unique_ptr<IItem> item =  inventory->TakeCurItem();
+        std::unique_ptr<IItem> item = inventory->TakeCurItem();
+        visualizer->VisualOffItem();
         AltarManager::Instance()->ReceiveItem(std::move(item));
         cout << "[Player] Drop Item... " << endl;
     }
 
+    // Die
+    curLife--;
+    
+    if (curLife <= 0)
+    {
+        curLife = 0;
+        ChangeState(PlayerState::Die);
+        GameManager::Instance()->GameOver();
+
+        return;
+    }
+
     // Hit (패닉)
-    ChangeState(PlayerState::Hit);
+    if(state != PlayerState::Hit)
+        ChangeState(PlayerState::Hit);
+    else
+    {
+        // 이미 패닉상태였을경우 재시작 (무적상태는 위에서 return)
+        ChangeState(PlayerState::Idle);
+        ChangeState(PlayerState::Hit);
+    }
+}
+
+float PlayerController::GetCurSenseRadiuse() const
+{
+    return curSenseRadius;
 }
