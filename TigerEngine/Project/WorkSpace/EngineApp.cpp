@@ -86,9 +86,7 @@ bool EngineApp::OnInitialize()
     // == find scene ==
     LoadSavedFirstScene(); // SceneClear 호출해서 객채 생성은 이 코드 이후에 해야함 
 
-#if _DEBUG
     auto freeCamHandle = CameraSystem::Instance().CreateFreeCamera(clientWidth, clientHeight, SceneSystem::Instance().GetCurrentScene().get());
-#endif
 
 
 	// == init renderpass ==

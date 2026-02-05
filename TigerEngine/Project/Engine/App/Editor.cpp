@@ -1117,13 +1117,9 @@ void Editor::RenderGizmo()
         return;
     if (!selectedObject || selectedObject->IsDestory())
         return;
-    if (PlayModeSystem::Instance().IsPlaying())
-        return;
-
     Transform* transform = selectedObject->GetTransform();
     if (!transform)
         return;
-
     Camera* cam = CameraSystem::Instance().GetFreeCamera();
     if (!cam)
         return;
@@ -2043,4 +2039,3 @@ void Editor::OnInputProcess(const Keyboard::State &KeyState, const Keyboard::Key
         }
     }
 }
-#endif
