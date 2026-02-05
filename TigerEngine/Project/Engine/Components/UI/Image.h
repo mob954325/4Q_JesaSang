@@ -2,18 +2,13 @@
 #include "../RenderComponent.h"
 #include "../../Manager/UIData/TextureResource.h"
 #include "../../Components/RectTransform.h"
+#include "UITypeDatas.h"
 
 enum class ImageType
 {
     Simple,		// 기본 이미지 출력
     Sliced,		// 9-Sliced
     Fill		// 이미지 채우기
-};
-
-enum class DrawSpaceType
-{
-    Screen,
-    World
 };
 
 /// <summary>

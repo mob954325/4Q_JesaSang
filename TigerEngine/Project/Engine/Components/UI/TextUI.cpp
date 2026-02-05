@@ -25,7 +25,8 @@ rttr::registration::class_<TextUI>("TextUI")
                 .property("fontSize", &TextUI::GetFontSize, &TextUI::SetFontSize)
                 .property("atlasW", &TextUI::atlasW)
                 .property("atlasH", &TextUI::atlasH)
-                .property("paddingPx", &TextUI::paddingPx);
+                .property("paddingPx", &TextUI::paddingPx)
+                .property("drawSpacetype", &TextUI::GetDrawSpace, &TextUI::SetDrawSpace);
 }
 
 void TextUI::OnRender(RenderQueue& queue)
@@ -43,6 +44,10 @@ void TextUI::OnRender(RenderQueue& queue)
     item.color = color;
     item.worldMat = rect->GetWorldMatrix();
     item.imageSize = Vector4(rect->GetSize().x, rect->GetSize().y, 0, 0);
+    if (drawSpacetype == DrawSpaceType::World)
+        item.isWorldSpace = true;
+    else
+        item.isWorldSpace = false;
 
     queue.AddUIRenderQueue(item);
 

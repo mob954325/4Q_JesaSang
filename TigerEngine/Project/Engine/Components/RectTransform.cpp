@@ -112,7 +112,7 @@ void RectTransform::UpdateMatricesIfDirty()
     Matrix T0 = Matrix::CreateTranslation(-pivot.x, -pivot.y, 0.0f);
     Matrix S = Matrix::CreateScale({ size.x, size.y, 1.0f });         // size = px
     Matrix R = Matrix::CreateFromYawPitchRoll(r.y, r.x, r.z);
-    Matrix T1 = Matrix::CreateTranslation({ pos.x, pos.y, 0.0f });
+    Matrix T1 = Matrix::CreateTranslation({ pos.x, pos.y, pos.z });
 
     localMatrix = T0 * S * R * T1;
 

@@ -3,7 +3,7 @@
 #include "../../Manager/UIData/TextResource.h"
 #include "UITextDatas.h"
 #include "../../RenderPass/Renderable/UIQuadVertex.h"
-
+#include "UITypeDatas.h"
 
 /// <summary>
 /// text 그리는 컴포넌트
@@ -33,9 +33,11 @@ public:
     int GetFontSize() const;
     void SetFontSize(int px); // NOTE 아틀라스 크기보다 폰트양이 많으면 터지기 때문에 적당히 키운다. 
 
+    DrawSpaceType GetDrawSpace() const { return drawSpacetype; }
+    void SetDrawSpace(DrawSpaceType value) { drawSpacetype = value; }
+
     nlohmann::json Serialize() override;
     void Deserialize(nlohmann::json data) override;
-
 
 // Private:
     // 자원
@@ -43,7 +45,8 @@ public:
 
     Color color{};          // 글자 색깔
     std::wstring text{};    // 출력할 텍스트
-    
+
+    DrawSpaceType drawSpacetype = DrawSpaceType::Screen;
     HAlign alignType = HAlign::Left; // 폰트 정렬 타입
     std::wstring fontPath;			// 폰트 위치
 
