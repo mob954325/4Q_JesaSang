@@ -32,20 +32,6 @@ RTTR_REGISTRATION
 
 void AudioTestController::OnInitialize()
 {
-    if (auto owner = GetOwner())
-    {
-        m_Transform = owner->GetTransform();
-        m_Source = owner->GetComponent<AudioSourceComponent>();
-        m_Listener = owner->GetComponent<AudioListenerComponent>();
-
-        if (m_Transform)
-        {
-            const Vector3 pos = m_Transform->GetWorldPosition();
-            m_Center = pos;
-            m_PrevPosSource = pos;
-            m_PrevPosListener = pos;
-        }
-    }
 }
 
 void AudioTestController::OnUpdate(float delta)
@@ -58,6 +44,14 @@ void AudioTestController::OnUpdate(float delta)
             if (!m_Source) m_Source = owner->GetComponent<AudioSourceComponent>();
             if (!m_Listener) m_Listener = owner->GetComponent<AudioListenerComponent>();
         }
+    }
+    if (!m_HasInit && m_Transform)
+    {
+        const Vector3 pos = m_Transform->GetWorldPosition();
+        m_Center = pos;
+        m_PrevPosSource = pos;
+        m_PrevPosListener = pos;
+        m_HasInit = true;
     }
 
     if (enablePlayModeAuto && m_Source && autoPlay)
@@ -99,6 +93,10 @@ void AudioTestController::OnUpdate(float delta)
 
     if (enableKeyTrigger && m_Source)
     {
+        if (clipId.empty())
+        {
+            return;
+        }
         if (Input::GetKeyDown(static_cast<DirectX::Keyboard::Keys>(triggerKey)))
         {
             auto clip = AudioManager::Instance().GetOrCreateClip(clipId);

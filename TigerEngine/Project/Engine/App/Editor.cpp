@@ -1464,7 +1464,7 @@ void Editor::RenderComponentInfo(std::string compName, T* comp)
         }
     }
     
-    if (compName == "AudioSourceComponent" || compName == "AudioManagerComponent" || compName == "AudioTestController")
+    if (compName == "AudioSourceComponent" || compName == "AudioManagerComponent")
     {
         for (auto& prop : t.get_properties())
         {

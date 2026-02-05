@@ -1,16 +1,17 @@
 #pragma once
 
-#include "Components/ScriptComponent.h"
+#include "Object/Component.h"
 #include "Components/AudioListenerComponent.h"
 #include "Components/AudioSourceComponent.h"
+#include "EngineSystem/PlayModeSystem.h"
 
 #include <directxtk/Keyboard.h>
 
 class Transform;
 
-class AudioTestController : public ScriptComponent
+class AudioTestController : public Component
 {
-    RTTR_ENABLE(ScriptComponent)
+    RTTR_ENABLE(Component)
 public:
     AudioTestController() { SetName("AudioTestController"); }
     ~AudioTestController() override = default;
@@ -31,7 +32,7 @@ public:
     bool autoPlay = true;
 
     // Key trigger
-    std::string clipId = "SFX_OneShot";
+    std::string clipId = "";
     int triggerKey = static_cast<int>(DirectX::Keyboard::Keys::Z);
 
     // Orbit
@@ -51,6 +52,7 @@ private:
     Vector3 m_PrevPosSource{ 0.0f, 0.0f, 0.0f };
     Vector3 m_PrevPosListener{ 0.0f, 0.0f, 0.0f };
     float m_Time = 0.0f;
+    bool m_HasInit = false;
 
     bool m_WasPaused = false;
     bool m_HasStarted = false;
