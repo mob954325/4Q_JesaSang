@@ -1,5 +1,6 @@
 #include "Player_Hit.h"
 #include "../../Inventory/Inventory.h"
+#include "Manager/WorldManager.h"
 
 void Player_Hit::Enter()
 {
@@ -17,6 +18,11 @@ void Player_Hit::Enter()
 
     // 3초동안은 무적상태
     player->isPlayerInvincible = true;
+
+    // 비네트 On
+    auto& postProcessData = WorldManager::Instance().postProcessData;
+    postProcessData.useVignette = true;
+    postProcessData.vignetteColor = { 1,0,0 };
 
     // timer init
     hitTimer = 0.0f;
@@ -77,6 +83,8 @@ void Player_Hit::Update(float deltaTime)
         renderDirectorTimer = 0.0f;
     }
 
+    
+
     // look dir
     Vector3 input(0, 0, 0);
 
@@ -103,6 +111,10 @@ void Player_Hit::Exit()
 
     // 렌더 다시 on
     player->fbxRenderer->SetActive(true);
+
+    // 비네트 Off
+    auto& postProcessData = WorldManager::Instance().postProcessData;
+    postProcessData.useVignette = false;
 
     cout << "[Player] Exit Hit State" << endl;
 }

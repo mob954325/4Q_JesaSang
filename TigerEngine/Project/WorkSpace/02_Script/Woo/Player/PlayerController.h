@@ -177,6 +177,9 @@ private:
 
 public:
     // 외부 call Funcs..
+    PlayerState GetPlayerState();
+
+    // Intereac Object
     void SetCurSearchObject(SearchObject* object);
     void SetCurHideObject(HideObject* object);
 
