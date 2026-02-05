@@ -179,7 +179,7 @@ void PlayerController::ChangeState(PlayerState nextState)
 /*-------[ Init ]-------------------------------------*/
 void PlayerController::InitStat()
 {
-
+    curLife = life;
 }
 
 /*-------[ Input ]-------------------------------------*/
@@ -466,7 +466,22 @@ void PlayerController::ReceiveMiniGameItem(unique_ptr<IItem> ingredient)
 
 void PlayerController::TakeAttack()
 {
+    if (state == PlayerState::Die) return;
+
     cout << "[Player] Take Damage! " << endl;
+
+    // Life
+    curLife--;
+
+    // Die
+    if (curLife <= 0)
+    {
+        curLife = 0;
+        ChangeState(PlayerState::Die);
+        // TODO :: GameManager
+
+        return;
+    }
 
     // 아이템이 있다면 제단에 올라감
     if (inventory->HasItem())

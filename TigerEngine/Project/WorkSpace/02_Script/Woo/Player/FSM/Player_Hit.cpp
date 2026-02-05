@@ -2,7 +2,7 @@
 
 void Player_Hit::Enter()
 {
-    //cout << "[Player] Enter Hit State" << endl;
+    cout << "[Player] Enter Hit State (life : " << player->curLife << ")" << endl;
 
     // set speed
     player->curSpeed = player->walkSpeed * player->hitSpeedUpRate;
@@ -69,5 +69,5 @@ void Player_Hit::FixedUpdate(float deltaTime)
 
 void Player_Hit::Exit()
 {
-    //cout << "[Player] Exit Hit State" << endl;
+    cout << "[Player] Exit Hit State" << endl;
 }
