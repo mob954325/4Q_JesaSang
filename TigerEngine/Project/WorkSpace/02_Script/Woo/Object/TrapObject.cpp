@@ -1,6 +1,8 @@
 #include "TrapObject.h"
 #include "Util/JsonHelper.h"
 #include "Util/ComponentAutoRegister.h"
+#include "Object/GameObject.h"
+#include "../Player/PlayerController.h"
 
 REGISTER_COMPONENT(TrapObject)
 
@@ -17,6 +19,21 @@ void TrapObject::OnStart()
 
 void TrapObject::OnUpdate(float delta)
 {
+    // wave 파동중일때 re wave cool time udapte
+    if (!isWaveing)
+        return;
+
+    coolTimer += delta;
+    if (coolTimer >= coolTime)
+    {
+        // 재발동 가능
+        isPossibleWave = true;
+        isWaveing = false;
+
+        // clear
+        coolTimer = 0.0f;
+        wavelength = 0.0f;
+    }
 }
 
 nlohmann::json TrapObject::Serialize()
@@ -27,4 +44,55 @@ nlohmann::json TrapObject::Serialize()
 void TrapObject::Deserialize(nlohmann::json data)
 {
     JsonHelper::SetDataFromJson(this, data);
+}
+
+void TrapObject::OnCCTTriggerEnter(CharacterControllerComponent* other)
+{
+    if (!isPossibleWave) return;        // 최초1회, re wave 가능할때
+
+    GameObject* otherOwner = other->GetOwner();
+    if (otherOwner->GetName() != "Player") return;
+
+    // 플레이어 상태에 따른 파장 범위 설정
+    auto pc = otherOwner->GetComponent<PlayerController>();
+    if (!pc) return;
+
+    auto state = pc->GetPlayerState();
+
+    switch (state)
+    {
+    case PlayerState::Walk:
+        wavelength = walkWaveLength;
+        break;
+    case PlayerState::Run:
+    case PlayerState::Hit:
+        wavelength = runWaveLength;
+        break;
+    default:
+        return; // 파장 발생 안 함
+    }
+
+    // 파장 웨이브 시작
+    StartTriggerWave();     
+}
+
+
+void TrapObject::StartTriggerWave()
+{
+    // TODO :: 파장 연출
+
+    // AI
+    NotifyAIInRange();
+    
+    // re wave cool time start
+    isWaveing = true;
+    isPossibleWave = false;
+    coolTimer = 0.0f;
+
+    cout << "[TrapObject] : Start Trap Trigger Wave. Range : " << wavelength << endl;
+}
+
+void TrapObject::NotifyAIInRange()
+{
+    // TODO :: 선민이 AI 찾아서 Call 하는 함수 호출
 }

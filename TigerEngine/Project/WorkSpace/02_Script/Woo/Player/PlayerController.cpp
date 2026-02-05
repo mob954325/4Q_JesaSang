@@ -175,8 +175,6 @@ void PlayerController::ChangeState(PlayerState nextState)
 
     if(curState)
         curState->Enter();
-
-    cout << "[Player] Current Sense Radius : " << curSenseRadius << endl;
 }
 
 /*-------[ Init ]-------------------------------------*/
@@ -391,6 +389,11 @@ void PlayerController::GetItemAltarInteraction(float dt)
     }
 }
     
+
+PlayerState PlayerController::GetPlayerState()
+{
+    return state;
+}
 
 /*----------- 외부 호출 Funcs.. -------------------------*/
 void PlayerController::SetCurSearchObject(SearchObject* object)
