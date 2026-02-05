@@ -52,21 +52,22 @@ bool VisionComponent::CheckVision(
     m_LastDebug.valid = true;
 
     auto* selfTr = GetOwner()->GetTransform();  //GetOwner()->GetTransform();
-    auto* targetTr = target->GetTransform();  //target->GetTransform();
+    auto* targetTr = target->GetTransform();    //target->GetTransform();
 
     Vector3 origin = selfTr->GetWorldPosition();
     origin.y += 50.0f;
-    // origin.z += 20.0f;
     Vector3 forward = selfTr->GetForward();
 
     Vector3 toTarget = targetTr->GetWorldPosition() - origin;
     float dist = toTarget.Length();
 
+    toTarget.y = origin.y;
+
     if (dist > maxDistance) return false;
     toTarget.Normalize();
 
 
-   // FOV 체크 
+    // FOV 체크 
     Vector3 flatForward = forward;
     flatForward.y = 0;
     flatForward.Normalize();
@@ -82,7 +83,7 @@ bool VisionComponent::CheckVision(
     // PhysX
     PxVec3 originPx = ToPx(origin);
     PxVec3 dirPx(toTarget.x, toTarget.y, toTarget.z);
-    float maxDistPx = maxDistance * WORLD_TO_PHYSX;
+    float maxDistPx = maxDistance; // *WORLD_TO_PHYSX;
 
     std::vector<RaycastHit> hits;
     if (!PhysicsSystem::Instance().Raycast(
