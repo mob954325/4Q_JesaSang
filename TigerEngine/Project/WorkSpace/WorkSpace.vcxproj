@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -158,7 +158,9 @@
     <ClInclude Include="02_Script\Woo\Player\Interaction\InteractionZone.h" />
     <ClInclude Include="EngineApp.h" />
     <ClInclude Include="99_Test\MiniMapTest\MiniMapTestScript.h" />
+    <ClInclude Include="99_Test\MiniMapTest\MiniMapManager.h" />
     <ClInclude Include="99_Test\AudioTest\AudioTestController.h" />
+    <ClInclude Include="99_Test\AudioTest\AudioListenerSyncScript.h" />
     <ClInclude Include="02_Script\Woo\Player\FSM\IPlayerState.h" />
     <ClInclude Include="99_Test\AudioTest\AudioManagerComponent.h" />
     <ClInclude Include="99_Test\PhysicsTest\CCTTest.h" />
@@ -183,6 +185,10 @@
     <ClInclude Include="02_Script\Woo\Player\FSM\Player_Cook.h" />
     <ClInclude Include="02_Script\Woo\JesaSang\JesaSangManager.h" />
     <ClInclude Include="02_Script\Woo\Player\PlayerItemVisualizer.h" />
+    <ClInclude Include="02_Script\Woo\Object\HideObject.h" />
+    <ClInclude Include="02_Script\Woo\Manager\GameManager.h" />
+    <ClInclude Include="02_Script\Woo\Object\TrapObject.h" />	
+    <ClInclude Include="99_Test\Intro\IntroCutSceneController.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="02_Script\Moon\AI\AdultGhostController.cpp" />
@@ -198,7 +204,9 @@
     <ClCompile Include="02_Script\Woo\Player\Interaction\InteractionZone.cpp" />
     <ClCompile Include="EngineApp.cpp" />
     <ClCompile Include="99_Test\MiniMapTest\MiniMapTestScript.cpp" />
+    <ClCompile Include="99_Test\MiniMapTest\MiniMapManager.cpp" />
     <ClCompile Include="99_Test\AudioTest\AudioTestController.cpp" />
+    <ClCompile Include="99_Test\AudioTest\AudioListenerSyncScript.cpp" />
     <ClCompile Include="02_Script\Woo\Player\FSM\IPlayerState.cpp" />
     <ClCompile Include="99_Test\AudioTest\AudioManagerComponent.cpp" />
     <ClCompile Include="99_Test\PhysicsTest\CCTTest.cpp" />
@@ -223,7 +231,11 @@
     <ClCompile Include="02_Script\Woo\Player\FSM\Player_Cook.cpp" />
     <ClCompile Include="02_Script\Woo\JesaSang\JesaSangManager.cpp" />
     <ClCompile Include="02_Script\Woo\Player\PlayerItemVisualizer.cpp" />
+    <ClCompile Include="02_Script\Woo\Object\HideObject.cpp" />
+    <ClCompile Include="02_Script\Woo\Manager\GameManager.cpp" />
+    <ClCompile Include="02_Script\Woo\Object\TrapObject.cpp" />
     <ClCompile Include="winMain.cpp" />
+    <ClCompile Include="99_Test\Intro\IntroCutSceneController.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Engine\Engine.vcxproj">

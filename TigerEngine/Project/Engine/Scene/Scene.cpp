@@ -103,6 +103,46 @@ GameObject* Scene::GetGameObjectByName(std::string name)
     return nullptr;
 }
 
+std::vector<GameObject*> Scene::GetGameObjectsByName(const std::string& name)
+{
+    std::vector<GameObject*> result;
+
+    // 1) map에 있으면 빠르게 반환
+    if (auto it = mappedGameObjects.find(name); it != mappedGameObjects.end())
+    {
+        const auto& container = it->second;
+
+        result.reserve(container.size());
+        for (const auto& [handle, index] : container)
+        {
+            // index 유효성 체크
+            if (index < 0 || index >= static_cast<int>(gameObjects.size()))
+                continue;
+
+            GameObject* ptr = gameObjects[index].objPtr;
+            if (!ptr) continue;
+
+            // 혹시 이름 바뀌었거나 인덱스가 꼬였으면 걸러냄
+            if (ptr->GetName() == name)
+                result.push_back(ptr);
+        }
+
+        // map이 있는데 결과가 비어있으면(인덱스 꼬임 등) fallback으로 전체 탐색
+        if (!result.empty())
+            return result;
+    }
+
+    // 2) fallback: 전체 순회 (이름 변경 / 매핑 깨짐 대비)
+    for (auto& entity : gameObjects)
+    {
+        if (!entity.objPtr) continue;
+        if (entity.objPtr->GetName() == name)
+            result.push_back(entity.objPtr);
+    }
+
+    return result;
+}
+
 GameObject* Scene::GetGameObject(GameObject* obj)
 {
     std::string name = obj->GetName();

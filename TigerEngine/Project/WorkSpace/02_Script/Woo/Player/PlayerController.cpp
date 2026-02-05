@@ -21,6 +21,7 @@
 #include "FSM/Player_Die.h"
 
 #include "../Object/SearchObject.h"
+#include "../Object/HideObject.h"
 #include "../Inventory/Inventory.h"
 #include "../Item/Item.h"
 #include "../Camera/CameraController.h"
@@ -28,6 +29,7 @@
 #include "../JesaSang/JesaSangManager.h"
 #include "../Altar/AltarManager.h"
 #include "PlayerItemVisualizer.h"
+#include "../Manager/GameManager.h"
 
 
 REGISTER_COMPONENT(PlayerController)
@@ -86,20 +88,6 @@ void PlayerController::OnUpdate(float delta)
     {
         TakeAttack();
     }
-
-    // view mode change test (Hide State)
-    if (Input::GetKeyDown(Keyboard::W))
-    {
-        camController->ToggleViewMode();
-    }
-
-    // Debug----
-    //cout << "[Player] State : " << (int)state << endl;
-    //cout << "[Player] Walk MoveDir : (" << moveDir.x << ", " << moveDir.y << ", " << moveDir.z << ")" << endl;
-    //cout << "[Player] Current Speed : " << curSpeed << endl;
-
-    //cout << "L:" << isMoveLKey << " R:" << isMoveRKey << " F:" << isMoveFKey << " B:" << isMoveBKey
-    //    << " Sit:" << isSitKey << " Run:" << isRunKey << " Interact:" << isInteractionKey << endl;
 }
 
 void PlayerController::OnFixedUpdate(float delta)
@@ -192,7 +180,7 @@ void PlayerController::ChangeState(PlayerState nextState)
 /*-------[ Init ]-------------------------------------*/
 void PlayerController::InitStat()
 {
-
+    curLife = life;
 }
 
 /*-------[ Input ]-------------------------------------*/
@@ -246,6 +234,7 @@ void PlayerController::Rotation(float delta)
 void PlayerController::InteractionCheak(float delta)
 {
     SerachObjectInteraction(delta);     // 수색 오브젝트 수색 Interaction
+    HideObjectInteraction(delta);       // 은신 오브젝트 은신 Interaction
     CookingInteraction(delta);          // 조리대 미니게임 시작 Interaction
     PutFoodJesaSangInteraction(delta);  // 제사상 음식 올리기 Interaction
     GetItemAltarInteraction(delta);     // 제단에서 아이템 가져오기 Interaction
@@ -291,6 +280,20 @@ void PlayerController::SerachObjectInteraction(float dt)
         isPossibleSearch = false;
         curSerachObject = nullptr;
         searchTimer = 0.0f;
+    }
+}
+
+void PlayerController::HideObjectInteraction(float dt)
+{
+    // interaction x
+    if (!isPossibleHide || !curHideObject)
+        return;
+
+    // hide
+    if (Input::GetKeyDown(interaction_Key) && curHideObject->IsPossibleHide())
+    {
+        ChangeState(PlayerState::Hide);
+        curHideObject->StartHide(this);
     }
 }
 
@@ -387,6 +390,11 @@ void PlayerController::GetItemAltarInteraction(float dt)
 }
     
 
+PlayerState PlayerController::GetPlayerState()
+{
+    return state;
+}
+
 /*----------- 외부 호출 Funcs.. -------------------------*/
 void PlayerController::SetCurSearchObject(SearchObject* object)
 {
@@ -400,6 +408,21 @@ void PlayerController::SetCurSearchObject(SearchObject* object)
     {
         isPossibleSearch = false;
         curSerachObject = nullptr;
+    }
+}
+
+void PlayerController::SetCurHideObject(HideObject* object)
+{
+    // interaction zone에서 hide object를 넘겨줌
+    if (object)
+    {
+        isPossibleHide = true;
+        curHideObject = object;
+    }
+    else
+    {
+        isPossibleHide = false;
+        curHideObject = nullptr;
     }
 }
 
@@ -449,12 +472,51 @@ void PlayerController::ReceiveMiniGameItem(unique_ptr<IItem> ingredient)
 
 void PlayerController::TakeAttack()
 {
+    // 이미 죽은상태 return
+    if (state == PlayerState::Die) return;
+
+    // 무적상태 return
+    if (isPlayerInvincible)
+    {
+        cout << "[Player] TakeAttack Fail! isPlayerInvincible" << endl;
+        return;
+    }
+    
     cout << "[Player] Take Damage! " << endl;
 
+    // 아이템이 있다면 제단에 올라감
     if (inventory->HasItem())
     {
-        std::unique_ptr<IItem> item =  inventory->TakeCurItem();
+        std::unique_ptr<IItem> item = inventory->TakeCurItem();
+        visualizer->VisualOffItem();
         AltarManager::Instance()->ReceiveItem(std::move(item));
         cout << "[Player] Drop Item... " << endl;
     }
+
+    // Die
+    curLife--;
+    
+    if (curLife <= 0)
+    {
+        curLife = 0;
+        ChangeState(PlayerState::Die);
+        GameManager::Instance()->GameOver();
+
+        return;
+    }
+
+    // Hit (패닉)
+    if(state != PlayerState::Hit)
+        ChangeState(PlayerState::Hit);
+    else
+    {
+        // 이미 패닉상태였을경우 재시작 (무적상태는 위에서 return)
+        ChangeState(PlayerState::Idle);
+        ChangeState(PlayerState::Hit);
+    }
+}
+
+float PlayerController::GetCurSenseRadiuse() const
+{
+    return curSenseRadius;
 }

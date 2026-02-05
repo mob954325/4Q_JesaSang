@@ -228,6 +228,217 @@
         }
       },
       "type": "GameObject"
+    },
+    {
+      "properties": {
+        "ID": 1001,
+        "Name": "UI_Intro_Image",
+        "ParentID": -1,
+        "components": {
+          "Transform": {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          "Image": {
+            "properties": {
+              "Active": true,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "fillAmount": 1.0,
+              "isMouseCheck": false,
+              "path": "..\\Assets\\Resource\\CutScene\\intro_00.png",
+              "sliceBorderPx": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "type": "Simple"
+            },
+            "type": "Image"
+          },
+          "RectTransform": {
+            "properties": {
+              "Active": true,
+              "Pivot": [
+                0.0,
+                0.0
+              ],
+              "Pos": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Size": [
+                1920.0,
+                1080.0
+              ]
+            },
+            "type": "RectTransform"
+          }
+        }
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "ID": 1002,
+        "Name": "UI_Intro_Frame",
+        "ParentID": -1,
+        "components": {
+          "Transform": {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          "Image": {
+            "properties": {
+              "Active": true,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "fillAmount": 1.0,
+              "isMouseCheck": false,
+              "path": "..\\Assets\\Resource\\CutScene\\cutscene-frame.png",
+              "sliceBorderPx": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "type": "Simple"
+            },
+            "type": "Image"
+          },
+          "RectTransform": {
+            "properties": {
+              "Active": true,
+              "Pivot": [
+                0.0,
+                0.0
+              ],
+              "Pos": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Size": [
+                1920.0,
+                1080.0
+              ]
+            },
+            "type": "RectTransform"
+          }
+        }
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "ID": 1003,
+        "Name": "UI_Intro_Controller",
+        "ParentID": -1,
+        "components": {
+          "Transform": {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          "IntroCutSceneController": {
+            "properties": {
+              "AllowSkip": true,
+              "FrameObjectName": "UI_Intro_Frame",
+              "ImageObjectName": "UI_Intro_Image",
+              "NextScenePath": "..\\Assets\\Scenes\\01_StartScene.json"
+            },
+            "type": "IntroCutSceneController"
+          }
+        }
+      },
+      "type": "GameObject"
     }
   ],
   "worldData": [

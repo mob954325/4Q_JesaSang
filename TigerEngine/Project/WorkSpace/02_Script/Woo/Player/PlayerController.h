@@ -9,6 +9,7 @@ class IPlayerState;
 class InteractionZone;
 class InteractionSensor;
 class SearchObject;
+class HideObject;
 class Inventory;
 class CameraController;
 class MiniGameManager;
@@ -28,7 +29,8 @@ enum class PlayerState
      1) FSM
      2) Input
      3) Movement
-     4) TODO :: Interaction...
+     4) Interaction
+     5) TODO..
 */
 class PlayerController : public ScriptComponent
 {
@@ -49,23 +51,48 @@ private:
     IPlayerState* curState;
     IPlayerState* fsmStates[9];
 
-    // --- [ Stat ] --------------------------------
-    // values (inspector)
-    float walkSpeed = 2.5f;   //1.0f;
-    float runSpeed  = 4.0f;   //1.8f;
-    float sitSpeed = 1.0f;   //0.6f;
-        
+    // --- [ Stat (Data) ] --------------------------------
+    // life
+    int life = 5;
+
+    // speed
+    float walkSpeed = 2.5f; 
+    float runSpeed  = 4.0f; 
+    float sitSpeed = 1.0f;  
+    float hitSpeedUpRate = 2.0f;        // walkSpeed * 2.0f
+
+    // sense
+    float idleSenseRadius = 0.0f;
+    float walkSenseRadius = 1.0f;
+    float sitSenseRadius = 0.0f;
+    float runSenseRadius = 5.0f;
+
+    float ingreSenseRadius = 0.5f;
+    float foodSenseRadius = 1.5f;
+
+    // hit
+    float hitDuration = 5.0f;           // 패닉 유지시간
+    float hitInvincibleTime = 3.0f;     // 패닉 무적타임
+
+
 
     // --- [ Controll ] ----------------------------
-    // cur stat
+    // cur stat, state
+    int curLife;
     float curSpeed = 0.0f;
     Vector3 lookDir = Vector3::Zero;
+    float curSenseRadius = 0.0f;         // 현재 기척 범위
+    bool isPlayerInvincible = false;     // 현재 무적상태 여부
 
     // search object interaction
-    bool  isPossibleSearch = false;      // 기획자분이 한번에 하나만 가능한 사이즈라고 하심. 중첩된다면 추가 처리필요.
-    SearchObject* curSerachObject;       // 현재 interaction가능한 오브젝트
+    bool  isPossibleSearch = false;            // 기획자분이 한번에 하나만 가능한 사이즈라고 하심. 중첩된다면 추가 처리필요.
+    SearchObject* curSerachObject = nullptr;   // 현재 search 가능한 오브젝트
     float searchTime  = 2.0f;
     float searchTimer = 0.0f;
+
+    // hide object interaction
+    bool  isPossibleHide = false;
+    HideObject* curHideObject = nullptr;      // 현재 은신 가능한 오브젝트
 
     // jesasang interaction
     bool isPossiblePutFood;
@@ -142,6 +169,7 @@ private:
     // Interaction
     void InteractionCheak(float delta);
     void SerachObjectInteraction(float dt);
+    void HideObjectInteraction(float dt);
     void CookingInteraction(float dt);
     void PutFoodJesaSangInteraction(float dt);
     void GetItemAltarInteraction(float dt);
@@ -149,8 +177,11 @@ private:
 
 public:
     // 외부 call Funcs..
-    // Current Interaction Zone Search Object Set
+    PlayerState GetPlayerState();
+
+    // Intereac Object
     void SetCurSearchObject(SearchObject* object);
+    void SetCurHideObject(HideObject* object);
 
 
     // MiniGame Return Login
@@ -159,7 +190,8 @@ public:
 
 
     // AI
-    void TakeAttack();      // AI에게 공격 당했을 때
+    void TakeAttack();       // AI에게 공격 당했을 때
+    float GetCurSenseRadiuse() const;    // 플레이어 현재 기척 getter
 
 
 
@@ -178,5 +210,6 @@ public:
     friend class InteractionZone;
     friend class InteractionSensor;
     friend class MiniGameManager;
+    friend class HideObject;
 };
 

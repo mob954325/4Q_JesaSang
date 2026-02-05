@@ -1,4 +1,5 @@
 #include "Player_Sit.h"
+#include "../../Inventory/Inventory.h"
 
 void Player_Sit::Enter()
 {
@@ -9,6 +10,13 @@ void Player_Sit::Enter()
 
     // set moved dir
     player->lookDir = Vector3::Zero;
+
+    // set sense radius
+    player->curSenseRadius = player->sitSenseRadius;
+    if (player->inventory->GetCurItemType() == ItemType::Ingredient)
+        player->curSenseRadius += player->ingreSenseRadius;
+    else if (player->inventory->GetCurItemType() == ItemType::Food)
+        player->curSenseRadius += player->foodSenseRadius;
 }
 
 void Player_Sit::ChangeStateLogic()

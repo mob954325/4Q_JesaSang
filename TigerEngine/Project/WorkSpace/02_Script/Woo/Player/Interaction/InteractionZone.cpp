@@ -3,6 +3,7 @@
 #include "Util/ComponentAutoRegister.h"
 #include "Object/GameObject.h"
 #include "../../Object/SearchObject.h"
+#include "../../Object/HideObject.h"
 #include "EngineSystem/PhysicsSystem.h"
 
 REGISTER_COMPONENT(InteractionZone)
@@ -62,6 +63,17 @@ void InteractionZone::OnTriggerEnter(PhysicsComponent* other)
         // TODO :: UI
     }
 
+    // Hide Object
+    if (other->GetOwner()->GetName() == "HideObject")
+    {
+        auto hideOB = other->GetOwner()->GetComponent<HideObject>();
+        if (hideOB)
+        {
+            player->SetCurHideObject(hideOB);
+            cout << "[InteractionZone] HideObject In Interaction Zone" << endl;
+        }
+    }
+
     // Kitchin (MiniGame)
     if (other->GetOwner()->GetName() == "CookingZone")
     {
@@ -97,6 +109,17 @@ void InteractionZone::OnTriggerExit(PhysicsComponent* other)
         }
 
         // TODO :: UI
+    }
+
+    // Hide Object
+    if (other->GetOwner()->GetName() == "HideObject")
+    {
+        auto hideOB = other->GetOwner()->GetComponent<HideObject>();
+        if (hideOB)
+        {
+            player->SetCurHideObject(nullptr);
+            cout << "[InteractionZone] HideObject Out Interaction Zone" << endl;
+        }
     }
 
     // Kitchin (MiniGame)

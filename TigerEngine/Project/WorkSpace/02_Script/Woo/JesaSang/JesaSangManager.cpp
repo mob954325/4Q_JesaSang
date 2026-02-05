@@ -4,6 +4,7 @@
 #include "Object/GameObject.h"
 #include "EngineSystem/SceneSystem.h"
 #include "../Item/Item.h"
+#include "../Manager/GameManager.h"
 
 REGISTER_COMPONENT(JesaSangManager)
 
@@ -50,6 +51,11 @@ void JesaSangManager::Deserialize(nlohmann::json data)
     JsonHelper::SetDataFromJson(this, data);
 }
 
+bool JesaSangManager::HasAllFood()
+{
+    return hasApple && hasPear && hasBatter && hasTofu && hasSanjeok && hasDong;
+}
+
 /*
     [Food Item ID]
     Apple
@@ -70,19 +76,41 @@ void JesaSangManager::ReceiveFood(std::unique_ptr<IItem> food)
 
     // 음식 올리기
     if (foodID == "Apple" && apple)
+    {
+        hasApple = true;
         apple->SetActive(true);
+    }
     else if (foodID == "Pear" && pear)
+    {
+        hasPear = true;
         pear->SetActive(true);
+    }
     else if (foodID == "Batter" && batter)
+    {
+        hasBatter = true;
         batter->SetActive(true);
+    }
     else if (foodID == "Tofu" && tofu)
+    {
+        hasTofu = true;
         tofu->SetActive(true);
+    }
     else if (foodID == "Sanjeok" && sanjeok)
+    {
+        hasSanjeok = true;
         sanjeok->SetActive(true);
+    }
     else if (foodID == "Donggeurangttaeng" && dong)
+    {
+        hasDong = true;
         dong->SetActive(true);
+    }
 
     // 전달받은 Food Item은 할일 끝났으니 쏘멸
     std::cout << "[JesaSangManager] Put Food : " << food->itemId << endl;
     food.reset();
+
+    // 제사상에 음식이 다 올라오면 성공
+    if(HasAllFood())
+        GameManager::Instance()->GameSuccess();
 }

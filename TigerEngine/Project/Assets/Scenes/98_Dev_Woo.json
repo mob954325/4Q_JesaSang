@@ -2,8 +2,8 @@
   "objects": [
     {
       "properties": {
-        "Active": 1,
-        "ID": 742,
+        "Active": true,
+        "ID": 779,
         "Name": "Main Camera",
         "ParentID": -1,
         "components": [
@@ -55,8 +55,8 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 743,
+        "Active": true,
+        "ID": 780,
         "Name": "DirectionalLight(Sun)",
         "ParentID": -1,
         "components": [
@@ -109,8 +109,8 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 744,
+        "Active": true,
+        "ID": 781,
         "Name": "---------Floor----------",
         "ParentID": -1,
         "components": [
@@ -140,10 +140,10 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 745,
+        "Active": true,
+        "ID": 782,
         "Name": "Floor",
-        "ParentID": 744,
+        "ParentID": 781,
         "components": [
           {
             "properties": {
@@ -201,7 +201,7 @@
                 1.0,
                 1.0
               ],
-              "IsGround": false,
+              "IsGround": true,
               "Metalic": 1.0,
               "MetallicOverride": 1.0,
               "RenderBlendType": "Opaque",
@@ -243,8 +243,8 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 746,
+        "Active": true,
+        "ID": 783,
         "Name": "---------Wall----------",
         "ParentID": -1,
         "components": [
@@ -274,10 +274,10 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 747,
+        "Active": true,
+        "ID": 784,
         "Name": "Door_Open",
-        "ParentID": 746,
+        "ParentID": 783,
         "components": [
           {
             "properties": {
@@ -354,10 +354,10 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 748,
+        "Active": true,
+        "ID": 785,
         "Name": "Pillar",
-        "ParentID": 746,
+        "ParentID": 783,
         "components": [
           {
             "properties": {
@@ -463,10 +463,10 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 749,
+        "Active": true,
+        "ID": 786,
         "Name": "wall_4",
-        "ParentID": 746,
+        "ParentID": 783,
         "components": [
           {
             "properties": {
@@ -572,17 +572,17 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 750,
+        "Active": true,
+        "ID": 787,
         "Name": "wall_5",
-        "ParentID": 746,
+        "ParentID": 783,
         "components": [
           {
             "properties": {
               "Position": [
                 -350.6000061035156,
                 -110.0,
-                90.69999694824219
+                89.94911193847656
               ],
               "Rotation": [
                 -0.0,
@@ -590,9 +590,9 @@
                 0.0
               ],
               "Scale": [
+                0.9999875426292419,
                 1.0,
-                1.0,
-                1.0
+                0.9999875426292419
               ]
             },
             "type": "Transform"
@@ -681,10 +681,10 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 751,
+        "Active": true,
+        "ID": 788,
         "Name": "Room",
-        "ParentID": 744,
+        "ParentID": 781,
         "components": [
           {
             "properties": {
@@ -742,7 +742,7 @@
                 1.0,
                 1.0
               ],
-              "IsGround": false,
+              "IsGround": true,
               "Metalic": 1.0,
               "MetallicOverride": 1.0,
               "RenderBlendType": "Opaque",
@@ -761,10 +761,10 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 752,
+        "Active": true,
+        "ID": 789,
         "Name": "Room_a_love_room",
-        "ParentID": 744,
+        "ParentID": 781,
         "components": [
           {
             "properties": {
@@ -841,10 +841,10 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 753,
+        "Active": true,
+        "ID": 790,
         "Name": "Room_Kitchen",
-        "ParentID": 744,
+        "ParentID": 781,
         "components": [
           {
             "properties": {
@@ -921,10 +921,10 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 754,
+        "Active": true,
+        "ID": 791,
         "Name": "Room_main_room",
-        "ParentID": 744,
+        "ParentID": 781,
         "components": [
           {
             "properties": {
@@ -1001,10 +1001,10 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 755,
+        "Active": true,
+        "ID": 792,
         "Name": "Room_saibi",
-        "ParentID": 744,
+        "ParentID": 781,
         "components": [
           {
             "properties": {
@@ -1081,10 +1081,10 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 756,
+        "Active": true,
+        "ID": 793,
         "Name": "Room_Table_of_memorial_ceremony",
-        "ParentID": 744,
+        "ParentID": 781,
         "components": [
           {
             "properties": {
@@ -1161,10 +1161,10 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 757,
+        "Active": true,
+        "ID": 794,
         "Name": "Room_Warehouse",
-        "ParentID": 744,
+        "ParentID": 781,
         "components": [
           {
             "properties": {
@@ -1241,8 +1241,8 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 758,
+        "Active": true,
+        "ID": 795,
         "Name": "---------Object----------",
         "ParentID": -1,
         "components": [
@@ -1272,8 +1272,8 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 759,
+        "Active": true,
+        "ID": 796,
         "Name": "JesaSang",
         "ParentID": -1,
         "components": [
@@ -1381,10 +1381,10 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 760,
+        "Active": true,
+        "ID": 797,
         "Name": "SearchObject",
-        "ParentID": 758,
+        "ParentID": 795,
         "components": [
           {
             "properties": {
@@ -1499,10 +1499,10 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 761,
+        "Active": true,
+        "ID": 798,
         "Name": "SearchObject",
-        "ParentID": 758,
+        "ParentID": 795,
         "components": [
           {
             "properties": {
@@ -1617,10 +1617,10 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 762,
+        "Active": true,
+        "ID": 799,
         "Name": "baseFood",
-        "ParentID": 759,
+        "ParentID": 796,
         "components": [
           {
             "properties": {
@@ -1697,8 +1697,8 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 763,
+        "Active": true,
+        "ID": 800,
         "Name": "Player",
         "ParentID": -1,
         "components": [
@@ -1812,8 +1812,8 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 764,
+        "Active": true,
+        "ID": 801,
         "Name": "-----------------------",
         "ParentID": -1,
         "components": [
@@ -1843,8 +1843,8 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 765,
+        "Active": true,
+        "ID": 802,
         "Name": "CurScene_98_Dev_Woo",
         "ParentID": -1,
         "components": [
@@ -1874,8 +1874,8 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 766,
+        "Active": true,
+        "ID": 803,
         "Name": "-----------------------",
         "ParentID": -1,
         "components": [
@@ -1905,10 +1905,10 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 767,
+        "Active": true,
+        "ID": 804,
         "Name": "wall_5",
-        "ParentID": 746,
+        "ParentID": 783,
         "components": [
           {
             "properties": {
@@ -2014,10 +2014,10 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 768,
+        "Active": true,
+        "ID": 805,
         "Name": "wall_5",
-        "ParentID": 746,
+        "ParentID": 783,
         "components": [
           {
             "properties": {
@@ -2123,10 +2123,10 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 769,
+        "Active": true,
+        "ID": 806,
         "Name": "wall_5",
-        "ParentID": 746,
+        "ParentID": 783,
         "components": [
           {
             "properties": {
@@ -2232,10 +2232,10 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 770,
+        "Active": true,
+        "ID": 807,
         "Name": "wall_4",
-        "ParentID": 746,
+        "ParentID": 783,
         "components": [
           {
             "properties": {
@@ -2341,10 +2341,10 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 771,
+        "Active": true,
+        "ID": 808,
         "Name": "CameraTrackingPoint",
-        "ParentID": 763,
+        "ParentID": 800,
         "components": [
           {
             "properties": {
@@ -2372,10 +2372,10 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 772,
+        "Active": true,
+        "ID": 809,
         "Name": "OcclusionFadePoint",
-        "ParentID": 763,
+        "ParentID": 800,
         "components": [
           {
             "properties": {
@@ -2403,22 +2403,22 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 773,
+        "Active": true,
+        "ID": 810,
         "Name": "SearchObject",
-        "ParentID": 758,
+        "ParentID": 795,
         "components": [
           {
             "properties": {
               "Position": [
                 25.299999237060547,
-                -110.0,
+                -109.99999237060547,
                 280.0
               ],
               "Rotation": [
                 -0.0,
                 0.0,
-                0.0
+                -0.0
               ],
               "Scale": [
                 1.0,
@@ -2521,10 +2521,10 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 774,
+        "Active": true,
+        "ID": 811,
         "Name": "InteractionSensor",
-        "ParentID": 763,
+        "ParentID": 800,
         "components": [
           {
             "properties": {
@@ -2581,10 +2581,10 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 775,
+        "Active": true,
+        "ID": 812,
         "Name": "InteractZone",
-        "ParentID": 763,
+        "ParentID": 800,
         "components": [
           {
             "properties": {
@@ -2641,8 +2641,8 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 776,
+        "Active": true,
+        "ID": 813,
         "Name": "Kitchen",
         "ParentID": -1,
         "components": [
@@ -2721,10 +2721,10 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 777,
+        "Active": true,
+        "ID": 814,
         "Name": "MiniGameManager",
-        "ParentID": 796,
+        "ParentID": 833,
         "components": [
           {
             "properties": {
@@ -2758,10 +2758,10 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 778,
+        "Active": true,
+        "ID": 815,
         "Name": "CookingZone",
-        "ParentID": 776,
+        "ParentID": 813,
         "components": [
           {
             "properties": {
@@ -2812,10 +2812,10 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 779,
+        "Active": true,
+        "ID": 816,
         "Name": "SearchObject",
-        "ParentID": 758,
+        "ParentID": 795,
         "components": [
           {
             "properties": {
@@ -2930,10 +2930,10 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 780,
+        "Active": true,
+        "ID": 817,
         "Name": "SearchObject",
-        "ParentID": 758,
+        "ParentID": 795,
         "components": [
           {
             "properties": {
@@ -3048,10 +3048,10 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 781,
+        "Active": true,
+        "ID": 818,
         "Name": "SearchObject",
-        "ParentID": 758,
+        "ParentID": 795,
         "components": [
           {
             "properties": {
@@ -3166,10 +3166,10 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 782,
+        "Active": true,
+        "ID": 819,
         "Name": "SearchObject",
-        "ParentID": 758,
+        "ParentID": 795,
         "components": [
           {
             "properties": {
@@ -3284,10 +3284,10 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 783,
+        "Active": true,
+        "ID": 820,
         "Name": "SearchObject",
-        "ParentID": 758,
+        "ParentID": 795,
         "components": [
           {
             "properties": {
@@ -3402,10 +3402,10 @@
     },
     {
       "properties": {
-        "Active": 0,
-        "ID": 784,
+        "Active": false,
+        "ID": 821,
         "Name": "Apple",
-        "ParentID": 759,
+        "ParentID": 796,
         "components": [
           {
             "properties": {
@@ -3429,7 +3429,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "DataPath": "..\\Assets\\Resource\\FBX\\New_Food\\apple.fbx",
               "IsStatic": false
             },
@@ -3437,7 +3437,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "Alpha": 1.0,
               "Diffuse": [
                 1.0,
@@ -3482,10 +3482,10 @@
     },
     {
       "properties": {
-        "Active": 0,
-        "ID": 785,
+        "Active": false,
+        "ID": 822,
         "Name": "Pear",
-        "ParentID": 759,
+        "ParentID": 796,
         "components": [
           {
             "properties": {
@@ -3509,7 +3509,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "DataPath": "..\\Assets\\Resource\\FBX\\New_Food\\pear.fbx",
               "IsStatic": false
             },
@@ -3517,7 +3517,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "Alpha": 1.0,
               "Diffuse": [
                 1.0,
@@ -3562,10 +3562,10 @@
     },
     {
       "properties": {
-        "Active": 0,
-        "ID": 786,
+        "Active": false,
+        "ID": 823,
         "Name": "Batter",
-        "ParentID": 759,
+        "ParentID": 796,
         "components": [
           {
             "properties": {
@@ -3589,7 +3589,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "DataPath": "..\\Assets\\Resource\\FBX\\New_Food\\skewer_pancake.fbx",
               "IsStatic": false
             },
@@ -3597,7 +3597,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "Alpha": 1.0,
               "Diffuse": [
                 1.0,
@@ -3642,10 +3642,10 @@
     },
     {
       "properties": {
-        "Active": 0,
-        "ID": 787,
+        "Active": false,
+        "ID": 824,
         "Name": "Tofu",
-        "ParentID": 759,
+        "ParentID": 796,
         "components": [
           {
             "properties": {
@@ -3669,7 +3669,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "DataPath": "..\\Assets\\Resource\\FBX\\New_Food\\tofu.fbx",
               "IsStatic": false
             },
@@ -3677,7 +3677,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "Alpha": 1.0,
               "Diffuse": [
                 1.0,
@@ -3722,10 +3722,10 @@
     },
     {
       "properties": {
-        "Active": 0,
-        "ID": 788,
+        "Active": false,
+        "ID": 825,
         "Name": "Sanjeok",
-        "ParentID": 759,
+        "ParentID": 796,
         "components": [
           {
             "properties": {
@@ -3749,7 +3749,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "DataPath": "..\\Assets\\Resource\\FBX\\New_Food\\Korean_st_Pancake.fbx",
               "IsStatic": true
             },
@@ -3757,7 +3757,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "Alpha": 1.0,
               "Diffuse": [
                 1.0,
@@ -3802,10 +3802,10 @@
     },
     {
       "properties": {
-        "Active": 0,
-        "ID": 789,
+        "Active": false,
+        "ID": 826,
         "Name": "Donggeurangttaeng",
-        "ParentID": 759,
+        "ParentID": 796,
         "components": [
           {
             "properties": {
@@ -3829,7 +3829,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "DataPath": "..\\Assets\\Resource\\FBX\\New_Food\\Korean_st_meatball.fbx",
               "IsStatic": false
             },
@@ -3837,7 +3837,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "Alpha": 1.0,
               "Diffuse": [
                 1.0,
@@ -3882,10 +3882,10 @@
     },
     {
       "properties": {
-        "Active": 0,
-        "ID": 790,
+        "Active": false,
+        "ID": 827,
         "Name": "Visual_Ingre_Apple",
-        "ParentID": 797,
+        "ParentID": 834,
         "components": [
           {
             "properties": {
@@ -3909,7 +3909,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "DataPath": "..\\Assets\\Resource\\sphere.fbx",
               "IsStatic": true
             },
@@ -3917,7 +3917,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "Alpha": 1.0,
               "Diffuse": [
                 1.0,
@@ -3962,10 +3962,10 @@
     },
     {
       "properties": {
-        "Active": 0,
-        "ID": 791,
+        "Active": false,
+        "ID": 828,
         "Name": "Visual_Ingre_Batter",
-        "ParentID": 797,
+        "ParentID": 834,
         "components": [
           {
             "properties": {
@@ -3989,7 +3989,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "DataPath": "..\\Assets\\Resource\\sphere.fbx",
               "IsStatic": true
             },
@@ -3997,7 +3997,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "Alpha": 1.0,
               "Diffuse": [
                 1.0,
@@ -4042,10 +4042,10 @@
     },
     {
       "properties": {
-        "Active": 0,
-        "ID": 792,
+        "Active": false,
+        "ID": 829,
         "Name": "Visual_Ingre_Donggeurangttaeng",
-        "ParentID": 797,
+        "ParentID": 834,
         "components": [
           {
             "properties": {
@@ -4069,7 +4069,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "DataPath": "..\\Assets\\Resource\\sphere.fbx",
               "IsStatic": true
             },
@@ -4077,7 +4077,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "Alpha": 1.0,
               "Diffuse": [
                 1.0,
@@ -4122,10 +4122,10 @@
     },
     {
       "properties": {
-        "Active": 0,
-        "ID": 793,
+        "Active": false,
+        "ID": 830,
         "Name": "Visual_Ingre_Pear",
-        "ParentID": 797,
+        "ParentID": 834,
         "components": [
           {
             "properties": {
@@ -4149,7 +4149,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "DataPath": "..\\Assets\\Resource\\sphere.fbx",
               "IsStatic": true
             },
@@ -4157,7 +4157,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "Alpha": 1.0,
               "Diffuse": [
                 1.0,
@@ -4202,10 +4202,10 @@
     },
     {
       "properties": {
-        "Active": 0,
-        "ID": 794,
+        "Active": false,
+        "ID": 831,
         "Name": "Visual_Ingre_Sanjeok",
-        "ParentID": 797,
+        "ParentID": 834,
         "components": [
           {
             "properties": {
@@ -4229,7 +4229,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "DataPath": "..\\Assets\\Resource\\sphere.fbx",
               "IsStatic": true
             },
@@ -4237,7 +4237,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "Alpha": 1.0,
               "Diffuse": [
                 1.0,
@@ -4282,10 +4282,10 @@
     },
     {
       "properties": {
-        "Active": 0,
-        "ID": 795,
+        "Active": false,
+        "ID": 832,
         "Name": "Visual_Ingre_Tofu",
-        "ParentID": 797,
+        "ParentID": 834,
         "components": [
           {
             "properties": {
@@ -4309,7 +4309,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "DataPath": "..\\Assets\\Resource\\sphere.fbx",
               "IsStatic": true
             },
@@ -4317,7 +4317,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "Alpha": 1.0,
               "Diffuse": [
                 1.0,
@@ -4362,8 +4362,8 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 796,
+        "Active": true,
+        "ID": 833,
         "Name": "Managers",
         "ParentID": -1,
         "components": [
@@ -4393,10 +4393,10 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 797,
+        "Active": true,
+        "ID": 834,
         "Name": "ItemVisualizer",
-        "ParentID": 763,
+        "ParentID": 800,
         "components": [
           {
             "properties": {
@@ -4424,10 +4424,10 @@
     },
     {
       "properties": {
-        "Active": 0,
-        "ID": 798,
+        "Active": false,
+        "ID": 835,
         "Name": "Visual_Apple",
-        "ParentID": 797,
+        "ParentID": 834,
         "components": [
           {
             "properties": {
@@ -4451,7 +4451,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "DataPath": "..\\Assets\\Resource\\FBX\\New_Food\\apple.fbx",
               "IsStatic": false
             },
@@ -4459,7 +4459,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "Alpha": 1.0,
               "Diffuse": [
                 1.0,
@@ -4504,10 +4504,10 @@
     },
     {
       "properties": {
-        "Active": 0,
-        "ID": 799,
+        "Active": false,
+        "ID": 836,
         "Name": "Visual_Pear",
-        "ParentID": 797,
+        "ParentID": 834,
         "components": [
           {
             "properties": {
@@ -4531,7 +4531,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "DataPath": "..\\Assets\\Resource\\FBX\\New_Food\\pear.fbx",
               "IsStatic": false
             },
@@ -4539,7 +4539,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "Alpha": 1.0,
               "Diffuse": [
                 1.0,
@@ -4584,10 +4584,10 @@
     },
     {
       "properties": {
-        "Active": 0,
-        "ID": 800,
+        "Active": false,
+        "ID": 837,
         "Name": "Visual_Batter",
-        "ParentID": 797,
+        "ParentID": 834,
         "components": [
           {
             "properties": {
@@ -4611,7 +4611,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "DataPath": "..\\Assets\\Resource\\FBX\\New_Food\\skewer_pancake.fbx",
               "IsStatic": false
             },
@@ -4619,7 +4619,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "Alpha": 1.0,
               "Diffuse": [
                 1.0,
@@ -4664,10 +4664,10 @@
     },
     {
       "properties": {
-        "Active": 0,
-        "ID": 801,
+        "Active": false,
+        "ID": 838,
         "Name": "Visual_Tofu",
-        "ParentID": 797,
+        "ParentID": 834,
         "components": [
           {
             "properties": {
@@ -4691,7 +4691,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "DataPath": "..\\Assets\\Resource\\FBX\\New_Food\\tofu.fbx",
               "IsStatic": false
             },
@@ -4699,7 +4699,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "Alpha": 1.0,
               "Diffuse": [
                 1.0,
@@ -4744,10 +4744,10 @@
     },
     {
       "properties": {
-        "Active": 0,
-        "ID": 802,
+        "Active": false,
+        "ID": 839,
         "Name": "Visual_Sanjeok",
-        "ParentID": 797,
+        "ParentID": 834,
         "components": [
           {
             "properties": {
@@ -4771,7 +4771,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "DataPath": "..\\Assets\\Resource\\FBX\\New_Food\\Korean_st_Pancake.fbx",
               "IsStatic": true
             },
@@ -4779,7 +4779,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "Alpha": 1.0,
               "Diffuse": [
                 1.0,
@@ -4824,10 +4824,10 @@
     },
     {
       "properties": {
-        "Active": 0,
-        "ID": 803,
+        "Active": false,
+        "ID": 840,
         "Name": "Visual_Donggeurangttaeng",
-        "ParentID": 797,
+        "ParentID": 834,
         "components": [
           {
             "properties": {
@@ -4851,7 +4851,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "DataPath": "..\\Assets\\Resource\\FBX\\New_Food\\Korean_st_meatball.fbx",
               "IsStatic": false
             },
@@ -4859,7 +4859,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "Alpha": 1.0,
               "Diffuse": [
                 1.0,
@@ -4904,8 +4904,8 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 804,
+        "Active": true,
+        "ID": 841,
         "Name": "Altar",
         "ParentID": -1,
         "components": [
@@ -5013,10 +5013,10 @@
     },
     {
       "properties": {
-        "Active": 1,
-        "ID": 805,
+        "Active": true,
+        "ID": 842,
         "Name": "baseFood",
-        "ParentID": 804,
+        "ParentID": 841,
         "components": [
           {
             "properties": {
@@ -5093,10 +5093,10 @@
     },
     {
       "properties": {
-        "Active": 0,
-        "ID": 806,
+        "Active": false,
+        "ID": 843,
         "Name": "Alta_Apple",
-        "ParentID": 804,
+        "ParentID": 841,
         "components": [
           {
             "properties": {
@@ -5120,7 +5120,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "DataPath": "..\\Assets\\Resource\\FBX\\New_Food\\apple.fbx",
               "IsStatic": false
             },
@@ -5128,7 +5128,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "Alpha": 1.0,
               "Diffuse": [
                 1.0,
@@ -5173,10 +5173,10 @@
     },
     {
       "properties": {
-        "Active": 0,
-        "ID": 807,
+        "Active": false,
+        "ID": 844,
         "Name": "Alta_Pear",
-        "ParentID": 804,
+        "ParentID": 841,
         "components": [
           {
             "properties": {
@@ -5200,7 +5200,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "DataPath": "..\\Assets\\Resource\\FBX\\New_Food\\pear.fbx",
               "IsStatic": false
             },
@@ -5208,7 +5208,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "Alpha": 1.0,
               "Diffuse": [
                 1.0,
@@ -5253,10 +5253,10 @@
     },
     {
       "properties": {
-        "Active": 0,
-        "ID": 808,
+        "Active": false,
+        "ID": 845,
         "Name": "Alta_Batter",
-        "ParentID": 804,
+        "ParentID": 841,
         "components": [
           {
             "properties": {
@@ -5280,7 +5280,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "DataPath": "..\\Assets\\Resource\\FBX\\New_Food\\skewer_pancake.fbx",
               "IsStatic": false
             },
@@ -5288,7 +5288,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "Alpha": 1.0,
               "Diffuse": [
                 1.0,
@@ -5333,10 +5333,10 @@
     },
     {
       "properties": {
-        "Active": 0,
-        "ID": 809,
+        "Active": false,
+        "ID": 846,
         "Name": "Alta_Tofu",
-        "ParentID": 804,
+        "ParentID": 841,
         "components": [
           {
             "properties": {
@@ -5360,7 +5360,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "DataPath": "..\\Assets\\Resource\\FBX\\New_Food\\tofu.fbx",
               "IsStatic": false
             },
@@ -5368,7 +5368,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "Alpha": 1.0,
               "Diffuse": [
                 1.0,
@@ -5413,10 +5413,10 @@
     },
     {
       "properties": {
-        "Active": 0,
-        "ID": 810,
+        "Active": false,
+        "ID": 847,
         "Name": "Alta_Sanjeok",
-        "ParentID": 804,
+        "ParentID": 841,
         "components": [
           {
             "properties": {
@@ -5440,7 +5440,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "DataPath": "..\\Assets\\Resource\\FBX\\New_Food\\Korean_st_Pancake.fbx",
               "IsStatic": true
             },
@@ -5448,7 +5448,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "Alpha": 1.0,
               "Diffuse": [
                 1.0,
@@ -5493,10 +5493,10 @@
     },
     {
       "properties": {
-        "Active": 0,
-        "ID": 811,
+        "Active": false,
+        "ID": 848,
         "Name": "Alta_Donggeurangttaeng",
-        "ParentID": 804,
+        "ParentID": 841,
         "components": [
           {
             "properties": {
@@ -5520,7 +5520,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "DataPath": "..\\Assets\\Resource\\FBX\\New_Food\\Korean_st_meatball.fbx",
               "IsStatic": false
             },
@@ -5528,7 +5528,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "Alpha": 1.0,
               "Diffuse": [
                 1.0,
@@ -5573,10 +5573,10 @@
     },
     {
       "properties": {
-        "Active": 0,
-        "ID": 812,
+        "Active": false,
+        "ID": 849,
         "Name": "Alta_Ingre_Apple",
-        "ParentID": 804,
+        "ParentID": 841,
         "components": [
           {
             "properties": {
@@ -5600,7 +5600,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "DataPath": "..\\Assets\\Resource\\sphere.fbx",
               "IsStatic": true
             },
@@ -5608,7 +5608,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "Alpha": 1.0,
               "Diffuse": [
                 1.0,
@@ -5653,10 +5653,10 @@
     },
     {
       "properties": {
-        "Active": 0,
-        "ID": 813,
+        "Active": false,
+        "ID": 850,
         "Name": "Alta_Ingre_Pear",
-        "ParentID": 804,
+        "ParentID": 841,
         "components": [
           {
             "properties": {
@@ -5680,7 +5680,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "DataPath": "..\\Assets\\Resource\\sphere.fbx",
               "IsStatic": true
             },
@@ -5688,7 +5688,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "Alpha": 1.0,
               "Diffuse": [
                 0.9852941036224365,
@@ -5733,10 +5733,10 @@
     },
     {
       "properties": {
-        "Active": 0,
-        "ID": 814,
+        "Active": false,
+        "ID": 851,
         "Name": "Alta_Ingre_Batter",
-        "ParentID": 804,
+        "ParentID": 841,
         "components": [
           {
             "properties": {
@@ -5760,7 +5760,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "DataPath": "..\\Assets\\Resource\\sphere.fbx",
               "IsStatic": true
             },
@@ -5768,7 +5768,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "Alpha": 1.0,
               "Diffuse": [
                 0.7022186517715454,
@@ -5813,10 +5813,10 @@
     },
     {
       "properties": {
-        "Active": 0,
-        "ID": 815,
+        "Active": false,
+        "ID": 852,
         "Name": "Alta_Ingre_Tofu",
-        "ParentID": 804,
+        "ParentID": 841,
         "components": [
           {
             "properties": {
@@ -5840,7 +5840,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "DataPath": "..\\Assets\\Resource\\sphere.fbx",
               "IsStatic": true
             },
@@ -5848,7 +5848,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "Alpha": 1.0,
               "Diffuse": [
                 1.0,
@@ -5893,10 +5893,10 @@
     },
     {
       "properties": {
-        "Active": 0,
-        "ID": 816,
+        "Active": false,
+        "ID": 853,
         "Name": "Alta_Ingre_Sanjeok",
-        "ParentID": 804,
+        "ParentID": 841,
         "components": [
           {
             "properties": {
@@ -5920,7 +5920,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "DataPath": "..\\Assets\\Resource\\sphere.fbx",
               "IsStatic": true
             },
@@ -5928,7 +5928,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "Alpha": 1.0,
               "Diffuse": [
                 0.1840878427028656,
@@ -5973,10 +5973,10 @@
     },
     {
       "properties": {
-        "Active": 0,
-        "ID": 817,
+        "Active": false,
+        "ID": 854,
         "Name": "Alta_Ingre_Donggeurangttaeng",
-        "ParentID": 804,
+        "ParentID": 841,
         "components": [
           {
             "properties": {
@@ -6000,7 +6000,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "DataPath": "..\\Assets\\Resource\\sphere.fbx",
               "IsStatic": true
             },
@@ -6008,7 +6008,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "Alpha": 1.0,
               "Diffuse": [
                 0.364140123128891,
@@ -6046,6 +6046,303 @@
               "UseRoughnessOverride": false
             },
             "type": "FBXRenderer"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 855,
+        "Name": "HideObject",
+        "ParentID": -1,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                113.4000015258789,
+                -110.0,
+                100.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "DataPath": "..\\Assets\\Resource\\FBX\\HideObject\\wastebasket.fbx",
+              "IsStatic": true
+            },
+            "type": "FBXData"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "Alpha": 1.0,
+              "Diffuse": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "DiffuseOverride": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Emissive": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "EmissiveOverride": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "IsGround": false,
+              "Metalic": 1.0,
+              "MetallicOverride": 1.0,
+              "RenderBlendType": "Opaque",
+              "Roughness": 1.0,
+              "RoughnessOverride": 1.0,
+              "UseDiffuseOverride": false,
+              "UseEmissiveOverride": false,
+              "UseMetallicOverride": false,
+              "UseRoughnessOverride": false
+            },
+            "type": "FBXRenderer"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "ColliderType": "Box",
+              "PhysicsBodyType": "Static",
+              "density": 10.0,
+              "halfExtents": [
+                20.0,
+                50.0,
+                20.0
+              ],
+              "height": 10.0,
+              "isTrigger": false,
+              "layer": "Default",
+              "localOffset": [
+                0.0,
+                50.0,
+                0.0
+              ],
+              "radius": 50.0
+            },
+            "type": "PhysicsComponent"
+          },
+          {
+            "properties": {
+              "Active": true
+            },
+            "type": "HideObject"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 856,
+        "Name": "TrapObject_Decal",
+        "ParentID": -1,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                -833.989990234375,
+                -109.50004577636719,
+                -60.04458236694336
+              ],
+              "Rotation": [
+                -0.0,
+                1.570796012878418,
+                -0.0
+              ],
+              "Scale": [
+                4.999998569488525,
+                1.0,
+                4.999998569488525
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "DecalType": "TextureMap",
+              "IsGroundDecal": false,
+              "Offset": [
+                0.0,
+                0.0
+              ],
+              "Opacity": 1.0,
+              "TexturePath": "..\\Assets\\Resource\\Decals\\Blood_Decals_A.tga",
+              "Tiling": [
+                1.0,
+                1.0
+              ],
+              "UpThreshold": 0.8999999761581421
+            },
+            "type": "Decal"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "ColliderType": "Box",
+              "PhysicsBodyType": "Static",
+              "density": 10.0,
+              "halfExtents": [
+                50.0,
+                100.0,
+                50.0
+              ],
+              "height": 10.0,
+              "isTrigger": true,
+              "layer": "Default",
+              "localOffset": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "radius": 50.0
+            },
+            "type": "PhysicsComponent"
+          },
+          {
+            "properties": {
+              "Active": true
+            },
+            "type": "TrapObject"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 857,
+        "Name": "TropObject_Table",
+        "ParentID": -1,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                -391.6114501953125,
+                -110.0,
+                52.105918884277344
+              ],
+              "Rotation": [
+                -0.0,
+                0.0,
+                -0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "DataPath": "..\\Assets\\Resource\\FBX\\TrapObject\\Living_room_sofa_1.fbx",
+              "IsStatic": false
+            },
+            "type": "FBXData"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "Alpha": 1.0,
+              "Diffuse": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "DiffuseOverride": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Emissive": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "EmissiveOverride": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "IsGround": false,
+              "Metalic": 1.0,
+              "MetallicOverride": 1.0,
+              "RenderBlendType": "Opaque",
+              "Roughness": 1.0,
+              "RoughnessOverride": 1.0,
+              "UseDiffuseOverride": false,
+              "UseEmissiveOverride": false,
+              "UseMetallicOverride": false,
+              "UseRoughnessOverride": false
+            },
+            "type": "FBXRenderer"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "ColliderType": "Box",
+              "PhysicsBodyType": "Static",
+              "density": 10.0,
+              "halfExtents": [
+                50.0,
+                100.0,
+                80.0
+              ],
+              "height": 10.0,
+              "isTrigger": true,
+              "layer": "Default",
+              "localOffset": [
+                -30.0,
+                0.0,
+                0.0
+              ],
+              "radius": 50.0
+            },
+            "type": "PhysicsComponent"
+          },
+          {
+            "properties": {
+              "Active": true
+            },
+            "type": "TrapObject"
           }
         ]
       },

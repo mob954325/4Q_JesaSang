@@ -3,6 +3,7 @@
 #include "Util/ComponentAutoRegister.h"
 #include "Object/GameObject.h"
 #include "EngineSystem/SceneSystem.h"
+#include "Components/FBXRenderer.h"
 
 REGISTER_COMPONENT(PlayerItemVisualizer)
 
@@ -82,6 +83,7 @@ void PlayerItemVisualizer::Deserialize(nlohmann::json data)
 void PlayerItemVisualizer::VisualOnItem(std::string itemID)
 {
     if (itemID.empty()) return;
+    curItemID = itemID;
 
     // all off
     VisualOffItem();
@@ -132,4 +134,14 @@ void PlayerItemVisualizer::VisualOffItem()
     if (food_tofu)     food_tofu->SetActive(false);
     if (food_sanjeok)  food_sanjeok->SetActive(false);
     if (food_dong)     food_dong->SetActive(false);
+}
+
+void PlayerItemVisualizer::VisualRenderOn()
+{
+    VisualOnItem(curItemID);
+}
+
+void PlayerItemVisualizer::VisualRenderOff()
+{
+    VisualOffItem();
 }

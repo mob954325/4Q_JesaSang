@@ -1,4 +1,5 @@
 #include "Player_Cook.h"
+#include "../../Inventory/Inventory.h"
 
 void Player_Cook::Enter()
 {
@@ -6,6 +7,9 @@ void Player_Cook::Enter()
 
     // set speed
     player->curSpeed = 0;
+
+    // set sense radius
+    player->curSenseRadius = 0;
 }
 
 void Player_Cook::ChangeStateLogic()
