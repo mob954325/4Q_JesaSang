@@ -38,4 +38,8 @@ public:
     UINT GetIndexCount() const;
     UINT GetStride() const;
     UINT GetOffset() const;
+
+    // ===== Text =====
+    std::vector<UIQuadVertex> cpuVerts; // 복사할 정점 데이터
+    std::vector<uint16_t> cpuInds;      // 인덱스 데이터
 };

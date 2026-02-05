@@ -2,6 +2,7 @@
 #include "../Base/pch.h"
 #include "../Components/UI/UIBase.h"
 #include "System/Singleton.h"
+#include "UIData/TextResource.h"
 
 /// <summary>
 /// 자식 계층중 UIBase를 가지고 있는 게임 오브젝트를 관리하는 매니저
@@ -13,6 +14,8 @@ public:
     UIManager(token) {};
     ~UIManager() = default;
 
+    void Init(ComPtr<ID3D11Device>& dev, ComPtr<ID3D11DeviceContext>& ctx);
+
     /// <summary>
     /// client screen size 가져오기, 카메라 투영 계산도 포함됨.
     /// </summary>
@@ -21,7 +24,13 @@ public:
 
     Matrix GetProjection() const;
 
+    void LoadFontAtlas( const std::wstring fontFilePath,
+                        FontAtlas& atlasOut,
+                        float fontPx, int atlasW, int atlasH, int paddingPx);
+
 protected:
+    ComPtr<ID3D11Device> device{};
+    ComPtr<ID3D11DeviceContext> context{};
     // std::vector<UIBase*> uiComps;
 
     // UI ㅡMVP 계산 할 때 사용하는 투영 매트릭스 ( 직교 투영 )
@@ -29,4 +38,6 @@ protected:
 
     int width{};
     int height{};
+
+    FontAtlasBuilder builder{};
 };

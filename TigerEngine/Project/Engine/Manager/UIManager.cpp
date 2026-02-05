@@ -1,5 +1,11 @@
 #include "UIManager.h"
 
+void UIManager::Init(ComPtr<ID3D11Device>& dev, ComPtr<ID3D11DeviceContext>& ctx)
+{
+    device = dev;
+    context = ctx;
+}
+
 void UIManager::SetSize(int w, int h)
 {
     width = w;
@@ -20,4 +26,10 @@ Vector2 UIManager::GetSize()
 Matrix UIManager::GetProjection() const
 {
     return proj;
+}
+
+void UIManager::LoadFontAtlas(const std::wstring fontFilePath, FontAtlas& atlasOut,
+    float fontPx, int atlasW, int atlasH, int paddingPx)
+{
+    atlasOut = builder.BuildASCII(device.Get(), fontFilePath, fontPx, atlasW, atlasH, paddingPx);
 }

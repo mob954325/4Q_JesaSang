@@ -142,6 +142,7 @@
     <ClCompile Include="Components\UI\Image.cpp" />
     <ClCompile Include="Components\VisionComponent.cpp" />
     <ClCompile Include="EngineSystem\AgentSystem.cpp" />
+    <ClCompile Include="Components\UI\TextUI.cpp" />
     <ClCompile Include="Manager\TextureResourceManager.cpp" />
     <ClCompile Include="Manager\UIManager.cpp" />
     <ClCompile Include="Components\GridComponent.cpp" />
@@ -209,8 +210,10 @@
     <ClInclude Include="Components\UI\Image.h" />
     <ClInclude Include="Components\VisionComponent.h" />
     <ClInclude Include="EngineSystem\AgentSystem.h" />
+    <ClInclude Include="Components\UI\TextUI.h" />
     <ClInclude Include="Manager\TextureResourceManager.h" />
     <ClInclude Include="Manager\UIData\TextureResource.h" />
+    <ClInclude Include="Manager\UIData\TextResource.h" />
     <ClInclude Include="Manager\UIManager.h" />
     <ClInclude Include="Components\Decal.h" />
     <ClInclude Include="Components\RectTransform.h" />
