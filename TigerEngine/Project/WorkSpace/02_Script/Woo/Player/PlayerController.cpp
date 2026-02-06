@@ -47,6 +47,9 @@ void PlayerController::OnStart()
     // get components
     transform = GetOwner()->GetComponent<Transform>();
     fbxRenderer = GetOwner()->GetComponent<FBXRenderer>();
+    fbxData = GetOwner()->GetComponent<FBXData>();
+    animController = GetOwner()->GetComponent<AnimationController>();
+
     cct = GetOwner()->GetComponent<CharacterControllerComponent>();
     inventory = GetOwner()->GetComponent<Inventory>();
     visualizer = GetOwner()->GetComponent<PlayerItemVisualizer>();
@@ -54,10 +57,13 @@ void PlayerController::OnStart()
     camController = CameraSystem::Instance().GetCurrCamera()->GetOwner()->GetComponent<CameraController>();
 
     // debug
-    if (!fbxRenderer || !cct || !inventory || !camController)
+    if (!fbxRenderer || !cct || !inventory || !camController || !fbxData || !animController)
     {
         cout << "[Player] Missing COmponet!" << endl;
     }
+
+    // load animation
+    //LoadAnimation();
 
     // init fsm
     InitFSMStates();
@@ -175,8 +181,27 @@ void PlayerController::ChangeState(PlayerState nextState)
 
     if(curState)
         curState->Enter();
+}
 
-    cout << "[Player] Current Sense Radius : " << curSenseRadius << endl;
+void PlayerController::LoadAnimation()
+{
+    // 애니메이션 파일 로드
+    FBXResourceManager::Instance().LoadAnimationByPath(fbxData->GetFBXInfo(), "..\\Assets\\Resource\\Animation\\ani_walk_character.fbx", "Idle");
+
+    // 클립 생성
+    auto idleClip = animController->FindClip("Idle");
+
+    if (!idleClip )
+    {
+        OutputDebugStringW(L"[CCTTest] Clip not found! 이름 확인 필요\n");
+        return;
+    }
+
+    // 상태 등록
+    animController->AddState(std::make_unique<AnimationState>("Idle", idleClip, animController));
+
+    // 시작
+    animController->ChangeState("Idle");
 }
 
 /*-------[ Init ]-------------------------------------*/
@@ -391,6 +416,11 @@ void PlayerController::GetItemAltarInteraction(float dt)
     }
 }
     
+
+PlayerState PlayerController::GetPlayerState()
+{
+    return state;
+}
 
 /*----------- 외부 호출 Funcs.. -------------------------*/
 void PlayerController::SetCurSearchObject(SearchObject* object)

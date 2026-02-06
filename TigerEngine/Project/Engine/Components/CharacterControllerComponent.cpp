@@ -20,7 +20,7 @@ RTTR_REGISTRATION
             rttr::value("World", CollisionLayer::World),
             rttr::value("Trigger", CollisionLayer::Trigger),
             rttr::value("Projectile", CollisionLayer::Projectile),
-            rttr::value("Ball", CollisionLayer::Ball),
+            rttr::value("Vision", CollisionLayer::Vision),
             rttr::value("Ground", CollisionLayer::Ground)
             );
 
@@ -85,6 +85,7 @@ void CharacterControllerComponent::Enable_Inner()
     if(m_firstRegister)
     {
         CreateCharacterCollider(m_Radius, m_Height, m_Offset);
+        // SetLayer(m_Layer);
         CharacterControllerSystem::Instance().RegisterComponent(this, m_Controller);
     }
 
@@ -128,7 +129,7 @@ void CharacterControllerComponent::CreateCharacterCollider(float radius, float h
         10.0f   // density (사실상 무의미) density는 반드시 > 0
     );
 
-    SetLayer(CollisionLayer::Default); // 초기 레이어 적용
+     SetLayer(m_Layer); // 레이어 적용
 }
 
 //void CharacterControllerComponent::MoveCharacter(const Vector3& wishDir, float fixedDt)

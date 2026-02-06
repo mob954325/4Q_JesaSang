@@ -6,7 +6,6 @@ struct VisionDebugParam
 {
     float fov = 0.f;
     float dist = 0.f;
-    CollisionMask occlusionMask = 0;
     bool valid = false;
 };
 
@@ -29,11 +28,8 @@ public:
 
     bool CheckVision(
         GameObject* target,
-        float fovDeg,
-        float viewDistance,
-        CollisionMask targetMask,
-        CollisionMask occlusionMask);
+        float fov,
+        float maxDistance);
 
-    // void DrawDebugVision(float fovDeg, float viewDistance, CollisionMask occlusionMask);
     void DrawDebugVision();
 };

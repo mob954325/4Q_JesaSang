@@ -109,7 +109,7 @@ struct alignas(16) OffsetMatrixCB
 {
     // bone offset matrix
     // vertex데이터에 참조할 index 4개가 들어있음
-    Matrix boneOffset[128];
+    Matrix boneOffset[256];
 };
 
 // PoseMatrix -> b5
@@ -118,7 +118,7 @@ struct alignas(16) PoseMatrixCB
     // bone world matrix
     // bone의 local matrix(animation)을 계층 구조에 따라 누적한 bone transform 배열
     // vertex데이터에 참조할 index 4개가 들어있음
-    Matrix bonePose[128];
+    Matrix bonePose[256];
 };
 
 // PostProcess CB -> b6
@@ -226,7 +226,21 @@ struct alignas(16) DecalCB
 
     float opacity;
     float upThreshold;
-    Vector2 padding;
+    int   decalType;      // 0=TextureMap, 1=RingEffect
+    float pad0;
+
+    // ring
+    float ringStartTime;
+    float ringDuration;
+    float ringMaxRadius;
+    float ringSpeed;
+
+    float ringThickness;
+    float ringFeather;
+    float pad1;
+
+    Vector3 ringColor;
+    float pad2;
 };
 
 // UI가 공용으로 사용할 상수 버퍼 CB -> b11

@@ -100,7 +100,8 @@ void CCTTest::OnFixedUpdate(float dt)
     }
 
     CCTMoveExample(dt);  // 캐릭터 이동 예시 코드 
-    // RaycastExample(); // 레이캐스트  예시 코드 
+    // 
+    // Example(); // 레이캐스트  예시 코드 
 }
 
 

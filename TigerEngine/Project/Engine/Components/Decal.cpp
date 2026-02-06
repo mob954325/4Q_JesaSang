@@ -16,20 +16,26 @@ RTTR_REGISTRATION
         );
 
     rttr::registration::class_<Decal>("Decal")
-        .constructor<>()
-            (rttr::policy::ctor::as_std_shared_ptr)
-        .property("DecalType",     &Decal::type)
-        .property("Opacity",       &Decal::opacity)
-        .property("IsGroundDecal", &Decal::isGroundDecal)
-        .property("UpThreshold",   &Decal::upThreshold)
-        .property("Tiling",        &Decal::tiling)
-        .property("Offset",        &Decal::offset)
-        .property("TexturePath",   &Decal::decalTexturePath);
+    .constructor<>()
+    (rttr::policy::ctor::as_std_shared_ptr)
+    .property("DecalType", &Decal::type)
+    .property("Opacity", &Decal::opacity)
+    .property("IsGroundDecal", &Decal::isGroundDecal)
+    .property("UpThreshold", &Decal::upThreshold)
+    .property("Tiling", &Decal::tiling)
+    .property("Offset", &Decal::offset)
+    .property("TexturePath", &Decal::decalTexturePath)
+    
+    .property("ringDuration", &Decal::ringDuration)
+    .property("ringSpeed", &Decal::ringSpeed)
+    .property("ringThickness", &Decal::ringThickness)
+    .property("ringFeather", &Decal::ringFeather)
+    .property("ringColor", &Decal::ringColor);
 }
 
 void Decal::OnInitialize()
 {
-    
+    SetActive(false);
 }
 
 void Decal::OnDestory()
@@ -76,6 +82,17 @@ void Decal::Disable_Inner()
 {
     DecalSystem::Instance().UnRegister(this);
     OnDisable();
+}
+
+void Decal::StartRingEffect(float startTime, float duration, float speed)
+{
+    if (type == DecalType::TextureMap) return;
+
+    ringStartTime = startTime;
+    ringDuration = duration;
+    ringSpeed = speed;
+
+    SetActive(true);
 }
 
 std::wstring ToWString(const std::string& str)

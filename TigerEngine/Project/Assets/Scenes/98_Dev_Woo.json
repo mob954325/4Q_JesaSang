@@ -3,7 +3,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1605,
+        "ID": 877,
         "Name": "Main Camera",
         "ParentID": -1,
         "components": [
@@ -56,7 +56,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1606,
+        "ID": 878,
         "Name": "DirectionalLight(Sun)",
         "ParentID": -1,
         "components": [
@@ -110,7 +110,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1607,
+        "ID": 879,
         "Name": "---------Floor----------",
         "ParentID": -1,
         "components": [
@@ -141,9 +141,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1608,
+        "ID": 880,
         "Name": "Floor",
-        "ParentID": 1607,
+        "ParentID": 879,
         "components": [
           {
             "properties": {
@@ -221,13 +221,13 @@
               "PhysicsBodyType": "Static",
               "density": 10.0,
               "halfExtents": [
-                1000.0,
+                5000.0,
                 10.0,
-                1000.0
+                50000.0
               ],
               "height": 10.0,
               "isTrigger": false,
-              "layer": "Default",
+              "layer": "Ground",
               "localOffset": [
                 0.0,
                 0.0,
@@ -244,7 +244,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1609,
+        "ID": 881,
         "Name": "---------Wall----------",
         "ParentID": -1,
         "components": [
@@ -275,9 +275,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1610,
+        "ID": 882,
         "Name": "Door_Open",
-        "ParentID": 1609,
+        "ParentID": 881,
         "components": [
           {
             "properties": {
@@ -355,9 +355,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1611,
+        "ID": 883,
         "Name": "Pillar",
-        "ParentID": 1609,
+        "ParentID": 881,
         "components": [
           {
             "properties": {
@@ -464,9 +464,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1612,
+        "ID": 884,
         "Name": "wall_4",
-        "ParentID": 1609,
+        "ParentID": 881,
         "components": [
           {
             "properties": {
@@ -573,9 +573,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1613,
+        "ID": 885,
         "Name": "wall_5",
-        "ParentID": 1609,
+        "ParentID": 881,
         "components": [
           {
             "properties": {
@@ -682,9 +682,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1614,
+        "ID": 886,
         "Name": "Room",
-        "ParentID": 1607,
+        "ParentID": 879,
         "components": [
           {
             "properties": {
@@ -762,9 +762,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1615,
+        "ID": 887,
         "Name": "Room_a_love_room",
-        "ParentID": 1607,
+        "ParentID": 879,
         "components": [
           {
             "properties": {
@@ -822,7 +822,7 @@
                 1.0,
                 1.0
               ],
-              "IsGround": false,
+              "IsGround": true,
               "Metalic": 1.0,
               "MetallicOverride": 1.0,
               "RenderBlendType": "Opaque",
@@ -842,9 +842,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1616,
+        "ID": 888,
         "Name": "Room_Kitchen",
-        "ParentID": 1607,
+        "ParentID": 879,
         "components": [
           {
             "properties": {
@@ -922,9 +922,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1617,
+        "ID": 889,
         "Name": "Room_main_room",
-        "ParentID": 1607,
+        "ParentID": 879,
         "components": [
           {
             "properties": {
@@ -1002,9 +1002,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1618,
+        "ID": 890,
         "Name": "Room_saibi",
-        "ParentID": 1607,
+        "ParentID": 879,
         "components": [
           {
             "properties": {
@@ -1082,9 +1082,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1619,
+        "ID": 891,
         "Name": "Room_Table_of_memorial_ceremony",
-        "ParentID": 1607,
+        "ParentID": 879,
         "components": [
           {
             "properties": {
@@ -1162,9 +1162,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1620,
+        "ID": 892,
         "Name": "Room_Warehouse",
-        "ParentID": 1607,
+        "ParentID": 879,
         "components": [
           {
             "properties": {
@@ -1242,7 +1242,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1621,
+        "ID": 893,
         "Name": "---------Object----------",
         "ParentID": -1,
         "components": [
@@ -1273,7 +1273,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1622,
+        "ID": 894,
         "Name": "JesaSang",
         "ParentID": -1,
         "components": [
@@ -1382,9 +1382,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1623,
+        "ID": 895,
         "Name": "SearchObject",
-        "ParentID": 1621,
+        "ParentID": 893,
         "components": [
           {
             "properties": {
@@ -1500,9 +1500,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1624,
+        "ID": 896,
         "Name": "SearchObject",
-        "ParentID": 1621,
+        "ParentID": 893,
         "components": [
           {
             "properties": {
@@ -1618,9 +1618,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1625,
+        "ID": 897,
         "Name": "baseFood",
-        "ParentID": 1622,
+        "ParentID": 894,
         "components": [
           {
             "properties": {
@@ -1698,7 +1698,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1626,
+        "ID": 898,
         "Name": "Player",
         "ParentID": -1,
         "components": [
@@ -1805,6 +1805,12 @@
               "Active": true
             },
             "type": "PlayerItemVisualizer"
+          },
+          {
+            "properties": {
+              "Active": true
+            },
+            "type": "AnimationController"
           }
         ]
       },
@@ -1813,7 +1819,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1627,
+        "ID": 899,
         "Name": "-----------------------",
         "ParentID": -1,
         "components": [
@@ -1844,7 +1850,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1628,
+        "ID": 900,
         "Name": "CurScene_98_Dev_Woo",
         "ParentID": -1,
         "components": [
@@ -1875,7 +1881,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1629,
+        "ID": 901,
         "Name": "-----------------------",
         "ParentID": -1,
         "components": [
@@ -1906,9 +1912,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1630,
+        "ID": 902,
         "Name": "wall_5",
-        "ParentID": 1609,
+        "ParentID": 881,
         "components": [
           {
             "properties": {
@@ -2015,9 +2021,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1631,
+        "ID": 903,
         "Name": "wall_5",
-        "ParentID": 1609,
+        "ParentID": 881,
         "components": [
           {
             "properties": {
@@ -2124,9 +2130,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1632,
+        "ID": 904,
         "Name": "wall_5",
-        "ParentID": 1609,
+        "ParentID": 881,
         "components": [
           {
             "properties": {
@@ -2233,9 +2239,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1633,
+        "ID": 905,
         "Name": "wall_4",
-        "ParentID": 1609,
+        "ParentID": 881,
         "components": [
           {
             "properties": {
@@ -2342,9 +2348,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1634,
+        "ID": 906,
         "Name": "CameraTrackingPoint",
-        "ParentID": 1626,
+        "ParentID": 898,
         "components": [
           {
             "properties": {
@@ -2373,9 +2379,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1635,
+        "ID": 907,
         "Name": "OcclusionFadePoint",
-        "ParentID": 1626,
+        "ParentID": 898,
         "components": [
           {
             "properties": {
@@ -2404,9 +2410,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1636,
+        "ID": 908,
         "Name": "SearchObject",
-        "ParentID": 1621,
+        "ParentID": 893,
         "components": [
           {
             "properties": {
@@ -2522,9 +2528,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1637,
+        "ID": 909,
         "Name": "InteractionSensor",
-        "ParentID": 1626,
+        "ParentID": 898,
         "components": [
           {
             "properties": {
@@ -2582,9 +2588,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1638,
+        "ID": 910,
         "Name": "InteractZone",
-        "ParentID": 1626,
+        "ParentID": 898,
         "components": [
           {
             "properties": {
@@ -2642,7 +2648,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1639,
+        "ID": 911,
         "Name": "Kitchen",
         "ParentID": -1,
         "components": [
@@ -2722,9 +2728,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1640,
+        "ID": 912,
         "Name": "MiniGameManager",
-        "ParentID": 1659,
+        "ParentID": 931,
         "components": [
           {
             "properties": {
@@ -2759,9 +2765,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1641,
+        "ID": 913,
         "Name": "CookingZone",
-        "ParentID": 1639,
+        "ParentID": 911,
         "components": [
           {
             "properties": {
@@ -2813,9 +2819,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1642,
+        "ID": 914,
         "Name": "SearchObject",
-        "ParentID": 1621,
+        "ParentID": 893,
         "components": [
           {
             "properties": {
@@ -2931,9 +2937,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1643,
+        "ID": 915,
         "Name": "SearchObject",
-        "ParentID": 1621,
+        "ParentID": 893,
         "components": [
           {
             "properties": {
@@ -3049,9 +3055,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1644,
+        "ID": 916,
         "Name": "SearchObject",
-        "ParentID": 1621,
+        "ParentID": 893,
         "components": [
           {
             "properties": {
@@ -3167,9 +3173,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1645,
+        "ID": 917,
         "Name": "SearchObject",
-        "ParentID": 1621,
+        "ParentID": 893,
         "components": [
           {
             "properties": {
@@ -3285,9 +3291,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1646,
+        "ID": 918,
         "Name": "SearchObject",
-        "ParentID": 1621,
+        "ParentID": 893,
         "components": [
           {
             "properties": {
@@ -3403,9 +3409,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 1647,
+        "ID": 919,
         "Name": "Apple",
-        "ParentID": 1622,
+        "ParentID": 894,
         "components": [
           {
             "properties": {
@@ -3483,9 +3489,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 1648,
+        "ID": 920,
         "Name": "Pear",
-        "ParentID": 1622,
+        "ParentID": 894,
         "components": [
           {
             "properties": {
@@ -3563,9 +3569,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 1649,
+        "ID": 921,
         "Name": "Batter",
-        "ParentID": 1622,
+        "ParentID": 894,
         "components": [
           {
             "properties": {
@@ -3643,9 +3649,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 1650,
+        "ID": 922,
         "Name": "Tofu",
-        "ParentID": 1622,
+        "ParentID": 894,
         "components": [
           {
             "properties": {
@@ -3723,9 +3729,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 1651,
+        "ID": 923,
         "Name": "Sanjeok",
-        "ParentID": 1622,
+        "ParentID": 894,
         "components": [
           {
             "properties": {
@@ -3803,9 +3809,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 1652,
+        "ID": 924,
         "Name": "Donggeurangttaeng",
-        "ParentID": 1622,
+        "ParentID": 894,
         "components": [
           {
             "properties": {
@@ -3883,9 +3889,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 1653,
+        "ID": 925,
         "Name": "Visual_Ingre_Apple",
-        "ParentID": 1660,
+        "ParentID": 932,
         "components": [
           {
             "properties": {
@@ -3963,9 +3969,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 1654,
+        "ID": 926,
         "Name": "Visual_Ingre_Batter",
-        "ParentID": 1660,
+        "ParentID": 932,
         "components": [
           {
             "properties": {
@@ -4043,9 +4049,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 1655,
+        "ID": 927,
         "Name": "Visual_Ingre_Donggeurangttaeng",
-        "ParentID": 1660,
+        "ParentID": 932,
         "components": [
           {
             "properties": {
@@ -4123,9 +4129,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 1656,
+        "ID": 928,
         "Name": "Visual_Ingre_Pear",
-        "ParentID": 1660,
+        "ParentID": 932,
         "components": [
           {
             "properties": {
@@ -4203,9 +4209,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 1657,
+        "ID": 929,
         "Name": "Visual_Ingre_Sanjeok",
-        "ParentID": 1660,
+        "ParentID": 932,
         "components": [
           {
             "properties": {
@@ -4283,9 +4289,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 1658,
+        "ID": 930,
         "Name": "Visual_Ingre_Tofu",
-        "ParentID": 1660,
+        "ParentID": 932,
         "components": [
           {
             "properties": {
@@ -4363,7 +4369,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1659,
+        "ID": 931,
         "Name": "Managers",
         "ParentID": -1,
         "components": [
@@ -4394,9 +4400,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1660,
+        "ID": 932,
         "Name": "ItemVisualizer",
-        "ParentID": 1626,
+        "ParentID": 898,
         "components": [
           {
             "properties": {
@@ -4425,9 +4431,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 1661,
+        "ID": 933,
         "Name": "Visual_Apple",
-        "ParentID": 1660,
+        "ParentID": 932,
         "components": [
           {
             "properties": {
@@ -4505,9 +4511,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 1662,
+        "ID": 934,
         "Name": "Visual_Pear",
-        "ParentID": 1660,
+        "ParentID": 932,
         "components": [
           {
             "properties": {
@@ -4585,9 +4591,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 1663,
+        "ID": 935,
         "Name": "Visual_Batter",
-        "ParentID": 1660,
+        "ParentID": 932,
         "components": [
           {
             "properties": {
@@ -4665,9 +4671,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 1664,
+        "ID": 936,
         "Name": "Visual_Tofu",
-        "ParentID": 1660,
+        "ParentID": 932,
         "components": [
           {
             "properties": {
@@ -4745,9 +4751,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 1665,
+        "ID": 937,
         "Name": "Visual_Sanjeok",
-        "ParentID": 1660,
+        "ParentID": 932,
         "components": [
           {
             "properties": {
@@ -4825,9 +4831,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 1666,
+        "ID": 938,
         "Name": "Visual_Donggeurangttaeng",
-        "ParentID": 1660,
+        "ParentID": 932,
         "components": [
           {
             "properties": {
@@ -4905,7 +4911,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1667,
+        "ID": 939,
         "Name": "Altar",
         "ParentID": -1,
         "components": [
@@ -5014,9 +5020,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1668,
+        "ID": 940,
         "Name": "baseFood",
-        "ParentID": 1667,
+        "ParentID": 939,
         "components": [
           {
             "properties": {
@@ -5094,9 +5100,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 1669,
+        "ID": 941,
         "Name": "Alta_Apple",
-        "ParentID": 1667,
+        "ParentID": 939,
         "components": [
           {
             "properties": {
@@ -5174,9 +5180,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 1670,
+        "ID": 942,
         "Name": "Alta_Pear",
-        "ParentID": 1667,
+        "ParentID": 939,
         "components": [
           {
             "properties": {
@@ -5254,9 +5260,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 1671,
+        "ID": 943,
         "Name": "Alta_Batter",
-        "ParentID": 1667,
+        "ParentID": 939,
         "components": [
           {
             "properties": {
@@ -5334,9 +5340,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 1672,
+        "ID": 944,
         "Name": "Alta_Tofu",
-        "ParentID": 1667,
+        "ParentID": 939,
         "components": [
           {
             "properties": {
@@ -5414,9 +5420,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 1673,
+        "ID": 945,
         "Name": "Alta_Sanjeok",
-        "ParentID": 1667,
+        "ParentID": 939,
         "components": [
           {
             "properties": {
@@ -5494,9 +5500,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 1674,
+        "ID": 946,
         "Name": "Alta_Donggeurangttaeng",
-        "ParentID": 1667,
+        "ParentID": 939,
         "components": [
           {
             "properties": {
@@ -5574,9 +5580,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 1675,
+        "ID": 947,
         "Name": "Alta_Ingre_Apple",
-        "ParentID": 1667,
+        "ParentID": 939,
         "components": [
           {
             "properties": {
@@ -5654,9 +5660,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 1676,
+        "ID": 948,
         "Name": "Alta_Ingre_Pear",
-        "ParentID": 1667,
+        "ParentID": 939,
         "components": [
           {
             "properties": {
@@ -5734,9 +5740,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 1677,
+        "ID": 949,
         "Name": "Alta_Ingre_Batter",
-        "ParentID": 1667,
+        "ParentID": 939,
         "components": [
           {
             "properties": {
@@ -5814,9 +5820,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 1678,
+        "ID": 950,
         "Name": "Alta_Ingre_Tofu",
-        "ParentID": 1667,
+        "ParentID": 939,
         "components": [
           {
             "properties": {
@@ -5894,9 +5900,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 1679,
+        "ID": 951,
         "Name": "Alta_Ingre_Sanjeok",
-        "ParentID": 1667,
+        "ParentID": 939,
         "components": [
           {
             "properties": {
@@ -5974,9 +5980,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 1680,
+        "ID": 952,
         "Name": "Alta_Ingre_Donggeurangttaeng",
-        "ParentID": 1667,
+        "ParentID": 939,
         "components": [
           {
             "properties": {
@@ -6054,7 +6060,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1681,
+        "ID": 953,
         "Name": "HideObject",
         "ParentID": -1,
         "components": [
@@ -6163,7 +6169,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1682,
+        "ID": 954,
         "Name": "TrapObject_Decal",
         "ParentID": -1,
         "components": [
@@ -6191,6 +6197,7 @@
             "properties": {
               "Active": true,
               "DecalType": "TextureMap",
+              "IsGroundDecal": false,
               "Offset": [
                 0.0,
                 0.0
@@ -6201,7 +6208,16 @@
                 1.0,
                 1.0
               ],
-              "UpThreshold": 0.8999999761581421
+              "UpThreshold": 0.8999999761581421,
+              "ringColor": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "ringDuration": 5.0,
+              "ringFeather": 0.30000001192092896,
+              "ringSpeed": 1.5,
+              "ringThickness": 0.029999999329447746
             },
             "type": "Decal"
           },
@@ -6213,7 +6229,7 @@
               "density": 10.0,
               "halfExtents": [
                 50.0,
-                10.0,
+                100.0,
                 50.0
               ],
               "height": 10.0,
@@ -6241,7 +6257,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1683,
+        "ID": 955,
         "Name": "TropObject_Table",
         "ParentID": -1,
         "components": [
@@ -6249,7 +6265,7 @@
             "properties": {
               "Position": [
                 -391.6114501953125,
-                -86.32793426513672,
+                -110.0,
                 52.105918884277344
               ],
               "Rotation": [
@@ -6258,9 +6274,9 @@
                 -0.0
               ],
               "Scale": [
-                0.30000001192092896,
-                0.30000001192092896,
-                0.30000001192092896
+                1.0,
+                1.0,
+                1.0
               ]
             },
             "type": "Transform"
@@ -6268,8 +6284,8 @@
           {
             "properties": {
               "Active": true,
-              "DataPath": "..\\Assets\\Resource\\Cube1.fbx",
-              "IsStatic": true
+              "DataPath": "..\\Assets\\Resource\\FBX\\TrapObject\\Living_room_sofa_1.fbx",
+              "IsStatic": false
             },
             "type": "FBXData"
           },
@@ -6322,7 +6338,7 @@
               "density": 10.0,
               "halfExtents": [
                 50.0,
-                30.0,
+                100.0,
                 80.0
               ],
               "height": 10.0,
@@ -6342,6 +6358,723 @@
               "Active": true
             },
             "type": "TrapObject"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 956,
+        "Name": "---------------------------",
+        "ParentID": -1,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 957,
+        "Name": "Grid",
+        "ParentID": -1,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                -109.80000305175781,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "CellSize": 100.0,
+              "Height": 50,
+              "Width": 50
+            },
+            "type": "GridComponent"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 958,
+        "Name": "Ghost_Adult",
+        "ParentID": -1,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                -745.1178588867188,
+                0.0,
+                -11.942604064941406
+              ],
+              "Rotation": [
+                -0.0,
+                0.0,
+                -0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "DataPath": "..\\Assets\\Resource\\FBX\\00_character\\ghost.fbx",
+              "IsStatic": false
+            },
+            "type": "FBXData"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "Alpha": 1.0,
+              "Diffuse": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "DiffuseOverride": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Emissive": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "EmissiveOverride": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "IsGround": false,
+              "Metalic": 1.0,
+              "MetallicOverride": 1.0,
+              "RenderBlendType": "Opaque",
+              "Roughness": 1.0,
+              "RoughnessOverride": 1.0,
+              "UseDiffuseOverride": false,
+              "UseEmissiveOverride": false,
+              "UseMetallicOverride": false,
+              "UseRoughnessOverride": false
+            },
+            "type": "FBXRenderer"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "height": 120.0,
+              "isTrigger": false,
+              "jumpSpeed": 5.5,
+              "layer": "Default",
+              "moveSpeed": 2.0,
+              "offset": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "radius": 30.0
+            },
+            "type": "CharacterControllerComponent"
+          },
+          {
+            "properties": {
+              "Active": true
+            },
+            "type": "VisionComponent"
+          },
+          {
+            "properties": {
+              "Active": true
+            },
+            "type": "AdultGhostController"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "patrolSpeed": 1.0,
+              "reachDist": 20.0
+            },
+            "type": "AgentComponent"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 959,
+        "Name": "Ghost_Baby",
+        "ParentID": -1,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                -569.2680053710938,
+                0.0,
+                60.562076568603516
+              ],
+              "Rotation": [
+                -0.0,
+                0.0,
+                -0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "DataPath": "..\\Assets\\Resource\\FBX\\00_character\\ani_babyghost.fbx",
+              "IsStatic": false
+            },
+            "type": "FBXData"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "Alpha": 1.0,
+              "Diffuse": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "DiffuseOverride": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Emissive": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "EmissiveOverride": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "IsGround": false,
+              "Metalic": 1.0,
+              "MetallicOverride": 1.0,
+              "RenderBlendType": "Opaque",
+              "Roughness": 1.0,
+              "RoughnessOverride": 1.0,
+              "UseDiffuseOverride": false,
+              "UseEmissiveOverride": false,
+              "UseMetallicOverride": false,
+              "UseRoughnessOverride": false
+            },
+            "type": "FBXRenderer"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "height": 120.0,
+              "isTrigger": false,
+              "jumpSpeed": 5.5,
+              "layer": "Default",
+              "moveSpeed": 2.0,
+              "offset": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "radius": 30.0
+            },
+            "type": "CharacterControllerComponent"
+          },
+          {
+            "properties": {
+              "Active": true
+            },
+            "type": "VisionComponent"
+          },
+          {
+            "properties": {
+              "Active": true
+            },
+            "type": "AdultGhostController"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "patrolSpeed": 1.0,
+              "reachDist": 20.0
+            },
+            "type": "AgentComponent"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 960,
+        "Name": "Ghost_Baby",
+        "ParentID": -1,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                1124.12109375,
+                0.0,
+                -27.17041778564453
+              ],
+              "Rotation": [
+                -0.0,
+                0.0,
+                -0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "DataPath": "..\\Assets\\Resource\\FBX\\00_character\\ani_babyghost.fbx",
+              "IsStatic": false
+            },
+            "type": "FBXData"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "Alpha": 1.0,
+              "Diffuse": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "DiffuseOverride": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Emissive": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "EmissiveOverride": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "IsGround": false,
+              "Metalic": 1.0,
+              "MetallicOverride": 1.0,
+              "RenderBlendType": "Opaque",
+              "Roughness": 1.0,
+              "RoughnessOverride": 1.0,
+              "UseDiffuseOverride": false,
+              "UseEmissiveOverride": false,
+              "UseMetallicOverride": false,
+              "UseRoughnessOverride": false
+            },
+            "type": "FBXRenderer"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "height": 120.0,
+              "isTrigger": false,
+              "jumpSpeed": 5.5,
+              "layer": "Default",
+              "moveSpeed": 2.0,
+              "offset": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "radius": 30.0
+            },
+            "type": "CharacterControllerComponent"
+          },
+          {
+            "properties": {
+              "Active": true
+            },
+            "type": "VisionComponent"
+          },
+          {
+            "properties": {
+              "Active": true
+            },
+            "type": "AdultGhostController"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "patrolSpeed": 1.0,
+              "reachDist": 20.0
+            },
+            "type": "AgentComponent"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 961,
+        "Name": "Ghost_Adult",
+        "ParentID": -1,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                273.9989929199219,
+                0.0,
+                820.8717651367188
+              ],
+              "Rotation": [
+                -0.0,
+                0.0,
+                -0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "DataPath": "..\\Assets\\Resource\\FBX\\00_character\\ghost.fbx",
+              "IsStatic": false
+            },
+            "type": "FBXData"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "Alpha": 1.0,
+              "Diffuse": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "DiffuseOverride": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Emissive": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "EmissiveOverride": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "IsGround": false,
+              "Metalic": 1.0,
+              "MetallicOverride": 1.0,
+              "RenderBlendType": "Opaque",
+              "Roughness": 1.0,
+              "RoughnessOverride": 1.0,
+              "UseDiffuseOverride": false,
+              "UseEmissiveOverride": false,
+              "UseMetallicOverride": false,
+              "UseRoughnessOverride": false
+            },
+            "type": "FBXRenderer"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "height": 120.0,
+              "isTrigger": false,
+              "jumpSpeed": 5.5,
+              "layer": "Default",
+              "moveSpeed": 2.0,
+              "offset": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "radius": 30.0
+            },
+            "type": "CharacterControllerComponent"
+          },
+          {
+            "properties": {
+              "Active": true
+            },
+            "type": "VisionComponent"
+          },
+          {
+            "properties": {
+              "Active": true
+            },
+            "type": "AdultGhostController"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "patrolSpeed": 1.0,
+              "reachDist": 20.0
+            },
+            "type": "AgentComponent"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 962,
+        "Name": "AITarget",
+        "ParentID": 898,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "ColliderType": "Box",
+              "PhysicsBodyType": "Static",
+              "density": 10.0,
+              "halfExtents": [
+                10.0,
+                5.0,
+                10.0
+              ],
+              "height": 10.0,
+              "isTrigger": false,
+              "layer": "Player",
+              "localOffset": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "radius": 50.0
+            },
+            "type": "PhysicsComponent"
+          },
+          {
+            "properties": {
+              "Active": true
+            },
+            "type": "AITarget"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": false,
+        "ID": 963,
+        "Name": "RingEffect",
+        "ParentID": 954,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                4.0,
+                3.0,
+                4.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "DecalType": "RingEffect",
+              "IsGroundDecal": true,
+              "Offset": [
+                0.0,
+                0.0
+              ],
+              "Opacity": 1.0,
+              "TexturePath": "",
+              "Tiling": [
+                1.0,
+                1.0
+              ],
+              "UpThreshold": 0.8999999761581421,
+              "ringColor": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "ringDuration": 10.0,
+              "ringFeather": 0.009999999776482582,
+              "ringSpeed": 0.44999998807907104,
+              "ringThickness": 0.004999999888241291
+            },
+            "type": "Decal"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": false,
+        "ID": 967,
+        "Name": "RingEffect",
+        "ParentID": 955,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                20.0,
+                5.0,
+                20.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "DecalType": "RingEffect",
+              "IsGroundDecal": true,
+              "Offset": [
+                0.0,
+                0.0
+              ],
+              "Opacity": 1.0,
+              "TexturePath": "",
+              "Tiling": [
+                1.0,
+                1.0
+              ],
+              "UpThreshold": 0.8999999761581421,
+              "ringColor": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "ringDuration": 10.0,
+              "ringFeather": 0.009999999776482582,
+              "ringSpeed": 0.44999998807907104,
+              "ringThickness": 0.004999999888241291
+            },
+            "type": "Decal"
           }
         ]
       },

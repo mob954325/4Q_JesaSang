@@ -156,6 +156,7 @@
     <ClInclude Include="02_Script\Woo\OcclusionFade\OcclusionFader.h" />
     <ClInclude Include="02_Script\Woo\Player\Interaction\InteractionSensor.h" />
     <ClInclude Include="02_Script\Woo\Player\Interaction\InteractionZone.h" />
+    <ClInclude Include="02_Script\Woo\Player\AITarget\AITarget.h" />
     <ClInclude Include="EngineApp.h" />
     <ClInclude Include="99_Test\MiniMapTest\MiniMapTestScript.h" />
     <ClInclude Include="99_Test\MiniMapTest\MiniMapManager.h" />
@@ -187,7 +188,7 @@
     <ClInclude Include="02_Script\Woo\Player\PlayerItemVisualizer.h" />
     <ClInclude Include="02_Script\Woo\Object\HideObject.h" />
     <ClInclude Include="02_Script\Woo\Manager\GameManager.h" />
-    <ClInclude Include="02_Script\Woo\Object\TrapObject.h" />	
+    <ClInclude Include="02_Script\Woo\Object\TrapObject.h" />
     <ClInclude Include="99_Test\Intro\IntroCutSceneController.h" />
   </ItemGroup>
   <ItemGroup>
@@ -202,6 +203,7 @@
     <ClCompile Include="02_Script\Woo\OcclusionFade\OcclusionFader.cpp" />
     <ClCompile Include="02_Script\Woo\Player\Interaction\InteractionSensor.cpp" />
     <ClCompile Include="02_Script\Woo\Player\Interaction\InteractionZone.cpp" />
+    <ClCompile Include="02_Script\Woo\Player\AITarget\AITarget.cpp" />
     <ClCompile Include="EngineApp.cpp" />
     <ClCompile Include="99_Test\MiniMapTest\MiniMapTestScript.cpp" />
     <ClCompile Include="99_Test\MiniMapTest\MiniMapManager.cpp" />
