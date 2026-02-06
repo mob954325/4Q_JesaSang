@@ -331,6 +331,10 @@ void PlayerController::HideObjectInteraction(float dt)
     if (!isPossibleHide || !curHideObject)
         return;
 
+    // hit, die 상태라면 return (맞겠지?)
+    if (state == PlayerState::Hit || state == PlayerState::Die)
+        return;
+
     // hide
     if (Input::GetKeyDown(interaction_Key) && curHideObject->IsPossibleHide())
     {
