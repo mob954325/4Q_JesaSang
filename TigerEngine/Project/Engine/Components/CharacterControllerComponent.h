@@ -41,6 +41,9 @@ public:
     std::unordered_set<PhysicsComponent*> m_CCTPrevTriggers;
     std::unordered_set<PhysicsComponent*> m_CCTCurrTriggers;
 
+    // ㅊㅊㅆ <-> CCT 
+    std::unordered_set<CharacterControllerComponent*> m_CCTCurrCCTContacts;
+    std::unordered_set<CharacterControllerComponent*> m_CCTPrevCCTContacts;
 
 public:
     PxController* m_Controller = nullptr;    
@@ -80,6 +83,10 @@ public:
     virtual void OnTriggerStay(PhysicsComponent* other);
     virtual void OnTriggerExit(PhysicsComponent* other);
 
+    virtual void OnCCTCollisionEnter(CharacterControllerComponent* other);
+    virtual void OnCCTCollisionStay(CharacterControllerComponent* other);
+    virtual void OnCCTCollisionExit(CharacterControllerComponent* other);
+
 public:
     bool IsTrigger() const { return m_IsTrigger; }
 
@@ -107,6 +114,7 @@ public:
     void ResolveCollisions();
     void ResolveTriggers();
     void CheckTriggers();
+    void ResolveCCTCollisions();
 
     // --------------------------
     // 충돌 레이어 

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -146,6 +146,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="02_Script\Moon\AI\AdultGhostController.h" />
+    <ClInclude Include="02_Script\Moon\AI\FSM\AdultGhost_Chase.h" />
+    <ClInclude Include="02_Script\Moon\AI\FSM\AdultGhost_Patrol.h" />
+    <ClInclude Include="02_Script\Moon\AI\FSM\AdultGhost_Search.h" />
+    <ClInclude Include="02_Script\Moon\AI\FSM\IAdultGhostState.h" />
+    <ClInclude Include="02_Script\Moon\AI\GhostInteractionZone.h" />
     <ClInclude Include="02_Script\Moon\AnimationTest\PlayerAnimationTest.h" />
     <ClInclude Include="02_Script\Woo\Altar\AltarManager.h" />
     <ClInclude Include="02_Script\Woo\Camera\CameraController.h" />
@@ -157,13 +162,14 @@
     <ClInclude Include="02_Script\Woo\Player\Interaction\InteractionSensor.h" />
     <ClInclude Include="02_Script\Woo\Player\Interaction\InteractionZone.h" />
     <ClInclude Include="02_Script\Woo\Player\AITarget\AITarget.h" />
+    <ClInclude Include="02_Script\\Ron\\Manager\\SceneFlowManager.h" />
     <ClInclude Include="EngineApp.h" />
-    <ClInclude Include="99_Test\MiniMapTest\MiniMapTestScript.h" />
-    <ClInclude Include="99_Test\MiniMapTest\MiniMapManager.h" />
-    <ClInclude Include="99_Test\AudioTest\AudioTestController.h" />
-    <ClInclude Include="99_Test\AudioTest\AudioListenerSyncScript.h" />
+    <ClInclude Include="02_Script\\Ron\\MiniMapTest\MiniMapTestScript.h" />
+    <ClInclude Include="02_Script\\Ron\\MiniMapTest\MiniMapManager.h" />
+    <ClInclude Include="02_Script\\Ron\\AudioTest\AudioTestController.h" />
+    <ClInclude Include="02_Script\\Ron\\AudioTest\AudioListenerSyncScript.h" />
     <ClInclude Include="02_Script\Woo\Player\FSM\IPlayerState.h" />
-    <ClInclude Include="99_Test\AudioTest\AudioManagerComponent.h" />
+    <ClInclude Include="02_Script\\Ron\\AudioTest\AudioManagerComponent.h" />
     <ClInclude Include="99_Test\PhysicsTest\CCTTest.h" />
     <ClInclude Include="99_Test\PhysicsTest\GroundTestScript.h" />
     <ClInclude Include="99_Test\PhysicsTest\PhysicsTestScript.h" />
@@ -189,10 +195,14 @@
     <ClInclude Include="02_Script\Woo\Object\HideObject.h" />
     <ClInclude Include="02_Script\Woo\Manager\GameManager.h" />
     <ClInclude Include="02_Script\Woo\Object\TrapObject.h" />
-    <ClInclude Include="99_Test\Intro\IntroCutSceneController.h" />
+    <ClInclude Include="02_Script\\Ron\\Intro\IntroCutSceneController.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="02_Script\Moon\AI\AdultGhostController.cpp" />
+    <ClCompile Include="02_Script\Moon\AI\FSM\AdultGhost_Chase.cpp" />
+    <ClCompile Include="02_Script\Moon\AI\FSM\AdultGhost_Patrol.cpp" />
+    <ClCompile Include="02_Script\Moon\AI\FSM\AdultGhost_Search.cpp" />
+    <ClCompile Include="02_Script\Moon\AI\GhostInteractionZone.cpp" />
     <ClCompile Include="02_Script\Moon\AnimationTest\PlayerAnimationTest.cpp" />
     <ClCompile Include="02_Script\Woo\Altar\AltarManager.cpp" />
     <ClCompile Include="02_Script\Woo\Camera\CameraController.cpp" />
@@ -204,13 +214,14 @@
     <ClCompile Include="02_Script\Woo\Player\Interaction\InteractionSensor.cpp" />
     <ClCompile Include="02_Script\Woo\Player\Interaction\InteractionZone.cpp" />
     <ClCompile Include="02_Script\Woo\Player\AITarget\AITarget.cpp" />
+    <ClCompile Include="02_Script\\Ron\\Manager\\SceneFlowManager.cpp" />
     <ClCompile Include="EngineApp.cpp" />
-    <ClCompile Include="99_Test\MiniMapTest\MiniMapTestScript.cpp" />
-    <ClCompile Include="99_Test\MiniMapTest\MiniMapManager.cpp" />
-    <ClCompile Include="99_Test\AudioTest\AudioTestController.cpp" />
-    <ClCompile Include="99_Test\AudioTest\AudioListenerSyncScript.cpp" />
+    <ClCompile Include="02_Script\\Ron\\MiniMapTest\MiniMapTestScript.cpp" />
+    <ClCompile Include="02_Script\\Ron\\MiniMapTest\MiniMapManager.cpp" />
+    <ClCompile Include="02_Script\\Ron\\AudioTest\AudioTestController.cpp" />
+    <ClCompile Include="02_Script\\Ron\\AudioTest\AudioListenerSyncScript.cpp" />
     <ClCompile Include="02_Script\Woo\Player\FSM\IPlayerState.cpp" />
-    <ClCompile Include="99_Test\AudioTest\AudioManagerComponent.cpp" />
+    <ClCompile Include="02_Script\\Ron\\AudioTest\AudioManagerComponent.cpp" />
     <ClCompile Include="99_Test\PhysicsTest\CCTTest.cpp" />
     <ClCompile Include="99_Test\PhysicsTest\GroundTestScript.cpp" />
     <ClCompile Include="99_Test\PhysicsTest\PhysicsTestScript.cpp" />
@@ -237,7 +248,7 @@
     <ClCompile Include="02_Script\Woo\Manager\GameManager.cpp" />
     <ClCompile Include="02_Script\Woo\Object\TrapObject.cpp" />
     <ClCompile Include="winMain.cpp" />
-    <ClCompile Include="99_Test\Intro\IntroCutSceneController.cpp" />
+    <ClCompile Include="02_Script\\Ron\\Intro\IntroCutSceneController.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Engine\Engine.vcxproj">
@@ -248,3 +259,6 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
 </Project>
+
+
+

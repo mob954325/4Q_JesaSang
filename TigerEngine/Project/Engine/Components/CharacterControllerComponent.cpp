@@ -65,6 +65,10 @@ void CharacterControllerComponent::OnTriggerEnter(PhysicsComponent* other) { if 
 void CharacterControllerComponent::OnTriggerStay(PhysicsComponent* other) { if (GetOwner())GetOwner()->BroadcastTriggerStay(other); }
 void CharacterControllerComponent::OnTriggerExit(PhysicsComponent* other) { if (GetOwner()) GetOwner()->BroadcastTriggerExit(other); }
 
+void CharacterControllerComponent::OnCCTCollisionEnter(CharacterControllerComponent* other) { if (GetOwner()) GetOwner()->BroadcastCCTCollisionEnter(other); }
+void CharacterControllerComponent::OnCCTCollisionStay(CharacterControllerComponent* other) { if (GetOwner()) GetOwner()->BroadcastCCTCollisionStay(other); }
+void CharacterControllerComponent::OnCCTCollisionExit(CharacterControllerComponent* other) { if (GetOwner()) GetOwner()->BroadcastCCTCollisionExit(other); }
+
 
 void CharacterControllerComponent::OnInitialize()
 {
@@ -430,6 +434,39 @@ void CharacterControllerComponent::CheckTriggers()
         m_CCTCurrTriggers.insert(comp);
     }
 }
+
+void CharacterControllerComponent::ResolveCCTCollisions()
+{
+    // Enter / Stay
+    for (auto* other : m_CCTCurrCCTContacts)
+    {
+        if (m_CCTPrevCCTContacts.find(other) == m_CCTPrevCCTContacts.end())
+        {
+            OnCCTCollisionEnter(other);
+            other->OnCCTCollisionEnter(this);
+        }
+        else
+        {
+            OnCCTCollisionStay(other);
+            other->OnCCTCollisionStay(this);
+        }
+    }
+
+    // Exit
+    for (auto* other : m_CCTPrevCCTContacts)
+    {
+        if (m_CCTCurrCCTContacts.find(other) == m_CCTCurrCCTContacts.end())
+        {
+            OnCCTCollisionExit(other);
+            other->OnCCTCollisionExit(this);
+        }
+    }
+
+    // 다음 프레임 준비
+    m_CCTPrevCCTContacts = std::move(m_CCTCurrCCTContacts);
+    m_CCTCurrCCTContacts.clear();
+}
+
 
 void CharacterControllerComponent::Teleport(const Vector3& pos)
 {

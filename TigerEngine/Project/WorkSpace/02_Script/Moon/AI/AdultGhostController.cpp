@@ -1,9 +1,15 @@
 #include "AdultGhostController.h"
-#include "Object/GameObject.h"
 #include "Util/JsonHelper.h"
 #include "Util/ComponentAutoRegister.h"
+
+#include "Object/GameObject.h"
 #include "EngineSystem/SceneSystem.h"
-#include "Components/VisionComponent.h"
+
+#include "FSM/IAdultGhostState.h"
+#include "FSM/AdultGhost_Patrol.h"
+#include "FSM/AdultGhost_Chase.h"
+#include "FSM/AdultGhost_Search.h"
+
 
 REGISTER_COMPONENT(AdultGhostController)
 
@@ -25,8 +31,9 @@ void AdultGhostController::Deserialize(nlohmann::json data)
 }
 
 
-// ------------------------------------------
-
+// -----------------------------------------------------------
+// [ Process ]
+// -----------------------------------------------------------
 
 void AdultGhostController::OnStart()
 {
@@ -35,39 +42,101 @@ void AdultGhostController::OnStart()
 
     if (!agent || !vision)
     {
-        std::cout << "[AdultGhostController] agent or vision missing" << std::endl;
+        std::cout << "[AdultGhostController] Component Missing" << std::endl;
         return;
     }
 
-    agent->PickRandomTarget(); // 목표 좌표 찾기 
+    // load animation
+    //LoadAnimation();
+
+    // init fsm
+    InitFSMStates();
+    ChangeState(AdultGhostState::Patrol);
+
+    // init stat
+    // InitStat();
+}
+
+void AdultGhostController::OnUpdate(float delta)
+{
+    // FSM 
+    if (curState)
+    {
+        curState->ChangeStateLogic();
+        curState->Update(delta);
+    }
 }
 
 
 void AdultGhostController::OnFixedUpdate(float dt)
 {
-    if (!agent || !vision) return;
-
-    // AgentComponent의 경로 따라 이동
-    agent->OnFixedUpdate(dt); 
-
-    // 디버그
-    //if (agent->hasTarget)
-    //{
-    //    std::cout << "[AdultGhostController] \"" << GetOwner()->GetName()
-    //        << "\" Current: (" << agent->cx << "," << agent->cy << ") "
-    //        << "Target: (" << agent->targetCX << "," << agent->targetCY << ") "
-    //        << "Remaining Path: " << agent->path.size() << std::endl;
-    //}
-
-
-    // [시야 감지] 플레이어 탐지
-    auto* player = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("Player");
-    if (player)
+    // FSM 
+    if (curState)
     {
-        // std::cout << "[player]" << player->GetName() << " is " << (int)player->GetComponent<CharacterControllerComponent>()->GetLayer() << std::endl;
-        if (vision->CheckVision(player, 90, 400))
-        {
-            std::cout << "[AdultGhostController]" << GetOwner()->GetName() << " is PLAYER FOUND !" << std::endl;
-        }
+        curState->FixedUpdate(dt);
     }
+}
+
+
+
+// -----------------------------------------------------------
+// [ FSM ]
+// -----------------------------------------------------------
+
+void AdultGhostController::InitFSMStates()
+{
+    //  Patrol, Chase, Search, Return, Attack, None
+    fsmStates[(int)AdultGhostState::Patrol] = new AdultGhost_Patrol(this);
+    fsmStates[(int)AdultGhostState::Chase] = new AdultGhost_Chase(this);
+    fsmStates[(int)AdultGhostState::Search] = new AdultGhost_Search(this);
+    //fsmStates[(int)AdultGhostState::Return] = new AdultGhost_Return(this);
+    //fsmStates[(int)AdultGhostState::Attack] = new AdultGhost_Attack(this);
+}
+
+void AdultGhostController::ChangeState(AdultGhostState nextState)
+{
+    if (curState == fsmStates[(int)nextState])
+        return;
+
+    if (curState)
+        curState->Exit();
+
+    curState = fsmStates[(int)nextState];
+    this->state = nextState;
+
+    if (curState)
+        curState->Enter();
+}
+
+void AdultGhostController::LoadAnimation()
+{
+
+}
+
+
+// --------------------------------------------------------------------------
+
+
+void AdultGhostController::OnPlayerNoise(const Vector3& noiseWorldPos)
+{
+    // Patrol 상태인 귀신만 반응
+    if (state != AdultGhostState::Patrol)
+        return;
+
+    std::cout << "[AdultGhostController] OnPlayerNoise on Patrol AI" << std::endl;
+
+    auto grid = GridSystem::Instance().GetMainGrid();
+    if (!grid) return;
+
+    int cx, cy;
+    if (!grid->WorldToGridFromCenter(noiseWorldPos, cx, cy))
+        return;
+
+    // Search 상태로 전환 + 목표 좌표 전달
+    auto* search = dynamic_cast<AdultGhost_Search*>( fsmStates[(int)AdultGhostState::Search] );
+    if (!search) return;
+
+    search->SetSearchTarget(cx, cy);
+
+    ChangeState(AdultGhostState::Search);
 }
