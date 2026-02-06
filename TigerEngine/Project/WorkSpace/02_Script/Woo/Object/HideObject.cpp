@@ -97,5 +97,16 @@ void HideObject::StopHide()
 
 void HideObject::SetAILook(bool isLook)
 {
-    isAILooking = isLook;
+    // isAILooking = isLook; // 바라보고 있는 AI 수를 체크해서 Se 선민 | 02.07 
+
+    if (isLook)
+        lookingAICount++;
+    else
+        lookingAICount--;
+
+    if (lookingAICount < 0)
+        lookingAICount = 0;
+
+    isAILooking = (lookingAICount > 0);
+    cout << "[HideObject] isAILooking = " << isAILooking << endl;
 }

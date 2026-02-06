@@ -3,7 +3,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 894,
+        "ID": 922,
         "Name": "Main Camera",
         "ParentID": -1,
         "components": [
@@ -56,7 +56,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 895,
+        "ID": 923,
         "Name": "DirectionalLight(Sun)",
         "ParentID": -1,
         "components": [
@@ -110,7 +110,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 896,
+        "ID": 924,
         "Name": "---------Floor----------",
         "ParentID": -1,
         "components": [
@@ -141,9 +141,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 897,
+        "ID": 925,
         "Name": "Floor",
-        "ParentID": 896,
+        "ParentID": 924,
         "components": [
           {
             "properties": {
@@ -210,7 +210,8 @@
               "UseDiffuseOverride": false,
               "UseEmissiveOverride": false,
               "UseMetallicOverride": false,
-              "UseRoughnessOverride": false
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
             },
             "type": "FBXRenderer"
           },
@@ -244,7 +245,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 898,
+        "ID": 926,
         "Name": "---------Wall----------",
         "ParentID": -1,
         "components": [
@@ -275,9 +276,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 899,
+        "ID": 927,
         "Name": "Door_Open",
-        "ParentID": 898,
+        "ParentID": 926,
         "components": [
           {
             "properties": {
@@ -344,7 +345,8 @@
               "UseDiffuseOverride": false,
               "UseEmissiveOverride": false,
               "UseMetallicOverride": false,
-              "UseRoughnessOverride": false
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
             },
             "type": "FBXRenderer"
           }
@@ -355,9 +357,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 900,
+        "ID": 928,
         "Name": "Pillar",
-        "ParentID": 898,
+        "ParentID": 926,
         "components": [
           {
             "properties": {
@@ -424,7 +426,8 @@
               "UseDiffuseOverride": false,
               "UseEmissiveOverride": false,
               "UseMetallicOverride": false,
-              "UseRoughnessOverride": false
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
             },
             "type": "FBXRenderer"
           },
@@ -464,9 +467,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 901,
+        "ID": 929,
         "Name": "wall_4",
-        "ParentID": 898,
+        "ParentID": 926,
         "components": [
           {
             "properties": {
@@ -533,7 +536,8 @@
               "UseDiffuseOverride": false,
               "UseEmissiveOverride": false,
               "UseMetallicOverride": false,
-              "UseRoughnessOverride": false
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
             },
             "type": "FBXRenderer"
           },
@@ -573,9 +577,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 902,
+        "ID": 930,
         "Name": "wall_5",
-        "ParentID": 898,
+        "ParentID": 926,
         "components": [
           {
             "properties": {
@@ -642,7 +646,8 @@
               "UseDiffuseOverride": false,
               "UseEmissiveOverride": false,
               "UseMetallicOverride": false,
-              "UseRoughnessOverride": false
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
             },
             "type": "FBXRenderer"
           },
@@ -682,9 +687,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 903,
+        "ID": 931,
         "Name": "Room",
-        "ParentID": 896,
+        "ParentID": 924,
         "components": [
           {
             "properties": {
@@ -751,7 +756,8 @@
               "UseDiffuseOverride": false,
               "UseEmissiveOverride": false,
               "UseMetallicOverride": false,
-              "UseRoughnessOverride": false
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
             },
             "type": "FBXRenderer"
           }
@@ -762,9 +768,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 904,
+        "ID": 932,
         "Name": "Room_a_love_room",
-        "ParentID": 896,
+        "ParentID": 924,
         "components": [
           {
             "properties": {
@@ -831,7 +837,8 @@
               "UseDiffuseOverride": false,
               "UseEmissiveOverride": false,
               "UseMetallicOverride": false,
-              "UseRoughnessOverride": false
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
             },
             "type": "FBXRenderer"
           }
@@ -842,9 +849,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 905,
+        "ID": 933,
         "Name": "Room_Kitchen",
-        "ParentID": 896,
+        "ParentID": 924,
         "components": [
           {
             "properties": {
@@ -911,7 +918,8 @@
               "UseDiffuseOverride": false,
               "UseEmissiveOverride": false,
               "UseMetallicOverride": false,
-              "UseRoughnessOverride": false
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
             },
             "type": "FBXRenderer"
           }
@@ -922,9 +930,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 906,
+        "ID": 934,
         "Name": "Room_main_room",
-        "ParentID": 896,
+        "ParentID": 924,
         "components": [
           {
             "properties": {
@@ -991,7 +999,8 @@
               "UseDiffuseOverride": false,
               "UseEmissiveOverride": false,
               "UseMetallicOverride": false,
-              "UseRoughnessOverride": false
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
             },
             "type": "FBXRenderer"
           }
@@ -1002,9 +1011,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 907,
+        "ID": 935,
         "Name": "Room_saibi",
-        "ParentID": 896,
+        "ParentID": 924,
         "components": [
           {
             "properties": {
@@ -1071,7 +1080,8 @@
               "UseDiffuseOverride": false,
               "UseEmissiveOverride": false,
               "UseMetallicOverride": false,
-              "UseRoughnessOverride": false
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
             },
             "type": "FBXRenderer"
           }
@@ -1082,9 +1092,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 908,
+        "ID": 936,
         "Name": "Room_Table_of_memorial_ceremony",
-        "ParentID": 896,
+        "ParentID": 924,
         "components": [
           {
             "properties": {
@@ -1094,9 +1104,9 @@
                 999.0999755859375
               ],
               "Rotation": [
+                -0.0,
                 0.0,
-                0.0,
-                0.0
+                -0.0
               ],
               "Scale": [
                 1.0,
@@ -1151,7 +1161,8 @@
               "UseDiffuseOverride": false,
               "UseEmissiveOverride": false,
               "UseMetallicOverride": false,
-              "UseRoughnessOverride": false
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
             },
             "type": "FBXRenderer"
           }
@@ -1162,9 +1173,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 909,
+        "ID": 937,
         "Name": "Room_Warehouse",
-        "ParentID": 896,
+        "ParentID": 924,
         "components": [
           {
             "properties": {
@@ -1231,7 +1242,8 @@
               "UseDiffuseOverride": false,
               "UseEmissiveOverride": false,
               "UseMetallicOverride": false,
-              "UseRoughnessOverride": false
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
             },
             "type": "FBXRenderer"
           }
@@ -1242,7 +1254,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 910,
+        "ID": 938,
         "Name": "---------Object----------",
         "ParentID": -1,
         "components": [
@@ -1273,7 +1285,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 911,
+        "ID": 939,
         "Name": "JesaSang",
         "ParentID": -1,
         "components": [
@@ -1342,7 +1354,8 @@
               "UseDiffuseOverride": false,
               "UseEmissiveOverride": false,
               "UseMetallicOverride": false,
-              "UseRoughnessOverride": false
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
             },
             "type": "FBXRenderer"
           },
@@ -1382,9 +1395,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 912,
+        "ID": 940,
         "Name": "SearchObject",
-        "ParentID": 910,
+        "ParentID": 938,
         "components": [
           {
             "properties": {
@@ -1451,7 +1464,8 @@
               "UseDiffuseOverride": false,
               "UseEmissiveOverride": false,
               "UseMetallicOverride": false,
-              "UseRoughnessOverride": false
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
             },
             "type": "FBXRenderer"
           },
@@ -1500,9 +1514,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 913,
+        "ID": 941,
         "Name": "SearchObject",
-        "ParentID": 910,
+        "ParentID": 938,
         "components": [
           {
             "properties": {
@@ -1569,7 +1583,8 @@
               "UseDiffuseOverride": false,
               "UseEmissiveOverride": false,
               "UseMetallicOverride": false,
-              "UseRoughnessOverride": false
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
             },
             "type": "FBXRenderer"
           },
@@ -1618,9 +1633,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 914,
+        "ID": 942,
         "Name": "baseFood",
-        "ParentID": 911,
+        "ParentID": 939,
         "components": [
           {
             "properties": {
@@ -1687,7 +1702,8 @@
               "UseDiffuseOverride": false,
               "UseEmissiveOverride": false,
               "UseMetallicOverride": false,
-              "UseRoughnessOverride": false
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
             },
             "type": "FBXRenderer"
           }
@@ -1698,7 +1714,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 915,
+        "ID": 943,
         "Name": "Player",
         "ParentID": -1,
         "components": [
@@ -1784,7 +1800,8 @@
               "UseDiffuseOverride": false,
               "UseEmissiveOverride": false,
               "UseMetallicOverride": false,
-              "UseRoughnessOverride": false
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
             },
             "type": "FBXRenderer"
           },
@@ -1819,7 +1836,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 916,
+        "ID": 944,
         "Name": "-----------------------",
         "ParentID": -1,
         "components": [
@@ -1850,7 +1867,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 917,
+        "ID": 945,
         "Name": "CurScene_98_Dev_Woo",
         "ParentID": -1,
         "components": [
@@ -1881,7 +1898,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 918,
+        "ID": 946,
         "Name": "-----------------------",
         "ParentID": -1,
         "components": [
@@ -1912,9 +1929,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 919,
+        "ID": 947,
         "Name": "wall_5",
-        "ParentID": 898,
+        "ParentID": 926,
         "components": [
           {
             "properties": {
@@ -1981,7 +1998,8 @@
               "UseDiffuseOverride": false,
               "UseEmissiveOverride": false,
               "UseMetallicOverride": false,
-              "UseRoughnessOverride": false
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
             },
             "type": "FBXRenderer"
           },
@@ -2021,9 +2039,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 920,
+        "ID": 948,
         "Name": "wall_5",
-        "ParentID": 898,
+        "ParentID": 926,
         "components": [
           {
             "properties": {
@@ -2090,7 +2108,8 @@
               "UseDiffuseOverride": false,
               "UseEmissiveOverride": false,
               "UseMetallicOverride": false,
-              "UseRoughnessOverride": false
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
             },
             "type": "FBXRenderer"
           },
@@ -2130,9 +2149,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 921,
+        "ID": 949,
         "Name": "wall_5",
-        "ParentID": 898,
+        "ParentID": 926,
         "components": [
           {
             "properties": {
@@ -2199,7 +2218,8 @@
               "UseDiffuseOverride": false,
               "UseEmissiveOverride": false,
               "UseMetallicOverride": false,
-              "UseRoughnessOverride": false
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
             },
             "type": "FBXRenderer"
           },
@@ -2239,9 +2259,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 922,
+        "ID": 950,
         "Name": "wall_4",
-        "ParentID": 898,
+        "ParentID": 926,
         "components": [
           {
             "properties": {
@@ -2308,7 +2328,8 @@
               "UseDiffuseOverride": false,
               "UseEmissiveOverride": false,
               "UseMetallicOverride": false,
-              "UseRoughnessOverride": false
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
             },
             "type": "FBXRenderer"
           },
@@ -2348,9 +2369,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 923,
+        "ID": 951,
         "Name": "CameraTrackingPoint",
-        "ParentID": 915,
+        "ParentID": 943,
         "components": [
           {
             "properties": {
@@ -2379,9 +2400,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 924,
+        "ID": 952,
         "Name": "OcclusionFadePoint",
-        "ParentID": 915,
+        "ParentID": 943,
         "components": [
           {
             "properties": {
@@ -2410,9 +2431,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 925,
+        "ID": 953,
         "Name": "SearchObject",
-        "ParentID": 910,
+        "ParentID": 938,
         "components": [
           {
             "properties": {
@@ -2479,7 +2500,8 @@
               "UseDiffuseOverride": false,
               "UseEmissiveOverride": false,
               "UseMetallicOverride": false,
-              "UseRoughnessOverride": false
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
             },
             "type": "FBXRenderer"
           },
@@ -2528,9 +2550,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 926,
+        "ID": 954,
         "Name": "InteractionSensor",
-        "ParentID": 915,
+        "ParentID": 943,
         "components": [
           {
             "properties": {
@@ -2588,9 +2610,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 927,
+        "ID": 955,
         "Name": "InteractZone",
-        "ParentID": 915,
+        "ParentID": 943,
         "components": [
           {
             "properties": {
@@ -2648,7 +2670,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 928,
+        "ID": 956,
         "Name": "Kitchen",
         "ParentID": -1,
         "components": [
@@ -2717,7 +2739,8 @@
               "UseDiffuseOverride": false,
               "UseEmissiveOverride": false,
               "UseMetallicOverride": false,
-              "UseRoughnessOverride": false
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
             },
             "type": "FBXRenderer"
           }
@@ -2728,9 +2751,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 930,
+        "ID": 957,
         "Name": "CookingZone",
-        "ParentID": 928,
+        "ParentID": 956,
         "components": [
           {
             "properties": {
@@ -2782,9 +2805,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 931,
+        "ID": 958,
         "Name": "SearchObject",
-        "ParentID": 910,
+        "ParentID": 938,
         "components": [
           {
             "properties": {
@@ -2851,7 +2874,8 @@
               "UseDiffuseOverride": false,
               "UseEmissiveOverride": false,
               "UseMetallicOverride": false,
-              "UseRoughnessOverride": false
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
             },
             "type": "FBXRenderer"
           },
@@ -2900,9 +2924,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 932,
+        "ID": 959,
         "Name": "SearchObject",
-        "ParentID": 910,
+        "ParentID": 938,
         "components": [
           {
             "properties": {
@@ -2969,7 +2993,8 @@
               "UseDiffuseOverride": false,
               "UseEmissiveOverride": false,
               "UseMetallicOverride": false,
-              "UseRoughnessOverride": false
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
             },
             "type": "FBXRenderer"
           },
@@ -3018,9 +3043,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 933,
+        "ID": 960,
         "Name": "SearchObject",
-        "ParentID": 910,
+        "ParentID": 938,
         "components": [
           {
             "properties": {
@@ -3087,7 +3112,8 @@
               "UseDiffuseOverride": false,
               "UseEmissiveOverride": false,
               "UseMetallicOverride": false,
-              "UseRoughnessOverride": false
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
             },
             "type": "FBXRenderer"
           },
@@ -3136,9 +3162,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 934,
+        "ID": 961,
         "Name": "SearchObject",
-        "ParentID": 910,
+        "ParentID": 938,
         "components": [
           {
             "properties": {
@@ -3205,7 +3231,8 @@
               "UseDiffuseOverride": false,
               "UseEmissiveOverride": false,
               "UseMetallicOverride": false,
-              "UseRoughnessOverride": false
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
             },
             "type": "FBXRenderer"
           },
@@ -3254,9 +3281,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 935,
+        "ID": 962,
         "Name": "SearchObject",
-        "ParentID": 910,
+        "ParentID": 938,
         "components": [
           {
             "properties": {
@@ -3323,7 +3350,8 @@
               "UseDiffuseOverride": false,
               "UseEmissiveOverride": false,
               "UseMetallicOverride": false,
-              "UseRoughnessOverride": false
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
             },
             "type": "FBXRenderer"
           },
@@ -3372,9 +3400,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 936,
+        "ID": 963,
         "Name": "Apple",
-        "ParentID": 911,
+        "ParentID": 939,
         "components": [
           {
             "properties": {
@@ -3441,7 +3469,8 @@
               "UseDiffuseOverride": false,
               "UseEmissiveOverride": false,
               "UseMetallicOverride": false,
-              "UseRoughnessOverride": false
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
             },
             "type": "FBXRenderer"
           }
@@ -3452,9 +3481,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 937,
+        "ID": 964,
         "Name": "Pear",
-        "ParentID": 911,
+        "ParentID": 939,
         "components": [
           {
             "properties": {
@@ -3521,7 +3550,8 @@
               "UseDiffuseOverride": false,
               "UseEmissiveOverride": false,
               "UseMetallicOverride": false,
-              "UseRoughnessOverride": false
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
             },
             "type": "FBXRenderer"
           }
@@ -3532,9 +3562,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 938,
+        "ID": 965,
         "Name": "Batter",
-        "ParentID": 911,
+        "ParentID": 939,
         "components": [
           {
             "properties": {
@@ -3601,7 +3631,8 @@
               "UseDiffuseOverride": false,
               "UseEmissiveOverride": false,
               "UseMetallicOverride": false,
-              "UseRoughnessOverride": false
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
             },
             "type": "FBXRenderer"
           }
@@ -3612,9 +3643,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 939,
+        "ID": 966,
         "Name": "Tofu",
-        "ParentID": 911,
+        "ParentID": 939,
         "components": [
           {
             "properties": {
@@ -3681,7 +3712,8 @@
               "UseDiffuseOverride": false,
               "UseEmissiveOverride": false,
               "UseMetallicOverride": false,
-              "UseRoughnessOverride": false
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
             },
             "type": "FBXRenderer"
           }
@@ -3692,9 +3724,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 940,
+        "ID": 967,
         "Name": "Sanjeok",
-        "ParentID": 911,
+        "ParentID": 939,
         "components": [
           {
             "properties": {
@@ -3761,7 +3793,8 @@
               "UseDiffuseOverride": false,
               "UseEmissiveOverride": false,
               "UseMetallicOverride": false,
-              "UseRoughnessOverride": false
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
             },
             "type": "FBXRenderer"
           }
@@ -3772,9 +3805,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 941,
+        "ID": 968,
         "Name": "Donggeurangttaeng",
-        "ParentID": 911,
+        "ParentID": 939,
         "components": [
           {
             "properties": {
@@ -3841,7 +3874,8 @@
               "UseDiffuseOverride": false,
               "UseEmissiveOverride": false,
               "UseMetallicOverride": false,
-              "UseRoughnessOverride": false
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
             },
             "type": "FBXRenderer"
           }
@@ -3852,9 +3886,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 942,
+        "ID": 969,
         "Name": "Visual_Ingre_Apple",
-        "ParentID": 949,
+        "ParentID": 976,
         "components": [
           {
             "properties": {
@@ -3921,7 +3955,8 @@
               "UseDiffuseOverride": true,
               "UseEmissiveOverride": false,
               "UseMetallicOverride": true,
-              "UseRoughnessOverride": true
+              "UseRoughnessOverride": true,
+              "isroughnessFromShininess": false
             },
             "type": "FBXRenderer"
           }
@@ -3932,9 +3967,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 943,
+        "ID": 970,
         "Name": "Visual_Ingre_Batter",
-        "ParentID": 949,
+        "ParentID": 976,
         "components": [
           {
             "properties": {
@@ -4001,7 +4036,8 @@
               "UseDiffuseOverride": true,
               "UseEmissiveOverride": false,
               "UseMetallicOverride": true,
-              "UseRoughnessOverride": true
+              "UseRoughnessOverride": true,
+              "isroughnessFromShininess": false
             },
             "type": "FBXRenderer"
           }
@@ -4012,9 +4048,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 944,
+        "ID": 971,
         "Name": "Visual_Ingre_Donggeurangttaeng",
-        "ParentID": 949,
+        "ParentID": 976,
         "components": [
           {
             "properties": {
@@ -4081,7 +4117,8 @@
               "UseDiffuseOverride": true,
               "UseEmissiveOverride": false,
               "UseMetallicOverride": true,
-              "UseRoughnessOverride": true
+              "UseRoughnessOverride": true,
+              "isroughnessFromShininess": false
             },
             "type": "FBXRenderer"
           }
@@ -4092,9 +4129,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 945,
+        "ID": 972,
         "Name": "Visual_Ingre_Pear",
-        "ParentID": 949,
+        "ParentID": 976,
         "components": [
           {
             "properties": {
@@ -4161,7 +4198,8 @@
               "UseDiffuseOverride": true,
               "UseEmissiveOverride": false,
               "UseMetallicOverride": true,
-              "UseRoughnessOverride": true
+              "UseRoughnessOverride": true,
+              "isroughnessFromShininess": false
             },
             "type": "FBXRenderer"
           }
@@ -4172,9 +4210,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 946,
+        "ID": 973,
         "Name": "Visual_Ingre_Sanjeok",
-        "ParentID": 949,
+        "ParentID": 976,
         "components": [
           {
             "properties": {
@@ -4241,7 +4279,8 @@
               "UseDiffuseOverride": true,
               "UseEmissiveOverride": false,
               "UseMetallicOverride": true,
-              "UseRoughnessOverride": true
+              "UseRoughnessOverride": true,
+              "isroughnessFromShininess": false
             },
             "type": "FBXRenderer"
           }
@@ -4252,9 +4291,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 947,
+        "ID": 974,
         "Name": "Visual_Ingre_Tofu",
-        "ParentID": 949,
+        "ParentID": 976,
         "components": [
           {
             "properties": {
@@ -4321,7 +4360,8 @@
               "UseDiffuseOverride": true,
               "UseEmissiveOverride": false,
               "UseMetallicOverride": true,
-              "UseRoughnessOverride": true
+              "UseRoughnessOverride": true,
+              "isroughnessFromShininess": false
             },
             "type": "FBXRenderer"
           }
@@ -4332,7 +4372,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 948,
+        "ID": 975,
         "Name": "Managers",
         "ParentID": -1,
         "components": [
@@ -4363,9 +4403,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 949,
+        "ID": 976,
         "Name": "ItemVisualizer",
-        "ParentID": 915,
+        "ParentID": 943,
         "components": [
           {
             "properties": {
@@ -4394,9 +4434,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 950,
+        "ID": 977,
         "Name": "Visual_Apple",
-        "ParentID": 949,
+        "ParentID": 976,
         "components": [
           {
             "properties": {
@@ -4463,7 +4503,8 @@
               "UseDiffuseOverride": false,
               "UseEmissiveOverride": false,
               "UseMetallicOverride": false,
-              "UseRoughnessOverride": false
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
             },
             "type": "FBXRenderer"
           }
@@ -4474,9 +4515,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 951,
+        "ID": 978,
         "Name": "Visual_Pear",
-        "ParentID": 949,
+        "ParentID": 976,
         "components": [
           {
             "properties": {
@@ -4543,7 +4584,8 @@
               "UseDiffuseOverride": false,
               "UseEmissiveOverride": false,
               "UseMetallicOverride": false,
-              "UseRoughnessOverride": false
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
             },
             "type": "FBXRenderer"
           }
@@ -4554,9 +4596,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 952,
+        "ID": 979,
         "Name": "Visual_Batter",
-        "ParentID": 949,
+        "ParentID": 976,
         "components": [
           {
             "properties": {
@@ -4623,7 +4665,8 @@
               "UseDiffuseOverride": false,
               "UseEmissiveOverride": false,
               "UseMetallicOverride": false,
-              "UseRoughnessOverride": false
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
             },
             "type": "FBXRenderer"
           }
@@ -4634,9 +4677,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 953,
+        "ID": 980,
         "Name": "Visual_Tofu",
-        "ParentID": 949,
+        "ParentID": 976,
         "components": [
           {
             "properties": {
@@ -4703,7 +4746,8 @@
               "UseDiffuseOverride": false,
               "UseEmissiveOverride": false,
               "UseMetallicOverride": false,
-              "UseRoughnessOverride": false
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
             },
             "type": "FBXRenderer"
           }
@@ -4714,9 +4758,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 954,
+        "ID": 981,
         "Name": "Visual_Sanjeok",
-        "ParentID": 949,
+        "ParentID": 976,
         "components": [
           {
             "properties": {
@@ -4783,7 +4827,8 @@
               "UseDiffuseOverride": false,
               "UseEmissiveOverride": false,
               "UseMetallicOverride": false,
-              "UseRoughnessOverride": false
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
             },
             "type": "FBXRenderer"
           }
@@ -4794,9 +4839,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 955,
+        "ID": 982,
         "Name": "Visual_Donggeurangttaeng",
-        "ParentID": 949,
+        "ParentID": 976,
         "components": [
           {
             "properties": {
@@ -4863,7 +4908,8 @@
               "UseDiffuseOverride": false,
               "UseEmissiveOverride": false,
               "UseMetallicOverride": false,
-              "UseRoughnessOverride": false
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
             },
             "type": "FBXRenderer"
           }
@@ -4874,7 +4920,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 956,
+        "ID": 983,
         "Name": "Altar",
         "ParentID": -1,
         "components": [
@@ -4943,7 +4989,8 @@
               "UseDiffuseOverride": false,
               "UseEmissiveOverride": false,
               "UseMetallicOverride": false,
-              "UseRoughnessOverride": false
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
             },
             "type": "FBXRenderer"
           },
@@ -4983,9 +5030,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 957,
+        "ID": 984,
         "Name": "baseFood",
-        "ParentID": 956,
+        "ParentID": 983,
         "components": [
           {
             "properties": {
@@ -5052,7 +5099,8 @@
               "UseDiffuseOverride": false,
               "UseEmissiveOverride": false,
               "UseMetallicOverride": false,
-              "UseRoughnessOverride": false
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
             },
             "type": "FBXRenderer"
           }
@@ -5063,9 +5111,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 958,
+        "ID": 985,
         "Name": "Alta_Apple",
-        "ParentID": 956,
+        "ParentID": 983,
         "components": [
           {
             "properties": {
@@ -5132,7 +5180,8 @@
               "UseDiffuseOverride": false,
               "UseEmissiveOverride": false,
               "UseMetallicOverride": false,
-              "UseRoughnessOverride": false
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
             },
             "type": "FBXRenderer"
           }
@@ -5143,9 +5192,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 959,
+        "ID": 986,
         "Name": "Alta_Pear",
-        "ParentID": 956,
+        "ParentID": 983,
         "components": [
           {
             "properties": {
@@ -5212,7 +5261,8 @@
               "UseDiffuseOverride": false,
               "UseEmissiveOverride": false,
               "UseMetallicOverride": false,
-              "UseRoughnessOverride": false
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
             },
             "type": "FBXRenderer"
           }
@@ -5223,9 +5273,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 960,
+        "ID": 987,
         "Name": "Alta_Batter",
-        "ParentID": 956,
+        "ParentID": 983,
         "components": [
           {
             "properties": {
@@ -5292,7 +5342,8 @@
               "UseDiffuseOverride": false,
               "UseEmissiveOverride": false,
               "UseMetallicOverride": false,
-              "UseRoughnessOverride": false
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
             },
             "type": "FBXRenderer"
           }
@@ -5303,9 +5354,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 961,
+        "ID": 988,
         "Name": "Alta_Tofu",
-        "ParentID": 956,
+        "ParentID": 983,
         "components": [
           {
             "properties": {
@@ -5372,7 +5423,8 @@
               "UseDiffuseOverride": false,
               "UseEmissiveOverride": false,
               "UseMetallicOverride": false,
-              "UseRoughnessOverride": false
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
             },
             "type": "FBXRenderer"
           }
@@ -5383,9 +5435,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 962,
+        "ID": 989,
         "Name": "Alta_Sanjeok",
-        "ParentID": 956,
+        "ParentID": 983,
         "components": [
           {
             "properties": {
@@ -5452,7 +5504,8 @@
               "UseDiffuseOverride": false,
               "UseEmissiveOverride": false,
               "UseMetallicOverride": false,
-              "UseRoughnessOverride": false
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
             },
             "type": "FBXRenderer"
           }
@@ -5463,9 +5516,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 963,
+        "ID": 990,
         "Name": "Alta_Donggeurangttaeng",
-        "ParentID": 956,
+        "ParentID": 983,
         "components": [
           {
             "properties": {
@@ -5532,7 +5585,8 @@
               "UseDiffuseOverride": false,
               "UseEmissiveOverride": false,
               "UseMetallicOverride": false,
-              "UseRoughnessOverride": false
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
             },
             "type": "FBXRenderer"
           }
@@ -5543,9 +5597,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 964,
+        "ID": 991,
         "Name": "Alta_Ingre_Apple",
-        "ParentID": 956,
+        "ParentID": 983,
         "components": [
           {
             "properties": {
@@ -5612,7 +5666,8 @@
               "UseDiffuseOverride": false,
               "UseEmissiveOverride": false,
               "UseMetallicOverride": false,
-              "UseRoughnessOverride": false
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
             },
             "type": "FBXRenderer"
           }
@@ -5623,9 +5678,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 965,
+        "ID": 992,
         "Name": "Alta_Ingre_Pear",
-        "ParentID": 956,
+        "ParentID": 983,
         "components": [
           {
             "properties": {
@@ -5692,7 +5747,8 @@
               "UseDiffuseOverride": false,
               "UseEmissiveOverride": false,
               "UseMetallicOverride": false,
-              "UseRoughnessOverride": false
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
             },
             "type": "FBXRenderer"
           }
@@ -5703,9 +5759,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 966,
+        "ID": 993,
         "Name": "Alta_Ingre_Batter",
-        "ParentID": 956,
+        "ParentID": 983,
         "components": [
           {
             "properties": {
@@ -5772,7 +5828,8 @@
               "UseDiffuseOverride": false,
               "UseEmissiveOverride": false,
               "UseMetallicOverride": false,
-              "UseRoughnessOverride": false
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
             },
             "type": "FBXRenderer"
           }
@@ -5783,9 +5840,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 967,
+        "ID": 994,
         "Name": "Alta_Ingre_Tofu",
-        "ParentID": 956,
+        "ParentID": 983,
         "components": [
           {
             "properties": {
@@ -5852,7 +5909,8 @@
               "UseDiffuseOverride": false,
               "UseEmissiveOverride": false,
               "UseMetallicOverride": false,
-              "UseRoughnessOverride": false
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
             },
             "type": "FBXRenderer"
           }
@@ -5863,9 +5921,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 968,
+        "ID": 995,
         "Name": "Alta_Ingre_Sanjeok",
-        "ParentID": 956,
+        "ParentID": 983,
         "components": [
           {
             "properties": {
@@ -5932,7 +5990,8 @@
               "UseDiffuseOverride": false,
               "UseEmissiveOverride": false,
               "UseMetallicOverride": false,
-              "UseRoughnessOverride": false
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
             },
             "type": "FBXRenderer"
           }
@@ -5943,9 +6002,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 969,
+        "ID": 996,
         "Name": "Alta_Ingre_Donggeurangttaeng",
-        "ParentID": 956,
+        "ParentID": 983,
         "components": [
           {
             "properties": {
@@ -6012,7 +6071,8 @@
               "UseDiffuseOverride": false,
               "UseEmissiveOverride": false,
               "UseMetallicOverride": false,
-              "UseRoughnessOverride": false
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
             },
             "type": "FBXRenderer"
           }
@@ -6023,7 +6083,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 970,
+        "ID": 997,
         "Name": "HideObject",
         "ParentID": -1,
         "components": [
@@ -6031,13 +6091,13 @@
             "properties": {
               "Position": [
                 113.4000015258789,
-                -110.0,
-                100.0
+                -47.9775390625,
+                786.8681640625
               ],
               "Rotation": [
+                -0.0,
                 0.0,
-                0.0,
-                0.0
+                -0.0
               ],
               "Scale": [
                 1.0,
@@ -6092,7 +6152,8 @@
               "UseDiffuseOverride": false,
               "UseEmissiveOverride": false,
               "UseMetallicOverride": false,
-              "UseRoughnessOverride": false
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
             },
             "type": "FBXRenderer"
           },
@@ -6103,9 +6164,9 @@
               "PhysicsBodyType": "Static",
               "density": 10.0,
               "halfExtents": [
-                20.0,
-                50.0,
-                20.0
+                30.0,
+                100.0,
+                30.0
               ],
               "height": 10.0,
               "isTrigger": false,
@@ -6132,7 +6193,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 973,
+        "ID": 998,
         "Name": "---------------------------",
         "ParentID": -1,
         "components": [
@@ -6163,7 +6224,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 974,
+        "ID": 999,
         "Name": "Grid",
         "ParentID": -1,
         "components": [
@@ -6203,7 +6264,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 975,
+        "ID": 1000,
         "Name": "Ghost_Adult",
         "ParentID": -1,
         "components": [
@@ -6272,7 +6333,8 @@
               "UseDiffuseOverride": false,
               "UseEmissiveOverride": false,
               "UseMetallicOverride": false,
-              "UseRoughnessOverride": false
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
             },
             "type": "FBXRenderer"
           },
@@ -6320,7 +6382,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 976,
+        "ID": 1001,
         "Name": "Ghost_Baby",
         "ParentID": -1,
         "components": [
@@ -6389,7 +6451,8 @@
               "UseDiffuseOverride": false,
               "UseEmissiveOverride": false,
               "UseMetallicOverride": false,
-              "UseRoughnessOverride": false
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
             },
             "type": "FBXRenderer"
           },
@@ -6437,7 +6500,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 977,
+        "ID": 1002,
         "Name": "Ghost_Baby",
         "ParentID": -1,
         "components": [
@@ -6506,7 +6569,8 @@
               "UseDiffuseOverride": false,
               "UseEmissiveOverride": false,
               "UseMetallicOverride": false,
-              "UseRoughnessOverride": false
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
             },
             "type": "FBXRenderer"
           },
@@ -6554,7 +6618,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 978,
+        "ID": 1003,
         "Name": "Ghost_Adult",
         "ParentID": -1,
         "components": [
@@ -6623,7 +6687,8 @@
               "UseDiffuseOverride": false,
               "UseEmissiveOverride": false,
               "UseMetallicOverride": false,
-              "UseRoughnessOverride": false
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
             },
             "type": "FBXRenderer"
           },
@@ -6671,9 +6736,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 979,
+        "ID": 1004,
         "Name": "AITarget",
-        "ParentID": 915,
+        "ParentID": 943,
         "components": [
           {
             "properties": {
@@ -6731,9 +6796,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 980,
+        "ID": 1005,
         "Name": "GhostInteractionZone",
-        "ParentID": 975,
+        "ParentID": 1000,
         "components": [
           {
             "properties": {
@@ -6791,9 +6856,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 981,
+        "ID": 1006,
         "Name": "GhostInteractionZone",
-        "ParentID": 976,
+        "ParentID": 1001,
         "components": [
           {
             "properties": {
@@ -6851,9 +6916,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 982,
+        "ID": 1007,
         "Name": "GhostInteractionZone",
-        "ParentID": 977,
+        "ParentID": 1002,
         "components": [
           {
             "properties": {
@@ -6911,9 +6976,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 983,
+        "ID": 1008,
         "Name": "GhostInteractionZone",
-        "ParentID": 978,
+        "ParentID": 1003,
         "components": [
           {
             "properties": {
@@ -6971,7 +7036,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 992,
+        "ID": 1009,
         "Name": "TrapObject_Decal",
         "ParentID": -1,
         "components": [
@@ -7059,9 +7124,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 993,
+        "ID": 1010,
         "Name": "RingEffect",
-        "ParentID": 992,
+        "ParentID": 1009,
         "components": [
           {
             "properties": {
@@ -7118,7 +7183,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1003,
+        "ID": 1011,
         "Name": "TropObject_Table",
         "ParentID": -1,
         "components": [
@@ -7187,7 +7252,8 @@
               "UseDiffuseOverride": false,
               "UseEmissiveOverride": false,
               "UseMetallicOverride": false,
-              "UseRoughnessOverride": false
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
             },
             "type": "FBXRenderer"
           },
@@ -7227,9 +7293,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 1004,
+        "ID": 1012,
         "Name": "RingEffect",
-        "ParentID": 1003,
+        "ParentID": 1011,
         "components": [
           {
             "properties": {
@@ -7278,6 +7344,226 @@
               "ringThickness": 0.004999999888241291
             },
             "type": "Decal"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 1026,
+        "Name": "HideObject",
+        "ParentID": -1,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                -1226.5587158203125,
+                -46.59999465942383,
+                -13.10479736328125
+              ],
+              "Rotation": [
+                -0.0,
+                0.0,
+                -0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "DataPath": "..\\Assets\\Resource\\FBX\\HideObject\\wastebasket.fbx",
+              "IsStatic": true
+            },
+            "type": "FBXData"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "Alpha": 1.0,
+              "Diffuse": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "DiffuseOverride": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Emissive": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "EmissiveOverride": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "IsGround": false,
+              "Metalic": 1.0,
+              "MetallicOverride": 1.0,
+              "RenderBlendType": "Opaque",
+              "Roughness": 1.0,
+              "RoughnessOverride": 1.0,
+              "UseDiffuseOverride": false,
+              "UseEmissiveOverride": false,
+              "UseMetallicOverride": false,
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
+            },
+            "type": "FBXRenderer"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "ColliderType": "Box",
+              "PhysicsBodyType": "Static",
+              "density": 10.0,
+              "halfExtents": [
+                30.0,
+                100.0,
+                30.0
+              ],
+              "height": 10.0,
+              "isTrigger": false,
+              "layer": "Default",
+              "localOffset": [
+                0.0,
+                50.0,
+                0.0
+              ],
+              "radius": 50.0
+            },
+            "type": "PhysicsComponent"
+          },
+          {
+            "properties": {
+              "Active": true
+            },
+            "type": "HideObject"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 1033,
+        "Name": "HideObject",
+        "ParentID": -1,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                -1393.6358642578125,
+                -110.00006103515625,
+                606.7353515625
+              ],
+              "Rotation": [
+                -0.0,
+                0.0,
+                -0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "DataPath": "..\\Assets\\Resource\\FBX\\HideObject\\wastebasket.fbx",
+              "IsStatic": true
+            },
+            "type": "FBXData"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "Alpha": 1.0,
+              "Diffuse": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "DiffuseOverride": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Emissive": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "EmissiveOverride": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "IsGround": false,
+              "Metalic": 1.0,
+              "MetallicOverride": 1.0,
+              "RenderBlendType": "Opaque",
+              "Roughness": 1.0,
+              "RoughnessOverride": 1.0,
+              "UseDiffuseOverride": false,
+              "UseEmissiveOverride": false,
+              "UseMetallicOverride": false,
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
+            },
+            "type": "FBXRenderer"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "ColliderType": "Box",
+              "PhysicsBodyType": "Static",
+              "density": 10.0,
+              "halfExtents": [
+                60.0,
+                100.0,
+                60.0
+              ],
+              "height": 10.0,
+              "isTrigger": false,
+              "layer": "Default",
+              "localOffset": [
+                0.0,
+                50.0,
+                0.0
+              ],
+              "radius": 50.0
+            },
+            "type": "PhysicsComponent"
+          },
+          {
+            "properties": {
+              "Active": true
+            },
+            "type": "HideObject"
           }
         ]
       },

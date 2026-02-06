@@ -2,6 +2,7 @@
 #include "Components/VisionComponent.h"
 #include "EngineSystem/SceneSystem.h"
 #include "../../../Woo/Player/PlayerController.h"
+#include "../../../Woo/Object/HideObject.h"
 
 
 void AdultGhost_Patrol::Enter()
@@ -36,7 +37,32 @@ void AdultGhost_Patrol::ChangeStateLogic()
         return;
     }
 
-    // 2. 기척 감지 
+
+    // 2. HideObject 시야 체크
+    auto* hideObj = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("HideObject");
+    if (hideObj)
+    {
+        auto* hideComp = hideObj->GetComponent<HideObject>();
+        if (hideComp)
+        {
+            bool nowSeeing = adultGhost->vision->CheckVision(hideObj, 90, 400);
+
+            if (nowSeeing && !adultGhost->hideLookRegistered)
+            {
+                hideComp->SetAILook(true);
+                adultGhost->hideLookRegistered = true;
+                adultGhost->isSeeingHideObject = true;
+            }
+            else if (!nowSeeing && adultGhost->hideLookRegistered)
+            {
+                hideComp->SetAILook(false);
+                adultGhost->hideLookRegistered = false;
+                adultGhost->isSeeingHideObject = false;
+            }
+        }
+    }
+
+    // 3. 기척 감지 
     auto* playerObj = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("Player");
     auto* playerController = playerObj->GetComponent<PlayerController>();
     if (!playerController) return;
@@ -47,11 +73,10 @@ void AdultGhost_Patrol::ChangeStateLogic()
     Vector3 pPos = playerObj->GetTransform()->GetWorldPosition();
     Vector3 gPos = adultGhost->GetOwner()->GetTransform()->GetWorldPosition();
 
-    float dist = Vector3::Distance(pPos, gPos); // = (pPos - gPos).Length();
+    float dist = Vector3::Distance(pPos, gPos);
     if (dist <= senseRadius)
     {
         cout << "[AdultGhost_Patrol] PLAYER FOUND (Sense)!  dist=" << dist << " radius=" << senseRadius << endl;
-
         adultGhost->ChangeState(AdultGhostState::Search);
     }
 }
@@ -59,11 +84,6 @@ void AdultGhost_Patrol::ChangeStateLogic()
 void AdultGhost_Patrol::Update(float deltaTime)
 {
     patrolTimer += deltaTime;
-
-    // [ 함정 오브젝트 연결 ]
-
-    // [ 은신 오브젝트 연결 ]
-
 }
 
 void AdultGhost_Patrol::FixedUpdate(float deltaTime)
@@ -72,6 +92,18 @@ void AdultGhost_Patrol::FixedUpdate(float deltaTime)
 
 void AdultGhost_Patrol::Exit()
 {
+    auto* hideObj = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("HideObject");
+    if (hideObj)
+    {
+        auto* hideComp = hideObj->GetComponent<HideObject>();
+        if (hideComp && adultGhost->hideLookRegistered)
+        {
+            hideComp->SetAILook(false);
+            adultGhost->hideLookRegistered = false;
+        }
+    }
+    adultGhost->isSeeingHideObject = false;
+
     agent->hasTarget = false;
     agent->path.clear();
     agent->isWaiting = false;
