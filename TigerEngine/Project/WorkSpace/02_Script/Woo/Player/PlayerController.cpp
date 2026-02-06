@@ -531,6 +531,7 @@ void PlayerController::TakeAttack()
     {
         std::unique_ptr<IItem> item = inventory->TakeCurItem();
         visualizer->VisualOffItem();
+        visualizer->VisualItemIDNullSet();
         AltarManager::Instance()->ReceiveItem(std::move(item));
         cout << "[Player] Drop Item... " << endl;
     }
