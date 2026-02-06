@@ -8,9 +8,15 @@ void AdultGhost_Search::Enter()
 
     // 초기화 
     agent = adultGhost->agent;
-    agent->patrolSpeed = 0.8f;
+    agent->patrolSpeed = 5.0f;
 
     searchTimer = 0.0f;
+
+    // (if) 기척 or 함정 감지로 넘어온 경우
+    // - 3초 정지 하고 → 소리난 곳으로 이동 → 3~5초간 회전하며 대기
+
+    // (if) 추격에서 추격 실패로 넘어온 경우
+    // - 마지막으로 플레이어 목격 했던 지점으로 이동 후 → 3~5초간 회전하며 대기
 }
 
 void AdultGhost_Search::ChangeStateLogic()

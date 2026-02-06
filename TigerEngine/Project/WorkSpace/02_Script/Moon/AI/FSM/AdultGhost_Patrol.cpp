@@ -1,6 +1,8 @@
 #include "AdultGhost_Patrol.h"
 #include "Components/VisionComponent.h"
 #include "EngineSystem/SceneSystem.h"
+#include "../../../Woo/Player/PlayerController.h"
+
 
 void AdultGhost_Patrol::Enter()
 {
@@ -24,22 +26,39 @@ void AdultGhost_Patrol::ChangeStateLogic()
     if (patrolTimer < forcePatrolTime)
         return;
 
-    // [ 시야 감지 : 플레이어 감지 ]
+
+    // 1. 시야 감지 : 플레이어(AITarget) 감지 
     auto* AITarget = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("AITarget");
     if (AITarget && adultGhost->vision->CheckVision(AITarget, 90, 400))
     {
         cout << "[AdultGhost_Patrol] PLAYER FOUND ! " << endl;
         adultGhost->ChangeState(AdultGhostState::Chase);
+        return;
+    }
+
+    // 2. 기척 감지 
+    auto* playerObj = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("Player");
+    auto* playerController = playerObj->GetComponent<PlayerController>();
+    if (!playerController) return;
+
+    float senseRadius = playerController->GetCurSenseRadiuse();
+    if (senseRadius <= 0.0f) return;
+
+    Vector3 pPos = playerObj->GetTransform()->GetWorldPosition();
+    Vector3 gPos = adultGhost->GetOwner()->GetTransform()->GetWorldPosition();
+
+    float dist = (pPos - gPos).Length();
+    if (dist <= senseRadius)
+    {
+        cout << "[AdultGhost_Patrol] PLAYER FOUND (Sense)!  dist=" << dist << " radius=" << senseRadius << endl;
+
+        adultGhost->ChangeState(AdultGhostState::Search);
     }
 }
 
 void AdultGhost_Patrol::Update(float deltaTime)
 {
     patrolTimer += deltaTime;
-
-    // [ 기척 감지 ] 
-    // 시야 밖에서 기척 감지 -> GetCurSenseRadiuse 로 확인 
-    // 플레이어와 귀신 사이의 거리가 GetCurSenseRadiuse 보다 짧으면 => 기척 감지 
 
     // [ 함정 오브젝트 연결 ]
 
