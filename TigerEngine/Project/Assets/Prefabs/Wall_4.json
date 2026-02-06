@@ -2,7 +2,7 @@
   "prefab": [
     {
       "Active": true,
-      "ID": 99,
+      "ID": 175,
       "Name": "wall_4",
       "ParentID": -1,
       "components": [
@@ -71,7 +71,8 @@
             "UseDiffuseOverride": false,
             "UseEmissiveOverride": false,
             "UseMetallicOverride": false,
-            "UseRoughnessOverride": false
+            "UseRoughnessOverride": false,
+            "isroughnessFromShininess": false
           },
           "type": "FBXRenderer"
         },
@@ -97,6 +98,12 @@
             "radius": 50.0
           },
           "type": "PhysicsComponent"
+        },
+        {
+          "properties": {
+            "Active": true
+          },
+          "type": "OcclusionFadeObject"
         }
       ]
     }
