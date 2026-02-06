@@ -62,6 +62,7 @@ private:
     void RenderDebugAABBDraw();
     void RenderDebugGrid();
     void RenderDebugVision();
+    void RenderPhysicsHalfExtentsAABBDraw();
 
     // Reender RTTR
     template<typename T>

@@ -1017,6 +1017,69 @@ void Editor::RenderCameraFrustum()
     DebugDraw::g_Batch->End();
 }
 
+namespace
+{
+    DirectX::XMVECTOR XM_CALLCONV GetPhysicsBodyTypeDebugColor(PhysicsBodyType bodyType)
+    {
+        switch (bodyType)
+        {
+        case PhysicsBodyType::Static:
+            return DirectX::Colors::Green;
+        case PhysicsBodyType::Dynamic:
+            return DirectX::Colors::Cyan;
+        case PhysicsBodyType::Kinematic:
+            return DirectX::Colors::Magenta;
+        default:
+            return DirectX::Colors::White;
+        }
+    }
+}
+
+void Editor::RenderPhysicsHalfExtentsAABBDraw()
+{
+    auto scene = SceneSystem::Instance().GetCurrentScene();
+    if (!scene)
+        return;
+
+    scene->ForEachGameObject([&](GameObject* gameObject)
+        {
+            if (!gameObject || gameObject->IsDestory())
+                return;
+
+            if (!gameObject->GetActiveSelf())
+                return;
+
+            auto* phys = gameObject->GetComponent<PhysicsComponent>();
+            if (!phys || !phys->GetActiveSelf())
+                return;
+
+            if (phys->m_ColliderType != ColliderType::Box)
+                return;
+
+            Transform* tr = gameObject->GetTransform();
+            if (!tr)
+                return;
+
+            // PhysicsComponent::SyncToPhysics() 기준(로컬 pose)으로 collider center 계산
+            const Vector3 actorPos = tr->GetLocalPosition();
+            const Quaternion actorRot = tr->GetQuaternion();
+
+            const Vector3 rotatedOffset =
+                Vector3::Transform(phys->m_LocalOffset, Matrix::CreateFromQuaternion(actorRot));
+            const Vector3 center = actorPos + rotatedOffset;
+            const Vector3 halfExtents = phys->m_HalfExtents;
+
+            BoundingBox box;
+            box.Center = XMFLOAT3(center.x, center.y, center.z);
+            box.Extents = XMFLOAT3(halfExtents.x, halfExtents.y, halfExtents.z);
+
+            const XMVECTOR color = GetPhysicsBodyTypeDebugColor(phys->m_BodyType);
+            const bool drawCross = phys->IsTrigger();
+
+            DebugDraw::Draw(DebugDraw::g_Batch.get(), box, color, drawCross);
+        });
+}
+
 void Editor::RenderWorldSettings()
 {
     if (isWorldSettingOpen)
@@ -1911,7 +1974,14 @@ void Editor::RenderDebugAABBDraw()
     // PhysX
     if (isPhysicsDebugOpen)
     {
-        PhysicsSystem::Instance().DrawPhysXActors();
+        if (PlayModeSystem::Instance().GetPlayMode() == PlayModeState::Stopped)
+        {
+            RenderPhysicsHalfExtentsAABBDraw();
+        }
+        else
+        {
+            PhysicsSystem::Instance().DrawPhysXActors();
+        }
     }
 
     // ===============================

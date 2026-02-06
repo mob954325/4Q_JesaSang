@@ -119,7 +119,7 @@ void ScriptSystem::Update(float delta)
 
 void ScriptSystem::FixedUpdate(float dt)
 {
-    if (PlayModeSystem::Instance().IsPlaying())
+    // if (PlayModeSystem::Instance().IsPlaying())
     {
         for (auto& e : pending_scriptComponents)
         {
