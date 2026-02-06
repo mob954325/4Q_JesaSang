@@ -36,12 +36,12 @@ public:
 
     // ring effect
     float ringStartTime = 0.0f;     // 스폰 시점
-    float ringDuration  = 5.0f;     // 링 수명
+    float ringDuration  = 15.0f;    // 링 수명
     float ringMaxRadius = 0.95f;    // 0~1(uv공간 반경)
-    float ringSpeed     = 0.3f;     // Speed
-    float ringThickness = 0.03f;    // 링 두께 (uv공간)
-    float ringFeather   = 0.03f;    // 링 가장자리 소프트
-    Vector3 ringColor   = { 1.0f, 1.0f, 1.0f }; 
+    float ringSpeed     = 0.45f;    // Speed
+    float ringThickness = 0.005f;   // 링 두께 (uv공간)
+    float ringFeather   = 0.01f;    // 링 가장자리 소프트
+    Vector3 ringColor   = { 0.0f, 0.0f, 1.0f }; 
 
 public:
     // component process

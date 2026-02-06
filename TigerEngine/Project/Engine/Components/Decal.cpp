@@ -35,7 +35,7 @@ RTTR_REGISTRATION
 
 void Decal::OnInitialize()
 {
-    
+    SetActive(false);
 }
 
 void Decal::OnDestory()
@@ -91,6 +91,8 @@ void Decal::StartRingEffect(float startTime, float duration, float speed)
     ringStartTime = startTime;
     ringDuration = duration;
     ringSpeed = speed;
+
+    SetActive(true);
 }
 
 std::wstring ToWString(const std::string& str)
