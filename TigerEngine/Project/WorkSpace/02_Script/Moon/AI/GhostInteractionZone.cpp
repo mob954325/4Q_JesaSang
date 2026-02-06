@@ -53,7 +53,5 @@ void GhostInteractionZone::OnTriggerEnter(PhysicsComponent* other)
         {
             player->GetComponent<PlayerController>()->TakeAttack(); // AI에게 공격 당했을 때 
         }
-
-        // float GetCurSenseRadiuse() const;    // 플레이어 현재 기척 getter
     }
 }

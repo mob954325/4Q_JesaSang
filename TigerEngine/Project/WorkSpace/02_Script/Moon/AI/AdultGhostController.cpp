@@ -1,9 +1,12 @@
 #include "AdultGhostController.h"
-#include "Object/GameObject.h"
 #include "Util/JsonHelper.h"
 #include "Util/ComponentAutoRegister.h"
+
+#include "Object/GameObject.h"
 #include "EngineSystem/SceneSystem.h"
-#include "Components/VisionComponent.h"
+
+#include "FSM/IAdultGhostState.h"
+
 
 REGISTER_COMPONENT(AdultGhostController)
 
@@ -35,11 +38,35 @@ void AdultGhostController::OnStart()
 
     if (!agent || !vision)
     {
-        std::cout << "[AdultGhostController] agent or vision missing" << std::endl;
+        std::cout << "[AdultGhostController] Component Missing" << std::endl;
         return;
     }
 
-    agent->PickRandomTarget(); // 목표 좌표 찾기 
+    // 목표 좌표 찾기 (이전 코드)
+    // agent->PickRandomTarget(); 
+
+    // load animation
+    //LoadAnimation();
+
+    // init fsm
+    InitFSMStates();
+    ChangeState(AdultGhostState::Patrol);
+
+    // init stat
+    InitStat();
+}
+
+void AdultGhostController::OnUpdate(float delta)
+{
+    // fsm
+    if (curState)
+    {
+        curState->ChangeStateLogic();
+        curState->Update(delta);
+    }
+
+    // interaction cheak
+    // InteractionCheak(delta);
 }
 
 
@@ -48,9 +75,9 @@ void AdultGhostController::OnFixedUpdate(float dt)
     if (!agent || !vision) return;
 
     // AgentComponent의 경로 따라 이동
-    agent->OnFixedUpdate(dt); 
+    // agent->OnFixedUpdate(dt);  
 
-    // 디버그
+#pragma region PathDebug 
     //if (agent->hasTarget)
     //{
     //    std::cout << "[AdultGhostController] \"" << GetOwner()->GetName()
@@ -58,16 +85,22 @@ void AdultGhostController::OnFixedUpdate(float dt)
     //        << "Target: (" << agent->targetCX << "," << agent->targetCY << ") "
     //        << "Remaining Path: " << agent->path.size() << std::endl;
     //}
+#pragma endregion 
 
 
-    // [시야 감지] 플레이어 탐지
+    // 시야 감지 : 플레이어 탐지
     auto* player = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("Player");
     if (player)
     {
-        // std::cout << "[player]" << player->GetName() << " is " << (int)player->GetComponent<CharacterControllerComponent>()->GetLayer() << std::endl;
         if (vision->CheckVision(player, 90, 400))
         {
             std::cout << "[AdultGhostController]" << GetOwner()->GetName() << " is PLAYER FOUND !" << std::endl;
         }
     }
+
+}
+
+void AdultGhostController::InteractionCheak(float delta)
+{
+    // SerachObjectInteraction(delta);   
 }
