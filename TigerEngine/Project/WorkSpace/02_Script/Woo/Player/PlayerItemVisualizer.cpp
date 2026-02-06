@@ -145,3 +145,8 @@ void PlayerItemVisualizer::VisualRenderOff()
 {
     VisualOffItem();
 }
+
+void PlayerItemVisualizer::VisualItemIDNullSet()
+{
+    curItemID = "";
+}

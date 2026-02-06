@@ -312,6 +312,13 @@ void PlayerController::SerachObjectInteraction(float dt)
         // item get or fail
         if (item)
         {
+            // 미니맵 연결
+            if (item->itemType == ItemType::Piece)
+            {
+                // TODO :: 아론님 트리거 코드 호출
+            }
+
+            // item get
             visualizer->VisualOnItem(item->itemId);
             inventory->AddItem(std::move(item));
         }
@@ -329,6 +336,10 @@ void PlayerController::HideObjectInteraction(float dt)
 {
     // interaction x
     if (!isPossibleHide || !curHideObject)
+        return;
+
+    // hit, die 상태라면 return (맞겠지?)
+    if (state == PlayerState::Hit || state == PlayerState::Die)
         return;
 
     // hide
@@ -531,6 +542,7 @@ void PlayerController::TakeAttack()
     {
         std::unique_ptr<IItem> item = inventory->TakeCurItem();
         visualizer->VisualOffItem();
+        visualizer->VisualItemIDNullSet();
         AltarManager::Instance()->ReceiveItem(std::move(item));
         cout << "[Player] Drop Item... " << endl;
     }
