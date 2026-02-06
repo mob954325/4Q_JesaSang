@@ -36,8 +36,6 @@ public:
 protected:
     void UpdateMatricesIfDirty() override;
 
-    Matrix RemoveScale(Matrix& m);
-
     /// <summary>
     /// 앵커를 기준으로 하는 사각형 피벗 포지션 -> transform의 position이랑 다름
     /// </summary>
