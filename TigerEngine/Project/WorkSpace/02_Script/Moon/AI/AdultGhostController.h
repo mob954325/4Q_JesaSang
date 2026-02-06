@@ -52,7 +52,7 @@ private:
     // void InitStat();
 
     // Interaction
-    // void InteractionCheak(float delta);
+    void InteractionCheak(float delta);
 
 
 public:

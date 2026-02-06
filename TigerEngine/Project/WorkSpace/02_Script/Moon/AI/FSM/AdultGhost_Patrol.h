@@ -3,6 +3,9 @@
 
 class AdultGhost_Patrol : public IAdultGhostState
 {
+private:
+    AgentComponent* agent = nullptr;
+
 public:
     AdultGhost_Patrol(AdultGhostController* _adultGhost) : IAdultGhostState(_adultGhost) {}
     ~AdultGhost_Patrol() = default;

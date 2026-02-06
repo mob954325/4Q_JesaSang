@@ -6,6 +6,7 @@
 #include "EngineSystem/SceneSystem.h"
 
 #include "FSM/IAdultGhostState.h"
+#include "FSM/AdultGhost_Patrol.h"
 
 
 REGISTER_COMPONENT(AdultGhostController)
@@ -43,16 +44,26 @@ void AdultGhostController::OnStart()
         return;
     }
 
-    // 목표 좌표 찾기
-    agent->SetWaitTime(3.0f); // 대기 시간 
-    agent->PickRandomTarget(); 
+    // -----------------------------------------------------------
+    // [ 임시 코드 ]
+    // -----------------------------------------------------------
+
+    //// 순찰 : 목표 좌표 찾기 
+    //agent->SetWaitTime(3.0f); // 대기 시간 
+    //agent->PickRandomTarget();
+
+    // 기척 감지(순찰 → 탐색) : 시야 밖에서 기척(발소리 / 음식냄새) 감지
+    // 함정 감지(순찰 → 탐색) : 시야 밖에서 함정 파동 감지
+
+
+    // -----------------------------------------------------------
 
     // load animation
     //LoadAnimation();
 
     // init fsm
-    //InitFSMStates();
-    //ChangeState(AdultGhostState::Patrol);
+    InitFSMStates();
+    ChangeState(AdultGhostState::Patrol);
 
     // init stat
     // InitStat();
@@ -60,12 +71,12 @@ void AdultGhostController::OnStart()
 
 void AdultGhostController::OnUpdate(float delta)
 {
-    //// fsm
-    //if (curState)
-    //{
-    //    curState->ChangeStateLogic();
-    //    curState->Update(delta);
-    //}
+    // FSM 
+    if (curState)
+    {
+        curState->ChangeStateLogic();
+        curState->Update(delta);
+    }
 
     // interaction cheak
     // InteractionCheak(delta);
@@ -79,6 +90,12 @@ void AdultGhostController::OnFixedUpdate(float dt)
     // AgentComponent의 경로 따라 이동
     agent->OnFixedUpdate(dt);  
 
+    // FSM 
+    if (curState)
+    {
+        curState->FixedUpdate(dt);
+    }
+
 #pragma region PathDebug 
     //if (agent->hasTarget)
     //{
@@ -89,15 +106,15 @@ void AdultGhostController::OnFixedUpdate(float dt)
     //}
 #pragma endregion 
 
-    // 시야 감지 : 플레이어 탐지
-    auto* player = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("Player");
-    if (player)
-    {
-        if (vision->CheckVision(player, 90, 400))
-        {
-            std::cout << "[AdultGhostController]" << GetOwner()->GetName() << " is PLAYER FOUND !" << std::endl;
-        }
-    }
+    //// 시야 감지 : 플레이어 탐지
+    //auto* player = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("Player");
+    //if (player)
+    //{
+    //    if (vision->CheckVision(player, 90, 400))
+    //    {
+    //        std::cout << "[AdultGhostController]" << GetOwner()->GetName() << " is PLAYER FOUND !" << std::endl;
+    //    }
+    //}
 }
 
 
@@ -109,7 +126,7 @@ void AdultGhostController::OnFixedUpdate(float dt)
 void AdultGhostController::InitFSMStates()
 {
     //  Patrol, Chase, Search, Return, Attack, None
-    // fsmStates[(int)AdultGhostState::Patrol] = new AdultGhost_Patrol(this);
+    fsmStates[(int)AdultGhostState::Patrol] = new AdultGhost_Patrol(this);
     //fsmStates[(int)AdultGhostState::Chase] = new AdultGhost_Chase(this);
     //fsmStates[(int)AdultGhostState::Search] = new AdultGhost_Search(this);
     //fsmStates[(int)AdultGhostState::Return] = new AdultGhost_Return(this);
