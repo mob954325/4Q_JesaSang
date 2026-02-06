@@ -35,6 +35,8 @@ private:
     float hideDurationTimer = 0.0f;
     float reHideCoolTimer = 0.0f;
 
+    int lookingAICount = 0;             // 보고있는 AI 개수 
+
 public:
     // component process
     void OnStart() override;
@@ -52,4 +54,3 @@ public :
     void StopHide();
     void SetAILook(bool isLook);        // TODO :: 선민이 AI 시야 연결
 };
-
