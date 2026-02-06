@@ -284,6 +284,7 @@
     <ClInclude Include="Util\EncodeConvertHelper.h" />
     <ClInclude Include="Util\FontAtlasBuild.h" />
     <ClInclude Include="Util\JsonHelper.h" />
+    <ClInclude Include="Util\Multidelegate.h" />
     <ClInclude Include="Util\PathHelper.h" />
     <ClInclude Include="Util\DebugDraw.h" />
     <ClInclude Include="Manager\WorldManager.h" />

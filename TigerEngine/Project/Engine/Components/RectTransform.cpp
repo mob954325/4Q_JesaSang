@@ -112,7 +112,7 @@ void RectTransform::UpdateMatricesIfDirty()
     Matrix T0 = Matrix::CreateTranslation(-pivot.x, -pivot.y, 0.0f);
     Matrix S = Matrix::CreateScale({ size.x, size.y, 1.0f });         // size = px
     Matrix R = Matrix::CreateFromYawPitchRoll(r.y, r.x, r.z);
-    Matrix T1 = Matrix::CreateTranslation({ pos.x, pos.y, pos.z });
+    Matrix T1 = Matrix::CreateTranslation({ pos.x, pos.y, 0.0f });
 
     localMatrix = T0 * S * R * T1;
 
@@ -127,7 +127,7 @@ void RectTransform::UpdateMatricesIfDirty()
         if (parentRect)
         {
             Matrix parentNoScale = RemoveScale(parentRect->GetWorldMatrix());
-            worldMatrix = localMatrix * parentNoScale;   // ✅ 부모 스케일 미상속
+            worldMatrix = localMatrix * parentNoScale;   // 부모 스케일 미상속
         }
         else
         {
