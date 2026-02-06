@@ -95,6 +95,19 @@ void AgentComponent::OnFixedUpdate(float dt)
     auto grid = GridSystem::Instance().GetMainGrid();
     if (!grid) return;
 
+    // 대기 중이면 시간 감소 
+    if (isWaiting)
+    {
+        waitTimer -= dt;
+        if (waitTimer <= 0.f)
+        {
+            isWaiting = false;
+            PickRandomTarget(); // 다시 탐색 시작
+        }
+        return; // 대기 중엔 이동 안함
+    }
+
+
     // 목표가 없으면 새 목표 선택
     if (!hasTarget)
     {
@@ -129,10 +142,14 @@ void AgentComponent::OnFixedUpdate(float dt)
         cy = next.second;
         path.erase(path.begin());
 
-        // 경로가 다 끝나면 목표 재선택
+        // 경로가 다 끝나면 잠시 멈췄다가 목표 재선택
         if (path.empty())
         {
-            PickRandomTarget();
+            // PickRandomTarget();
+            isWaiting = true;
+            waitTimer = waitDuration;
+            hasTarget = false;  // 다음 탐색은 대기 후
+            return;
         }
     }
     else
@@ -174,4 +191,9 @@ void AgentComponent::MoveAgent(const Vector3& dir, float speed, float dt)
 
         tr->SetRotationY(newYaw);
     }
+}
+
+void AgentComponent::SetWaitTime(float seconds)
+{
+    waitDuration = seconds;
 }

@@ -146,6 +146,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="02_Script\Moon\AI\AdultGhostController.h" />
+    <ClInclude Include="02_Script\Moon\AI\FSM\AdultGhost_Patrol.h" />
+    <ClInclude Include="02_Script\Moon\AI\FSM\IAdultGhostState.h" />
     <ClInclude Include="02_Script\Moon\AI\GhostInteractionZone.h" />
     <ClInclude Include="02_Script\Moon\AnimationTest\PlayerAnimationTest.h" />
     <ClInclude Include="02_Script\Woo\Altar\AltarManager.h" />
@@ -194,6 +196,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="02_Script\Moon\AI\AdultGhostController.cpp" />
+    <ClCompile Include="02_Script\Moon\AI\FSM\AdultGhost_Patrol.cpp" />
     <ClCompile Include="02_Script\Moon\AI\GhostInteractionZone.cpp" />
     <ClCompile Include="02_Script\Moon\AnimationTest\PlayerAnimationTest.cpp" />
     <ClCompile Include="02_Script\Woo\Altar\AltarManager.cpp" />

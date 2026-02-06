@@ -28,8 +28,9 @@ void AdultGhostController::Deserialize(nlohmann::json data)
 }
 
 
-// ------------------------------------------
-
+// -----------------------------------------------------------
+// [ Process ]
+// -----------------------------------------------------------
 
 void AdultGhostController::OnStart()
 {
@@ -42,28 +43,29 @@ void AdultGhostController::OnStart()
         return;
     }
 
-    // 목표 좌표 찾기 (이전 코드)
-    // agent->PickRandomTarget(); 
+    // 목표 좌표 찾기
+    agent->SetWaitTime(3.0f); // 대기 시간 
+    agent->PickRandomTarget(); 
 
     // load animation
     //LoadAnimation();
 
     // init fsm
-    InitFSMStates();
-    ChangeState(AdultGhostState::Patrol);
+    //InitFSMStates();
+    //ChangeState(AdultGhostState::Patrol);
 
     // init stat
-    InitStat();
+    // InitStat();
 }
 
 void AdultGhostController::OnUpdate(float delta)
 {
-    // fsm
-    if (curState)
-    {
-        curState->ChangeStateLogic();
-        curState->Update(delta);
-    }
+    //// fsm
+    //if (curState)
+    //{
+    //    curState->ChangeStateLogic();
+    //    curState->Update(delta);
+    //}
 
     // interaction cheak
     // InteractionCheak(delta);
@@ -75,7 +77,7 @@ void AdultGhostController::OnFixedUpdate(float dt)
     if (!agent || !vision) return;
 
     // AgentComponent의 경로 따라 이동
-    // agent->OnFixedUpdate(dt);  
+    agent->OnFixedUpdate(dt);  
 
 #pragma region PathDebug 
     //if (agent->hasTarget)
@@ -87,7 +89,6 @@ void AdultGhostController::OnFixedUpdate(float dt)
     //}
 #pragma endregion 
 
-
     // 시야 감지 : 플레이어 탐지
     auto* player = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("Player");
     if (player)
@@ -97,10 +98,57 @@ void AdultGhostController::OnFixedUpdate(float dt)
             std::cout << "[AdultGhostController]" << GetOwner()->GetName() << " is PLAYER FOUND !" << std::endl;
         }
     }
-
 }
 
-void AdultGhostController::InteractionCheak(float delta)
+
+
+// -----------------------------------------------------------
+// [ FSM ]
+// -----------------------------------------------------------
+
+void AdultGhostController::InitFSMStates()
 {
-    // SerachObjectInteraction(delta);   
+    //  Patrol, Chase, Search, Return, Attack, None
+    // fsmStates[(int)AdultGhostState::Patrol] = new AdultGhost_Patrol(this);
+    //fsmStates[(int)AdultGhostState::Chase] = new AdultGhost_Chase(this);
+    //fsmStates[(int)AdultGhostState::Search] = new AdultGhost_Search(this);
+    //fsmStates[(int)AdultGhostState::Return] = new AdultGhost_Return(this);
+    //fsmStates[(int)AdultGhostState::Attack] = new AdultGhost_Attack(this);
 }
+
+void AdultGhostController::ChangeState(AdultGhostState nextState)
+{
+    if (curState == fsmStates[(int)nextState])
+        return;
+
+    if (curState)
+        curState->Exit();
+
+    curState = fsmStates[(int)nextState];
+    this->state = nextState;
+
+    if (curState)
+        curState->Enter();
+}
+
+void AdultGhostController::LoadAnimation()
+{
+    //// 애니메이션 파일 로드
+    //FBXResourceManager::Instance().LoadAnimationByPath(fbxData->GetFBXInfo(), "..\\Assets\\Resource\\Animation\\ani_walk_character.fbx", "Idle");
+
+    //// 클립 생성
+    //auto idleClip = animController->FindClip("Idle");
+
+    //if (!idleClip)
+    //{
+    //    OutputDebugStringW(L"[CCTTest] Clip not found! 이름 확인 필요\n");
+    //    return;
+    //}
+
+    //// 상태 등록
+    //animController->AddState(std::make_unique<AnimationState>("Idle", idleClip, animController));
+
+    //// 시작
+    //animController->ChangeState("Idle");
+}
+

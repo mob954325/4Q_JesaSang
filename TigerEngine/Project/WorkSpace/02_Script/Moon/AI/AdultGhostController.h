@@ -16,6 +16,7 @@ class AdultGhost_Attack;
 
 enum class AdultGhostState
 {
+ // 순찰,   추격,   탐색,   복귀,   공격,    None
     Patrol, Chase, Search, Return, Attack, None
 };
 
@@ -48,11 +49,10 @@ private:
     void LoadAnimation();
 
     // Init
-    void InitStat();
-
+    // void InitStat();
 
     // Interaction
-    void InteractionCheak(float delta);
+    // void InteractionCheak(float delta);
 
 
 public:
