@@ -3,7 +3,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 957,
+        "ID": 442,
         "Name": "Main Camera",
         "ParentID": -1,
         "components": [
@@ -56,7 +56,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 958,
+        "ID": 443,
         "Name": "DirectionalLight(Sun)",
         "ParentID": -1,
         "components": [
@@ -110,7 +110,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 959,
+        "ID": 444,
         "Name": "---------Floor----------",
         "ParentID": -1,
         "components": [
@@ -141,9 +141,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 960,
+        "ID": 445,
         "Name": "Floor",
-        "ParentID": 959,
+        "ParentID": 444,
         "components": [
           {
             "properties": {
@@ -245,7 +245,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 961,
+        "ID": 446,
         "Name": "---------Wall----------",
         "ParentID": -1,
         "components": [
@@ -276,9 +276,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 962,
+        "ID": 447,
         "Name": "Door_Open",
-        "ParentID": 961,
+        "ParentID": 446,
         "components": [
           {
             "properties": {
@@ -357,9 +357,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 963,
+        "ID": 448,
         "Name": "Pillar",
-        "ParentID": 961,
+        "ParentID": 446,
         "components": [
           {
             "properties": {
@@ -467,9 +467,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 964,
+        "ID": 449,
         "Name": "wall_4",
-        "ParentID": 961,
+        "ParentID": 446,
         "components": [
           {
             "properties": {
@@ -577,9 +577,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 965,
+        "ID": 450,
         "Name": "wall_5",
-        "ParentID": 961,
+        "ParentID": 446,
         "components": [
           {
             "properties": {
@@ -687,9 +687,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 966,
+        "ID": 451,
         "Name": "Room",
-        "ParentID": 959,
+        "ParentID": 444,
         "components": [
           {
             "properties": {
@@ -768,9 +768,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 967,
+        "ID": 452,
         "Name": "Room_a_love_room",
-        "ParentID": 959,
+        "ParentID": 444,
         "components": [
           {
             "properties": {
@@ -849,9 +849,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 968,
+        "ID": 453,
         "Name": "Room_Kitchen",
-        "ParentID": 959,
+        "ParentID": 444,
         "components": [
           {
             "properties": {
@@ -930,9 +930,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 969,
+        "ID": 454,
         "Name": "Room_main_room",
-        "ParentID": 959,
+        "ParentID": 444,
         "components": [
           {
             "properties": {
@@ -1011,9 +1011,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 970,
+        "ID": 455,
         "Name": "Room_saibi",
-        "ParentID": 959,
+        "ParentID": 444,
         "components": [
           {
             "properties": {
@@ -1092,9 +1092,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 971,
+        "ID": 456,
         "Name": "Room_Table_of_memorial_ceremony",
-        "ParentID": 959,
+        "ParentID": 444,
         "components": [
           {
             "properties": {
@@ -1173,9 +1173,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 972,
+        "ID": 457,
         "Name": "Room_Warehouse",
-        "ParentID": 959,
+        "ParentID": 444,
         "components": [
           {
             "properties": {
@@ -1254,7 +1254,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 973,
+        "ID": 458,
         "Name": "---------Object----------",
         "ParentID": -1,
         "components": [
@@ -1285,7 +1285,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 974,
+        "ID": 459,
         "Name": "JesaSang",
         "ParentID": -1,
         "components": [
@@ -1395,9 +1395,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 975,
+        "ID": 460,
         "Name": "SearchObject",
-        "ParentID": 973,
+        "ParentID": 458,
         "components": [
           {
             "properties": {
@@ -1407,13 +1407,13 @@
                 280.0
               ],
               "Rotation": [
-                -0.0,
-                0.0,
-                0.0
+                0.0009890493238344789,
+                0.007638114038854837,
+                -0.004344874992966652
               ],
               "Scale": [
                 1.0,
-                1.0,
+                0.9999999403953552,
                 1.0
               ]
             },
@@ -1514,9 +1514,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 976,
+        "ID": 461,
         "Name": "SearchObject",
-        "ParentID": 973,
+        "ParentID": 458,
         "components": [
           {
             "properties": {
@@ -1633,9 +1633,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 977,
+        "ID": 462,
         "Name": "baseFood",
-        "ParentID": 974,
+        "ParentID": 459,
         "components": [
           {
             "properties": {
@@ -1714,7 +1714,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 978,
+        "ID": 463,
         "Name": "Player",
         "ParentID": -1,
         "components": [
@@ -1741,17 +1741,17 @@
           {
             "properties": {
               "Active": true,
-              "height": 120.0,
+              "height": 90.0,
               "isTrigger": false,
               "jumpSpeed": 5.5,
               "layer": "Player",
               "moveSpeed": 0.0,
               "offset": [
                 0.0,
-                50.0,
+                53.0,
                 0.0
               ],
-              "radius": 30.0
+              "radius": 13.0
             },
             "type": "CharacterControllerComponent"
           },
@@ -1836,7 +1836,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 979,
+        "ID": 464,
         "Name": "-----------------------",
         "ParentID": -1,
         "components": [
@@ -1867,7 +1867,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 980,
+        "ID": 465,
         "Name": "CurScene_98_Dev_Woo",
         "ParentID": -1,
         "components": [
@@ -1898,7 +1898,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 981,
+        "ID": 466,
         "Name": "-----------------------",
         "ParentID": -1,
         "components": [
@@ -1929,9 +1929,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 982,
+        "ID": 467,
         "Name": "wall_5",
-        "ParentID": 961,
+        "ParentID": 446,
         "components": [
           {
             "properties": {
@@ -2039,9 +2039,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 983,
+        "ID": 468,
         "Name": "wall_5",
-        "ParentID": 961,
+        "ParentID": 446,
         "components": [
           {
             "properties": {
@@ -2149,9 +2149,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 984,
+        "ID": 469,
         "Name": "wall_5",
-        "ParentID": 961,
+        "ParentID": 446,
         "components": [
           {
             "properties": {
@@ -2259,9 +2259,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 985,
+        "ID": 470,
         "Name": "wall_4",
-        "ParentID": 961,
+        "ParentID": 446,
         "components": [
           {
             "properties": {
@@ -2369,9 +2369,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 986,
+        "ID": 471,
         "Name": "CameraTrackingPoint",
-        "ParentID": 978,
+        "ParentID": 463,
         "components": [
           {
             "properties": {
@@ -2400,9 +2400,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 987,
+        "ID": 472,
         "Name": "OcclusionFadePoint",
-        "ParentID": 978,
+        "ParentID": 463,
         "components": [
           {
             "properties": {
@@ -2431,9 +2431,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 988,
+        "ID": 473,
         "Name": "SearchObject",
-        "ParentID": 973,
+        "ParentID": 458,
         "components": [
           {
             "properties": {
@@ -2550,9 +2550,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 989,
+        "ID": 474,
         "Name": "InteractionSensor",
-        "ParentID": 978,
+        "ParentID": 463,
         "components": [
           {
             "properties": {
@@ -2610,9 +2610,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 990,
+        "ID": 475,
         "Name": "InteractZone",
-        "ParentID": 978,
+        "ParentID": 463,
         "components": [
           {
             "properties": {
@@ -2647,9 +2647,9 @@
               "PhysicsBodyType": "Static",
               "density": 10.0,
               "halfExtents": [
-                50.0,
+                35.0,
                 10.0,
-                50.0
+                35.0
               ],
               "height": 10.0,
               "isTrigger": true,
@@ -2670,7 +2670,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 991,
+        "ID": 476,
         "Name": "Kitchen",
         "ParentID": -1,
         "components": [
@@ -2697,7 +2697,7 @@
           {
             "properties": {
               "Active": true,
-              "DataPath": "..\\Assets\\Resource\\FBX\\00_character\\Player\\ani_character.glb",
+              "DataPath": "..\\Assets\\Resource\\FBX\\Kitchen\\Kitchen.fbx",
               "IsStatic": false
             },
             "type": "FBXData"
@@ -2751,9 +2751,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 992,
+        "ID": 477,
         "Name": "CookingZone",
-        "ParentID": 991,
+        "ParentID": 476,
         "components": [
           {
             "properties": {
@@ -2805,9 +2805,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 993,
+        "ID": 478,
         "Name": "SearchObject",
-        "ParentID": 973,
+        "ParentID": 458,
         "components": [
           {
             "properties": {
@@ -2924,9 +2924,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 994,
+        "ID": 479,
         "Name": "SearchObject",
-        "ParentID": 973,
+        "ParentID": 458,
         "components": [
           {
             "properties": {
@@ -3043,9 +3043,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 995,
+        "ID": 480,
         "Name": "SearchObject",
-        "ParentID": 973,
+        "ParentID": 458,
         "components": [
           {
             "properties": {
@@ -3162,9 +3162,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 996,
+        "ID": 481,
         "Name": "SearchObject",
-        "ParentID": 973,
+        "ParentID": 458,
         "components": [
           {
             "properties": {
@@ -3281,9 +3281,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 997,
+        "ID": 482,
         "Name": "SearchObject",
-        "ParentID": 973,
+        "ParentID": 458,
         "components": [
           {
             "properties": {
@@ -3400,9 +3400,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 998,
+        "ID": 483,
         "Name": "Apple",
-        "ParentID": 974,
+        "ParentID": 459,
         "components": [
           {
             "properties": {
@@ -3481,9 +3481,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 999,
+        "ID": 484,
         "Name": "Pear",
-        "ParentID": 974,
+        "ParentID": 459,
         "components": [
           {
             "properties": {
@@ -3562,9 +3562,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 1000,
+        "ID": 485,
         "Name": "Batter",
-        "ParentID": 974,
+        "ParentID": 459,
         "components": [
           {
             "properties": {
@@ -3643,9 +3643,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 1001,
+        "ID": 486,
         "Name": "Tofu",
-        "ParentID": 974,
+        "ParentID": 459,
         "components": [
           {
             "properties": {
@@ -3724,9 +3724,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 1002,
+        "ID": 487,
         "Name": "Sanjeok",
-        "ParentID": 974,
+        "ParentID": 459,
         "components": [
           {
             "properties": {
@@ -3805,9 +3805,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 1003,
+        "ID": 488,
         "Name": "Donggeurangttaeng",
-        "ParentID": 974,
+        "ParentID": 459,
         "components": [
           {
             "properties": {
@@ -3886,9 +3886,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 1004,
+        "ID": 489,
         "Name": "Visual_Ingre_Apple",
-        "ParentID": 1010,
+        "ParentID": 495,
         "components": [
           {
             "properties": {
@@ -3967,9 +3967,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 1005,
+        "ID": 490,
         "Name": "Visual_Ingre_Batter",
-        "ParentID": 1010,
+        "ParentID": 495,
         "components": [
           {
             "properties": {
@@ -4048,9 +4048,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 1006,
+        "ID": 491,
         "Name": "Visual_Ingre_Donggeurangttaeng",
-        "ParentID": 1010,
+        "ParentID": 495,
         "components": [
           {
             "properties": {
@@ -4129,9 +4129,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 1007,
+        "ID": 492,
         "Name": "Visual_Ingre_Pear",
-        "ParentID": 1010,
+        "ParentID": 495,
         "components": [
           {
             "properties": {
@@ -4210,9 +4210,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 1008,
+        "ID": 493,
         "Name": "Visual_Ingre_Sanjeok",
-        "ParentID": 1010,
+        "ParentID": 495,
         "components": [
           {
             "properties": {
@@ -4291,9 +4291,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 1009,
+        "ID": 494,
         "Name": "Visual_Ingre_Tofu",
-        "ParentID": 1010,
+        "ParentID": 495,
         "components": [
           {
             "properties": {
@@ -4372,9 +4372,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1010,
+        "ID": 495,
         "Name": "ItemVisualizer",
-        "ParentID": 978,
+        "ParentID": 463,
         "components": [
           {
             "properties": {
@@ -4403,16 +4403,16 @@
     {
       "properties": {
         "Active": false,
-        "ID": 1011,
+        "ID": 496,
         "Name": "Visual_Apple",
-        "ParentID": 1010,
+        "ParentID": 495,
         "components": [
           {
             "properties": {
               "Position": [
-                -25.700000762939453,
+                -32.0,
                 -55.0,
-                24.399999618530273
+                32.099998474121094
               ],
               "Rotation": [
                 0.0,
@@ -4420,9 +4420,9 @@
                 0.0
               ],
               "Scale": [
-                1.0,
-                1.0,
-                1.0
+                1.2999999523162842,
+                1.2999999523162842,
+                1.2999999523162842
               ]
             },
             "type": "Transform"
@@ -4484,16 +4484,16 @@
     {
       "properties": {
         "Active": false,
-        "ID": 1012,
+        "ID": 497,
         "Name": "Visual_Pear",
-        "ParentID": 1010,
+        "ParentID": 495,
         "components": [
           {
             "properties": {
               "Position": [
-                14.100000381469727,
+                15.199999809265137,
                 -55.0,
-                25.0
+                33.099998474121094
               ],
               "Rotation": [
                 0.0,
@@ -4501,9 +4501,9 @@
                 0.0
               ],
               "Scale": [
-                1.0,
-                1.0,
-                1.0
+                1.2999999523162842,
+                1.2999999523162842,
+                1.2999999523162842
               ]
             },
             "type": "Transform"
@@ -4565,16 +4565,16 @@
     {
       "properties": {
         "Active": false,
-        "ID": 1013,
+        "ID": 498,
         "Name": "Visual_Batter",
-        "ParentID": 1010,
+        "ParentID": 495,
         "components": [
           {
             "properties": {
               "Position": [
-                7.300000190734863,
-                -55.0,
-                0.0
+                7.400000095367432,
+                -61.099998474121094,
+                1.399999976158142
               ],
               "Rotation": [
                 0.0,
@@ -4582,9 +4582,9 @@
                 0.0
               ],
               "Scale": [
-                1.0,
-                1.0,
-                1.0
+                1.5,
+                1.5,
+                1.5
               ]
             },
             "type": "Transform"
@@ -4646,16 +4646,16 @@
     {
       "properties": {
         "Active": false,
-        "ID": 1014,
+        "ID": 499,
         "Name": "Visual_Tofu",
-        "ParentID": 1010,
+        "ParentID": 495,
         "components": [
           {
             "properties": {
               "Position": [
-                -20.0,
-                -55.0,
-                0.0
+                -33.29999923706055,
+                -60.900001525878906,
+                -1.0
               ],
               "Rotation": [
                 0.0,
@@ -4663,9 +4663,9 @@
                 0.0
               ],
               "Scale": [
-                1.0,
-                1.0,
-                1.0
+                1.5,
+                1.5,
+                1.5
               ]
             },
             "type": "Transform"
@@ -4727,16 +4727,16 @@
     {
       "properties": {
         "Active": false,
-        "ID": 1015,
+        "ID": 500,
         "Name": "Visual_Sanjeok",
-        "ParentID": 1010,
+        "ParentID": 495,
         "components": [
           {
             "properties": {
               "Position": [
-                22.5,
+                28.799999237060547,
                 -55.0,
-                -15.600000381469727
+                -20.799999237060547
               ],
               "Rotation": [
                 0.0,
@@ -4744,9 +4744,9 @@
                 0.0
               ],
               "Scale": [
-                1.0,
-                1.0,
-                1.0
+                1.2999999523162842,
+                1.2999999523162842,
+                1.2999999523162842
               ]
             },
             "type": "Transform"
@@ -4808,15 +4808,15 @@
     {
       "properties": {
         "Active": false,
-        "ID": 1016,
+        "ID": 501,
         "Name": "Visual_Donggeurangttaeng",
-        "ParentID": 1010,
+        "ParentID": 495,
         "components": [
           {
             "properties": {
               "Position": [
-                21.899999618530273,
-                -55.0,
+                29.0,
+                -62.20000076293945,
                 0.0
               ],
               "Rotation": [
@@ -4825,9 +4825,9 @@
                 0.0
               ],
               "Scale": [
-                1.0,
-                1.0,
-                1.0
+                1.5,
+                1.5,
+                1.5
               ]
             },
             "type": "Transform"
@@ -4889,7 +4889,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1017,
+        "ID": 502,
         "Name": "Altar",
         "ParentID": -1,
         "components": [
@@ -4999,9 +4999,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1018,
+        "ID": 503,
         "Name": "baseFood",
-        "ParentID": 1017,
+        "ParentID": 502,
         "components": [
           {
             "properties": {
@@ -5080,9 +5080,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 1019,
+        "ID": 504,
         "Name": "Alta_Apple",
-        "ParentID": 1017,
+        "ParentID": 502,
         "components": [
           {
             "properties": {
@@ -5161,9 +5161,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 1020,
+        "ID": 505,
         "Name": "Alta_Pear",
-        "ParentID": 1017,
+        "ParentID": 502,
         "components": [
           {
             "properties": {
@@ -5242,9 +5242,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 1021,
+        "ID": 506,
         "Name": "Alta_Batter",
-        "ParentID": 1017,
+        "ParentID": 502,
         "components": [
           {
             "properties": {
@@ -5323,9 +5323,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 1022,
+        "ID": 507,
         "Name": "Alta_Tofu",
-        "ParentID": 1017,
+        "ParentID": 502,
         "components": [
           {
             "properties": {
@@ -5404,9 +5404,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 1023,
+        "ID": 508,
         "Name": "Alta_Sanjeok",
-        "ParentID": 1017,
+        "ParentID": 502,
         "components": [
           {
             "properties": {
@@ -5485,9 +5485,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 1024,
+        "ID": 509,
         "Name": "Alta_Donggeurangttaeng",
-        "ParentID": 1017,
+        "ParentID": 502,
         "components": [
           {
             "properties": {
@@ -5566,9 +5566,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 1025,
+        "ID": 510,
         "Name": "Alta_Ingre_Apple",
-        "ParentID": 1017,
+        "ParentID": 502,
         "components": [
           {
             "properties": {
@@ -5647,9 +5647,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 1026,
+        "ID": 511,
         "Name": "Alta_Ingre_Pear",
-        "ParentID": 1017,
+        "ParentID": 502,
         "components": [
           {
             "properties": {
@@ -5728,9 +5728,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 1027,
+        "ID": 512,
         "Name": "Alta_Ingre_Batter",
-        "ParentID": 1017,
+        "ParentID": 502,
         "components": [
           {
             "properties": {
@@ -5809,9 +5809,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 1028,
+        "ID": 513,
         "Name": "Alta_Ingre_Tofu",
-        "ParentID": 1017,
+        "ParentID": 502,
         "components": [
           {
             "properties": {
@@ -5890,9 +5890,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 1029,
+        "ID": 514,
         "Name": "Alta_Ingre_Sanjeok",
-        "ParentID": 1017,
+        "ParentID": 502,
         "components": [
           {
             "properties": {
@@ -5971,9 +5971,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 1030,
+        "ID": 515,
         "Name": "Alta_Ingre_Donggeurangttaeng",
-        "ParentID": 1017,
+        "ParentID": 502,
         "components": [
           {
             "properties": {
@@ -6052,7 +6052,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1031,
+        "ID": 516,
         "Name": "HideObject",
         "ParentID": -1,
         "components": [
@@ -6162,7 +6162,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1032,
+        "ID": 517,
         "Name": "TrapObject_Decal",
         "ParentID": -1,
         "components": [
@@ -6250,7 +6250,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1033,
+        "ID": 518,
         "Name": "TropObject_Table",
         "ParentID": -1,
         "components": [
@@ -6360,7 +6360,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1034,
+        "ID": 519,
         "Name": "---------------------------",
         "ParentID": -1,
         "components": [
@@ -6391,7 +6391,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1035,
+        "ID": 520,
         "Name": "Grid",
         "ParentID": -1,
         "components": [
@@ -6431,7 +6431,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1036,
+        "ID": 521,
         "Name": "Ghost_Adult",
         "ParentID": -1,
         "components": [
@@ -6549,7 +6549,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1037,
+        "ID": 522,
         "Name": "Ghost_Baby",
         "ParentID": -1,
         "components": [
@@ -6667,7 +6667,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1038,
+        "ID": 523,
         "Name": "Ghost_Baby",
         "ParentID": -1,
         "components": [
@@ -6785,7 +6785,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1039,
+        "ID": 524,
         "Name": "Ghost_Adult",
         "ParentID": -1,
         "components": [
@@ -6903,9 +6903,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1040,
+        "ID": 525,
         "Name": "AITarget",
-        "ParentID": 978,
+        "ParentID": 463,
         "components": [
           {
             "properties": {
@@ -6963,9 +6963,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 1041,
+        "ID": 526,
         "Name": "RingEffect",
-        "ParentID": 1032,
+        "ParentID": 517,
         "components": [
           {
             "properties": {
@@ -7022,9 +7022,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 1042,
+        "ID": 527,
         "Name": "RingEffect",
-        "ParentID": 1033,
+        "ParentID": 518,
         "components": [
           {
             "properties": {
@@ -7081,7 +7081,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1043,
+        "ID": 528,
         "Name": "---------------------------",
         "ParentID": -1,
         "components": [
@@ -7112,9 +7112,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1044,
+        "ID": 529,
         "Name": "Image_BackgroundTop",
-        "ParentID": 1046,
+        "ParentID": 531,
         "components": [
           {
             "properties": {
@@ -7199,9 +7199,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1045,
+        "ID": 530,
         "Name": "Image_BackgroundDown",
-        "ParentID": 1046,
+        "ParentID": 531,
         "components": [
           {
             "properties": {
@@ -7286,7 +7286,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1046,
+        "ID": 531,
         "Name": "UI_MiniGame",
         "ParentID": -1,
         "components": [
@@ -7351,7 +7351,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1047,
+        "ID": 532,
         "Name": "MiniGameManager",
         "ParentID": -1,
         "components": [
@@ -7388,9 +7388,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 1048,
+        "ID": 533,
         "Name": "UI_MiniGame1",
-        "ParentID": 1046,
+        "ParentID": 531,
         "components": [
           {
             "properties": {
@@ -7453,9 +7453,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 1049,
+        "ID": 534,
         "Name": "UI_MiniGame2",
-        "ParentID": 1046,
+        "ParentID": 531,
         "components": [
           {
             "properties": {
@@ -7518,9 +7518,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 1050,
+        "ID": 535,
         "Name": "UI_MiniGame3",
-        "ParentID": 1046,
+        "ParentID": 531,
         "components": [
           {
             "properties": {
@@ -7583,9 +7583,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1051,
+        "ID": 536,
         "Name": "Image_ESC",
-        "ParentID": 1044,
+        "ParentID": 529,
         "components": [
           {
             "properties": {
@@ -7670,9 +7670,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 1052,
+        "ID": 537,
         "Name": "Image_ProgressBar",
-        "ParentID": 1048,
+        "ParentID": 533,
         "components": [
           {
             "properties": {
@@ -7757,9 +7757,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 1053,
+        "ID": 538,
         "Name": "Image_SpaceBar",
-        "ParentID": 1048,
+        "ParentID": 533,
         "components": [
           {
             "properties": {
