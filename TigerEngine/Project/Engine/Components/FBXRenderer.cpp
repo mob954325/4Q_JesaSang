@@ -35,7 +35,8 @@ RTTR_REGISTRATION
         .property("Alpha", 	        &FBXRenderer::GetAlpha,         &FBXRenderer::SetAlpha)
         .property("Emissive", 	    &FBXRenderer::GetEmissive,		&FBXRenderer::SetEmissive)
         .property("Roughness", 	    &FBXRenderer::GetRoughness,		&FBXRenderer::SetRoughness)
-        .property("Metalic", 		&FBXRenderer::GetMatalic,		&FBXRenderer::SetMatalic)
+        .property("Metalic",       &FBXRenderer::GetMatalic,        &FBXRenderer::SetMatalic)
+        .property("isroughnessFromShininess", &FBXRenderer::GetRoughnessFromShininess, &FBXRenderer::SetRoughnessFromShininess)
 
         .property("UseDiffuseOverride", 	&FBXRenderer::GetUseDiffuseOverride,	&FBXRenderer::SetUseDiffuseOverride)
         .property("UseEmissiveOverride", 	&FBXRenderer::GetUseEmissiveOverride,	&FBXRenderer::SetUseEmissiveOverride)
@@ -233,6 +234,13 @@ void FBXRenderer::SetMatalic(float value)
 
     for (auto& material : fbxData->GetMesh())
         material.GetMaterial().metallicFactor = factor;
+}
+
+void FBXRenderer::SetRoughnessFromShininess(bool flag)
+{
+    isRoughnessFromShininess = flag;
+    for (auto& material : fbxData->GetMesh())
+        material.GetMaterial().roughnessFromShininess = isRoughnessFromShininess;
 }
 
 void FBXRenderer::SetUseDiffuseOverride(bool flag)
