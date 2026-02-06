@@ -5,6 +5,9 @@
 #include "EngineSystem/SceneSystem.h"
 #include "System/InputSystem.h"
 
+#include "Components/RectTransform.h"
+#include "Components/UI/Image.h"
+
 #include "../Item/Item.h"
 #include "Game/IMinigame.h"
 #include "Game/Game_Cutting.h"

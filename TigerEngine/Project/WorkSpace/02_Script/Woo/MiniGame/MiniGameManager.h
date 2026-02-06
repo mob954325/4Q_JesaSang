@@ -4,6 +4,8 @@
 #include <directxtk/Keyboard.h>
 
 class IItem;
+class RectTransform;
+class Image;
 
 /* 
     [ MiniGameManager Script Component ] <Singleton>
@@ -13,6 +15,9 @@ class IItem;
     Singleton Script Component로,
     플레이어가 조리대와 인터랙션 할 때 Instance에 접근하여 게임을 시작합니다.
     Minigame은 총 3가지로, Player가 소지한 음식 재료에 따라 다른 미니 게임이 진행됩니다.
+
+    - UI - 
+    Backgournd : 1500(아래) <-> 550
 */
 
 class MiniGameManager :  public ScriptComponent
@@ -26,6 +31,9 @@ private:
     // game
     std::unique_ptr<IMiniGame> currentMiniGame;
     std::unique_ptr<IItem> curIngredient;
+
+    // UI
+    RectTransform* miniGameParent;
 
 public:
     // data
