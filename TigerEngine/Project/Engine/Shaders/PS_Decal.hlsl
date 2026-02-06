@@ -32,7 +32,7 @@ float RingMask(float2 uv, float t01)
     float d = abs(r - radius);
     float ring = 1.0f - smoothstep(ringThickness, ringThickness + ringFeather, d);
 
-    // 바깥쪽으로 갈수록 약간 페이드(선택)
+    // 바깥쪽으로 갈수록 약간 페이드
     float outer = 1.0f - smoothstep(ringMaxRadius, ringMaxRadius + ringFeather, r);
 
     // t01이 1에 가까워질수록 0으로 떨어지게
@@ -42,24 +42,10 @@ float RingMask(float2 uv, float t01)
     return ring * outer * endFade;
 }
 
-float RingMaskMulti(float2 uv, float t01)
-{
-    float m = 0.0f;
-
-    // 5개의 링이 서로 간격 두고 이동
-    m += RingMask(uv, frac(t01 + 0.0f));
-    m += RingMask(uv, frac(t01 + 0.2f));
-    m += RingMask(uv, frac(t01 + 0.4f));
-    m += RingMask(uv, frac(t01 + 0.6f));
-    m += RingMask(uv, frac(t01 + 0.8f));
-
-    return saturate(m);
-}
-
 float RingMaskContinuous(float2 uv, float base01)
 {
-    // 링 개수(연속 파동 수)
-    const int RING_COUNT = 3; // 2~5 사이 추천
+    // 링 개수
+    const int RING_COUNT = 5;
     float m = 0.0f;
 
     [unroll]
@@ -67,6 +53,53 @@ float RingMaskContinuous(float2 uv, float base01)
     {
         float phase = (float) i / (float) RING_COUNT;
         m += RingMask(uv, frac(base01 + phase));
+    }
+
+    return saturate(m);
+}
+
+float RingMaskContinuous_SpawnLimited(float2 uv, float tRaw)
+{
+    const int RING_COUNT = 5;
+    float m = 0.0f;
+
+    float maxR = max(ringMaxRadius, 0.0001f);
+    float spd = max(ringSpeed, 0.0001f);
+
+    // 한 사이클 시간(반경이 maxR만큼 커지는 시간)
+    float Tcycle = maxR / spd;
+
+    // 정규화 진행량 (1 증가 = 한 사이클)
+    float u = tRaw / Tcycle;
+
+    // 링이 막 태어날 때 살짝 부드럽게
+    const float spawnFadeInTime = 0.12f;
+
+    [unroll]
+    for (int i = 0; i < RING_COUNT; ++i)
+    {
+        float phase = (float) i / (float) RING_COUNT; // 0, 0.2, 0.4, 0.6, 0.8
+
+        // u - phase 로 바꿔서, phase가 큰 링은 늦게 스폰되게
+        float x = u - phase;
+
+        // 스폰 전이면 표시하지 않음 (처음에 5개가 한번에 뜨는 현상 제거)
+        float started = step(0.0f, x);
+
+        float cycleIdx = floor(x);  // 0,1,2... (x>=0일 때만 의미 있음)
+        float t01 = frac(x);        // 사이클 내 진행(0~1)
+
+        // 이 링이 생성된 절대시간
+        float spawnTime = (cycleIdx + phase) * Tcycle;
+
+        // duration 이후 생성되는 링은 컷
+        float alive = step(spawnTime, ringDuration);
+
+        // 생성 직후 페이드 인
+        float ringAge = tRaw - spawnTime;
+        float birthFade = smoothstep(0.0f, spawnFadeInTime, ringAge);
+
+        m += RingMask(uv, t01) * started * alive * birthFade;
     }
 
     return saturate(m);
@@ -106,19 +139,20 @@ float4 main(PS_Position_INPUT input) : SV_TARGET
     }
     else // RingEffect
     {
-        float t = max(time - ringStartTime, 0.0f);
+        float tRaw = time - ringStartTime;
+        if (tRaw < 0.0f)
+            discard;
 
-        // radius speed
-        float radius = t * ringSpeed;
+        // 링은 계속 이동
+        float maxR = max(ringMaxRadius, 0.0001f);
+        float spd = max(ringSpeed, 0.0001f);
 
-        // maxRadius 단위로 반복 → 0~1
-        float base01 = frac(radius / max(ringMaxRadius, 0.0001f));
-
-        // 연속 링 합성
-        float mask = RingMaskContinuous(uvDecal, base01);
-
-        // 루프 경계페이드
+        // 루프 경계 페이드
+        float base01 = frac((tRaw * spd) / maxR);
         float cycleFade = smoothstep(0.0f, 0.05f, base01) * (1.0f - smoothstep(0.95f, 1.0f, base01));
+
+        // spawn 제한 + 링 이동
+        float mask = RingMaskContinuous_SpawnLimited(uvDecal, tRaw);
 
         float a = mask * cycleFade * opacity;
         if (a <= 0.001f)
