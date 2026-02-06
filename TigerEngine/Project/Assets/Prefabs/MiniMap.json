@@ -2,7 +2,7 @@
   "prefab": [
     {
       "Active": true,
-      "ID": 169,
+      "ID": 3838,
       "Name": "UI_MiniMap_Controller",
       "ParentID": -1,
       "components": [
@@ -95,9 +95,9 @@
     },
     {
       "Active": true,
-      "ID": 168,
+      "ID": 3839,
       "Name": "UI_MiniMap_ItemPing_06",
-      "ParentID": 169,
+      "ParentID": 3838,
       "components": [
         {
           "properties": {
@@ -121,7 +121,7 @@
         },
         {
           "properties": {
-            "Active": true,
+            "Active": false,
             "color": [
               1.0,
               1.0,
@@ -179,9 +179,9 @@
     },
     {
       "Active": true,
-      "ID": 167,
+      "ID": 3840,
       "Name": "UI_MiniMap_ItemPing_05",
-      "ParentID": 169,
+      "ParentID": 3838,
       "components": [
         {
           "properties": {
@@ -205,7 +205,7 @@
         },
         {
           "properties": {
-            "Active": true,
+            "Active": false,
             "color": [
               1.0,
               1.0,
@@ -263,9 +263,9 @@
     },
     {
       "Active": true,
-      "ID": 166,
+      "ID": 3841,
       "Name": "UI_MiniMap_ItemPing_04",
-      "ParentID": 169,
+      "ParentID": 3838,
       "components": [
         {
           "properties": {
@@ -289,7 +289,7 @@
         },
         {
           "properties": {
-            "Active": true,
+            "Active": false,
             "color": [
               1.0,
               1.0,
@@ -347,9 +347,9 @@
     },
     {
       "Active": true,
-      "ID": 165,
+      "ID": 3842,
       "Name": "UI_MiniMap_ItemPing_03",
-      "ParentID": 169,
+      "ParentID": 3838,
       "components": [
         {
           "properties": {
@@ -373,7 +373,7 @@
         },
         {
           "properties": {
-            "Active": true,
+            "Active": false,
             "color": [
               1.0,
               1.0,
@@ -431,9 +431,9 @@
     },
     {
       "Active": true,
-      "ID": 164,
+      "ID": 3843,
       "Name": "UI_MiniMap_ItemPing_02",
-      "ParentID": 169,
+      "ParentID": 3838,
       "components": [
         {
           "properties": {
@@ -457,7 +457,7 @@
         },
         {
           "properties": {
-            "Active": true,
+            "Active": false,
             "color": [
               1.0,
               1.0,
@@ -515,9 +515,9 @@
     },
     {
       "Active": true,
-      "ID": 163,
+      "ID": 3844,
       "Name": "UI_MiniMap_ItemPing_01",
-      "ParentID": 169,
+      "ParentID": 3838,
       "components": [
         {
           "properties": {
@@ -541,7 +541,7 @@
         },
         {
           "properties": {
-            "Active": true,
+            "Active": false,
             "color": [
               1.0,
               1.0,
@@ -599,9 +599,9 @@
     },
     {
       "Active": true,
-      "ID": 161,
+      "ID": 3845,
       "Name": "UI_MiniMap_MainPing",
-      "ParentID": 169,
+      "ParentID": 3838,
       "components": [
         {
           "properties": {
@@ -683,9 +683,9 @@
     },
     {
       "Active": false,
-      "ID": 160,
+      "ID": 3846,
       "Name": "UI_MiniMap_Piece_06",
-      "ParentID": 169,
+      "ParentID": 3838,
       "components": [
         {
           "properties": {
@@ -767,9 +767,9 @@
     },
     {
       "Active": true,
-      "ID": 159,
+      "ID": 3847,
       "Name": "UI_MiniMap_Piece_05",
-      "ParentID": 169,
+      "ParentID": 3838,
       "components": [
         {
           "properties": {
@@ -851,9 +851,9 @@
     },
     {
       "Active": true,
-      "ID": 158,
+      "ID": 3848,
       "Name": "UI_MiniMap_Piece_04",
-      "ParentID": 169,
+      "ParentID": 3838,
       "components": [
         {
           "properties": {
@@ -935,9 +935,9 @@
     },
     {
       "Active": true,
-      "ID": 157,
+      "ID": 3849,
       "Name": "UI_MiniMap_Piece_03",
-      "ParentID": 169,
+      "ParentID": 3838,
       "components": [
         {
           "properties": {
@@ -1019,9 +1019,9 @@
     },
     {
       "Active": true,
-      "ID": 156,
+      "ID": 3850,
       "Name": "UI_MiniMap_Piece_02",
-      "ParentID": 169,
+      "ParentID": 3838,
       "components": [
         {
           "properties": {
@@ -1103,9 +1103,9 @@
     },
     {
       "Active": true,
-      "ID": 155,
+      "ID": 3851,
       "Name": "UI_MiniMap_Piece_01",
-      "ParentID": 169,
+      "ParentID": 3838,
       "components": [
         {
           "properties": {
@@ -1187,9 +1187,9 @@
     },
     {
       "Active": true,
-      "ID": 154,
+      "ID": 3852,
       "Name": "UI_MiniMap_GaugeFill",
-      "ParentID": 169,
+      "ParentID": 3838,
       "components": [
         {
           "properties": {
@@ -1271,9 +1271,9 @@
     },
     {
       "Active": true,
-      "ID": 153,
+      "ID": 3853,
       "Name": "UI_MiniMap_GaugeBG",
-      "ParentID": 169,
+      "ParentID": 3838,
       "components": [
         {
           "properties": {
@@ -1355,9 +1355,9 @@
     },
     {
       "Active": false,
-      "ID": 152,
+      "ID": 3854,
       "Name": "UI_MiniMap_Complete",
-      "ParentID": 169,
+      "ParentID": 3838,
       "components": [
         {
           "properties": {
@@ -1439,9 +1439,9 @@
     },
     {
       "Active": true,
-      "ID": 151,
+      "ID": 3855,
       "Name": "UI_MiniMap_Base",
-      "ParentID": 169,
+      "ParentID": 3838,
       "components": [
         {
           "properties": {
