@@ -84,7 +84,7 @@ public:
 
     const auto& GetOpaqueQueue()  const { return opaqueQueue; }
     const auto& GetTransparentQueue()  const { return transparentQueue; }
-    const auto& GetUIRenderQueue() const { return uiRenderQueue; }
+    auto& GetUIRenderQueue() { return uiRenderQueue; } // std::sort로 정렬함.
 
     void Clear()
     {

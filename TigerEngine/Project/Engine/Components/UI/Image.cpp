@@ -34,7 +34,8 @@ RTTR_REGISTRATION
         .property("isMouseCheck",   &Image::GetMouseCheck,  &Image::SetMouseCheck)
         .property("imageType",      &Image::GetType,        &Image::SetType)
         .property("drawSpacetype",  &Image::GetDrawSpace,  &Image::SetDrawSpace)
-        .property("isMouseCheck",   &Image::GetMouseCheck,  &Image::SetMouseCheck);
+        .property("isMouseCheck",   &Image::GetMouseCheck,  &Image::SetMouseCheck)
+        .property("zOrder",         &Image::GetZOrder, &Image::SetZOrder);
 }
 
 void Image::OnInitialize()
@@ -104,6 +105,8 @@ void Image::OnRender(RenderQueue& queue)
     else
         data.isWorldSpace = false;
 
+    data.zOrder = zOrder;
+
     queue.AddUIRenderQueue(data); // NOTE : 이러면 sort를 renderpass에서 처리하면되니까 canvas는 왜 필요한거지
 }
 
@@ -115,6 +118,16 @@ void Image::SetMouseCheck(bool value)
 bool Image::GetMouseCheck() const
 {
     return isMouseCheck;
+}
+
+int Image::GetZOrder() const
+{
+    return zOrder;
+}
+
+void Image::SetZOrder(int v)
+{
+    zOrder = v;
 }
 
 void Image::ChangeData(std::string path)

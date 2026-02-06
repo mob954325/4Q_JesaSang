@@ -4,6 +4,7 @@
 #include "../../Object/GameObject.h"
 #include "../../Components/UI/TextUI.h"
 #include "../../EngineSystem/CameraSystem.h"
+#include <algorithm>
 
 void UIRenderPass::Init(const ComPtr<ID3D11Device>& device)
 {
@@ -29,6 +30,13 @@ void UIRenderPass::Execute(ComPtr<ID3D11DeviceContext>& context, RenderQueue& qu
     context->OMSetDepthStencilState(sm.disableDSS.Get(), 1);
 
     auto& renderQueue = queue.GetUIRenderQueue();
+
+    std::sort(renderQueue.begin(), renderQueue.end(),
+        [](const ImageUIRenderItem& a, const ImageUIRenderItem& b)
+        {
+            return a.zOrder < b.zOrder;
+        });
+
     for (auto& item : renderQueue)
     {
         Matrix mvp;

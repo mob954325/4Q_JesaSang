@@ -52,6 +52,9 @@ public:
     const std::string& GetPath() const { return path; }
     void SetPath(const std::string& path) { this->path = path; }
 
+    int GetZOrder() const;
+    void SetZOrder(int v);
+
     void ChangeData(std::string path);
 
 private:
@@ -75,4 +78,6 @@ private:
     bool isMouseHover = false;  // 마우스가 겹치는지 확인
     bool prevLeft = false;      // 마우스 이전에 클릭했는지 저장 변수
     void CheckMouseHover();
+
+    int zOrder = 0; // 해당 값을 item에 넘겨서 한 번 정렬한 다음에 출력한다.
 };

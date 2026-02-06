@@ -39,6 +39,9 @@ public:
     nlohmann::json Serialize() override;
     void Deserialize(nlohmann::json data) override;
 
+    int GetZOrder() const;
+    void SetZOrder(int v);
+
 // Private:
     // 자원
     std::shared_ptr<TextResource> resource{}; // atlas
@@ -60,4 +63,6 @@ public:
 
     std::vector<UIQuadVertex> cpuVerts{};
     int indexCount = 0;
+
+    int zOrder = 0;
 };

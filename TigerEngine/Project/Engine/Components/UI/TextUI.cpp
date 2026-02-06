@@ -26,7 +26,8 @@ rttr::registration::class_<TextUI>("TextUI")
                 .property("atlasW", &TextUI::atlasW)
                 .property("atlasH", &TextUI::atlasH)
                 .property("paddingPx", &TextUI::paddingPx)
-                .property("drawSpacetype", &TextUI::GetDrawSpace, &TextUI::SetDrawSpace);
+                .property("drawSpacetype", &TextUI::GetDrawSpace, &TextUI::SetDrawSpace)
+                .property("zOrder", &TextUI::GetZOrder, &TextUI::SetZOrder);
 }
 
 void TextUI::OnRender(RenderQueue& queue)
@@ -48,6 +49,8 @@ void TextUI::OnRender(RenderQueue& queue)
         item.isWorldSpace = true;
     else
         item.isWorldSpace = false;
+
+    item.zOrder = zOrder;
 
     queue.AddUIRenderQueue(item);
 
@@ -169,4 +172,14 @@ void TextUI::Deserialize(nlohmann::json data)
 
     LoadFontAtlas(fontPath, atlasW, atlasH, paddingPx);
     geometryDirty = true;
+}
+
+int TextUI::GetZOrder() const
+{
+    return zOrder;
+}
+
+void TextUI::SetZOrder(int v)
+{
+    zOrder = v;
 }
