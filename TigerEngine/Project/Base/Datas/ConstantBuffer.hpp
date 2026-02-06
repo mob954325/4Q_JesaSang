@@ -226,7 +226,21 @@ struct alignas(16) DecalCB
 
     float opacity;
     float upThreshold;
-    Vector2 padding;
+    int   decalType;      // 0=TextureMap, 1=RingEffect
+    float pad0;
+
+    // ring
+    float ringStartTime;
+    float ringDuration;
+    float ringMaxRadius;
+    float ringSpeed;
+
+    float ringThickness;
+    float ringFeather;
+    float pad1;
+
+    Vector3 ringColor;
+    float pad2;
 };
 
 // UI가 공용으로 사용할 상수 버퍼 CB -> b11

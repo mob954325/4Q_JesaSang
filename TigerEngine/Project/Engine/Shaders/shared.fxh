@@ -238,13 +238,26 @@ cbuffer PickingCB : register(b9)
 cbuffer DecalCB : register(b10)
 {
     matrix decalInvWorld;
-    
+
     float2 tiling;
     float2 offset;
 
     float opacity;
     float upThreshold;
-    float2 padding18;
+    int decalType;
+    float pad0;
+
+    float ringStartTime;
+    float ringDuration;
+    float ringMaxRadius;
+    float ringSpeed;
+    
+    float ringThickness;
+    float ringFeather;
+    float pad1;
+    
+    float3 ringColor;
+    float pad2;
 }
 
 cbuffer UICBData : register(b11)

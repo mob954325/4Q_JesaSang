@@ -4,6 +4,9 @@
 #include "Object/GameObject.h"
 #include "../Player/PlayerController.h"
 #include "EngineSystem/SceneSystem.h"
+#include "Components/Decal.h"
+#include "Components/Transform.h"
+#include "System/TimeSystem.h"
 
 REGISTER_COMPONENT(TrapObject)
 
@@ -16,6 +19,9 @@ RTTR_REGISTRATION
 
 void TrapObject::OnStart()
 {
+    ringEffect = this->GetOwner()->GetChildByName("RingEffect")->GetOwner()->GetComponent<Decal>();
+    if (!ringEffect)
+        cout << "[TrapObject] Missing Decal Component!" << endl;
 }
 
 void TrapObject::OnUpdate(float delta)
@@ -80,7 +86,9 @@ void TrapObject::OnCCTTriggerEnter(CharacterControllerComponent* other)
 
 void TrapObject::StartTriggerWave()
 {
-    // TODO :: 파장 연출
+    // 링 파동 이펙트
+    auto curTime = GameTimer::Instance().TotalTime();
+    ringEffect->StartRingEffect(curTime);
 
     // AI
     NotifyAIInRange();
@@ -104,14 +112,4 @@ void TrapObject::NotifyAIInRange()
 
     //auto baby_AIs = SceneSystem::Instance().GetCurrentScene()->GetGameObjectsByName("baby_AIs");
     //auto ancestor_AIs = SceneSystem::Instance().GetCurrentScene()->GetGameObjectsByName("ancestor_AIs");
-
-
-    // test
-
-    auto searchObect = SceneSystem::Instance().GetCurrentScene()->GetGameObjectsByName("SearchObject");
-    if (searchObect.empty()) cout << "searchObects : empty!" << endl;
-    else
-    {
-        cout << "searchObect cout : " << searchObect.size() << endl;
-    }
 }
