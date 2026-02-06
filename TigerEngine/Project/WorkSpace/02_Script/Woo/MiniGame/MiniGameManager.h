@@ -37,6 +37,14 @@ private:
     GameObject* miniGame1_Parent;       // on, off
     GameObject* miniGame2_Parent;       // on, off
     GameObject* miniGame3_Parent;       // on, off
+    // 각 miniGame 안의 UI controll은 각 IMinigame 안에서 선언하고 제어하기.
+
+    // popup 연출
+    Vector3 popupHiddenPos;
+    Vector3 popupShownPos;
+    Vector3 popupTargetPos;
+    float popupSpeed = 12.0f;
+    bool isPopupMoving = false;
 
 public:
     // data
@@ -66,6 +74,11 @@ private:
 
     // update
     void StopChecking();
+
+    // 연출
+    void UpdatePopup(float delta);
+    void ShowPopup();
+    void HidePopup();
 
 public:
     // 외부 call fucns..

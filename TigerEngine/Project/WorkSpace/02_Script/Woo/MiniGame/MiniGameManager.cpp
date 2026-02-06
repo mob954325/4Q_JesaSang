@@ -41,10 +41,20 @@ void MiniGameManager::OnStart()
     {
         cout << "[MiniGameManager] Missing ui objects...!!!" << endl;
     }
+
+    // init
+    popupHiddenPos = Vector3(960, 1500, 0);
+    popupShownPos = Vector3(960, 550, 0);
+
+    popupTargetPos = popupHiddenPos;
+    miniGameParent->SetPos(popupHiddenPos);
 }
 
 void MiniGameManager::OnUpdate(float delta)
 {
+    // popup move
+    UpdatePopup(delta);
+
     // game update
     if (isPlaying && currentMiniGame)
     {
@@ -128,8 +138,8 @@ void MiniGameManager::StartMiniGame(std::unique_ptr<IItem> ingredient)
     currentMiniGame->StartGame();
     isPlaying = true;
 
-    // ui
-    miniGameParent->SetPos(miniGameParent->GetPos() + Vector3(0, -1000, 0));
+    // popup ui
+    ShowPopup();
 }
 
 // 미니게임 종료시 (성공/실패+패널티)
@@ -137,8 +147,8 @@ void MiniGameManager::EndMiniGame(bool isSuccess)
 {
     isPlaying = false;
 
-    // ui
-    miniGameParent->SetPos(miniGameParent->GetPos() + Vector3(0,1000,0));
+    // popup ui
+    HidePopup();
 
     // end game
     if (currentMiniGame)
@@ -167,6 +177,9 @@ void MiniGameManager::EndMiniGame(bool isSuccess)
 void MiniGameManager::StopMiniGame()
 {
     isPlaying = false;
+
+    // popup ui
+    HidePopup();
 
     // end game
     if (currentMiniGame)
@@ -197,4 +210,31 @@ void MiniGameManager::StopChecking()
     {
         StopMiniGame();
     }
+}
+
+void MiniGameManager::UpdatePopup(float delta)
+{
+    if (!miniGameParent) return;
+
+    // 항상 부드럽게 이동시키고 싶으면 if 제거해도 됨
+    Vector3 cur = miniGameParent->GetPos();
+    Vector3 next = Vector3::Lerp(cur, popupTargetPos, std::min(1.0f, popupSpeed * delta));
+    miniGameParent->SetPos(next);
+
+    // 도착 판정(오차 범위)
+    Vector3 diff = popupTargetPos - next;
+    if (diff.Length() < 0.5f)
+    {
+        miniGameParent->SetPos(popupTargetPos);
+    }
+}
+
+void MiniGameManager::ShowPopup()
+{
+    popupTargetPos = popupShownPos;
+}
+
+void MiniGameManager::HidePopup()
+{
+    popupTargetPos = popupHiddenPos;
 }
