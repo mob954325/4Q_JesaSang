@@ -37,6 +37,9 @@ public:
     void SetRoughness(float value);
 	float GetMatalic() { return metalicFactor; }
     void SetMatalic(float value);
+
+    bool GetRoughnessFromShininess() { return isRoughnessFromShininess; }
+    void SetRoughnessFromShininess(bool flag);
 	
     bool GetUseDiffuseOverride() { return useDiffuseOverride; }
     void SetUseDiffuseOverride(bool flag);
@@ -86,6 +89,8 @@ private:
     Vector3 emissiveFactor  = { 1,1,1 };
 	float   roughnessFactor = 1.0f;
 	float   metalicFactor   = 1.0f;
+
+    bool isRoughnessFromShininess = false;      // roughness 반전 flag
 
     bool useDiffuseOverride   = false;
     bool useEmissiveOverride  = false;
