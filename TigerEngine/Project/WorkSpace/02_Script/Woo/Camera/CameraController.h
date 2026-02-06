@@ -87,7 +87,7 @@ private:
 
 public:
     void OnStart() override;
-    void OnLateUpdate(float delta) override;
+    void OnFixedUpdate(float delta) override;
     void OnDestory() override;
 
     nlohmann::json Serialize();
