@@ -8,6 +8,9 @@ void Player_SitWalk::Enter()
     // set speed
     player->curSpeed = player->sitSpeed;
 
+    // set animation
+    player->animController->ChangeState("Sit");
+
     // set sense radius
     player->curSenseRadius = player->sitSenseRadius;
     if (player->inventory->GetCurItemType() == ItemType::Ingredient)

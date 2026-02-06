@@ -8,6 +8,9 @@ void Player_Run::Enter()
     // set speed
     player->curSpeed = player->runSpeed;
 
+    // set animation
+    player->animController->ChangeState("Run");
+
     // set sense radius
     player->curSenseRadius = player->runSenseRadius;
     if (player->inventory->GetCurItemType() == ItemType::Ingredient)

@@ -10,6 +10,9 @@ void Player_Die::Enter()
 
     // set sense radius
     player->curSenseRadius = 0;
+
+    // set animation
+    player->animController->ChangeState("Hit");
 }
 
 void Player_Die::ChangeStateLogic()

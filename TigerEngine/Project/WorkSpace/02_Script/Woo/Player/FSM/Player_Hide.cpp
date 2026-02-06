@@ -7,6 +7,9 @@
 
 void Player_Hide::Enter()
 {
+    // set animation
+    player->animController->ChangeState("Idle");
+
     // player render off
     player->fbxRenderer->SetActive(false);
     player->visualizer->VisualRenderOff();
