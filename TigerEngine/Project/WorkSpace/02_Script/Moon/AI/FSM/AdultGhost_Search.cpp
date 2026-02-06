@@ -94,7 +94,7 @@ void AdultGhost_Search::FixedUpdate(float deltaTime)
 
 void AdultGhost_Search::Exit()
 {
-    hasTarget = false;
+    hasSearchTarget = false;
     arrived = false;
 
     agent->externalControl = false; 
