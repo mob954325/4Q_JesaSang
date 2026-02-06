@@ -16,10 +16,15 @@ RTTR_REGISTRATION
 void AITarget::OnStart()
 {
     tr = this->GetOwner()->GetTransform();
+    playerTr = this->GetOwner()->GetParent();
+
+    Vector3 upatePos = playerTr->GetWorldPosition() + Vector3(0, 150, 0);
+    tr->SetPosition(upatePos);
+    GetOwner()->GetComponent<PhysicsComponent>()->SyncToPhysics();
 }
 void AITarget::OnFixedUpdate(float delta)
 {
-    Vector3 upatePos = tr->GetWorldPosition() + Vector3(0, 50, 0);
+    Vector3 upatePos = playerTr->GetWorldPosition() + Vector3(0, 150, 0);
     tr->SetPosition(upatePos);
     GetOwner()->GetComponent<PhysicsComponent>()->SyncToPhysics();
 }

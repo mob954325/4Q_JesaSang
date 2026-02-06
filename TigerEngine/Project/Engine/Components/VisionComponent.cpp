@@ -39,48 +39,51 @@ void VisionComponent::Disable_Inner()
 
 // -----------------------------------------------------------
 
-// [ 타겟이 시야 내에 있는지 확인 ]
-bool VisionComponent::CheckVision( GameObject* target, float fov, float maxDistance)
+bool VisionComponent::CheckVision(
+    GameObject* target,
+    float fov,
+    float maxDistance)
 {
     if (!target) return false;
 
-    // 디버그용 값 저장
+    // 디버그 위한 세팅 저장 
     m_LastDebug.fov = fov;
     m_LastDebug.dist = maxDistance;
     m_LastDebug.valid = true;
-    
 
-    auto* selfTr = GetOwner()->GetTransform();  
-    auto* targetTr = target->GetTransform();   
+    auto* selfTr = GetOwner()->GetTransform();  //GetOwner()->GetTransform();
+    auto* targetTr = target->GetTransform();    //target->GetTransform();
 
-
-    // 시야 원점 & 전방 벡터 
     Vector3 origin = selfTr->GetWorldPosition();
+    origin.y += 50.0f;
     Vector3 forward = selfTr->GetForward();
-    origin.y += eyeHigh; // 눈 위치 보정
 
-
-    // 타겟까지 방향 & 거리
     Vector3 toTarget = targetTr->GetWorldPosition() - origin;
     float dist = toTarget.Length();
-    toTarget.y = origin.y; // FOV 평면 기준!! : 여기도 해줬어야 했음 
-    if (dist > maxDistance) return false;
 
+    toTarget.y = origin.y;
+
+    if (dist > maxDistance) return false;
     toTarget.Normalize();
 
 
-    // FOV 체크 (X-Z 평면 기준)
-    Vector3 flatForward = forward; flatForward.y = 0; flatForward.Normalize();
-    Vector3 flatToTarget = toTarget; flatToTarget.y = 0; flatToTarget.Normalize();
+    // FOV 체크 
+    Vector3 flatForward = forward;
+    flatForward.y = 0;
+    flatForward.Normalize();
+
+    Vector3 flatToTarget = toTarget;
+    flatToTarget.y = 0;
+    flatToTarget.Normalize();
+
     float dot = flatForward.Dot(flatToTarget);
     float limit = cosf(Deg2Rad(fov * 0.5f));
     if (dot < limit) return false;
 
-
-    // PhysX Raycast
+    // PhysX
     PxVec3 originPx = ToPx(origin);
     PxVec3 dirPx(toTarget.x, toTarget.y, toTarget.z);
-    float maxDistPx = maxDistance; 
+    float maxDistPx = maxDistance; // *WORLD_TO_PHYSX;
 
     std::vector<RaycastHit> hits;
     if (!PhysicsSystem::Instance().Raycast(
@@ -95,13 +98,14 @@ bool VisionComponent::CheckVision( GameObject* target, float fov, float maxDista
         return false;
     }
 
-
     // 거리 순 정렬 (가장 가까운 히트가 front)
     std::sort(hits.begin(), hits.end(),
-        [](const RaycastHit& a, const RaycastHit& b) { return a.distance < b.distance; });
+        [](const RaycastHit& a, const RaycastHit& b)
+        {
+            return a.distance < b.distance;
+        });
 
-
-    // 첫 번째 유효 히트 찾기 
+    // 첫 번째 유효 히트 찾기
     PhysicsComponent* firstComp = nullptr;
     for (auto& hit : hits)
     {
@@ -111,13 +115,12 @@ bool VisionComponent::CheckVision( GameObject* target, float fov, float maxDista
         if (isTrigger) continue; // Trigger 무시
 
         if (!PhysicsLayerMatrix::CanCollide(CollisionLayer::Default, hit.component->GetLayer()))
-            continue; // 충돌 가능 레이어 
+            continue;
 
-        // 디버그 
-        //std::cout << "  Object: " << hit.component->GetOwner()->GetName()
-        //    << " | Layer: " << (uint32_t)hit.component->GetLayer()
-        //    << " | Distance: " << hit.distance
-        //    << std::endl;
+        std::cout << "  Object: " << hit.component->GetOwner()->GetName()
+            << " | Layer: " << (uint32_t)hit.component->GetLayer()
+            << " | Distance: " << hit.distance
+            << std::endl;
 
         firstComp = hit.component;
         break;
@@ -129,33 +132,31 @@ bool VisionComponent::CheckVision( GameObject* target, float fov, float maxDista
         std::cout << "[Vision] Ray hit -> Object: " << obj->GetName() << " | Layer: " << (uint32_t)firstComp->GetLayer() << std::endl;
     }
 
-
     // 타겟과 첫 히트 객체 비교
     return firstComp && firstComp->GetOwner() == target;
 }
 
 
-// [ 시야 디버그 그리기 ]
+
 void VisionComponent::DrawDebugVision()
 {
     if (!m_LastDebug.valid) return;
 
     auto* tr = GetOwner()->GetTransform();
     Vector3 origin = tr->GetWorldPosition();
-    origin.y += eyeHigh;               // CheckVision과 동일한 눈 위치 
+    origin.y += 50.0f;               // CheckVision과 동일
     Vector3 forward = tr->GetForward();
     Vector3 right = tr->GetRight();
 
     // PhysX 변환
     PxVec3 originPx = ToPx(origin);
-    float maxDistPx = m_LastDebug.dist;
+    float maxDistPx = m_LastDebug.dist * WORLD_TO_PHYSX;
 
-    const int SEGMENTS = 32; // 시야 원 분할 수
+    const int SEGMENTS = 32;
     float halfRad = Deg2Rad(m_LastDebug.fov * 0.5f);
 
     XMVECTOR o = XMVectorSet(origin.x, origin.y + 5.0f, origin.z, 1);
 
-    // FOV 원 시뮬레이션
     for (int i = 0; i <= SEGMENTS; ++i)
     {
         float t = -halfRad + (halfRad * 2.f) * (float(i) / SEGMENTS);
@@ -176,11 +177,11 @@ void VisionComponent::DrawDebugVision()
             hits,
             CollisionLayer::Default,          
             QueryTriggerInteraction::Ignore,
-            false // BLOCK 하나
+            false                             // BLOCK 하나
         ))
         {
-            // 길이 조절
-            drawDist = hits[0].distance; 
+            // PhysX → World 단위 변환
+            drawDist = hits[0].distance * PHYSX_TO_WORLD;
         }
 
         XMVECTOR end = o + XMVectorSet(dir.x, dir.y, dir.z, 0) * drawDist;
