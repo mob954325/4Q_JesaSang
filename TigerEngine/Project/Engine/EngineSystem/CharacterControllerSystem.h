@@ -21,7 +21,8 @@ public:
     CharacterControllerComponent* owner = nullptr;
 
     virtual void onShapeHit(const PxControllerShapeHit& hit) override;
-    virtual void onControllerHit(const PxControllersHit&) override {}
+    virtual void onControllerHit(const PxControllersHit&) override;
+
     virtual void onObstacleHit(const PxControllerObstacleHit&) override {}
 };
 
