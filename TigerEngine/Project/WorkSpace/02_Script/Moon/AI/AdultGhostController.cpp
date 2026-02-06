@@ -7,6 +7,7 @@
 
 #include "FSM/IAdultGhostState.h"
 #include "FSM/AdultGhost_Patrol.h"
+#include "FSM/AdultGhost_Chase.h"
 
 
 REGISTER_COMPONENT(AdultGhostController)
@@ -44,19 +45,8 @@ void AdultGhostController::OnStart()
         return;
     }
 
-    // -----------------------------------------------------------
-    // [ 임시 코드 ]
-    // -----------------------------------------------------------
-
-    //// 순찰 : 목표 좌표 찾기 
-    //agent->SetWaitTime(3.0f); // 대기 시간 
-    //agent->PickRandomTarget();
-
     // 기척 감지(순찰 → 탐색) : 시야 밖에서 기척(발소리 / 음식냄새) 감지
     // 함정 감지(순찰 → 탐색) : 시야 밖에서 함정 파동 감지
-
-
-    // -----------------------------------------------------------
 
     // load animation
     //LoadAnimation();
@@ -87,7 +77,7 @@ void AdultGhostController::OnFixedUpdate(float dt)
 {
     if (!agent || !vision) return;
 
-    // AgentComponent의 경로 따라 이동
+    // AgentComponent의 경로 따라 이동 : TODO 수정 필요 
     agent->OnFixedUpdate(dt);  
 
     // FSM 
@@ -95,26 +85,6 @@ void AdultGhostController::OnFixedUpdate(float dt)
     {
         curState->FixedUpdate(dt);
     }
-
-#pragma region PathDebug 
-    //if (agent->hasTarget)
-    //{
-    //    std::cout << "[AdultGhostController] \"" << GetOwner()->GetName()
-    //        << "\" Current: (" << agent->cx << "," << agent->cy << ") "
-    //        << "Target: (" << agent->targetCX << "," << agent->targetCY << ") "
-    //        << "Remaining Path: " << agent->path.size() << std::endl;
-    //}
-#pragma endregion 
-
-    //// 시야 감지 : 플레이어 탐지
-    //auto* player = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("Player");
-    //if (player)
-    //{
-    //    if (vision->CheckVision(player, 90, 400))
-    //    {
-    //        std::cout << "[AdultGhostController]" << GetOwner()->GetName() << " is PLAYER FOUND !" << std::endl;
-    //    }
-    //}
 }
 
 
@@ -127,7 +97,7 @@ void AdultGhostController::InitFSMStates()
 {
     //  Patrol, Chase, Search, Return, Attack, None
     fsmStates[(int)AdultGhostState::Patrol] = new AdultGhost_Patrol(this);
-    //fsmStates[(int)AdultGhostState::Chase] = new AdultGhost_Chase(this);
+    fsmStates[(int)AdultGhostState::Chase] = new AdultGhost_Chase(this);
     //fsmStates[(int)AdultGhostState::Search] = new AdultGhost_Search(this);
     //fsmStates[(int)AdultGhostState::Return] = new AdultGhost_Return(this);
     //fsmStates[(int)AdultGhostState::Attack] = new AdultGhost_Attack(this);

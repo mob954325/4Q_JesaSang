@@ -61,7 +61,7 @@ bool VisionComponent::CheckVision(GameObject* target, float fov, float maxDistan
 
 
     // 타겟까지 방향 & 거리
-    Vector3 toTarget = targetTr->GetWorldPosition() - origin;
+    Vector3 toTarget = targetTr->GetLocalPosition() - origin;
     float dist = toTarget.Length();
     toTarget.y = origin.y; // FOV 평면 기준!! : 여기도 해줬어야 했음 
     if (dist > maxDistance) return false;
@@ -123,6 +123,7 @@ bool VisionComponent::CheckVision(GameObject* target, float fov, float maxDistan
         break;
     }
 
+    // 디버그 
     if (firstComp)
     {
         auto* obj = firstComp->GetOwner();
