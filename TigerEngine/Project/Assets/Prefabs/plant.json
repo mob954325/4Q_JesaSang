@@ -1,0 +1,183 @@
+{
+  "prefab": [
+    {
+      "Active": true,
+      "ID": 46,
+      "Name": "plant",
+      "ParentID": -1,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "DataPath": "..\\Assets\\Resource\\ArtModel\\The_living_room\\plant.fbx",
+            "IsStatic": true
+          },
+          "type": "FBXData"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Alpha": 1.0,
+            "Diffuse": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "DiffuseOverride": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "Emissive": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "EmissiveOverride": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "IsGround": false,
+            "Metalic": 1.0,
+            "MetallicOverride": 1.0,
+            "RenderBlendType": "Opaque",
+            "Roughness": 1.0,
+            "RoughnessOverride": 1.0,
+            "UseDiffuseOverride": false,
+            "UseEmissiveOverride": false,
+            "UseMetallicOverride": false,
+            "UseRoughnessOverride": false
+          },
+          "type": "FBXRenderer"
+        }
+      ]
+    },
+    {
+      "Active": 1,
+      "ID": 48,
+      "Name": "Left",
+      "ParentID": 46,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              -0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "ColliderType": "Box",
+            "PhysicsBodyType": "Static",
+            "density": 10.0,
+            "halfExtents": [
+              22.799999237060547,
+              63.900001525878906,
+              20.799999237060547
+            ],
+            "height": 10.0,
+            "isTrigger": false,
+            "layer": "Default",
+            "localOffset": [
+              -19.100000381469727,
+              64.5999984741211,
+              -2.5
+            ],
+            "radius": 50.0
+          },
+          "type": "PhysicsComponent"
+        }
+      ]
+    },
+    {
+      "Active": 1,
+      "ID": 50,
+      "Name": "Right",
+      "ParentID": 46,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              -0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "ColliderType": "Box",
+            "PhysicsBodyType": "Static",
+            "density": 10.0,
+            "halfExtents": [
+              14.100000381469727,
+              10.0,
+              13.199999809265137
+            ],
+            "height": 10.0,
+            "isTrigger": false,
+            "layer": "Default",
+            "localOffset": [
+              32.70000076293945,
+              10.199999809265137,
+              -1.2000000476837158
+            ],
+            "radius": 50.0
+          },
+          "type": "PhysicsComponent"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,118 @@
+{
+  "prefab": [
+    {
+      "Active": true,
+      "ID": 477,
+      "Name": "Ghost_Baby",
+      "ParentID": -1,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              -569.2680053710938,
+              0.0,
+              60.562076568603516
+            ],
+            "Rotation": [
+              -0.0,
+              0.0,
+              -0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "DataPath": "..\\Assets\\Resource\\FBX\\00_character\\ani_babyghost.fbx",
+            "IsStatic": false
+          },
+          "type": "FBXData"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Alpha": 1.0,
+            "Diffuse": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "DiffuseOverride": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "Emissive": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "EmissiveOverride": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "IsGround": false,
+            "Metalic": 1.0,
+            "MetallicOverride": 1.0,
+            "RenderBlendType": "Opaque",
+            "Roughness": 1.0,
+            "RoughnessOverride": 1.0,
+            "UseDiffuseOverride": false,
+            "UseEmissiveOverride": false,
+            "UseMetallicOverride": false,
+            "UseRoughnessOverride": false
+          },
+          "type": "FBXRenderer"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "patrolSpeed": 1.0,
+            "reachDist": 20.0
+          },
+          "type": "AgentComponent"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "height": 120.0,
+            "isTrigger": false,
+            "jumpSpeed": 5.5,
+            "layer": "Default",
+            "moveSpeed": 2.0,
+            "offset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "radius": 30.0
+          },
+          "type": "CharacterControllerComponent"
+        },
+        {
+          "properties": {
+            "Active": true
+          },
+          "type": "VisionComponent"
+        },
+        {
+          "properties": {
+            "Active": true
+          },
+          "type": "AdultGhostController"
+        }
+      ]
+    }
+  ]
+}

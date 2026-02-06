@@ -1,0 +1,55 @@
+{
+  "prefab": [
+    {
+      "Active": true,
+      "ID": 443,
+      "Name": "DirectionalLight(Sun)",
+      "ParentID": -1,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Color": [
+              1.0,
+              0.9861591458320618,
+              0.9215686321258545,
+              1.0
+            ],
+            "Direction": [
+              0.0,
+              -0.800000011920929,
+              1.0
+            ],
+            "InnerAngle": 15.0,
+            "Intensity": 1.0,
+            "IsSunLight": true,
+            "LightType": "Directional",
+            "OuterAngle": 30.0,
+            "Range": 15.0
+          },
+          "type": "Light"
+        }
+      ]
+    }
+  ]
+}

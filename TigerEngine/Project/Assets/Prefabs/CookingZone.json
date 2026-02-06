@@ -1,0 +1,55 @@
+{
+  "prefab": [
+    {
+      "Active": true,
+      "ID": 996,
+      "Name": "CookingZone",
+      "ParentID": -1,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              -671.5999755859375,
+              -110.0,
+              500.0
+            ],
+            "Rotation": [
+              -0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "ColliderType": "Box",
+            "PhysicsBodyType": "Static",
+            "density": 10.0,
+            "halfExtents": [
+              200.0,
+              100.0,
+              200.0
+            ],
+            "height": 10.0,
+            "isTrigger": true,
+            "layer": "Default",
+            "localOffset": [
+              0.0,
+              100.0,
+              0.0
+            ],
+            "radius": 50.0
+          },
+          "type": "PhysicsComponent"
+        }
+      ]
+    }
+  ]
+}

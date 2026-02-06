@@ -1,0 +1,672 @@
+{
+  "prefab": [
+    {
+      "Active": true,
+      "ID": 1050,
+      "Name": "UI_MiniGame",
+      "ParentID": -1,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Pivot": [
+              0.5,
+              0.5
+            ],
+            "Pos": [
+              960.0,
+              1500.0,
+              0.0
+            ],
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "Size": [
+              1920.0,
+              1080.0
+            ]
+          },
+          "type": "RectTransform"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 1048,
+      "Name": "Image_BackgroundTop",
+      "ParentID": 1050,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Pivot": [
+              0.5,
+              0.5
+            ],
+            "Pos": [
+              960.0,
+              380.0,
+              0.0
+            ],
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "Size": [
+              900.0,
+              500.0
+            ]
+          },
+          "type": "RectTransform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "color": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "fillAmount": 1.0,
+            "isMouseCheck": false,
+            "path": "..\\Assets\\Resource\\UI\\MiniGame\\Game_Mini_01.png",
+            "sliceBorderPx": [
+              40.0,
+              40.0,
+              40.0,
+              40.0
+            ],
+            "type": "Fill"
+          },
+          "type": "Image"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 1055,
+      "Name": "Image_ESC",
+      "ParentID": 1048,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Pivot": [
+              0.0,
+              0.0
+            ],
+            "Pos": [
+              -10.0,
+              -10.0,
+              0.0
+            ],
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "Size": [
+              100.0,
+              50.0
+            ]
+          },
+          "type": "RectTransform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "color": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "fillAmount": 1.0,
+            "isMouseCheck": false,
+            "path": "..\\Assets\\Resource\\UI\\MiniGame\\ESC.png",
+            "sliceBorderPx": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "type": "Simple"
+          },
+          "type": "Image"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 1049,
+      "Name": "Image_BackgroundDown",
+      "ParentID": 1050,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Pivot": [
+              0.5,
+              0.5
+            ],
+            "Pos": [
+              960.0,
+              700.0,
+              0.0
+            ],
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "Size": [
+              900.0,
+              100.0
+            ]
+          },
+          "type": "RectTransform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "color": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "fillAmount": 1.0,
+            "isMouseCheck": false,
+            "path": "..\\Assets\\Resource\\UI\\MiniGame\\Game_Mini_02.png",
+            "sliceBorderPx": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "type": "Simple"
+          },
+          "type": "Image"
+        }
+      ]
+    },
+    {
+      "Active": false,
+      "ID": 1052,
+      "Name": "UI_MiniGame1",
+      "ParentID": 1050,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "Pivot": [
+              0.5,
+              0.5
+            ],
+            "Pos": [
+              900.0,
+              700.0,
+              0.0
+            ],
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "Size": [
+              900.0,
+              100.0
+            ]
+          },
+          "type": "RectTransform"
+        }
+      ]
+    },
+    {
+      "Active": false,
+      "ID": 1056,
+      "Name": "Image_ProgressBar",
+      "ParentID": 1052,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "Pivot": [
+              0.5,
+              0.5
+            ],
+            "Pos": [
+              500.0,
+              50.0,
+              0.0
+            ],
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "Size": [
+              750.0,
+              6.0
+            ]
+          },
+          "type": "RectTransform"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "color": [
+              0.7990195751190186,
+              0.7990195751190186,
+              0.7990195751190186,
+              1.0
+            ],
+            "fillAmount": 1.0,
+            "isMouseCheck": false,
+            "path": "..\\Assets\\Resource\\UI\\MiniGame\\sound_gaige.png",
+            "sliceBorderPx": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "type": "Simple"
+          },
+          "type": "Image"
+        }
+      ]
+    },
+    {
+      "Active": false,
+      "ID": 1057,
+      "Name": "Image_SpaceBar",
+      "ParentID": 1052,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "Pivot": [
+              0.5,
+              0.5
+            ],
+            "Pos": [
+              500.0,
+              50.0,
+              0.0
+            ],
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "Size": [
+              100.0,
+              50.0
+            ]
+          },
+          "type": "RectTransform"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "color": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "fillAmount": 1.0,
+            "isMouseCheck": false,
+            "path": "..\\Assets\\Resource\\UI\\MiniGame\\SPACE.png",
+            "sliceBorderPx": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "type": "Simple"
+          },
+          "type": "Image"
+        }
+      ]
+    },
+    {
+      "Active": false,
+      "ID": 1053,
+      "Name": "UI_MiniGame2",
+      "ParentID": 1050,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "Pivot": [
+              0.0,
+              0.0
+            ],
+            "Pos": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "Size": [
+              0.0,
+              0.0
+            ]
+          },
+          "type": "RectTransform"
+        }
+      ]
+    },
+    {
+      "Active": false,
+      "ID": 1054,
+      "Name": "UI_MiniGame3",
+      "ParentID": 1050,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "Pivot": [
+              0.0,
+              0.0
+            ],
+            "Pos": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "Size": [
+              0.0,
+              0.0
+            ]
+          },
+          "type": "RectTransform"
+        }
+      ]
+    }
+  ]
+}

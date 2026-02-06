@@ -1,0 +1,60 @@
+{
+  "prefab": [
+    {
+      "Active": false,
+      "ID": 963,
+      "Name": "RingEffect",
+      "ParentID": 954,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              3.0,
+              3.0,
+              3.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "DecalType": "RingEffect",
+            "IsGroundDecal": true,
+            "Offset": [
+              0.0,
+              0.0
+            ],
+            "Opacity": 1.0,
+            "TexturePath": "",
+            "Tiling": [
+              1.0,
+              1.0
+            ],
+            "UpThreshold": 0.8999999761581421,
+            "ringColor": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "ringDuration": 10.0,
+            "ringFeather": 0.009999999776482582,
+            "ringSpeed": 0.44999998807907104,
+            "ringThickness": 0.004999999888241291
+          },
+          "type": "Decal"
+        }
+      ]
+    }
+  ]
+}
