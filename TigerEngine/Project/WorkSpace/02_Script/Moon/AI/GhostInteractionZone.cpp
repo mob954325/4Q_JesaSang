@@ -2,6 +2,9 @@
 #include "Util/JsonHelper.h"
 #include "Util/ComponentAutoRegister.h"
 #include "Object/GameObject.h"
+#include "EngineSystem/SceneSystem.h"
+#include "../../Woo/Player/PlayerController.h"
+
 
 
 REGISTER_COMPONENT(GhostInteractionZone)
@@ -45,6 +48,12 @@ void GhostInteractionZone::OnTriggerEnter(PhysicsComponent* other)
 {
     if (other->GetOwner()->GetName() == "InteractZone")
     {
-        cout << "[GhostInteractionSensor] Ghost is OnTriggerEnter From Player's InteractZone" << endl;
+        auto* player = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("Player");
+        if (player)
+        {
+            player->GetComponent<PlayerController>()->TakeAttack(); // AI에게 공격 당했을 때 
+        }
+
+        // float GetCurSenseRadiuse() const;    // 플레이어 현재 기척 getter
     }
 }
