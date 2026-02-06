@@ -1,0 +1,81 @@
+{
+  "prefab": [
+    {
+      "Active": true,
+      "ID": 1506,
+      "Name": "folding_screen",
+      "ParentID": -1,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "DataPath": "..\\Assets\\Resource\\ArtModel\\Jesasing\\teble\\folding_screen.fbx",
+            "IsStatic": true
+          },
+          "type": "FBXData"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Alpha": 1.0,
+            "Diffuse": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "DiffuseOverride": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "Emissive": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "EmissiveOverride": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "IsGround": false,
+            "Metalic": 1.0,
+            "MetallicOverride": 1.0,
+            "RenderBlendType": "Opaque",
+            "Roughness": 1.0,
+            "RoughnessOverride": 1.0,
+            "UseDiffuseOverride": false,
+            "UseEmissiveOverride": false,
+            "UseMetallicOverride": false,
+            "UseRoughnessOverride": false
+          },
+          "type": "FBXRenderer"
+        }
+      ]
+    }
+  ]
+}
