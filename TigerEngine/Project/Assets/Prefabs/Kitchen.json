@@ -78,7 +78,7 @@
       ]
     },
     {
-      "Active": 1,
+      "Active": true,
       "ID": 115,
       "Name": "Left",
       "ParentID": 112,
@@ -129,7 +129,7 @@
       ]
     },
     {
-      "Active": 1,
+      "Active": true,
       "ID": 117,
       "Name": "Front",
       "ParentID": 112,
@@ -180,7 +180,7 @@
       ]
     },
     {
-      "Active": 1,
+      "Active": true,
       "ID": 119,
       "Name": "Center",
       "ParentID": 112,
@@ -231,7 +231,7 @@
       ]
     },
     {
-      "Active": 1,
+      "Active": true,
       "ID": 121,
       "Name": "Right",
       "ParentID": 112,
