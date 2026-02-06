@@ -3,7 +3,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 416,
+        "ID": 951,
         "Name": "Main Camera",
         "ParentID": -1,
         "components": [
@@ -56,7 +56,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 417,
+        "ID": 952,
         "Name": "DirectionalLight(Sun)",
         "ParentID": -1,
         "components": [
@@ -110,7 +110,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 418,
+        "ID": 953,
         "Name": "---------Floor----------",
         "ParentID": -1,
         "components": [
@@ -141,9 +141,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 419,
+        "ID": 954,
         "Name": "Floor",
-        "ParentID": 418,
+        "ParentID": 953,
         "components": [
           {
             "properties": {
@@ -245,7 +245,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 420,
+        "ID": 955,
         "Name": "---------Wall----------",
         "ParentID": -1,
         "components": [
@@ -276,9 +276,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 421,
+        "ID": 956,
         "Name": "Door_Open",
-        "ParentID": 420,
+        "ParentID": 955,
         "components": [
           {
             "properties": {
@@ -357,9 +357,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 422,
+        "ID": 957,
         "Name": "Pillar",
-        "ParentID": 420,
+        "ParentID": 955,
         "components": [
           {
             "properties": {
@@ -467,9 +467,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 423,
+        "ID": 958,
         "Name": "wall_4",
-        "ParentID": 420,
+        "ParentID": 955,
         "components": [
           {
             "properties": {
@@ -577,9 +577,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 424,
+        "ID": 959,
         "Name": "wall_5",
-        "ParentID": 420,
+        "ParentID": 955,
         "components": [
           {
             "properties": {
@@ -687,9 +687,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 425,
+        "ID": 960,
         "Name": "Room",
-        "ParentID": 418,
+        "ParentID": 953,
         "components": [
           {
             "properties": {
@@ -768,9 +768,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 426,
+        "ID": 961,
         "Name": "Room_a_love_room",
-        "ParentID": 418,
+        "ParentID": 953,
         "components": [
           {
             "properties": {
@@ -849,9 +849,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 427,
+        "ID": 962,
         "Name": "Room_Kitchen",
-        "ParentID": 418,
+        "ParentID": 953,
         "components": [
           {
             "properties": {
@@ -930,9 +930,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 428,
+        "ID": 963,
         "Name": "Room_main_room",
-        "ParentID": 418,
+        "ParentID": 953,
         "components": [
           {
             "properties": {
@@ -1011,9 +1011,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 429,
+        "ID": 964,
         "Name": "Room_saibi",
-        "ParentID": 418,
+        "ParentID": 953,
         "components": [
           {
             "properties": {
@@ -1092,9 +1092,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 430,
+        "ID": 965,
         "Name": "Room_Table_of_memorial_ceremony",
-        "ParentID": 418,
+        "ParentID": 953,
         "components": [
           {
             "properties": {
@@ -1173,9 +1173,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 431,
+        "ID": 966,
         "Name": "Room_Warehouse",
-        "ParentID": 418,
+        "ParentID": 953,
         "components": [
           {
             "properties": {
@@ -1254,7 +1254,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 432,
+        "ID": 967,
         "Name": "---------Object----------",
         "ParentID": -1,
         "components": [
@@ -1285,7 +1285,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 433,
+        "ID": 968,
         "Name": "JesaSang",
         "ParentID": -1,
         "components": [
@@ -1395,9 +1395,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 434,
+        "ID": 969,
         "Name": "SearchObject",
-        "ParentID": 432,
+        "ParentID": 967,
         "components": [
           {
             "properties": {
@@ -1514,9 +1514,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 435,
+        "ID": 970,
         "Name": "SearchObject",
-        "ParentID": 432,
+        "ParentID": 967,
         "components": [
           {
             "properties": {
@@ -1633,9 +1633,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 436,
+        "ID": 971,
         "Name": "baseFood",
-        "ParentID": 433,
+        "ParentID": 968,
         "components": [
           {
             "properties": {
@@ -1714,7 +1714,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 437,
+        "ID": 972,
         "Name": "Player",
         "ParentID": -1,
         "components": [
@@ -1836,7 +1836,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 438,
+        "ID": 973,
         "Name": "-----------------------",
         "ParentID": -1,
         "components": [
@@ -1867,7 +1867,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 439,
+        "ID": 974,
         "Name": "CurScene_98_Dev_Woo",
         "ParentID": -1,
         "components": [
@@ -1898,7 +1898,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 440,
+        "ID": 975,
         "Name": "-----------------------",
         "ParentID": -1,
         "components": [
@@ -1929,9 +1929,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 441,
+        "ID": 976,
         "Name": "wall_5",
-        "ParentID": 420,
+        "ParentID": 955,
         "components": [
           {
             "properties": {
@@ -2039,9 +2039,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 442,
+        "ID": 977,
         "Name": "wall_5",
-        "ParentID": 420,
+        "ParentID": 955,
         "components": [
           {
             "properties": {
@@ -2149,9 +2149,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 443,
+        "ID": 978,
         "Name": "wall_5",
-        "ParentID": 420,
+        "ParentID": 955,
         "components": [
           {
             "properties": {
@@ -2259,9 +2259,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 444,
+        "ID": 979,
         "Name": "wall_4",
-        "ParentID": 420,
+        "ParentID": 955,
         "components": [
           {
             "properties": {
@@ -2369,9 +2369,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 445,
+        "ID": 980,
         "Name": "CameraTrackingPoint",
-        "ParentID": 437,
+        "ParentID": 972,
         "components": [
           {
             "properties": {
@@ -2400,9 +2400,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 446,
+        "ID": 981,
         "Name": "OcclusionFadePoint",
-        "ParentID": 437,
+        "ParentID": 972,
         "components": [
           {
             "properties": {
@@ -2431,9 +2431,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 447,
+        "ID": 982,
         "Name": "SearchObject",
-        "ParentID": 432,
+        "ParentID": 967,
         "components": [
           {
             "properties": {
@@ -2550,9 +2550,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 448,
+        "ID": 983,
         "Name": "InteractionSensor",
-        "ParentID": 437,
+        "ParentID": 972,
         "components": [
           {
             "properties": {
@@ -2610,9 +2610,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 449,
+        "ID": 984,
         "Name": "InteractZone",
-        "ParentID": 437,
+        "ParentID": 972,
         "components": [
           {
             "properties": {
@@ -2670,7 +2670,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 450,
+        "ID": 985,
         "Name": "Kitchen",
         "ParentID": -1,
         "components": [
@@ -2751,46 +2751,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 451,
-        "Name": "MiniGameManager",
-        "ParentID": 470,
-        "components": [
-          {
-            "properties": {
-              "Position": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Rotation": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ]
-            },
-            "type": "Transform"
-          },
-          {
-            "properties": {
-              "Active": true
-            },
-            "type": "MiniGameManager"
-          }
-        ]
-      },
-      "type": "GameObject"
-    },
-    {
-      "properties": {
-        "Active": true,
-        "ID": 452,
+        "ID": 986,
         "Name": "CookingZone",
-        "ParentID": 450,
+        "ParentID": 985,
         "components": [
           {
             "properties": {
@@ -2842,9 +2805,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 453,
+        "ID": 987,
         "Name": "SearchObject",
-        "ParentID": 432,
+        "ParentID": 967,
         "components": [
           {
             "properties": {
@@ -2961,9 +2924,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 454,
+        "ID": 988,
         "Name": "SearchObject",
-        "ParentID": 432,
+        "ParentID": 967,
         "components": [
           {
             "properties": {
@@ -3080,9 +3043,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 455,
+        "ID": 989,
         "Name": "SearchObject",
-        "ParentID": 432,
+        "ParentID": 967,
         "components": [
           {
             "properties": {
@@ -3199,9 +3162,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 456,
+        "ID": 990,
         "Name": "SearchObject",
-        "ParentID": 432,
+        "ParentID": 967,
         "components": [
           {
             "properties": {
@@ -3318,9 +3281,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 457,
+        "ID": 991,
         "Name": "SearchObject",
-        "ParentID": 432,
+        "ParentID": 967,
         "components": [
           {
             "properties": {
@@ -3437,9 +3400,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 458,
+        "ID": 992,
         "Name": "Apple",
-        "ParentID": 433,
+        "ParentID": 968,
         "components": [
           {
             "properties": {
@@ -3518,9 +3481,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 459,
+        "ID": 993,
         "Name": "Pear",
-        "ParentID": 433,
+        "ParentID": 968,
         "components": [
           {
             "properties": {
@@ -3599,9 +3562,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 460,
+        "ID": 994,
         "Name": "Batter",
-        "ParentID": 433,
+        "ParentID": 968,
         "components": [
           {
             "properties": {
@@ -3680,9 +3643,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 461,
+        "ID": 995,
         "Name": "Tofu",
-        "ParentID": 433,
+        "ParentID": 968,
         "components": [
           {
             "properties": {
@@ -3761,9 +3724,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 462,
+        "ID": 996,
         "Name": "Sanjeok",
-        "ParentID": 433,
+        "ParentID": 968,
         "components": [
           {
             "properties": {
@@ -3842,9 +3805,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 463,
+        "ID": 997,
         "Name": "Donggeurangttaeng",
-        "ParentID": 433,
+        "ParentID": 968,
         "components": [
           {
             "properties": {
@@ -3923,9 +3886,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 464,
+        "ID": 998,
         "Name": "Visual_Ingre_Apple",
-        "ParentID": 471,
+        "ParentID": 1004,
         "components": [
           {
             "properties": {
@@ -4004,9 +3967,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 465,
+        "ID": 999,
         "Name": "Visual_Ingre_Batter",
-        "ParentID": 471,
+        "ParentID": 1004,
         "components": [
           {
             "properties": {
@@ -4085,9 +4048,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 466,
+        "ID": 1000,
         "Name": "Visual_Ingre_Donggeurangttaeng",
-        "ParentID": 471,
+        "ParentID": 1004,
         "components": [
           {
             "properties": {
@@ -4166,9 +4129,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 467,
+        "ID": 1001,
         "Name": "Visual_Ingre_Pear",
-        "ParentID": 471,
+        "ParentID": 1004,
         "components": [
           {
             "properties": {
@@ -4247,9 +4210,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 468,
+        "ID": 1002,
         "Name": "Visual_Ingre_Sanjeok",
-        "ParentID": 471,
+        "ParentID": 1004,
         "components": [
           {
             "properties": {
@@ -4328,9 +4291,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 469,
+        "ID": 1003,
         "Name": "Visual_Ingre_Tofu",
-        "ParentID": 471,
+        "ParentID": 1004,
         "components": [
           {
             "properties": {
@@ -4409,40 +4372,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 470,
-        "Name": "Managers",
-        "ParentID": -1,
-        "components": [
-          {
-            "properties": {
-              "Position": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Rotation": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ]
-            },
-            "type": "Transform"
-          }
-        ]
-      },
-      "type": "GameObject"
-    },
-    {
-      "properties": {
-        "Active": true,
-        "ID": 471,
+        "ID": 1004,
         "Name": "ItemVisualizer",
-        "ParentID": 437,
+        "ParentID": 972,
         "components": [
           {
             "properties": {
@@ -4471,9 +4403,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 472,
+        "ID": 1005,
         "Name": "Visual_Apple",
-        "ParentID": 471,
+        "ParentID": 1004,
         "components": [
           {
             "properties": {
@@ -4552,9 +4484,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 473,
+        "ID": 1006,
         "Name": "Visual_Pear",
-        "ParentID": 471,
+        "ParentID": 1004,
         "components": [
           {
             "properties": {
@@ -4633,9 +4565,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 474,
+        "ID": 1007,
         "Name": "Visual_Batter",
-        "ParentID": 471,
+        "ParentID": 1004,
         "components": [
           {
             "properties": {
@@ -4714,9 +4646,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 475,
+        "ID": 1008,
         "Name": "Visual_Tofu",
-        "ParentID": 471,
+        "ParentID": 1004,
         "components": [
           {
             "properties": {
@@ -4795,9 +4727,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 476,
+        "ID": 1009,
         "Name": "Visual_Sanjeok",
-        "ParentID": 471,
+        "ParentID": 1004,
         "components": [
           {
             "properties": {
@@ -4876,9 +4808,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 477,
+        "ID": 1010,
         "Name": "Visual_Donggeurangttaeng",
-        "ParentID": 471,
+        "ParentID": 1004,
         "components": [
           {
             "properties": {
@@ -4957,7 +4889,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 478,
+        "ID": 1011,
         "Name": "Altar",
         "ParentID": -1,
         "components": [
@@ -5067,9 +4999,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 479,
+        "ID": 1012,
         "Name": "baseFood",
-        "ParentID": 478,
+        "ParentID": 1011,
         "components": [
           {
             "properties": {
@@ -5148,9 +5080,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 480,
+        "ID": 1013,
         "Name": "Alta_Apple",
-        "ParentID": 478,
+        "ParentID": 1011,
         "components": [
           {
             "properties": {
@@ -5229,9 +5161,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 481,
+        "ID": 1014,
         "Name": "Alta_Pear",
-        "ParentID": 478,
+        "ParentID": 1011,
         "components": [
           {
             "properties": {
@@ -5310,9 +5242,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 482,
+        "ID": 1015,
         "Name": "Alta_Batter",
-        "ParentID": 478,
+        "ParentID": 1011,
         "components": [
           {
             "properties": {
@@ -5391,9 +5323,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 483,
+        "ID": 1016,
         "Name": "Alta_Tofu",
-        "ParentID": 478,
+        "ParentID": 1011,
         "components": [
           {
             "properties": {
@@ -5472,9 +5404,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 484,
+        "ID": 1017,
         "Name": "Alta_Sanjeok",
-        "ParentID": 478,
+        "ParentID": 1011,
         "components": [
           {
             "properties": {
@@ -5553,9 +5485,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 485,
+        "ID": 1018,
         "Name": "Alta_Donggeurangttaeng",
-        "ParentID": 478,
+        "ParentID": 1011,
         "components": [
           {
             "properties": {
@@ -5634,9 +5566,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 486,
+        "ID": 1019,
         "Name": "Alta_Ingre_Apple",
-        "ParentID": 478,
+        "ParentID": 1011,
         "components": [
           {
             "properties": {
@@ -5715,9 +5647,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 487,
+        "ID": 1020,
         "Name": "Alta_Ingre_Pear",
-        "ParentID": 478,
+        "ParentID": 1011,
         "components": [
           {
             "properties": {
@@ -5796,9 +5728,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 488,
+        "ID": 1021,
         "Name": "Alta_Ingre_Batter",
-        "ParentID": 478,
+        "ParentID": 1011,
         "components": [
           {
             "properties": {
@@ -5877,9 +5809,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 489,
+        "ID": 1022,
         "Name": "Alta_Ingre_Tofu",
-        "ParentID": 478,
+        "ParentID": 1011,
         "components": [
           {
             "properties": {
@@ -5958,9 +5890,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 490,
+        "ID": 1023,
         "Name": "Alta_Ingre_Sanjeok",
-        "ParentID": 478,
+        "ParentID": 1011,
         "components": [
           {
             "properties": {
@@ -6039,9 +5971,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 491,
+        "ID": 1024,
         "Name": "Alta_Ingre_Donggeurangttaeng",
-        "ParentID": 478,
+        "ParentID": 1011,
         "components": [
           {
             "properties": {
@@ -6120,7 +6052,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 492,
+        "ID": 1025,
         "Name": "HideObject",
         "ParentID": -1,
         "components": [
@@ -6230,7 +6162,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 493,
+        "ID": 1026,
         "Name": "TrapObject_Decal",
         "ParentID": -1,
         "components": [
@@ -6318,7 +6250,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 494,
+        "ID": 1027,
         "Name": "TropObject_Table",
         "ParentID": -1,
         "components": [
@@ -6428,7 +6360,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 495,
+        "ID": 1028,
         "Name": "---------------------------",
         "ParentID": -1,
         "components": [
@@ -6459,7 +6391,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 496,
+        "ID": 1029,
         "Name": "Grid",
         "ParentID": -1,
         "components": [
@@ -6499,7 +6431,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 497,
+        "ID": 1030,
         "Name": "Ghost_Adult",
         "ParentID": -1,
         "components": [
@@ -6617,7 +6549,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 498,
+        "ID": 1031,
         "Name": "Ghost_Baby",
         "ParentID": -1,
         "components": [
@@ -6735,7 +6667,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 499,
+        "ID": 1032,
         "Name": "Ghost_Baby",
         "ParentID": -1,
         "components": [
@@ -6853,7 +6785,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 500,
+        "ID": 1033,
         "Name": "Ghost_Adult",
         "ParentID": -1,
         "components": [
@@ -6971,9 +6903,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 501,
+        "ID": 1034,
         "Name": "AITarget",
-        "ParentID": 437,
+        "ParentID": 972,
         "components": [
           {
             "properties": {
@@ -7031,9 +6963,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 502,
+        "ID": 1035,
         "Name": "RingEffect",
-        "ParentID": 493,
+        "ParentID": 1026,
         "components": [
           {
             "properties": {
@@ -7090,9 +7022,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 503,
+        "ID": 1036,
         "Name": "RingEffect",
-        "ParentID": 494,
+        "ParentID": 1027,
         "components": [
           {
             "properties": {
@@ -7149,7 +7081,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 504,
+        "ID": 1037,
         "Name": "---------------------------",
         "ParentID": -1,
         "components": [
@@ -7179,10 +7111,286 @@
     },
     {
       "properties": {
-        "Active": false,
-        "ID": 505,
-        "Name": "NewGameObject",
+        "Active": true,
+        "ID": 1038,
+        "Name": "Image_BackgroundTop",
+        "ParentID": 1040,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "Pivot": [
+                0.5,
+                0.5
+              ],
+              "Pos": [
+                960.0,
+                380.0,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Size": [
+                900.0,
+                500.0
+              ]
+            },
+            "type": "RectTransform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "fillAmount": 1.0,
+              "isMouseCheck": false,
+              "path": "..\\Assets\\Resource\\UI\\MiniGame\\Game_Mini_01.png",
+              "sliceBorderPx": [
+                40.0,
+                40.0,
+                40.0,
+                40.0
+              ],
+              "type": "Fill"
+            },
+            "type": "Image"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 1039,
+        "Name": "Image_BackgroundDown",
+        "ParentID": 1040,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "Pivot": [
+                0.5,
+                0.5
+              ],
+              "Pos": [
+                960.0,
+                700.0,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Size": [
+                900.0,
+                100.0
+              ]
+            },
+            "type": "RectTransform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "fillAmount": 1.0,
+              "isMouseCheck": false,
+              "path": "..\\Assets\\Resource\\UI\\MiniGame\\Game_Mini_02.png",
+              "sliceBorderPx": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "type": "Simple"
+            },
+            "type": "Image"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 1040,
+        "Name": "UI_MiniGame",
         "ParentID": -1,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "Pivot": [
+                0.5,
+                0.5
+              ],
+              "Pos": [
+                960.0,
+                1500.0,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Size": [
+                1920.0,
+                1080.0
+              ]
+            },
+            "type": "RectTransform"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 1041,
+        "Name": "MiniGameManager",
+        "ParentID": -1,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true
+            },
+            "type": "MiniGameManager"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": false,
+        "ID": 1042,
+        "Name": "UI_MiniGame1",
+        "ParentID": 1040,
         "components": [
           {
             "properties": {
@@ -7212,8 +7420,8 @@
                 0.5
               ],
               "Pos": [
-                960.0,
-                500.0,
+                900.0,
+                700.0,
                 0.0
               ],
               "Position": [
@@ -7232,8 +7440,377 @@
                 1.0
               ],
               "Size": [
-                800.0,
-                500.0
+                900.0,
+                100.0
+              ]
+            },
+            "type": "RectTransform"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": false,
+        "ID": 1043,
+        "Name": "UI_MiniGame2",
+        "ParentID": 1040,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "Pivot": [
+                0.0,
+                0.0
+              ],
+              "Pos": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Size": [
+                0.0,
+                0.0
+              ]
+            },
+            "type": "RectTransform"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": false,
+        "ID": 1044,
+        "Name": "UI_MiniGame3",
+        "ParentID": 1040,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "Pivot": [
+                0.0,
+                0.0
+              ],
+              "Pos": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Size": [
+                0.0,
+                0.0
+              ]
+            },
+            "type": "RectTransform"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 1045,
+        "Name": "Image_ESC",
+        "ParentID": 1038,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "Pivot": [
+                0.0,
+                0.0
+              ],
+              "Pos": [
+                -10.0,
+                -10.0,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Size": [
+                100.0,
+                50.0
+              ]
+            },
+            "type": "RectTransform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "fillAmount": 1.0,
+              "isMouseCheck": false,
+              "path": "..\\Assets\\Resource\\UI\\MiniGame\\ESC.png",
+              "sliceBorderPx": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "type": "Simple"
+            },
+            "type": "Image"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": false,
+        "ID": 1046,
+        "Name": "Image_ProgressBar",
+        "ParentID": 1042,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "Pivot": [
+                0.5,
+                0.5
+              ],
+              "Pos": [
+                500.0,
+                50.0,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Size": [
+                750.0,
+                6.0
+              ]
+            },
+            "type": "RectTransform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "color": [
+                0.7990195751190186,
+                0.7990195751190186,
+                0.7990195751190186,
+                1.0
+              ],
+              "fillAmount": 1.0,
+              "isMouseCheck": false,
+              "path": "..\\Assets\\Resource\\UI\\MiniGame\\sound_gaige.png",
+              "sliceBorderPx": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "type": "Simple"
+            },
+            "type": "Image"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": false,
+        "ID": 1047,
+        "Name": "Image_SpaceBar",
+        "ParentID": 1042,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "Pivot": [
+                0.5,
+                0.5
+              ],
+              "Pos": [
+                500.0,
+                50.0,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Size": [
+                100.0,
+                50.0
               ]
             },
             "type": "RectTransform"
@@ -7249,7 +7826,7 @@
               ],
               "fillAmount": 1.0,
               "isMouseCheck": false,
-              "path": "..\\Assets\\Textures\\eyes_diff.png",
+              "path": "..\\Assets\\Resource\\UI\\MiniGame\\SPACE.png",
               "sliceBorderPx": [
                 0.0,
                 0.0,
