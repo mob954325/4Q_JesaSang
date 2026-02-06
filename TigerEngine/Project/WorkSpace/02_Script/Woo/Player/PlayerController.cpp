@@ -63,7 +63,7 @@ void PlayerController::OnStart()
     }
 
     // load animation
-    //LoadAnimation();
+    LoadAnimation();
 
     // init fsm
     InitFSMStates();
@@ -186,22 +186,26 @@ void PlayerController::ChangeState(PlayerState nextState)
 void PlayerController::LoadAnimation()
 {
     // 애니메이션 파일 로드
-    FBXResourceManager::Instance().LoadAnimationByPath(fbxData->GetFBXInfo(), "..\\Assets\\Resource\\Animation\\ani_walk_character.fbx", "Idle");
+    FBXResourceManager::Instance().LoadAnimationByPath(fbxData->GetFBXInfo(), "..\\Assets\\Resource\\Animation\\GLTF_TEST\\ani_idle_character.glb", "Run");
 
     // 클립 생성
-    auto idleClip = animController->FindClip("Idle");
+    auto runClip = animController->FindClip("Run");
 
-    if (!idleClip )
+    if (!runClip)
     {
-        OutputDebugStringW(L"[CCTTest] Clip not found! 이름 확인 필요\n");
+        cout << "[Player Animation] Clip not found!\n" << endl;
         return;
+    }
+    else
+    {
+        cout << "[Player Animation] Clip Found Success.\n" << endl;
     }
 
     // 상태 등록
-    animController->AddState(std::make_unique<AnimationState>("Idle", idleClip, animController));
+    animController->AddState(std::make_unique<AnimationState>("Run", runClip, animController));
 
     // 시작
-    animController->ChangeState("Idle");
+    animController->ChangeState("Run");
 }
 
 /*-------[ Init ]-------------------------------------*/
