@@ -47,7 +47,7 @@ void AdultGhost_Patrol::ChangeStateLogic()
     Vector3 pPos = playerObj->GetTransform()->GetWorldPosition();
     Vector3 gPos = adultGhost->GetOwner()->GetTransform()->GetWorldPosition();
 
-    float dist = (pPos - gPos).Length();
+    float dist = Vector3::Distance(pPos, gPos); // = (pPos - gPos).Length();
     if (dist <= senseRadius)
     {
         cout << "[AdultGhost_Patrol] PLAYER FOUND (Sense)!  dist=" << dist << " radius=" << senseRadius << endl;

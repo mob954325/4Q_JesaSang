@@ -63,18 +63,18 @@ private:
 
     // speed
     float walkSpeed = 2.0f; 
-    float runSpeed  = 3.2f; 
+    float runSpeed  = 3.7f; 
     float sitSpeed = 1.0f;  
     float hitSpeedUpRate = 1.5f;        // walkSpeed * 2.0f
 
     // sense
     float idleSenseRadius = 0.0f;
-    float walkSenseRadius = 20.0f;
+    float walkSenseRadius = 200.0f;
     float sitSenseRadius = 0.0f;
-    float runSenseRadius = 50.0f;
+    float runSenseRadius = 500.0f;
 
-    float ingreSenseRadius = 10.0f;
-    float foodSenseRadius = 30.0f;
+    float ingreSenseRadius = 100.0f;
+    float foodSenseRadius = 200.0f;
 
     // hit
     float hitDuration = 5.0f;           // 패닉 유지시간

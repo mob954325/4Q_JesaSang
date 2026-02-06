@@ -2728,43 +2728,6 @@
     {
       "properties": {
         "Active": true,
-        "ID": 929,
-        "Name": "MiniGameManager",
-        "ParentID": 948,
-        "components": [
-          {
-            "properties": {
-              "Position": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Rotation": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ]
-            },
-            "type": "Transform"
-          },
-          {
-            "properties": {
-              "Active": true
-            },
-            "type": "MiniGameManager"
-          }
-        ]
-      },
-      "type": "GameObject"
-    },
-    {
-      "properties": {
-        "Active": true,
         "ID": 930,
         "Name": "CookingZone",
         "ParentID": 928,

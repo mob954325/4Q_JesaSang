@@ -62,6 +62,12 @@ public:
 
 
 public:
+    // 우정 : 플레이어가 호출할 메소드
+    // 이 함수 호출하면 AI는 Search 상태로 전환 되면서 -> 그 함수가 호출되었을 때의 플레이어 위치를 향해서 이동
+    void OnPlayerNoise(const Vector3& noiseWorldPos);
+
+
+public:
     // friend
     friend class IAdultGhostState;
     friend class AdultGhost_Patrol;

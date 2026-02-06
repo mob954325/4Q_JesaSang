@@ -122,9 +122,9 @@ void TrapObject::NotifyAIInRange()
             float dist = Vector3::Distance(originPos, targetPos);
 
             // 파동 범위 안에 AI가 있다면 호출
-            if (dist >= curWaveRadius)
+            if (dist <= curWaveRadius)
             {
-                //ag->GetComponent<AdultGhostController>()-> TODO :: 선민이가 만든 함수 호출
+                ag->GetComponent<AdultGhostController>()->OnPlayerNoise(originPos);
             }
         }
     }
@@ -141,9 +141,9 @@ void TrapObject::NotifyAIInRange()
             float dist = Vector3::Distance(originPos, targetPos);
 
             // 파동 범위 안에 AI가 있다면 호출
-            if (dist >= curWaveRadius)
+            if (dist <= curWaveRadius)
             {
-                //bg->GetComponent<BabyGhostController>()-> TODO :: 선민이가 만든 함수 호출
+                bg->GetComponent<AdultGhostController>()->OnPlayerNoise(originPos);
             }
         }
     }

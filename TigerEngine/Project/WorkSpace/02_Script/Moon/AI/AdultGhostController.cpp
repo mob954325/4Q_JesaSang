@@ -112,3 +112,31 @@ void AdultGhostController::LoadAnimation()
 {
 
 }
+
+
+// --------------------------------------------------------------------------
+
+
+void AdultGhostController::OnPlayerNoise(const Vector3& noiseWorldPos)
+{
+    // Patrol 상태인 귀신만 반응
+    if (state != AdultGhostState::Patrol)
+        return;
+
+    std::cout << "[AdultGhostController] OnPlayerNoise on Patrol AI" << std::endl;
+
+    auto grid = GridSystem::Instance().GetMainGrid();
+    if (!grid) return;
+
+    int cx, cy;
+    if (!grid->WorldToGridFromCenter(noiseWorldPos, cx, cy))
+        return;
+
+    // Search 상태로 전환 + 목표 좌표 전달
+    auto* search = dynamic_cast<AdultGhost_Search*>( fsmStates[(int)AdultGhostState::Search] );
+    if (!search) return;
+
+    search->SetSearchTarget(cx, cy);
+
+    ChangeState(AdultGhostState::Search);
+}

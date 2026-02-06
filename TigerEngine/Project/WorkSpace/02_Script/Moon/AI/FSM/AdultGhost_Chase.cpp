@@ -23,7 +23,7 @@ void AdultGhost_Chase::Enter()
     repathTimer = 0.0f;
 
     // 추격 속도 세팅 
-    agent->patrolSpeed = 7.0f;
+    agent->patrolSpeed = 4.0f;
 
     // Agent 초기화 
     agent->externalControl = true;  // 자율 AI 봉인
