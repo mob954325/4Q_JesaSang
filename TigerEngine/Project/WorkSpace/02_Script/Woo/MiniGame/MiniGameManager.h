@@ -33,7 +33,10 @@ private:
     std::unique_ptr<IItem> curIngredient;
 
     // UI
-    RectTransform* miniGameParent;
+    RectTransform* miniGameParent;      // 시작/끝날때 밑에서 올라오고 내려가는 연출
+    GameObject* miniGame1_Parent;       // on, off
+    GameObject* miniGame2_Parent;       // on, off
+    GameObject* miniGame3_Parent;       // on, off
 
 public:
     // data
@@ -45,6 +48,7 @@ public:
 public:
     // component process
     void OnInitialize() override;
+    void OnStart() override;
     void OnUpdate(float delta) override;
     void OnDestory() override;
 
