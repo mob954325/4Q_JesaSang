@@ -432,7 +432,7 @@
               "AllowSkip": true,
               "FrameObjectName": "UI_Intro_Frame",
               "ImageObjectName": "UI_Intro_Image",
-              "NextScenePath": "..\\\\Assets\\\\Scenes\\\\04_MainGameScene.json"
+              "NextScenePath": "..\\Assets\\Scenes\\04_MainGameScene.json"
             },
             "type": "IntroCutSceneController"
           }
@@ -468,10 +468,10 @@
           },
           "SceneFlowManager": {
             "properties": {
-              "StartScenePath": "..\\\\Assets\\\\Scenes\\\\01_StartScene.json",
-              "IntroScenePath": "..\\\\Assets\\\\Scenes\\\\02_IntroScene.json",
-              "TutorialScenePath": "..\\\\Assets\\\\Scenes\\\\03_TutorialScene.json",
-              "MainScenePath": "..\\\\Assets\\\\Scenes\\\\04_MainGameScene.json",
+              "StartScenePath": "..\\Assets\\Scenes\\01_StartScene.json",
+              "IntroScenePath": "..\\Assets\\Scenes\\02_IntroScene.json",
+              "TutorialScenePath": "..\\Assets\\Scenes\\03_TutorialScene.json",
+              "MainScenePath": "..\\Assets\\Scenes\\04_MainGameScene.json",
               "AllowNumberKeys": true,
               "AllowStartAdvance": false
             },
@@ -575,3 +575,5 @@
     }
   ]
 }
+
+
