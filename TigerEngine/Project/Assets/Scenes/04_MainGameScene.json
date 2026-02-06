@@ -5973,6 +5973,47 @@
         ]
       },
       "type": "GameObject"
+    },
+    {
+      "properties": {
+        "ID": 270.0,
+        "Name": "SceneFlowManager",
+        "ParentID": -1,
+        "components": {
+          "Transform": {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          "SceneFlowManager": {
+            "properties": {
+              "StartScenePath": "..\\Assets\\Scenes\\01_StartScene.json",
+              "IntroScenePath": "..\\Assets\\Scenes\\02_IntroScene.json",
+              "TutorialScenePath": "..\\Assets\\Scenes\\03_TutorialScene.json",
+              "MainScenePath": "..\\Assets\\Scenes\\04_MainGameScene.json",
+              "AllowNumberKeys": true,
+              "AllowStartAdvance": false
+            },
+            "type": "SceneFlowManager"
+          }
+        }
+      },
+      "type": "GameObject"
     }
   ],
   "worldData": [
@@ -6068,3 +6109,5 @@
     }
   ]
 }
+
+

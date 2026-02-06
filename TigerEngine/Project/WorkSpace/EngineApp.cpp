@@ -437,10 +437,6 @@ void EngineApp::OnInputProcess(const Keyboard::State &KeyState, const Keyboard::
 #include "99_Test/PhysicsTest/PhysicsTestScript.h"
 #include "99_Test/PhysicsTest/GroundTestScript.h"
 #include "99_Test/PhysicsTest/CCTTest.h"
-#include "99_Test/AudioTest/AudioTestController.h"
-#include "99_Test/AudioTest/AudioManagerComponent.h"
-#include "99_Test/MiniMapTest/MiniMapTestScript.h"
-
 
 #include "Components/UI/Image.h"
 #include "Components/RectTransform.h"
@@ -459,9 +455,6 @@ void EngineApp::RegisterAllComponents()
 
     cf.Register<AudioListenerComponent>("AudioListenerComponent", ComponentCategory::Audio);
     cf.Register<AudioSourceComponent>("AudioSourceComponent", ComponentCategory::Audio);
-    cf.Register<AudioTestController>("AudioTestController", ComponentCategory::Script);
-    cf.Register<AudioManagerComponent>("AudioManagerComponent", ComponentCategory::Script);
-    cf.Register<MiniMapTestScript>("MiniMapTestScript", ComponentCategory::Script);
 
     cf.Register<PhysicsComponent>("PhysicsComponent", ComponentCategory::Physics);
     cf.Register<CharacterControllerComponent>("CharacterControllerComponent", ComponentCategory::Physics);
