@@ -312,6 +312,13 @@ void PlayerController::SerachObjectInteraction(float dt)
         // item get or fail
         if (item)
         {
+            // 미니맵 연결
+            if (item->itemType == ItemType::Piece)
+            {
+                // TODO :: 아론님 트리거 코드 호출
+            }
+
+            // item get
             visualizer->VisualOnItem(item->itemId);
             inventory->AddItem(std::move(item));
         }
