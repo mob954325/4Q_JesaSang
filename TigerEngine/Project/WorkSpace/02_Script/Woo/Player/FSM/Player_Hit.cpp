@@ -9,6 +9,9 @@ void Player_Hit::Enter()
     // set speed
     player->curSpeed = player->walkSpeed * player->hitSpeedUpRate;
 
+    // set animation
+    player->animController->ChangeState("Hit");
+
     // set sense radius
     player->curSenseRadius = player->walkSenseRadius;
     if (player->inventory->GetCurItemType() == ItemType::Ingredient)

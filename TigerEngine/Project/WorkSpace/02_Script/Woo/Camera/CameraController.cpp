@@ -54,7 +54,7 @@ void CameraController::OnStart()
     transform->SetEuler(DegToRad(modeEulerDeg));   // 처음은 중앙 고정
 }
 
-void CameraController::OnLateUpdate(float delta)
+void CameraController::OnFixedUpdate(float delta)
 {
     if (!transform || !targetTr)
     {
