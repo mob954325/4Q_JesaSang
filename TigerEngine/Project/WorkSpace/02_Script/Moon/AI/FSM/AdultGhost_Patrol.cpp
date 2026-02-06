@@ -11,7 +11,7 @@ void AdultGhost_Patrol::Enter()
 
 
     // [ 순찰 : 목표 좌표 정하고 순찰 시작 ]
-    agent->patrolSpeed = 1.2f;  // 순찰 속도 (상태마다 변경)
+    agent->patrolSpeed = 0.8f;  // 속도 
     agent->SetWaitTime(3.0f);   // 목표 지점에서 대기 시간 
 
     if (!agent->hasTarget && !agent->isWaiting)
@@ -31,17 +31,22 @@ void AdultGhost_Patrol::ChangeStateLogic()
 
 void AdultGhost_Patrol::Update(float deltaTime)
 {
+    // [ 기척 감지 ] 
+    // 시야 밖에서 기척 감지 -> GetCurSenseRadiuse 로 확인 
+    // 플레이어와 귀신 사이의 거리가 GetCurSenseRadiuse 보다 짧으면 => 기척 감지 
+
+    // [ 함정 오브젝트 연결 ]
+
+    // [ 은신 오브젝트 연결 ]
+
 }
 
 void AdultGhost_Patrol::FixedUpdate(float deltaTime)
 {
-    
 }
 
 void AdultGhost_Patrol::Exit()
 {
-    auto* agent = adultGhost->agent;
-
     agent->hasTarget = false;
     agent->path.clear();
     agent->isWaiting = false;

@@ -15,6 +15,9 @@ public:
     AgentComponent() = default;
     ~AgentComponent() = default;
 
+public:
+    bool externalControl = false; // FSM이 제어중인가? 
+
     CharacterControllerComponent* cct = nullptr;
 
     int cx = 0, cy = 0;             // 현재 위치 (중앙 기준)

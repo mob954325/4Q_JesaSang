@@ -3,6 +3,7 @@
 
 void AgentSystem::Register(AgentComponent* a) 
 { 
+    agents.push_back(a);
     pending_agents.push_back(a);
 }
 void AgentSystem::UnRegister(AgentComponent* a)

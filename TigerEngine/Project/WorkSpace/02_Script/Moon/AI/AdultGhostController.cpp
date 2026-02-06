@@ -45,9 +45,6 @@ void AdultGhostController::OnStart()
         return;
     }
 
-    // 기척 감지(순찰 → 탐색) : 시야 밖에서 기척(발소리 / 음식냄새) 감지
-    // 함정 감지(순찰 → 탐색) : 시야 밖에서 함정 파동 감지
-
     // load animation
     //LoadAnimation();
 
@@ -67,19 +64,11 @@ void AdultGhostController::OnUpdate(float delta)
         curState->ChangeStateLogic();
         curState->Update(delta);
     }
-
-    // interaction cheak
-    // InteractionCheak(delta);
 }
 
 
 void AdultGhostController::OnFixedUpdate(float dt)
 {
-    if (!agent || !vision) return;
-
-    // AgentComponent의 경로 따라 이동 : TODO 수정 필요 
-    agent->OnFixedUpdate(dt);  
-
     // FSM 
     if (curState)
     {
@@ -120,22 +109,5 @@ void AdultGhostController::ChangeState(AdultGhostState nextState)
 
 void AdultGhostController::LoadAnimation()
 {
-    //// 애니메이션 파일 로드
-    //FBXResourceManager::Instance().LoadAnimationByPath(fbxData->GetFBXInfo(), "..\\Assets\\Resource\\Animation\\ani_walk_character.fbx", "Idle");
 
-    //// 클립 생성
-    //auto idleClip = animController->FindClip("Idle");
-
-    //if (!idleClip)
-    //{
-    //    OutputDebugStringW(L"[CCTTest] Clip not found! 이름 확인 필요\n");
-    //    return;
-    //}
-
-    //// 상태 등록
-    //animController->AddState(std::make_unique<AnimationState>("Idle", idleClip, animController));
-
-    //// 시작
-    //animController->ChangeState("Idle");
 }
-

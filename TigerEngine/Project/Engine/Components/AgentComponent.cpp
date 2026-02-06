@@ -95,6 +95,9 @@ void AgentComponent::OnFixedUpdate(float dt)
     auto grid = GridSystem::Instance().GetMainGrid();
     if (!grid) return;
 
+    if (externalControl)
+        return; // FSM이 직접 path/target을 관리
+
     // 대기 중이면 시간 감소 
     if (isWaiting)
     {
@@ -145,7 +148,6 @@ void AgentComponent::OnFixedUpdate(float dt)
         // 경로가 다 끝나면 잠시 멈췄다가 목표 재선택
         if (path.empty())
         {
-            // PickRandomTarget();
             isWaiting = true;
             waitTimer = waitDuration;
             hasTarget = false;  // 다음 탐색은 대기 후

@@ -7,8 +7,11 @@ private:
     float chaseTimer = 0.0f;        // 탐색 시작
     float forceChaseTime = 3.0f;
 
+    float repathTimer = 0.f;        // 경로 재계산 타이머
+    float repathInterval = 0.3f;    // 몇 초마다 재계산할지
+
     AgentComponent* agent = nullptr;
-    GameObject* player = nullptr;
+    GameObject* aiTarget = nullptr;
 
 public:
     AdultGhost_Chase(AdultGhostController* _adultGhost) : IAdultGhostState(_adultGhost) {}
