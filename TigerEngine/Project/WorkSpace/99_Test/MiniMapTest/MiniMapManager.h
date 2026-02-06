@@ -26,8 +26,8 @@ public:
     std::string mainPingObjectName = "UI_MiniMap_MainPing";
     std::string gaugeObjectName = "UI_MiniMap_GaugeFill";
     std::string gaugeBgObjectName = "UI_MiniMap_GaugeBG";
-    std::string baseMapPath = "..\\Assets\\Resource\\MiniMap\\BaseMap.png";
-    std::string completeMapPath = "..\\Assets\\Resource\\MiniMap\\CompleteMap.png";
+    std::string baseMapPath = "..\\Assets\\Resource\\MiniMap\\MAP_GR.png";
+    std::string completeMapPath = "..\\Assets\\Resource\\MiniMap\\Map.png";
 
     std::string itemPingObjectName1 = "UI_MiniMap_ItemPing_01";
     std::string itemPingObjectName2 = "UI_MiniMap_ItemPing_02";
