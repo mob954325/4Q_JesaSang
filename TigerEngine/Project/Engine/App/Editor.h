@@ -146,6 +146,14 @@ private:
         virtual void Redo(Editor& ed) = 0;
     };
 
+    struct GizmoTransformCommand : ICommand
+    {
+        uint32_t objectId;
+        Vector3 beforePos, afterPos, beforeScale, afterScale;
+        Quaternion beforeRot, afterRot;
+        void Undo(Editor&) override; void Redo(Editor&) override;
+    };
+
     // Transform 변경(이동/회전/스케일)
     struct TransformEditCommand : ICommand
     {

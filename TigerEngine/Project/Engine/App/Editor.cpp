@@ -26,12 +26,80 @@
 #include "../Components/UI/Image.h"
 #include "../Components/VisionComponent.h"
 
+#include <unordered_map>
+#include <cmath>
 
 // Payload
 // Prefab payload
 static const char* kPayload_Prefab = "DND_PREFAB";
 // 오브젝트 이동 드랍을 위한 payload
 static const char* kPayload_GameObject = "DND_GAMEOBJECT";
+
+// ===============================
+// Gizmo Undo/Redo Support
+// ===============================
+namespace
+{
+    struct GizmoSession
+    {
+        bool active = false;
+        uint32_t objectId = 0;
+        ImGuizmo::OPERATION op = ImGuizmo::TRANSLATE;
+
+        DirectX::SimpleMath::Vector3 beforePos{};
+        DirectX::SimpleMath::Vector3 beforeScale{};
+        DirectX::SimpleMath::Quaternion beforeRot{};
+
+        // last applied snapshot (optional)
+        DirectX::SimpleMath::Vector3 lastPos{};
+        DirectX::SimpleMath::Vector3 lastScale{};
+        DirectX::SimpleMath::Quaternion lastRot{};
+    };
+
+    static bool NearlyEqual(float a, float b, float eps = 1e-5f)
+    {
+        return std::fabs(a - b) <= eps;
+    }
+
+    static bool NearlyEqual(const DirectX::SimpleMath::Vector3& a, const DirectX::SimpleMath::Vector3& b, float eps = 1e-5f)
+    {
+        return NearlyEqual(a.x, b.x, eps) && NearlyEqual(a.y, b.y, eps) && NearlyEqual(a.z, b.z, eps);
+    }
+
+    static bool NearlyEqual(const DirectX::SimpleMath::Quaternion& a, const DirectX::SimpleMath::Quaternion& b, float eps = 1e-5f)
+    {
+        return NearlyEqual(a.x, b.x, eps) && NearlyEqual(a.y, b.y, eps) && NearlyEqual(a.z, b.z, eps) && NearlyEqual(a.w, b.w, eps);
+    }
+
+    static void ExtractLocalTRS(Transform* tr,
+        DirectX::SimpleMath::Vector3& outPos,
+        DirectX::SimpleMath::Quaternion& outRot,
+        DirectX::SimpleMath::Vector3& outScale)
+    {
+        if (!tr)
+            return;
+
+        DirectX::SimpleMath::Matrix world = tr->GetWorldMatrix();
+        DirectX::SimpleMath::Matrix local = world;
+
+        if (Transform* parent = tr->GetParent())
+        {
+            DirectX::SimpleMath::Matrix parentWorld = parent->GetWorldMatrix();
+            DirectX::SimpleMath::Matrix invParent = parentWorld.Invert();
+            local = world * invParent;
+        }
+
+        DirectX::XMVECTOR s{};
+        DirectX::XMVECTOR r{};
+        DirectX::XMVECTOR p{};
+        if (DirectX::XMMatrixDecompose(&s, &r, &p, local))
+        {
+            outScale = DirectX::SimpleMath::Vector3(s);
+            outRot = DirectX::SimpleMath::Quaternion(r);
+            outPos = DirectX::SimpleMath::Vector3(p);
+        }
+    }
+}
 
 // 사용자 정의 미리 등록 (SimpleMath 등)
 RTTR_REGISTRATION
@@ -107,16 +175,16 @@ void Editor::Update()
 {
     Scene* currScene = SceneSystem::Instance().GetCurrentScene().get();
 
-    currScene->ForEachGameObject([](GameObject* obj){
-        if(obj->GetName() == "FreeCamera") return;        
+    currScene->ForEachGameObject([](GameObject* obj) {
+        if (obj->GetName() == "FreeCamera") return;
         obj->UpdateAABB();
-     });    
+        });
 
     CheckObjectPicking();
     CheckObjectDeleteKey();
 }
 
-void Editor::Render(HWND &hwnd)
+void Editor::Render(HWND& hwnd)
 {
     ImGuizmo::BeginFrame();
 
@@ -165,10 +233,10 @@ void Editor::RenderMenuBar(HWND& hwnd)
         if (ImGui::BeginMenu("File"))
         {
             if (ImGui::MenuItem("Save current scene"))
-			{
-				SaveCurrentScene(hwnd);
-			}
-            else if(ImGui::MenuItem("Load scene"))
+            {
+                SaveCurrentScene(hwnd);
+            }
+            else if (ImGui::MenuItem("Load scene"))
             {
                 LoadScene(hwnd);
             }
@@ -240,14 +308,14 @@ void Editor::RenderHierarchy()
 
     // 각 오브젝트 표시
     scene->ForEachGameObject([this](GameObject* obj)
-    {
-        Transform* tr = obj->GetComponent<Transform>();
-        if (!tr) return;
+        {
+            Transform* tr = obj->GetComponent<Transform>();
+            if (!tr) return;
 
-        if (tr->GetParent() != nullptr) return; // 루트만
+            if (tr->GetParent() != nullptr) return; // 루트만
 
-        DrawHierarchyNode(obj);
-    });
+            DrawHierarchyNode(obj);
+        });
 
     // 빈 공간을 dropspace로 만들기
     DrawHierarchyDropSpace();
@@ -334,7 +402,7 @@ void Editor::DrawHierarchyNode(GameObject* obj)
                         dtr->SetParent(tr);
                     }
                 }
-            }         
+            }
         }
 
         // 프리팹 -> 오브젝트 부모 연결 후 구성
@@ -366,18 +434,15 @@ void Editor::DrawHierarchyNode(GameObject* obj)
 
     ImGui::PopID();
 }
+
 void Editor::DrawHierarchyDropSpace()
 {
-    // 2. 빈 공간을 드롭 타겟으로 지정한다.
     ImVec2 avail = ImGui::GetContentRegionAvail(); // 창에서 사용 가능한 남은 공간
+    if (avail.y < 1.0f) avail.y = 1.0f;
 
-    if (avail.y < 1.0f) avail.y = 1.0f; // 최소 남은 공간 == 1.0f
-
-    // 배경 전체(남은 영역)를 아이템으로 만든다
     ImGui::InvisibleButton("##HierarchyBlankSpace", avail,
         ImGuiButtonFlags_MouseButtonLeft | ImGuiButtonFlags_MouseButtonRight);
 
-    // DragDrop 확인
     if (ImGui::BeginDragDropTarget())
     {
         // 루트 빼기
@@ -417,7 +482,6 @@ void Editor::DrawHierarchyDropSpace()
 
         ImGui::EndDragDropTarget();
     }
-
 }
 
 void Editor::RenderPrefabWindow(HWND& hwnd)
@@ -494,7 +558,6 @@ void Editor::RenderPrefabWindow(HWND& hwnd)
         ImGui::SameLine();
         if (ImGui::Button("Save Prefab"))
         {
-            // 파일 저장 다이얼로그
             OPENFILENAMEA ofn = {};
             char szFile[260] = {};
 
@@ -512,9 +575,8 @@ void Editor::RenderPrefabWindow(HWND& hwnd)
             ofn.lpstrDefExt = "json";
 
             if (GetSaveFileNameA(&ofn) != TRUE)
-                return; // 사용자가 취소함
+                return;
 
-            // GameWorld를 파일에 저장
             if (SavePrefabToJson(hwnd, prefabs[selectedPrefabIndex], szFile))
             {
                 MessageBoxA(hwnd, "Scene saved successfully!", "Save", MB_OK | MB_ICONINFORMATION);
@@ -572,7 +634,6 @@ void Editor::RenderPrefabWindow(HWND& hwnd)
 
 std::string Editor::MakeUniquePrefabName(const std::string& base, const std::vector<PrefabEntry>& list)
 {
-    // base가 이미 있으면 base(1), base(2)...
     auto exists = [&](const std::string& n) {
         for (auto& e : list) if (e.name == n) return true;
         return false;
@@ -691,13 +752,10 @@ GameObject* Editor::InstantiatePrefabFromJson(const std::vector<std::string>& js
     return created.front();
 }
 
-
 void Editor::CollectSubtree(GameObject* root, std::vector<std::string>& out)
 {
     if (!root || root->IsDestory()) return;
 
-    // Serialize가 root 전체를 준다면, properties만 쓰는 게 씬 로드 로직과 완전히 호환됨
-    // - root->Serialize()가 {"type","properties"} 형태라고 가정
     nlohmann::json objData = root->Serialize();
     if (objData.contains("properties"))
     {
@@ -717,22 +775,16 @@ void Editor::CollectSubtree(GameObject* root, std::vector<std::string>& out)
 
 bool Editor::SavePrefabToJson(HWND& hwnd, PrefabEntry& data, const char* filePath)
 {
-    // prefabs
-    //  obj1
-    //  obj2
-    //  ...
-
     nlohmann::json root;
     root["prefab"] = nlohmann::json::array();
-    // 저장할 json 구성하기
+
     for (const std::string& s : data.jsons)
     {
         nlohmann::json props = nlohmann::json::parse(s, nullptr, false);
         if (props.is_discarded()) continue;
-        root["prefab"].push_back(props); // 각 배열마다 오브젝트 내용 저장
+        root["prefab"].push_back(props);
     }
 
-    // 파일 이름 -> 프리팹 이름
     std::ofstream file(filePath);
     if (!file.is_open()) return false;
 
@@ -758,7 +810,7 @@ void Editor::LoadPrefabsFromFolder(const std::string& folder)
         if (!entry.is_regular_file()) continue;
 
         fs::path p = entry.path();
-        if (p.extension() != ".json") continue; // .json 확장자인지 확ㅇ니
+        if (p.extension() != ".json") continue;
 
         PrefabEntry prefab;
         if (LoadPrefabFromJsonFile(p.string(), prefab))
@@ -789,7 +841,6 @@ bool Editor::LoadPrefabFromJsonFile(const std::string& filepath, PrefabEntry& ou
     }
     file.close();
 
-    // 저장 포맷: { "prefab": [ {properties...}, {properties...}, ... ] }
     if (!root.contains("prefab") || !root["prefab"].is_array())
         return false;
 
@@ -804,7 +855,7 @@ bool Editor::LoadPrefabFromJsonFile(const std::string& filepath, PrefabEntry& ou
         return false;
 
     std::filesystem::path p(filepath);
-    outPrefab.name = p.stem().string(); // stem : 일반 파일에서 확장자를 제거한 이름을 반환
+    outPrefab.name = p.stem().string();
 
     return true;
 }
@@ -813,7 +864,7 @@ void Editor::RenderInspector()
 {
     ImGui::Begin("Inspector");
     {
-        if(selectedObject == nullptr)
+        if (selectedObject == nullptr)
         {
             ImGui::Text("No gameObject selected");
         }
@@ -828,8 +879,8 @@ void Editor::RenderInspector()
 
                 for (auto& prop : t.get_properties())
                 {
-                    rttr::variant value = prop.get_value(obj);   // 프로퍼티 값
-                    std::string name = prop.get_name().to_string();         // 프로퍼티 이름
+                    rttr::variant value = prop.get_value(obj);
+                    std::string name = prop.get_name().to_string();
                     if (value.is_type<std::string>() && name == "Name")
                     {
                         ImGui::Text("Name : %s", name.c_str());
@@ -857,13 +908,9 @@ void Editor::RenderInspector()
                 /* ---------------------------- add component 내용 ---------------------------- */
                 if (ImGui::Button("Add Component"))
                 {
-                    ImGui::OpenPopup("ComponentMenu"); // 1. popup 열라고 명령 
-                    // open component menu
-                    // - select component -> ???
-                    // - call obj->AddComponent<T>()
+                    ImGui::OpenPopup("ComponentMenu");
                 }
 
-                // 2. 해당 ID를 가진 팝업이 열려있는지 확인하고 그림
                 if (ImGui::BeginPopup("ComponentMenu"))
                 {
                     DrawAddComponentPopup(obj);
@@ -882,8 +929,8 @@ void Editor::RenderInspector()
                         ImGui::NewLine();
                         ImGui::Separator();
                     }
-                } // 컴포넌트 내용 출력 end
-            } // obj is destroy end
+                }
+            }
         }
     }
     ImGui::End();
@@ -907,17 +954,13 @@ static const char* CatName(ComponentCategory c)
 void Editor::DrawAddComponentPopup(GameObject* obj)
 {
     auto& entries = ComponentFactory::Instance().GetRegisteredComponents();
-    // entries: unordered_map<string, ComponentEntry> 라고 가정
 
-    // bucket 만들기 (한 번만)
     std::map<ComponentCategory, std::vector<const ComponentEntry*>> buckets;
     for (auto& [k, e] : entries)
         buckets[e.category].push_back(&e);
 
     for (auto& [cat, list] : buckets)
     {
-        // Transform 같은 금지 항목만 있는 카테고리는 숨기고 싶으면 여기서 필터링 가능
-
         if (ImGui::BeginMenu(CatName(cat)))
         {
             std::sort(list.begin(), list.end(),
@@ -930,7 +973,6 @@ void Editor::DrawAddComponentPopup(GameObject* obj)
                 if (ImGui::MenuItem(e->name.c_str()))
                 {
                     e->creator(obj);
-                    
                     ImGui::CloseCurrentPopup();
                 }
             }
@@ -948,12 +990,10 @@ void Editor::RenderPlayModeControls()
     auto& playMode = PlayModeSystem::Instance();
     PlayModeState currentState = playMode.GetPlayMode();
 
-    // 현재 상태에 따라 버튼 색상 설정
-    ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.2f, 0.7f, 0.2f, 1.0f)); // Play - 초록색
+    ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.2f, 0.7f, 0.2f, 1.0f));
     ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(0.3f, 0.8f, 0.3f, 1.0f));
     ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4(0.1f, 0.6f, 0.1f, 1.0f));
 
-    // Play 버튼
     if (ImGui::Button("Play"))
     {
         playMode.SetPlayMode(PlayModeState::Playing);
@@ -963,7 +1003,6 @@ void Editor::RenderPlayModeControls()
 
     ImGui::SameLine();
 
-    // Pause 버튼 - 노란색
     ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.7f, 0.7f, 0.2f, 1.0f));
     ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(0.8f, 0.8f, 0.3f, 1.0f));
     ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4(0.6f, 0.6f, 0.1f, 1.0f));
@@ -984,7 +1023,6 @@ void Editor::RenderPlayModeControls()
 
     ImGui::SameLine();
 
-    // Stop 버튼 - 빨간색
     ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.7f, 0.2f, 0.2f, 1.0f));
     ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(0.8f, 0.3f, 0.3f, 1.0f));
     ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4(0.6f, 0.1f, 0.1f, 1.0f));
@@ -1001,22 +1039,21 @@ void Editor::RenderPlayModeControls()
     ImGui::Separator();
     ImGui::SameLine();
 
-    // 현재 상태 표시
     const char* stateText = "";
     ImVec4 stateColor;
     switch (currentState)
     {
     case PlayModeState::Stopped:
         stateText = "Stopped";
-        stateColor = ImVec4(0.7f, 0.7f, 0.7f, 1.0f); // 회색
+        stateColor = ImVec4(0.7f, 0.7f, 0.7f, 1.0f);
         break;
     case PlayModeState::Playing:
         stateText = "Playing";
-        stateColor = ImVec4(0.2f, 0.7f, 0.2f, 1.0f); // 초록색
+        stateColor = ImVec4(0.2f, 0.7f, 0.2f, 1.0f);
         break;
     case PlayModeState::Paused:
         stateText = "Paused";
-        stateColor = ImVec4(0.7f, 0.7f, 0.2f, 1.0f); // 노란색
+        stateColor = ImVec4(0.7f, 0.7f, 0.2f, 1.0f);
         break;
     }
 
@@ -1069,8 +1106,8 @@ void Editor::RenderShadowMap()
         ImGui::Image(
             (ImTextureID)shadowSRV,
             size,
-            ImVec2(0, 1),   
-            ImVec2(1, 0)    
+            ImVec2(0, 1),
+            ImVec2(1, 0)
         );
 
         ImGui::End();
@@ -1129,14 +1166,14 @@ void Editor::RenderGizmoSettings()
     ImGuiIO& io = ImGui::GetIO();
     if (!io.WantCaptureKeyboard && !io.WantTextInput)
     {
-        if (ImGui::IsKeyPressed(ImGuiKey_W))
-            gizmoOperation = ImGuizmo::TRANSLATE;
-        if (ImGui::IsKeyPressed(ImGuiKey_E))
-            gizmoOperation = ImGuizmo::ROTATE;
-        if (ImGui::IsKeyPressed(ImGuiKey_R))
-            gizmoOperation = ImGuizmo::SCALE;
-        if (ImGui::IsKeyPressed(ImGuiKey_Q))
-            gizmoMode = (gizmoMode == ImGuizmo::LOCAL) ? ImGuizmo::WORLD : ImGuizmo::LOCAL;
+        //if (ImGui::IsKeyPressed(ImGuiKey_W))
+        //    gizmoOperation = ImGuizmo::TRANSLATE;
+        //if (ImGui::IsKeyPressed(ImGuiKey_E))
+        //    gizmoOperation = ImGuizmo::ROTATE;
+        //if (ImGui::IsKeyPressed(ImGuiKey_R))
+        //    gizmoOperation = ImGuizmo::SCALE;
+        //if (ImGui::IsKeyPressed(ImGuiKey_Q))
+        //    gizmoMode = (gizmoMode == ImGuizmo::LOCAL) ? ImGuizmo::WORLD : ImGuizmo::LOCAL;
     }
 
     ImGui::End();
@@ -1169,13 +1206,25 @@ void Editor::RenderGizmo()
         return;
     if (!selectedObject || selectedObject->IsDestory())
         return;
+
     Transform* transform = selectedObject->GetTransform();
     if (!transform)
         return;
+
     Camera* cam = CameraSystem::Instance().GetFreeCamera();
     if (!cam)
         return;
 
+    // ---------------------------------------
+    // Gizmo session tracking for Undo/Redo
+    // ---------------------------------------
+    static GizmoSession s_session;
+    static bool s_prevUsing = false;
+
+    // If selection changed while using, finalize previous session defensively.
+    bool usingNow = ImGuizmo::IsUsing();
+
+    // Prepare matrices
     Matrix view = cam->GetView();
     Matrix projection = cam->GetProjection();
     Matrix world = transform->GetWorldMatrix();
@@ -1225,12 +1274,73 @@ void Editor::RenderGizmo()
         snapPtr
     );
 
-    if (manipulated && ImGuizmo::IsUsing())
+    // detect session start/end
+    usingNow = ImGuizmo::IsUsing();
+
+    // session start: capture "before"
+    if (!s_prevUsing && usingNow)
+    {
+        s_session.active = true;
+        s_session.objectId = selectedObject->GetId();
+        s_session.op = gizmoOperation;
+
+        ExtractLocalTRS(transform, s_session.beforePos, s_session.beforeRot, s_session.beforeScale);
+        s_session.lastPos = s_session.beforePos;
+        s_session.lastRot = s_session.beforeRot;
+        s_session.lastScale = s_session.beforeScale;
+    }
+
+    if (manipulated && usingNow)
     {
         Matrix newWorld;
         memcpy(&newWorld, matrix, sizeof(matrix));
         ApplyGizmoToTransform(transform, newWorld);
+
+        // Update last snapshot (not strictly required, but helpful)
+        ExtractLocalTRS(transform, s_session.lastPos, s_session.lastRot, s_session.lastScale);
     }
+
+    // session end: push undo command once
+    if (s_prevUsing && !usingNow)
+    {
+        if (s_session.active && selectedObject && !selectedObject->IsDestory())
+        {
+            // ensure we're still on the same object id; if not, try find by id
+            uint32_t id = s_session.objectId;
+            GameObject* obj = FindGameObjectById(id);
+            if (obj && !obj->IsDestory())
+            {
+                Transform* tr = obj->GetTransform();
+                if (tr)
+                {
+                    DirectX::SimpleMath::Vector3 afterPos{}, afterScale{};
+                    DirectX::SimpleMath::Quaternion afterRot{};
+                    ExtractLocalTRS(tr, afterPos, afterRot, afterScale);
+
+                    bool moved = !NearlyEqual(s_session.beforePos, afterPos);
+                    bool scaled = !NearlyEqual(s_session.beforeScale, afterScale);
+                    bool rotated = !NearlyEqual(s_session.beforeRot, afterRot);
+
+                    if (moved || scaled || rotated)
+                    {
+                        // Gizmo 전용 Command를 만들어서 한 번에 TRS 복원
+                        auto cmd = std::make_unique<GizmoTransformCommand>();
+                        cmd->objectId = id;
+                        cmd->beforePos = s_session.beforePos;
+                        cmd->beforeRot = s_session.beforeRot;
+                        cmd->beforeScale = s_session.beforeScale;
+                        cmd->afterPos = afterPos;
+                        cmd->afterRot = afterRot;
+                        cmd->afterScale = afterScale;
+                        PushCommand(std::move(cmd));
+                    }
+                }
+            }
+        }
+        s_session.active = false;
+    }
+
+    s_prevUsing = usingNow;
 }
 
 void Editor::ApplyGizmoToTransform(Transform* transform, const Matrix& worldMatrix)
@@ -1265,25 +1375,20 @@ void Editor::ApplyGizmoToTransform(Transform* transform, const Matrix& worldMatr
 
 void Editor::RenderWorldManager()
 {
-    // Read
-    WorldManager& wm = WorldManager::Instance(); // 또는 Instance() 등 프로젝트 방식대로
+    WorldManager& wm = WorldManager::Instance();
 
     rttr::instance inst = wm;
     rttr::type t = rttr::type::get(inst);
 
-    // 1. worldManager의 인스턴스를 렌더링한다. ( 구조체, 클래스 내용 제외 )
-    ReadVariants(inst); 
+    ReadVariants(inst);
 
     ImGui::Separator();
-    // 2. shadow data
     ReadVariants(wm.shadowData);
 
     ImGui::Separator();
-    // 3. postProcess data
     ReadVariants(wm.postProcessData);
 
     ImGui::Separator();
-    // 4. FrameWorld data
     ReadVariants(wm.frameData);
 }
 
@@ -1294,34 +1399,26 @@ void Editor::RenderComponentInfo(std::string compName, T* comp)
 
     rttr::type t = rttr::type::get(*comp);
 
-    // 표시용 라벨 + ID 분리
     std::string headerLabel = t.get_name().to_string();
     std::string headerId = "##" + std::to_string((uintptr_t)comp);
     std::string header = headerLabel + headerId;
 
-    // 헤더
     bool open = ImGui::CollapsingHeader(header.c_str(), ImGuiTreeNodeFlags_DefaultOpen);
 
-    // 헤더 오른쪽에 Remove 버튼(Transform 제외)
     if (compName != "Transform")
     {
-        // 같은 줄에 오른쪽으로 밀기 (대충)
-        // float avail = ImGui::GetContentRegionAvail().x;
-        // ImGui::SameLine(ImGui::GetCursorPosX() + avail - 110.0f);
-
         ImGui::PushID(comp);
         if (ImGui::SmallButton("Remove"))
         {
             selectedObject->RemoveComponent(comp);
             ImGui::PopID();
-            return; // 삭제했으면 더 그리지 말기(댕글링 방지)
+            return;
         }
         ImGui::PopID();
     }
 
     if (!open) return;
 
-    // 내용은 헤더가 열렸을 때만
     if (compName == "Transform")
     {
         for (auto& prop : t.get_properties())
@@ -1349,7 +1446,7 @@ void Editor::RenderComponentInfo(std::string compName, T* comp)
                 if (ImGui::IsItemActivated())
                 {
                     TransformEditSession s;
-                    s.start = rotRad; // before (rad)
+                    s.start = rotRad;
                     s.kind = kind;
                     s.active = true;
                     transformSessions[key] = s;
@@ -1407,7 +1504,6 @@ void Editor::RenderComponentInfo(std::string compName, T* comp)
                 else if (name == "Position") kind = TransformEditCommand::Kind::Position;
                 else
                 {
-                    // 다른 Vector3 프로퍼티면 기존 동작만 (undo 기록 제외)
                     if (ImGui::DragFloat3(name.c_str(), &vec.x, 0.1f))
                     {
                         prop.set_value(*comp, vec);
@@ -1428,7 +1524,7 @@ void Editor::RenderComponentInfo(std::string compName, T* comp)
                 if (ImGui::IsItemActivated())
                 {
                     TransformEditSession s;
-                    s.start = value.get_value<DirectX::SimpleMath::Vector3>(); // before
+                    s.start = value.get_value<DirectX::SimpleMath::Vector3>();
                     s.kind = kind;
                     s.active = true;
                     transformSessions[key] = s;
@@ -1473,10 +1569,8 @@ void Editor::RenderComponentInfo(std::string compName, T* comp)
         return;
     }
 
-
     if (compName == "FBXData")
     {
-        // FileDialog 키 유니크하게
         std::string keyNonStatic = "ChooseFileDlgKey##" + std::to_string((uintptr_t)comp);
         std::string keyStatic = "ChooseStaticFileDlgKey##" + std::to_string((uintptr_t)comp);
 
@@ -1577,7 +1671,6 @@ void Editor::RenderComponentInfo(std::string compName, T* comp)
 
     if (compName == "Image")
     {
-
         for (auto& prop : t.get_properties())
         {
             std::string keyUITex = "ChooseUITexDlgKey##" + std::to_string((uintptr_t)comp);
@@ -1611,7 +1704,7 @@ void Editor::RenderComponentInfo(std::string compName, T* comp)
             }
         }
     }
-    
+
     if (compName == "AudioSourceComponent" || compName == "AudioManagerComponent")
     {
         for (auto& prop : t.get_properties())
@@ -1669,26 +1762,16 @@ void Editor::RenderComponentInfo(std::string compName, T* comp)
         return;
     }
 
-    // 기본
     ImGui::PushID(comp);
     ReadVariants(*comp);
     ImGui::PopID();
 }
 
-
 void Editor::RenderDebugAABBDraw()
 {
-    // 렌더타겟 다시 설정 (ImGui가 변경했을 수 있음)
     context->OMSetRenderTargets(1, renderTargetView.GetAddressOf(), depthStencliView.Get());
 
-    // DebugDraw의 BasicEffect 설정
-    
-    Camera* cam{}; 
-    //if (PlayModeSystem::Instance().IsPlaying())
-    //{
-    //    cam = CameraSystem::Instance().GetCurrCamera();
-    //}
-    //else
+    Camera* cam{};
     {
         cam = CameraSystem::Instance().GetFreeCamera();
     }
@@ -1698,31 +1781,14 @@ void Editor::RenderDebugAABBDraw()
     DebugDraw::g_BatchEffect->SetWorld(Matrix::Identity);
     DebugDraw::g_BatchEffect->Apply(context.Get());
 
-    // InputLayout 설정
     context->IASetInputLayout(DebugDraw::g_pBatchInputLayout.Get());
 
-    // 블렌드 스테이트 설정 (깊이 테스트 활성화)
     context->OMSetBlendState(DebugDraw::g_States->AlphaBlend(), nullptr, 0xFFFFFFFF);
     context->OMSetDepthStencilState(DebugDraw::g_States->DepthRead(), 0);
     context->RSSetState(DebugDraw::g_States->CullNone());
 
-
-    //// 선택된 오브젝트는 밝은 초록색
-    //SceneSystem::Instance().GetCurrentScene()->ForEachGameObject([&](GameObject* gameObject) {
-    //    if (gameObject->IsDestory()) return;
-
-    //    XMVECTOR color = XMVectorSet(0.0f, 1.0f, 0.0f, 1.0f);
-    //    DebugDraw::g_Batch->Begin();
-    //    DebugDraw::Draw(DebugDraw::g_Batch.get(), gameObject->GetAABB(), color);
-    //    DebugDraw::g_Batch->End();
-    // });
-
-     // ===============================
-    // Debug Draw Begin
-    // ===============================
     DebugDraw::g_Batch->Begin();
 
-    // AABB
     SceneSystem::Instance().GetCurrentScene()->ForEachGameObject([&](GameObject* gameObject)
         {
             if (gameObject->IsDestory()) return;
@@ -1733,21 +1799,14 @@ void Editor::RenderDebugAABBDraw()
             DebugDraw::Draw(DebugDraw::g_Batch.get(), box, color);
         });
 
-    // Grid 
     RenderDebugGrid();
-
-    // Vision Ray
     RenderDebugVision();
 
-    // PhysX
     if (isPhysicsDebugOpen)
     {
         PhysicsSystem::Instance().DrawPhysXActors();
     }
 
-    // ===============================
-    // Debug Draw End
-    // ===============================
     DebugDraw::g_Batch->End();
 }
 
@@ -1757,18 +1816,11 @@ void Editor::RenderDebugGrid()
     if (!grid) return;
 
     float defaultYThickness = 0.01f;
-    float highlightYThickness = 10.0f; // 원점과 걸을 수 없는 그리드 두께
+    float highlightYThickness = 10.0f;
 
-    /*int centerX = grid->width / 2;
-    int centerY = grid->height / 2;*/
     int centerX = (grid->width - 1) / 2;
     int centerY = (grid->height - 1) / 2;
 
-
-    // 중앙 기준 좌표: -centerX ~ +centerX-1, -centerY ~ +centerY-1
-    //for (int cy = -centerY; cy < grid->height - centerY; ++cy)
-    //{
-    //    for (int cx = -centerX; cx < grid->width - centerX; ++cx)
     for (int cy = -centerY; cy <= centerY; ++cy)
     {
         for (int cx = -centerX; cx <= centerX; ++cx)
@@ -1776,7 +1828,6 @@ void Editor::RenderDebugGrid()
             GridCell* cell = grid->GetCellFromCenter(cx, cy);
             if (!cell) continue;
 
-            // 중앙 기준 좌표 → 월드 위치
             Vector3 worldPos = grid->GridToWorldFromCenter(cx, cy);
 
             BoundingBox box;
@@ -1784,30 +1835,26 @@ void Editor::RenderDebugGrid()
             box.Center = XMFLOAT3(worldPos.x, worldPos.y, worldPos.z);
 
             float yThickness = defaultYThickness;
-            XMVECTOR color = XMVectorSet(1.0f, 1.0f, 1.0f, 1.0f); // 기본 흰색
-            bool drawCross = false; // X 표시 여부
+            XMVECTOR color = XMVectorSet(1.0f, 1.0f, 1.0f, 1.0f);
+            bool drawCross = false;
 
-            // 원점 (0,0) 중앙 그리드
             if (cx == 0 && cy == 0)
             {
-                color = XMVectorSet(0.0f, 0.0f, 0.0f, 1.0f); // 검은색
+                color = XMVectorSet(0.0f, 0.0f, 0.0f, 1.0f);
                 yThickness = highlightYThickness;
             }
-            // 걸을 수 없는 그리드
             else if (!cell->walkable)
             {
-                color = XMVectorSet(1.0f, 0.0f, 0.0f, 1.0f); // 빨간색
-                drawCross = true; // X 표시
+                color = XMVectorSet(1.0f, 0.0f, 0.0f, 1.0f);
+                drawCross = true;
             }
 
             box.Extents = XMFLOAT3(halfSize, yThickness, halfSize);
 
-            // Draw: drawCross가 true면 X 표시 포함
             DebugDraw::Draw(DebugDraw::g_Batch.get(), box, color, drawCross);
         }
     }
 }
-
 
 void Editor::RenderDebugVision()
 {
@@ -1818,77 +1865,70 @@ void Editor::RenderDebugVision()
         });
 }
 
-
-
 void Editor::SaveCurrentScene(HWND& hwnd)
 {
-	// 파일 저장 다이얼로그
-	OPENFILENAMEA ofn = {};
-	char szFile[260] = {};
+    OPENFILENAMEA ofn = {};
+    char szFile[260] = {};
 
-	ofn.lStructSize = sizeof(ofn);
-	ofn.hwndOwner = hwnd;
-	ofn.lpstrFile = szFile;
-	ofn.nMaxFile = sizeof(szFile);
-	ofn.lpstrFilter = "JSON Files (*.json)\0*.json\0All Files (*.*)\0*.*\0";
-	ofn.nFilterIndex = 1;
-	ofn.lpstrFileTitle = NULL;
-	ofn.nMaxFileTitle = 0;
-	ofn.lpstrInitialDir = NULL;
-	ofn.Flags = OFN_PATHMUSTEXIST | OFN_OVERWRITEPROMPT 
-            | OFN_PATHMUSTEXIST | OFN_NOCHANGEDIR;;
-	ofn.lpstrDefExt = "json";
+    ofn.lStructSize = sizeof(ofn);
+    ofn.hwndOwner = hwnd;
+    ofn.lpstrFile = szFile;
+    ofn.nMaxFile = sizeof(szFile);
+    ofn.lpstrFilter = "JSON Files (*.json)\0*.json\0All Files (*.*)\0*.*\0";
+    ofn.nFilterIndex = 1;
+    ofn.lpstrFileTitle = NULL;
+    ofn.nMaxFileTitle = 0;
+    ofn.lpstrInitialDir = NULL;
+    ofn.Flags = OFN_PATHMUSTEXIST | OFN_OVERWRITEPROMPT
+        | OFN_PATHMUSTEXIST | OFN_NOCHANGEDIR;;
+    ofn.lpstrDefExt = "json";
 
-	if (GetSaveFileNameA(&ofn) != TRUE)
-		return; // 사용자가 취소함
+    if (GetSaveFileNameA(&ofn) != TRUE)
+        return;
 
-	std::string filename = szFile;
+    std::string filename = szFile;
 
-	// GameWorld를 파일에 저장
-	if (SceneSystem::Instance().GetCurrentScene()->SaveToJson(filename))
-	{
-		MessageBoxA(hwnd, "Scene saved successfully!", "Save", MB_OK | MB_ICONINFORMATION);        
-	}
-	else
-	{
-		MessageBoxA(hwnd, "Failed to save scene!", "Error", MB_OK | MB_ICONERROR);
-	}
+    if (SceneSystem::Instance().GetCurrentScene()->SaveToJson(filename))
+    {
+        MessageBoxA(hwnd, "Scene saved successfully!", "Save", MB_OK | MB_ICONINFORMATION);
+    }
+    else
+    {
+        MessageBoxA(hwnd, "Failed to save scene!", "Error", MB_OK | MB_ICONERROR);
+    }
 }
 
-void Editor::LoadScene(HWND &hwnd)
+void Editor::LoadScene(HWND& hwnd)
 {
-    OPENFILENAMEA ofn ={};
+    OPENFILENAMEA ofn = {};
     char szFile[256] = {};
     ofn.lStructSize = sizeof(ofn);
     ofn.hwndOwner = hwnd;
     ofn.lpstrFile = szFile;
     ofn.nMaxFile = sizeof(szFile);
-	ofn.lpstrFilter = "JSON Files (*.json)\0*.json\0All Files (*.*)\0*.*\0";
-	ofn.nFilterIndex = 1;
-	ofn.lpstrFileTitle = NULL;
-	ofn.nMaxFileTitle = 0;
-	ofn.lpstrInitialDir = NULL;
-	ofn.Flags = OFN_PATHMUSTEXIST | OFN_OVERWRITEPROMPT 
-            | OFN_PATHMUSTEXIST | OFN_NOCHANGEDIR;
-	ofn.lpstrDefExt = "json";
+    ofn.lpstrFilter = "JSON Files (*.json)\0*.json\0All Files (*.*)\0*.*\0";
+    ofn.nFilterIndex = 1;
+    ofn.lpstrFileTitle = NULL;
+    ofn.nMaxFileTitle = 0;
+    ofn.lpstrInitialDir = NULL;
+    ofn.Flags = OFN_PATHMUSTEXIST | OFN_OVERWRITEPROMPT
+        | OFN_PATHMUSTEXIST | OFN_NOCHANGEDIR;
+    ofn.lpstrDefExt = "json";
 
-    // NOTE : GetOpenFileNameA를 한 뒤로 CWD (Current Working Directory)가 선택한 폴더로 변경된다.
-    // ->  OFN_PATHMUSTEXIST | OFN_NOCHANGEDIR 플래그 추가 해줘서 방지
-    if (GetOpenFileNameA(&ofn) != TRUE) 
-	    return; // 사용자가 취소함
+    if (GetOpenFileNameA(&ofn) != TRUE)
+        return;
 
     std::string filename = szFile;
 
     auto scene = SceneSystem::Instance().GetCurrentScene();
 
-    // scene으로 파일 데이터 로드하기
     if (scene->LoadToJson(filename))
     {
-    	MessageBoxA(hwnd, "Scene loaded successfully!", "Load", MB_OK | MB_ICONINFORMATION);
+        MessageBoxA(hwnd, "Scene loaded successfully!", "Load", MB_OK | MB_ICONINFORMATION);
     }
     else
     {
-    	MessageBoxA(hwnd, "Failed to load scene! object or world data not found.", "Error", MB_OK | MB_ICONERROR);
+        MessageBoxA(hwnd, "Failed to load scene! object or world data not found.", "Error", MB_OK | MB_ICONERROR);
     }
 }
 
@@ -1900,7 +1940,7 @@ void Editor::CreatePickingStagingTex()
     desc.MipLevels = 1;
     desc.ArraySize = 1;
     desc.Format = DXGI_FORMAT_R32_UINT;
-    desc.SampleDesc.Count = 1; 
+    desc.SampleDesc.Count = 1;
     desc.SampleDesc.Quality = 0;
     desc.Usage = D3D11_USAGE_STAGING;
     desc.BindFlags = 0;
@@ -1925,21 +1965,21 @@ void Editor::CheckObjectPicking()
     ImGuiIO& io = ImGui::GetIO();
 
     bool allowWorldPick =
-        !io.WantCaptureMouse       // ImGui가 마우스를 쓰는 중이면 차단
-        && !io.WantTextInput       // (선택) 텍스트 입력 중이면 차단
+        !io.WantCaptureMouse
+        && !io.WantTextInput
         && !ImGuizmo::IsOver()
         && !ImGuizmo::IsUsing();
 
     if (isMouseLeftClick && allowWorldPick && !isAABBPicking)
     {
         auto& sm = ShaderManager::Instance();
-        context->CopyResource(coppedPickingTex.Get(), sm.pickingTex.Get()); // 기록된 값 가져오기
+        context->CopyResource(coppedPickingTex.Get(), sm.pickingTex.Get());
 
         D3D11_MAPPED_SUBRESOURCE mapped;
-        context->Map(coppedPickingTex.Get(), 0, D3D11_MAP_READ, 0, &mapped); // Map : 하위 리소스에 대한 포인터 가져오기
+        context->Map(coppedPickingTex.Get(), 0, D3D11_MAP_READ, 0, &mapped);
 
-        uint32_t* row = (uint32_t*)((uint8_t*)mapped.pData + mouseXY.y * mapped.RowPitch); // 마우스값의 row 
-        currPickedID = row[mouseXY.x] - 1;	// x, y 좌표에 있는 ID 찾기
+        uint32_t* row = (uint32_t*)((uint8_t*)mapped.pData + mouseXY.y * mapped.RowPitch);
+        currPickedID = row[mouseXY.x] - 1;
 
         context->Unmap(coppedPickingTex.Get(), 0);
 
@@ -1960,7 +2000,6 @@ void Editor::ReadVariants(rttr::instance inst)
 
     rttr::type t = inst.get_derived_type();
 
-    // Get value from type
     for (auto& prop : t.get_properties())
     {
         rttr::variant value = prop.get_value(inst);
@@ -1969,35 +2008,29 @@ void Editor::ReadVariants(rttr::instance inst)
         if (!value.is_valid())
             continue;
 
-        // check metaData
         auto metaBool = prop.get_metadata(META_BOOL);
         auto metaBrowse = prop.get_metadata(META_BROWSE);
 
-        // Render elements
-        // ImGui::Text("%s : %s", name.c_str(), value.get_type().get_name().to_string().c_str());
         if (value.get_type().is_enumeration())
         {
             rttr::type enumType = value.get_type();
             rttr::enumeration e = enumType.get_enumeration();
 
-            // 현재 선택된 항목 이름
             std::string currentName;
             {
-                rttr::variant cur = value; // 현재 enum 값
+                rttr::variant cur = value;
                 rttr::string_view sv = e.value_to_name(cur);
                 currentName = sv.empty() ? std::string("<invalid>") : sv.to_string();
             }
 
-            // 모든 enum 이름 리스트
-            auto names = e.get_names(); // array_range<string_view>
+            auto names = e.get_names();
             if (!names.empty())
             {
-                // currentName이 names 중 몇 번째인지 찾기
                 int currentIndex = 0;
                 int idx = 0;
                 for (auto n : names)
                 {
-                    if (n.to_string() == currentName) // 선택한 인덱스 찾기
+                    if (n.to_string() == currentName)
                     {
                         currentIndex = idx;
                         break;
@@ -2005,7 +2038,6 @@ void Editor::ReadVariants(rttr::instance inst)
                     ++idx;
                 }
 
-                // ImGui Combo
                 const char* preview = currentName.c_str();
                 if (ImGui::BeginCombo(name.c_str(), preview))
                 {
@@ -2016,11 +2048,9 @@ void Editor::ReadVariants(rttr::instance inst)
                         bool selected = (i == currentIndex);
                         if (ImGui::Selectable(itemName.c_str(), selected))
                         {
-                            // 이름 -> enum 값 variant
                             rttr::variant newVal = e.name_to_value(n);
                             if (newVal.is_valid())
                             {
-                                // prop이 enum 타입이면 그대로 set_value
                                 prop.set_value(inst, newVal);
                             }
                         }
@@ -2034,7 +2064,7 @@ void Editor::ReadVariants(rttr::instance inst)
         }
         else if (metaBool.is_valid() && metaBool.to_bool())
         {
-            int iv = value.to_int();     // BOOL이든 int든 흡수
+            int iv = value.to_int();
             bool b = (iv != 0);
             if (ImGui::Checkbox(name.c_str(), &b))
             {
@@ -2112,26 +2142,18 @@ void Editor::ReadVariants(rttr::instance inst)
 
 void Editor::CheckObjectDeleteKey()
 {
-    // Hieararchy가 선택되었을 때만 제거 단축키 사용 가능
-
     if (!isHierarchyFocused) return;
     if (!selectedObject) return;
     if (selectedObject->IsDestory()) { selectedObject = nullptr; return; }
 
     ImGuiIO& io = ImGui::GetIO();
 
-    // UI가 키보드 입력을 쓰고 있으면 삭제 금지 (텍스트 입력/단축키 충돌 방지)
     if (io.WantTextInput)
         return;
 
     if (!ImGui::IsWindowFocused(ImGuiFocusedFlags_AnyWindow))
         return;
 
-    // 플레이 모드일 때 막기
-    //if (PlayModeSystem::Instance().IsPlaying())
-    //    return;
-
-    // imgui로 키 입력 확인
     if (ImGui::IsKeyPressed(ImGuiKey_Delete, false))
     {
         GameObject* victim = selectedObject;
@@ -2160,7 +2182,7 @@ void Editor::RenderCameraPanel()
     ImGui::End();
 }
 
-void Editor::OnInputProcess(const Keyboard::State &KeyState, const Keyboard::KeyboardStateTracker &KeyTracker, const Mouse::State &MouseState, const Mouse::ButtonStateTracker &MouseTracker)
+void Editor::OnInputProcess(const Keyboard::State& KeyState, const Keyboard::KeyboardStateTracker& KeyTracker, const Mouse::State& MouseState, const Mouse::ButtonStateTracker& MouseTracker)
 {
     isAABBPicking = false;
 
@@ -2181,7 +2203,6 @@ void Editor::OnInputProcess(const Keyboard::State &KeyState, const Keyboard::Key
     {
         if (!ImGui::GetIO().WantCaptureMouse && !ImGuizmo::IsOver() && !ImGuizmo::IsUsing())
         {
-            // 마우스 스크린 좌표를 [0, 1] -> [-1, 1] 로 변경
             float x = (2.0f * MouseState.x) / screenWidth - 1.0f;
             float y = 1.0f - (2.0f * MouseState.y) / screenHeight;
 
@@ -2193,11 +2214,9 @@ void Editor::OnInputProcess(const Keyboard::State &KeyState, const Keyboard::Key
             Vector4 nearNDC(x, y, 0.0f, 1.0f);
             Vector4 farNDC(x, y, 1.0f, 1.0f);
 
-            // NDC -> World
             Vector4 nearWorld = Vector4::Transform(nearNDC, invViewProj);
             Vector4 farWorld = Vector4::Transform(farNDC, invViewProj);
 
-            // 투영 행렬은 원근을 만들기 때문에 perpective divide로 월드 좌표를 얻는다.
             nearWorld /= nearWorld.w;
             farWorld /= farWorld.w;
 
@@ -2218,23 +2237,60 @@ void Editor::OnInputProcess(const Keyboard::State &KeyState, const Keyboard::Key
     }
 }
 
-
+// ===============================
+// Commands
+// ===============================
 void Editor::TransformEditCommand::Undo(Editor& ed) { ed.ApplyTransform(objectId, kind, before); }
 void Editor::TransformEditCommand::Redo(Editor& ed) { ed.ApplyTransform(objectId, kind, after); }
 
 void Editor::ReparentCommand::Undo(Editor& ed) { ed.ApplyReparent(objectId, oldParentId); }
 void Editor::ReparentCommand::Redo(Editor& ed) { ed.ApplyReparent(objectId, newParentId); }
 
+// GizmoTransformCommand: TRS 한번에 Undo/Redo
+void Editor::GizmoTransformCommand::Undo(Editor& ed)
+{
+    auto* obj = ed.FindGameObjectById(objectId);
+    if (!obj || obj->IsDestory()) return;
+
+    Transform* tr = obj->GetTransform();
+    if (!tr) return;
+
+    tr->SetScale(beforeScale);
+    tr->SetQuaternion(beforeRot);
+    tr->SetPosition(beforePos);
+
+    if (auto phys = obj->GetComponent<PhysicsComponent>())
+        phys->SyncToPhysics();
+    if (auto cct = obj->GetComponent<CharacterControllerComponent>())
+        cct->Teleport(beforePos);
+}
+
+void Editor::GizmoTransformCommand::Redo(Editor& ed)
+{
+    auto* obj = ed.FindGameObjectById(objectId);
+    if (!obj || obj->IsDestory()) return;
+
+    Transform* tr = obj->GetTransform();
+    if (!tr) return;
+
+    tr->SetScale(afterScale);
+    tr->SetQuaternion(afterRot);
+    tr->SetPosition(afterPos);
+
+    if (auto phys = obj->GetComponent<PhysicsComponent>())
+        phys->SyncToPhysics();
+    if (auto cct = obj->GetComponent<CharacterControllerComponent>())
+        cct->Teleport(afterPos);
+}
+
 void Editor::CreateDeleteCommand::Undo(Editor& ed)
 {
     if (isCreate)
     {
-        // create undo == delete
         ed.DestroyObjectById(representativeRootId);
     }
     else
     {
-        // delete undo == restore
         Transform* parentTr = nullptr;
         if (parentId != -1)
         {
@@ -2249,7 +2305,6 @@ void Editor::CreateDeleteCommand::Redo(Editor& ed)
 {
     if (isCreate)
     {
-        // create redo == recreate
         Transform* parentTr = nullptr;
         if (parentId != -1)
         {
@@ -2260,7 +2315,6 @@ void Editor::CreateDeleteCommand::Redo(Editor& ed)
     }
     else
     {
-        // delete redo == delete again
         ed.DestroyObjectById(representativeRootId);
     }
 }
@@ -2269,7 +2323,7 @@ void Editor::PushCommand(std::unique_ptr<ICommand> cmd)
 {
     if (!cmd) return;
 
-    redoStack.clear(); // 새 작업 시 redo 폐기
+    redoStack.clear();
     undoStack.push_back(std::move(cmd));
 
     if (undoStack.size() > maxHistory)
@@ -2337,7 +2391,6 @@ void Editor::ApplyReparent(uint32_t objId, int parentId)
     Transform* parentTr = parentObj->GetTransform();
     if (!parentTr) return;
 
-    // 순환 방지
     Transform* ancestor = parentTr;
     while (ancestor)
     {
@@ -2403,7 +2456,6 @@ void Editor::DestroyObjectWithUndo(GameObject* victim)
 {
     if (!victim || victim->IsDestory()) return;
 
-    // 카메라 1개 남았을 때 삭제 방지 (기존 정책 유지)
     if (victim->GetComponent<Camera>() && CameraSystem::Instance().GetAllCamera().size() == 1)
     {
         MessageBoxA(NULL, "Scene need at least one camera.", "Delete not allowed", 0);
@@ -2424,7 +2476,7 @@ void Editor::DestroyObjectWithUndo(GameObject* victim)
     }
 
     auto cmd = std::make_unique<CreateDeleteCommand>();
-    cmd->isCreate = false; // delete command
+    cmd->isCreate = false;
     cmd->parentId = parentId;
     cmd->subtreeJsons = std::move(datas);
     cmd->representativeRootId = victim->GetId();
@@ -2434,4 +2486,3 @@ void Editor::DestroyObjectWithUndo(GameObject* victim)
     if (selectedObject == victim) selectedObject = nullptr;
     victim->Destory();
 }
-
