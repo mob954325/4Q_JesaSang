@@ -4,7 +4,7 @@
 class AdultGhost_Chase : public IAdultGhostState
 {
 private:
-    float chaseTimer = 0.0f;        // 탐색 시작
+    float chaseTimer = 0.0f;        // 추격 시작
     float forceChaseTime = 3.0f;
 
     float repathTimer = 0.f;        // 경로 재계산 타이머

@@ -6,6 +6,9 @@ class AdultGhost_Patrol : public IAdultGhostState
 private:
     AgentComponent* agent = nullptr;
 
+    float patrolTimer = 0.0f;        
+    float forcePatrolTime = 2.0f;    // 2초 동안은 감지 무시  
+
 public:
     AdultGhost_Patrol(AdultGhostController* _adultGhost) : IAdultGhostState(_adultGhost) {}
     ~AdultGhost_Patrol() = default;

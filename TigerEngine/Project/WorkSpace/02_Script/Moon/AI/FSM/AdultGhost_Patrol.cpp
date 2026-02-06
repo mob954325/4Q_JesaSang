@@ -8,7 +8,7 @@ void AdultGhost_Patrol::Enter()
 
     // 초기화 
     agent = adultGhost->agent;
-
+    patrolTimer = 0.0f;
 
     // [ 순찰 : 목표 좌표 정하고 순찰 시작 ]
     agent->patrolSpeed = 0.8f;  // 속도 
@@ -20,6 +20,10 @@ void AdultGhost_Patrol::Enter()
 
 void AdultGhost_Patrol::ChangeStateLogic()
 {
+    // Patrol 들어오고 2초 동안은 감지 무시 (임시)
+    if (patrolTimer < forcePatrolTime)
+        return;
+
     // [ 시야 감지 : 플레이어 감지 ]
     auto* AITarget = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("AITarget");
     if (AITarget && adultGhost->vision->CheckVision(AITarget, 90, 400))
@@ -31,6 +35,8 @@ void AdultGhost_Patrol::ChangeStateLogic()
 
 void AdultGhost_Patrol::Update(float deltaTime)
 {
+    patrolTimer += deltaTime;
+
     // [ 기척 감지 ] 
     // 시야 밖에서 기척 감지 -> GetCurSenseRadiuse 로 확인 
     // 플레이어와 귀신 사이의 거리가 GetCurSenseRadiuse 보다 짧으면 => 기척 감지 

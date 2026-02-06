@@ -16,14 +16,14 @@ void AdultGhost_Chase::Enter()
     if (aiTarget)
     {
         auto wp = aiTarget->GetTransform()->GetLocalPosition();
-        cout << "[Chase Enter] AITarget Local = (" << wp.x << ", " << wp.y << ", " << wp.z << ")" << endl;
+        // cout << "[Chase Enter] AITarget Local = (" << wp.x << ", " << wp.y << ", " << wp.z << ")" << endl;
     }
 
     chaseTimer = 0.0f;
     repathTimer = 0.0f;
 
     // 추격 속도 세팅 
-    agent->patrolSpeed = 1.5f;
+    agent->patrolSpeed = 7.0f;
 
     // Agent 초기화 
     agent->externalControl = true;  // 자율 AI 봉인
@@ -40,21 +40,19 @@ void AdultGhost_Chase::ChangeStateLogic()
     // 3초 이후에만 상태 전환 가능 
     if (chaseTimer >= forceChaseTime)
     {
-        if(!adultGhost->vision->CheckVision(aiTarget, 90, 400))
+        if (!adultGhost->vision->CheckVision(aiTarget, 90, 400))
+        {
             cout << "[AdultGhost_Chase] ChangeState -> AdultGhostState::Search" << endl;
-            // adultGhost->ChangeState(AdultGhostState::Search);
+            adultGhost->ChangeState(AdultGhostState::Search);
+        }
     }
 }
 
 void AdultGhost_Chase::Update(float deltaTime)
 {
     chaseTimer += deltaTime;
-    // repathTimer += deltaTime;
 
     if (!aiTarget) return;
-    // if (repathTimer < repathInterval) return;
-
-    // repathTimer = 0.0f;
 
     auto grid = GridSystem::Instance().GetMainGrid();
     if (!grid) return;

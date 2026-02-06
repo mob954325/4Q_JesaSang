@@ -8,6 +8,7 @@
 #include "FSM/IAdultGhostState.h"
 #include "FSM/AdultGhost_Patrol.h"
 #include "FSM/AdultGhost_Chase.h"
+#include "FSM/AdultGhost_Search.h"
 
 
 REGISTER_COMPONENT(AdultGhostController)
@@ -87,7 +88,7 @@ void AdultGhostController::InitFSMStates()
     //  Patrol, Chase, Search, Return, Attack, None
     fsmStates[(int)AdultGhostState::Patrol] = new AdultGhost_Patrol(this);
     fsmStates[(int)AdultGhostState::Chase] = new AdultGhost_Chase(this);
-    //fsmStates[(int)AdultGhostState::Search] = new AdultGhost_Search(this);
+    fsmStates[(int)AdultGhostState::Search] = new AdultGhost_Search(this);
     //fsmStates[(int)AdultGhostState::Return] = new AdultGhost_Return(this);
     //fsmStates[(int)AdultGhostState::Attack] = new AdultGhost_Attack(this);
 }
