@@ -10,6 +10,9 @@ void Player_Cook::Enter()
 
     // set sense radius
     player->curSenseRadius = 0;
+
+    // set animation
+    player->animController->ChangeState("Idle");
 }
 
 void Player_Cook::ChangeStateLogic()

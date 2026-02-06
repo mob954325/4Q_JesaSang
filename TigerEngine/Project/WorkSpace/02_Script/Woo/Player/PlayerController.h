@@ -62,19 +62,19 @@ private:
     int life = 5;
 
     // speed
-    float walkSpeed = 2.5f; 
-    float runSpeed  = 4.0f; 
+    float walkSpeed = 2.0f; 
+    float runSpeed  = 3.2f; 
     float sitSpeed = 1.0f;  
-    float hitSpeedUpRate = 2.0f;        // walkSpeed * 2.0f
+    float hitSpeedUpRate = 1.5f;        // walkSpeed * 2.0f
 
     // sense
     float idleSenseRadius = 0.0f;
-    float walkSenseRadius = 1.0f;
+    float walkSenseRadius = 20.0f;
     float sitSenseRadius = 0.0f;
-    float runSenseRadius = 5.0f;
+    float runSenseRadius = 50.0f;
 
-    float ingreSenseRadius = 0.5f;
-    float foodSenseRadius = 1.5f;
+    float ingreSenseRadius = 10.0f;
+    float foodSenseRadius = 30.0f;
 
     // hit
     float hitDuration = 5.0f;           // 패닉 유지시간
@@ -199,7 +199,7 @@ public:
 
 
     // AI
-    void TakeAttack();       // AI에게 공격 당했을 때
+    void TakeAttack();                   // AI에게 공격 당했을 때
     float GetCurSenseRadiuse() const;    // 플레이어 현재 기척 getter
 
 

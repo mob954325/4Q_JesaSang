@@ -8,6 +8,9 @@ void Player_Idle::Enter()
     // set speed
     player->curSpeed = 0;
 
+    // set animation
+    player->animController->ChangeState("Idle");
+
     // set sense radius
     player->curSenseRadius = player->idleSenseRadius;
     if (player->inventory->GetCurItemType() == ItemType::Ingredient)

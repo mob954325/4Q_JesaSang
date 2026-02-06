@@ -2,7 +2,7 @@
   "objects": [
     {
       "properties": {
-        "Active": 0,
+        "Active": true,
         "ID": 215,
         "Name": "Main Camera",
         "ParentID": -1,
@@ -57,7 +57,7 @@
     },
     {
       "properties": {
-        "Active": 1,
+        "Active": true,
         "ID": 216,
         "Name": "DirectionalLight(Sun)",
         "ParentID": -1,
@@ -111,7 +111,7 @@
     },
     {
       "properties": {
-        "Active": 1,
+        "Active": true,
         "ID": 217,
         "Name": "----------------------",
         "ParentID": -1,
@@ -142,7 +142,7 @@
     },
     {
       "properties": {
-        "Active": 1,
+        "Active": true,
         "ID": 218,
         "Name": "Ground",
         "ParentID": -1,
@@ -222,7 +222,7 @@
     },
     {
       "properties": {
-        "Active": 1,
+        "Active": true,
         "ID": 219,
         "Name": "CurScene_98_Dev_Ron",
         "ParentID": -1,
@@ -253,7 +253,7 @@
     },
     {
       "properties": {
-        "Active": 1,
+        "Active": true,
         "ID": 220,
         "Name": "Audio_Mover",
         "ParentID": -1,
@@ -314,7 +314,7 @@
     },
     {
       "properties": {
-        "Active": 1,
+        "Active": true,
         "ID": 221,
         "Name": "Player",
         "ParentID": -1,
@@ -415,7 +415,7 @@
                 256.0
               ],
               "TotalItems": 6,
-              "TotalPieces": 6,
+              "TotalPieces": 5,
               "WorldMax": [
                 500.0,
                 0.0,
@@ -435,7 +435,7 @@
     },
     {
       "properties": {
-        "Active": 1,
+        "Active": true,
         "ID": 222,
         "Name": "Floor",
         "ParentID": -1,
@@ -538,7 +538,7 @@
     },
     {
       "properties": {
-        "Active": 1,
+        "Active": true,
         "ID": 223,
         "Name": "AudioManager",
         "ParentID": -1,
@@ -584,7 +584,7 @@
     },
     {
       "properties": {
-        "Active": 1,
+        "Active": true,
         "ID": 224,
         "Name": "UI_MiniMap_Base",
         "ParentID": -1,
@@ -620,7 +620,7 @@
               ],
               "fillAmount": 1.0,
               "isMouseCheck": false,
-              "path": "..\\Assets\\Resource\\MiniMap\\BaseMap.png",
+              "path": "..\\\\Assets\\\\Resource\\\\MiniMap\\\\MAP_GR.png",
               "sliceBorderPx": [
                 0.0,
                 0.0,
@@ -671,7 +671,7 @@
     },
     {
       "properties": {
-        "Active": 0,
+        "Active": false,
         "ID": 225,
         "Name": "UI_MiniMap_Complete",
         "ParentID": -1,
@@ -707,7 +707,7 @@
               ],
               "fillAmount": 1.0,
               "isMouseCheck": false,
-              "path": "..\\Assets\\Resource\\MiniMap\\CompleteMap.png",
+              "path": "..\\\\Assets\\\\Resource\\\\MiniMap\\\\Map.png",
               "sliceBorderPx": [
                 0.0,
                 0.0,
@@ -746,8 +746,8 @@
                 1.0
               ],
               "Size": [
-                256.0,
-                256.0
+                1075.0,
+                1048.0
               ]
             },
             "type": "RectTransform"
@@ -758,7 +758,7 @@
     },
     {
       "properties": {
-        "Active": 1,
+        "Active": true,
         "ID": 226,
         "Name": "UI_MiniMap_GaugeBG",
         "ParentID": -1,
@@ -785,7 +785,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "color": [
                 1.0,
                 1.0,
@@ -845,7 +845,7 @@
     },
     {
       "properties": {
-        "Active": 1,
+        "Active": true,
         "ID": 227,
         "Name": "UI_MiniMap_GaugeFill",
         "ParentID": -1,
@@ -872,7 +872,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "color": [
                 1.0,
                 1.0,
@@ -932,7 +932,7 @@
     },
     {
       "properties": {
-        "Active": 1,
+        "Active": true,
         "ID": 228,
         "Name": "UI_MiniMap_Piece_01",
         "ParentID": -1,
@@ -959,7 +959,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "color": [
                 1.0,
                 1.0,
@@ -968,7 +968,7 @@
               ],
               "fillAmount": 1.0,
               "isMouseCheck": false,
-              "path": "..\\Assets\\Resource\\MiniMap\\Piece_01.png",
+              "path": "..\\\\Assets\\\\Resource\\\\MiniMap\\\\MAP01.png",
               "sliceBorderPx": [
                 0.0,
                 0.0,
@@ -1007,8 +1007,8 @@
                 1.0
               ],
               "Size": [
-                85.33333587646484,
-                128.0
+                256.0,
+                256.0
               ]
             },
             "type": "RectTransform"
@@ -1019,7 +1019,7 @@
     },
     {
       "properties": {
-        "Active": 1,
+        "Active": true,
         "ID": 229,
         "Name": "UI_MiniMap_Piece_02",
         "ParentID": -1,
@@ -1046,7 +1046,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "color": [
                 1.0,
                 1.0,
@@ -1055,7 +1055,7 @@
               ],
               "fillAmount": 1.0,
               "isMouseCheck": false,
-              "path": "..\\Assets\\Resource\\MiniMap\\Piece_02.png",
+              "path": "..\\\\Assets\\\\Resource\\\\MiniMap\\\\MAP02.png",
               "sliceBorderPx": [
                 0.0,
                 0.0,
@@ -1074,7 +1074,7 @@
                 0.0
               ],
               "Pos": [
-                1585.3333740234375,
+                1500.0,
                 40.0,
                 0.0
               ],
@@ -1094,8 +1094,8 @@
                 1.0
               ],
               "Size": [
-                85.33333587646484,
-                128.0
+                256.0,
+                256.0
               ]
             },
             "type": "RectTransform"
@@ -1106,7 +1106,7 @@
     },
     {
       "properties": {
-        "Active": 1,
+        "Active": true,
         "ID": 230,
         "Name": "UI_MiniMap_Piece_03",
         "ParentID": -1,
@@ -1133,7 +1133,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "color": [
                 1.0,
                 1.0,
@@ -1142,7 +1142,7 @@
               ],
               "fillAmount": 1.0,
               "isMouseCheck": false,
-              "path": "..\\Assets\\Resource\\MiniMap\\Piece_03.png",
+              "path": "..\\\\Assets\\\\Resource\\\\MiniMap\\\\MAP03.png",
               "sliceBorderPx": [
                 0.0,
                 0.0,
@@ -1161,7 +1161,7 @@
                 0.0
               ],
               "Pos": [
-                1670.666748046875,
+                1500.0,
                 40.0,
                 0.0
               ],
@@ -1181,8 +1181,8 @@
                 1.0
               ],
               "Size": [
-                85.33333587646484,
-                128.0
+                256.0,
+                256.0
               ]
             },
             "type": "RectTransform"
@@ -1193,7 +1193,7 @@
     },
     {
       "properties": {
-        "Active": 1,
+        "Active": true,
         "ID": 231,
         "Name": "UI_MiniMap_Piece_04",
         "ParentID": -1,
@@ -1220,7 +1220,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "color": [
                 1.0,
                 1.0,
@@ -1229,7 +1229,7 @@
               ],
               "fillAmount": 1.0,
               "isMouseCheck": false,
-              "path": "..\\Assets\\Resource\\MiniMap\\Piece_04.png",
+              "path": "..\\\\Assets\\\\Resource\\\\MiniMap\\\\MAP04.png",
               "sliceBorderPx": [
                 0.0,
                 0.0,
@@ -1249,7 +1249,7 @@
               ],
               "Pos": [
                 1500.0,
-                168.0,
+                40.0,
                 0.0
               ],
               "Position": [
@@ -1268,8 +1268,8 @@
                 1.0
               ],
               "Size": [
-                85.33333587646484,
-                128.0
+                256.0,
+                256.0
               ]
             },
             "type": "RectTransform"
@@ -1280,7 +1280,7 @@
     },
     {
       "properties": {
-        "Active": 1,
+        "Active": true,
         "ID": 232,
         "Name": "UI_MiniMap_Piece_05",
         "ParentID": -1,
@@ -1307,7 +1307,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "color": [
                 1.0,
                 1.0,
@@ -1316,7 +1316,7 @@
               ],
               "fillAmount": 1.0,
               "isMouseCheck": false,
-              "path": "..\\Assets\\Resource\\MiniMap\\Piece_05.png",
+              "path": "..\\\\Assets\\\\Resource\\\\MiniMap\\\\MAP05.png",
               "sliceBorderPx": [
                 0.0,
                 0.0,
@@ -1335,8 +1335,8 @@
                 0.0
               ],
               "Pos": [
-                1585.3333740234375,
-                168.0,
+                1500.0,
+                40.0,
                 0.0
               ],
               "Position": [
@@ -1355,8 +1355,8 @@
                 1.0
               ],
               "Size": [
-                85.33333587646484,
-                128.0
+                256.0,
+                256.0
               ]
             },
             "type": "RectTransform"
@@ -1367,7 +1367,7 @@
     },
     {
       "properties": {
-        "Active": 1,
+        "Active": false,
         "ID": 233,
         "Name": "UI_MiniMap_Piece_06",
         "ParentID": -1,
@@ -1394,7 +1394,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "color": [
                 1.0,
                 1.0,
@@ -1403,7 +1403,7 @@
               ],
               "fillAmount": 1.0,
               "isMouseCheck": false,
-              "path": "..\\Assets\\Resource\\MiniMap\\Piece_06.png",
+              "path": "..\\Assets\\Resource\\MiniMap\\MAP05.png",
               "sliceBorderPx": [
                 0.0,
                 0.0,
@@ -1416,7 +1416,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "Pivot": [
                 0.0,
                 0.0
@@ -1454,7 +1454,7 @@
     },
     {
       "properties": {
-        "Active": 1,
+        "Active": true,
         "ID": 234,
         "Name": "UI_MiniMap_MainPing",
         "ParentID": -1,
@@ -1541,7 +1541,7 @@
     },
     {
       "properties": {
-        "Active": 1,
+        "Active": true,
         "ID": 235,
         "Name": "UI_MiniMap_Treasure",
         "ParentID": -1,
@@ -1628,7 +1628,7 @@
     },
     {
       "properties": {
-        "Active": 1,
+        "Active": true,
         "ID": 236,
         "Name": "UI_MiniMap_ItemPing_01",
         "ParentID": -1,
@@ -1715,7 +1715,7 @@
     },
     {
       "properties": {
-        "Active": 1,
+        "Active": true,
         "ID": 237,
         "Name": "UI_MiniMap_ItemPing_02",
         "ParentID": -1,
@@ -1802,7 +1802,7 @@
     },
     {
       "properties": {
-        "Active": 1,
+        "Active": true,
         "ID": 238,
         "Name": "UI_MiniMap_ItemPing_03",
         "ParentID": -1,
@@ -1889,7 +1889,7 @@
     },
     {
       "properties": {
-        "Active": 1,
+        "Active": true,
         "ID": 239,
         "Name": "UI_MiniMap_ItemPing_04",
         "ParentID": -1,
@@ -1976,7 +1976,7 @@
     },
     {
       "properties": {
-        "Active": 1,
+        "Active": true,
         "ID": 240,
         "Name": "UI_MiniMap_ItemPing_05",
         "ParentID": -1,
@@ -2063,7 +2063,7 @@
     },
     {
       "properties": {
-        "Active": 1,
+        "Active": true,
         "ID": 241,
         "Name": "UI_MiniMap_ItemPing_06",
         "ParentID": -1,
@@ -2150,7 +2150,7 @@
     },
     {
       "properties": {
-        "Active": 1,
+        "Active": true,
         "ID": 242,
         "Name": "UI_MiniMap_Controller",
         "ParentID": -1,
@@ -2180,8 +2180,8 @@
               "Active": true,
               "BaseMapObjectName": "UI_MiniMap_Base",
               "BottomRightMargin": [
-                20.0,
-                20.0
+                60.0,
+                80.0
               ],
               "CompleteMapObjectName": "UI_MiniMap_Complete",
               "DebugShowAllItemPings": true,
@@ -2225,7 +2225,7 @@
               "PieceObjectName3": "UI_MiniMap_Piece_03",
               "PieceObjectName4": "UI_MiniMap_Piece_04",
               "PieceObjectName5": "UI_MiniMap_Piece_05",
-              "PieceObjectName6": "UI_MiniMap_Piece_06",
+              "PieceObjectName6": "",
               "PingObjectName1": "UI_MiniMap_ItemPing_01",
               "PingObjectName2": "UI_MiniMap_ItemPing_02",
               "PingObjectName3": "UI_MiniMap_ItemPing_03",
@@ -2233,7 +2233,7 @@
               "PingObjectName5": "UI_MiniMap_ItemPing_05",
               "PingObjectName6": "UI_MiniMap_ItemPing_06",
               "PlayerObjectName": "Player",
-              "ShiftLeftByMapCount": 1,
+              "ShiftLeftByMapCount": 0,
               "ShowCompleteOnFull": false
             },
             "type": "MiniMapManager"
@@ -2336,3 +2336,4 @@
     }
   ]
 }
+

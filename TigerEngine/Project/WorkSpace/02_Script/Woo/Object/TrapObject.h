@@ -25,7 +25,7 @@ private:
     Decal* ringEffect = nullptr;;
 
     // cur
-    float waveRadius = 0.0f;
+    float curWaveRadius = 0.0f;
 
     // data
     float walkWaveRadius = 1.5;

@@ -63,7 +63,7 @@ void PlayerController::OnStart()
     }
 
     // load animation
-    //LoadAnimation();
+    LoadAnimation();
 
     // init fsm
     InitFSMStates();
@@ -183,25 +183,40 @@ void PlayerController::ChangeState(PlayerState nextState)
         curState->Enter();
 }
 
+
+/*-------[ Animation Create ]-------------------------------------*/
 void PlayerController::LoadAnimation()
 {
     // 애니메이션 파일 로드
-    FBXResourceManager::Instance().LoadAnimationByPath(fbxData->GetFBXInfo(), "..\\Assets\\Resource\\Animation\\ani_walk_character.fbx", "Idle");
+    FBXResourceManager::Instance().LoadAnimationByPath(fbxData->GetFBXInfo(), "..\\Assets\\Resource\\FBX\\00_character\\Player\\ani_idle_character.glb", "Idle");
+    //FBXResourceManager::Instance().LoadAnimationByPath(fbxData->GetFBXInfo(), "..\\Assets\\Resource\\FBX\\00_character\\Player\\ani_walk_character.glb", "Walk");
+    //FBXResourceManager::Instance().LoadAnimationByPath(fbxData->GetFBXInfo(), "..\\Assets\\Resource\\FBX\\00_character\\Player\\ani_run_character.glb", "Run");
+    //FBXResourceManager::Instance().LoadAnimationByPath(fbxData->GetFBXInfo(), "..\\Assets\\Resource\\FBX\\00_character\\Player\\ani_sit_character.glb", "Sit");
+    //FBXResourceManager::Instance().LoadAnimationByPath(fbxData->GetFBXInfo(), "..\\Assets\\Resource\\FBX\\00_character\\Player\\ani_cry_character.glb", "Hit");
 
     // 클립 생성
     auto idleClip = animController->FindClip("Idle");
+    //auto walkClip = animController->FindClip("Walk");
+    //auto runClip = animController->FindClip("Run");
+    //auto sitClip = animController->FindClip("Sit");
+    //auto hitClip = animController->FindClip("Hit");
 
-    if (!idleClip )
+    if (!idleClip/* || !walkClip || !runClip || !sitClip || !hitClip*/)
     {
-        OutputDebugStringW(L"[CCTTest] Clip not found! 이름 확인 필요\n");
+        cout << "[Player Animation] Clip not found!\n" << endl;
         return;
+    }
+    else
+    {
+        cout << "[Player] Animation Load Success" << endl;
     }
 
     // 상태 등록
     animController->AddState(std::make_unique<AnimationState>("Idle", idleClip, animController));
-
-    // 시작
-    animController->ChangeState("Idle");
+    //animController->AddState(std::make_unique<AnimationState>("Walk", walkClip, animController));
+    //animController->AddState(std::make_unique<AnimationState>("Run", runClip, animController));
+    //animController->AddState(std::make_unique<AnimationState>("Sit", sitClip, animController));
+    //animController->AddState(std::make_unique<AnimationState>("Hit", hitClip, animController));
 }
 
 /*-------[ Init ]-------------------------------------*/

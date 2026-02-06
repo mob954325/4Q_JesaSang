@@ -1,9 +1,11 @@
 #include "MiniGameManager.h"
 #include "Util/JsonHelper.h"
 #include "Util/ComponentAutoRegister.h"
-#include "Object/GameObject.h"
 #include "EngineSystem/SceneSystem.h"
 #include "System/InputSystem.h"
+#include "Object/GameObject.h"
+#include "Components/RectTransform.h"
+#include "Components/UI/Image.h"
 
 #include "../Item/Item.h"
 #include "Game/IMinigame.h"
@@ -28,8 +30,31 @@ void MiniGameManager::OnInitialize()
     s_instance = this;
 }
 
+void MiniGameManager::OnStart()
+{
+    miniGameParent = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("UI_MiniGame")->GetComponent<RectTransform>();
+    miniGame1_Parent = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("UI_MiniGame1");
+    miniGame2_Parent = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("UI_MiniGame2");
+    miniGame3_Parent = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("UI_MiniGame3");
+
+    if (!miniGameParent || !miniGame1_Parent || !miniGame2_Parent || !miniGame3_Parent)
+    {
+        cout << "[MiniGameManager] Missing ui objects...!!!" << endl;
+    }
+
+    // init
+    popupHiddenPos = Vector3(960, 1500, 0);
+    popupShownPos = Vector3(960, 550, 0);
+
+    popupTargetPos = popupHiddenPos;
+    miniGameParent->SetPos(popupHiddenPos);
+}
+
 void MiniGameManager::OnUpdate(float delta)
 {
+    // popup move
+    UpdatePopup(delta);
+
     // game update
     if (isPlaying && currentMiniGame)
     {
@@ -65,14 +90,17 @@ std::unique_ptr<IMiniGame> MiniGameManager::CreateMinigameForIngredientId(const 
     // 음식 재료에 따른 미니게임 선택
     if (foodId == "Ingredient_Apple" || foodId == "Ingredient_Pear")
     {
+        miniGame1_Parent->SetActive(true);
         return std::make_unique<Game_Cutting>();
     }
     if (foodId == "Ingredient_Batter" || foodId == "Ingredient_Tofu")
     {
+        miniGame2_Parent->SetActive(true);
         return std::make_unique<Game_FireControl>();
     }
     if (foodId == "Ingredient_Sanjeok" || foodId == "Ingredient_Donggeurangttaeng")
     {
+        miniGame3_Parent->SetActive(true);
         return std::make_unique<Game_Assembling>();
     }
 
@@ -109,12 +137,18 @@ void MiniGameManager::StartMiniGame(std::unique_ptr<IItem> ingredient)
     // start game
     currentMiniGame->StartGame();
     isPlaying = true;
+
+    // popup ui
+    ShowPopup();
 }
 
 // 미니게임 종료시 (성공/실패+패널티)
 void MiniGameManager::EndMiniGame(bool isSuccess)
 {
     isPlaying = false;
+
+    // popup ui
+    HidePopup();
 
     // end game
     if (currentMiniGame)
@@ -143,6 +177,9 @@ void MiniGameManager::EndMiniGame(bool isSuccess)
 void MiniGameManager::StopMiniGame()
 {
     isPlaying = false;
+
+    // popup ui
+    HidePopup();
 
     // end game
     if (currentMiniGame)
@@ -173,4 +210,31 @@ void MiniGameManager::StopChecking()
     {
         StopMiniGame();
     }
+}
+
+void MiniGameManager::UpdatePopup(float delta)
+{
+    if (!miniGameParent) return;
+
+    // 항상 부드럽게 이동시키고 싶으면 if 제거해도 됨
+    Vector3 cur = miniGameParent->GetPos();
+    Vector3 next = Vector3::Lerp(cur, popupTargetPos, std::min(1.0f, popupSpeed * delta));
+    miniGameParent->SetPos(next);
+
+    // 도착 판정(오차 범위)
+    Vector3 diff = popupTargetPos - next;
+    if (diff.Length() < 0.5f)
+    {
+        miniGameParent->SetPos(popupTargetPos);
+    }
+}
+
+void MiniGameManager::ShowPopup()
+{
+    popupTargetPos = popupShownPos;
+}
+
+void MiniGameManager::HidePopup()
+{
+    popupTargetPos = popupHiddenPos;
 }

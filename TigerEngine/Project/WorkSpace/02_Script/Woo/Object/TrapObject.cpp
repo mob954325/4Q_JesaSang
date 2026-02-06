@@ -7,6 +7,7 @@
 #include "Components/Decal.h"
 #include "Components/Transform.h"
 #include "System/TimeSystem.h"
+#include "../../Moon/AI/AdultGhostController.h"
 
 REGISTER_COMPONENT(TrapObject)
 
@@ -39,7 +40,7 @@ void TrapObject::OnUpdate(float delta)
 
         // clear
         coolTimer = 0.0f;
-        waveRadius = 0.0f;
+        curWaveRadius = 0.0f;
     }
 }
 
@@ -69,11 +70,11 @@ void TrapObject::OnCCTTriggerEnter(CharacterControllerComponent* other)
     switch (state)
     {
     case PlayerState::Walk:
-        waveRadius = walkWaveRadius;
+        curWaveRadius = walkWaveRadius;
         break;
     case PlayerState::Run:
     case PlayerState::Hit:
-        waveRadius = runWaveRadius;
+        curWaveRadius = runWaveRadius;
         break;
     default:
         return; // 파장 발생 안 함
@@ -98,18 +99,52 @@ void TrapObject::StartTriggerWave()
     isPossibleWave = false;
     coolTimer = 0.0f;
 
-    cout << "[TrapObject] : Start Trap Trigger Wave. Range : " << waveRadius << endl;
+    cout << "[TrapObject] : Start Trap Trigger Wave. Range : " << curWaveRadius << endl;
 }
 
 void TrapObject::NotifyAIInRange()
 {
-    // TODO :: 선민이 AI 찾아서 Call 하는 함수 호출
     /*
         파동 발생한 즉시 월드의 AI를 모두 찾아서 dist > waveLength보다 크다면 AI Called
         - Ghost_Adult <AdultGhostController>
         - Ghost_Baby
     */
 
-    //auto baby_AIs = SceneSystem::Instance().GetCurrentScene()->GetGameObjectsByName("baby_AIs");
-    //auto ancestor_AIs = SceneSystem::Instance().GetCurrentScene()->GetGameObjectsByName("ancestor_AIs");
+    // 어른 유령 호출
+    auto adultGhosts = SceneSystem::Instance().GetCurrentScene()->GetGameObjectsByName("Ghost_Adult");
+    if (!adultGhosts.empty())
+    {
+        for (auto ag : adultGhosts)
+        {
+            Vector3 originPos = this->GetOwner()->GetTransform()->GetWorldPosition();
+            Vector3 targetPos = ag->GetTransform()->GetWorldPosition();
+            
+            float dist = Vector3::Distance(originPos, targetPos);
+
+            // 파동 범위 안에 AI가 있다면 호출
+            if (dist >= curWaveRadius)
+            {
+                //ag->GetComponent<AdultGhostController>()-> TODO :: 선민이가 만든 함수 호출
+            }
+        }
+    }
+
+    // 애기 유령 호출
+    auto babyGhosts = SceneSystem::Instance().GetCurrentScene()->GetGameObjectsByName("Ghost_Baby");
+    if (!babyGhosts.empty())
+    {
+        for (auto bg : babyGhosts)
+        {
+            Vector3 originPos = this->GetOwner()->GetTransform()->GetWorldPosition();
+            Vector3 targetPos = bg->GetTransform()->GetWorldPosition();
+
+            float dist = Vector3::Distance(originPos, targetPos);
+
+            // 파동 범위 안에 AI가 있다면 호출
+            if (dist >= curWaveRadius)
+            {
+                //bg->GetComponent<BabyGhostController>()-> TODO :: 선민이가 만든 함수 호출
+            }
+        }
+    }
 }

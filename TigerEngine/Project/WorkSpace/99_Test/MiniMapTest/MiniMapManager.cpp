@@ -251,6 +251,13 @@ void MiniMapManager::OnStart()
 
     for (int i = 0; i < 6; ++i)
     {
+        if (pieceNames[i] == nullptr || pieceNames[i][0] == '\0')
+        {
+            m_PieceRects[i] = nullptr;
+            m_PieceImages[i] = nullptr;
+            continue;
+        }
+
         m_PieceRects[i] = GetRectOrLog(scene, pieceNames[i], "RectTransform on piece object");
         m_PieceImages[i] = GetImageOrLog(scene, pieceNames[i], "Image on piece object");
     }
@@ -396,7 +403,7 @@ void MiniMapManager::ApplyLayout()
 
     const Vector3 current = m_BaseRect->GetPos();
     const Vector3 target(
-        screen.x - size.x - bottomRightMargin.x - (size.x * static_cast<float>(std::max(0, shiftLeftByMapCount))),
+        screen.x - size.x - bottomRightMargin.x - (size.x * static_cast<float>(shiftLeftByMapCount)),
         screen.y - size.y - bottomRightMargin.y,
         current.z
     );
