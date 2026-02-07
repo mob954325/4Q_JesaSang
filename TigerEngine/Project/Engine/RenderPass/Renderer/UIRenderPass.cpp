@@ -27,8 +27,6 @@ void UIRenderPass::Execute(ComPtr<ID3D11DeviceContext>& context, RenderQueue& qu
     context->RSSetState(sm.cullNoneRS.Get());
     context->VSSetShader(sm.VS_UIImage.Get(), nullptr, 0);
 
-    context->OMSetDepthStencilState(sm.disableDSS.Get(), 1);
-
     auto& renderQueue = queue.GetUIRenderQueue();
 
     std::sort(renderQueue.begin(), renderQueue.end(),
@@ -41,11 +39,17 @@ void UIRenderPass::Execute(ComPtr<ID3D11DeviceContext>& context, RenderQueue& qu
     {
         Matrix mvp;
         if (!item.isWorldSpace)
-            mvp = item.worldMat * um.GetProjection();	// UI에서  view는 보통 identity
+        {
+            mvp = item.screenMat * um.GetProjection();	// UI에서  view는 보통 identity
+            context->OMSetDepthStencilState(sm.disableDSS.Get(), 1);  // depth test off
+
+        }
         else
         {
-            Camera* cam = CameraSystem::Instance().GetCurrCamera();
-            mvp = item.worldMat * cam->GetView() * cam->GetProjection();
+            mvp = Matrix::CreateTranslation( item.params.z, item.params.w, 0.0f ) *     // 피벗
+                    Matrix::CreateScale(item.imageSize.x, item.imageSize.y, 1) *        // 이미지 사이즈
+                    item.worldMat * cam->GetView() * cam->GetProjection();              // 월드 좌표
+                    context->OMSetDepthStencilState(sm.defualtDSS.Get(), 1);            // depth test off
         }
 
         sm.uiCBData.WVP = mvp.Transpose();

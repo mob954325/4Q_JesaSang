@@ -71,7 +71,7 @@ private:
 
     DrawSpaceType drawSpacetype = DrawSpaceType::Screen;
     ImageType type = ImageType::Simple;
-    Color color{};
+    Color color = { 1,1,1,1 };
 
     // fillMode에서 사용할 값
     float fillAmount = 1.0f;

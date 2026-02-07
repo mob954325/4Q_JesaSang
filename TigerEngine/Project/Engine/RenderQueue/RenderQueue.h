@@ -38,9 +38,10 @@ struct RenderItem
 struct ImageUIRenderItem
 {
     Matrix worldMat;
+    Matrix screenMat;
     Color color;        // 색상
     Vector4 uvRect;     // L, R, T, B (px)
-    Vector4 params;     // x = type, y = fillAmount;
+    Vector4 params;     // x = type, y = fillAmount; z = pivot.x, w = pivot.y
     Vector4 imageSize;  // (rectW, rectH, texW, texH)
     int zOrder = -1;    // 정렬 순서
 

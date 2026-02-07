@@ -102,12 +102,13 @@ void Image::OnRender(RenderQueue& queue)
     auto rect = GetOwner()->GetComponent<RectTransform>();
     if (!rect) return;
 
-    data.worldMat = rect->GetWorldMatrix();
+    data.worldMat = GetOwner()->GetTransform()->GetWorldMatrix();
+    data.screenMat = rect->GetWorldMatrix();
     data.color = color;
 
     Vector2 rectSize = rect->GetSize();
     data.imageSize = Vector4(rectSize.x, rectSize.y, resource->texSizePx.x, resource->texSizePx.y);
-    data.params = Vector4((float)type, fillAmount, 0.0f, 0.0f);
+    data.params = Vector4((float)type, fillAmount, rect->GetPivot().x, rect->GetPivot().y);
     data.uvRect = sliceBorderPx;
     data.resource = resource.get();
     data.isText = false;
