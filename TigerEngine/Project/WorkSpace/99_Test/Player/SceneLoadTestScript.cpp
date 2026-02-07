@@ -12,7 +12,8 @@ RTTR_REGISTRATION
 {
     rttr::registration::class_<SceneLoadTestScript>("SceneLoadTestScript")
         .constructor<>()
-        (rttr::policy::ctor::as_std_shared_ptr);
+        (rttr::policy::ctor::as_std_shared_ptr)
+        .property("index", &SceneLoadTestScript::index);
 }
 
 void SceneLoadTestScript::OnInitialize()

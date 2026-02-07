@@ -18,7 +18,7 @@ public:
     nlohmann::json Serialize() override;
     void Deserialize(nlohmann::json data) override;
 
-private:
     int index = 0;
+private:
 };
 
