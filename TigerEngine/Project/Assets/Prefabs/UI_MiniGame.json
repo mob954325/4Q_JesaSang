@@ -2,7 +2,7 @@
   "prefab": [
     {
       "Active": true,
-      "ID": 1050,
+      "ID": 3720,
       "Name": "UI_MiniGame",
       "ParentID": -1,
       "components": [
@@ -35,7 +35,7 @@
             ],
             "Pos": [
               960.0,
-              1500.0,
+              550.0,
               0.0
             ],
             "Position": [
@@ -64,9 +64,9 @@
     },
     {
       "Active": true,
-      "ID": 1048,
+      "ID": 3718,
       "Name": "Image_BackgroundTop",
-      "ParentID": 1050,
+      "ParentID": 3720,
       "components": [
         {
           "properties": {
@@ -131,7 +131,9 @@
               1.0,
               1.0
             ],
+            "drawSpacetype": "Screen",
             "fillAmount": 1.0,
+            "imageType": "Fill",
             "isMouseCheck": false,
             "path": "..\\Assets\\Resource\\UI\\MiniGame\\Game_Mini_01.png",
             "sliceBorderPx": [
@@ -140,7 +142,8 @@
               40.0,
               40.0
             ],
-            "type": "Fill"
+            "type": "Fill",
+            "zOrder": 0
           },
           "type": "Image"
         }
@@ -148,9 +151,9 @@
     },
     {
       "Active": true,
-      "ID": 1055,
+      "ID": 3725,
       "Name": "Image_ESC",
-      "ParentID": 1048,
+      "ParentID": 3718,
       "components": [
         {
           "properties": {
@@ -215,7 +218,9 @@
               1.0,
               1.0
             ],
+            "drawSpacetype": "Screen",
             "fillAmount": 1.0,
+            "imageType": "Simple",
             "isMouseCheck": false,
             "path": "..\\Assets\\Resource\\UI\\MiniGame\\ESC.png",
             "sliceBorderPx": [
@@ -224,7 +229,8 @@
               0.0,
               0.0
             ],
-            "type": "Simple"
+            "type": "Simple",
+            "zOrder": 0
           },
           "type": "Image"
         }
@@ -232,9 +238,9 @@
     },
     {
       "Active": true,
-      "ID": 1049,
+      "ID": 3719,
       "Name": "Image_BackgroundDown",
-      "ParentID": 1050,
+      "ParentID": 3720,
       "components": [
         {
           "properties": {
@@ -299,7 +305,9 @@
               1.0,
               1.0
             ],
+            "drawSpacetype": "Screen",
             "fillAmount": 1.0,
+            "imageType": "Simple",
             "isMouseCheck": false,
             "path": "..\\Assets\\Resource\\UI\\MiniGame\\Game_Mini_02.png",
             "sliceBorderPx": [
@@ -308,7 +316,8 @@
               0.0,
               0.0
             ],
-            "type": "Simple"
+            "type": "Simple",
+            "zOrder": 0
           },
           "type": "Image"
         }
@@ -316,9 +325,9 @@
     },
     {
       "Active": false,
-      "ID": 1052,
+      "ID": 3722,
       "Name": "UI_MiniGame1",
-      "ParentID": 1050,
+      "ParentID": 3720,
       "components": [
         {
           "properties": {
@@ -378,9 +387,9 @@
     },
     {
       "Active": false,
-      "ID": 1056,
+      "ID": 3726,
       "Name": "Image_ProgressBar",
-      "ParentID": 1052,
+      "ParentID": 3722,
       "components": [
         {
           "properties": {
@@ -445,7 +454,9 @@
               0.7990195751190186,
               1.0
             ],
+            "drawSpacetype": "Screen",
             "fillAmount": 1.0,
+            "imageType": "Simple",
             "isMouseCheck": false,
             "path": "..\\Assets\\Resource\\UI\\MiniGame\\sound_gaige.png",
             "sliceBorderPx": [
@@ -454,7 +465,8 @@
               0.0,
               0.0
             ],
-            "type": "Simple"
+            "type": "Simple",
+            "zOrder": 0
           },
           "type": "Image"
         }
@@ -462,9 +474,96 @@
     },
     {
       "Active": false,
-      "ID": 1057,
+      "ID": 3727,
       "Name": "Image_SpaceBar",
-      "ParentID": 1052,
+      "ParentID": 3722,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "Pivot": [
+              0.5,
+              0.5
+            ],
+            "Pos": [
+              200.0,
+              50.0,
+              0.0
+            ],
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "Size": [
+              100.0,
+              50.0
+            ]
+          },
+          "type": "RectTransform"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "color": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "drawSpacetype": "Screen",
+            "fillAmount": 1.0,
+            "imageType": "Simple",
+            "isMouseCheck": false,
+            "path": "..\\Assets\\Resource\\UI\\MiniGame\\SPACE.png",
+            "sliceBorderPx": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "type": "Simple",
+            "zOrder": 0
+          },
+          "type": "Image"
+        }
+      ]
+    },
+    {
+      "Active": false,
+      "ID": 3728,
+      "Name": "Image_StopPoint",
+      "ParentID": 3722,
       "components": [
         {
           "properties": {
@@ -529,16 +628,19 @@
               1.0,
               1.0
             ],
+            "drawSpacetype": "Screen",
             "fillAmount": 1.0,
+            "imageType": "Simple",
             "isMouseCheck": false,
-            "path": "..\\Assets\\Resource\\UI\\MiniGame\\SPACE.png",
+            "path": "..\\Assets\\Resource\\UI\\MiniGame\\SPACE_01.png",
             "sliceBorderPx": [
               0.0,
               0.0,
               0.0,
               0.0
             ],
-            "type": "Simple"
+            "type": "Simple",
+            "zOrder": 0
           },
           "type": "Image"
         }
@@ -546,9 +648,9 @@
     },
     {
       "Active": false,
-      "ID": 1053,
+      "ID": 3723,
       "Name": "UI_MiniGame2",
-      "ParentID": 1050,
+      "ParentID": 3720,
       "components": [
         {
           "properties": {
@@ -608,9 +710,9 @@
     },
     {
       "Active": false,
-      "ID": 1054,
+      "ID": 3724,
       "Name": "UI_MiniGame3",
-      "ParentID": 1050,
+      "ParentID": 3720,
       "components": [
         {
           "properties": {
