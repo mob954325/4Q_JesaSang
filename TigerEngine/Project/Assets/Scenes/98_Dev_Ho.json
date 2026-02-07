@@ -3,7 +3,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 202,
+        "ID": 90,
         "Name": "DirectionalLight(Sun)",
         "ParentID": -1,
         "components": [
@@ -57,26 +57,26 @@
     {
       "properties": {
         "Active": true,
-        "ID": 203,
+        "ID": 91,
         "Name": "Box",
         "ParentID": -1,
         "components": [
           {
             "properties": {
               "Position": [
-                0.0,
+                -0.574554443359375,
                 30.899999618530273,
                 70.19999694824219
               ],
               "Rotation": [
-                0.0,
-                0.0,
+                -0.0,
+                -0.20873989164829254,
                 0.0
               ],
               "Scale": [
-                0.4000000059604645,
-                0.4000000059604645,
-                1.0
+                0.5000001788139343,
+                0.5,
+                0.5000001788139343
               ]
             },
             "type": "Transform"
@@ -126,19 +126,12 @@
               "UseDiffuseOverride": false,
               "UseEmissiveOverride": false,
               "UseMetallicOverride": false,
-              "UseRoughnessOverride": false
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
             },
             "type": "FBXRenderer"
           },
-          {},
-          {
-            "properties": {
-              "b": 0.0,
-              "g": 0.0,
-              "r": 0.0
-            },
-            "type": "Player1"
-          }
+          {}
         ]
       },
       "type": "GameObject"
@@ -146,40 +139,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 204,
-        "Name": "TestWeapon",
-        "ParentID": -1,
-        "components": [
-          {
-            "properties": {
-              "Position": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Rotation": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ]
-            },
-            "type": "Transform"
-          }
-        ]
-      },
-      "type": "GameObject"
-    },
-    {
-      "properties": {
-        "Active": true,
-        "ID": 205,
+        "ID": 93,
         "Name": "PlayerSoket",
-        "ParentID": 203,
+        "ParentID": 91,
         "components": [
           {
             "properties": {
@@ -208,7 +170,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 208,
+        "ID": 104,
         "Name": "cam1",
         "ParentID": -1,
         "components": [
@@ -249,7 +211,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 209,
+        "ID": 105,
         "Name": "cam2",
         "ParentID": -1,
         "components": [
@@ -290,7 +252,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 210,
+        "ID": 106,
         "Name": "cam3",
         "ParentID": -1,
         "components": [
@@ -331,7 +293,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 211,
+        "ID": 107,
         "Name": "TestWeapon",
         "ParentID": -1,
         "components": [
@@ -362,68 +324,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 212,
-        "Name": "PlayerSoket",
-        "ParentID": -1,
-        "components": [
-          {
-            "properties": {
-              "Active": true,
-              "alignType": "Left",
-              "atlasH": 2048,
-              "atlasW": 2048,
-              "color": [
-                1.0,
-                1.0,
-                1.0,
-                1.0
-              ],
-              "drawSpacetype": "Screen",
-              "fontPath": "../Assets/Resource/font/Shilla_Culture(B).ttf",
-              "fontSize": 130,
-              "paddingPx": 1,
-              "text": "가나다라 마바사 "
-            },
-            "type": "TextUI"
-          },
-          {
-            "properties": {
-              "Active": true,
-              "Pivot": [
-                0.0,
-                0.0
-              ],
-              "Pos": [
-                191.39999389648438,
-                70.80000305175781,
-                0.0
-              ],
-              "Position": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Rotation": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ]
-            },
-            "type": "Transform"
-          }
-        ]
-      },
-      "type": "GameObject"
-    },
-    {
-      "properties": {
-        "Active": true,
-        "ID": 49,
+        "ID": 109,
         "Name": "NewGameObject",
         "ParentID": -1,
         "components": [
@@ -440,9 +341,9 @@
                 0.0
               ],
               "Scale": [
-                1.0,
-                1.0,
-                1.0
+                0.0,
+                0.0,
+                0.0
               ]
             },
             "type": "Transform"
@@ -451,9 +352,9 @@
             "properties": {
               "Active": true,
               "color": [
-                0.0,
-                0.0,
-                0.0,
+                1.0,
+                1.0,
+                1.0,
                 1.0
               ],
               "drawSpacetype": "Screen",
@@ -467,7 +368,8 @@
                 0.0,
                 0.0
               ],
-              "type": "Simple"
+              "type": "Simple",
+              "zOrder": 0
             },
             "type": "Image"
           },
@@ -479,8 +381,8 @@
                 0.0
               ],
               "Pos": [
-                810.7000122070313,
-                133.10000610351563,
+                176.1999969482422,
+                -23.700000762939453,
                 0.0
               ],
               "Position": [
@@ -501,6 +403,96 @@
               "Size": [
                 387.79998779296875,
                 278.70001220703125
+              ]
+            },
+            "type": "RectTransform"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 111,
+        "Name": "NewGameObject",
+        "ParentID": 91,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                -42.0,
+                112.461669921875,
+                -3.0517578125e-05
+              ],
+              "Rotation": [
+                -0.0,
+                0.0,
+                -0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "drawSpacetype": "World",
+              "fillAmount": 1.0,
+              "imageType": "Simple",
+              "isMouseCheck": false,
+              "path": "..\\Assets\\Resource\\eyes_diff.png",
+              "sliceBorderPx": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "type": "Simple",
+              "zOrder": 0
+            },
+            "type": "Image"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "Pivot": [
+                0.0,
+                0.0
+              ],
+              "Pos": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Size": [
+                72.5999984741211,
+                47.20000076293945
               ]
             },
             "type": "RectTransform"
