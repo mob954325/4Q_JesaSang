@@ -49,6 +49,9 @@ void AdultGhostController::OnStart()
         return;
     }
 
+    // Hide Object 모두 수집 
+    hideObjects = SceneUtil::GetObjectsByName("HideObject");
+
     //LoadAnimation();  
 
     InitFSMStates();

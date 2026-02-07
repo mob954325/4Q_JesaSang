@@ -58,17 +58,13 @@ void AdultGhost_Patrol::FixedUpdate(float deltaTime)
 
 void AdultGhost_Patrol::Exit()
 {
-    auto* hideObj = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("HideObject");
-    if (hideObj)
+    if (adultGhost->curSeeingHideObject)
     {
-        auto* hideComp = hideObj->GetComponent<HideObject>();
-        if (hideComp && adultGhost->hideLookRegistered)
-        {
-            hideComp->UnregisterAILook(adultGhost);
-            adultGhost->hideLookRegistered = false;
-            adultGhost->curSeeingHideObject = nullptr;
-        }
+        if (auto* hide = adultGhost->curSeeingHideObject->GetComponent<HideObject>())
+            hide->UnregisterAILook(adultGhost);
     }
+    adultGhost->curSeeingHideObject = nullptr;
+    adultGhost->hideLookRegistered = false;
 
     agent->hasTarget = false;
     agent->path.clear();
@@ -82,25 +78,42 @@ void AdultGhost_Patrol::Exit()
 
 void AdultGhost_Patrol::UpdateHideObjectVision()
 {
-    auto* hideObj = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("HideObject");
+    GameObject* seen = nullptr;
 
-    if (!hideObj) return;
-
-    auto* hideComp = hideObj->GetComponent<HideObject>();
-    if (!hideComp) return;
-
-    bool nowSeeing = adultGhost->IsSeeing(hideObj);
-
-    if (nowSeeing && !adultGhost->hideLookRegistered)
+    for (auto* obj : adultGhost->hideObjects)
     {
-        hideComp->RegisterAILook(adultGhost);
-        adultGhost->hideLookRegistered = true;
-        adultGhost->curSeeingHideObject = hideObj;
+        if (!obj) continue;
+
+        if (adultGhost->IsSeeing(obj))
+        {
+            seen = obj;
+            break;
+        }
     }
-    else if (!nowSeeing && adultGhost->hideLookRegistered)
+
+    // 새로 봄
+    if (seen && adultGhost->curSeeingHideObject != seen)
     {
-        hideComp->UnregisterAILook(adultGhost);
-        adultGhost->hideLookRegistered = false;
+        // 이전 해제
+        if (adultGhost->curSeeingHideObject)
+        {
+            if (auto* hide = adultGhost->curSeeingHideObject->GetComponent<HideObject>())
+                hide->UnregisterAILook(adultGhost);
+        }
+
+        adultGhost->curSeeingHideObject = seen;
+        adultGhost->hideLookRegistered = true;
+
+        if (auto* hide = seen->GetComponent<HideObject>())
+            hide->RegisterAILook(adultGhost);
+    }
+    // 아무것도 안 보게 됨
+    else if (!seen && adultGhost->curSeeingHideObject)
+    {
+        if (auto* hide = adultGhost->curSeeingHideObject->GetComponent<HideObject>())
+            hide->UnregisterAILook(adultGhost);
+
         adultGhost->curSeeingHideObject = nullptr;
+        adultGhost->hideLookRegistered = false;
     }
 }

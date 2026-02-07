@@ -47,6 +47,7 @@ private:
 
     // HideObject tracking
     GameObject* curSeeingHideObject = nullptr;
+    std::vector<GameObject*> hideObjects;
     bool hideLookRegistered = false;
 
 private:
