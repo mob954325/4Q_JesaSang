@@ -531,10 +531,10 @@ bool PhysicsSystem::RaycastVision(
 
 void PhysicsSystem::DrawPhysXActors()
 {
-    //for (auto& it : m_ActorMap)
-    //{
-    //    PhysicsComponent* comp = it.first;
-    //    if (comp)
-    //        comp->DrawPhysXActors();
-    //}
+    for (auto& it : m_ActorMap)
+    {
+        PhysicsComponent* comp = it.first;
+        if (comp)
+            comp->DrawPhysXActors();
+    }
 }
