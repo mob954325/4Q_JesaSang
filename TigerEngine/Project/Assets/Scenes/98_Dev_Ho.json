@@ -3,7 +3,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 202,
+        "ID": 63,
         "Name": "DirectionalLight(Sun)",
         "ParentID": -1,
         "components": [
@@ -57,26 +57,26 @@
     {
       "properties": {
         "Active": true,
-        "ID": 203,
+        "ID": 64,
         "Name": "Box",
         "ParentID": -1,
         "components": [
           {
             "properties": {
               "Position": [
-                0.0,
+                -0.574554443359375,
                 30.899999618530273,
                 70.19999694824219
               ],
               "Rotation": [
-                0.0,
-                0.0,
+                -0.0,
+                -0.20873989164829254,
                 0.0
               ],
               "Scale": [
-                0.4000000059604645,
-                0.4000000059604645,
-                1.0
+                0.5000001788139343,
+                0.5,
+                0.5000001788139343
               ]
             },
             "type": "Transform"
@@ -126,18 +126,10 @@
               "UseDiffuseOverride": false,
               "UseEmissiveOverride": false,
               "UseMetallicOverride": false,
-              "UseRoughnessOverride": false
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
             },
             "type": "FBXRenderer"
-          },
-          {},
-          {
-            "properties": {
-              "b": 0.0,
-              "g": 0.0,
-              "r": 0.0
-            },
-            "type": "Player1"
           }
         ]
       },
@@ -146,40 +138,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 204,
-        "Name": "TestWeapon",
-        "ParentID": -1,
-        "components": [
-          {
-            "properties": {
-              "Position": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Rotation": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ]
-            },
-            "type": "Transform"
-          }
-        ]
-      },
-      "type": "GameObject"
-    },
-    {
-      "properties": {
-        "Active": true,
-        "ID": 205,
+        "ID": 65,
         "Name": "PlayerSoket",
-        "ParentID": 203,
+        "ParentID": 64,
         "components": [
           {
             "properties": {
@@ -208,7 +169,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 208,
+        "ID": 66,
         "Name": "cam1",
         "ParentID": -1,
         "components": [
@@ -249,7 +210,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 209,
+        "ID": 67,
         "Name": "cam2",
         "ParentID": -1,
         "components": [
@@ -290,7 +251,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 210,
+        "ID": 68,
         "Name": "cam3",
         "ParentID": -1,
         "components": [
@@ -331,7 +292,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 211,
+        "ID": 69,
         "Name": "TestWeapon",
         "ParentID": -1,
         "components": [
@@ -362,8 +323,188 @@
     {
       "properties": {
         "Active": true,
-        "ID": 212,
-        "Name": "PlayerSoket",
+        "ID": 70,
+        "Name": "NewGameObject",
+        "ParentID": -1,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "drawSpacetype": "Screen",
+              "fillAmount": 1.0,
+              "imageType": "Simple",
+              "isMouseCheck": true,
+              "path": "..\\Assets\\Resource\\Bricks059_Specular.png",
+              "sliceBorderPx": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "type": "Simple",
+              "zOrder": 0
+            },
+            "type": "Image"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "Pivot": [
+                0.0,
+                0.0
+              ],
+              "Pos": [
+                176.1999969482422,
+                -23.700000762939453,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.4000000059604645
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Size": [
+                387.79998779296875,
+                278.70001220703125
+              ]
+            },
+            "type": "RectTransform"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 71,
+        "Name": "NewGameObject",
+        "ParentID": 64,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                -42.0,
+                112.461669921875,
+                -3.0517578125e-05
+              ],
+              "Rotation": [
+                -0.0,
+                0.0,
+                -0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "drawSpacetype": "World",
+              "fillAmount": 1.0,
+              "imageType": "Simple",
+              "isMouseCheck": false,
+              "path": "..\\Assets\\Resource\\eyes_diff.png",
+              "sliceBorderPx": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "type": "Simple",
+              "zOrder": 0
+            },
+            "type": "Image"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "Pivot": [
+                0.0,
+                0.0
+              ],
+              "Pos": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Size": [
+                72.5999984741211,
+                47.20000076293945
+              ]
+            },
+            "type": "RectTransform"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 73,
+        "Name": "Button",
         "ParentID": -1,
         "components": [
           {
@@ -385,6 +526,121 @@
               ]
             },
             "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "drawSpacetype": "Screen",
+              "fillAmount": 1.0,
+              "imageType": "Simple",
+              "isMouseCheck": false,
+              "path": "..\\Assets\\Resource\\Bricks059_Specular.png",
+              "sliceBorderPx": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "type": "Simple",
+              "zOrder": 0
+            },
+            "type": "Image"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "drawSpacetype": "Screen",
+              "fillAmount": 1.0,
+              "imageType": "Simple",
+              "isMouseCheck": false,
+              "path": "..\\Assets\\Resource\\DB2X2_L01.png",
+              "sliceBorderPx": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "type": "Simple",
+              "zOrder": 0
+            },
+            "type": "Image"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "drawSpacetype": "Screen",
+              "fillAmount": 1.0,
+              "imageType": "Simple",
+              "isMouseCheck": false,
+              "path": "..\\Assets\\Resource\\eyes_diff.png",
+              "sliceBorderPx": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "type": "Simple",
+              "zOrder": 0
+            },
+            "type": "Image"
+          },
+          {
+            "properties": {
+              "Active": true
+            },
+            "type": "TestButton"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "Pivot": [
+                0.0,
+                0.0
+              ],
+              "Pos": [
+                588.4000244140625,
+                94.0,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Size": [
+                200.0,
+                200.0
+              ]
+            },
+            "type": "RectTransform"
           }
         ]
       },

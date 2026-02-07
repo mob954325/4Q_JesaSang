@@ -127,7 +127,7 @@ void RectTransform::UpdateMatricesIfDirty()
         if (parentRect)
         {
             Matrix parentNoScale = RemoveScale(parentRect->GetWorldMatrix());
-            worldMatrix = localMatrix * parentNoScale;   // ✅ 부모 스케일 미상속
+            worldMatrix = localMatrix * parentNoScale;   // 부모 스케일 미상속
         }
         else
         {
