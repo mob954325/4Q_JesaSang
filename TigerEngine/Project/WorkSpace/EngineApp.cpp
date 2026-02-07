@@ -74,7 +74,7 @@ bool EngineApp::OnInitialize()
     UIManager::Instance().SetSize(clientWidth, clientHeight);
     UIManager::Instance().Init(dxRenderer->GetDevice(), dxRenderer->GetDeviceContext());
     TextureResourceManager::Instance().Init(dxRenderer->GetDevice(), dxRenderer->GetDeviceContext());
-
+    SceneSystem::Instance().LoadSavedScenes(); // json 불러와서 Scene 저장
     renderQueue = std::make_unique<RenderQueue>();
 
 #if _DEBUG
@@ -87,7 +87,7 @@ bool EngineApp::OnInitialize()
 #endif
 
 	SceneSystem::Instance().AddScene();			    	// create first scene
-	SceneSystem::Instance().SetCurrentSceneByIndex(); 	// render first scene
+	SceneSystem::Instance().ChangeSceneByIndex(0); 	// render first scene
 
 	// create free camera
 	CameraSystem::Instance().SetScreenSize(clientWidth, clientHeight);

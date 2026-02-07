@@ -11,6 +11,8 @@ public:
 	SceneSystem(token) {};
 	~SceneSystem() = default;
 
+    void LoadSavedScenes();
+
 	void BeforUpdate();
 	void UpdateScene(float deltaTime);
 	void FixedUpdateScene(float deltaTime);
@@ -18,8 +20,12 @@ public:
 
 	std::shared_ptr<Scene> GetSceneByIndex(int index);
 	void AddScene();
+	void AddScene(const std::shared_ptr<Scene>& scene);
 	std::shared_ptr<Scene> GetCurrentScene();
-	std::shared_ptr<Scene> SetCurrentSceneByIndex(int i = 0);
+
+    int GetSceneCount();
+	void ChangeScene(const std::shared_ptr<Scene>& scene);
+	void ChangeSceneByIndex(int index);
 
 private:
 	std::map<int, std::shared_ptr<Scene>> scenes;

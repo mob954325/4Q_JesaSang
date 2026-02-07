@@ -63,7 +63,7 @@ public:
     GameObject* GetGameObject(GameObject* obj);
 
 	/// @brief 모든 씬 오브젝트들을 제거하는 함수
-	void ClearScene();
+	void SystemClear();
 
 	/// @brief json으로 scene정보를 저장하는 함수
 	/// @param filename 저장할 파일 이름
@@ -86,7 +86,7 @@ public:
     /// <summary>
     /// 가장 최근에 로드된 json 파일을 다시 로드하는 함수
     /// </summary>
-    void ReloadScene();
+    void ReloadSceneByJson();
 
     /// <summary>
     /// 게임 오브젝트 포인터로 인덱스 찾기
@@ -101,6 +101,16 @@ public:
     /// <param name="index">인덱스</param>
     /// <returns>있으면 포인터 없으면 nullptr</returns>
     GameObject* GetGameObjectByIndex(int index);
+
+    /// <summary>
+    /// 씬에 등록된 모든 오브젝트 시스템에 등록
+    /// </summary>
+    void OpenScene();
+
+    /// <summary>
+    /// 씬으로부터 등록된 시스템 정리 ( 모든 시스템에 등록된 오브젝트 정리 -> disable 호출해서 제거 )
+    /// </summary>
+    void CloseScene();
 
 protected:
     /// <summary>
