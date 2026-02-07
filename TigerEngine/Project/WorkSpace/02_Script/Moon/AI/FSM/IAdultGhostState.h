@@ -9,7 +9,10 @@ protected:
     AdultGhostController* adultGhost;
 
 public:
-    IAdultGhostState(AdultGhostController* _adultGhost) : adultGhost(_adultGhost) {}
+    AdultGhostState type;
+
+public:
+    explicit IAdultGhostState(AdultGhostController* _adultGhost, AdultGhostState _type) : adultGhost(_adultGhost), type(_type) {}
     virtual ~IAdultGhostState() = default;
 
     virtual void Enter() = 0;

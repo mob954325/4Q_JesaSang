@@ -13,13 +13,18 @@ class AdultGhost_Search;
 class AdultGhost_Return;
 class AdultGhost_Attack;
 
-
 enum class AdultGhostState
 {
  // 순찰,   추격,   탐색,   복귀,   공격,    None
     Patrol, Chase, Search, Return, Attack, None
 };
 
+struct GridPos
+{
+    int x = -1;
+    int y = -1;
+    bool valid = false;
+};
 
 class AdultGhostController : public ScriptComponent
 {
@@ -31,15 +36,19 @@ private:
 
     // Component 
     AgentComponent* agent = nullptr;
-    GridComponent* grid = nullptr;
     VisionComponent* vision = nullptr;
 
-    GameObject* curSeeingHideObject = nullptr;
 
     // State
     AdultGhostState state = AdultGhostState::None;
-    IAdultGhostState* curState;
+    IAdultGhostState* currentState;
     IAdultGhostState* fsmStates[5];
+
+
+    // HideObject tracking
+    GameObject* curSeeingHideObject = nullptr;
+    std::vector<GameObject*> hideObjects;
+    bool hideLookRegistered = false;
 
 private:
     // FSM
@@ -49,12 +58,8 @@ private:
     // Animation
     void LoadAnimation();
 
-    // Init
-    // void InitStat();
-
-    // Interaction
-    void InteractionCheak(float delta);
-
+    // Movement (공통)
+    bool MoveToTarget(float delta);
 
 public:
     void OnStart() override;
@@ -62,11 +67,20 @@ public:
     void OnFixedUpdate(float dt) override;
     void OnDestory() override;
 
+    // Interaction
+    void OnPlayerNoise(const Vector3& noiseWorldPos); // 플레이어에서 호출 
 
-public:
-    // [ To. 우정 : 플레이어 연동 관련 ] 
-    void OnPlayerNoise(const Vector3& noiseWorldPos); 
-    bool hideLookRegistered = false;    
+    // Helper
+    void ResetAgentForMove(float speed);
+    bool IsSeeing(GameObject* target) const;
+    bool IsPlayerInSenseRange();
+
+    GameObject* GetAITarget() const;
+    GameObject* GetPlayer() const;
+
+
+    // 플레이어 발견 마지막 위치 (그리드 좌표) 
+    GridPos lastPlayerGrid;
 
 public:
     // friend
