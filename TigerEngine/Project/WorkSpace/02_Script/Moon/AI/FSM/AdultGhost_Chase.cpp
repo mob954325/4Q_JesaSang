@@ -22,10 +22,10 @@ void AdultGhost_Chase::ChangeStateLogic()
 {
     if (!target) return;
 
-    // 최소 추격 시간 이후에만 추격 포기 가능
+    // 최소 추격 시간 이후에만 추격 포기 가능함 
     if (CanGiveUpChase())
     {
-        // 마지막으로 본 위치를 Search에 넘겨줌 
+        // 마지막으로 본 위치 저장 
         auto grid = GridSystem::Instance().GetMainGrid();
         if (grid)
         {
@@ -33,13 +33,9 @@ void AdultGhost_Chase::ChangeStateLogic()
             auto wp = target->GetTransform()->GetWorldPosition();
             if (grid->WorldToGridFromCenter(wp, px, py))
             {
-                if (auto* search = adultGhost->GetState<AdultGhost_Search>(AdultGhostState::Search))
-                {
-                    search->SetSearchTarget(px, py);
-                }
+                adultGhost->lastPlayerGrid = { px, py, true };
             }
         }
-
         adultGhost->ChangeState(AdultGhostState::Search);
     }
 }
@@ -69,8 +65,6 @@ void AdultGhost_Chase::Exit()
     adultGhost->agent->hasTarget = false;
     adultGhost->agent->externalControl = false;
     adultGhost->agent->path.clear();
-
-    cout << "[AdultGhost_Chase] Exit" << endl;
 }
 
 

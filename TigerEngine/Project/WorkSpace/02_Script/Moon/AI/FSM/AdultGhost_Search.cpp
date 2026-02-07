@@ -11,7 +11,21 @@ void AdultGhost_Search::Enter()
 
     adultGhost->ResetAgentForMove(3.5f);
 
-    TrySetInitialTarget();
+    // 마지막 플레이어 위치 있으면 사용 
+    if (adultGhost->lastPlayerGrid.valid)
+    {
+        auto& p = adultGhost->lastPlayerGrid;
+
+        adultGhost->agent->targetCX = p.x;
+        adultGhost->agent->targetCY = p.y;
+        adultGhost->agent->hasTarget = true;
+
+        adultGhost->lastPlayerGrid.valid = false; // 1회성
+    }
+    else
+    {
+        adultGhost->ChangeState(AdultGhostState::Patrol);  // 값 없으면 바로 Patrol
+    }
 }
 
 void AdultGhost_Search::ChangeStateLogic()
@@ -24,7 +38,7 @@ void AdultGhost_Search::ChangeStateLogic()
         return;
     }
 
-    // 2. 목적지 도착못했는데, 시간 지났을 때 (Search 실패)
+    // 2. 도착 후 일정 시간 탐색 (Search 실패)
     if (arrived && searchTimer >= maxSearchTime)
     {
         cout << "[AdultGhost_Search] Search Fail.. " << endl;
@@ -52,31 +66,9 @@ void AdultGhost_Search::FixedUpdate(float deltaTime)
 
 void AdultGhost_Search::Exit()
 {
-    hasSearchTarget = false;
     arrived = false;
 
     adultGhost->agent->externalControl = false;
     adultGhost->agent->path.clear();
     adultGhost->agent->hasTarget = false;
-}
-
-// -----------------------------------------------------------
-
-void AdultGhost_Search::SetSearchTarget(int cx, int cy)
-{
-    targetCX = cx;
-    targetCY = cy;
-    hasSearchTarget = true;
-}
-
-void AdultGhost_Search::TrySetInitialTarget()
-{
-    if (!hasSearchTarget) return;
-
-    auto grid = GridSystem::Instance().GetMainGrid();
-    if (!grid) return;
-
-    adultGhost->agent->targetCX = targetCX;
-    adultGhost->agent->targetCY = targetCY;
-    adultGhost->agent->hasTarget = true;
 }

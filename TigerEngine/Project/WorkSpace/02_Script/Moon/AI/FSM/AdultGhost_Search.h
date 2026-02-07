@@ -23,13 +23,6 @@ private:
 
     bool arrived = false;
 
-    int targetCX = 0;
-    int targetCY = 0;
-    bool hasSearchTarget = false; 
-
-private:
-    void TrySetInitialTarget();
-
 public:
     AdultGhost_Search(AdultGhostController* _adultGhost) : IAdultGhostState(_adultGhost, AdultGhostState::Search) {}
     ~AdultGhost_Search() = default;
@@ -39,7 +32,4 @@ public:
     void Update(float deltaTime) override;
     void FixedUpdate(float deltaTime) override;
     void Exit() override;
-
-    // 타겟 설정 
-    void SetSearchTarget(int cx, int cy);
 };
