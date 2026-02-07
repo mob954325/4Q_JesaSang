@@ -91,15 +91,21 @@ std::unique_ptr<IMiniGame> MiniGameManager::CreateMinigameForIngredientId(const 
     if (foodId == "Ingredient_Apple" || foodId == "Ingredient_Pear")
     {
         miniGame1_Parent->SetActive(true);
+        miniGame2_Parent->SetActive(false);
+        miniGame3_Parent->SetActive(false);
         return std::make_unique<Game_Cutting>();
     }
     if (foodId == "Ingredient_Batter" || foodId == "Ingredient_Tofu")
     {
+        miniGame1_Parent->SetActive(false);
         miniGame2_Parent->SetActive(true);
+        miniGame3_Parent->SetActive(false);
         return std::make_unique<Game_FireControl>();
     }
     if (foodId == "Ingredient_Sanjeok" || foodId == "Ingredient_Donggeurangttaeng")
     {
+        miniGame1_Parent->SetActive(false);
+        miniGame2_Parent->SetActive(false);
         miniGame3_Parent->SetActive(true);
         return std::make_unique<Game_Assembling>();
     }
