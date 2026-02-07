@@ -85,21 +85,12 @@ Camera* CameraSystem::GetCurrCamera()
     // NOTE : 씬 전환 뒤 currCamera Index 초과 방지
     if (currCameraIndex >= registered.size()) currCameraIndex = 0; // 초과 되면 0번 초기화
 
-    if (registered.size() == 1)
+    if (registered[currCameraIndex]->GetOwner()->GetName() == "FreeCamera") // 현재 카메라가 프리캠이면 다음 카메라로 실행
     {
-        return registered[currCameraIndex];
-    }
-    else
-    {
-        if (registered[currCameraIndex]->GetOwner()->GetName() == "FreeCamera") // 현재 카메라가 프리캠이면 다음 카메라로 실행
-        {
-            NextCamera(); // ++; -> 만약 여기서도 프리캠밖에 없으면 프리캠으로 잡힐 것임.
-        }
-
-        return registered[currCameraIndex];
+        NextCamera(); // ++; -> 만약 여기서도 프리캠밖에 없으면 프리캠으로 잡힐 것임.
     }
 
-    return registered[currCameraIndex]; // 예외 
+    return registered[currCameraIndex];
 }
 
 Camera *CameraSystem::GetCameraByIndex(int index)

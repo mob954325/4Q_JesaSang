@@ -123,12 +123,11 @@ void ScriptSystem::FixedUpdate(float dt)
         {
             scriptComps.push_back(e);
         }
+        pending_scriptComponents.clear();
 
         // 사용자 정의 component update
         for (auto& e : scriptComps)
         {
-            pending_scriptComponents.clear();
-
             e->OnFixedUpdate(dt);
         }
     }
@@ -142,12 +141,11 @@ void ScriptSystem::LateUpdate(float dt)
         {
             scriptComps.push_back(e);
         }
+        pending_scriptComponents.clear();
 
         // 사용자 정의 component update
         for (auto& e : scriptComps)
         {
-            pending_scriptComponents.clear();
-
             e->OnLateUpdate(dt);
         }
     }

@@ -5,6 +5,7 @@
 #include "System/ObjectSystem.h"
 #include "../EngineSystem/LightSystem.h"
 #include "../EngineSystem/CameraSystem.h"
+#include <sstream>
 
 void Scene::OnUpdate(float deltaTime)
 {
@@ -339,6 +340,13 @@ void Scene::ReloadSceneByJson()
     LoadToJson(targetLoadedPath);
 }
 
+bool Scene::ReloadSceneByStoredJson()
+{
+    if (storedJson.empty()) return false;
+    //return LoadFromJsonStringInternal(storedJson, nullptr);
+    return true;
+}
+
 int Scene::GetGameObjectIndex(GameObject* ptr)
 {
     int res = -1;
@@ -367,7 +375,10 @@ void Scene::OpenScene()
 {
     for (auto& obj : gameObjects)
     {
-        obj.objPtr->Enable_Inner();
+        for (auto& comp : obj.objPtr->GetComponents())
+        {
+            comp->Enable_Inner();
+        }        
     }
 }
 
@@ -375,6 +386,9 @@ void Scene::CloseScene()
 {
     for (auto& obj : gameObjects)
     {
-        obj.objPtr->Disable_Inner();
+        for (auto& comp : obj.objPtr->GetComponents())
+        {
+            comp->Disable_Inner();
+        }
     }
 }

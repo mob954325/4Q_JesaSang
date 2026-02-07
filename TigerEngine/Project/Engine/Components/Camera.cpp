@@ -27,6 +27,11 @@ void Camera::Disable_Inner()
     OnDisable();
 }
 
+void Camera::OnEnable()
+{
+    SetProjection(povAngle, screenWidth, screenHeight, nearDist, farDist);
+}
+
 Vector3 Camera::GetForward()
 {
 	Matrix world = owner->GetTransform()->GetWorldMatrix();
@@ -93,7 +98,6 @@ void Camera::OnInitialize()
     screenWidth = screen.x;
     screenHeight = screen.y;
 
-    SetProjection(povAngle, screenWidth, screenHeight, nearDist, farDist);
 }
 
 void Camera::OnStart()

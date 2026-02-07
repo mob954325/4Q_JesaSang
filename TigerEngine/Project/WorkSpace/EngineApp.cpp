@@ -74,7 +74,6 @@ bool EngineApp::OnInitialize()
     UIManager::Instance().SetSize(clientWidth, clientHeight);
     UIManager::Instance().Init(dxRenderer->GetDevice(), dxRenderer->GetDeviceContext());
     TextureResourceManager::Instance().Init(dxRenderer->GetDevice(), dxRenderer->GetDeviceContext());
-    SceneSystem::Instance().LoadSavedScenes(); // json 불러와서 Scene 저장
     renderQueue = std::make_unique<RenderQueue>();
 
 #if _DEBUG
@@ -86,14 +85,18 @@ bool EngineApp::OnInitialize()
     editor->CreatePickingStagingTex();
 #endif
 
-	SceneSystem::Instance().AddScene();			    	// create first scene
-	SceneSystem::Instance().ChangeSceneByIndex(0); 	// render first scene
-
-	// create free camera
 	CameraSystem::Instance().SetScreenSize(clientWidth, clientHeight);
 
+
+    SceneSystem::Instance().LoadSavedScenes(); // json 불러와서 Scene 저장
+
+    if(SceneSystem::Instance().GetSceneCount() == 0)
+	    SceneSystem::Instance().AddScene();			    	// create first scene
+
+	SceneSystem::Instance().ChangeSceneByIndex(0); 	// render first scene
+
     // == find scene ==
-    LoadSavedFirstScene(); // SceneClear 호출해서 객채 생성은 이 코드 이후에 해야함 
+    //LoadSavedFirstScene(); // SceneClear 호출해서 객채 생성은 이 코드 이후에 해야함 
 
 #if _DEBUG
     auto freeCamHandle = CameraSystem::Instance().CreateFreeCamera(clientWidth, clientHeight, SceneSystem::Instance().GetCurrentScene().get());
@@ -139,7 +142,6 @@ bool EngineApp::OnInitialize()
 
 void EngineApp::OnPreUpdate()
 {
-    SceneSystem::Instance().CheckSceneChange();
     ScriptSystem::Instance().CheckReadyQueue();
     RenderSystem::Instance().CheckReadyQueue();
 }
@@ -147,9 +149,9 @@ void EngineApp::OnPreUpdate()
 void EngineApp::OnUpdate()
 {
     Camera* curCam;
-    if(PlayModeSystem::Instance().IsPlaying())
-        curCam = CameraSystem::Instance().GetCurrCamera();
-    else
+   if(PlayModeSystem::Instance().IsPlaying())
+       curCam = CameraSystem::Instance().GetCurrCamera();
+   else
         curCam = CameraSystem::Instance().GetFreeCamera();
 
 	SceneSystem::Instance().BeforUpdate();	
@@ -162,6 +164,26 @@ void EngineApp::OnUpdate()
 
 #if _DEBUG
 	editor->Update();
+
+    if (Input::GetKeyDown(DirectX::Keyboard::O))
+    {
+        index--;
+        if (index < 0)
+        {
+            index = SceneSystem::Instance().GetSceneCount() - 1;
+        }
+        SceneSystem::Instance().ChangeSceneByIndex(index);
+    }
+
+    if (Input::GetKeyDown(DirectX::Keyboard::P))
+    {
+        index++;
+        if (index >= SceneSystem::Instance().GetSceneCount())
+        {
+            index = 0;
+        }
+        SceneSystem::Instance().ChangeSceneByIndex(index);
+    }
 #endif
 }
 
@@ -254,6 +276,7 @@ void EngineApp::OnFixedUpdate()
 void EngineApp::OnLateUpdate()
 {
     SceneSystem::Instance().LateUpdateScene(GameTimer::Instance().DeltaTime());
+    SceneSystem::Instance().CheckSceneChange();
 }
 
 void GameApp::ConsoleInitialize()

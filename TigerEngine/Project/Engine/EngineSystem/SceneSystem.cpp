@@ -30,8 +30,13 @@ void SceneSystem::CheckSceneChange()
 {
     if (nextSceneIndex != currSceneIndex) // 씬 전환 감지
     {
-        currentScene->CloseScene();
-        currentScene = scenes.find(nextSceneIndex)->second;
+        auto it = scenes.find(nextSceneIndex);
+        if (it == scenes.end()) return;
+
+        if (currentScene)
+            currentScene->CloseScene();
+
+        currentScene = it->second;
         currentScene->OpenScene();
 
         currSceneIndex = nextSceneIndex;

@@ -89,4 +89,6 @@ private:
     void Moon_Registeration();
     void Ron_Registeration();
     void Ho_Registeration();
+
+    int index = 0;
 };

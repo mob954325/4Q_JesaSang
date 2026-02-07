@@ -29,6 +29,7 @@ public:
     void OnDestory() override;
     void Enable_Inner() override;
     void Disable_Inner() override;
+    void OnEnable() override;
 
 	float GetSpeed() const { return moveSpeed; }
 	void SetSpeed(float value) {  moveSpeed = value; }

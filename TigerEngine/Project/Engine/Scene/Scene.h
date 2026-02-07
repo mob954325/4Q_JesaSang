@@ -72,6 +72,7 @@ public:
 	/// @brief json 파일을 읽어서 scene에 로드하는 함수
 	/// @param 불러오는 파일 이름
 	bool LoadToJson(const std::string& filename);
+	bool LoadFromJsonString(const std::string& jsonText);
 	
 	int GetObjectCount() { return gameObjects.size(); }
 
@@ -87,6 +88,7 @@ public:
     /// 가장 최근에 로드된 json 파일을 다시 로드하는 함수
     /// </summary>
     void ReloadSceneByJson();
+    bool ReloadSceneByStoredJson();
 
     /// <summary>
     /// 게임 오브젝트 포인터로 인덱스 찾기
@@ -112,6 +114,9 @@ public:
     /// </summary>
     void CloseScene();
 
+private:
+    bool LoadFromJsonStringInternal(const std::string& jsonText, const std::string* sourcePath);
+
 protected:
     /// <summary>
     /// 씬에서 사용하는 오브젝트 모음 
@@ -124,4 +129,5 @@ protected:
     std::unordered_map<std::string, std::vector<std::pair<Handle, int>>> mappedGameObjects;
 
     std::string targetLoadedPath = "";
+    std::string storedJson = "";
 };
