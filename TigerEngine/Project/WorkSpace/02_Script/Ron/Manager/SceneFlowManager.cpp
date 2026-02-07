@@ -68,34 +68,34 @@ void SceneFlowManager::LoadScene(const std::string& path)
 
 void SceneFlowManager::OnUpdate(float delta)
 {
-    (void)delta;
-
-    if (allowNumberKeys)
-    {
-        if (InputSystem::Instance().GetKeyDown(DirectX::Keyboard::Keys::D1))
-        {
-            LoadScene(startScenePath);
-        }
-        else if (InputSystem::Instance().GetKeyDown(DirectX::Keyboard::Keys::D2))
-        {
-            LoadScene(introScenePath);
-        }
-        else if (InputSystem::Instance().GetKeyDown(DirectX::Keyboard::Keys::D3))
-        {
-            LoadScene(tutorialScenePath);
-        }
-        else if (InputSystem::Instance().GetKeyDown(DirectX::Keyboard::Keys::D4))
-        {
-            LoadScene(mainScenePath);
-        }
-    }
-
-    if (allowStartAdvance)
-    {
-        if (InputSystem::Instance().GetKeyDown(DirectX::Keyboard::Keys::Space) ||
-            InputSystem::Instance().GetKeyDown(DirectX::Keyboard::Keys::Enter))
-        {
-            LoadScene(introScenePath);
-        }
-    }
+   //(void)delta;
+   //
+   //if (allowNumberKeys)
+   //{
+   //    if (InputSystem::Instance().GetKeyDown(DirectX::Keyboard::Keys::D1))
+   //    {
+   //        LoadScene(startScenePath);
+   //    }
+   //    else if (InputSystem::Instance().GetKeyDown(DirectX::Keyboard::Keys::D2))
+   //    {
+   //        LoadScene(introScenePath);
+   //    }
+   //    else if (InputSystem::Instance().GetKeyDown(DirectX::Keyboard::Keys::D3))
+   //    {
+   //        LoadScene(tutorialScenePath);
+   //    }
+   //    else if (InputSystem::Instance().GetKeyDown(DirectX::Keyboard::Keys::D4))
+   //    {
+   //        LoadScene(mainScenePath);
+   //    }
+   //}
+   //
+   //if (allowStartAdvance)
+   //{
+   //    if (InputSystem::Instance().GetKeyDown(DirectX::Keyboard::Keys::Space) ||
+   //        InputSystem::Instance().GetKeyDown(DirectX::Keyboard::Keys::Enter))
+   //    {
+   //        LoadScene(introScenePath);
+   //    }
+   //}
 }

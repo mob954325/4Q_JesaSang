@@ -22,6 +22,10 @@ void AITarget::OnStart()
     tr->SetPosition(upatePos);
     GetOwner()->GetComponent<PhysicsComponent>()->SyncToPhysics();
 }
+void AITarget::OnUpdate(float d)
+{
+
+}
 void AITarget::OnFixedUpdate(float delta)
 {
     Vector3 upatePos = playerTr->GetWorldPosition() + Vector3(0, 150, 0);

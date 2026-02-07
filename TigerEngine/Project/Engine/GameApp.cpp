@@ -186,8 +186,8 @@ void GameApp::Update()
 	InputSystem::Instance().Update(Singleton<GameTimer>::Instance().DeltaTime());
 
     OnPreUpdate();
-    FixedUpdate(); // 물리 업데이트
 	OnUpdate();
+    FixedUpdate(); // 물리 업데이트
 }
 
 void GameApp::OnFixedUpdate()

@@ -23,6 +23,7 @@ private:
 public:
     // component process
     void OnStart() override;
+    void OnUpdate(float d) override;
     void OnFixedUpdate(float delta) override;
 
     // json

@@ -142,6 +142,7 @@ bool EngineApp::OnInitialize()
 
 void EngineApp::OnPreUpdate()
 {
+    SceneSystem::Instance().CheckSceneChange();
     ScriptSystem::Instance().CheckReadyQueue();
     RenderSystem::Instance().CheckReadyQueue();
 }
@@ -276,7 +277,6 @@ void EngineApp::OnFixedUpdate()
 void EngineApp::OnLateUpdate()
 {
     SceneSystem::Instance().LateUpdateScene(GameTimer::Instance().DeltaTime());
-    SceneSystem::Instance().CheckSceneChange();
 }
 
 void GameApp::ConsoleInitialize()
