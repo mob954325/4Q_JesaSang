@@ -164,7 +164,6 @@
     <ClInclude Include="02_Script\Woo\Player\AITarget\AITarget.h" />
     <ClInclude Include="02_Script\\Ron\\Manager\\SceneFlowManager.h" />
     <ClInclude Include="99_Test\Player\PlayerUI.h" />
-    <ClInclude Include="99_Test\Player\SceneLoadTestScript.h" />
     <ClInclude Include="99_Test\Player\TestButton.h" />
     <ClInclude Include="EngineApp.h" />
     <ClInclude Include="02_Script\\Ron\\MiniMapTest\MiniMapTestScript.h" />
@@ -219,7 +218,6 @@
     <ClCompile Include="02_Script\Woo\Player\AITarget\AITarget.cpp" />
     <ClCompile Include="02_Script\\Ron\\Manager\\SceneFlowManager.cpp" />
     <ClCompile Include="99_Test\Player\PlayerUI.cpp" />
-    <ClCompile Include="99_Test\Player\SceneLoadTestScript.cpp" />
     <ClCompile Include="99_Test\Player\TestButton.cpp" />
     <ClCompile Include="EngineApp.cpp" />
     <ClCompile Include="02_Script\\Ron\\MiniMapTest\MiniMapTestScript.cpp" />
