@@ -163,7 +163,7 @@ GameObject* Scene::GetGameObject(GameObject* obj)
     }
 }
 
-void Scene::ClearScene()
+void Scene::SystemClear()
 {
 	for(auto it = gameObjects.begin(); it != gameObjects.end();)
 	{
@@ -234,7 +234,7 @@ bool Scene::LoadToJson(const std::string &filename)
 	// json 데이터에 objects 객체이나 배열이 없음
 	if(!root.contains("objects") || !root["objects"].is_array()) return false;
 
-    ClearScene(); // 데이터가 존재하면 현재 씬 제거
+    SystemClear(); // 데이터가 존재하면 현재 씬 제거
     targetLoadedPath = filename;
 
     // 데이터에 있는 게임 오브젝트 불러오기
@@ -333,9 +333,9 @@ GameObject* Scene::RayCastGameObject(const Ray &ray, float *outDistance)
     return hitObject;
 }
 
-void Scene::ReloadScene()
+void Scene::ReloadSceneByJson()
 {
-    ClearScene();
+    SystemClear();
     LoadToJson(targetLoadedPath);
 }
 
@@ -361,4 +361,20 @@ GameObject* Scene::GetGameObjectByIndex(int index)
     if (index < 0 || index >= gameObjects.size()) return nullptr;
 
 	return gameObjects[index].objPtr;
+}
+
+void Scene::OpenScene()
+{
+    for (auto& obj : gameObjects)
+    {
+        obj.objPtr->Enable_Inner();
+    }
+}
+
+void Scene::CloseScene()
+{
+    for (auto& obj : gameObjects)
+    {
+        obj.objPtr->Disable_Inner();
+    }
 }

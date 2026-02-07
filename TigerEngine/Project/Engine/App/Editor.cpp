@@ -945,7 +945,7 @@ void Editor::RenderPlayModeControls()
     if (ImGui::Button("Stop"))
     {
         playMode.SetPlayMode(PlayModeState::Stopped);
-        SceneSystem::Instance().GetCurrentScene()->ReloadScene();
+        SceneSystem::Instance().GetCurrentScene()->ReloadSceneByJson();
         CameraSystem::Instance().SetCurrCameraToFreeCamera();
     }
     ImGui::PopStyleColor(3);
