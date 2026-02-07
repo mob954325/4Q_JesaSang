@@ -7027,60 +7027,6 @@
     },
     {
       "properties": {
-        "Active": false,
-        "ID": 3342,
-        "Name": "Right",
-        "ParentID": 3341,
-        "components": [
-          {
-            "properties": {
-              "Position": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Rotation": [
-                -0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ]
-            },
-            "type": "Transform"
-          },
-          {
-            "properties": {
-              "Active": false,
-              "ColliderType": "Box",
-              "PhysicsBodyType": "Static",
-              "density": 10.0,
-              "halfExtents": [
-                73.80000305175781,
-                89.9000015258789,
-                25.600000381469727
-              ],
-              "height": 10.0,
-              "isTrigger": false,
-              "layer": "Default",
-              "localOffset": [
-                -202.6999969482422,
-                90.19999694824219,
-                190.5
-              ],
-              "radius": 50.0
-            },
-            "type": "PhysicsComponent"
-          }
-        ]
-      },
-      "type": "GameObject"
-    },
-    {
-      "properties": {
         "Active": true,
         "ID": 3343,
         "Name": "CookingZone",
