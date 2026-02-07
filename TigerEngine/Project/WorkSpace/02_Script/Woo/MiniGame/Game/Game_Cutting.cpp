@@ -1,24 +1,157 @@
 #include "Game_Cutting.h"
 #include <iostream>
+#include <algorithm>
+
+#include "EngineSystem/SceneSystem.h"
+#include "System/InputSystem.h"
+#include "Object/GameObject.h"
+#include "Components/RectTransform.h"
+#include "Components/UI/Image.h"
+
+using std::cout;
+using std::endl;
+
+float Game_Cutting::GetUIPosX(RectTransform* rt) const
+{
+    return rt->GetPos().x;
+}
+
+void Game_Cutting::SetUIPosX(RectTransform* rt, float x)
+{
+    Vector3 pos = rt->GetPos();
+    pos.x = x;
+    rt->SetPos(pos);
+}
+
+float Game_Cutting::GetUIWidth(RectTransform* rt) const
+{
+    return rt->GetSize().x;
+}
+
+bool Game_Cutting::IsSpaceDownOnce() const
+{
+    return InputSystem::Instance().GetKeyDown(spaceKey);
+}
+
+void Game_Cutting::EvaluateOnce()
+{
+    const float stopX = GetUIPosX(stopPoint);
+    const float stopW = std::max(1.0f, GetUIWidth(stopPoint));
+
+    const float barX = GetUIPosX(spaceBar);
+    const float barW = std::max(1.0f, GetUIWidth(spaceBar));
+
+    const float stopLeft = stopX - stopW * 0.5f;
+    const float stopRight = stopX + stopW * 0.5f;
+
+    const float barCenter = barX;
+  
+    const bool hit = (barCenter >= stopLeft && barCenter <= stopRight);
+
+    if (hit)
+    {
+        curSuccessCount++;
+        cout << "[MiniGame Cutting] SUCCESS! (" << curSuccessCount << "/5)" << endl;
+    }
+    else
+    {
+        curFailCount++;
+        cout << "[MiniGame Cutting] FAIL! (" << curFailCount << "/3)" << endl;
+    }
+
+    // 성공/실패 체크
+    if (curSuccessCount >= 5)
+    {
+        isFinished = true;
+        isSuccess = true;
+    }
+    else if (curFailCount >= 3)
+    {
+        isFinished = true;
+        isSuccess = false;
+    }
+}
 
 void Game_Cutting::StartGame()
 {
+    stopPoint = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("Image_StopPoint")->GetComponent<RectTransform>();
+    spaceBar = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("Image_SpaceBar")->GetComponent<RectTransform>();
+    
+    if (!stopPoint || !spaceBar)
+    {
+        cout << "[MiniGame 1] Missing ui objects!" << endl;
+        return;
+    }
+
+    // init
     timer = 0.0f;
-    std::cout << "[Mini Game] : Game_Cutting Start!" << std::endl;
+    curFailCount = 0;
+    curSuccessCount = 0;
+
+    dir = 1.0f;
+    isStopped = false;
+    stopTimer = 0.0f;
+    consumedThisStop = false;
+
+    // start pos init
+    SetUIPosX(spaceBar, (xMin + xMax) * 0.5f);
+
+    std::cout << "[MiniGame 1] : Game_Cutting Start!" << std::endl;
 }
 
 void Game_Cutting::UpdateGame(float delta)
 {
-    timer += delta;
-    if (timer >= gamePlayTime)
+    if (isFinished) return;
+
+    // Space바 눌렀을때
+    if (!isStopped && IsSpaceDownOnce())
     {
-        timer = 0.0f;
-        isFinished = true;
-        isSuccess = true;
+        isStopped = true;
+        stopTimer = 0.0f;
+        consumedThisStop = false;
     }
+
+    // 판정 + 대기후 다시 움직이기
+    if (isStopped)
+    {
+        if (!consumedThisStop)
+        {
+            consumedThisStop = true;
+            EvaluateOnce();
+
+            if (isFinished) return; // 5성공/3실패로 끝났으면 바로 종료
+        }
+
+        stopTimer += delta;
+        if (stopTimer >= spaceStopTime)
+        {
+            isStopped = false;
+            stopTimer = 0.0f;
+            consumedThisStop = false;
+        }
+
+        return; // 멈춘 동안은 이동 x
+    }
+
+    // 스페이스 슬라이더 movement
+    float x = GetUIPosX(spaceBar);
+    x += dir * spaceSpped * delta;
+
+    if (x <= xMin)
+    {
+        x = xMin;
+        dir = 1.0f;
+    }
+    else if (x >= xMax)
+    {
+        x = xMax;
+        dir = -1.0f;
+    }
+
+    SetUIPosX(spaceBar, x);
 }
 
 void Game_Cutting::EndGame()
 {
-    std::cout << "[Mini Game] : Game_Cutting End!" << std::endl;
+    std::cout << "[MiniGame 1] : Game_Cutting End!" << std::endl;
 }

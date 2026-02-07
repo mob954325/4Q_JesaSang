@@ -44,43 +44,53 @@ bool VisionComponent::CheckVision(GameObject* target, float fov, float maxDistan
 {
     if (!target) return false;
 
-    // 디버그용 값 저장
     m_LastDebug.fov = fov;
     m_LastDebug.dist = maxDistance;
     m_LastDebug.valid = true;
 
-
     auto* selfTr = GetOwner()->GetTransform();
     auto* targetTr = target->GetTransform();
 
-
-    // 시야 원점 & 전방 벡터 
+    // Ray origin (world)
     Vector3 origin = selfTr->GetWorldPosition();
+    origin.y += eyeHigh;
+
+    // target pos는 "local이 맞다" 했으니 그대로 사용
+    Vector3 targetPos = targetTr->GetLocalPosition();
+
+    // 3D 방향/거리 (Raycast용)
+    Vector3 toTarget3D = targetPos - origin;
+    float dist3D = toTarget3D.Length();
+    if (dist3D <= 0.0001f) return true;      // 거의 같은 위치면 보인다고 처리(선택)
+    if (dist3D > maxDistance) return false;
+
+    Vector3 dir3D = toTarget3D;
+    dir3D.Normalize();
+
+    // 2D(XZ) 방향 (FOV용)
     Vector3 forward = selfTr->GetForward();
-    origin.y += eyeHigh; // 눈 위치 보정
+    Vector3 flatForward = forward; flatForward.y = 0.0f;
+    if (flatForward.Length() <= 0.0001f) return false;
+    flatForward.Normalize();
 
+    Vector3 flatToTarget = toTarget3D; flatToTarget.y = 0.0f;
+    if (flatToTarget.Length() <= 0.0001f)
+    {
+        // 타겟이 거의 바로 위/아래라면: FOV를 통과시키거나(보통 통과) 원하는 정책으로
+        // 여기서는 통과 처리
+    }
+    else
+    {
+        flatToTarget.Normalize();
+        float dot = flatForward.Dot(flatToTarget);
+        float limit = cosf(Deg2Rad(fov * 0.5f));
+        if (dot < limit) return false;
+    }
 
-    // 타겟까지 방향 & 거리
-    Vector3 toTarget = targetTr->GetLocalPosition() - origin;
-    float dist = toTarget.Length();
-    toTarget.y = origin.y; // FOV 평면 기준!! : 여기도 해줬어야 했음 
-    if (dist > maxDistance) return false;
-
-    toTarget.Normalize();
-
-
-    // FOV 체크 (X-Z 평면 기준)
-    Vector3 flatForward = forward; flatForward.y = 0; flatForward.Normalize();
-    Vector3 flatToTarget = toTarget; flatToTarget.y = 0; flatToTarget.Normalize();
-    float dot = flatForward.Dot(flatToTarget);
-    float limit = cosf(Deg2Rad(fov * 0.5f));
-    if (dot < limit) return false;
-
-
-    // PhysX Raycast
+    // PhysX Raycast: 타겟까지 거리만 쏘는 게 일반적으로 더 정확
     PxVec3 originPx = ToPx(origin);
-    PxVec3 dirPx(toTarget.x, toTarget.y, toTarget.z);
-    float maxDistPx = maxDistance;
+    PxVec3 dirPx(dir3D.x, dir3D.y, dir3D.z);
+    float maxDistPx = dist3D; // <= 핵심 변경
 
     std::vector<RaycastHit> hits;
     if (!PhysicsSystem::Instance().Raycast(
@@ -90,30 +100,29 @@ bool VisionComponent::CheckVision(GameObject* target, float fov, float maxDistan
         hits,
         CollisionLayer::Default,
         QueryTriggerInteraction::Ignore,
-        true)) // 모든 히트 수집
+        true))
     {
         return false;
     }
 
-
-    // 거리 순 정렬 (가장 가까운 히트가 front)
     std::sort(hits.begin(), hits.end(),
         [](const RaycastHit& a, const RaycastHit& b) { return a.distance < b.distance; });
 
-
-    // 첫 번째 유효 히트 찾기 
     PhysicsComponent* firstComp = nullptr;
     for (auto& hit : hits)
     {
         if (!hit.component) continue;
 
+        // 자기 자신 무시 (중요)
+        if (hit.component->GetOwner() == GetOwner())
+            continue;
+
         bool isTrigger = hit.shape->getFlags() & PxShapeFlag::eTRIGGER_SHAPE;
-        if (isTrigger) continue; // Trigger 무시
+        if (isTrigger) continue;
 
         if (!PhysicsLayerMatrix::CanCollide(CollisionLayer::Default, hit.component->GetLayer()))
-            continue; // 충돌 가능 레이어 
+            continue;
 
-        // 디버그 
         std::cout << "  Object: " << hit.component->GetOwner()->GetName()
             << " | Layer: " << (uint32_t)hit.component->GetLayer()
             << " | Distance: " << hit.distance
@@ -123,15 +132,14 @@ bool VisionComponent::CheckVision(GameObject* target, float fov, float maxDistan
         break;
     }
 
-    // 디버그 
     if (firstComp)
     {
         auto* obj = firstComp->GetOwner();
-        std::cout << "[Vision] Ray hit -> Object: " << obj->GetName() << " | Layer: " << (uint32_t)firstComp->GetLayer() << std::endl;
+        std::cout << "[Vision] Ray hit -> Object: " << obj->GetName()
+            << " | Layer: " << (uint32_t)firstComp->GetLayer()
+            << std::endl;
     }
 
-
-    // 타겟과 첫 히트 객체 비교
     return firstComp && firstComp->GetOwner() == target;
 }
 

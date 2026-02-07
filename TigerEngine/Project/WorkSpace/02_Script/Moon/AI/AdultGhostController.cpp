@@ -9,6 +9,7 @@
 #include "FSM/AdultGhost_Patrol.h"
 #include "FSM/AdultGhost_Chase.h"
 #include "FSM/AdultGhost_Search.h"
+#include "../../Woo/Object/HideObject.h"
 
 
 REGISTER_COMPONENT(AdultGhostController)
@@ -67,7 +68,6 @@ void AdultGhostController::OnUpdate(float delta)
     }
 }
 
-
 void AdultGhostController::OnFixedUpdate(float dt)
 {
     // FSM 
@@ -77,6 +77,20 @@ void AdultGhostController::OnFixedUpdate(float dt)
     }
 }
 
+void AdultGhostController::OnDestory()
+{
+    // HideObject를 보고 있다가 AI가 삭제 되었을 때
+    if (hideLookRegistered && curSeeingHideObject)
+    {
+        auto* hideComp = curSeeingHideObject->GetComponent<HideObject>();
+        if (hideComp)
+        {
+            hideComp->UnregisterAILook(this);
+        }
+    }
+    hideLookRegistered = false;
+    curSeeingHideObject = nullptr;
+}
 
 
 // -----------------------------------------------------------

@@ -49,15 +49,15 @@ void AdultGhost_Patrol::ChangeStateLogic()
 
             if (nowSeeing && !adultGhost->hideLookRegistered)
             {
-                hideComp->SetAILook(true);
+                hideComp->RegisterAILook(adultGhost);
                 adultGhost->hideLookRegistered = true;
-                adultGhost->isSeeingHideObject = true;
+                adultGhost->curSeeingHideObject = hideObj;
             }
             else if (!nowSeeing && adultGhost->hideLookRegistered)
             {
-                hideComp->SetAILook(false);
+                hideComp->UnregisterAILook(adultGhost);
                 adultGhost->hideLookRegistered = false;
-                adultGhost->isSeeingHideObject = false;
+                adultGhost->curSeeingHideObject = nullptr;
             }
         }
     }
@@ -98,11 +98,11 @@ void AdultGhost_Patrol::Exit()
         auto* hideComp = hideObj->GetComponent<HideObject>();
         if (hideComp && adultGhost->hideLookRegistered)
         {
-            hideComp->SetAILook(false);
+            hideComp->UnregisterAILook(adultGhost);
             adultGhost->hideLookRegistered = false;
+            adultGhost->curSeeingHideObject = nullptr;
         }
     }
-    adultGhost->isSeeingHideObject = false;
 
     agent->hasTarget = false;
     agent->path.clear();
