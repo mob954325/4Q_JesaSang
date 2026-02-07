@@ -139,6 +139,7 @@ bool EngineApp::OnInitialize()
 
 void EngineApp::OnPreUpdate()
 {
+    SceneSystem::Instance().CheckSceneChange();
     ScriptSystem::Instance().CheckReadyQueue();
     RenderSystem::Instance().CheckReadyQueue();
 }
