@@ -13,13 +13,11 @@ class AdultGhost_Search;
 class AdultGhost_Return;
 class AdultGhost_Attack;
 
-
 enum class AdultGhostState
 {
  // 순찰,   추격,   탐색,   복귀,   공격,    None
     Patrol, Chase, Search, Return, Attack, None
 };
-
 
 class AdultGhostController : public ScriptComponent
 {
@@ -29,17 +27,39 @@ private:
     nlohmann::json Serialize();
     void Deserialize(nlohmann::json data);
 
+public:
+    template<typename T>
+    T* GetState(AdultGhostState id)
+    {
+        auto* base = fsmStates[(int)id];
+        if (!base) return nullptr;
+
+#ifdef _DEBUG
+        if (base->type != id)
+        {
+            std::cerr << "[FSM] State type mismatch\n";
+            return nullptr;
+        }
+#endif
+
+        return static_cast<T*>(base);
+    }
+
+private:
     // Component 
     AgentComponent* agent = nullptr;
-    GridComponent* grid = nullptr;
+    // GridComponent* grid = nullptr;
     VisionComponent* vision = nullptr;
 
-    GameObject* curSeeingHideObject = nullptr;
 
     // State
     AdultGhostState state = AdultGhostState::None;
-    IAdultGhostState* curState;
+    IAdultGhostState* currentState;
     IAdultGhostState* fsmStates[5];
+
+    // HideObject tracking
+    GameObject* curSeeingHideObject = nullptr;
+    bool hideLookRegistered = false;
 
 private:
     // FSM
@@ -49,12 +69,8 @@ private:
     // Animation
     void LoadAnimation();
 
-    // Init
-    // void InitStat();
-
-    // Interaction
-    void InteractionCheak(float delta);
-
+    // Movement (공통)
+    bool MoveToTarget(float delta);
 
 public:
     void OnStart() override;
@@ -62,11 +78,17 @@ public:
     void OnFixedUpdate(float dt) override;
     void OnDestory() override;
 
+    // Interaction
+    void OnPlayerNoise(const Vector3& noiseWorldPos); // 플레이어에서 호출 
 
-public:
-    // [ To. 우정 : 플레이어 연동 관련 ] 
-    void OnPlayerNoise(const Vector3& noiseWorldPos); 
-    bool hideLookRegistered = false;    
+    // Helper
+    void ResetAgentForMove(float speed);
+    bool IsSeeing(GameObject* target) const;
+    bool IsPlayerInSenseRange();
+
+    GameObject* GetAITarget() const;
+    GameObject* GetPlayer() const;
+
 
 public:
     // friend

@@ -9,7 +9,9 @@
 #include "FSM/AdultGhost_Patrol.h"
 #include "FSM/AdultGhost_Chase.h"
 #include "FSM/AdultGhost_Search.h"
+
 #include "../../Woo/Object/HideObject.h"
+#include "../../Woo/Player/PlayerController.h"
 
 
 REGISTER_COMPONENT(AdultGhostController)
@@ -47,46 +49,37 @@ void AdultGhostController::OnStart()
         return;
     }
 
-    // load animation
-    //LoadAnimation();
+    //LoadAnimation();  
 
-    // init fsm
     InitFSMStates();
     ChangeState(AdultGhostState::Patrol);
 
-    // init stat
-    // InitStat();
 }
 
 void AdultGhostController::OnUpdate(float delta)
 {
-    // FSM 
-    if (curState)
+    if (currentState)
     {
-        curState->ChangeStateLogic();
-        curState->Update(delta);
+        currentState->ChangeStateLogic();
+        currentState->Update(delta);
     }
 }
 
 void AdultGhostController::OnFixedUpdate(float dt)
 {
-    // FSM 
-    if (curState)
+    if (currentState)
     {
-        curState->FixedUpdate(dt);
+        currentState->FixedUpdate(dt);
     }
 }
 
 void AdultGhostController::OnDestory()
 {
-    // HideObject를 보고 있다가 AI가 삭제 되었을 때
+    // AI가 HideObject를 보고 있다가 삭제 되었을 때
     if (hideLookRegistered && curSeeingHideObject)
     {
-        auto* hideComp = curSeeingHideObject->GetComponent<HideObject>();
-        if (hideComp)
-        {
-            hideComp->UnregisterAILook(this);
-        }
+        if (auto* hide = curSeeingHideObject->GetComponent<HideObject>())
+            hide->UnregisterAILook(this);
     }
     hideLookRegistered = false;
     curSeeingHideObject = nullptr;
@@ -109,18 +102,19 @@ void AdultGhostController::InitFSMStates()
 
 void AdultGhostController::ChangeState(AdultGhostState nextState)
 {
-    if (curState == fsmStates[(int)nextState])
+    if (currentState == fsmStates[(int)nextState])
         return;
 
-    if (curState)
-        curState->Exit();
+    if (currentState)
+        currentState->Exit();
 
-    curState = fsmStates[(int)nextState];
+    currentState = fsmStates[(int)nextState];
     this->state = nextState;
 
-    if (curState)
-        curState->Enter();
+    if (currentState)
+        currentState->Enter();
 }
+
 
 void AdultGhostController::LoadAnimation()
 {
@@ -128,16 +122,103 @@ void AdultGhostController::LoadAnimation()
 }
 
 
-// --------------------------------------------------------------------------
 
+// -------------------------------------------------
+// Movement
+// -------------------------------------------------
+bool AdultGhostController::MoveToTarget(float delta)
+{
+    if (!agent || !agent->hasTarget) return false;
+
+    auto grid = GridSystem::Instance().GetMainGrid();
+    if (!grid) return false;
+
+    // 경로 없으면 생성
+    if (agent->path.empty())
+    {
+        agent->path = grid->FindPath(agent->cx, agent->cy, agent->targetCX, agent->targetCY);
+        if (agent->path.empty()) return false;
+    }
+
+    // 다음 칸 이동 
+    auto next = agent->path.front();
+    Vector3 targetPos = grid->GridToWorldFromCenter(next.first, next.second);
+
+    Vector3 pos = agent->GetOwner()->GetTransform()->GetWorldPosition();
+    Vector3 dir = targetPos - pos;
+    dir.y = 0;
+
+    // 해당 칸 도착 
+    if (dir.Length() < agent->reachDist)
+    {
+        agent->cx = next.first;
+        agent->cy = next.second;
+        agent->path.erase(agent->path.begin());
+        return agent->path.empty(); // 이 칸은 끝까지 가도록 
+    }
+
+    dir.Normalize();
+    agent->MoveAgent(dir, agent->patrolSpeed, delta);
+    return false;
+}
+
+
+// -------------------------------------------------
+// Helper
+// -------------------------------------------------
+
+void AdultGhostController::ResetAgentForMove(float speed)
+{
+    agent->patrolSpeed = speed;
+    agent->externalControl = true;
+    agent->hasTarget = false;
+    agent->path.clear();
+    agent->isWaiting = false;
+}
+
+// Ai가 Target을 보고 있는가? // TODO : FOV, Dist 값 매개변수로 받기 
+bool AdultGhostController::IsSeeing(GameObject* target) const
+{
+    return target && vision->CheckVision(target, 90, 400);
+}
+
+// Object Getter 
+GameObject* AdultGhostController::GetAITarget() const
+{
+    return SceneSystem::Instance().GetCurrentScene() ->GetGameObjectByName("AITarget");
+}
+GameObject* AdultGhostController::GetPlayer() const
+{
+    return SceneSystem::Instance().GetCurrentScene() ->GetGameObjectByName("Player");
+}
+
+// Ai가 플레이어의 기척 범위에 들어왔는가? 
+bool AdultGhostController::IsPlayerInSenseRange() 
+{
+    auto* playerObj = GetPlayer();
+    if (!playerObj) return false;
+
+    auto* playerController = playerObj->GetComponent<PlayerController>();
+    if (!playerController) return false;
+
+    float senseRadius = playerController->GetCurSenseRadiuse();
+    if (senseRadius <= 0) return false;
+
+    Vector3 pPos = playerObj->GetTransform()->GetWorldPosition();
+    Vector3 gPos = this->GetOwner()->GetTransform()->GetWorldPosition();
+
+    return Vector3::Distance(pPos, gPos) <= senseRadius;
+}
+
+
+// -------------------------------------------------
+// Interaction
+// -------------------------------------------------
 
 void AdultGhostController::OnPlayerNoise(const Vector3& noiseWorldPos)
 {
     // Patrol 상태인 귀신만 반응
-    if (state != AdultGhostState::Patrol)
-        return;
-
-    std::cout << "[AdultGhostController] OnPlayerNoise on Patrol AI" << std::endl;
+    if (state != AdultGhostState::Patrol) return;
 
     auto grid = GridSystem::Instance().GetMainGrid();
     if (!grid) return;
@@ -147,7 +228,7 @@ void AdultGhostController::OnPlayerNoise(const Vector3& noiseWorldPos)
         return;
 
     // Search 상태로 전환 + 목표 좌표 전달
-    auto* search = dynamic_cast<AdultGhost_Search*>( fsmStates[(int)AdultGhostState::Search] );
+    auto* search = dynamic_cast<AdultGhost_Search*>(fsmStates[(int)AdultGhostState::Search]);
     if (!search) return;
 
     search->SetSearchTarget(cx, cy);

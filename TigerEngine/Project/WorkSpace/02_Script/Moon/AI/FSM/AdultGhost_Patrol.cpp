@@ -1,7 +1,8 @@
 #include "AdultGhost_Patrol.h"
+
 #include "Components/VisionComponent.h"
 #include "EngineSystem/SceneSystem.h"
-#include "../../../Woo/Player/PlayerController.h"
+
 #include "../../../Woo/Object/HideObject.h"
 
 
@@ -9,76 +10,41 @@ void AdultGhost_Patrol::Enter()
 {
     cout << "[AdultGhost_Patrol] Enter Patrol State" << endl;
 
-    // 초기화 
     agent = adultGhost->agent;
     patrolTimer = 0.0f;
 
-    // [ 순찰 : 목표 좌표 정하고 순찰 시작 ]
-    agent->patrolSpeed = 0.8f;  // 속도 
+    agent->patrolSpeed = 0.8f;  // Patrol 속도 
     agent->SetWaitTime(3.0f);   // 목표 지점에서 대기 시간 
 
+    // 아직 이동 중이 아니라면 랜덤 목표 설정
     if (!agent->hasTarget && !agent->isWaiting)
         agent->PickRandomTarget();
 }
 
 void AdultGhost_Patrol::ChangeStateLogic()
 {
-    // Patrol 들어오고 2초 동안은 감지 무시 (임시)
+    // 상태 진입 직후 바로 바뀌는 현상 방지 (임시)
     if (patrolTimer < forcePatrolTime)
         return;
 
-
-    // 1. 시야 감지 : 플레이어(AITarget) 감지 
-    auto* AITarget = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("AITarget");
-    if (AITarget && adultGhost->vision->CheckVision(AITarget, 90, 400))
+    // 1. 시야 감지 : 플레이어 감지 
+    if (adultGhost->IsSeeing(adultGhost->GetAITarget()))
     {
-        cout << "[AdultGhost_Patrol] PLAYER FOUND ! " << endl;
+        std::cout << "[AdultGhost_Patrol] Ghost is Seeing PLAYER !" << std::endl;
         adultGhost->ChangeState(AdultGhostState::Chase);
         return;
     }
 
-
-    // 2. HideObject 시야 체크
-    auto* hideObj = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("HideObject");
-    if (hideObj)
+    // 2. 기척 감지 
+    if (adultGhost->IsPlayerInSenseRange())
     {
-        auto* hideComp = hideObj->GetComponent<HideObject>();
-        if (hideComp)
-        {
-            bool nowSeeing = adultGhost->vision->CheckVision(hideObj, 90, 400);
-
-            if (nowSeeing && !adultGhost->hideLookRegistered)
-            {
-                hideComp->RegisterAILook(adultGhost);
-                adultGhost->hideLookRegistered = true;
-                adultGhost->curSeeingHideObject = hideObj;
-            }
-            else if (!nowSeeing && adultGhost->hideLookRegistered)
-            {
-                hideComp->UnregisterAILook(adultGhost);
-                adultGhost->hideLookRegistered = false;
-                adultGhost->curSeeingHideObject = nullptr;
-            }
-        }
-    }
-
-    // 3. 기척 감지 
-    auto* playerObj = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("Player");
-    auto* playerController = playerObj->GetComponent<PlayerController>();
-    if (!playerController) return;
-
-    float senseRadius = playerController->GetCurSenseRadiuse();
-    if (senseRadius <= 0.0f) return;
-
-    Vector3 pPos = playerObj->GetTransform()->GetWorldPosition();
-    Vector3 gPos = adultGhost->GetOwner()->GetTransform()->GetWorldPosition();
-
-    float dist = Vector3::Distance(pPos, gPos);
-    if (dist <= senseRadius)
-    {
-        cout << "[AdultGhost_Patrol] PLAYER FOUND (Sense)!  dist=" << dist << " radius=" << senseRadius << endl;
+        std::cout << "[AdultGhost_Patrol] PLAYER FOUND (Sense)!" << std::endl;
         adultGhost->ChangeState(AdultGhostState::Search);
+        return;
     }
+
+    // 3. HideObject 시야 체크
+    UpdateHideObjectVision();
 }
 
 void AdultGhost_Patrol::Update(float deltaTime)
@@ -109,4 +75,32 @@ void AdultGhost_Patrol::Exit()
     agent->isWaiting = false;
 
     cout << "[AdultGhost_Patrol] Exit" << endl;
+}
+
+
+// --------------------------------------------------------
+
+void AdultGhost_Patrol::UpdateHideObjectVision()
+{
+    auto* hideObj = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("HideObject");
+
+    if (!hideObj) return;
+
+    auto* hideComp = hideObj->GetComponent<HideObject>();
+    if (!hideComp) return;
+
+    bool nowSeeing = adultGhost->IsSeeing(hideObj);
+
+    if (nowSeeing && !adultGhost->hideLookRegistered)
+    {
+        hideComp->RegisterAILook(adultGhost);
+        adultGhost->hideLookRegistered = true;
+        adultGhost->curSeeingHideObject = hideObj;
+    }
+    else if (!nowSeeing && adultGhost->hideLookRegistered)
+    {
+        hideComp->UnregisterAILook(adultGhost);
+        adultGhost->hideLookRegistered = false;
+        adultGhost->curSeeingHideObject = nullptr;
+    }
 }
