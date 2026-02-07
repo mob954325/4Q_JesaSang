@@ -3,7 +3,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 90,
+        "ID": 63,
         "Name": "DirectionalLight(Sun)",
         "ParentID": -1,
         "components": [
@@ -57,7 +57,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 91,
+        "ID": 64,
         "Name": "Box",
         "ParentID": -1,
         "components": [
@@ -130,8 +130,7 @@
               "isroughnessFromShininess": false
             },
             "type": "FBXRenderer"
-          },
-          {}
+          }
         ]
       },
       "type": "GameObject"
@@ -139,9 +138,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 93,
+        "ID": 65,
         "Name": "PlayerSoket",
-        "ParentID": 91,
+        "ParentID": 64,
         "components": [
           {
             "properties": {
@@ -170,7 +169,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 104,
+        "ID": 66,
         "Name": "cam1",
         "ParentID": -1,
         "components": [
@@ -211,7 +210,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 105,
+        "ID": 67,
         "Name": "cam2",
         "ParentID": -1,
         "components": [
@@ -252,7 +251,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 106,
+        "ID": 68,
         "Name": "cam3",
         "ParentID": -1,
         "components": [
@@ -293,7 +292,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 107,
+        "ID": 69,
         "Name": "TestWeapon",
         "ParentID": -1,
         "components": [
@@ -324,7 +323,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 109,
+        "ID": 70,
         "Name": "NewGameObject",
         "ParentID": -1,
         "components": [
@@ -414,9 +413,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 111,
+        "ID": 71,
         "Name": "NewGameObject",
-        "ParentID": 91,
+        "ParentID": 64,
         "components": [
           {
             "properties": {
@@ -493,6 +492,152 @@
               "Size": [
                 72.5999984741211,
                 47.20000076293945
+              ]
+            },
+            "type": "RectTransform"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 73,
+        "Name": "Button",
+        "ParentID": -1,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "drawSpacetype": "Screen",
+              "fillAmount": 1.0,
+              "imageType": "Simple",
+              "isMouseCheck": false,
+              "path": "..\\Assets\\Resource\\Bricks059_Specular.png",
+              "sliceBorderPx": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "type": "Simple",
+              "zOrder": 0
+            },
+            "type": "Image"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "drawSpacetype": "Screen",
+              "fillAmount": 1.0,
+              "imageType": "Simple",
+              "isMouseCheck": false,
+              "path": "..\\Assets\\Resource\\DB2X2_L01.png",
+              "sliceBorderPx": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "type": "Simple",
+              "zOrder": 0
+            },
+            "type": "Image"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "drawSpacetype": "Screen",
+              "fillAmount": 1.0,
+              "imageType": "Simple",
+              "isMouseCheck": false,
+              "path": "..\\Assets\\Resource\\eyes_diff.png",
+              "sliceBorderPx": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "type": "Simple",
+              "zOrder": 0
+            },
+            "type": "Image"
+          },
+          {
+            "properties": {
+              "Active": true
+            },
+            "type": "TestButton"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "Pivot": [
+                0.0,
+                0.0
+              ],
+              "Pos": [
+                588.4000244140625,
+                94.0,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Size": [
+                200.0,
+                200.0
               ]
             },
             "type": "RectTransform"

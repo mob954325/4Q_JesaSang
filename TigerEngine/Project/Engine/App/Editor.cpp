@@ -829,9 +829,11 @@ void Editor::RenderInspector()
 
                     if (auto it = registered.find(name); it != registered.end())
                     {
+                        ImGui::PushID(comp);
                         RenderComponentInfo(name, comp);
                         ImGui::NewLine();
                         ImGui::Separator();
+                        ImGui::PopID();
                     }
                 } // 컴포넌트 내용 출력 end
             } // obj is destroy end

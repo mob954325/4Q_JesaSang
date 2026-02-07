@@ -23,6 +23,8 @@ class Image : public RenderComponent
 {
     RTTR_ENABLE(RenderComponent)
 public:
+    Image() { SetName("Image"); }
+
     void OnInitialize() override;
     void OnUpdate(float delta) override;
 
@@ -32,8 +34,8 @@ public:
     void GetTextureByPath(std::string path);
     void OnRender(RenderQueue& queue) override;
 
-    void SetMouseCheck(bool value);
-    bool GetMouseCheck() const;
+    void SetMouseEventActive(bool value);
+    bool GetMouseEvnetActive() const;
 
     ImageType GetType() const { return type; }
     void SetType(ImageType value) { type = value; }
@@ -61,6 +63,8 @@ public:
     // Event
     MultiDelegate<> OnEnter;
     MultiDelegate<> OnClick;
+    MultiDelegate<> OnPressed;
+    MultiDelegate<> OnPressOut;
     MultiDelegate<> OnExit;
 
 private:
@@ -80,7 +84,8 @@ private:
     Vector4 sliceBorderPx{ 0.0f, 0.0f, 0.0f, 0.0f }; 
 
     std::string path{};
-    bool isMouseCheck = false;  // 마우스 체크 확인
+    bool useMouseEvnet = false;  // 마우스 체크 이벤트 활성화확인
+    bool isClick = false;       // 마우스 클릭 확인
     bool isMouseHover = false;  // 마우스가 겹치는지 확인
     bool hoverd = false;        // 마우스가 이미지 위에 올라가있는지 확인
     bool prevLeft = false;      // 마우스 이전에 클릭했는지 저장 변수

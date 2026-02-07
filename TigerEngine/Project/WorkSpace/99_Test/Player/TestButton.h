@@ -11,6 +11,7 @@ class TestButton : public ScriptComponent
 {
     RTTR_ENABLE(ScriptComponent)
 public:
+
     void OnInitialize() override;
     void OnEnable() override;
     void OnStart() override;
@@ -20,6 +21,10 @@ public:
 
     nlohmann::json Serialize() override;
     void Deserialize(nlohmann::json data) override;
+
+    void ShowNormal();
+    void ShowEnter();
+    void ShowPressed();
 
 private:
     Image* imageEnter{};

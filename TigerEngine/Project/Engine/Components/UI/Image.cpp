@@ -31,10 +31,10 @@ RTTR_REGISTRATION
         .property("sliceBorderPx",  &Image::GetBorderPx,    &Image::SetBorderPx)
         .property("path",           &Image::GetPath,        &Image::SetPath)
             (metadata(META_BROWSE, ""))
-        .property("isMouseCheck",   &Image::GetMouseCheck,  &Image::SetMouseCheck)
+        .property("isMouseCheck",   &Image::GetMouseEvnetActive,  &Image::SetMouseEventActive)
         .property("imageType",      &Image::GetType,        &Image::SetType)
         .property("drawSpacetype",  &Image::GetDrawSpace,  &Image::SetDrawSpace)
-        .property("isMouseCheck",   &Image::GetMouseCheck,  &Image::SetMouseCheck)
+        .property("isMouseCheck",   &Image::GetMouseEvnetActive,  &Image::SetMouseEventActive)
         .property("zOrder",         &Image::GetZOrder, &Image::SetZOrder);
 }
 
@@ -45,7 +45,7 @@ void Image::OnInitialize()
 
 void Image::OnUpdate(float delta)
 {
-    if (isMouseCheck)
+    if (useMouseEvnet)
     {
         CheckMouseHover();
 
@@ -62,10 +62,32 @@ void Image::OnUpdate(float delta)
             // 여기서 "좌클릭 1회" 처리 (Pressed 순간)
             std::cout << "image Clicked!!!\n";
             OnClick.Invoke();
+            isClick = true;
+        }
+
+        if (curLeft && isMouseHover)
+        {
+            std::cout << "image pressed!!!\n";
+            OnPressed.Invoke();
+        }
+
+        if (!curLeft && isClick && prevLeft && isMouseHover)
+        {
+            std::cout << "image pressedout aaa\n";
+            OnPressOut.Invoke();
+            isClick = false;
         }
 
         if (hoverd && !isMouseHover)
         {
+            if (isClick) // 누르면서 버튼 나가면 out 처리
+            {
+                std::cout << "image click hover out aaa\n";
+                OnPressOut.Invoke();
+                isClick = false;
+            }
+
+            std::cout << "image hover out aaa\n";
             OnExit.Invoke();
             hoverd = false;
         }
@@ -123,14 +145,14 @@ void Image::OnRender(RenderQueue& queue)
     queue.AddUIRenderQueue(data); // NOTE : 이러면 sort를 renderpass에서 처리하면되니까 canvas는 왜 필요한거지
 }
 
-void Image::SetMouseCheck(bool value)
+void Image::SetMouseEventActive(bool value)
 {
-    isMouseCheck = value;
+    useMouseEvnet = value;
 }
 
-bool Image::GetMouseCheck() const
+bool Image::GetMouseEvnetActive() const
 {
-    return isMouseCheck;
+    return useMouseEvnet;
 }
 
 int Image::GetZOrder() const
