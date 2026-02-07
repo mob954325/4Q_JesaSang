@@ -6,7 +6,9 @@
 #include "Datas/ConstantBuffer.hpp"
 #include "../Manager/UIData/TextureResource.h"    
 
+
 class GameObject; // 전방선언
+class TextUI;     // 
 
 struct RenderItem
 {
@@ -33,15 +35,25 @@ struct RenderItem
 /// <summary>
 /// UI 렌더링에 필요한 데이터 모음
 /// </summary>
-struct UIRenderItem
+struct ImageUIRenderItem
 {
     Matrix worldMat;
+    Matrix screenMat;
     Color color;        // 색상
     Vector4 uvRect;     // L, R, T, B (px)
-    Vector4 params;     // x = type, y = fillAmount;
+    Vector4 params;     // x = type, y = fillAmount; z = pivot.x, w = pivot.y
     Vector4 imageSize;  // (rectW, rectH, texW, texH)
-    TextureResource* resource;
+    int zOrder = -1;    // 정렬 순서
+
+    bool isWorldSpace = false;
+
+    // 이미지 리소스
+    TextureResource* resource = nullptr; 
+
+    // 텍스트 리소스
+    TextUI* textComp = nullptr;   // cpuVerts, indexCount, align, text, resource 접근
     bool isText = false;
+    bool geometryDirty = false;
 };
 
 /// <summary>
@@ -53,7 +65,7 @@ private:
     // Render Queue
     std::vector<RenderItem> opaqueQueue;        // 불투명 오브젝트 -> Deffered Rendering
     std::vector<RenderItem> transparentQueue;   // 투명 오브젝트   -> Forward Rendering
-    std::vector<UIRenderItem> uiRenderQueue;    // UI 오브젝트 -> ui 렌더링에 필요한 내용 따로 queue 추가함 - 26.02.02 이성호
+    std::vector<ImageUIRenderItem> uiRenderQueue;    // UI 오브젝트 -> ui 렌더링에 필요한 내용 따로 queue 추가함 - 26.02.02 이성호
 
 public:
     void AddOpaqueQueue(const RenderItem& item)
@@ -66,14 +78,14 @@ public:
         transparentQueue.push_back(item);
     }
 
-    void AddUIRenderQueue(const UIRenderItem& item)
+    void AddUIRenderQueue(const ImageUIRenderItem& item)
     {
         uiRenderQueue.push_back(item);
     }
 
     const auto& GetOpaqueQueue()  const { return opaqueQueue; }
     const auto& GetTransparentQueue()  const { return transparentQueue; }
-    const auto& GetUIRenderQueue() const { return uiRenderQueue; }
+    auto& GetUIRenderQueue() { return uiRenderQueue; } // std::sort로 정렬함.
 
     void Clear()
     {

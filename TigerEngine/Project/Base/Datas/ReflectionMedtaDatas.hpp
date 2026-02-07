@@ -6,3 +6,6 @@ static const rttr::string_view META_BOOL = "ui.bool";
 
 /// <summary>/// 탐색기를 찾는 문자열 /// </summary>
 static const rttr::string_view META_BROWSE = "ui.browse";
+
+/// <summary>/// 입력 /// </summary>
+static const rttr::string_view META_INPUT = "ui.input";

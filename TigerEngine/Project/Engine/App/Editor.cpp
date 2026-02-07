@@ -26,7 +26,8 @@
 #include "../Util/PathHelper.h"
 #include "../Components/UI/Image.h"
 #include "../Components/VisionComponent.h"
-
+#include "../Components/UI/TextUI.h"
+#include "../Util/EncodeConvertHelper.h"
 
 // Payload
 // Prefab payload
@@ -828,9 +829,11 @@ void Editor::RenderInspector()
 
                     if (auto it = registered.find(name); it != registered.end())
                     {
+                        ImGui::PushID(comp);
                         RenderComponentInfo(name, comp);
                         ImGui::NewLine();
                         ImGui::Separator();
+                        ImGui::PopID();
                     }
                 } // 컴포넌트 내용 출력 end
             } // obj is destroy end
@@ -1514,12 +1517,58 @@ void Editor::RenderComponentInfo(std::string compName, T* comp)
                 }
             }
         }
-
-        ImGui::PushID(comp);
-        ReadVariants(*comp);
-        ImGui::PopID();
-        return;
     }
+
+    if (compName == "TextUI")
+    {
+        std::string fontPathKey = "ChooseTextUIFontDlgKey##" + std::to_string((uintptr_t)comp);
+
+        for (auto& prop : t.get_properties())
+        {
+            rttr::variant value = prop.get_value(*comp);
+            std::string name = prop.get_name().to_string();
+            if (!value.is_valid()) continue;
+
+            if (value.is_type<std::wstring>() && name == "fontPath")
+            {
+                // wstring -> utf8 (표시용)
+                std::wstring curW = value.get_value<std::wstring>();
+                std::string curPathUtf8 = WStringToUtf8(curW);
+
+                ImGui::Text("Current Path: %s", curPathUtf8.c_str());
+
+                if (ImGui::Button("Browse"))
+                {
+                    IGFD::FileDialogConfig config;
+                    config.path = "../";
+                    ImGuiFileDialog::Instance()->OpenDialog(fontPathKey, "Choose File", ".ttf,.ttc", config);
+                }
+
+                if (ImGuiFileDialog::Instance()->Display(fontPathKey))
+                {
+                    if (ImGuiFileDialog::Instance()->IsOk())
+                    {
+                        // 다이얼로그는 보통 UTF-8 std::string 반환
+                        std::string filePathNameUtf8 = ImGuiFileDialog::Instance()->GetFilePathName();
+
+                        // relative도 UTF-8 string 기준으로 처리
+                        std::filesystem::path relativePath = std::filesystem::relative(std::filesystem::path(filePathNameUtf8));
+                        std::string relativeUtf8 = relativePath.generic_string();
+
+                        // utf8 -> wstring 저장
+                        std::wstring relativeW = Utf8ToWString(relativeUtf8);
+                        prop.set_value(*comp, relativeW);
+
+                        // 기존 로직 유지: Decal이면 ChangeData 호출 (string 필요시 utf8 전달)
+                        auto* textUI = dynamic_cast<TextUI*>(comp);
+                        if (textUI) textUI->LoadFontAtlas(relativeW);
+                    }
+                    ImGuiFileDialog::Instance()->Close();
+                }
+            }
+        }
+    }
+
 
     // 기본
     ImGui::PushID(comp);
@@ -1824,6 +1873,7 @@ void Editor::ReadVariants(rttr::instance inst)
         // check metaData
         auto metaBool = prop.get_metadata(META_BOOL);
         auto metaBrowse = prop.get_metadata(META_BROWSE);
+        auto metaInput = prop.get_metadata(META_INPUT);
 
         // Render elements
         // ImGui::Text("%s : %s", name.c_str(), value.get_type().get_name().to_string().c_str());
@@ -1893,6 +1943,25 @@ void Editor::ReadVariants(rttr::instance inst)
                 prop.set_value(inst, b ? 1 : 0);
             }
         }
+        else if (value.is_type<std::string>() && metaInput.is_valid())
+        {
+            char buf[256]{};
+            strncpy_s(buf, value.get_value<std::string>().c_str(), sizeof(buf) - 1);
+            ImGui::InputText(name.c_str(), buf, sizeof(buf), ImGuiInputTextFlags_EnterReturnsTrue);
+            prop.set_value(inst, std::string(buf));
+
+        }
+        else if (value.is_type<std::wstring>() && metaInput.is_valid())
+        {
+            std::string utf8 = WStringToUtf8(value.get_value<std::wstring>());
+
+            char buf[256]{};
+            strncpy_s(buf, utf8.c_str(), sizeof(buf) - 1);
+
+            ImGui::InputText(name.c_str(), buf, sizeof(buf), ImGuiInputTextFlags_EnterReturnsTrue);
+
+            prop.set_value(inst, Utf8ToWString(std::string(buf)));
+        }
         else if (value.is_type<float>())
         {
             float v = value.get_value<float>();
@@ -1957,6 +2026,33 @@ void Editor::ReadVariants(rttr::instance inst)
                 &c))
             {
                 prop.set_value(inst, c);
+            }
+        }
+        else if (value.is_type<std::wstring>() && !metaBrowse.is_valid())
+        {
+            // wstring(UTF-16) -> UTF-8(string) : ImGui InputText 버퍼
+            std::string c = WStringToUtf8(value.get_value<std::wstring>());
+
+            if (ImGui::InputText(
+                name.c_str(),
+                c.data(),
+                c.capacity() + 1,
+                ImGuiInputTextFlags_CallbackResize,
+                [](ImGuiInputTextCallbackData* data) -> int
+                {
+                    if (data->EventFlag == ImGuiInputTextFlags_CallbackResize)
+                    {
+                        auto* str = static_cast<std::string*>(data->UserData);
+                        str->resize(data->BufTextLen);
+                        data->Buf = str->data();
+                    }
+                    return 0;
+                },
+                &c))
+            {
+                // UTF-8(string) -> wstring(UTF-16)
+                std::wstring w = Utf8ToWString(c);
+                prop.set_value(inst, w);
             }
         }
     }
