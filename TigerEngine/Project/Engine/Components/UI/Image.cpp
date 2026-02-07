@@ -51,11 +51,23 @@ void Image::OnUpdate(float delta)
 
         auto ms = DirectX::Mouse::Get().GetState();
         bool curLeft = (ms.leftButton != 0);
+        if (!hoverd && isMouseHover)
+        {
+            OnEnter.Invoke();
+            hoverd = true;
+        }
 
         if (curLeft && !prevLeft && isMouseHover)
         {
             // 여기서 "좌클릭 1회" 처리 (Pressed 순간)
             std::cout << "image Clicked!!!\n";
+            OnClick.Invoke();
+        }
+
+        if (hoverd && !isMouseHover)
+        {
+            OnExit.Invoke();
+            hoverd = false;
         }
 
         prevLeft = curLeft;

@@ -3,6 +3,7 @@
 #include "../../Manager/UIData/TextureResource.h"
 #include "../../Components/RectTransform.h"
 #include "UITypeDatas.h"
+#include "../../Util/Multidelegate.h"
 
 enum class ImageType
 {
@@ -57,6 +58,11 @@ public:
 
     void ChangeData(std::string path);
 
+    // Event
+    MultiDelegate<> OnEnter;
+    MultiDelegate<> OnClick;
+    MultiDelegate<> OnExit;
+
 private:
     void Init();
     
@@ -76,6 +82,7 @@ private:
     std::string path{};
     bool isMouseCheck = false;  // 마우스 체크 확인
     bool isMouseHover = false;  // 마우스가 겹치는지 확인
+    bool hoverd = false;        // 마우스가 이미지 위에 올라가있는지 확인
     bool prevLeft = false;      // 마우스 이전에 클릭했는지 저장 변수
     void CheckMouseHover();
 
