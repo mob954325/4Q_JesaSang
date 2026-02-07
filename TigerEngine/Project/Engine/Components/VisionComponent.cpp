@@ -114,10 +114,10 @@ bool VisionComponent::CheckVision(GameObject* target, float fov, float maxDistan
             continue; // 충돌 가능 레이어 
 
         // 디버그 
-        //std::cout << "  Object: " << hit.component->GetOwner()->GetName()
-        //    << " | Layer: " << (uint32_t)hit.component->GetLayer()
-        //    << " | Distance: " << hit.distance
-        //    << std::endl;
+        std::cout << "  Object: " << hit.component->GetOwner()->GetName()
+            << " | Layer: " << (uint32_t)hit.component->GetLayer()
+            << " | Distance: " << hit.distance
+            << std::endl;
 
         firstComp = hit.component;
         break;

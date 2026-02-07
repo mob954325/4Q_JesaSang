@@ -49,5 +49,7 @@ public:
 
     void VisualRenderOn();          // Render Active (Hide용)
     void VisualRenderOff();         // Render Active (Hide용)
+
+    void VisualItemIDNullSet();     // hit으로 떨어뜨리고 hide->exit시 마지막 id가 남아있어서 추가
 };
 
