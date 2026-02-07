@@ -26,6 +26,18 @@ void SceneSystem::LoadSavedScenes()
     }
 }
 
+void SceneSystem::CheckSceneChange()
+{
+    if (nextSceneIndex != currSceneIndex) // 씬 전환 감지
+    {
+        currentScene->CloseScene();
+        currentScene = scenes.find(nextSceneIndex)->second;
+        currentScene->OpenScene();
+
+        currSceneIndex = nextSceneIndex;
+    }
+}
+
 void SceneSystem::BeforUpdate()
 {
 	if(scenes.empty()) return;
@@ -82,18 +94,9 @@ int SceneSystem::GetSceneCount()
     return static_cast<int>(scenes.size());
 }
 
-void SceneSystem::ChangeScene(const std::shared_ptr<Scene>& scene)
-{
-    currentScene->CloseScene();
-    currentScene = scene;
-    currentScene->OpenScene();    
-}
-
 void SceneSystem::ChangeSceneByIndex(int index)
 {
 	if (index < 0 || index >= static_cast<int>(scenes.size())) return;
 
-    currentScene->CloseScene();
-    currentScene = scenes.find(index)->second;
-    currentScene->OpenScene();    
+    nextSceneIndex = index; 
 }

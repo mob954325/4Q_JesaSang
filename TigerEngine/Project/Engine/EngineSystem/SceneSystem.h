@@ -13,6 +13,7 @@ public:
 
     void LoadSavedScenes();
 
+    void CheckSceneChange();
 	void BeforUpdate();
 	void UpdateScene(float deltaTime);
 	void FixedUpdateScene(float deltaTime);
@@ -24,12 +25,14 @@ public:
 	std::shared_ptr<Scene> GetCurrentScene();
 
     int GetSceneCount();
-	void ChangeScene(const std::shared_ptr<Scene>& scene);
 	void ChangeSceneByIndex(int index);
 
 private:
 	std::map<int, std::shared_ptr<Scene>> scenes;
 	std::shared_ptr<Scene> currentScene{};
+
+    int nextSceneIndex = -1;
+    int currSceneIndex = -1;
 };
 
 namespace SceneUtil
