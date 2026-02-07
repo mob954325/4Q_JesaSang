@@ -3,6 +3,7 @@
 #include <vector>
 #include <functional>
 #include "../../Base/Entity/Object.h"
+#include "../Base/System/ObjectSystem.h"
 
 template<typename... Args>
 class MultiDelegate {
@@ -36,9 +37,12 @@ public:
     {
         for (const auto& s : slots)
         {
-            // Handle로 테이블에서 유효한지 검사
-            if (ObjectTable::Get().IsValid(s.instance))
+            if (!s.instance) continue;
+
+            if (ObjectSystem::Instance().Get<Object>(s.instance->GetHandle()))
+            {
                 s.func(args...);
+            }
         }
     }
 };
