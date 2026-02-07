@@ -338,8 +338,8 @@ void PlayerController::HideObjectInteraction(float dt)
     if (!isPossibleHide || !curHideObject)
         return;
 
-    // hit, die 상태라면 return (맞겠지?)
-    if (state == PlayerState::Hit || state == PlayerState::Die)
+    // hit, die 상태라면 return (맞겠지?) -> hit일떄 은신된대.
+    if (state == PlayerState::Die)
         return;
 
     // hide
@@ -403,6 +403,7 @@ void PlayerController::PutFoodJesaSangInteraction(float dt)
         std::unique_ptr<IItem> food = inventory->TakeCurItem();
         JesaSangManager::Instance()->ReceiveFood(std::move(food));
         visualizer->VisualOffItem();
+        visualizer->VisualItemIDNullSet();
 
         // clear
         putFoodTimer = 0.0f;
