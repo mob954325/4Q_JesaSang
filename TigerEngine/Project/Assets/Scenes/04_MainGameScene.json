@@ -3,7 +3,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3265,
+        "ID": 2216,
         "Name": "Main Camera",
         "ParentID": -1,
         "components": [
@@ -30,9 +30,9 @@
           {
             "properties": {
               "angle": 1.5707963705062866,
-              "farDist": 2000.0,
+              "farDist": 1700.0,
               "moveSpeed": 100.0,
-              "nearDist": 0.009999999776482582,
+              "nearDist": 90.0,
               "rotSpeed": 0.004000000189989805
             },
             "type": "Camera"
@@ -56,7 +56,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3266,
+        "ID": 2217,
         "Name": "DirectionalLight(Sun)",
         "ParentID": -1,
         "components": [
@@ -110,7 +110,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3267,
+        "ID": 2218,
         "Name": "----------------------",
         "ParentID": -1,
         "components": [
@@ -141,7 +141,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3268,
+        "ID": 2219,
         "Name": "CurScene_04_MainGameScene",
         "ParentID": -1,
         "components": [
@@ -172,7 +172,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3269,
+        "ID": 2220,
         "Name": "-------[Map]-----------",
         "ParentID": -1,
         "components": [
@@ -203,7 +203,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3270,
+        "ID": 2221,
         "Name": "Floor",
         "ParentID": -1,
         "components": [
@@ -307,7 +307,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3271,
+        "ID": 2222,
         "Name": "Room_",
         "ParentID": -1,
         "components": [
@@ -411,7 +411,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3272,
+        "ID": 2223,
         "Name": "Room_a_love_room",
         "ParentID": -1,
         "components": [
@@ -515,7 +515,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3273,
+        "ID": 2224,
         "Name": "Room_Kitchen",
         "ParentID": -1,
         "components": [
@@ -619,7 +619,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3274,
+        "ID": 2225,
         "Name": "Room_main_room",
         "ParentID": -1,
         "components": [
@@ -723,7 +723,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3275,
+        "ID": 2226,
         "Name": "Room_saibi",
         "ParentID": -1,
         "components": [
@@ -827,7 +827,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3276,
+        "ID": 2227,
         "Name": "Room_Table_of_memorial_ceremony",
         "ParentID": -1,
         "components": [
@@ -931,7 +931,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3277,
+        "ID": 2228,
         "Name": "Room_Warehouse",
         "ParentID": -1,
         "components": [
@@ -1035,7 +1035,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3278,
+        "ID": 2229,
         "Name": "------[Occlusion]------",
         "ParentID": -1,
         "components": [
@@ -1066,7 +1066,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3279,
+        "ID": 2230,
         "Name": "wall",
         "ParentID": -1,
         "components": [
@@ -1176,7 +1176,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3280,
+        "ID": 2231,
         "Name": "wall_12",
         "ParentID": -1,
         "components": [
@@ -1286,7 +1286,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3281,
+        "ID": 2232,
         "Name": "wall_13",
         "ParentID": -1,
         "components": [
@@ -1396,7 +1396,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3282,
+        "ID": 2233,
         "Name": "wall_14",
         "ParentID": -1,
         "components": [
@@ -1506,7 +1506,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3283,
+        "ID": 2234,
         "Name": "wall_2",
         "ParentID": -1,
         "components": [
@@ -1616,7 +1616,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3284,
+        "ID": 2235,
         "Name": "wall_3",
         "ParentID": -1,
         "components": [
@@ -1726,7 +1726,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3285,
+        "ID": 2236,
         "Name": "wall_4",
         "ParentID": -1,
         "components": [
@@ -1836,7 +1836,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3286,
+        "ID": 2237,
         "Name": "wall_5",
         "ParentID": -1,
         "components": [
@@ -1946,7 +1946,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3287,
+        "ID": 2238,
         "Name": "wall_6",
         "ParentID": -1,
         "components": [
@@ -2056,7 +2056,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3288,
+        "ID": 2239,
         "Name": "wall_8",
         "ParentID": -1,
         "components": [
@@ -2166,7 +2166,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3289,
+        "ID": 2240,
         "Name": "wall_9",
         "ParentID": -1,
         "components": [
@@ -2276,7 +2276,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3290,
+        "ID": 2241,
         "Name": "Pillar",
         "ParentID": -1,
         "components": [
@@ -2386,7 +2386,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3291,
+        "ID": 2242,
         "Name": "Door_Open",
         "ParentID": -1,
         "components": [
@@ -2496,7 +2496,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3292,
+        "ID": 2243,
         "Name": "Pillar",
         "ParentID": -1,
         "components": [
@@ -2606,7 +2606,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3293,
+        "ID": 2244,
         "Name": "-----[Interaction_OB]----------",
         "ParentID": -1,
         "components": [
@@ -2637,7 +2637,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3294,
+        "ID": 2245,
         "Name": "JesaSang",
         "ParentID": -1,
         "components": [
@@ -2747,9 +2747,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3295,
+        "ID": 2246,
         "Name": "baseFood",
-        "ParentID": 3294,
+        "ParentID": 2245,
         "components": [
           {
             "properties": {
@@ -2828,9 +2828,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 3296,
+        "ID": 2247,
         "Name": "Apple",
-        "ParentID": 3294,
+        "ParentID": 2245,
         "components": [
           {
             "properties": {
@@ -2909,9 +2909,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 3297,
+        "ID": 2248,
         "Name": "Pear",
-        "ParentID": 3294,
+        "ParentID": 2245,
         "components": [
           {
             "properties": {
@@ -2990,9 +2990,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 3298,
+        "ID": 2249,
         "Name": "Batter",
-        "ParentID": 3294,
+        "ParentID": 2245,
         "components": [
           {
             "properties": {
@@ -3071,9 +3071,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 3299,
+        "ID": 2250,
         "Name": "Tofu",
-        "ParentID": 3294,
+        "ParentID": 2245,
         "components": [
           {
             "properties": {
@@ -3152,9 +3152,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 3300,
+        "ID": 2251,
         "Name": "Sanjeok",
-        "ParentID": 3294,
+        "ParentID": 2245,
         "components": [
           {
             "properties": {
@@ -3233,9 +3233,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 3301,
+        "ID": 2252,
         "Name": "Donggeurangttaeng",
-        "ParentID": 3294,
+        "ParentID": 2245,
         "components": [
           {
             "properties": {
@@ -3314,7 +3314,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3302,
+        "ID": 2253,
         "Name": "Altar",
         "ParentID": -1,
         "components": [
@@ -3424,9 +3424,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3303,
+        "ID": 2254,
         "Name": "baseFood",
-        "ParentID": 3302,
+        "ParentID": 2253,
         "components": [
           {
             "properties": {
@@ -3505,9 +3505,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 3304,
+        "ID": 2255,
         "Name": "Alta_Apple",
-        "ParentID": 3302,
+        "ParentID": 2253,
         "components": [
           {
             "properties": {
@@ -3586,9 +3586,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 3305,
+        "ID": 2256,
         "Name": "Alta_Pear",
-        "ParentID": 3302,
+        "ParentID": 2253,
         "components": [
           {
             "properties": {
@@ -3667,9 +3667,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 3306,
+        "ID": 2257,
         "Name": "Alta_Batter",
-        "ParentID": 3302,
+        "ParentID": 2253,
         "components": [
           {
             "properties": {
@@ -3748,9 +3748,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 3307,
+        "ID": 2258,
         "Name": "Alta_Tofu",
-        "ParentID": 3302,
+        "ParentID": 2253,
         "components": [
           {
             "properties": {
@@ -3829,9 +3829,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 3308,
+        "ID": 2259,
         "Name": "Alta_Sanjeok",
-        "ParentID": 3302,
+        "ParentID": 2253,
         "components": [
           {
             "properties": {
@@ -3910,9 +3910,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 3309,
+        "ID": 2260,
         "Name": "Alta_Donggeurangttaeng",
-        "ParentID": 3302,
+        "ParentID": 2253,
         "components": [
           {
             "properties": {
@@ -3991,9 +3991,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 3310,
+        "ID": 2261,
         "Name": "Alta_Ingre_Apple",
-        "ParentID": 3302,
+        "ParentID": 2253,
         "components": [
           {
             "properties": {
@@ -4072,9 +4072,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 3311,
+        "ID": 2262,
         "Name": "Alta_Ingre_Pear",
-        "ParentID": 3302,
+        "ParentID": 2253,
         "components": [
           {
             "properties": {
@@ -4153,9 +4153,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 3312,
+        "ID": 2263,
         "Name": "Alta_Ingre_Batter",
-        "ParentID": 3302,
+        "ParentID": 2253,
         "components": [
           {
             "properties": {
@@ -4234,9 +4234,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 3313,
+        "ID": 2264,
         "Name": "Alta_Ingre_Tofu",
-        "ParentID": 3302,
+        "ParentID": 2253,
         "components": [
           {
             "properties": {
@@ -4315,9 +4315,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 3314,
+        "ID": 2265,
         "Name": "Alta_Ingre_Sanjeok",
-        "ParentID": 3302,
+        "ParentID": 2253,
         "components": [
           {
             "properties": {
@@ -4396,9 +4396,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 3315,
+        "ID": 2266,
         "Name": "Alta_Ingre_Donggeurangttaeng",
-        "ParentID": 3302,
+        "ParentID": 2253,
         "components": [
           {
             "properties": {
@@ -4477,7 +4477,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3316,
+        "ID": 2267,
         "Name": "HideObject",
         "ParentID": -1,
         "components": [
@@ -4587,7 +4587,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3317,
+        "ID": 2268,
         "Name": "TrapObject_Decal",
         "ParentID": -1,
         "components": [
@@ -4675,9 +4675,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 3318,
+        "ID": 2269,
         "Name": "RingEffect",
-        "ParentID": 3317,
+        "ParentID": 2268,
         "components": [
           {
             "properties": {
@@ -4734,7 +4734,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3319,
+        "ID": 2270,
         "Name": "TropObject_Table",
         "ParentID": -1,
         "components": [
@@ -4844,9 +4844,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 3320,
+        "ID": 2271,
         "Name": "RingEffect",
-        "ParentID": 3319,
+        "ParentID": 2270,
         "components": [
           {
             "properties": {
@@ -4903,7 +4903,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3321,
+        "ID": 2272,
         "Name": "TrapObject_Decal",
         "ParentID": -1,
         "components": [
@@ -4991,9 +4991,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 3322,
+        "ID": 2273,
         "Name": "RingEffect",
-        "ParentID": 3321,
+        "ParentID": 2272,
         "components": [
           {
             "properties": {
@@ -5050,7 +5050,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3323,
+        "ID": 2274,
         "Name": "TropObject_Table",
         "ParentID": -1,
         "components": [
@@ -5160,9 +5160,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 3324,
+        "ID": 2275,
         "Name": "RingEffect",
-        "ParentID": 3323,
+        "ParentID": 2274,
         "components": [
           {
             "properties": {
@@ -5219,7 +5219,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3325,
+        "ID": 2276,
         "Name": "-----[ItemSearchOB]------------",
         "ParentID": -1,
         "components": [
@@ -5250,7 +5250,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3326,
+        "ID": 2277,
         "Name": "SearchObject",
         "ParentID": -1,
         "components": [
@@ -5369,7 +5369,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3327,
+        "ID": 2278,
         "Name": "SearchObject",
         "ParentID": -1,
         "components": [
@@ -5488,7 +5488,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3328,
+        "ID": 2279,
         "Name": "SearchObject",
         "ParentID": -1,
         "components": [
@@ -5607,7 +5607,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3329,
+        "ID": 2280,
         "Name": "SearchObject",
         "ParentID": -1,
         "components": [
@@ -5726,7 +5726,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3330,
+        "ID": 2281,
         "Name": "SearchObject",
         "ParentID": -1,
         "components": [
@@ -5845,7 +5845,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3331,
+        "ID": 2282,
         "Name": "SearchObject",
         "ParentID": -1,
         "components": [
@@ -5964,7 +5964,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3332,
+        "ID": 2283,
         "Name": "SearchObject",
         "ParentID": -1,
         "components": [
@@ -6083,7 +6083,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3333,
+        "ID": 2284,
         "Name": "SearchObject",
         "ParentID": -1,
         "components": [
@@ -6202,7 +6202,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3334,
+        "ID": 2285,
         "Name": "SearchObject",
         "ParentID": -1,
         "components": [
@@ -6321,7 +6321,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3335,
+        "ID": 2286,
         "Name": "SearchObject",
         "ParentID": -1,
         "components": [
@@ -6440,7 +6440,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3336,
+        "ID": 2287,
         "Name": "SearchObject",
         "ParentID": -1,
         "components": [
@@ -6559,7 +6559,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3337,
+        "ID": 2288,
         "Name": "SearchObject",
         "ParentID": -1,
         "components": [
@@ -6678,7 +6678,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3338,
+        "ID": 2289,
         "Name": "SearchObject",
         "ParentID": -1,
         "components": [
@@ -6797,7 +6797,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3339,
+        "ID": 2290,
         "Name": "SearchObject",
         "ParentID": -1,
         "components": [
@@ -6916,7 +6916,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3340,
+        "ID": 2291,
         "Name": "-----[Cook]---------------",
         "ParentID": -1,
         "components": [
@@ -6947,7 +6947,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3341,
+        "ID": 2292,
         "Name": "Kitchen",
         "ParentID": -1,
         "components": [
@@ -7028,7 +7028,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3343,
+        "ID": 2293,
         "Name": "CookingZone",
         "ParentID": -1,
         "components": [
@@ -7082,7 +7082,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3346,
+        "ID": 2294,
         "Name": "MiniGameManager",
         "ParentID": -1,
         "components": [
@@ -7119,7 +7119,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3347,
+        "ID": 2295,
         "Name": "-----[Player]--------------",
         "ParentID": -1,
         "components": [
@@ -7150,7 +7150,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3348,
+        "ID": 2296,
         "Name": "Player",
         "ParentID": -1,
         "components": [
@@ -7272,9 +7272,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3349,
+        "ID": 2297,
         "Name": "CameraTrackingPoint",
-        "ParentID": 3348,
+        "ParentID": 2296,
         "components": [
           {
             "properties": {
@@ -7303,9 +7303,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3350,
+        "ID": 2298,
         "Name": "OcclusionFadePoint",
-        "ParentID": 3348,
+        "ParentID": 2296,
         "components": [
           {
             "properties": {
@@ -7334,9 +7334,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3351,
+        "ID": 2299,
         "Name": "InteractionSensor",
-        "ParentID": 3348,
+        "ParentID": 2296,
         "components": [
           {
             "properties": {
@@ -7394,9 +7394,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3352,
+        "ID": 2300,
         "Name": "InteractZone",
-        "ParentID": 3348,
+        "ParentID": 2296,
         "components": [
           {
             "properties": {
@@ -7454,9 +7454,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3353,
+        "ID": 2301,
         "Name": "ItemVisualizer",
-        "ParentID": 3348,
+        "ParentID": 2296,
         "components": [
           {
             "properties": {
@@ -7485,9 +7485,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 3354,
+        "ID": 2302,
         "Name": "Visual_Ingre_Apple",
-        "ParentID": 3353,
+        "ParentID": 2301,
         "components": [
           {
             "properties": {
@@ -7566,9 +7566,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 3355,
+        "ID": 2303,
         "Name": "Visual_Ingre_Batter",
-        "ParentID": 3353,
+        "ParentID": 2301,
         "components": [
           {
             "properties": {
@@ -7647,9 +7647,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 3356,
+        "ID": 2304,
         "Name": "Visual_Ingre_Donggeurangttaeng",
-        "ParentID": 3353,
+        "ParentID": 2301,
         "components": [
           {
             "properties": {
@@ -7728,9 +7728,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 3357,
+        "ID": 2305,
         "Name": "Visual_Ingre_Pear",
-        "ParentID": 3353,
+        "ParentID": 2301,
         "components": [
           {
             "properties": {
@@ -7809,9 +7809,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 3358,
+        "ID": 2306,
         "Name": "Visual_Ingre_Sanjeok",
-        "ParentID": 3353,
+        "ParentID": 2301,
         "components": [
           {
             "properties": {
@@ -7890,9 +7890,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 3359,
+        "ID": 2307,
         "Name": "Visual_Ingre_Tofu",
-        "ParentID": 3353,
+        "ParentID": 2301,
         "components": [
           {
             "properties": {
@@ -7971,9 +7971,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 3360,
+        "ID": 2308,
         "Name": "Visual_Apple",
-        "ParentID": 3353,
+        "ParentID": 2301,
         "components": [
           {
             "properties": {
@@ -8052,9 +8052,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 3361,
+        "ID": 2309,
         "Name": "Visual_Pear",
-        "ParentID": 3353,
+        "ParentID": 2301,
         "components": [
           {
             "properties": {
@@ -8133,9 +8133,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 3362,
+        "ID": 2310,
         "Name": "Visual_Batter",
-        "ParentID": 3353,
+        "ParentID": 2301,
         "components": [
           {
             "properties": {
@@ -8214,9 +8214,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 3363,
+        "ID": 2311,
         "Name": "Visual_Tofu",
-        "ParentID": 3353,
+        "ParentID": 2301,
         "components": [
           {
             "properties": {
@@ -8295,9 +8295,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 3364,
+        "ID": 2312,
         "Name": "Visual_Sanjeok",
-        "ParentID": 3353,
+        "ParentID": 2301,
         "components": [
           {
             "properties": {
@@ -8376,9 +8376,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 3365,
+        "ID": 2313,
         "Name": "Visual_Donggeurangttaeng",
-        "ParentID": 3353,
+        "ParentID": 2301,
         "components": [
           {
             "properties": {
@@ -8457,9 +8457,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3366,
+        "ID": 2314,
         "Name": "AITarget",
-        "ParentID": 3348,
+        "ParentID": 2296,
         "components": [
           {
             "properties": {
@@ -8517,7 +8517,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3367,
+        "ID": 2315,
         "Name": "-----[AI]------------------",
         "ParentID": -1,
         "components": [
@@ -8548,7 +8548,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3368,
+        "ID": 2316,
         "Name": "Grid",
         "ParentID": -1,
         "components": [
@@ -8588,7 +8588,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3369,
+        "ID": 2317,
         "Name": "Ghost_Adult",
         "ParentID": -1,
         "components": [
@@ -8706,9 +8706,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3370,
+        "ID": 2318,
         "Name": "GhostInteractionZone",
-        "ParentID": 3369,
+        "ParentID": 2317,
         "components": [
           {
             "properties": {
@@ -8766,7 +8766,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3371,
+        "ID": 2319,
         "Name": "Ghost_Baby",
         "ParentID": -1,
         "components": [
@@ -8884,9 +8884,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3372,
+        "ID": 2320,
         "Name": "GhostInteractionZone",
-        "ParentID": 3371,
+        "ParentID": 2319,
         "components": [
           {
             "properties": {
@@ -8944,7 +8944,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3373,
+        "ID": 2321,
         "Name": "Ghost_Baby",
         "ParentID": -1,
         "components": [
@@ -9062,9 +9062,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3374,
+        "ID": 2322,
         "Name": "GhostInteractionZone",
-        "ParentID": 3373,
+        "ParentID": 2321,
         "components": [
           {
             "properties": {
@@ -9122,7 +9122,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3375,
+        "ID": 2323,
         "Name": "Ghost_Adult",
         "ParentID": -1,
         "components": [
@@ -9240,9 +9240,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3376,
+        "ID": 2324,
         "Name": "GhostInteractionZone",
-        "ParentID": 3375,
+        "ParentID": 2323,
         "components": [
           {
             "properties": {
@@ -9300,7 +9300,463 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3377,
+        "ID": 2325,
+        "Name": "-----[UI]------------------",
+        "ParentID": -1,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 2326,
+        "Name": "UI_Screen",
+        "ParentID": -1,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "Pivot": [
+                0.0,
+                0.0
+              ],
+              "Pos": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Size": [
+                1920.0,
+                1080.0
+              ]
+            },
+            "type": "RectTransform"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": false,
+        "ID": 2327,
+        "Name": "PausePannel",
+        "ParentID": 2326,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "Pivot": [
+                0.5,
+                0.5
+              ],
+              "Pos": [
+                960.0,
+                480.0,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Size": [
+                900.0,
+                500.0
+              ]
+            },
+            "type": "RectTransform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "drawSpacetype": "Screen",
+              "fillAmount": 1.0,
+              "imageType": "Simple",
+              "isBillboard": false,
+              "isMouseCheck": false,
+              "path": "..\\Assets\\Resource\\UI\\Game_Mini_01.png",
+              "sliceBorderPx": [
+                40.0,
+                40.0,
+                40.0,
+                40.0
+              ],
+              "type": "Simple",
+              "zOrder": 0
+            },
+            "type": "Image"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": false,
+        "ID": 2328,
+        "Name": "Button_StopYes",
+        "ParentID": 2327,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "Pivot": [
+                0.5,
+                0.5
+              ],
+              "Pos": [
+                330.0,
+                480.0,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Size": [
+                200.0,
+                100.0
+              ]
+            },
+            "type": "RectTransform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "drawSpacetype": "Screen",
+              "fillAmount": 1.0,
+              "imageType": "Simple",
+              "isBillboard": false,
+              "isMouseCheck": false,
+              "path": "..\\Assets\\Resource\\UI\\no.png",
+              "sliceBorderPx": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "type": "Simple",
+              "zOrder": 1
+            },
+            "type": "Image"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": false,
+        "ID": 2329,
+        "Name": "Button_StopNo",
+        "ParentID": 2327,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "Pivot": [
+                0.5,
+                0.5
+              ],
+              "Pos": [
+                600.0,
+                480.0,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Size": [
+                200.0,
+                100.0
+              ]
+            },
+            "type": "RectTransform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "drawSpacetype": "Screen",
+              "fillAmount": 1.0,
+              "imageType": "Simple",
+              "isBillboard": false,
+              "isMouseCheck": false,
+              "path": "..\\Assets\\Resource\\UI\\yes.png",
+              "sliceBorderPx": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "type": "Simple",
+              "zOrder": 1
+            },
+            "type": "Image"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": false,
+        "ID": 2330,
+        "Name": "Text_Stop",
+        "ParentID": 2327,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "Pivot": [
+                0.5,
+                0.5
+              ],
+              "Pos": [
+                200.0,
+                180.0,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Size": [
+                1.0,
+                1.0
+              ]
+            },
+            "type": "RectTransform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "alignType": "Left",
+              "atlasH": 2048,
+              "atlasW": 2048,
+              "color": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ],
+              "drawSpacetype": "Screen",
+              "fontPath": "../Assets/Resource/font/Shilla_Culture(B).ttf",
+              "fontSize": 80,
+              "isBillboard": false,
+              "paddingPx": 1,
+              "text": "나가시겠습니까?",
+              "zOrder": 1
+            },
+            "type": "TextUI"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 2331,
         "Name": "UI_MiniGame",
         "ParentID": -1,
         "components": [
@@ -9365,9 +9821,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3378,
+        "ID": 2332,
         "Name": "Image_BackgroundTop",
-        "ParentID": 3377,
+        "ParentID": 2331,
         "components": [
           {
             "properties": {
@@ -9435,6 +9891,7 @@
               "drawSpacetype": "Screen",
               "fillAmount": 1.0,
               "imageType": "Fill",
+              "isBillboard": false,
               "isMouseCheck": false,
               "path": "..\\Assets\\Resource\\UI\\MiniGame\\Game_Mini_01.png",
               "sliceBorderPx": [
@@ -9444,7 +9901,7 @@
                 40.0
               ],
               "type": "Fill",
-              "zOrder": 0
+              "zOrder": -1
             },
             "type": "Image"
           }
@@ -9455,9 +9912,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3379,
+        "ID": 2333,
         "Name": "Image_ESC",
-        "ParentID": 3378,
+        "ParentID": 2332,
         "components": [
           {
             "properties": {
@@ -9525,6 +9982,7 @@
               "drawSpacetype": "Screen",
               "fillAmount": 1.0,
               "imageType": "Simple",
+              "isBillboard": false,
               "isMouseCheck": false,
               "path": "..\\Assets\\Resource\\UI\\MiniGame\\ESC.png",
               "sliceBorderPx": [
@@ -9545,9 +10003,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 3380,
+        "ID": 2334,
         "Name": "Image_BackgroundDown",
-        "ParentID": 3377,
+        "ParentID": 2331,
         "components": [
           {
             "properties": {
@@ -9615,6 +10073,7 @@
               "drawSpacetype": "Screen",
               "fillAmount": 1.0,
               "imageType": "Simple",
+              "isBillboard": false,
               "isMouseCheck": false,
               "path": "..\\Assets\\Resource\\UI\\MiniGame\\Game_Mini_02.png",
               "sliceBorderPx": [
@@ -9624,7 +10083,7 @@
                 0.0
               ],
               "type": "Simple",
-              "zOrder": 0
+              "zOrder": -1
             },
             "type": "Image"
           }
@@ -9635,9 +10094,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 3381,
+        "ID": 2335,
         "Name": "UI_MiniGame1",
-        "ParentID": 3377,
+        "ParentID": 2331,
         "components": [
           {
             "properties": {
@@ -9700,9 +10159,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 3382,
-        "Name": "Image_ProgressBar",
-        "ParentID": 3381,
+        "ID": 2336,
+        "Name": "1_Image_ProgressBar",
+        "ParentID": 2335,
         "components": [
           {
             "properties": {
@@ -9770,6 +10229,7 @@
               "drawSpacetype": "Screen",
               "fillAmount": 1.0,
               "imageType": "Simple",
+              "isBillboard": false,
               "isMouseCheck": false,
               "path": "..\\Assets\\Resource\\UI\\MiniGame\\sound_gaige.png",
               "sliceBorderPx": [
@@ -9790,9 +10250,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 3383,
-        "Name": "Image_SpaceBar",
-        "ParentID": 3381,
+        "ID": 2337,
+        "Name": "1_Image_Knife",
+        "ParentID": 2335,
         "components": [
           {
             "properties": {
@@ -9843,7 +10303,7 @@
               ],
               "Size": [
                 100.0,
-                50.0
+                100.0
               ]
             },
             "type": "RectTransform"
@@ -9860,8 +10320,9 @@
               "drawSpacetype": "Screen",
               "fillAmount": 1.0,
               "imageType": "Simple",
+              "isBillboard": false,
               "isMouseCheck": false,
-              "path": "..\\Assets\\Resource\\UI\\MiniGame\\SPACE.png",
+              "path": "..\\Assets\\Resource\\UI\\MiniGame\\knife.png",
               "sliceBorderPx": [
                 0.0,
                 0.0,
@@ -9869,7 +10330,7 @@
                 0.0
               ],
               "type": "Simple",
-              "zOrder": 0
+              "zOrder": 2
             },
             "type": "Image"
           }
@@ -9880,9 +10341,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 3384,
-        "Name": "Image_StopPoint",
-        "ParentID": 3381,
+        "ID": 2338,
+        "Name": "1_Image_StopPoint",
+        "ParentID": 2335,
         "components": [
           {
             "properties": {
@@ -9950,8 +10411,165 @@
               "drawSpacetype": "Screen",
               "fillAmount": 1.0,
               "imageType": "Simple",
+              "isBillboard": false,
               "isMouseCheck": false,
               "path": "..\\Assets\\Resource\\UI\\MiniGame\\SPACE_01.png",
+              "sliceBorderPx": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "type": "Simple",
+              "zOrder": 1
+            },
+            "type": "Image"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": false,
+        "ID": 2339,
+        "Name": "UI_MiniGame2",
+        "ParentID": 2331,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "Pivot": [
+                0.5,
+                0.5
+              ],
+              "Pos": [
+                900.0,
+                700.0,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Size": [
+                900.0,
+                100.0
+              ]
+            },
+            "type": "RectTransform"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": false,
+        "ID": 2340,
+        "Name": "2_Image_ProgressBar",
+        "ParentID": 2339,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "Pivot": [
+                0.5,
+                0.5
+              ],
+              "Pos": [
+                500.0,
+                50.0,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Size": [
+                750.0,
+                6.0
+              ]
+            },
+            "type": "RectTransform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "drawSpacetype": "Screen",
+              "fillAmount": 1.0,
+              "imageType": "Simple",
+              "isBillboard": false,
+              "isMouseCheck": false,
+              "path": "..\\Assets\\Resource\\UI\\MiniGame\\sound_gaige.png",
               "sliceBorderPx": [
                 0.0,
                 0.0,
@@ -9970,9 +10588,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 3385,
-        "Name": "UI_MiniGame2",
-        "ParentID": 3377,
+        "ID": 2341,
+        "Name": "2_Image_FoodPoint",
+        "ParentID": 2339,
         "components": [
           {
             "properties": {
@@ -9998,12 +10616,12 @@
             "properties": {
               "Active": false,
               "Pivot": [
-                0.0,
-                0.0
+                0.5,
+                0.5
               ],
               "Pos": [
-                0.0,
-                0.0,
+                500.0,
+                50.0,
                 0.0
               ],
               "Position": [
@@ -10022,8 +10640,372 @@
                 1.0
               ],
               "Size": [
+                70.0,
+                70.0
+              ]
+            },
+            "type": "RectTransform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "drawSpacetype": "Screen",
+              "fillAmount": 1.0,
+              "imageType": "Simple",
+              "isBillboard": false,
+              "isMouseCheck": false,
+              "path": "..\\Assets\\Resource\\UI\\MiniGame\\Arrow_fail01.png",
+              "sliceBorderPx": [
+                0.0,
+                0.0,
                 0.0,
                 0.0
+              ],
+              "type": "Simple",
+              "zOrder": 1
+            },
+            "type": "Image"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": false,
+        "ID": 2342,
+        "Name": "2_Image_SpaceBar",
+        "ParentID": 2339,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "Pivot": [
+                0.5,
+                0.5
+              ],
+              "Pos": [
+                250.0,
+                50.0,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Size": [
+                200.0,
+                50.0
+              ]
+            },
+            "type": "RectTransform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "drawSpacetype": "Screen",
+              "fillAmount": 1.0,
+              "imageType": "Simple",
+              "isBillboard": false,
+              "isMouseCheck": false,
+              "path": "..\\Assets\\Resource\\UI\\MiniGame\\SPACE_01.png",
+              "sliceBorderPx": [
+                40.0,
+                40.0,
+                40.0,
+                40.0
+              ],
+              "type": "Simple",
+              "zOrder": 0
+            },
+            "type": "Image"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": false,
+        "ID": 2343,
+        "Name": "2_Image_Gauge",
+        "ParentID": 2339,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "Pivot": [
+                0.5,
+                0.5
+              ],
+              "Pos": [
+                510.0,
+                120.0,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Size": [
+                800.0,
+                30.0
+              ]
+            },
+            "type": "RectTransform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "color": [
+                0.781862735748291,
+                0.563725471496582,
+                1.0,
+                1.0
+              ],
+              "drawSpacetype": "Screen",
+              "fillAmount": 0.5,
+              "imageType": "Fill",
+              "isBillboard": false,
+              "isMouseCheck": false,
+              "path": "..\\Assets\\Resource\\UI\\MiniGame\\Game_Mini_02.png",
+              "sliceBorderPx": [
+                20.0,
+                20.0,
+                20.0,
+                20.0
+              ],
+              "type": "Fill",
+              "zOrder": 1
+            },
+            "type": "Image"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": false,
+        "ID": 2344,
+        "Name": "2_Image_Background",
+        "ParentID": 2339,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "Pivot": [
+                0.5,
+                0.5
+              ],
+              "Pos": [
+                510.0,
+                120.0,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Size": [
+                800.0,
+                30.0
+              ]
+            },
+            "type": "RectTransform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "color": [
+                0.024509787559509277,
+                0.024509787559509277,
+                0.024509787559509277,
+                1.0
+              ],
+              "drawSpacetype": "Screen",
+              "fillAmount": 1.0,
+              "imageType": "Simple",
+              "isBillboard": false,
+              "isMouseCheck": false,
+              "path": "..\\Assets\\Resource\\UI\\MiniGame\\Game_Mini_02.png",
+              "sliceBorderPx": [
+                20.0,
+                20.0,
+                20.0,
+                20.0
+              ],
+              "type": "Simple",
+              "zOrder": 0
+            },
+            "type": "Image"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": false,
+        "ID": 2345,
+        "Name": "UI_MiniGame3",
+        "ParentID": 2331,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "Pivot": [
+                0.5,
+                0.5
+              ],
+              "Pos": [
+                900.0,
+                700.0,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Size": [
+                900.0,
+                100.0
               ]
             },
             "type": "RectTransform"
@@ -10035,9 +11017,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 3386,
-        "Name": "UI_MiniGame3",
-        "ParentID": 3377,
+        "ID": 2346,
+        "Name": "3_Image_key1",
+        "ParentID": 2345,
         "components": [
           {
             "properties": {
@@ -10063,12 +11045,12 @@
             "properties": {
               "Active": false,
               "Pivot": [
-                0.0,
-                0.0
+                0.5,
+                0.5
               ],
               "Pos": [
-                0.0,
-                0.0,
+                160.0,
+                50.0,
                 0.0
               ],
               "Position": [
@@ -10087,11 +11069,936 @@
                 1.0
               ],
               "Size": [
-                0.0,
-                0.0
+                80.0,
+                80.0
               ]
             },
             "type": "RectTransform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "drawSpacetype": "Screen",
+              "fillAmount": 1.0,
+              "imageType": "Simple",
+              "isBillboard": false,
+              "isMouseCheck": false,
+              "path": "..\\Assets\\Resource\\UI\\MiniGame\\Arrow.png",
+              "sliceBorderPx": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "type": "Simple",
+              "zOrder": 1
+            },
+            "type": "Image"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": false,
+        "ID": 2347,
+        "Name": "3_Image_key2",
+        "ParentID": 2345,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "Pivot": [
+                0.5,
+                0.5
+              ],
+              "Pos": [
+                260.0,
+                50.0,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Size": [
+                80.0,
+                80.0
+              ]
+            },
+            "type": "RectTransform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "drawSpacetype": "Screen",
+              "fillAmount": 1.0,
+              "imageType": "Simple",
+              "isBillboard": false,
+              "isMouseCheck": false,
+              "path": "..\\Assets\\Resource\\UI\\MiniGame\\Arrow.png",
+              "sliceBorderPx": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "type": "Simple",
+              "zOrder": 1
+            },
+            "type": "Image"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": false,
+        "ID": 2348,
+        "Name": "3_Image_key3",
+        "ParentID": 2345,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "Pivot": [
+                0.5,
+                0.5
+              ],
+              "Pos": [
+                360.0,
+                50.0,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Size": [
+                80.0,
+                80.0
+              ]
+            },
+            "type": "RectTransform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "drawSpacetype": "Screen",
+              "fillAmount": 1.0,
+              "imageType": "Simple",
+              "isBillboard": false,
+              "isMouseCheck": false,
+              "path": "..\\Assets\\Resource\\UI\\MiniGame\\Arrow.png",
+              "sliceBorderPx": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "type": "Simple",
+              "zOrder": 1
+            },
+            "type": "Image"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": false,
+        "ID": 2349,
+        "Name": "3_Image_key4",
+        "ParentID": 2345,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "Pivot": [
+                0.5,
+                0.5
+              ],
+              "Pos": [
+                460.0,
+                50.0,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Size": [
+                80.0,
+                80.0
+              ]
+            },
+            "type": "RectTransform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "drawSpacetype": "Screen",
+              "fillAmount": 1.0,
+              "imageType": "Simple",
+              "isBillboard": false,
+              "isMouseCheck": false,
+              "path": "..\\Assets\\Resource\\UI\\MiniGame\\Arrow.png",
+              "sliceBorderPx": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "type": "Simple",
+              "zOrder": 1
+            },
+            "type": "Image"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": false,
+        "ID": 2350,
+        "Name": "3_Image_key5",
+        "ParentID": 2345,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "Pivot": [
+                0.5,
+                0.5
+              ],
+              "Pos": [
+                560.0,
+                50.0,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Size": [
+                80.0,
+                80.0
+              ]
+            },
+            "type": "RectTransform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "drawSpacetype": "Screen",
+              "fillAmount": 1.0,
+              "imageType": "Simple",
+              "isBillboard": false,
+              "isMouseCheck": false,
+              "path": "..\\Assets\\Resource\\UI\\MiniGame\\Arrow.png",
+              "sliceBorderPx": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "type": "Simple",
+              "zOrder": 1
+            },
+            "type": "Image"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": false,
+        "ID": 2351,
+        "Name": "3_Image_key6",
+        "ParentID": 2345,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "Pivot": [
+                0.5,
+                0.5
+              ],
+              "Pos": [
+                660.0,
+                50.0,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Size": [
+                80.0,
+                80.0
+              ]
+            },
+            "type": "RectTransform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "drawSpacetype": "Screen",
+              "fillAmount": 1.0,
+              "imageType": "Simple",
+              "isBillboard": false,
+              "isMouseCheck": false,
+              "path": "..\\Assets\\Resource\\UI\\MiniGame\\Arrow.png",
+              "sliceBorderPx": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "type": "Simple",
+              "zOrder": 1
+            },
+            "type": "Image"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": false,
+        "ID": 2352,
+        "Name": "3_Image_key7",
+        "ParentID": 2345,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "Pivot": [
+                0.5,
+                0.5
+              ],
+              "Pos": [
+                760.0,
+                50.0,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Size": [
+                80.0,
+                80.0
+              ]
+            },
+            "type": "RectTransform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "drawSpacetype": "Screen",
+              "fillAmount": 1.0,
+              "imageType": "Simple",
+              "isBillboard": false,
+              "isMouseCheck": false,
+              "path": "..\\Assets\\Resource\\UI\\MiniGame\\Arrow.png",
+              "sliceBorderPx": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "type": "Simple",
+              "zOrder": 1
+            },
+            "type": "Image"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": false,
+        "ID": 2353,
+        "Name": "3_Image_key8",
+        "ParentID": 2345,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "Pivot": [
+                0.5,
+                0.5
+              ],
+              "Pos": [
+                860.0,
+                50.0,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Size": [
+                80.0,
+                80.0
+              ]
+            },
+            "type": "RectTransform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "drawSpacetype": "Screen",
+              "fillAmount": 1.0,
+              "imageType": "Simple",
+              "isBillboard": false,
+              "isMouseCheck": false,
+              "path": "..\\Assets\\Resource\\UI\\MiniGame\\Arrow.png",
+              "sliceBorderPx": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "type": "Simple",
+              "zOrder": 1
+            },
+            "type": "Image"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": false,
+        "ID": 2354,
+        "Name": "Image_Result_Success",
+        "ParentID": 2331,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "Pivot": [
+                0.5,
+                0.5
+              ],
+              "Pos": [
+                960.0,
+                380.0,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Size": [
+                100.0,
+                50.0
+              ]
+            },
+            "type": "RectTransform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "drawSpacetype": "Screen",
+              "fillAmount": 1.0,
+              "imageType": "Simple",
+              "isBillboard": false,
+              "isMouseCheck": false,
+              "path": "..\\Assets\\Resource\\UI\\MiniGame\\arrow_good01.png",
+              "sliceBorderPx": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "type": "Simple",
+              "zOrder": 2
+            },
+            "type": "Image"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": false,
+        "ID": 2355,
+        "Name": "Image_Result_Fail",
+        "ParentID": 2331,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "Pivot": [
+                0.5,
+                0.5
+              ],
+              "Pos": [
+                960.0,
+                380.0,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Size": [
+                100.0,
+                50.0
+              ]
+            },
+            "type": "RectTransform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "drawSpacetype": "Screen",
+              "fillAmount": 1.0,
+              "imageType": "Simple",
+              "isBillboard": false,
+              "isMouseCheck": false,
+              "path": "..\\Assets\\Resource\\UI\\MiniGame\\Arrow_fail01.png",
+              "sliceBorderPx": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "type": "Simple",
+              "zOrder": 2
+            },
+            "type": "Image"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 2356,
+        "Name": "MainGameUIManager",
+        "ParentID": -1,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true
+            },
+            "type": "MainGameUIManager"
+          },
+          {
+            "properties": {
+              "Active": true
+            },
+            "type": "PauseManager"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 2357,
+        "Name": "GameManager",
+        "ParentID": -1,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true
+            },
+            "type": "GameManager"
           }
         ]
       },
