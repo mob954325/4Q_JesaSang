@@ -1860,9 +1860,14 @@ void Editor::ReadVariants(rttr::instance inst)
 
     rttr::type t = inst.get_derived_type();
 
+    int propIndex = 0;
     // Get value from type
     for (auto& prop : t.get_properties())
     {
+        std::string propId = prop.get_name().to_string();
+        ImGui::PushID(propIndex);
+        ImGui::PushID(propId.c_str());
+
         rttr::variant value = prop.get_value(inst);
         std::string name = prop.get_name().to_string();
 
@@ -2086,6 +2091,10 @@ void Editor::ReadVariants(rttr::instance inst)
                 prop.set_value(inst, w);
             }
         }
+
+        ImGui::PopID(); // propId
+        ImGui::PopID(); // propIndex
+        ++propIndex;
     }
 }
 
