@@ -23,11 +23,11 @@ void AdultGhost_Patrol::Enter()
 
 void AdultGhost_Patrol::ChangeStateLogic()
 {
-    // 상태 진입 직후 바로 바뀌는 현상 방지 (임시)
-    if (patrolTimer < forcePatrolTime)
-        return;
+    //// 상태 진입 직후 바로 바뀌는 현상 방지 (임시)
+    //if (patrolTimer < forcePatrolTime)
+    //    return;
 
-    // 1. 시야 감지 : 플레이어 감지 
+    // 1. 시야 감지 : 플레이어 가 범위 내에 진입 
     if (adultGhost->IsSeeing(adultGhost->GetAITarget()))
     {
         std::cout << "[AdultGhost_Patrol] Ghost is Seeing PLAYER !" << std::endl;
@@ -35,15 +35,27 @@ void AdultGhost_Patrol::ChangeStateLogic()
         return;
     }
 
-    // 2. 기척 감지 
+    // 2. 기척 or 함정 감지 : 시야 밖에서 감지 
     if (adultGhost->IsPlayerInSenseRange())
     {
         std::cout << "[AdultGhost_Patrol] PLAYER FOUND (Sense)!" << std::endl;
+        auto grid = GridSystem::Instance().GetMainGrid();
+        if (grid)
+        {
+            int px, py;
+            auto playerObj = adultGhost->GetPlayer();
+            if (playerObj && grid->WorldToGridFromCenter(playerObj->GetTransform()->GetLocalPosition(), px, py))
+            {
+                adultGhost->lastPlayerGrid = { px, py, true };
+                // std::cout << "[Patrol → Search] Save Sense/Grid = (" << px << "," << py << ")\n";
+            }
+        }
+        adultGhost->searchReason = SearchReason::FromPatrol;
         adultGhost->ChangeState(AdultGhostState::Search);
         return;
     }
 
-    // 3. HideObject 시야 체크
+    // Hide Object가 시야 내에 있는지 (플레이어 은신 불가능 해짐)
     UpdateHideObjectVision();
 }
 
@@ -69,8 +81,6 @@ void AdultGhost_Patrol::Exit()
     agent->hasTarget = false;
     agent->path.clear();
     agent->isWaiting = false;
-
-    cout << "[AdultGhost_Patrol] Exit" << endl;
 }
 
 

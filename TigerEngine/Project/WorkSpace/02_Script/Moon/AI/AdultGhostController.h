@@ -26,6 +26,15 @@ struct GridPos
     bool valid = false;
 };
 
+// Search 상태의 진입 경로 
+enum class SearchReason
+{
+    FromPatrol,   // 기척 or 함정 으로 넘어옴 
+    FromChase,    // 추격 실패    으로 넘어옴 
+    FromAttack,
+    None
+};
+
 class AdultGhostController : public ScriptComponent
 {
     RTTR_ENABLE(ScriptComponent)
@@ -50,6 +59,10 @@ private:
     std::vector<GameObject*> hideObjects;
     bool hideLookRegistered = false;
 
+
+    // AI가 처음 배치된 좌표 (웨이 포인트)
+    Vector3 initialPosition;
+
 private:
     // FSM
     void InitFSMStates();
@@ -60,6 +73,7 @@ private:
 
     // Movement (공통)
     bool MoveToTarget(float delta);
+    void RotateByDirection(const Vector3& moveDir, float delta);
 
 public:
     void OnStart() override;
@@ -69,6 +83,7 @@ public:
 
     // Interaction
     void OnPlayerNoise(const Vector3& noiseWorldPos); // 플레이어에서 호출 
+    void OnAttackHit(); // 유령 충돌 오브젝트에서 호출
 
     // Helper
     void ResetAgentForMove(float speed);
@@ -81,6 +96,10 @@ public:
 
     // 플레이어 발견 마지막 위치 (그리드 좌표) 
     GridPos lastPlayerGrid;
+
+
+    // 상태의 진입 경로 (어떤 이유로 들어왔는가)
+    SearchReason searchReason = SearchReason::None;
 
 public:
     // friend

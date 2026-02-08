@@ -22,6 +22,10 @@ void AdultGhost_Chase::ChangeStateLogic()
 {
     if (!target) return;
 
+    // 이미 Attack으로 바뀌었으면 로직 중단
+    if (adultGhost->state == AdultGhostState::Attack)
+        return;
+
     // 최소 추격 시간 이후에만 추격 포기 가능함 
     if (CanGiveUpChase())
     {
@@ -30,12 +34,21 @@ void AdultGhost_Chase::ChangeStateLogic()
         if (grid)
         {
             int px, py;
-            auto wp = target->GetTransform()->GetWorldPosition();
+            auto wp = target->GetTransform()->GetLocalPosition();
+
+            // std::cout << "[Chase] Last Player World Pos = " << wp.x << ", " << wp.y << ", " << wp.z << std::endl;
+
             if (grid->WorldToGridFromCenter(wp, px, py))
             {
+                std::cout << "[Chase] Save Last Player Grid = (" << px << ", " << py << ")" << std::endl;
                 adultGhost->lastPlayerGrid = { px, py, true };
             }
+            else
+            {
+                std::cout << "[Chase] WorldToGrid FAILED\n";
+            }
         }
+        adultGhost->searchReason = SearchReason::FromChase;
         adultGhost->ChangeState(AdultGhostState::Search);
     }
 }

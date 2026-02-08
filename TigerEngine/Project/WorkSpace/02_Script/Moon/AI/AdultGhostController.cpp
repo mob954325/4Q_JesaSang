@@ -9,6 +9,8 @@
 #include "FSM/AdultGhost_Patrol.h"
 #include "FSM/AdultGhost_Chase.h"
 #include "FSM/AdultGhost_Search.h"
+#include "FSM/AdultGhost_Attack.h"
+#include "FSM/AdultGhost_Return.h"
 
 #include "../../Woo/Object/HideObject.h"
 #include "../../Woo/Player/PlayerController.h"
@@ -33,6 +35,13 @@ void AdultGhostController::Deserialize(nlohmann::json data)
     JsonHelper::SetDataFromJson(this, data);
 }
 
+// Util 
+float WrapAngleRad(float a)
+{
+    while (a > XM_PI)  a -= XM_2PI;
+    while (a < -XM_PI) a += XM_2PI;
+    return a;
+}
 
 // -----------------------------------------------------------
 // [ Process ]
@@ -54,9 +63,11 @@ void AdultGhostController::OnStart()
 
     //LoadAnimation();  
 
+    // 최초 시작 위치 저장
+    initialPosition = GetOwner()->GetTransform()->GetWorldPosition(); // local X
+
     InitFSMStates();
     ChangeState(AdultGhostState::Patrol);
-
 }
 
 void AdultGhostController::OnUpdate(float delta)
@@ -99,8 +110,8 @@ void AdultGhostController::InitFSMStates()
     fsmStates[(int)AdultGhostState::Patrol] = new AdultGhost_Patrol(this);
     fsmStates[(int)AdultGhostState::Chase] = new AdultGhost_Chase(this);
     fsmStates[(int)AdultGhostState::Search] = new AdultGhost_Search(this);
-    //fsmStates[(int)AdultGhostState::Return] = new AdultGhost_Return(this);
-    //fsmStates[(int)AdultGhostState::Attack] = new AdultGhost_Attack(this);
+    fsmStates[(int)AdultGhostState::Return] = new AdultGhost_Return(this);
+    fsmStates[(int)AdultGhostState::Attack] = new AdultGhost_Attack(this);
 }
 
 void AdultGhostController::ChangeState(AdultGhostState nextState)
@@ -162,7 +173,28 @@ bool AdultGhostController::MoveToTarget(float delta)
 
     dir.Normalize();
     agent->MoveAgent(dir, agent->patrolSpeed, delta);
+    RotateByDirection(dir, delta);
+
     return false;
+}
+
+void AdultGhostController::RotateByDirection(const Vector3& moveDir, float delta)
+{
+    if (moveDir.LengthSquared() <= 0.0001f)
+        return;
+
+    auto tr = GetOwner()->GetTransform();
+
+    Vector3 dir = -moveDir; // 모델 반전 보정
+    float targetYaw = atan2f(dir.x, dir.z);
+    float currentYaw = tr->GetYaw();
+
+    float deltaYaw = WrapAngleRad(targetYaw - currentYaw);
+
+    float turnSpeed = 6.0f; // 플레이어보다 느리게
+    float newYaw = currentYaw + deltaYaw * turnSpeed * delta;
+
+    tr->SetEuler(Vector3(0.f, newYaw, 0.f));
 }
 
 
@@ -180,6 +212,7 @@ void AdultGhostController::ResetAgentForMove(float speed)
 }
 
 // Ai가 Target을 보고 있는가? // TODO : FOV, Dist 값 매개변수로 받기 
+// TODO : 플레이어가 Hide 상태이면, Target을 못봐야 함
 bool AdultGhostController::IsSeeing(GameObject* target) const
 {
     return target && vision->CheckVision(target, 90, 400);
@@ -235,4 +268,18 @@ void AdultGhostController::OnPlayerNoise(const Vector3& noiseWorldPos)
     lastPlayerGrid = { cx, cy, true };
 
     ChangeState(AdultGhostState::Search);
+}
+
+void AdultGhostController::OnAttackHit()
+{
+    //if (state == AdultGhostState::Chase)
+    //{
+    //    std::cout << "[FSM] Chase -> Attack (Collision)\n";
+    //    ChangeState(AdultGhostState::Attack);
+    //}
+
+    if (state == AdultGhostState::Chase /*state != AdultGhostState::Attack*/)
+    {
+        ChangeState(AdultGhostState::Attack);
+    }
 }
