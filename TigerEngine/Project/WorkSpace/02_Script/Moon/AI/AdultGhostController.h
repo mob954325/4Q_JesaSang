@@ -59,6 +59,10 @@ private:
     std::vector<GameObject*> hideObjects;
     bool hideLookRegistered = false;
 
+
+    // AI가 처음 배치된 좌표 (웨이 포인트)
+    Vector3 initialPosition;
+
 private:
     // FSM
     void InitFSMStates();

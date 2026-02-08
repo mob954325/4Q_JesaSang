@@ -25,12 +25,12 @@ void AdultGhost_Attack::ChangeStateLogic()
 
     if (player && adultGhost->IsSeeing(player))
     {
-        cout << "[Attack] Player still in sight -> Chase\n";
+        cout << "[AdultGhost_Attack] Player still in sight -> Chase\n";
         adultGhost->ChangeState(AdultGhostState::Chase);
     }
     else
     {
-        cout << "[Attack] Lost player -> Search\n";
+        cout << "[AdultGhost_Attack] Lost player -> Search\n";
 
         // 마지막으로 본 위치 저장 
         auto* target = adultGhost->GetAITarget();

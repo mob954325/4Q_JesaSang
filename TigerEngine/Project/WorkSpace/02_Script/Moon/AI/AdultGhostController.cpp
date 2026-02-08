@@ -10,6 +10,7 @@
 #include "FSM/AdultGhost_Chase.h"
 #include "FSM/AdultGhost_Search.h"
 #include "FSM/AdultGhost_Attack.h"
+#include "FSM/AdultGhost_Return.h"
 
 #include "../../Woo/Object/HideObject.h"
 #include "../../Woo/Player/PlayerController.h"
@@ -62,9 +63,11 @@ void AdultGhostController::OnStart()
 
     //LoadAnimation();  
 
+    // 최초 시작 위치 저장
+    initialPosition = GetOwner()->GetTransform()->GetWorldPosition(); // local X
+
     InitFSMStates();
     ChangeState(AdultGhostState::Patrol);
-
 }
 
 void AdultGhostController::OnUpdate(float delta)
@@ -107,7 +110,7 @@ void AdultGhostController::InitFSMStates()
     fsmStates[(int)AdultGhostState::Patrol] = new AdultGhost_Patrol(this);
     fsmStates[(int)AdultGhostState::Chase] = new AdultGhost_Chase(this);
     fsmStates[(int)AdultGhostState::Search] = new AdultGhost_Search(this);
-    //fsmStates[(int)AdultGhostState::Return] = new AdultGhost_Return(this);
+    fsmStates[(int)AdultGhostState::Return] = new AdultGhost_Return(this);
     fsmStates[(int)AdultGhostState::Attack] = new AdultGhost_Attack(this);
 }
 
@@ -209,6 +212,7 @@ void AdultGhostController::ResetAgentForMove(float speed)
 }
 
 // Ai가 Target을 보고 있는가? // TODO : FOV, Dist 값 매개변수로 받기 
+// TODO : 플레이어가 Hide 상태이면, Target을 못봐야 함
 bool AdultGhostController::IsSeeing(GameObject* target) const
 {
     return target && vision->CheckVision(target, 90, 400);
@@ -274,7 +278,7 @@ void AdultGhostController::OnAttackHit()
     //    ChangeState(AdultGhostState::Attack);
     //}
 
-    if (state != AdultGhostState::Attack)
+    if (state == AdultGhostState::Chase /*state != AdultGhostState::Attack*/)
     {
         ChangeState(AdultGhostState::Attack);
     }

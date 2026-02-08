@@ -23,7 +23,9 @@ void AdultGhost_Search::Enter()
     }
 
     // 마지막 플레이어 위치 있으면 사용 
-    if (adultGhost->lastPlayerGrid.valid)
+    if (adultGhost->lastPlayerGrid.valid /*&&
+        (adultGhost->searchReason == SearchReason::FromChase ||
+            adultGhost->searchReason == SearchReason::FromAttack)*/)
     {
         auto& p = adultGhost->lastPlayerGrid;
         std::cout << "[Search] Use Last Grid = (" << p.x << ", " << p.y << ")" << std::endl;
@@ -39,19 +41,17 @@ void AdultGhost_Search::Enter()
 void AdultGhost_Search::ChangeStateLogic()
 {
     // 1. 회전 중 플레이어 발견 (Search 성공)
-    if (phase == SearchPhase::RotateSearch && 
-        adultGhost->IsSeeing(adultGhost->GetAITarget()))
+    if (phase == SearchPhase::RotateSearch &&  adultGhost->IsSeeing(adultGhost->GetAITarget()))
     {
         cout << "[AdultGhost_Search] Search Clear!! " << endl;
         adultGhost->ChangeState(AdultGhostState::Chase);
         return;
     }
     // 2. 회전 시간 종료 (Search 실패)
-    if (phase == SearchPhase::RotateSearch &&
-        rotateTimer >= rotateTime)
+    if (phase == SearchPhase::RotateSearch && rotateTimer >= rotateTime)
     {
         cout << "[AdultGhost_Search] Search Fail.." << endl;
-        adultGhost->ChangeState(AdultGhostState::Patrol); // 나중에 Return으로 교체
+        adultGhost->ChangeState(AdultGhostState::Return); // 나중에 Return으로 교체
     }
 }
 
