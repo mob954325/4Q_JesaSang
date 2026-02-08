@@ -212,10 +212,25 @@ void AdultGhostController::ResetAgentForMove(float speed)
 }
 
 // Ai가 Target을 보고 있는가? // TODO : FOV, Dist 값 매개변수로 받기 
-// TODO : 플레이어가 Hide 상태이면, Target을 못봐야 함
 bool AdultGhostController::IsSeeing(GameObject* target) const
 {
-    return target && vision->CheckVision(target, 90, 400);
+    if (!target)
+        return false;
+
+    // 플레이어인지 확인
+    auto* playerController = target->GetComponent<PlayerController>();
+    if (playerController)
+    {
+        // 플레이어가 Hide 상태면 감지하지 않음
+        if (playerController->GetPlayerState() == PlayerState::Hide)
+        {
+            std::cout << "[AdultGhostController] Player is Hiding, Can't See" << std::endl;
+            return false;
+        }
+    }
+
+    // 시야 체크
+    return vision->CheckVision(target, 90, 400);
 }
 
 // Object Getter 
