@@ -1432,7 +1432,6 @@ void Editor::RenderComponentInfo(std::string compName, T* comp)
 
     if (compName == "Image")
     {
-
         for (auto& prop : t.get_properties())
         {
             std::string keyUITex = "ChooseUITexDlgKey##" + std::to_string((uintptr_t)comp);
@@ -1443,7 +1442,7 @@ void Editor::RenderComponentInfo(std::string compName, T* comp)
             if (value.is_type<std::string>() && name == "path")
             {
                 std::string path = value.get_value<std::string>();
-                ImGui::Text("Current Path: %s", path.c_str());
+                ImGui::Text("Current Image Path: %s", path.c_str());
 
                 if (ImGui::Button("Browse texture"))
                 {
@@ -1535,7 +1534,7 @@ void Editor::RenderComponentInfo(std::string compName, T* comp)
                 std::wstring curW = value.get_value<std::wstring>();
                 std::string curPathUtf8 = WStringToUtf8(curW);
 
-                ImGui::Text("Current Path: %s", curPathUtf8.c_str());
+                ImGui::Text("Current Font Path: %s", curPathUtf8.c_str());
 
                 if (ImGui::Button("Browse"))
                 {
@@ -1861,9 +1860,14 @@ void Editor::ReadVariants(rttr::instance inst)
 
     rttr::type t = inst.get_derived_type();
 
+    int propIndex = 0;
     // Get value from type
     for (auto& prop : t.get_properties())
     {
+        std::string propId = prop.get_name().to_string();
+        ImGui::PushID(propIndex);
+        ImGui::PushID(propId.c_str());
+
         rttr::variant value = prop.get_value(inst);
         std::string name = prop.get_name().to_string();
 
@@ -2028,6 +2032,38 @@ void Editor::ReadVariants(rttr::instance inst)
                 prop.set_value(inst, c);
             }
         }
+        else if (value.is_type<string>() && metaBrowse.is_valid())
+        {
+            std::string c = value.get_value<std::string>();
+
+            // inst 포인터 (가능하면 실제 객체 포인터)
+            void* p = inst.try_convert<void*>();
+            std::uintptr_t instId = reinterpret_cast<std::uintptr_t>(p);
+
+            // prop 이름을 섞어서 "같은 인스턴스의 다른 browse 프로퍼티"도 분리
+            std::string propName = prop.get_name().to_string();
+
+            // FileDialog key: inst + propName 조합 (표시용 텍스트는 ## 앞만, ID는 전체)
+            std::string key = "ChooseFileNormalStringKey##" + std::to_string(instId) + "##" + propName;
+
+            ImGui::Text("Current Path: %s", c.c_str());
+            if (ImGui::Button("Browse"))
+            {
+                IGFD::FileDialogConfig config;
+                config.path = "../";
+                ImGuiFileDialog::Instance()->OpenDialog(key, "Choose File", ".png,.jpg,.fbx,.glb,.ttf,.ttc,.json", config);
+            }
+            if (ImGuiFileDialog::Instance()->Display(key))
+            {
+                if (ImGuiFileDialog::Instance()->IsOk())
+                {
+                    std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
+                    std::filesystem::path relativePath = std::filesystem::relative(filePathName);
+                    prop.set_value(inst, relativePath.string());
+                }
+                ImGuiFileDialog::Instance()->Close();
+            }
+        }
         else if (value.is_type<std::wstring>() && !metaBrowse.is_valid())
         {
             // wstring(UTF-16) -> UTF-8(string) : ImGui InputText 버퍼
@@ -2055,6 +2091,10 @@ void Editor::ReadVariants(rttr::instance inst)
                 prop.set_value(inst, w);
             }
         }
+
+        ImGui::PopID(); // propId
+        ImGui::PopID(); // propIndex
+        ++propIndex;
     }
 }
 
