@@ -3,6 +3,7 @@
 #include "../Engine/Object/GameObject.h"
 #include "../Base/Datas/ReflectionMedtaDatas.hpp"
 #include "../Engine/Util/ComponentAutoRegister.h"
+#include "../Engine/EngineSystem/SceneSystem.h"
 
 REGISTER_COMPONENT(MenuUI_StartButton);
 
@@ -39,12 +40,18 @@ void MenuUI_StartButton::OnStart()
         image->OnPressed.AddListener(image, [this]() 
             { 
                 image->ChangeData(pressedImagePath); 
+                
             }); // 누르면 이미지 바꾸기
 
         image->OnPressOut.AddListener(image, [this]() 
             { 
                 image->ChangeData(normalImagePath); 
-                // 시작 씬으로 전환
+
+                // 시작 씬으로 전환 
+                // NOTE : 지정하는게 browse면 상관없을 거임
+                auto s = SceneSystem::Instance().GetCurrentScene();
+                s->LoadToJson(targetScenePath); // 해당함수는 경로를 저장한다 -> 잘못 패스를 저장하고 PlayMode에서 정지하면 씬 정보가 날라간다
+
             }); // 누르는거 땠으면 이미지 바꾸기
     }
 }
