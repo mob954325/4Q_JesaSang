@@ -46,6 +46,10 @@ private:
     float popupSpeed = 12.0f;
     bool isPopupMoving = false;
 
+    // pause esc 우선순위 제어
+    bool isPopupHiding = false;
+    bool isPopupHidden = true;
+
 public:
     // data
     Keyboard::Keys stop_key = Keyboard::Escape;
@@ -85,5 +89,7 @@ public:
     static MiniGameManager* Instance() { return s_instance; }
 
     void StartMiniGame(std::unique_ptr<IItem> ingredient);         // 플레이어 조리대 인터랙션
+
+    bool IsPopupHiding() const { return isPopupHiding; }
 };
 

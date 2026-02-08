@@ -8,6 +8,8 @@
 #include "Components/RectTransform.h"
 #include "Components/UI/Image.h"
 
+#include "../MiniGame/MiniGameManager.h"
+
 
 REGISTER_COMPONENT(PauseManager)
 
@@ -33,12 +35,18 @@ void PauseManager::OnStart()
 
 void PauseManager::OnUpdate(float delta)
 {
-    if (Input::GetKeyDown(pause_key))
+    if (!Input::GetKeyDown(pause_key))
+        return;
+
+    // 미니게임 [ESC] 우선.
+    // 미니게임 팝업이 다 내려가고 난 뒤 일시정지 패널 on 가능
+    if (auto* mg = MiniGameManager::Instance())
     {
-        // TODO :: 다른곳에서 esc 누르는 경우 예외처리
-        // 1. 미니게임 실행중이면 return
-        TogglePause();
+        if (mg->IsPopupHiding())
+            return;
     }
+
+    TogglePause();
 }
 
 nlohmann::json PauseManager::Serialize()
