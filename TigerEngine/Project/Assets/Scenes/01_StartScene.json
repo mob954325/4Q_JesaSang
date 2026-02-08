@@ -3,7 +3,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 183,
+        "ID": 36,
         "Name": "Main Camera",
         "ParentID": -1,
         "components": [
@@ -44,7 +44,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 184,
+        "ID": 37,
         "Name": "DirectionalLight(Sun)",
         "ParentID": -1,
         "components": [
@@ -98,7 +98,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 185,
+        "ID": 38,
         "Name": "----------------------",
         "ParentID": -1,
         "components": [
@@ -129,7 +129,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 186,
+        "ID": 39,
         "Name": "CurScene_01_StartScene",
         "ParentID": -1,
         "components": [
@@ -160,7 +160,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 187,
+        "ID": 40,
         "Name": "UI_Start_Image",
         "ParentID": -1,
         "components": [
@@ -250,7 +250,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 188,
+        "ID": 41,
         "Name": "SceneFlowManager",
         "ParentID": -1,
         "components": [
@@ -293,7 +293,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 189,
+        "ID": 42,
         "Name": "Main Button Manager",
         "ParentID": -1,
         "components": [
@@ -324,9 +324,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 190,
+        "ID": 43,
         "Name": "Title",
-        "ParentID": 189,
+        "ParentID": 42,
         "components": [
           {
             "properties": {
@@ -395,7 +395,7 @@
               "fillAmount": 1.0,
               "imageType": "Simple",
               "isMouseCheck": false,
-              "path": "..\\Assets\\Resource\\UI\\Title\\TitleSample.png",
+              "path": "..\\Assets\\Resource\\UI\\Title\\sound.png",
               "sliceBorderPx": [
                 0.0,
                 0.0,
@@ -414,9 +414,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 191,
+        "ID": 44,
         "Name": "StartButton",
-        "ParentID": 189,
+        "ParentID": 42,
         "components": [
           {
             "properties": {
@@ -496,15 +496,6 @@
               ]
             },
             "type": "RectTransform"
-          },
-          {
-            "properties": {
-              "Active": true,
-              "normalImagePath": "",
-              "pressedImagePath": "..\\Assets\\Resource\\UI\\Title\\start_click.png",
-              "targetScenePath": "..\\Assets\\Scenes\\02_IntroScene.json"
-            },
-            "type": "MenuUI_StartButton"
           }
         ]
       },
@@ -513,9 +504,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 192,
+        "ID": 45,
         "Name": "OptionsButton",
-        "ParentID": 189,
+        "ParentID": 42,
         "components": [
           {
             "properties": {
@@ -595,15 +586,6 @@
               ]
             },
             "type": "RectTransform"
-          },
-          {
-            "properties": {
-              "Active": true,
-              "normalImagePath": "",
-              "pressedImagePath": "..\\Assets\\Resource\\UI\\Title\\system_click.png",
-              "targetScenePath": ""
-            },
-            "type": "MenuUI_OptionButton"
           }
         ]
       },
@@ -612,9 +594,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 193,
+        "ID": 46,
         "Name": "ExitButton",
-        "ParentID": 189,
+        "ParentID": 42,
         "components": [
           {
             "properties": {
@@ -694,15 +676,6 @@
               ]
             },
             "type": "RectTransform"
-          },
-          {
-            "properties": {
-              "Active": true,
-              "normalImagePath": "",
-              "pressedImagePath": "..\\Assets\\Resource\\UI\\Title\\yes_click.png",
-              "targetScenePath": ""
-            },
-            "type": "MenuUI_ExitButton"
           }
         ]
       },
