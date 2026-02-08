@@ -496,6 +496,15 @@
               ]
             },
             "type": "RectTransform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "normalImagePath": "",
+              "pressedImagePath": "..\\Assets\\Resource\\UI\\Title\\start_click.png",
+              "targetScenePath": "..\\Assets\\Scenes\\02_IntroScene.json"
+            },
+            "type": "MenuUI_StartButton"
           }
         ]
       },
@@ -586,6 +595,15 @@
               ]
             },
             "type": "RectTransform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "normalImagePath": "",
+              "pressedImagePath": "..\\Assets\\Resource\\UI\\Title\\system_click.png",
+              "targetScenePath": ""
+            },
+            "type": "MenuUI_OptionButton"
           }
         ]
       },
@@ -676,6 +694,15 @@
               ]
             },
             "type": "RectTransform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "normalImagePath": "",
+              "pressedImagePath": "..\\Assets\\Resource\\UI\\Title\\yes_click.png",
+              "targetScenePath": ""
+            },
+            "type": "MenuUI_ExitButton"
           }
         ]
       },
