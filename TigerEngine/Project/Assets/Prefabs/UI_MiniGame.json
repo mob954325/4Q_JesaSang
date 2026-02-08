@@ -2,7 +2,7 @@
   "prefab": [
     {
       "Active": true,
-      "ID": 3720,
+      "ID": 680,
       "Name": "UI_MiniGame",
       "ParentID": -1,
       "components": [
@@ -64,9 +64,9 @@
     },
     {
       "Active": true,
-      "ID": 3718,
+      "ID": 681,
       "Name": "Image_BackgroundTop",
-      "ParentID": 3720,
+      "ParentID": 680,
       "components": [
         {
           "properties": {
@@ -151,9 +151,9 @@
     },
     {
       "Active": true,
-      "ID": 3725,
+      "ID": 682,
       "Name": "Image_ESC",
-      "ParentID": 3718,
+      "ParentID": 681,
       "components": [
         {
           "properties": {
@@ -238,9 +238,9 @@
     },
     {
       "Active": true,
-      "ID": 3719,
+      "ID": 683,
       "Name": "Image_BackgroundDown",
-      "ParentID": 3720,
+      "ParentID": 680,
       "components": [
         {
           "properties": {
@@ -325,9 +325,9 @@
     },
     {
       "Active": false,
-      "ID": 3722,
+      "ID": 684,
       "Name": "UI_MiniGame1",
-      "ParentID": 3720,
+      "ParentID": 680,
       "components": [
         {
           "properties": {
@@ -387,9 +387,9 @@
     },
     {
       "Active": false,
-      "ID": 3726,
+      "ID": 685,
       "Name": "Image_ProgressBar",
-      "ParentID": 3722,
+      "ParentID": 684,
       "components": [
         {
           "properties": {
@@ -474,9 +474,9 @@
     },
     {
       "Active": false,
-      "ID": 3727,
+      "ID": 686,
       "Name": "Image_SpaceBar",
-      "ParentID": 3722,
+      "ParentID": 684,
       "components": [
         {
           "properties": {
@@ -561,9 +561,9 @@
     },
     {
       "Active": false,
-      "ID": 3728,
+      "ID": 687,
       "Name": "Image_StopPoint",
-      "ParentID": 3722,
+      "ParentID": 684,
       "components": [
         {
           "properties": {
@@ -648,9 +648,9 @@
     },
     {
       "Active": false,
-      "ID": 3723,
+      "ID": 688,
       "Name": "UI_MiniGame2",
-      "ParentID": 3720,
+      "ParentID": 680,
       "components": [
         {
           "properties": {
@@ -710,9 +710,9 @@
     },
     {
       "Active": false,
-      "ID": 3724,
+      "ID": 689,
       "Name": "UI_MiniGame3",
-      "ParentID": 3720,
+      "ParentID": 680,
       "components": [
         {
           "properties": {

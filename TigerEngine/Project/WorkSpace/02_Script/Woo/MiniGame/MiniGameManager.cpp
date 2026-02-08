@@ -131,6 +131,8 @@ void MiniGameManager::StartMiniGame(std::unique_ptr<IItem> ingredient)
     if (ingredient->itemType != ItemType::Ingredient)
         return;
 
+    miniGameParent->GetOwner()->SetActive(true);
+
     // mini game create
     const std::string foodId = ingredient->itemId;
     auto newGame = CreateMinigameForIngredientId(foodId);
