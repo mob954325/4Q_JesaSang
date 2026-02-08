@@ -68,7 +68,7 @@ bool VisionComponent::CheckVision(GameObject* target, float fov, float maxDistan
     dir3D.Normalize();
 
     // 2D(XZ) 방향 (FOV용)
-    Vector3 forward = selfTr->GetForward();
+    Vector3 forward = - selfTr->GetForward();
     Vector3 flatForward = forward; flatForward.y = 0.0f;
     if (flatForward.Length() <= 0.0001f) return false;
     flatForward.Normalize();
@@ -152,7 +152,7 @@ void VisionComponent::DrawDebugVision()
     auto* tr = GetOwner()->GetTransform();
     Vector3 origin = tr->GetWorldPosition();
     origin.y += eyeHigh;               // CheckVision과 동일한 눈 위치 
-    Vector3 forward = tr->GetForward();
+    Vector3 forward = - tr->GetForward();
     Vector3 right = tr->GetRight();
 
     // PhysX 변환

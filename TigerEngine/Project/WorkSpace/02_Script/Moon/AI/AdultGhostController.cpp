@@ -34,6 +34,13 @@ void AdultGhostController::Deserialize(nlohmann::json data)
 }
 
 
+float WrapAngleRad(float a)
+{
+    while (a > XM_PI)  a -= XM_2PI;
+    while (a < -XM_PI) a += XM_2PI;
+    return a;
+}
+
 // -----------------------------------------------------------
 // [ Process ]
 // -----------------------------------------------------------
@@ -162,7 +169,28 @@ bool AdultGhostController::MoveToTarget(float delta)
 
     dir.Normalize();
     agent->MoveAgent(dir, agent->patrolSpeed, delta);
+    RotateByDirection(dir, delta);
+
     return false;
+}
+
+void AdultGhostController::RotateByDirection(const Vector3& moveDir, float delta)
+{
+    if (moveDir.LengthSquared() <= 0.0001f)
+        return;
+
+    auto tr = GetOwner()->GetTransform();
+
+    Vector3 dir = -moveDir; // 모델 반전 보정
+    float targetYaw = atan2f(dir.x, dir.z);
+    float currentYaw = tr->GetYaw();
+
+    float deltaYaw = WrapAngleRad(targetYaw - currentYaw);
+
+    float turnSpeed = 6.0f; // 플레이어보다 느리게
+    float newYaw = currentYaw + deltaYaw * turnSpeed * delta;
+
+    tr->SetEuler(Vector3(0.f, newYaw, 0.f));
 }
 
 
@@ -212,6 +240,24 @@ bool AdultGhostController::IsPlayerInSenseRange()
 
     return Vector3::Distance(pPos, gPos) <= senseRadius;
 }
+//
+//void AdultGhostController::RotateTowardsYaw(float targetYaw, float dt, float degPerSec)
+//{
+//    agent->externalControl = true; // 자동 회전 막기
+//    agent->RotateTowardsYaw(targetYaw, dt, degPerSec);
+//}
+//
+//void AdultGhostController::RotateTowardsDir(const Vector3& dir, float dt, float degPerSec)
+//{
+//    if (dir.LengthSquared() < 0.0001f) return;
+//
+//    float targetYaw = atan2f(dir.x, dir.z);
+//    
+//    // targetYaw += XM_PI; // 모델 forward가 -Z면
+//
+//    RotateTowardsYaw(targetYaw, dt, degPerSec);
+//}
+//
 
 
 // -------------------------------------------------

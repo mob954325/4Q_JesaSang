@@ -35,10 +35,22 @@ void AdultGhost_Patrol::ChangeStateLogic()
         return;
     }
 
-    // 2. 기척 & 함정 감지 : 시야 밖에서 감지 
+    // 2. 기척 or 함정 감지 : 시야 밖에서 감지 
     if (adultGhost->IsPlayerInSenseRange())
     {
         std::cout << "[AdultGhost_Patrol] PLAYER FOUND (Sense)!" << std::endl;
+        auto grid = GridSystem::Instance().GetMainGrid();
+        if (grid)
+        {
+            int px, py;
+            auto playerObj = adultGhost->GetPlayer();
+            if (playerObj && grid->WorldToGridFromCenter(playerObj->GetTransform()->GetLocalPosition(), px, py))
+            {
+                adultGhost->lastPlayerGrid = { px, py, true };
+                // std::cout << "[Patrol → Search] Save Sense/Grid = (" << px << "," << py << ")\n";
+            }
+        }
+        adultGhost->searchReason = SearchReason::FromPatrol;
         adultGhost->ChangeState(AdultGhostState::Search);
         return;
     }
@@ -69,8 +81,6 @@ void AdultGhost_Patrol::Exit()
     agent->hasTarget = false;
     agent->path.clear();
     agent->isWaiting = false;
-
-    cout << "[AdultGhost_Patrol] Exit" << endl;
 }
 
 

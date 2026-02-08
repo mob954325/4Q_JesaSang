@@ -26,6 +26,14 @@ struct GridPos
     bool valid = false;
 };
 
+// Search 상태의 진입 경로 
+enum class SearchReason
+{
+    FromPatrol,   // 기척 or 함정 으로 넘어옴 
+    FromChase,    // 추격 실패    으로 넘어옴 
+    None
+};
+
 class AdultGhostController : public ScriptComponent
 {
     RTTR_ENABLE(ScriptComponent)
@@ -81,6 +89,16 @@ public:
 
     // 플레이어 발견 마지막 위치 (그리드 좌표) 
     GridPos lastPlayerGrid;
+
+
+    // 상태의 진입 경로 (어떤 이유로 들어왔는가)
+    SearchReason searchReason = SearchReason::None;
+
+
+//public:
+//    void RotateTowardsYaw(float targetYaw, float dt, float degPerSec = 180.0f);
+//    void RotateTowardsDir(const Vector3& dir, float dt, float degPerSec = 180.0f);
+    void RotateByDirection(const Vector3& moveDir, float delta);
 
 public:
     // friend

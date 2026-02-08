@@ -44,6 +44,7 @@ void AdultGhost_Chase::ChangeStateLogic()
                 std::cout << "[Chase] WorldToGrid FAILED\n";
             }
         }
+        adultGhost->searchReason = SearchReason::FromChase;
         adultGhost->ChangeState(AdultGhostState::Search);
     }
 }

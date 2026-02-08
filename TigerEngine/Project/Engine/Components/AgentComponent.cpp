@@ -184,7 +184,7 @@ void AgentComponent::MoveAgent(const Vector3& dir, float speed, float dt)
         auto tr = GetOwner()->GetTransform();
 
         // 이동 방향의 Y축 회전 계산
-        float targetYaw = atan2f(dir.x, dir.z); // Z-forward 기준
+        float targetYaw = atan2f(-dir.x, -dir.z); // Z-forward 기준
         float currentYaw = tr->GetYaw();
 
         // 회전 
