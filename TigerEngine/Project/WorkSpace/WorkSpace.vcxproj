@@ -145,6 +145,9 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="02_Script\Ho\UI\MenuUI_ExitButton.h" />
+    <ClInclude Include="02_Script\Ho\UI\MenuUI_OptionButton.h" />
+    <ClInclude Include="02_Script\Ho\UI\MenuUI_StartButton.h" />
     <ClInclude Include="02_Script\Moon\AI\AdultGhostController.h" />
     <ClInclude Include="02_Script\Moon\AI\FSM\AdultGhost_Chase.h" />
     <ClInclude Include="02_Script\Moon\AI\FSM\AdultGhost_Patrol.h" />
@@ -202,6 +205,9 @@
     <ClInclude Include="02_Script\Woo\Manager\MainGameUIManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="02_Script\Ho\UI\MenuUI_ExitButton.cpp" />
+    <ClCompile Include="02_Script\Ho\UI\MenuUI_OptionButton.cpp" />
+    <ClCompile Include="02_Script\Ho\UI\MenuUI_StartButton.cpp" />
     <ClCompile Include="02_Script\Moon\AI\AdultGhostController.cpp" />
     <ClCompile Include="02_Script\Moon\AI\FSM\AdultGhost_Chase.cpp" />
     <ClCompile Include="02_Script\Moon\AI\FSM\AdultGhost_Patrol.cpp" />
