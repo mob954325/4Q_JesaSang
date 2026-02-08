@@ -30,10 +30,18 @@ void AdultGhost_Chase::ChangeStateLogic()
         if (grid)
         {
             int px, py;
-            auto wp = target->GetTransform()->GetWorldPosition();
+            auto wp = target->GetTransform()->GetLocalPosition();
+
+            std::cout << "[Chase] Last Player World Pos = " << wp.x << ", " << wp.y << ", " << wp.z << std::endl;
+
             if (grid->WorldToGridFromCenter(wp, px, py))
             {
+                std::cout << "[Chase] Save Last Player Grid = (" << px << ", " << py << ")" << std::endl;
                 adultGhost->lastPlayerGrid = { px, py, true };
+            }
+            else
+            {
+                std::cout << "[Chase] WorldToGrid FAILED\n";
             }
         }
         adultGhost->ChangeState(AdultGhostState::Search);

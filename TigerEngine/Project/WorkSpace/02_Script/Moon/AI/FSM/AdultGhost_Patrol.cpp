@@ -23,11 +23,11 @@ void AdultGhost_Patrol::Enter()
 
 void AdultGhost_Patrol::ChangeStateLogic()
 {
-    // 상태 진입 직후 바로 바뀌는 현상 방지 (임시)
-    if (patrolTimer < forcePatrolTime)
-        return;
+    //// 상태 진입 직후 바로 바뀌는 현상 방지 (임시)
+    //if (patrolTimer < forcePatrolTime)
+    //    return;
 
-    // 1. 시야 감지 : 플레이어 감지 
+    // 1. 시야 감지 : 플레이어 가 범위 내에 진입 
     if (adultGhost->IsSeeing(adultGhost->GetAITarget()))
     {
         std::cout << "[AdultGhost_Patrol] Ghost is Seeing PLAYER !" << std::endl;
@@ -35,7 +35,7 @@ void AdultGhost_Patrol::ChangeStateLogic()
         return;
     }
 
-    // 2. 기척 감지 
+    // 2. 기척 & 함정 감지 : 시야 밖에서 감지 
     if (adultGhost->IsPlayerInSenseRange())
     {
         std::cout << "[AdultGhost_Patrol] PLAYER FOUND (Sense)!" << std::endl;
@@ -43,7 +43,7 @@ void AdultGhost_Patrol::ChangeStateLogic()
         return;
     }
 
-    // 3. HideObject 시야 체크
+    // Hide Object가 시야 내에 있는지 (플레이어 은신 불가능 해짐)
     UpdateHideObjectVision();
 }
 

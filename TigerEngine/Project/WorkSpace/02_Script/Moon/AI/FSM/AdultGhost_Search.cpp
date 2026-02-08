@@ -15,6 +15,7 @@ void AdultGhost_Search::Enter()
     if (adultGhost->lastPlayerGrid.valid)
     {
         auto& p = adultGhost->lastPlayerGrid;
+        std::cout << "[Search] Use Last Grid = (" << p.x << ", " << p.y << ")" << std::endl;
 
         adultGhost->agent->targetCX = p.x;
         adultGhost->agent->targetCY = p.y;
@@ -24,6 +25,7 @@ void AdultGhost_Search::Enter()
     }
     else
     {
+        std::cout << "[Search] No Last Grid → Patrol" << std::endl;
         adultGhost->ChangeState(AdultGhostState::Patrol);  // 값 없으면 바로 Patrol
     }
 }
@@ -60,6 +62,7 @@ void AdultGhost_Search::FixedUpdate(float deltaTime)
         {
             arrived = true;
             searchTimer = 0.0f;
+            std::cout << "[Search] ARRIVED at target\n";
         }
     }
 }
