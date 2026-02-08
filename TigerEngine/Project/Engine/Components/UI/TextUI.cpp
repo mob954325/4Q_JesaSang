@@ -3,6 +3,7 @@
 #include "../../Object/GameObject.h"
 #include "../../../Base/Datas/ReflectionMedtaDatas.hpp"
 #include "../../Util/JsonHelper.h"
+#include "../Engine/EngineSystem/CameraSystem.h"
 
 RTTR_REGISTRATION
 {
@@ -27,7 +28,8 @@ rttr::registration::class_<TextUI>("TextUI")
                 .property("atlasH", &TextUI::atlasH)
                 .property("paddingPx", &TextUI::paddingPx)
                 .property("drawSpacetype", &TextUI::GetDrawSpace, &TextUI::SetDrawSpace)
-                .property("zOrder", &TextUI::GetZOrder, &TextUI::SetZOrder);
+                .property("zOrder", &TextUI::GetZOrder, &TextUI::SetZOrder)
+                .property("isBillboard", &TextUI::isBillboard);
 }
 
 void TextUI::OnRender(RenderQueue& queue)
@@ -39,6 +41,19 @@ void TextUI::OnRender(RenderQueue& queue)
     if (!rect) return;
 
     ImageUIRenderItem item;
+    if (isBillboard)
+    {
+        auto tr = GetOwner()->GetTransform();
+        Matrix R = GetScreenAlignedBillboardRotation();
+        item.worldMat = Matrix::CreateScale(tr->GetScale()) *
+            R *
+            Matrix::CreateTranslation(tr->GetWorldPosition());
+    }
+    else
+    {
+        item.worldMat = GetOwner()->GetTransform()->GetWorldMatrix();
+    }
+
     item.isText = true;
     item.textComp = this;
     item.geometryDirty = geometryDirty; // Note : rebuild geometry를 위한 플래그 
@@ -182,4 +197,54 @@ int TextUI::GetZOrder() const
 void TextUI::SetZOrder(int v)
 {
     zOrder = v;
+}
+
+Matrix TextUI::GetScreenAlignedBillboardRotation()
+{
+    auto cam = CameraSystem::Instance().GetCurrCamera();
+
+    // 카메라의 월드 회전 = view^-1
+    Matrix invView = cam->GetView().Invert();
+    invView.Translation(Vector3::Zero); // 회전만 사용
+
+    //invView = Matrix::CreateRotationY(DirectX::XM_PI) * invView;
+    invView = Matrix::CreateRotationX(DirectX::XM_PI) * invView;
+
+    return invView;
+}
+
+static Vector3 ExtractWorldScale(const Matrix& W)
+{
+    // W의 basis 벡터(축) 길이 = 스케일
+    // SimpleMath는 Right/Up/Forward 접근자가 있는 경우가 많음.
+    Vector3 right = W.Right();
+    Vector3 up = W.Up();
+    Vector3 forward = W.Forward();
+
+    float sx = right.Length();
+    float sy = up.Length();
+    float sz = forward.Length();
+
+    // 스케일 0 방지
+    if (sx < 1e-8f) sx = 1.0f;
+    if (sy < 1e-8f) sy = 1.0f;
+    if (sz < 1e-8f) sz = 1.0f;
+
+    return Vector3(sx, sy, sz);
+}
+
+Matrix TextUI::BuildBillboardWorldMatrix()
+{
+    auto tr = GetOwner()->GetTransform();
+
+    Matrix W0 = tr->GetWorldMatrix();               // 기존 월드(부모 포함)
+    Vector3 ws = ExtractWorldScale(W0);             // 월드 스케일
+
+    Matrix R = GetScreenAlignedBillboardRotation(); // 회전만(translation=0)
+
+    Matrix W = Matrix::CreateScale(ws) * R;         // 스케일+빌보드 회전
+
+    // 위치는 기존 월드 위치로 강제
+    W.Translation(tr->GetWorldPosition());
+    return W;
 }
