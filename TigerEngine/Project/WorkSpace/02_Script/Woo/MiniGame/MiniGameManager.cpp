@@ -131,6 +131,8 @@ void MiniGameManager::StartMiniGame(std::unique_ptr<IItem> ingredient)
     if (ingredient->itemType != ItemType::Ingredient)
         return;
 
+    miniGameParent->GetOwner()->SetActive(true);
+
     // mini game create
     const std::string foodId = ingredient->itemId;
     auto newGame = CreateMinigameForIngredientId(foodId);
@@ -212,7 +214,7 @@ void MiniGameManager::StopMiniGame()
 
 void MiniGameManager::StopChecking()
 {
-    if (Input::GetKeyDown(stop_key))
+    if (Input::GetKeyDown(stop_key) && isPlaying)
     {
         StopMiniGame();
     }
@@ -222,25 +224,35 @@ void MiniGameManager::UpdatePopup(float delta)
 {
     if (!miniGameParent) return;
 
-    // 항상 부드럽게 이동시키고 싶으면 if 제거해도 됨
     Vector3 cur = miniGameParent->GetPos();
     Vector3 next = Vector3::Lerp(cur, popupTargetPos, std::min(1.0f, popupSpeed * delta));
     miniGameParent->SetPos(next);
 
-    // 도착 판정(오차 범위)
+    // 도착 판정
     Vector3 diff = popupTargetPos - next;
     if (diff.Length() < 0.5f)
     {
         miniGameParent->SetPos(popupTargetPos);
+
+        // pause controll
+        // 팝업이 완전히 다 내려간 뒤, 게임 일시정지 가능
+        if (isPopupHiding)
+        {
+            isPopupHiding = false;
+            isPopupHidden = true;
+        }
     }
 }
 
 void MiniGameManager::ShowPopup()
 {
     popupTargetPos = popupShownPos;
+    isPopupHiding = false;
+    isPopupHidden = false;
 }
 
 void MiniGameManager::HidePopup()
 {
     popupTargetPos = popupHiddenPos;
+    isPopupHiding = true;
 }
