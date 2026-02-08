@@ -18,7 +18,7 @@ class PauseManager : public ScriptComponent
 
 private:
     Keyboard::Keys pause_key = Keyboard::Escape;
-    bool isPauseOn = false;
+    bool isPause = false;
 
     GameObject* pausePannel;
 
@@ -32,7 +32,8 @@ public:
     void Deserialize(nlohmann::json data);
 
 private:
-   void PauseOn();        // 인게임 일시정지
-   void PauseOff();       // 인게임 이어하기
+   void TogglePause();
+   void Resume();        // 인게임 일시정지
+   void Pause();         // 인게임 이어하기
 };
 

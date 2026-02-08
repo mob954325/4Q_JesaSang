@@ -3,6 +3,7 @@
 #include "Util/ComponentAutoRegister.h"
 #include "EngineSystem/SceneSystem.h"
 #include "System/InputSystem.h"
+#include "System/TimeSystem.h"
 #include "Object/GameObject.h"
 #include "Components/RectTransform.h"
 #include "Components/UI/Image.h"
@@ -25,21 +26,18 @@ void PauseManager::OnStart()
     if (!pausePannel)
         cout << "[PauseManager] Missing ui objects!" << endl;
 
-
-    PauseOff();
+    // init
+    pausePannel->SetActive(false);
+    isPause = false;
 }
 
 void PauseManager::OnUpdate(float delta)
 {
     if (Input::GetKeyDown(pause_key))
     {
-        // 미니게임중이라면 return
-
-        // 일시정지 / 재개
-        if (isPauseOn)
-            PauseOff();
-        else
-            PauseOn();
+        // TODO :: 다른곳에서 esc 누르는 경우 예외처리
+        // 1. 미니게임 실행중이면 return
+        TogglePause();
     }
 }
 
@@ -53,14 +51,26 @@ void PauseManager::Deserialize(nlohmann::json data)
     JsonHelper::SetDataFromJson(this, data);
 }
 
-void PauseManager::PauseOn()
+void PauseManager::TogglePause()
 {
-    pausePannel->SetActive(true);
-    isPauseOn = true;
+    if (isPause) Resume();
+    else Pause();
 }
 
-void PauseManager::PauseOff()
+void PauseManager::Resume()
 {
     pausePannel->SetActive(false);
-    isPauseOn = false;
+    isPause = false;
+
+    // 게임 시간 재개
+    GameTimer::Instance().SetTimeScale(1.0f);
+}
+
+void PauseManager::Pause()
+{
+    pausePannel->SetActive(true);
+    isPause = true;
+
+    // 게임 시간 정지
+    GameTimer::Instance().SetTimeScale(0.0f);
 }
