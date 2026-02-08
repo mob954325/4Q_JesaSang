@@ -106,7 +106,7 @@ void Game_FireControl::UpdateBar(float delta)
 {
     float x = GetUIPosX(spacbar);
 
-    // 스듀 느낌: 홀딩하면 +가속(오른쪽/위로), 아니면 -가속(왼쪽/아래로)
+    // 스듀 느낌 : 홀딩하면 +가속(오른쪽/위로), 아니면 -가속(왼쪽/아래로)
     if (IsSpaceHold())
     {
         barVel += barAccelUp * delta;
