@@ -192,7 +192,7 @@ void Game_FireControl::StartGame()
 
     if (!foodPoint || !spacbar || !gauge)
     {
-        cout << "[MiniGame 1] Missing ui objects!" << endl;
+        cout << "[MiniGame 2] Missing ui objects!" << endl;
         return;
     }
 
@@ -219,7 +219,7 @@ void Game_FireControl::StartGame()
     // bar init
     barVel = 0.0f;
 
-    cout << "[Mini Game] : Game_FireControl Start!" << endl;
+    cout << "[Mini Game 2] : Game_FireControl Start!" << endl;
 }
 
 void Game_FireControl::UpdateGame(float delta)
@@ -233,6 +233,6 @@ void Game_FireControl::UpdateGame(float delta)
 
 void Game_FireControl::EndGame()
 {
-    std::cout << "[Mini Game] : Game_FireControl End!" << std::endl;
+    std::cout << "[Mini Game 2] : Game_FireControl End!" << std::endl;
 
 }
