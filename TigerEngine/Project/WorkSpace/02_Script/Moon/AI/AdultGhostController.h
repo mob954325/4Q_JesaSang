@@ -31,6 +31,7 @@ enum class SearchReason
 {
     FromPatrol,   // 기척 or 함정 으로 넘어옴 
     FromChase,    // 추격 실패    으로 넘어옴 
+    FromAttack,
     None
 };
 
@@ -68,6 +69,7 @@ private:
 
     // Movement (공통)
     bool MoveToTarget(float delta);
+    void RotateByDirection(const Vector3& moveDir, float delta);
 
 public:
     void OnStart() override;
@@ -77,6 +79,7 @@ public:
 
     // Interaction
     void OnPlayerNoise(const Vector3& noiseWorldPos); // 플레이어에서 호출 
+    void OnAttackHit(); // 유령 충돌 오브젝트에서 호출
 
     // Helper
     void ResetAgentForMove(float speed);
@@ -93,12 +96,6 @@ public:
 
     // 상태의 진입 경로 (어떤 이유로 들어왔는가)
     SearchReason searchReason = SearchReason::None;
-
-
-//public:
-//    void RotateTowardsYaw(float targetYaw, float dt, float degPerSec = 180.0f);
-//    void RotateTowardsDir(const Vector3& dir, float dt, float degPerSec = 180.0f);
-    void RotateByDirection(const Vector3& moveDir, float delta);
 
 public:
     // friend

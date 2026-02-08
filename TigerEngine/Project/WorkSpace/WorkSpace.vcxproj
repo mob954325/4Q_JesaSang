@@ -146,6 +146,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="02_Script\Moon\AI\AdultGhostController.h" />
+    <ClInclude Include="02_Script\Moon\AI\FSM\AdultGhost_Attack.h" />
     <ClInclude Include="02_Script\Moon\AI\FSM\AdultGhost_Chase.h" />
     <ClInclude Include="02_Script\Moon\AI\FSM\AdultGhost_Patrol.h" />
     <ClInclude Include="02_Script\Moon\AI\FSM\AdultGhost_Search.h" />
@@ -202,6 +203,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="02_Script\Moon\AI\AdultGhostController.cpp" />
+    <ClCompile Include="02_Script\Moon\AI\FSM\AdultGhost_Attack.cpp" />
     <ClCompile Include="02_Script\Moon\AI\FSM\AdultGhost_Chase.cpp" />
     <ClCompile Include="02_Script\Moon\AI\FSM\AdultGhost_Patrol.cpp" />
     <ClCompile Include="02_Script\Moon\AI\FSM\AdultGhost_Search.cpp" />

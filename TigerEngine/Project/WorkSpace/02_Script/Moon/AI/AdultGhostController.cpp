@@ -9,6 +9,7 @@
 #include "FSM/AdultGhost_Patrol.h"
 #include "FSM/AdultGhost_Chase.h"
 #include "FSM/AdultGhost_Search.h"
+#include "FSM/AdultGhost_Attack.h"
 
 #include "../../Woo/Object/HideObject.h"
 #include "../../Woo/Player/PlayerController.h"
@@ -33,7 +34,7 @@ void AdultGhostController::Deserialize(nlohmann::json data)
     JsonHelper::SetDataFromJson(this, data);
 }
 
-
+// Util 
 float WrapAngleRad(float a)
 {
     while (a > XM_PI)  a -= XM_2PI;
@@ -107,7 +108,7 @@ void AdultGhostController::InitFSMStates()
     fsmStates[(int)AdultGhostState::Chase] = new AdultGhost_Chase(this);
     fsmStates[(int)AdultGhostState::Search] = new AdultGhost_Search(this);
     //fsmStates[(int)AdultGhostState::Return] = new AdultGhost_Return(this);
-    //fsmStates[(int)AdultGhostState::Attack] = new AdultGhost_Attack(this);
+    fsmStates[(int)AdultGhostState::Attack] = new AdultGhost_Attack(this);
 }
 
 void AdultGhostController::ChangeState(AdultGhostState nextState)
@@ -240,24 +241,6 @@ bool AdultGhostController::IsPlayerInSenseRange()
 
     return Vector3::Distance(pPos, gPos) <= senseRadius;
 }
-//
-//void AdultGhostController::RotateTowardsYaw(float targetYaw, float dt, float degPerSec)
-//{
-//    agent->externalControl = true; // 자동 회전 막기
-//    agent->RotateTowardsYaw(targetYaw, dt, degPerSec);
-//}
-//
-//void AdultGhostController::RotateTowardsDir(const Vector3& dir, float dt, float degPerSec)
-//{
-//    if (dir.LengthSquared() < 0.0001f) return;
-//
-//    float targetYaw = atan2f(dir.x, dir.z);
-//    
-//    // targetYaw += XM_PI; // 모델 forward가 -Z면
-//
-//    RotateTowardsYaw(targetYaw, dt, degPerSec);
-//}
-//
 
 
 // -------------------------------------------------
@@ -281,4 +264,18 @@ void AdultGhostController::OnPlayerNoise(const Vector3& noiseWorldPos)
     lastPlayerGrid = { cx, cy, true };
 
     ChangeState(AdultGhostState::Search);
+}
+
+void AdultGhostController::OnAttackHit()
+{
+    //if (state == AdultGhostState::Chase)
+    //{
+    //    std::cout << "[FSM] Chase -> Attack (Collision)\n";
+    //    ChangeState(AdultGhostState::Attack);
+    //}
+
+    if (state != AdultGhostState::Attack)
+    {
+        ChangeState(AdultGhostState::Attack);
+    }
 }

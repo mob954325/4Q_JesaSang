@@ -4,6 +4,7 @@
 #include "Object/GameObject.h"
 #include "EngineSystem/SceneSystem.h"
 #include "../../Woo/Player/PlayerController.h"
+#include "AdultGhostController.h"
 
 
 
@@ -48,10 +49,19 @@ void GhostInteractionZone::OnTriggerEnter(PhysicsComponent* other)
 {
     if (other->GetOwner()->GetName() == "InteractZone")
     {
-        auto* player = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("Player");
-        if (player)
+        auto* ghostObj = GetOwner()->GetTransform()->GetParent()->GetOwner();
+        if (!ghostObj) return;
+
+        auto* controller = ghostObj->GetComponent<AdultGhostController>();
+        if (controller)
         {
-            player->GetComponent<PlayerController>()->TakeAttack(); // AI에게 공격 당했을 때 
+            controller->OnAttackHit(); // FSM 한테 알림
         }
+
+        //auto* player = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("Player");
+        //if (player)
+        //{
+        //    player->GetComponent<PlayerController>()->TakeAttack(); // AI에게 공격 당했을 때 
+        //}
     }
 }

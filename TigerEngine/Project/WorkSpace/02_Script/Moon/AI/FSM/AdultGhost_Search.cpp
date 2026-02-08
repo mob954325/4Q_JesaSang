@@ -15,8 +15,9 @@ void AdultGhost_Search::Enter()
     phase = SearchPhase::WaitBeforeMove;
 
 
-    // 1. Chase에서 넘어온 경우 바로 이동
-    if (adultGhost->searchReason == SearchReason::FromChase)
+    // 1. Chase or Attack 에서 넘어온 경우 바로 이동
+    if (adultGhost->searchReason == SearchReason::FromChase ||
+        adultGhost->searchReason == SearchReason::FromAttack)
     {
         phase = SearchPhase::MoveToPoint;
     }
@@ -64,17 +65,6 @@ void AdultGhost_Search::Update(float deltaTime)
             phase = SearchPhase::MoveToPoint;
         }
     }
-    //else if (phase == SearchPhase::RotateSearch)
-    //{
-    //    rotateTimer += deltaTime;
-
-    //    // Y축 회전 (초당 60도)
-    //    auto tr = adultGhost->GetOwner()->GetTransform();
-    //    float targetYaw = tr->GetYaw() + XMConvertToRadians(360.f);
-
-    //    adultGhost->agent->externalControl = true;
-    //    adultGhost->agent->RotateTowardsYaw(targetYaw, deltaTime, 60.0f);
-    //}
 }
 
 void AdultGhost_Search::FixedUpdate(float deltaTime)
@@ -93,8 +83,6 @@ void AdultGhost_Search::FixedUpdate(float deltaTime)
             targetYaw = baseYaw + XMConvertToRadians(360.f);
 
             adultGhost->agent->externalControl = true;
-
-            std::cout << "[Search] ARRIVED -> Rotate\n";
         }
     }
     else if (phase == SearchPhase::RotateSearch)
