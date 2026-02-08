@@ -9,7 +9,8 @@ enum class ImageType
 {
     Simple,		// 기본 이미지 출력
     Sliced,		// 9-Sliced
-    Fill		// 이미지 채우기
+    Fill,		// 이미지 채우기 Radial CW
+    FillHorizontal
 };
 
 /// <summary>
@@ -67,6 +68,8 @@ public:
     MultiDelegate<> OnPressOut;
     MultiDelegate<> OnExit;
 
+    bool isBillboard = false; // 메인 카메라를 바라본다.
+
 private:
     void Init();
     
@@ -92,4 +95,7 @@ private:
     void CheckMouseHover();
 
     int zOrder = 0; // 해당 값을 item에 넘겨서 한 번 정렬한 다음에 출력한다.
+
+    Matrix GetScreenAlignedBillboardRotation();
+    Matrix BuildBillboardWorldMatrix();
 };

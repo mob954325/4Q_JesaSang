@@ -46,10 +46,21 @@ void UIRenderPass::Execute(ComPtr<ID3D11DeviceContext>& context, RenderQueue& qu
         }
         else
         {
-            mvp = Matrix::CreateTranslation( item.params.z, item.params.w, 0.0f ) *     // 피벗
-                    Matrix::CreateScale(item.imageSize.x, item.imageSize.y, 1) *        // 이미지 사이즈
-                    item.worldMat * cam->GetView() * cam->GetProjection();              // 월드 좌표
-                    context->OMSetDepthStencilState(sm.defualtDSS.Get(), 1);            // depth test off
+            const float pivotX = item.params.z; // 0~1
+            const float pivotY = item.params.w; // 0~1
+
+            // 로컬(유닛쿼드 0~1)에서 pivot을 원점으로 옮김
+            Matrix pivotOff = Matrix::CreateTranslation(-pivotX, -pivotY, 0.0f);
+
+            // 유닛 쿼드를 실제 크기로
+            Matrix sizeS = Matrix::CreateScale(item.imageSize.x, item.imageSize.y, 1.0f);
+
+            // 최종 모델(로컬->월드)
+            Matrix model = pivotOff * sizeS * item.worldMat;
+
+            mvp = model * cam->GetView() * cam->GetProjection();
+
+            context->OMSetDepthStencilState(sm.defualtDSS.Get(), 1); // depth test off
         }
 
         sm.uiCBData.WVP = mvp.Transpose();

@@ -49,13 +49,13 @@ void Player1::OnEnable()
 void Player1::OnStart()
 {
     // cout << "[Player1 | PlayModeTest] : OnStart() 3\n";    
-    GameObject* obj = SceneUtil::GetObjectByName("Weapon");
+    // GameObject* obj = SceneUtil::GetObjectByName("Weapon");
 
     // if(obj)
         // cout << "SceneUtiltest : " << obj->GetName() << endl;
 
-    GameObject* instantiated = PrefabUtil::Instantiate("Test1");
-    instantiated->GetTransform()->SetParent(this->GetOwner()->GetTransform());
+    // GameObject* instantiated = PrefabUtil::Instantiate("Test1");
+    // instantiated->GetTransform()->SetParent(this->GetOwner()->GetTransform());
 }
 
 void Player1::OnDisable()
@@ -85,13 +85,13 @@ void Player1::OnUpdate(float delta)
     if (b > 1.0f) b = 0.f;
 
     auto trans = GetOwner()->GetTransform();
-    if (Input::GetKey(DirectX::Keyboard::Keys::W))
+    if (Input::GetKey(DirectX::Keyboard::Keys::Up))
         trans->Translate({ 0, 0, 1.f });
-    else if (Input::GetKey(DirectX::Keyboard::Keys::S))
+    else if (Input::GetKey(DirectX::Keyboard::Keys::Down))
         trans->Translate({ 0, 0, -1.f });
-    if (Input::GetKey(DirectX::Keyboard::Keys::A))
+    if (Input::GetKey(DirectX::Keyboard::Keys::Left))
         trans->Translate({ -1.f, 0, 0 });
-    else if (Input::GetKey(DirectX::Keyboard::Keys::D))
+    else if (Input::GetKey(DirectX::Keyboard::Keys::Right))
         trans->Translate({ 1.f, 0, 0 });
 
     if (Input::GetKey(DirectX::Keyboard::Keys::Z))
