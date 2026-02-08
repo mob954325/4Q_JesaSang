@@ -11,6 +11,7 @@
 using std::cout;
 using std::endl;
 
+
 float Game_Cutting::GetUIPosX(RectTransform* rt) const
 {
     return rt->GetPos().x;
@@ -38,8 +39,8 @@ void Game_Cutting::EvaluateOnce()
     const float stopX = GetUIPosX(stopPoint);
     const float stopW = std::max(1.0f, GetUIWidth(stopPoint));
 
-    const float barX = GetUIPosX(spaceBar);
-    const float barW = std::max(1.0f, GetUIWidth(spaceBar));
+    const float barX = GetUIPosX(knife);
+    const float barW = std::max(1.0f, GetUIWidth(knife));
 
     const float stopLeft = stopX - stopW * 0.5f;
     const float stopRight = stopX + stopW * 0.5f;
@@ -74,10 +75,10 @@ void Game_Cutting::EvaluateOnce()
 
 void Game_Cutting::StartGame()
 {
-    stopPoint = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("Image_StopPoint")->GetComponent<RectTransform>();
-    spaceBar = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("Image_SpaceBar")->GetComponent<RectTransform>();
+    stopPoint = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("1_Image_StopPoint")->GetComponent<RectTransform>();
+    knife = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("1_Image_Knife")->GetComponent<RectTransform>();
     
-    if (!stopPoint || !spaceBar)
+    if (!stopPoint || !knife)
     {
         cout << "[MiniGame 1] Missing ui objects!" << endl;
         return;
@@ -94,7 +95,7 @@ void Game_Cutting::StartGame()
     consumedThisStop = false;
 
     // start pos init
-    SetUIPosX(spaceBar, (xMin + xMax) * 0.5f);
+    SetUIPosX(knife, (xMin + xMax) * 0.5f);
 
     std::cout << "[MiniGame 1] : Game_Cutting Start!" << std::endl;
 }
@@ -134,7 +135,7 @@ void Game_Cutting::UpdateGame(float delta)
     }
 
     // 스페이스 슬라이더 movement
-    float x = GetUIPosX(spaceBar);
+    float x = GetUIPosX(knife);
     x += dir * spaceSpped * delta;
 
     if (x <= xMin)
@@ -148,7 +149,7 @@ void Game_Cutting::UpdateGame(float delta)
         dir = -1.0f;
     }
 
-    SetUIPosX(spaceBar, x);
+    SetUIPosX(knife, x);
 }
 
 void Game_Cutting::EndGame()

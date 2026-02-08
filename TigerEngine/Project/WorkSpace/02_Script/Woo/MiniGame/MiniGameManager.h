@@ -34,9 +34,9 @@ private:
 
     // UI
     RectTransform* miniGameParent;      // 시작/끝날때 밑에서 올라오고 내려가는 연출
-    GameObject* miniGame1_Parent;       // on, off
-    GameObject* miniGame2_Parent;       // on, off
-    GameObject* miniGame3_Parent;       // on, off
+    GameObject* miniGame1_Parent;       // on, off (Cutting : 스타포스)
+    GameObject* miniGame2_Parent;       // on, off (Fire : 스듀낚시)
+    GameObject* miniGame3_Parent;       // on, off (Assembling : 키입력)
     // 각 miniGame 안의 UI controll은 각 IMinigame 안에서 선언하고 제어하기.
 
     // popup 연출
