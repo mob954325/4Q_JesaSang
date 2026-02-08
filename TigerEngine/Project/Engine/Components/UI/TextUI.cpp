@@ -43,8 +43,8 @@ void TextUI::OnRender(RenderQueue& queue)
     item.textComp = this;
     item.geometryDirty = geometryDirty; // Note : rebuild geometry를 위한 플래그 
     item.color = color;
-    item.worldMat = rect->GetWorldMatrix();
-    item.imageSize = Vector4(rect->GetSize().x, rect->GetSize().y, 0, 0);
+    item.screenMat = rect->GetWorldMatrix();
+    item.imageSize = Vector4(rect->GetSize().x, rect->GetSize().y, rect->GetPivot().x, rect->GetPivot().y);
     if (drawSpacetype == DrawSpaceType::World)
         item.isWorldSpace = true;
     else
