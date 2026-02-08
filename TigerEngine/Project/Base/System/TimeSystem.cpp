@@ -52,15 +52,37 @@ float GameTimer::DeltaTime()const
 	return (float)mDeltaTime;
 }
 
+float GameTimer::UnscaledDeltaTime() const
+{
+    return (float)mUnscaledDeltaTime;
+}
+
+void GameTimer::SetTimeScale(float scale)
+{
+    if (scale < 0.0f) scale = 0.0f;
+    mTimeScale = scale;
+}
+
+float GameTimer::GetTimeScale() const
+{
+    return mTimeScale;
+}
+
 void GameTimer::Reset()
 {
-	__int64 currTime;
-	QueryPerformanceCounter((LARGE_INTEGER*)&currTime);
+    __int64 currTime;
+    QueryPerformanceCounter((LARGE_INTEGER*)&currTime);
 
-	mBaseTime = currTime;
-	mPrevTime = currTime;
-	mStopTime = 0;
-	mStopped = false;
+    mBaseTime = currTime;
+    mPrevTime = currTime;
+    mCurrTime = currTime;
+
+    mStopTime = 0;
+    mPausedTime = 0;
+    mStopped = false;
+
+    mUnscaledDeltaTime = 0.0;
+    mDeltaTime = 0.0;
 }
 
 void GameTimer::Start()
@@ -80,6 +102,7 @@ void GameTimer::Start()
 		mPausedTime += (startTime - mStopTime);
 
 		mPrevTime = startTime;
+        mCurrTime = startTime;
 		mStopTime = 0;
 		mStopped = false;
 	}
@@ -101,6 +124,7 @@ void GameTimer::Tick()
 {
 	if (mStopped)
 	{
+        mUnscaledDeltaTime = 0.0;
 		mDeltaTime = 0.0;
 		return;
 	}
@@ -109,19 +133,17 @@ void GameTimer::Tick()
 	QueryPerformanceCounter((LARGE_INTEGER*)&currTime);
 	mCurrTime = currTime;
 
-	// Time difference between this frame and the previous.
-	mDeltaTime = (mCurrTime - mPrevTime) * mSecondsPerCount;
+    // raw delta
+    mUnscaledDeltaTime = (mCurrTime - mPrevTime) * mSecondsPerCount;
 
-	// Prepare for next frame.
-	mPrevTime = mCurrTime;
+    // Prepare for next frame.
+    mPrevTime = mCurrTime;
 
-	// Force nonnegative.  The DXSDK's CDXUTTimer mentions that if the 
-	// processor goes into a power save mode or we get shuffled to another
-	// processor, then mDeltaTime can be negative.
-	if (mDeltaTime < 0.0)
-	{
-		mDeltaTime = 0.0;
-	}
+    if (mUnscaledDeltaTime < 0.0)
+        mUnscaledDeltaTime = 0.0;
+
+    // scaled delta
+    mDeltaTime = mUnscaledDeltaTime * (double)mTimeScale;
 }
 
 

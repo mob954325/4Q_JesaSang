@@ -122,6 +122,16 @@ float4 main(PS_UIImage_Input input) : SV_TARGET
         }
     }    
     
+    if (type == 3)
+    {
+        float fillAmount = saturate(imageParams.y); // 0..1
+
+        // 좌 -> 우 채움: uv.x가 fillAmount보다 크면 버림
+        // fillAmount=0  => 전부 clip (아무것도 안 보임)
+        // fillAmount=1  => 전부 통과 (전부 보임)
+        clip(fillAmount - uv.x);
+    }
+    
     float4 sampleTex = uiImageTex.Sample(samLinear, uv);
     return sampleTex * ImageBaseColor;
 }

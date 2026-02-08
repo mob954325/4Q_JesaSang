@@ -145,6 +145,9 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="02_Script\Ho\UI\MenuUI_ExitButton.h" />
+    <ClInclude Include="02_Script\Ho\UI\MenuUI_OptionButton.h" />
+    <ClInclude Include="02_Script\Ho\UI\MenuUI_StartButton.h" />
     <ClInclude Include="02_Script\Moon\AI\AdultGhostController.h" />
     <ClInclude Include="02_Script\Moon\AI\FSM\AdultGhost_Attack.h" />
     <ClInclude Include="02_Script\Moon\AI\FSM\AdultGhost_Chase.h" />
@@ -166,7 +169,6 @@
     <ClInclude Include="02_Script\Woo\Player\AITarget\AITarget.h" />
     <ClInclude Include="02_Script\\Ron\\Manager\\SceneFlowManager.h" />
     <ClInclude Include="99_Test\Player\PlayerUI.h" />
-    <ClInclude Include="99_Test\Player\SceneLoadTestScript.h" />
     <ClInclude Include="99_Test\Player\TestButton.h" />
     <ClInclude Include="EngineApp.h" />
     <ClInclude Include="02_Script\\Ron\\MiniMapTest\MiniMapTestScript.h" />
@@ -201,8 +203,13 @@
     <ClInclude Include="02_Script\Woo\Manager\GameManager.h" />
     <ClInclude Include="02_Script\Woo\Object\TrapObject.h" />
     <ClInclude Include="02_Script\\Ron\\Intro\IntroCutSceneController.h" />
+    <ClInclude Include="02_Script\Woo\Manager\PauseManager.h" />
+    <ClInclude Include="02_Script\Woo\Manager\MainGameUIManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="02_Script\Ho\UI\MenuUI_ExitButton.cpp" />
+    <ClCompile Include="02_Script\Ho\UI\MenuUI_OptionButton.cpp" />
+    <ClCompile Include="02_Script\Ho\UI\MenuUI_StartButton.cpp" />
     <ClCompile Include="02_Script\Moon\AI\AdultGhostController.cpp" />
     <ClCompile Include="02_Script\Moon\AI\FSM\AdultGhost_Attack.cpp" />
     <ClCompile Include="02_Script\Moon\AI\FSM\AdultGhost_Chase.cpp" />
@@ -223,7 +230,6 @@
     <ClCompile Include="02_Script\Woo\Player\AITarget\AITarget.cpp" />
     <ClCompile Include="02_Script\\Ron\\Manager\\SceneFlowManager.cpp" />
     <ClCompile Include="99_Test\Player\PlayerUI.cpp" />
-    <ClCompile Include="99_Test\Player\SceneLoadTestScript.cpp" />
     <ClCompile Include="99_Test\Player\TestButton.cpp" />
     <ClCompile Include="EngineApp.cpp" />
     <ClCompile Include="02_Script\\Ron\\MiniMapTest\MiniMapTestScript.cpp" />
@@ -257,6 +263,8 @@
     <ClCompile Include="02_Script\Woo\Object\HideObject.cpp" />
     <ClCompile Include="02_Script\Woo\Manager\GameManager.cpp" />
     <ClCompile Include="02_Script\Woo\Object\TrapObject.cpp" />
+    <ClCompile Include="02_Script\Woo\Manager\PauseManager.cpp" />
+    <ClCompile Include="02_Script\Woo\Manager\MainGameUIManager.cpp" />
     <ClCompile Include="winMain.cpp" />
     <ClCompile Include="02_Script\\Ron\\Intro\IntroCutSceneController.cpp" />
   </ItemGroup>

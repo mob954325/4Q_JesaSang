@@ -65,4 +65,9 @@ public:
     int indexCount = 0;
 
     int zOrder = 0;
+
+    bool isBillboard = false;
+
+    Matrix GetScreenAlignedBillboardRotation();
+    Matrix BuildBillboardWorldMatrix();
 };

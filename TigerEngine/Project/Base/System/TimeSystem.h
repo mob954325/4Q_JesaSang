@@ -15,8 +15,17 @@ public:
 	GameTimer(token);
 	~GameTimer() = default;
 
-	float TotalTime()const;  // in seconds
-	float DeltaTime()const; // in seconds
+    // scaled time :게임 시간
+	float DeltaTime()const;  // in seconds
+
+    // unscaled time : pause 상태와 관계 x
+    float TotalTime()const;          // in seconds
+    float UnscaledDeltaTime() const; // in seconds
+
+    // time scale funcs
+    void SetTimeScale(float scale);
+    float GetTimeScale() const;
+
 
 	void Reset(); // Call before message loop.
 	void Start(); // Call when unpaused.
@@ -25,7 +34,8 @@ public:
 	
 private:
 	double mSecondsPerCount{};
-	double mDeltaTime{};
+	double mDeltaTime{};          // scaled delta
+    double mUnscaledDeltaTime{};  // raw delta
 
 	__int64 mBaseTime{};
 	__int64 mPausedTime{};
@@ -34,5 +44,5 @@ private:
 	__int64 mCurrTime{};
 
 	bool mStopped = false;
-
+    float mTimeScale = 1.0f;        // time scale
 };
