@@ -1,5 +1,5 @@
 #include "SpriteSheet.hpp"
-#include "Particle.hpp"
+#include "Particle.h"
 #include <vector>
 using std::vector;
 
