@@ -12,7 +12,7 @@
 class AdultGhost_Return : public IAdultGhostState
 {
 public:
-    AdultGhost_Return(AdultGhostController* _adultGhost) : IAdultGhostState(_adultGhost, AdultGhostState::Patrol) {}
+    AdultGhost_Return(AdultGhostController* _adultGhost) : IAdultGhostState(_adultGhost, AdultGhostState::Return) {}
     ~AdultGhost_Return() = default;
 
     void Enter() override;

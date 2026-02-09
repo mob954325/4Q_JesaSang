@@ -66,25 +66,17 @@ static Vector2 WorldToMiniMap(const Vector3& worldPos, const Vector3& worldMin, 
     return out;
 }
 
-static void LogMissing(const char* label, const std::string& name)
-{
-    std::cout << "[MiniMapManager] Missing " << label << ": " << name << std::endl;
-}
-
 static RectTransform* GetRectOrLog(const std::shared_ptr<Scene>& scene, const std::string& name, const char* label)
 {
     if (!scene)
     {
-        LogMissing("scene", "null");
         return nullptr;
     }
     if (auto obj = scene->GetGameObjectByName(name))
     {
         auto rect = obj->GetComponent<RectTransform>();
-        if (!rect) LogMissing(label, name);
         return rect;
     }
-    LogMissing(label, name);
     return nullptr;
 }
 
@@ -105,16 +97,13 @@ static Image* GetImageOrLog(const std::shared_ptr<Scene>& scene, const std::stri
 {
     if (!scene)
     {
-        LogMissing("scene", "null");
         return nullptr;
     }
     if (auto obj = scene->GetGameObjectByName(name))
     {
         auto image = obj->GetComponent<Image>();
-        if (!image) LogMissing(label, name);
         return image;
     }
-    LogMissing(label, name);
     return nullptr;
 }
 
@@ -203,11 +192,6 @@ void MiniMapManager::OnStart()
     if (auto player = scene->GetGameObjectByName(playerObjectName))
     {
         m_Map = player->GetComponent<MiniMapTestScript>();
-        if (!m_Map) LogMissing("MiniMapTestScript on player", playerObjectName);
-    }
-    else
-    {
-        LogMissing("player object", playerObjectName);
     }
 
     if (auto obj = scene->GetGameObjectByName(baseMapObjectName))
@@ -368,6 +352,24 @@ void MiniMapManager::OnUpdate(float delta)
     const Vector3 worldMin = m_Map->GetWorldMin();
     const Vector3 worldMax = m_Map->GetWorldMax();
     const Vector2 mapSize = m_Map->GetMapSize();
+    Vector3 playerWorld{};
+    if (m_Map)
+    {
+        if (auto owner = m_Map->GetOwner())
+        {
+            if (auto playerTransform = owner->GetTransform())
+            {
+                playerWorld = playerTransform->GetWorldPosition();
+            }
+        }
+    }
+    else if (m_Player)
+    {
+        if (auto playerTransform = m_Player->GetComponent<Transform>())
+        {
+            playerWorld = playerTransform->GetWorldPosition();
+        }
+    }
 
     for (int i = 0; i < 6; ++i)
     {
@@ -385,6 +387,9 @@ void MiniMapManager::OnUpdate(float delta)
         size.x = m_GaugeBaseSize.x * progress;
         m_GaugeRect->SetSize(size);
     }
+
+    // Keep ping on top even when base map refreshes
+    BumpPingRenderOrder();
 }
 
 void MiniMapManager::ApplyLayout()
@@ -499,6 +504,7 @@ void MiniMapManager::TriggerItemCollected(int index, const Vector3& worldPos)
 
 void MiniMapManager::TriggerPieceCollected(int index)
 {
+    cout << "Test" << endl;
     TriggerPieceActive(index, true);
     if (m_Map)
     {

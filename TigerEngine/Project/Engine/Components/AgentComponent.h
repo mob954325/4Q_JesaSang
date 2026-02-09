@@ -46,4 +46,5 @@ public:
     void MoveAgent(const Vector3& dir, float speed, float dt);
 
     void SetWaitTime(float seconds);
+    Vector3 ComputeSeparationForce(const Vector3& moveDir);
 };

@@ -5,6 +5,7 @@
 class RectTransform;
 class Image;
 class MiniMapTestScript;
+class GameObject;
 
 class MiniMapManager : public ScriptComponent
 {
@@ -49,7 +50,7 @@ public:
     Vector3 itemWorldPos4{ 300.0f, 0.0f, 300.0f };
     Vector3 itemWorldPos5{ 0.0f, 0.0f, 0.0f };
     Vector3 itemWorldPos6{ 200.0f, 0.0f, 100.0f };
-    bool debugShowAllItemPings = true;
+    bool debugShowAllItemPings = false;
     bool debugShowAllPieces = true;
     bool placeBottomRight = true;
     Vector2 bottomRightMargin{ 20.0f, 20.0f };
@@ -67,6 +68,7 @@ public:
 
 private:
     MiniMapTestScript* m_Map = nullptr;
+    GameObject* m_Player = nullptr;
     GameObject* m_BaseObject = nullptr;
     GameObject* m_CompleteObject = nullptr;
     RectTransform* m_BaseRect = nullptr;

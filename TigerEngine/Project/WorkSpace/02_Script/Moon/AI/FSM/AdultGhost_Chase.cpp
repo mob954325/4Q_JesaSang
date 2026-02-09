@@ -14,16 +14,25 @@ void AdultGhost_Chase::Enter()
     // Agent 초기화 
     adultGhost->ResetAgentForMove(4.0f); // Chase 속도
 
-    // 최초 타겟 설정
-    target = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("AITarget");
+    adultGhost->animController->ChangeState("Move");
+
+    // 타겟이 지정되어 있으면 그대로 사용
+    if (!adultGhost->target)
+    {
+        adultGhost->target = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("AITarget");
+    }
 }
 
 void AdultGhost_Chase::ChangeStateLogic()
 {
-    if (!target) return;
+    if (!adultGhost->target) return;
 
     // 이미 Attack으로 바뀌었으면 로직 중단
     if (adultGhost->state == AdultGhostState::Attack)
+        return;
+
+    // PostBabyCare 중이면 절대 포기 금지
+    if (adultGhost->postCareActive)
         return;
 
     // 최소 추격 시간 이후에만 추격 포기 가능함 
@@ -34,9 +43,7 @@ void AdultGhost_Chase::ChangeStateLogic()
         if (grid)
         {
             int px, py;
-            auto wp = target->GetTransform()->GetLocalPosition();
-
-            // std::cout << "[Chase] Last Player World Pos = " << wp.x << ", " << wp.y << ", " << wp.z << std::endl;
+            auto wp = adultGhost->target->GetTransform()->GetLocalPosition();
 
             if (grid->WorldToGridFromCenter(wp, px, py))
             {
@@ -48,7 +55,15 @@ void AdultGhost_Chase::ChangeStateLogic()
                 std::cout << "[Chase] WorldToGrid FAILED\n";
             }
         }
-        adultGhost->searchReason = SearchReason::FromChase;
+        // adultGhost->searchReason = SearchReason::FromChase;
+        if (adultGhost->chaseReason == ChaseReason::FromBabyCry)
+        {
+            adultGhost->searchReason = SearchReason::None; // 필요 없거나 BabyCry용 처리
+        }
+        else
+        {
+            adultGhost->searchReason = SearchReason::FromChase;
+        }
         adultGhost->ChangeState(AdultGhostState::Search);
     }
 }
@@ -58,15 +73,57 @@ void AdultGhost_Chase::Update(float deltaTime)
     chaseTimer += deltaTime;
     repathTimer += deltaTime;
 
-    if (!target) return;
+    // Post BabyCare 진행 중이면
+    if (adultGhost->postCareActive)
+    {
+        adultGhost->postCareTimer += deltaTime; 
 
-    // 일정 주기로 목표 위치 갱신
+        // 강제 위치 이동: target을 null로 하고 forcedTargetPos를 agent 목표로
+        auto grid = GridSystem::Instance().GetMainGrid();
+        if (grid)
+        {
+            int tx, ty;
+            if (grid->WorldToGridFromCenter(adultGhost->forcedTargetPos, tx, ty))
+            {
+                adultGhost->agent->targetCX = tx;
+                adultGhost->agent->targetCY = ty;
+                adultGhost->agent->hasTarget = true;
+
+                // 경로 재생성
+                adultGhost->agent->path = grid->FindPath(adultGhost->agent->cx, adultGhost->agent->cy, tx, ty);
+            }
+        }
+
+        // 5초 경과 시 PostBabyCare 종료
+        if (adultGhost->postCareTimer >= 5.0f)
+        {
+            adultGhost->postCareActive = false;
+
+            GameObject* player = adultGhost->GetPlayer();
+            if (player && adultGhost->IsSeeing(player))
+            {
+                adultGhost->SetAITarget(player);   // Chase 재진입
+                adultGhost->ChangeState(AdultGhostState::Chase);
+            }
+            else
+            {
+                adultGhost->ChangeState(AdultGhostState::Search);
+            }
+        }
+
+        return; // PostBabyCare 동안에는 일반 Chase 로직 skip
+    }
+
+    // 일반 Chase 로직
+    if (!adultGhost->target) return;
+
     if (repathTimer >= repathInterval)
     {
         UpdateTargetGrid();
         repathTimer = 0.0f;
     }
 }
+
 
 void AdultGhost_Chase::FixedUpdate(float deltaTime)
 {
@@ -90,7 +147,7 @@ void AdultGhost_Chase::UpdateTargetGrid()
 
     // [ 플레이어 위치 -> Grid ]
     int px, py;
-    auto wp = target->GetTransform()->GetLocalPosition();
+    auto wp = adultGhost->target->GetTransform()->GetLocalPosition();
     if (!grid->WorldToGridFromCenter(wp, px, py)) return;
     // cout << "[Chase Repath] Player Grid = (" << px << "," << py << ")\n";
 
@@ -123,5 +180,12 @@ bool AdultGhost_Chase::CanGiveUpChase() const
     if (chaseTimer < minChaseTime)
         return false;
 
-    return !adultGhost->IsSeeing(target);
+    // BabyCry에서 추격 중이면 포기 금지
+    if (adultGhost->chaseReason == ChaseReason::FromBabyCry || adultGhost->postCareActive)
+    {
+        return false;
+    }
+
+    // 일반적인 경우 : 시야 밖이면 포기 
+    return !adultGhost->IsSeeing(adultGhost->target);
 }

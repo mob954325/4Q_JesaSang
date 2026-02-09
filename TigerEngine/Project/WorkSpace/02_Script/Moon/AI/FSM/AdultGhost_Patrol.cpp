@@ -11,10 +11,11 @@ void AdultGhost_Patrol::Enter()
     cout << "[AdultGhost_Patrol] Enter Patrol State" << endl;
 
     agent = adultGhost->agent;
-    patrolTimer = 0.0f;
 
     agent->patrolSpeed = 0.8f;  // Patrol 속도 
     agent->SetWaitTime(3.0f);   // 목표 지점에서 대기 시간 
+
+    adultGhost->animController->ChangeState("Idle");
 
     // 아직 이동 중이 아니라면 랜덤 목표 설정
     if (!agent->hasTarget && !agent->isWaiting)
@@ -23,10 +24,6 @@ void AdultGhost_Patrol::Enter()
 
 void AdultGhost_Patrol::ChangeStateLogic()
 {
-    //// 상태 진입 직후 바로 바뀌는 현상 방지 (임시)
-    //if (patrolTimer < forcePatrolTime)
-    //    return;
-
     // 1. 시야 감지 : 플레이어 가 범위 내에 진입 
     if (adultGhost->IsSeeing(adultGhost->GetAITarget()))
     {
@@ -61,7 +58,6 @@ void AdultGhost_Patrol::ChangeStateLogic()
 
 void AdultGhost_Patrol::Update(float deltaTime)
 {
-    patrolTimer += deltaTime;
 }
 
 void AdultGhost_Patrol::FixedUpdate(float deltaTime)

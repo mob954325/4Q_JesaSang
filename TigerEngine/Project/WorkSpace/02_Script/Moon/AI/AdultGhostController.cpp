@@ -51,8 +51,11 @@ void AdultGhostController::OnStart()
 {
     agent = GetOwner()->GetComponent<AgentComponent>();
     vision = GetOwner()->GetComponent<VisionComponent>();
+    fbxRenderer = GetOwner()->GetComponent<FBXRenderer>();
+    fbxData = GetOwner()->GetComponent<FBXData>();
+    animController = GetOwner()->GetComponent<AnimationController>();
 
-    if (!agent || !vision)
+    if (!agent || !vision || !fbxRenderer || !fbxData || !animController)
     {
         std::cout << "[AdultGhostController] Component Missing" << std::endl;
         return;
@@ -61,7 +64,7 @@ void AdultGhostController::OnStart()
     // Hide Object 모두 수집 
     hideObjects = SceneUtil::GetObjectsByName("HideObject");
 
-    //LoadAnimation();  
+    LoadAnimation();  
 
     // 최초 시작 위치 저장
     initialPosition = GetOwner()->GetTransform()->GetWorldPosition(); // local X
@@ -132,7 +135,33 @@ void AdultGhostController::ChangeState(AdultGhostState nextState)
 
 void AdultGhostController::LoadAnimation()
 {
+    // 애니메이션 파일 로드
+    FBXResourceManager::Instance().LoadAnimationByPath(fbxData->GetFBXInfo(), "..\\Assets\\Resource\\Animation\\Adult_Ghost\\ani_attackdelay_ghost.fbx", "Idle");
+    FBXResourceManager::Instance().LoadAnimationByPath(fbxData->GetFBXInfo(), "..\\Assets\\Resource\\Animation\\Adult_Ghost\\ani_attackdelay_ghost.fbx", "Move");
+    FBXResourceManager::Instance().LoadAnimationByPath(fbxData->GetFBXInfo(), "..\\Assets\\Resource\\Animation\\Adult_Ghost\\ani_attackdelay_ghost.fbx", "Attack");
+    FBXResourceManager::Instance().LoadAnimationByPath(fbxData->GetFBXInfo(), "..\\Assets\\Resource\\Animation\\Adult_Ghost\\ani_attackdelay_ghost.fbx", "AttackDelay");
 
+    // 클립 생성
+    auto idleClip = animController->FindClip("Idle");
+    auto moveClip = animController->FindClip("Move");
+    auto attackClip = animController->FindClip("Attack");
+    auto attackDelayClip = animController->FindClip("AttackDelay");
+
+    if (!idleClip || !moveClip || !attackClip || !attackDelayClip)
+    {
+        cout << "[Player Animation] Clip not found!\n" << endl;
+        return;
+    }
+    else
+    {
+        cout << "[Player] Animation Load Success" << endl;
+    }
+
+    // 상태 등록
+    animController->AddState(std::make_unique<AnimationState>("Idle", idleClip, animController));
+    animController->AddState(std::make_unique<AnimationState>("Move", moveClip, animController));
+    animController->AddState(std::make_unique<AnimationState>("Attack", attackClip, animController));
+    animController->AddState(std::make_unique<AnimationState>("AttackDelay", attackDelayClip, animController));
 }
 
 
@@ -211,11 +240,27 @@ void AdultGhostController::ResetAgentForMove(float speed)
     agent->isWaiting = false;
 }
 
+
 // Ai가 Target을 보고 있는가? // TODO : FOV, Dist 값 매개변수로 받기 
-// TODO : 플레이어가 Hide 상태이면, Target을 못봐야 함
 bool AdultGhostController::IsSeeing(GameObject* target) const
 {
-    return target && vision->CheckVision(target, 90, 400);
+    if (!target)
+        return false;
+
+    // 플레이어인지 확인
+    auto* playerController = target->GetComponent<PlayerController>();
+    if (playerController)
+    {
+        // 플레이어가 Hide 상태면 감지하지 않음
+        if (playerController->GetPlayerState() == PlayerState::Hide)
+        {
+            std::cout << "[AdultGhostController] Player is Hiding, Can't See" << std::endl;
+            return false;
+        }
+    }
+
+    // 시야 체크
+    return vision->CheckVision(target, 90, 400);
 }
 
 // Object Getter 
@@ -246,6 +291,20 @@ bool AdultGhostController::IsPlayerInSenseRange()
     return Vector3::Distance(pPos, gPos) <= senseRadius;
 }
 
+void AdultGhostController::StartPostBabyCare()
+{
+    postCareTimer = 0.0f;
+    postCareActive = true;
+    if (target)
+    {
+        forcedTargetPos = target->GetTransform()->GetLocalPosition(); // 플레이어 위치 저장
+    }
+
+    // PostBabyCare 동안 기존 target 제거
+    target = nullptr;
+    agent->hasTarget = false;
+    agent->path.clear();
+}
 
 // -------------------------------------------------
 // Interaction

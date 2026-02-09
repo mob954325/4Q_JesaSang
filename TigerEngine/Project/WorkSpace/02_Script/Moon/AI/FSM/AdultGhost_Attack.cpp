@@ -11,6 +11,8 @@ void AdultGhost_Attack::Enter()
     attackTimer = 0.0f;
     didDamage = false;
 
+    adultGhost->animController->ChangeState("Attack");
+
     // 이동 완전 정지
     adultGhost->agent->externalControl = true;
     adultGhost->agent->path.clear();
@@ -53,8 +55,7 @@ void AdultGhost_Attack::Update(float deltaTime)
 {
     attackTimer += deltaTime;
 
-    // 0.8초쯤 데미지
-    if (!didDamage && attackTimer >= 0.8f)
+    if (!didDamage /*&& attackTimer >= 0.8f*/)
     {
         auto* player = adultGhost->GetPlayer();
         if (player)

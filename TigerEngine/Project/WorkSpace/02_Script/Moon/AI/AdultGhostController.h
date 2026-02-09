@@ -3,6 +3,10 @@
 #include "Components/AgentComponent.h"
 #include "Components/GridComponent.h"
 #include "Components/VisionComponent.h"
+#include "Components/FBXRenderer.h"
+#include "Components/FBXData.h"
+#include "Components/AnimationController.h"
+
 #include "Util/CollisionLayer.h"
 
 
@@ -35,6 +39,13 @@ enum class SearchReason
     None
 };
 
+// Chase 상태의 진입 경로
+enum class ChaseReason
+{
+    FromBabyCry,   
+    None
+};
+
 class AdultGhostController : public ScriptComponent
 {
     RTTR_ENABLE(ScriptComponent)
@@ -46,7 +57,9 @@ private:
     // Component 
     AgentComponent* agent = nullptr;
     VisionComponent* vision = nullptr;
-
+    FBXRenderer* fbxRenderer = nullptr;
+    FBXData* fbxData = nullptr;
+    AnimationController* animController = nullptr;
 
     // State
     AdultGhostState state = AdultGhostState::None;
@@ -62,6 +75,13 @@ private:
 
     // AI가 처음 배치된 좌표 (웨이 포인트)
     Vector3 initialPosition;
+
+
+    // Post BabyCare용
+    float postCareTimer = 0.0f;
+    bool postCareActive = false;
+    Vector3 forcedTargetPos;
+
 
 private:
     // FSM
@@ -87,8 +107,10 @@ public:
 
     // Helper
     void ResetAgentForMove(float speed);
+    // void SetAITarget(GameObject* newTarget);
     bool IsSeeing(GameObject* target) const;
     bool IsPlayerInSenseRange();
+    void StartPostBabyCare();
 
     GameObject* GetAITarget() const;
     GameObject* GetPlayer() const;
@@ -100,6 +122,34 @@ public:
 
     // 상태의 진입 경로 (어떤 이유로 들어왔는가)
     SearchReason searchReason = SearchReason::None;
+    ChaseReason  chaseReason = ChaseReason::None;
+
+
+private:
+    GameObject* target = nullptr;
+
+public:
+    // 외부에서 AdultGhost 상태를 가져오기
+    AdultGhostState GetState() const { return state; }
+
+    // 외부에서 AdultGhost 상태를 바꾸기
+    void ChangeStateTo(AdultGhostState nextState)
+    {
+        ChangeState(nextState);
+    }
+
+    // 외부에서 AdultGhost 타겟 지정
+    void SetAITarget(GameObject* newTarget)
+    {
+        if (!agent) return;
+
+        target = newTarget;    
+        agent->path.clear();
+        agent->hasTarget = true;
+    }
+
+    // 외부에서 타겟 확인
+    GameObject* GetTarget() const { return target; }
 
 public:
     // friend

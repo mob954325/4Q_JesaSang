@@ -157,7 +157,19 @@ void AgentComponent::OnFixedUpdate(float dt)
     else
     {
         dir.Normalize();
-        MoveAgent(dir, patrolSpeed, dt);
+
+        // 주변 Agent 회피
+        Vector3 sep = ComputeSeparationForce(dir);
+        Vector3 finalDir = dir + sep;
+        float len = finalDir.Length();
+        if (len > 0.0001f)
+        {
+            finalDir.x /= len;
+            finalDir.y /= len;
+            finalDir.z /= len;
+        }
+
+        MoveAgent(finalDir, patrolSpeed, dt);
     }
 
     //// 디버그 출력
@@ -198,4 +210,31 @@ void AgentComponent::MoveAgent(const Vector3& dir, float speed, float dt)
 void AgentComponent::SetWaitTime(float seconds)
 {
     waitDuration = seconds;
+}
+
+Vector3 AgentComponent::ComputeSeparationForce(const Vector3& moveDir)
+{
+    Vector3 separation(0, 0, 0);
+
+    auto& agents = AgentSystem::Instance().GetAgents(); // 모든 Agent 리스트
+    Vector3 myPos = GetOwner()->GetTransform()->GetWorldPosition();
+    float separationRadius = 120.0f; // 유령 크기 + 안전 거리
+
+    for (auto* other : agents)
+    {
+        if (other == this) continue; // 자기 자신 제외
+
+        Vector3 otherPos = other->GetOwner()->GetTransform()->GetWorldPosition();
+        Vector3 diff = myPos - otherPos;
+        diff.y = 0;
+
+        float dist = diff.Length();
+        if (dist < separationRadius && dist > 0.001f)
+        {
+            // 가까울수록 강하게 밀어내기
+            separation += diff / dist * (separationRadius - dist);
+        }
+    }
+
+    return separation;
 }

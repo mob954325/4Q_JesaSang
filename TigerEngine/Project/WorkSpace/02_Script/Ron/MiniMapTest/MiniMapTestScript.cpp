@@ -42,12 +42,10 @@ static Vector2 WorldToMiniMap(const Vector3& worldPos, const Vector3& worldMin, 
 
 void MiniMapTestScript::OnInitialize()
 {
-    std::cout << "[MiniMapTest] OnInitialize" << std::endl;
 }
 
 void MiniMapTestScript::OnStart()
 {
-    std::cout << "[MiniMapTest] OnStart" << std::endl;
 }
 
 void MiniMapTestScript::OnUpdate(float delta)
@@ -66,9 +64,6 @@ void MiniMapTestScript::OnUpdate(float delta)
 
     const Vector3 pos = transform->GetWorldPosition();
     playerMapPos = WorldToMiniMap(pos, worldMin, worldMax, mapSize);
-#if defined(_DEBUG)
-    HandleDebugInput(delta);
-#endif
 }
 
 float MiniMapTestScript::GetProgress01() const
@@ -132,15 +127,6 @@ void MiniMapTestScript::HandleDebugInput(float delta)
     if (isODown && !wasODown)
     {
         OnItemCollected();
-    }
-
-    if (isPDown && !wasPDown)
-    {
-        const char* ownerName = GetOwner() ? GetOwner()->GetName().c_str() : "null";
-        std::cout << "[MiniMapTest] owner=" << ownerName << " this=" << this
-            << " player map pos(" << playerMapPos.x << ", " << playerMapPos.y
-            << "), pieces " << collectedPieces << " / " << totalPieces
-            << ", items " << collectedItems << " / " << totalItems << std::endl;
     }
 
     wasNDown = isNDown;
