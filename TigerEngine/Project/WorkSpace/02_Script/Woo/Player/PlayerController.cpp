@@ -31,6 +31,7 @@
 #include "PlayerItemVisualizer.h"
 #include "../Manager/GameManager.h"
 #include "../CookingZone/CookingZone.h"
+#include "../../Ron/MiniMapTest/MiniMapManager.h"
 
 
 REGISTER_COMPONENT(PlayerController)
@@ -322,7 +323,19 @@ void PlayerController::SerachObjectInteraction(float dt)
             // 미니맵 연결
             if (item->itemType == ItemType::Piece)
             {
-                // TODO :: 아론님 트리거 코드 호출
+                // 미니맵
+                auto* ob = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("UI_MiniMap_Controller");
+                auto* minimap = ob->GetComponent<MiniMapManager>();
+                if(item->itemId == "0")
+                    minimap->TriggerPieceCollected(0);
+                else if (item->itemId == "1")
+                    minimap->TriggerPieceCollected(1);
+                else if (item->itemId == "2")
+                    minimap->TriggerPieceCollected(2);
+                else if (item->itemId == "3")
+                    minimap->TriggerPieceCollected(3);
+                else if (item->itemId == "4")
+                    minimap->TriggerPieceCollected(4);
             }
 
             // item get
