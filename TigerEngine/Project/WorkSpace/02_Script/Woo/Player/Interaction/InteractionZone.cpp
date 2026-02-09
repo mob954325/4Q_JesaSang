@@ -59,10 +59,9 @@ void InteractionZone::OnTriggerEnter(PhysicsComponent* other)
         if(searchOB && !searchOB->isSearched)
         {
             player->SetCurSearchObject(searchOB);
+            searchOB->UIInteractionOnOff(true);
             cout << "[InteractionZone] SearchObject In Interaction Zone" << endl;
         }
-
-        // TODO :: UI
     }
 
     // Hide Object
@@ -107,10 +106,9 @@ void InteractionZone::OnTriggerExit(PhysicsComponent* other)
         if (searchOB && !searchOB->isSearched)
         {
             player->SetCurSearchObject(nullptr);
+            searchOB->UIInteractionOnOff(false);
             cout << "[InteractionZone] SearchObject Out Interaction Zone" << endl;
         }
-
-        // TODO :: UI
     }
 
     // Hide Object

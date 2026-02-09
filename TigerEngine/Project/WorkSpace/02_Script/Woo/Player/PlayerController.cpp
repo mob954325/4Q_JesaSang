@@ -306,6 +306,9 @@ void PlayerController::SerachObjectInteraction(float dt)
     float progress = searchTimer / searchTime;
     if (progress > 1.0f) progress = 1.0f;
 
+    // UI - interaction
+    curSerachObject->UIGaugeUpate(progress);
+
     // search object interaction
     if (searchTimer >= searchTime)
     {

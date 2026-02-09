@@ -45,43 +45,26 @@ void InteractionSensor::Deserialize(nlohmann::json data)
 
 void InteractionSensor::OnTriggerEnter(PhysicsComponent* other)
 {
-    if (!other || !other->GetOwner())
-        return;
+    GameObject* object = other->GetOwner();
 
     // 수색오브젝트 감지 on
-    if (other->GetOwner()->GetName() == "SearchObject")
+    if (object->GetName() == "SearchObject")
     {
-        Transform* child = other->GetOwner()->GetChildByName("Image_SensorOn");
-        if (!child)
-        {
-            cout << "[InteractionSensor] Missing Image_SensorOn!" << endl;
-            return;
-        }
-
-        GameObject* image_sensorOn = child->GetOwner();
-        if (image_sensorOn)
-            image_sensorOn->SetActive(true);
+        auto* so = object->GetComponent<SearchObject>();
+        if (so)
+            so->UISensorOnOff(true);
     }
 }
 
 void InteractionSensor::OnTriggerExit(PhysicsComponent* other)
 {
-    if (!other || !other->GetOwner())
-        return;
+    GameObject* object = other->GetOwner();
 
     // 수색오브젝트 감지 off
-    if (other->GetOwner()->GetName() == "SearchObject")
+    if (object->GetName() == "SearchObject")
     {
-
-        Transform* child = other->GetOwner()->GetChildByName("Image_SensorOn");
-        if (!child)
-        {
-            cout << "[InteractionSensor] Missing Image_SensorOn!" << endl;
-            return;
-        }
-
-        GameObject* image_sensorOn = child->GetOwner();
-        if (image_sensorOn)
-            image_sensorOn->SetActive(false);
+        auto* so = object->GetComponent<SearchObject>();
+        if (so)
+            so->UISensorOnOff(false);
     }
 }
