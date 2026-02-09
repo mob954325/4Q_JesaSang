@@ -8,6 +8,7 @@
 #include "Components/Transform.h"
 #include "System/TimeSystem.h"
 #include "../../Moon/AI/AdultGhostController.h"
+#include "../../Moon/AI/BabyGhostController.h"
 
 REGISTER_COMPONENT(TrapObject)
 
@@ -143,7 +144,7 @@ void TrapObject::NotifyAIInRange()
             // 파동 범위 안에 AI가 있다면 호출
             if (dist <= curWaveRadius)
             {
-                bg->GetComponent<AdultGhostController>()->OnPlayerNoise(originPos);
+                bg->GetComponent<BabyGhostController>()->OnPlayerNoise(originPos);
             }
         }
     }

@@ -77,7 +77,6 @@ public:
 
     // Interaction
     void OnPlayerNoise(const Vector3& noiseWorldPos); // 플레이어에서 호출 
-    void OnAttackHit(); // 유령 충돌 오브젝트에서 호출
 
     // Helper
     void ResetAgentForMove(float speed);

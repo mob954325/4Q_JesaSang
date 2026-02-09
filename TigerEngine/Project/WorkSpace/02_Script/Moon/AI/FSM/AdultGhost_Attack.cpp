@@ -53,8 +53,7 @@ void AdultGhost_Attack::Update(float deltaTime)
 {
     attackTimer += deltaTime;
 
-    // 0.8초쯤 데미지
-    if (!didDamage && attackTimer >= 0.8f)
+    if (!didDamage /*&& attackTimer >= 0.8f*/)
     {
         auto* player = adultGhost->GetPlayer();
         if (player)
