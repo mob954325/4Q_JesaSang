@@ -55,7 +55,8 @@ private:
     bool  IsSpaceDownOnce() const; 
     void  EvaluateOnce();          
 
-
+    Image* animImage{};
+    void SetAnimPathes();
 public:
     Game_Cutting() = default;
     ~Game_Cutting() override = default;
@@ -63,5 +64,7 @@ public:
     void StartGame() override;
     void UpdateGame(float delta)override;
     void EndGame() override;
+
+    void UpdateAnimation(float delta) override;
 };
 

@@ -189,6 +189,7 @@ void Game_FireControl::StartGame()
     foodPoint = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("2_Image_FoodPoint")->GetComponent<RectTransform>();
     spacbar = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("2_Image_SpaceBar")->GetComponent<RectTransform>();
     gauge = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("2_Image_Gauge")->GetComponent<Image>();
+    animImage = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("2_Image_CutAnimation")->GetComponent<Image>();
 
     if (!foodPoint || !spacbar || !gauge)
     {
@@ -215,6 +216,7 @@ void Game_FireControl::StartGame()
     foodStopped = false;
     foodStopTimer = 0.0f;
     PickNextFoodTarget();
+    SetAnimPathes();
 
     // bar init
     barVel = 0.0f;
@@ -235,4 +237,34 @@ void Game_FireControl::EndGame()
 {
     std::cout << "[Mini Game 2] : Game_FireControl End!" << std::endl;
 
+}
+
+void Game_FireControl::UpdateAnimation(float delta)
+{
+    if (animTimer <= 0.0f)
+    {
+        animTimer = changeAnimTime;
+        currAnimIndex++;
+        if (currAnimIndex >= currAnimPathes.size()) // 인덱스 초과 시 0으로
+        {
+            currAnimIndex = 0;
+        }
+
+        animImage->ChangeData(currAnimPathes[currAnimIndex]);
+    }
+
+    animTimer -= delta;
+}
+
+void Game_FireControl::SetAnimPathes()
+{
+    // 이미지 패스 생성
+    currAnimPathes.resize(3);
+
+    currAnimPathes[0] = "..\\Assets\\Resource\\UI\\CutScenes\\happy_ending_02.png";
+    currAnimPathes[1] = "..\\Assets\\Resource\\UI\\CutScenes\\happy_ending_03.png";
+    currAnimPathes[2] = "..\\Assets\\Resource\\UI\\CutScenes\\happy_ending_04.png";
+
+    if (animImage)
+        animImage->ChangeData(currAnimPathes[0]); // 첫번째로 초기화
 }

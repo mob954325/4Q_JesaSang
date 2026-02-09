@@ -94,6 +94,7 @@ void MiniGameManager::OnUpdate(float delta)
 
     // game update
     currentMiniGame->UpdateGame(delta);
+    currentMiniGame->UpdateAnimation(delta); // 애니메이션 실행
 
     // 게임이 끝나면 대기모드 진입
     if (currentMiniGame->IsFinished())
