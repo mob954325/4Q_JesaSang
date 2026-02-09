@@ -24,7 +24,7 @@ void BabyGhost_Cry::ChangeStateLogic()
         cout << "[BabyGhost_Cry] Care completed, returning to Patrol" << endl;
         
         // 아기 유령 복귀 
-        babyGhost->ChangeState(BabyGhostState::Patrol);
+        babyGhost->ChangeState(BabyGhostState::Return);
 
         // 돌봐주는 유령 후속 행동 시작
         if (caringAdult)
@@ -75,7 +75,7 @@ void BabyGhost_Cry::Update(float deltaTime)
     if (caringAdult)
     {
         float dist = (cryPos - caringAdult->GetOwner()->GetTransform()->GetWorldPosition()).Length();
-        const float arriveThreshold = 120.0f; // 근접 기준
+        const float arriveThreshold = 150.0f; // 근접 기준
         if (dist <= arriveThreshold)
         {
             adultArrived = true;

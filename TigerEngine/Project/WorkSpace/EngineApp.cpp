@@ -257,6 +257,7 @@ void EngineApp::OnFixedUpdate()
             PhysicsSystem::Instance().Simulate(fixedDt);
             AgentSystem::Instance().FixedUpdate(fixedDt);
         }
+        GridSystem::Instance().FixedUpdate(fixedDt);
 
         m_PhysicsAccumulator -= fixedDt;
     }

@@ -14,6 +14,8 @@ public:
     void Register(GridComponent* g);
     void UnRegister(GridComponent* g);
 
+    void FixedUpdate(float delta);
+
     GridComponent* GetMainGrid()
     {
         if (grids.empty()) return nullptr;
