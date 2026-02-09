@@ -1,7 +1,9 @@
 #include "HideObject.h"
 #include "Util/JsonHelper.h"
 #include "Util/ComponentAutoRegister.h"
+#include "Components/UI/Image.h"
 #include "../Player/PlayerController.h"
+
 
 REGISTER_COMPONENT(HideObject)
 
@@ -14,6 +16,25 @@ RTTR_REGISTRATION
 
 void HideObject::OnStart()
 {
+    // get child ui component
+    auto t1 = GetOwner()->GetChildByName("Image_SensorOn");
+    auto t2 = GetOwner()->GetChildByName("Image_InteractionOn");
+    if (!t1 || !t2)
+    {
+        cout << "[HideObject] Missing child transforms!" << endl;
+        return;
+    }
+
+    image_sensorOn = t1->GetOwner()->GetComponent<Image>();
+    image_interactionOn = t2->GetOwner()->GetComponent<Image>();
+
+    if (!image_sensorOn || !image_interactionOn)
+    {
+        cout << "[HideObject] Missing Image component!" << endl;
+        return;
+    }
+
+    // init
     hideDurationTimer = 0.0f;
     reHideCoolTimer = reHideCoolTime;
     isHiding = false;
@@ -73,6 +94,9 @@ void HideObject::StartHide(PlayerController* p)
     hideDurationTimer = 0.0f;
     reHideReady = false;
     reHideCoolTimer = 0.0f;
+
+    UISensorOnOff(false);
+    UIInteractionOnOff(false);
 }
 
 void HideObject::StopHide()
@@ -92,6 +116,21 @@ void HideObject::StopHide()
     // 안전 처리
     player = nullptr;
 
+    UISensorOnOff(true);
+    UIInteractionOnOff(true);
+
     cout << "[HideObject] Stop Hide Interrupted" << endl;
 }
 
+void HideObject::UISensorOnOff(bool flag)
+{
+    if (!image_sensorOn) return;
+    if (flag && !IsPossibleHide()) return;
+    image_sensorOn->SetActive(flag);
+}
+
+void HideObject::UIInteractionOnOff(bool flag)
+{
+    if (!image_interactionOn) return;
+    image_interactionOn->SetActive(flag);
+}

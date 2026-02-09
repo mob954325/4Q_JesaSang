@@ -47,10 +47,18 @@ void InteractionSensor::OnTriggerEnter(PhysicsComponent* other)
 {
     GameObject* object = other->GetOwner();
 
-    // 수색오브젝트 감지 on
+    // 수색 오브젝트 감지 on
     if (object->GetName() == "SearchObject")
     {
         auto* so = object->GetComponent<SearchObject>();
+        if (so)
+            so->UISensorOnOff(true);
+    }
+
+    // 은신 오브젝트 감지 on
+    if (object->GetName() == "HideObject")
+    {
+        auto* so = object->GetComponent<HideObject>();
         if (so)
             so->UISensorOnOff(true);
     }
@@ -60,10 +68,18 @@ void InteractionSensor::OnTriggerExit(PhysicsComponent* other)
 {
     GameObject* object = other->GetOwner();
 
-    // 수색오브젝트 감지 off
+    // 수색 오브젝트 감지 off
     if (object->GetName() == "SearchObject")
     {
         auto* so = object->GetComponent<SearchObject>();
+        if (so)
+            so->UISensorOnOff(false);
+    }
+
+    // 은신 오브젝트 감지 off
+    if (object->GetName() == "HideObject")
+    {
+        auto* so = object->GetComponent<HideObject>();
         if (so)
             so->UISensorOnOff(false);
     }

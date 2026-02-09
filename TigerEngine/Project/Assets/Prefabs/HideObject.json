@@ -2,21 +2,21 @@
   "prefab": [
     {
       "Active": true,
-      "ID": 1035,
+      "ID": 1541,
       "Name": "HideObject",
       "ParentID": -1,
       "components": [
         {
           "properties": {
             "Position": [
-              113.4000015258789,
-              -110.0,
-              100.0
+              -111.11873626708984,
+              0.0,
+              -287.77490234375
             ],
             "Rotation": [
+              -0.0,
               0.0,
-              0.0,
-              0.0
+              -0.0
             ],
             "Scale": [
               1.0,
@@ -104,6 +104,182 @@
             "Active": true
           },
           "type": "HideObject"
+        }
+      ]
+    },
+    {
+      "Active": false,
+      "ID": 1660,
+      "Name": "Image_SensorOn",
+      "ParentID": 1541,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              30.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              3.1415927410125732,
+              3.1415927410125732
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "Pivot": [
+              0.5,
+              0.5
+            ],
+            "Pos": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "Size": [
+              25.0,
+              25.0
+            ]
+          },
+          "type": "RectTransform"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "color": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "drawSpacetype": "World",
+            "fillAmount": 1.0,
+            "imageType": "Simple",
+            "isBillboard": true,
+            "isMouseCheck": false,
+            "path": "..\\Assets\\Resource\\UI\\Interaction\\point.png",
+            "sliceBorderPx": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "type": "Simple",
+            "zOrder": 0
+          },
+          "type": "Image"
+        }
+      ]
+    },
+    {
+      "Active": false,
+      "ID": 1661,
+      "Name": "Image_InteractionOn",
+      "ParentID": 1541,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              30.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              3.1415927410125732,
+              3.1415927410125732
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "Pivot": [
+              0.5,
+              0.5
+            ],
+            "Pos": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "Size": [
+              25.0,
+              25.0
+            ]
+          },
+          "type": "RectTransform"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "color": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "drawSpacetype": "World",
+            "fillAmount": 1.0,
+            "imageType": "Simple",
+            "isBillboard": true,
+            "isMouseCheck": false,
+            "path": "..\\Assets\\Resource\\UI\\Interaction\\F.png",
+            "sliceBorderPx": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "type": "Simple",
+            "zOrder": 1
+          },
+          "type": "Image"
         }
       ]
     }

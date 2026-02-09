@@ -71,6 +71,7 @@ void InteractionZone::OnTriggerEnter(PhysicsComponent* other)
         if (hideOB)
         {
             player->SetCurHideObject(hideOB);
+            hideOB->UIInteractionOnOff(true);
             cout << "[InteractionZone] HideObject In Interaction Zone" << endl;
         }
     }
@@ -118,6 +119,7 @@ void InteractionZone::OnTriggerExit(PhysicsComponent* other)
         if (hideOB)
         {
             player->SetCurHideObject(nullptr);
+            hideOB->UIInteractionOnOff(false);
             cout << "[InteractionZone] HideObject Out Interaction Zone" << endl;
         }
     }
