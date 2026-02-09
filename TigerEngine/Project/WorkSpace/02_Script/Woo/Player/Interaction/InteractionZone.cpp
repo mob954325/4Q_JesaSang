@@ -1,10 +1,12 @@
 #include "InteractionZone.h"
 #include "Util/JsonHelper.h"
 #include "Util/ComponentAutoRegister.h"
+#include "EngineSystem/PhysicsSystem.h"
+
 #include "Object/GameObject.h"
 #include "../../Object/SearchObject.h"
 #include "../../Object/HideObject.h"
-#include "EngineSystem/PhysicsSystem.h"
+
 
 REGISTER_COMPONENT(InteractionZone)
 
@@ -33,7 +35,7 @@ void InteractionZone::OnFixedUpdate(float delta)
     // transform->physics udpate
     auto ob = GetOwner();
     auto tr = ob->GetTransform();
-    Vector3 upatePos = tr->GetParent()->GetOwner()->GetTransform()->GetWorldPosition() + Vector3(0,20,0);
+    Vector3 upatePos = tr->GetParent()->GetOwner()->GetTransform()->GetWorldPosition() + Vector3(0,70,0);
     tr->SetPosition(upatePos);
     GetOwner()->GetComponent<PhysicsComponent>()->SyncToPhysics();
 }
