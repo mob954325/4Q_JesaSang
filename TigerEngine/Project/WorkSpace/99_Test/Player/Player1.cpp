@@ -23,16 +23,16 @@ RTTR_REGISTRATION
 void Player1::OnInitialize()
 {
     // cout << "== Player1 init ==\n";
-    weapon = GetOwner()->AddComponent<Weapon>();
+    // weapon = GetOwner()->AddComponent<Weapon>();
 
     // cout << "GameObject add\n";
-    auto weaponObj = SceneUtil::CreateGameObject("TestWeapon");
+    // auto weaponObj = SceneUtil::CreateGameObject("TestWeapon");
 
-    GetOwner()->GetTransform()->AddChild(weaponObj->GetTransform());
-    auto objIndex = GetOwner()->GetChildByIndex(0);
+    //GetOwner()->GetTransform()->AddChild(weaponObj->GetTransform());
+    // auto objIndex = GetOwner()->GetChildByIndex(0);
     // cout << "Find Obj index" << objIndex << " : " << objIndex->GetName() << "\n";
 
-    auto objName = GetOwner()->GetChildByName("TestWeapon");
+    //auto objName = GetOwner()->GetChildByName("TestWeapon");
     // cout << "Find Obj name " << objName->GetName() << " : " << objIndex->GetName() << "\n";
 
     // cout << "[Player1 | PlayModeTest] : OnInitalize() 1\n";    
@@ -41,8 +41,8 @@ void Player1::OnInitialize()
 void Player1::OnEnable()
 {
     // cout << "[Player1 | PlayModeTest] : OnEnable() 2\n";    
-    soket = SceneUtil::CreateGameObject("PlayerSoket");
-    soket->SetParent(GetOwner());
+    // soket = SceneUtil::CreateGameObject("PlayerSoket");
+    // soket->SetParent(GetOwner());
 
 }
 
@@ -56,6 +56,14 @@ void Player1::OnStart()
 
     // GameObject* instantiated = PrefabUtil::Instantiate("Test1");
     // instantiated->GetTransform()->SetParent(this->GetOwner()->GetTransform());
+    audioClip = GetOwner()->GetComponent<AudioSourceComponent>();
+
+    if (audioClip)
+    {
+        audioClip->Play();
+        bool isloop = audioClip->GetLoop();
+        audioClip->SetLoop(!isloop);
+    }
 }
 
 void Player1::OnDisable()
@@ -100,6 +108,32 @@ void Player1::OnUpdate(float delta)
         CameraSystem::Instance().SetCurrCameraByName("cam2");
     if (Input::GetKey(DirectX::Keyboard::Keys::C))
         CameraSystem::Instance().SetCurrCameraByName("cam3");
+
+    if (Input::GetKeyDown(DirectX::Keyboard::I))
+    {
+        audioClip->Pause(true);
+    }
+
+    if (Input::GetKeyDown(DirectX::Keyboard::O))
+    {
+        audioClip->Pause(false);
+    }
+
+    if (Input::GetKeyDown(DirectX::Keyboard::P))
+    {
+        audioClip->Stop();
+    }
+
+    if (Input::GetKeyDown(DirectX::Keyboard::L))
+    {
+        audioClip->Play();
+    }
+
+    if (Input::GetKeyDown(DirectX::Keyboard::K))
+    {
+        bool isloop = audioClip->GetLoop();
+        audioClip->SetLoop(!isloop);
+    }
 }
 
 nlohmann::json Player1::Serialize()

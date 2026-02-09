@@ -2,6 +2,7 @@
 #include "System/InputSystem.h"
 #include "Components/ScriptComponent.h"
 #include "Weapon.h"
+#include "../Engine/Components/AudioSourceComponent.h"
 
 /// <summary>
 /// 클라이언트 컴포넌트 테스트용 클래스.
@@ -25,7 +26,6 @@ public:
     float b = 0.0f;
 
 private:
-    GameObject* soket{};
-    Weapon* weapon{};
+    AudioSourceComponent* audioClip{};
 };
 
