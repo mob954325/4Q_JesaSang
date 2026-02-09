@@ -134,6 +134,26 @@ void Player1::OnUpdate(float delta)
         bool isloop = audioClip->GetLoop();
         audioClip->SetLoop(!isloop);
     }
+
+    // sync 
+
+    auto pos = GetOwner()->GetTransform()->GetWorldPosition();
+    auto fwd = GetOwner()->GetTransform()->GetForward();
+    auto up = GetOwner()->GetTransform()->GetUp();
+    Vector3 vel = Vector3::Zero;
+    if (hasPrev && delta > 0.0001f)
+        vel = (pos - prevPos) / delta * 0.01f;
+
+    prevPos = pos;
+    hasPrev = true;
+
+    AudioTransform t{};
+    t.position = { pos.x, pos.y, pos.z };       // 위치
+    t.forward = { fwd.x, fwd.y, fwd.z };        // forward
+    t.up = { up.x,  up.y,  up.z };              // up vector
+    t.velocity = { vel.x, vel.y, vel.z };       // "초당 이동량"(world-space). doppler 등에 사용됨. ( 청자(Listener)가 얼마나 / 어느 방향으로 움직이는지 알려주는 값 
+
+    audioClip->SetFallback(t); // AudioListenerComponent가 Update()에서 적용(Engine/Components/AudioListenerComponent.cpp:61)
 }
 
 nlohmann::json Player1::Serialize()
