@@ -75,7 +75,7 @@ void BabyGhost_Cry::Update(float deltaTime)
     if (caringAdult)
     {
         float dist = (cryPos - caringAdult->GetOwner()->GetTransform()->GetWorldPosition()).Length();
-        const float arriveThreshold = 100.0f; // 근접 기준
+        const float arriveThreshold = 120.0f; // 근접 기준
         if (dist <= arriveThreshold)
         {
             adultArrived = true;

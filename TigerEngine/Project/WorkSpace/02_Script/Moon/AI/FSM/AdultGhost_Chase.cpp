@@ -29,6 +29,10 @@ void AdultGhost_Chase::ChangeStateLogic()
     if (adultGhost->state == AdultGhostState::Attack)
         return;
 
+    // PostBabyCare 중이면 절대 포기 금지
+    if (adultGhost->postCareActive)
+        return;
+
     // 최소 추격 시간 이후에만 추격 포기 가능함 
     if (CanGiveUpChase())
     {
@@ -38,8 +42,6 @@ void AdultGhost_Chase::ChangeStateLogic()
         {
             int px, py;
             auto wp = adultGhost->target->GetTransform()->GetLocalPosition();
-
-            // std::cout << "[Chase] Last Player World Pos = " << wp.x << ", " << wp.y << ", " << wp.z << std::endl;
 
             if (grid->WorldToGridFromCenter(wp, px, py))
             {
@@ -72,7 +74,7 @@ void AdultGhost_Chase::Update(float deltaTime)
     // Post BabyCare 진행 중이면
     if (adultGhost->postCareActive)
     {
-        adultGhost->postCareTimer += deltaTime;
+        adultGhost->postCareTimer += deltaTime; 
 
         // 강제 위치 이동: target을 null로 하고 forcedTargetPos를 agent 목표로
         auto grid = GridSystem::Instance().GetMainGrid();
@@ -176,9 +178,10 @@ bool AdultGhost_Chase::CanGiveUpChase() const
     if (chaseTimer < minChaseTime)
         return false;
 
-    if (adultGhost->chaseReason == ChaseReason::FromBabyCry)
+    // BabyCry에서 추격 중이면 포기 금지
+    if (adultGhost->chaseReason == ChaseReason::FromBabyCry || adultGhost->postCareActive)
     {
-        return false; // BabyCry target이면 달래기 끝날때까지 포기 금지
+        return false;
     }
 
     // 일반적인 경우 : 시야 밖이면 포기 

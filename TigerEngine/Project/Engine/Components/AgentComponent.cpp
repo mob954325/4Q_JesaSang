@@ -218,7 +218,7 @@ Vector3 AgentComponent::ComputeSeparationForce(const Vector3& moveDir)
 
     auto& agents = AgentSystem::Instance().GetAgents(); // 모든 Agent 리스트
     Vector3 myPos = GetOwner()->GetTransform()->GetWorldPosition();
-    float separationRadius = 100.0f; // 유령 크기 + 안전 거리
+    float separationRadius = 120.0f; // 유령 크기 + 안전 거리
 
     for (auto* other : agents)
     {
