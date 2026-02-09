@@ -3,7 +3,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 79,
+        "ID": 82,
         "Name": "DirectionalLight(Sun)",
         "ParentID": -1,
         "components": [
@@ -57,7 +57,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 80,
+        "ID": 83,
         "Name": "Ground",
         "ParentID": -1,
         "components": [
@@ -138,7 +138,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 81,
+        "ID": 84,
         "Name": "Player",
         "ParentID": -1,
         "components": [
@@ -231,9 +231,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 82,
+        "ID": 85,
         "Name": "NewGameObject",
-        "ParentID": 81,
+        "ParentID": 84,
         "components": [
           {
             "properties": {
@@ -322,9 +322,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 83,
+        "ID": 86,
         "Name": "text",
-        "ParentID": 82,
+        "ParentID": 85,
         "components": [
           {
             "properties": {
@@ -409,7 +409,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 84,
+        "ID": 87,
         "Name": "SoundObject",
         "ParentID": -1,
         "components": [
@@ -461,7 +461,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 86,
+        "ID": 88,
         "Name": "NewGameObject",
         "ParentID": -1,
         "components": [
@@ -489,6 +489,91 @@
             "properties": {
               "Active": true,
               "allFinished": false,
+              "emitters": [
+                {
+                  "billboard": "ScreenFacing",
+                  "burstCount": 1,
+                  "coneAngleDeg": 30.0,
+                  "duration": 0.0,
+                  "dynamicData": {
+                    "angularMax": 0.0,
+                    "angularMin": 0.0,
+                    "colorMax": [
+                      1.0,
+                      1.0,
+                      1.0,
+                      1.0
+                    ],
+                    "colorMin": [
+                      0.0,
+                      0.0,
+                      0.0,
+                      1.0
+                    ],
+                    "lifeMax": 1.0,
+                    "lifeMin": 0.5,
+                    "rotationMax": 0.0,
+                    "rotationMin": 0.0,
+                    "sizeMax": [
+                      1.0,
+                      1.0
+                    ],
+                    "sizeMin": [
+                      1.0,
+                      1.0
+                    ],
+                    "speedMax": 10.0,
+                    "speedMin": 0.0
+                  },
+                  "emitDir": [
+                    0.0,
+                    1.0,
+                    0.0
+                  ],
+                  "emitRate": 0.0,
+                  "enabled": true,
+                  "filpbookPlayMode": "Loop",
+                  "fixedData": {
+                    "rotation": 0.49000000953674316,
+                    "size": [
+                      1.0,
+                      1.0
+                    ],
+                    "startColor": [
+                      1.0,
+                      1.0,
+                      1.0,
+                      1.0
+                    ]
+                  },
+                  "holdTime": 5.0,
+                  "infinite": 999999.0,
+                  "localOffset": [
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  "looping": true,
+                  "maxParticles": 256,
+                  "particleMode": "Fixed",
+                  "playing": true,
+                  "position": [
+                    0.0,
+                    156.3861083984375,
+                    0.0
+                  ],
+                  "sheet": {
+                    "baseSizeScale": 10.0,
+                    "cols": 5,
+                    "fps": 60.0,
+                    "frameCount": 25,
+                    "loop": true,
+                    "rows": 5,
+                    "texturePath": "..\\Assets\\Resource\\Effect\\Explosion00_5x5.tga"
+                  },
+                  "velocityShape": "Sphere"
+                }
+              ],
               "enabled": true,
               "looping": true,
               "playing": true

@@ -44,6 +44,10 @@ void EffectPass::Execute(ComPtr<ID3D11DeviceContext>& context, RenderQueue& queu
     for (Effect* fx : effects)
     {
         if (!fx) continue;
+        if (!fx->transform)
+            fx->OnInitialize();
+        if (!fx->transform)
+            continue;
         fx->Update();
     }
 
@@ -54,7 +58,7 @@ void EffectPass::Execute(ComPtr<ID3D11DeviceContext>& context, RenderQueue& queu
     auto* camOwner = cam->GetOwner();
     if (!camOwner || !camOwner->GetTransform()) return;
 
-    const Vector3 camPos = camOwner->GetTransform()->GetLocalPosition();
+    const Vector3 camPos = camOwner->GetTransform()->GetWorldPosition();
     const Vector3 camForward = cam->GetForward();
 
     for (Effect* fx : effects)
@@ -74,11 +78,9 @@ void EffectPass::Execute(ComPtr<ID3D11DeviceContext>& context, RenderQueue& queu
         }
         if (!hasAnyParticles) continue;
 
-        Vector3 dist{};
-        if (fx->transform)
-        {
-            fx->transform->GetWorldPosition() - camPos;
-        }
+        if (!fx->transform) continue;
+
+        Vector3 dist = fx->transform->GetWorldPosition() - camPos;
         float key = dist.Dot(camForward);
         sortedFx.push_back({ fx, key });
     }
