@@ -15,7 +15,6 @@
 
 #include "../Player/PlayerController.h"
 
-
 REGISTER_COMPONENT(MiniGameManager)
 
 RTTR_REGISTRATION
@@ -33,11 +32,14 @@ void MiniGameManager::OnInitialize()
 void MiniGameManager::OnStart()
 {
     miniGameParent = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("UI_MiniGame")->GetComponent<RectTransform>();
+    success = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("Image_Result_Success");
+    fail = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("Image_Result_Fail");
     miniGame1_Parent = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("UI_MiniGame1");
     miniGame2_Parent = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("UI_MiniGame2");
     miniGame3_Parent = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("UI_MiniGame3");
 
-    if (!miniGameParent || !miniGame1_Parent || !miniGame2_Parent || !miniGame3_Parent)
+    if (!miniGameParent || !success || !fail ||
+        !miniGame1_Parent || !miniGame2_Parent || !miniGame3_Parent)
     {
         cout << "[MiniGameManager] Missing ui objects...!!!" << endl;
     }
@@ -48,6 +50,12 @@ void MiniGameManager::OnStart()
 
     popupTargetPos = popupHiddenPos;
     miniGameParent->SetPos(popupHiddenPos);
+
+    // result pause init
+    isResultWaiting = false;
+    resultWaitTimer = 0.0f;
+    cachedResultSuccess = false;
+    pendingEnd = false;
 }
 
 void MiniGameManager::OnUpdate(float delta)
@@ -55,18 +63,51 @@ void MiniGameManager::OnUpdate(float delta)
     // popup move
     UpdatePopup(delta);
 
-    // game update
-    if (isPlaying && currentMiniGame)
-    {
-        currentMiniGame->UpdateGame(delta);
-        if (currentMiniGame->IsFinished())
-        {
-            EndMiniGame(currentMiniGame->IsSuccess());
-        }
-    }
-
     // stop cheking
     StopChecking();
+
+    // return (none game)
+    if (!isPlaying || !currentMiniGame) return;
+
+    // -------------------------
+    // [Result Pause]
+    // 성공/실패가 난 뒤, 잠깐(2초) 결과를 보여주고 팝업을 내리기만 한다.
+    // 팝업이 완전히 내려간 뒤 EndMiniGame() 호출은 UpdatePopup()에서 처리.
+    // -------------------------
+    if (isResultWaiting)
+    {
+        resultWaitTimer += delta;
+        if (resultWaitTimer >= resultWaitDuration)
+        {
+            isResultWaiting = false;
+            resultWaitTimer = 0.0f;
+
+            // 결과 저장(연출/반환용)
+            cachedResultSuccess = currentMiniGame ? currentMiniGame->IsSuccess() : cachedResultSuccess;
+
+            // 이제 팝업을 내리고, 완전히 내려간 뒤 EndMiniGame 호출하도록 플래그만 세팅
+            pendingEnd = true;
+            HidePopup();
+        }
+        return; // 대기 중엔 게임 업데이트 안 함(멈춘 것처럼 보임)
+    }
+
+    // game update
+    currentMiniGame->UpdateGame(delta);
+
+    // 게임이 끝나면 대기모드 진입
+    if (currentMiniGame->IsFinished())
+    {
+        cachedResultSuccess = currentMiniGame->IsSuccess();
+        isResultWaiting = true;
+        resultWaitTimer = 0.0f;
+
+        // 게임 결과 UI
+        if(cachedResultSuccess)
+            success->SetActive(true);
+        else
+            fail->SetActive(true);
+    }
 }
 
 void MiniGameManager::OnDestory()
@@ -91,15 +132,21 @@ std::unique_ptr<IMiniGame> MiniGameManager::CreateMinigameForIngredientId(const 
     if (foodId == "Ingredient_Apple" || foodId == "Ingredient_Pear")
     {
         miniGame1_Parent->SetActive(true);
+        miniGame2_Parent->SetActive(false);
+        miniGame3_Parent->SetActive(false);
         return std::make_unique<Game_Cutting>();
     }
     if (foodId == "Ingredient_Batter" || foodId == "Ingredient_Tofu")
     {
+        miniGame1_Parent->SetActive(false);
         miniGame2_Parent->SetActive(true);
+        miniGame3_Parent->SetActive(false);
         return std::make_unique<Game_FireControl>();
     }
     if (foodId == "Ingredient_Sanjeok" || foodId == "Ingredient_Donggeurangttaeng")
     {
+        miniGame1_Parent->SetActive(false);
+        miniGame2_Parent->SetActive(false);
         miniGame3_Parent->SetActive(true);
         return std::make_unique<Game_Assembling>();
     }
@@ -114,7 +161,7 @@ void MiniGameManager::CleanupMinigame()
         currentMiniGame->EndGame();
         currentMiniGame.reset();
     }
-    curIngredient.reset(); 
+    curIngredient.reset();
 }
 
 void MiniGameManager::StartMiniGame(std::unique_ptr<IItem> ingredient)
@@ -125,11 +172,22 @@ void MiniGameManager::StartMiniGame(std::unique_ptr<IItem> ingredient)
     if (ingredient->itemType != ItemType::Ingredient)
         return;
 
+    miniGameParent->GetOwner()->SetActive(true);
+    success->SetActive(false);
+    fail->SetActive(false);
+
+    // ---- result pause reset ----
+    isResultWaiting = false;
+    resultWaitTimer = 0.0f;
+    cachedResultSuccess = false;
+    pendingEnd = false;
+    // ----------------------------
+
     // mini game create
     const std::string foodId = ingredient->itemId;
     auto newGame = CreateMinigameForIngredientId(foodId);
     if (!newGame) return;
-        
+
     // ownership
     curIngredient = std::move(ingredient);
     currentMiniGame = std::move(newGame);
@@ -146,9 +204,6 @@ void MiniGameManager::StartMiniGame(std::unique_ptr<IItem> ingredient)
 void MiniGameManager::EndMiniGame(bool isSuccess)
 {
     isPlaying = false;
-
-    // popup ui
-    HidePopup();
 
     // end game
     if (currentMiniGame)
@@ -176,7 +231,13 @@ void MiniGameManager::EndMiniGame(bool isSuccess)
 // 미니게임 강제 종료시 (재료만 반환)
 void MiniGameManager::StopMiniGame()
 {
+    // 강제종료는 "대기 없이 즉시 종료" (원하는 동작)
     isPlaying = false;
+
+    // result pause reset (혹시 성공/실패 대기중이었다면 끊어줌)
+    isResultWaiting = false;
+    resultWaitTimer = 0.0f;
+    pendingEnd = false;
 
     // popup ui
     HidePopup();
@@ -190,7 +251,7 @@ void MiniGameManager::StopMiniGame()
 
     // get playercontroller
     auto* pc = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("Player")->GetComponent<PlayerController>();
-    if (!pc) 
+    if (!pc)
     {
         cout << "[MiniGameManager] Missing Player Controller!" << endl;
         return;
@@ -206,7 +267,7 @@ void MiniGameManager::StopMiniGame()
 
 void MiniGameManager::StopChecking()
 {
-    if (Input::GetKeyDown(stop_key))
+    if (Input::GetKeyDown(stop_key) && isPlaying)
     {
         StopMiniGame();
     }
@@ -216,25 +277,46 @@ void MiniGameManager::UpdatePopup(float delta)
 {
     if (!miniGameParent) return;
 
-    // 항상 부드럽게 이동시키고 싶으면 if 제거해도 됨
     Vector3 cur = miniGameParent->GetPos();
     Vector3 next = Vector3::Lerp(cur, popupTargetPos, std::min(1.0f, popupSpeed * delta));
     miniGameParent->SetPos(next);
 
-    // 도착 판정(오차 범위)
+    // 도착 판정
     Vector3 diff = popupTargetPos - next;
     if (diff.Length() < 0.5f)
     {
         miniGameParent->SetPos(popupTargetPos);
+
+        // pause controll
+        // 팝업이 완전히 다 내려간 뒤, 게임 일시정지 가능
+        if (isPopupHiding)
+        {
+            isPopupHiding = false;
+            isPopupHidden = true;
+
+            // -------------------------
+            // [중요]
+            // 성공/실패 후 2초 대기 -> HidePopup() 했고,
+            // 팝업이 완전히 내려간 순간 여기서 EndMiniGame 호출
+            // -------------------------
+            if (pendingEnd)
+            {
+                pendingEnd = false;
+                EndMiniGame(cachedResultSuccess);
+            }
+        }
     }
 }
 
 void MiniGameManager::ShowPopup()
 {
     popupTargetPos = popupShownPos;
+    isPopupHiding = false;
+    isPopupHidden = false;
 }
 
 void MiniGameManager::HidePopup()
 {
     popupTargetPos = popupHiddenPos;
+    isPopupHiding = true;
 }

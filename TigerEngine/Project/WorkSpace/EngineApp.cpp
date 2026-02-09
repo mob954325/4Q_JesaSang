@@ -12,6 +12,7 @@
 #include "Manager/WorldManager.h"
 #include "Manager/UIManager.h"
 #include "Manager/TextureResourceManager.h"
+#include "Manager/UIManager.h"
 
 #include "Entity/Object.h"
 #include "Object/GameObject.h"
@@ -31,7 +32,7 @@
 namespace fs = std::filesystem;
 
 EngineApp::EngineApp(HINSTANCE hInstance)
-	: GameApp(hInstance)
+    : GameApp(hInstance)
 {
 }
 
@@ -43,17 +44,17 @@ EngineApp::~EngineApp()
 
 bool EngineApp::OnInitialize()
 {
-	RegisterAllComponents();
+    RegisterAllComponents();
 
-	// == init renderer ==
-	dxRenderer = std::static_pointer_cast<DirectX11Renderer>(renderer); 
+    // == init renderer ==
+    dxRenderer = std::static_pointer_cast<DirectX11Renderer>(renderer);
 #if _DEBUG
-	imguiRenderer = std::make_unique<ImguiRenderer>();
-	imguiRenderer->Initialize(hwnd, dxRenderer->GetDevice(), dxRenderer->GetDeviceContext());
+    imguiRenderer = std::make_unique<ImguiRenderer>();
+    imguiRenderer->Initialize(hwnd, dxRenderer->GetDevice(), dxRenderer->GetDeviceContext());
 #endif
-    
-	// == init system ==
-	FBXResourceManager::Instance().GetDevice(dxRenderer->GetDevice(), dxRenderer->GetDeviceContext());
+
+    // == init system ==
+    FBXResourceManager::Instance().GetDevice(dxRenderer->GetDevice(), dxRenderer->GetDeviceContext());
     ShaderManager::Instance().Init(dxRenderer->GetDevice(), dxRenderer->GetDeviceContext(), clientWidth, clientHeight);
     AudioManager::Instance().Initialize();
     // AudioManager::Instance().GetSystem().Set3DSettings(1.0f, 0.01f, 1.0f);// 기본 3D 설정 도플러 스케일, 거리 , 감쇠 효과
@@ -71,24 +72,25 @@ bool EngineApp::OnInitialize()
     sm.deviceContext = dxRenderer->GetDeviceContext();
 
     UIManager::Instance().SetSize(clientWidth, clientHeight);
+    UIManager::Instance().Init(dxRenderer->GetDevice(), dxRenderer->GetDeviceContext());
     TextureResourceManager::Instance().Init(dxRenderer->GetDevice(), dxRenderer->GetDeviceContext());
 
     renderQueue = std::make_unique<RenderQueue>();
 
 #if _DEBUG
-	editor = std::make_unique<Editor>();
-	editor->GetScreenSize(clientWidth, clientHeight);
-	editor->Initialize(dxRenderer->GetDevice(), dxRenderer->GetDeviceContext());
-	editor->GetDSV(dxRenderer->GetDepthStencilView());
-	editor->GetRTV(dxRenderer->GetBackBufferRTV());
+    editor = std::make_unique<Editor>();
+    editor->GetScreenSize(clientWidth, clientHeight);
+    editor->Initialize(dxRenderer->GetDevice(), dxRenderer->GetDeviceContext());
+    editor->GetDSV(dxRenderer->GetDepthStencilView());
+    editor->GetRTV(dxRenderer->GetBackBufferRTV());
     editor->CreatePickingStagingTex();
 #endif
 
-	SceneSystem::Instance().AddScene();			    	// create first scene
-	SceneSystem::Instance().SetCurrentSceneByIndex(); 	// render first scene
+    SceneSystem::Instance().AddScene();			    	// create first scene
+    SceneSystem::Instance().SetCurrentSceneByIndex(); 	// render first scene
 
-	// create free camera
-	CameraSystem::Instance().SetScreenSize(clientWidth, clientHeight);
+    // create free camera
+    CameraSystem::Instance().SetScreenSize(clientWidth, clientHeight);
 
     // == find scene ==
     LoadSavedFirstScene(); // SceneClear 호출해서 객채 생성은 이 코드 이후에 해야함 
@@ -98,8 +100,8 @@ bool EngineApp::OnInitialize()
 #endif
 
 
-	// == init renderpass ==
-	// NOTE : 랜더링하는 순서대로 추가 할 것
+    // == init renderpass ==
+    // NOTE : 랜더링하는 순서대로 추가 할 것
     shadowPass = std::make_unique<ShadowPass>();
     geometryPass = std::make_unique<GeometryPass>();
     decalPass = std::make_unique<DecalPass>();
@@ -123,16 +125,16 @@ bool EngineApp::OnInitialize()
     uiPass->Init(dxRenderer->GetDevice());
 
     // == init world data ==
-	//WorldManager::Instance().shaderResourceView = shadowPass->GetShadowSRV();
+    //WorldManager::Instance().shaderResourceView = shadowPass->GetShadowSRV();
 
- 
+
 
 #if _DEBUG
 #else
     PlayModeSystem::Instance().SetPlayMode(PlayModeState::Playing);
 #endif
 
-	return true;
+    return true;
 }
 
 void EngineApp::OnPreUpdate()
@@ -144,27 +146,27 @@ void EngineApp::OnPreUpdate()
 void EngineApp::OnUpdate()
 {
     Camera* curCam;
-    if(PlayModeSystem::Instance().IsPlaying())
+    if (PlayModeSystem::Instance().IsPlaying())
         curCam = CameraSystem::Instance().GetCurrCamera();
     else
         curCam = CameraSystem::Instance().GetFreeCamera();
 
-	SceneSystem::Instance().BeforUpdate();	
-	CameraSystem::Instance().FreeCameraUpdate(GameTimer::Instance().DeltaTime());
-	CameraSystem::Instance().LightCameraUpdate(GameTimer::Instance().DeltaTime());
-	WorldManager::Instance().Update(dxRenderer->GetDeviceContext(), curCam, clientWidth, clientHeight);
-	SceneSystem::Instance().UpdateScene(GameTimer::Instance().DeltaTime());
+    SceneSystem::Instance().BeforUpdate();
+    CameraSystem::Instance().FreeCameraUpdate(GameTimer::Instance().DeltaTime());
+    CameraSystem::Instance().LightCameraUpdate(GameTimer::Instance().DeltaTime());
+    WorldManager::Instance().Update(dxRenderer->GetDeviceContext(), curCam, clientWidth, clientHeight);
+    SceneSystem::Instance().UpdateScene(GameTimer::Instance().DeltaTime());
     AudioManager::Instance().Update();
     AnimationSystem::Instance().Update(GameTimer::Instance().DeltaTime());
 
 #if _DEBUG
-	editor->Update();
+    editor->Update();
 #endif
 }
 
 void EngineApp::OnRender()
 {
-	BeginRender(); 					// 업데이트 준비
+    BeginRender(); 					// 업데이트 준비
 
     RenderSystem::Instance().Render(*renderQueue);
 
@@ -217,12 +219,12 @@ void EngineApp::OnRender()
 
 
 #if _DEBUG
-	editor->Render(hwnd); 	// 엔진 오버레이 렌더링
-	imguiRenderer->Render();		// imgui 렌더링
-	editor->RenderEnd(dxRenderer->GetDeviceContext());
+    editor->Render(hwnd); 	// 엔진 오버레이 렌더링
+    imguiRenderer->Render();		// imgui 렌더링
+    editor->RenderEnd(dxRenderer->GetDeviceContext());
 #endif
 
-	EndRender(); 					// 업데이트 마무리
+    EndRender(); 					// 업데이트 마무리
 }
 
 void EngineApp::OnFixedUpdate()
@@ -277,17 +279,17 @@ void GameApp::ConsoleUninitalize()
 void EngineApp::BeginRender()
 {
 #if _DEBUG
-	imguiRenderer->BeginRender();
+    imguiRenderer->BeginRender();
 #endif
-	renderer->BeginRender();
+    renderer->BeginRender();
     renderQueue->Clear();
 }
 
 void EngineApp::EndRender()
-{	
-	renderer->EndRender();
+{
+    renderer->EndRender();
 #if _DEBUG
-	imguiRenderer->EndRender();
+    imguiRenderer->EndRender();
 #endif
 }
 
@@ -403,14 +405,14 @@ LRESULT EngineApp::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam
         break;
     }
 
-	return __super::WndProc(hWnd, message, wParam, lParam);
+    return __super::WndProc(hWnd, message, wParam, lParam);
 }
 
-void EngineApp::OnInputProcess(const Keyboard::State &KeyState, const Keyboard::KeyboardStateTracker &KeyTracker, const Mouse::State &MouseState, const Mouse::ButtonStateTracker &MouseTracker)
+void EngineApp::OnInputProcess(const Keyboard::State& KeyState, const Keyboard::KeyboardStateTracker& KeyTracker, const Mouse::State& MouseState, const Mouse::ButtonStateTracker& MouseTracker)
 {
-	__super::OnInputProcess(KeyState, KeyTracker, MouseState, MouseTracker);
+    __super::OnInputProcess(KeyState, KeyTracker, MouseState, MouseTracker);
 #if _DEBUG
-	editor->OnInputProcess(KeyState, KeyTracker, MouseState, MouseTracker);
+    editor->OnInputProcess(KeyState, KeyTracker, MouseState, MouseTracker);
 #endif
 }
 
@@ -440,6 +442,7 @@ void EngineApp::OnInputProcess(const Keyboard::State &KeyState, const Keyboard::
 
 #include "Components/UI/Image.h"
 #include "Components/RectTransform.h"
+#include "Components/UI/TextUI.h"
 
 void EngineApp::RegisterAllComponents()
 {
@@ -478,7 +481,7 @@ void EngineApp::RegisterAllComponents()
 }
 
 void EngineApp::Woo_Registeration()
-{    
+{
 }
 
 void EngineApp::Moon_Registeration()
@@ -492,4 +495,7 @@ void EngineApp::Ron_Registeration()
 
 void EngineApp::Ho_Registeration()
 {
+    auto& cf = ComponentFactory::Instance();
+
+    cf.Register<TextUI>("TextUI", ComponentCategory::UI);
 }

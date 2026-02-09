@@ -142,6 +142,7 @@
     <ClCompile Include="Components\UI\Image.cpp" />
     <ClCompile Include="Components\VisionComponent.cpp" />
     <ClCompile Include="EngineSystem\AgentSystem.cpp" />
+    <ClCompile Include="Components\UI\TextUI.cpp" />
     <ClCompile Include="Manager\TextureResourceManager.cpp" />
     <ClCompile Include="Manager\UIManager.cpp" />
     <ClCompile Include="Components\GridComponent.cpp" />
@@ -209,8 +210,12 @@
     <ClInclude Include="Components\UI\Image.h" />
     <ClInclude Include="Components\VisionComponent.h" />
     <ClInclude Include="EngineSystem\AgentSystem.h" />
+    <ClInclude Include="Components\UI\TextUI.h" />
+    <ClInclude Include="Components\UI\UITextDatas.h" />
+    <ClInclude Include="Components\UI\UITypeDatas.h" />
     <ClInclude Include="Manager\TextureResourceManager.h" />
     <ClInclude Include="Manager\UIData\TextureResource.h" />
+    <ClInclude Include="Manager\UIData\TextResource.h" />
     <ClInclude Include="Manager\UIManager.h" />
     <ClInclude Include="Components\Decal.h" />
     <ClInclude Include="Components\RectTransform.h" />
@@ -221,6 +226,7 @@
     <ClInclude Include="Object\Enableable.h" />
     <ClInclude Include="RenderPass\Renderable\DecalVolumeMesh.h" />
     <ClInclude Include="RenderPass\Renderable\UIQuadMesh.h" />
+    <ClInclude Include="RenderPass\Renderable\UIQuadVertex.h" />
     <ClInclude Include="RenderPass\Renderer\DecalPass.h" />
     <ClInclude Include="EngineSystem\AnimationSystem.h" />
     <ClInclude Include="RenderPass\Renderer\ForwardTransparentPass.h" />
@@ -275,8 +281,10 @@
     <ClInclude Include="Util\AnimatorParameter.h" />
     <ClInclude Include="Util\CollisionLayer.h" />
     <ClInclude Include="Util\ComponentAutoRegister.h" />
+    <ClInclude Include="Util\EncodeConvertHelper.h" />
     <ClInclude Include="Util\FontAtlasBuild.h" />
     <ClInclude Include="Util\JsonHelper.h" />
+    <ClInclude Include="Util\Multidelegate.h" />
     <ClInclude Include="Util\PathHelper.h" />
     <ClInclude Include="Util\DebugDraw.h" />
     <ClInclude Include="Manager\WorldManager.h" />

@@ -3,7 +3,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 202,
+        "ID": 73,
         "Name": "DirectionalLight(Sun)",
         "ParentID": -1,
         "components": [
@@ -57,26 +57,26 @@
     {
       "properties": {
         "Active": true,
-        "ID": 203,
-        "Name": "Box",
+        "ID": 74,
+        "Name": "Ground",
         "ParentID": -1,
         "components": [
           {
             "properties": {
               "Position": [
-                0.0,
-                30.899999618530273,
-                70.19999694824219
-              ],
-              "Rotation": [
-                0.0,
+                6.712974548339844,
                 0.0,
                 0.0
               ],
+              "Rotation": [
+                -0.0,
+                0.0,
+                -0.0
+              ],
               "Scale": [
-                0.4000000059604645,
-                0.4000000059604645,
-                1.0
+                10.0,
+                1.0,
+                10.0
               ]
             },
             "type": "Transform"
@@ -84,7 +84,7 @@
           {
             "properties": {
               "Active": true,
-              "DataPath": "..\\Assets\\Resource\\Cube1.fbx",
+              "DataPath": "..\\Assets\\Resource\\Ground.fbx",
               "IsStatic": true
             },
             "type": "FBXData"
@@ -126,18 +126,10 @@
               "UseDiffuseOverride": false,
               "UseEmissiveOverride": false,
               "UseMetallicOverride": false,
-              "UseRoughnessOverride": false
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
             },
             "type": "FBXRenderer"
-          },
-          {},
-          {
-            "properties": {
-              "b": 0.0,
-              "g": 0.0,
-              "r": 0.0
-            },
-            "type": "Player1"
           }
         ]
       },
@@ -146,83 +138,21 @@
     {
       "properties": {
         "Active": true,
-        "ID": 204,
-        "Name": "TestWeapon",
+        "ID": 75,
+        "Name": "Player",
         "ParentID": -1,
         "components": [
           {
             "properties": {
               "Position": [
-                0.0,
-                0.0,
+                358.5361328125,
+                103.59076690673828,
                 0.0
               ],
               "Rotation": [
+                -0.0,
                 0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ]
-            },
-            "type": "Transform"
-          }
-        ]
-      },
-      "type": "GameObject"
-    },
-    {
-      "properties": {
-        "Active": true,
-        "ID": 205,
-        "Name": "PlayerSoket",
-        "ParentID": 203,
-        "components": [
-          {
-            "properties": {
-              "Position": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Rotation": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ]
-            },
-            "type": "Transform"
-          }
-        ]
-      },
-      "type": "GameObject"
-    },
-    {
-      "properties": {
-        "Active": true,
-        "ID": 208,
-        "Name": "cam1",
-        "ParentID": -1,
-        "components": [
-          {
-            "properties": {
-              "Position": [
-                11.274999618530273,
-                120.30000305175781,
-                -100.0
-              ],
-              "Rotation": [
-                0.06457717716693878,
-                0.0,
-                0.0
+                -0.0
               ],
               "Scale": [
                 1.0,
@@ -234,13 +164,53 @@
           },
           {
             "properties": {
-              "angle": 1.5707963705062866,
-              "farDist": 2000.0,
-              "moveSpeed": 100.0,
-              "nearDist": 0.009999999776482582,
-              "rotSpeed": 0.004000000189989805
+              "Active": true,
+              "DataPath": "..\\Assets\\Resource\\FBX\\00_character\\character.fbx",
+              "IsStatic": false
             },
-            "type": "Camera"
+            "type": "FBXData"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "Alpha": 1.0,
+              "Diffuse": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "DiffuseOverride": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Emissive": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "EmissiveOverride": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "IsGround": false,
+              "Metalic": 1.0,
+              "MetallicOverride": 1.0,
+              "RenderBlendType": "Opaque",
+              "Roughness": 1.0,
+              "RoughnessOverride": 1.0,
+              "UseDiffuseOverride": false,
+              "UseEmissiveOverride": false,
+              "UseMetallicOverride": false,
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
+            },
+            "type": "FBXRenderer"
           }
         ]
       },
@@ -249,21 +219,21 @@
     {
       "properties": {
         "Active": true,
-        "ID": 209,
-        "Name": "cam2",
-        "ParentID": -1,
+        "ID": 76,
+        "Name": "NewGameObject",
+        "ParentID": 75,
         "components": [
           {
             "properties": {
               "Position": [
-                -70.625,
-                125.69999694824219,
-                41.599998474121094
+                36.1680908203125,
+                168.33309936523438,
+                0.0
               ],
               "Rotation": [
-                0.06457717716693878,
-                1.5707963705062866,
-                -0.2617993950843811
+                -0.0,
+                0.0,
+                -0.0
               ],
               "Scale": [
                 1.0,
@@ -275,13 +245,63 @@
           },
           {
             "properties": {
-              "angle": 1.5707963705062866,
-              "farDist": 2000.0,
-              "moveSpeed": 100.0,
-              "nearDist": 0.009999999776482582,
-              "rotSpeed": 0.004000000189989805
+              "Active": true,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "drawSpacetype": "World",
+              "fillAmount": 1.0,
+              "imageType": "Simple",
+              "isBillboard": true,
+              "isMouseCheck": false,
+              "path": "..\\Assets\\Resource\\UI\\Title\\yes.png",
+              "sliceBorderPx": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "type": "Simple",
+              "zOrder": 0
             },
-            "type": "Camera"
+            "type": "Image"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "Pivot": [
+                0.0,
+                0.0
+              ],
+              "Pos": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Size": [
+                123.19999694824219,
+                50.0
+              ]
+            },
+            "type": "RectTransform"
           }
         ]
       },
@@ -290,21 +310,21 @@
     {
       "properties": {
         "Active": true,
-        "ID": 210,
-        "Name": "cam3",
-        "ParentID": -1,
+        "ID": 77,
+        "Name": "text",
+        "ParentID": 76,
         "components": [
           {
             "properties": {
               "Position": [
-                142.875,
-                130.0,
-                25.299999237060547
+                11.917877197265625,
+                -28.480743408203125,
+                0.0
               ],
               "Rotation": [
-                0.06457717716693878,
-                -1.5707963705062866,
-                0.2617993950843811
+                -0.0,
+                0.0,
+                -0.0
               ],
               "Scale": [
                 1.0,
@@ -316,30 +336,41 @@
           },
           {
             "properties": {
-              "angle": 1.5707963705062866,
-              "farDist": 2000.0,
-              "moveSpeed": 100.0,
-              "nearDist": 0.009999999776482582,
-              "rotSpeed": 0.004000000189989805
+              "Active": true,
+              "alignType": "Left",
+              "atlasH": 2048,
+              "atlasW": 2048,
+              "color": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ],
+              "drawSpacetype": "World",
+              "fontPath": "../Assets/Resource/font/rotteMedium.ttf",
+              "fontSize": 48,
+              "isBillboard": true,
+              "paddingPx": 1,
+              "text": "Hello World !!!",
+              "zOrder": 0
             },
-            "type": "Camera"
-          }
-        ]
-      },
-      "type": "GameObject"
-    },
-    {
-      "properties": {
-        "Active": true,
-        "ID": 211,
-        "Name": "TestWeapon",
-        "ParentID": -1,
-        "components": [
+            "type": "TextUI"
+          },
           {
             "properties": {
+              "Active": true,
+              "Pivot": [
+                0.0,
+                0.0
+              ],
+              "Pos": [
+                1.2999999523162842,
+                1.2000000476837158,
+                14.300000190734863
+              ],
               "Position": [
-                0.0,
-                0.0,
+                1.100000023841858,
+                -0.6000000238418579,
                 0.0
               ],
               "Rotation": [
@@ -351,40 +382,13 @@
                 1.0,
                 1.0,
                 1.0
+              ],
+              "Size": [
+                0.30000001192092896,
+                0.30000001192092896
               ]
             },
-            "type": "Transform"
-          }
-        ]
-      },
-      "type": "GameObject"
-    },
-    {
-      "properties": {
-        "Active": true,
-        "ID": 212,
-        "Name": "PlayerSoket",
-        "ParentID": -1,
-        "components": [
-          {
-            "properties": {
-              "Position": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Rotation": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ]
-            },
-            "type": "Transform"
+            "type": "RectTransform"
           }
         ]
       },

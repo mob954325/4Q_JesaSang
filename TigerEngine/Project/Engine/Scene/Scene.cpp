@@ -23,11 +23,11 @@ void Scene::OnLateUpdate(float dt)
 
 void Scene::CheckDestroy()
 {
-	for(auto it = gameObjects.begin(); it != gameObjects.end();)
-	{
-		auto entity = *it;
-		if(entity.objPtr->IsDestory())
-		{	
+    for (auto it = gameObjects.begin(); it != gameObjects.end();)
+    {
+        auto entity = *it;
+        if (entity.objPtr->IsDestory())
+        {
             // 맵 요소 제거
             auto container = mappedGameObjects[entity.objPtr->GetName()];
             for (auto mapContainerIt = container.begin(); mapContainerIt != container.end(); mapContainerIt++)
@@ -42,32 +42,32 @@ void Scene::CheckDestroy()
             }
 
             // 벡터 요소 제거
-			entity.objPtr->ClearAll();
-			ObjectSystem::Instance().Destory(entity.handle);
+            entity.objPtr->ClearAll();
+            ObjectSystem::Instance().Destory(entity.handle);
 
-			it = gameObjects.erase(it);
-		}
-		else
-		{
-			it++;
-		}
-	}
+            it = gameObjects.erase(it);
+        }
+        else
+        {
+            it++;
+        }
+    }
 }
 
 void Scene::ForEachGameObject(std::function<void(GameObject*)> fn)
 {
-	for(auto& obj : gameObjects)
-	{
-		fn(obj.objPtr);
-	}
+    for (auto& obj : gameObjects)
+    {
+        fn(obj.objPtr);
+    }
 }
 
 GameObject* Scene::AddGameObjectByName(std::string name)
 {
-	Handle handle = ObjectSystem::Instance().Create<GameObject>();
-	auto obj = ObjectSystem::Instance().Get<GameObject>(handle);
-	obj->SetScene(this);
-	obj->SetName(name);
+    Handle handle = ObjectSystem::Instance().Create<GameObject>();
+    auto obj = ObjectSystem::Instance().Get<GameObject>(handle);
+    obj->SetScene(this);
+    obj->SetName(name);
 
     int index = static_cast<int>(gameObjects.size());
     gameObjects.push_back({ obj, handle });
@@ -82,7 +82,7 @@ GameObject* Scene::GetGameObjectByName(std::string name)
     // 이름이 변하지 않았으면 map에서 찾기
     if (auto it = mappedGameObjects.find(name); it != mappedGameObjects.end())
     {
-        auto container = it->second;       
+        auto container = it->second;
         return gameObjects[container.front().second].objPtr; // 무조건 첫번째 반환
     }
 
@@ -165,16 +165,16 @@ GameObject* Scene::GetGameObject(GameObject* obj)
 
 void Scene::ClearScene()
 {
-	for(auto it = gameObjects.begin(); it != gameObjects.end();)
-	{
-		auto [ptr, handle] = *it;
+    for (auto it = gameObjects.begin(); it != gameObjects.end();)
+    {
+        auto [ptr, handle] = *it;
 
         ptr->ClearAll();
         ObjectSystem::Instance().Destory(handle);
         it = gameObjects.erase(it);
-	}
-	
-	gameObjects.clear();
+    }
+
+    gameObjects.clear();
     mappedGameObjects.clear();
     LightSystem::Instance().Clear();
     CameraSystem::Instance().Clear();
@@ -182,88 +182,88 @@ void Scene::ClearScene()
     RenderSystem::Instance().Clear();
 }
 
-bool Scene::SaveToJson(const std::string &filename) const
+bool Scene::SaveToJson(const std::string& filename) const
 {
-	nlohmann::json root;
+    nlohmann::json root;
 
     // 씬에 있는 게임 오브젝트 내용 저장
-	root["objects"] = nlohmann::json::array();
-	for(auto& entity : gameObjects)
-	{
-		if(!entity.objPtr) continue;
-		
-		nlohmann::json entityData = entity.objPtr->Serialize();
-		root["objects"].push_back(entityData);
-	}
+    root["objects"] = nlohmann::json::array();
+    for (auto& entity : gameObjects)
+    {
+        if (!entity.objPtr) continue;
+
+        nlohmann::json entityData = entity.objPtr->Serialize();
+        root["objects"].push_back(entityData);
+    }
 
     // 해당 씬의 월드 세팅 내용 저장
     root["worldData"] = nlohmann::json::array();
-    auto& wm = WorldManager::Instance();    
+    auto& wm = WorldManager::Instance();
     nlohmann::json worldData = wm.Serialize();
     root["worldData"].push_back(worldData);
 
     // 파일 만들기
-	std::ofstream file(filename);
-	if(!file.is_open()) return false;
+    std::ofstream file(filename);
+    if (!file.is_open()) return false;
 
-	file << root.dump(2); // 보기 좋게 2칸 들여쓰기
-	file.close();
+    file << root.dump(2); // 보기 좋게 2칸 들여쓰기
+    file.close();
 
-	return true;
+    return true;
 }
 
-bool Scene::LoadToJson(const std::string &filename)
+bool Scene::LoadToJson(const std::string& filename)
 {
-	std::ifstream file(filename);
-	if(!file.is_open()) return false;
+    std::ifstream file(filename);
+    if (!file.is_open()) return false;
 
-	nlohmann::json root;
+    nlohmann::json root;
 
-	try
-	{
-		file >> root;
-	}
-	catch(const nlohmann::json::exception& e)
-	{	// 파일 열기 실패
-		MessageBoxA(nullptr, e.what(), "Error", MB_OK | MB_ICONERROR);
-		file.close();
-		return false;
-	}
-	file.close();	
-	
-	// json 데이터에 objects 객체이나 배열이 없음
-	if(!root.contains("objects") || !root["objects"].is_array()) return false;
+    try
+    {
+        file >> root;
+    }
+    catch (const nlohmann::json::exception& e)
+    {	// 파일 열기 실패
+        MessageBoxA(nullptr, e.what(), "Error", MB_OK | MB_ICONERROR);
+        file.close();
+        return false;
+    }
+    file.close();
+
+    // json 데이터에 objects 객체이나 배열이 없음
+    if (!root.contains("objects") || !root["objects"].is_array()) return false;
 
     ClearScene(); // 데이터가 존재하면 현재 씬 제거
     targetLoadedPath = filename;
 
     // 데이터에 있는 게임 오브젝트 불러오기
     vector<int> parentIDs; // 넣은 순서대로 부모 ID 기억하기 ( 부모가 없으면 -1 )
-	for(const auto& objData : root["objects"])
-	{
-		if(!objData.contains("type")) continue;
+    for (const auto& objData : root["objects"])
+    {
+        if (!objData.contains("type")) continue;
 
-		std::string typeName = objData["type"]; // 클래스 타입 : GameObject
-		
-		// 이름 찾기
-		std::string objectName = "";
-		if(objData.contains("properties")) objectName = objData["properties"]["Name"];
+        std::string typeName = objData["type"]; // 클래스 타입 : GameObject
 
-		auto instance = AddGameObjectByName(objectName);
-		if(!instance) continue; 
+        // 이름 찾기
+        std::string objectName = "";
+        if (objData.contains("properties")) objectName = objData["properties"]["Name"];
 
-		instance->Deserialize(objData["properties"]);
+        auto instance = AddGameObjectByName(objectName);
+        if (!instance) continue;
+
+        instance->Deserialize(objData["properties"]);
 
         if (objData["properties"].contains("ID"))
         {
             instance->SetId(objData["properties"]["ID"]); // ID 추가
-        }        
+        }
 
         if (objData["properties"].contains("ParentID"))
         {
             parentIDs.push_back(objData["properties"]["ParentID"]); // 미리 부모 ID 기억
         }
-	}
+    }
 
     // 월드 데이터 불러오기
     if (!root.contains("worldData") || !root["worldData"].is_array()) return false;
@@ -305,30 +305,30 @@ bool Scene::LoadToJson(const std::string &filename)
     return true;
 }
 
-GameObject* Scene::RayCastGameObject(const Ray &ray, float *outDistance)
+GameObject* Scene::RayCastGameObject(const Ray& ray, float* outDistance)
 {
-	GameObject* hitObject = nullptr;
-	float minDistant = FLT_MAX;
+    GameObject* hitObject = nullptr;
+    float minDistant = FLT_MAX;
 
-	for(auto& [ptr, handle]: gameObjects)
-	{
-		if(!ptr) continue;
+    for (auto& [ptr, handle] : gameObjects)
+    {
+        if (!ptr) continue;
 
-		float outDist = 0.0f;
-		if(ray.Intersects(ptr->GetAABB(), outDist))
-		{
-			if(outDist < minDistant)
-			{
-				minDistant = outDist;
-				hitObject = ptr;
-			}
-		}
-	}
+        float outDist = 0.0f;
+        if (ray.Intersects(ptr->GetAABB(), outDist))
+        {
+            if (outDist < minDistant)
+            {
+                minDistant = outDist;
+                hitObject = ptr;
+            }
+        }
+    }
 
-	if(outDistance != nullptr && hitObject)
-	{
-		*outDistance = minDistant;
-	}
+    if (outDistance != nullptr && hitObject)
+    {
+        *outDistance = minDistant;
+    }
 
     return hitObject;
 }
@@ -360,5 +360,5 @@ GameObject* Scene::GetGameObjectByIndex(int index)
 {
     if (index < 0 || index >= gameObjects.size()) return nullptr;
 
-	return gameObjects[index].objPtr;
+    return gameObjects[index].objPtr;
 }

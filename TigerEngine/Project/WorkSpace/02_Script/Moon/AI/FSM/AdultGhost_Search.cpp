@@ -1,105 +1,106 @@
 #include "AdultGhost_Search.h"
-#include "Components/VisionComponent.h"
 #include "EngineSystem/SceneSystem.h"
+
 
 void AdultGhost_Search::Enter()
 {
     cout << "[AdultGhost_Search] Enter Search State" << endl;
 
-    // 초기화 
-    agent = adultGhost->agent;
-    agent->patrolSpeed = 3.5f;
-
-    agent->externalControl = true;
-    agent->path.clear();
-    agent->hasTarget = false;
-    agent->isWaiting = false;
-
     arrived = false;
-    searchTimer = 0.0f;
+    waitTimer = 0.0f;
+    rotateTimer = 0.0f;
 
-    if (hasSearchTarget)
+    adultGhost->ResetAgentForMove(3.5f);
+
+    phase = SearchPhase::WaitBeforeMove;
+
+
+    // 1. Chase or Attack 에서 넘어온 경우 바로 이동
+    if (adultGhost->searchReason == SearchReason::FromChase ||
+        adultGhost->searchReason == SearchReason::FromAttack)
     {
-        agent->targetCX = targetCX;
-        agent->targetCY = targetCY;
-        agent->hasTarget = true;
+        phase = SearchPhase::MoveToPoint;
     }
 
-    // (if) 기척 or 함정 감지로 넘어온 경우
-    // - 3초 정지 하고 → 소리난 곳으로 이동 → 3~5초간 회전하며 대기
+    // 마지막 플레이어 위치 있으면 사용 
+    if (adultGhost->lastPlayerGrid.valid /*&&
+        (adultGhost->searchReason == SearchReason::FromChase ||
+            adultGhost->searchReason == SearchReason::FromAttack)*/)
+    {
+        auto& p = adultGhost->lastPlayerGrid;
+        std::cout << "[Search] Use Last Grid = (" << p.x << ", " << p.y << ")" << std::endl;
 
-    // (if) 추격에서 추격 실패로 넘어온 경우
-    // - 마지막으로 플레이어 목격 했던 지점으로 이동 후 → 3~5초간 회전하며 대기
+        adultGhost->agent->targetCX = p.x;
+        adultGhost->agent->targetCY = p.y;
+        adultGhost->agent->hasTarget = true;
+
+        adultGhost->lastPlayerGrid.valid = false; // 1회성
+    }
 }
 
 void AdultGhost_Search::ChangeStateLogic()
 {
-    // // 목적지에 도착하면 무조건 Patrol 상태로 전환
-    // if (!arrived) return;
-
-    // (임시) 무조건 5초 지나면 Patrol 상태로 전환 
-    if (searchTimer >= forceSearchTime)
+    // 1. 회전 중 플레이어 발견 (Search 성공)
+    if (phase == SearchPhase::RotateSearch &&  adultGhost->IsSeeing(adultGhost->GetAITarget()))
     {
-        cout << "[AdultGhost_Search] ChangeState -> AdultGhostState::Patrol" << endl;
-        adultGhost->ChangeState(AdultGhostState::Patrol);
+        cout << "[AdultGhost_Search] Search Clear!! " << endl;
+        adultGhost->ChangeState(AdultGhostState::Chase);
+        return;
+    }
+    // 2. 회전 시간 종료 (Search 실패)
+    if (phase == SearchPhase::RotateSearch && rotateTimer >= rotateTime)
+    {
+        cout << "[AdultGhost_Search] Search Fail.." << endl;
+        adultGhost->ChangeState(AdultGhostState::Return); // 나중에 Return으로 교체
     }
 }
 
 void AdultGhost_Search::Update(float deltaTime)
 {
-    searchTimer += deltaTime;
+    if (phase == SearchPhase::WaitBeforeMove)
+    {
+        waitTimer += deltaTime;
+        if (waitTimer >= waitTime)
+        {
+            phase = SearchPhase::MoveToPoint;
+        }
+    }
 }
 
 void AdultGhost_Search::FixedUpdate(float deltaTime)
 {
-    if (!agent || !agent->hasTarget) return;
-
-    auto grid = GridSystem::Instance().GetMainGrid();
-    if (!grid) return;
-
-    if (agent->path.empty())
+    if (phase == SearchPhase::MoveToPoint && !arrived)
     {
-        agent->path = grid->FindPath(agent->cx, agent->cy, agent->targetCX, agent->targetCY);
-        if (agent->path.empty()) return;
-    }
-
-    auto next = agent->path.front();
-    Vector3 targetPos = grid->GridToWorldFromCenter(next.first, next.second);
-
-    Vector3 pos = agent->GetOwner()->GetTransform()->GetWorldPosition();
-    Vector3 dir = targetPos - pos;
-    dir.y = 0;
-
-    if (dir.Length() < agent->reachDist)
-    {
-        agent->cx = next.first;
-        agent->cy = next.second;
-        agent->path.erase(agent->path.begin());
-
-        // 도착하면 타이머 시작
-        if (agent->path.empty())
+        bool done = adultGhost->MoveToTarget(deltaTime);
+        if (done)
         {
-            agent->hasTarget = false;
             arrived = true;
-            searchTimer = 0.0f;
-            cout << "[Search] Arrived at last position\n";
+            phase = SearchPhase::RotateSearch;
+            rotateTimer = 0.0f;
+
+            auto tr = adultGhost->GetOwner()->GetTransform();
+            baseYaw = tr->GetYaw();
+            targetYaw = baseYaw + XMConvertToRadians(360.f);
+
+            adultGhost->agent->externalControl = true;
         }
     }
-    else
+    else if (phase == SearchPhase::RotateSearch)
     {
-        dir.Normalize();
-        agent->MoveAgent(dir, agent->patrolSpeed, deltaTime);
+        rotateTimer += deltaTime;
+
+        auto tr = adultGhost->GetOwner()->GetTransform();
+        float newYaw = tr->GetYaw() + XMConvertToRadians(90.f) * deltaTime;
+
+        tr->SetEuler(Vector3(0.f, newYaw, 0.f));
     }
 }
 
 void AdultGhost_Search::Exit()
 {
-    hasSearchTarget = false;
     arrived = false;
 
-    agent->externalControl = false; 
-    agent->path.clear();
-    agent->hasTarget = false;
-
-    cout << "[AdultGhost_Search] Exit" << endl;
+    adultGhost->agent->externalControl = false;
+    adultGhost->agent->path.clear();
+    adultGhost->agent->hasTarget = false;
 }

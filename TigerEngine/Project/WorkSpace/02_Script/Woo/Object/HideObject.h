@@ -35,7 +35,6 @@ private:
     float hideDurationTimer = 0.0f;
     float reHideCoolTimer = 0.0f;
 
-    int lookingAICount = 0;             // 보고있는 AI 개수 
 
 public:
     // component process
@@ -52,5 +51,31 @@ public :
     bool IsPossibleHide();
     void StartHide(PlayerController* p);
     void StopHide();
-    void SetAILook(bool isLook);        // TODO :: 선민이 AI 시야 연결
+
+
+    // AI 시야 연결 - 선민 | 02.07 
+    // 해당 HideObject를 바라보고 있는 AI들을 Set으로 관리해서 
+    // 한 마리라도 보고 있으면 isAILooking = true
+private:
+    std::unordered_set<void*> lookingAIs;
+    void UpdateAILook()
+    {
+        isAILooking = !lookingAIs.empty();
+        std::cout << "[HideObject] isAILooking = " << isAILooking << std::endl;
+    }
+
+public:
+    void RegisterAILook(void* ai)
+    {
+        lookingAIs.insert(ai);
+        UpdateAILook();
+    }
+
+    void UnregisterAILook(void* ai)
+    {
+        lookingAIs.erase(ai);
+        UpdateAILook();
+    }
+
+    bool IsAILooking() const { return isAILooking; }
 };

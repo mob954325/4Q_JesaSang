@@ -26,7 +26,8 @@
 #include "../Util/PathHelper.h"
 #include "../Components/UI/Image.h"
 #include "../Components/VisionComponent.h"
-
+#include "../Components/UI/TextUI.h"
+#include "../Util/EncodeConvertHelper.h"
 
 // Payload
 // Prefab payload
@@ -108,16 +109,16 @@ void Editor::Update()
 {
     Scene* currScene = SceneSystem::Instance().GetCurrentScene().get();
 
-    currScene->ForEachGameObject([](GameObject* obj){
-        if(obj->GetName() == "FreeCamera") return;        
+    currScene->ForEachGameObject([](GameObject* obj) {
+        if (obj->GetName() == "FreeCamera") return;
         obj->UpdateAABB();
-     });    
+        });
 
     CheckObjectPicking();
     CheckObjectDeleteKey();
 }
 
-void Editor::Render(HWND &hwnd)
+void Editor::Render(HWND& hwnd)
 {
     ImGuizmo::BeginFrame();
 
@@ -166,10 +167,10 @@ void Editor::RenderMenuBar(HWND& hwnd)
         if (ImGui::BeginMenu("File"))
         {
             if (ImGui::MenuItem("Save current scene"))
-			{
-				SaveCurrentScene(hwnd);
-			}
-            else if(ImGui::MenuItem("Load scene"))
+            {
+                SaveCurrentScene(hwnd);
+            }
+            else if (ImGui::MenuItem("Load scene"))
             {
                 LoadScene(hwnd);
             }
@@ -223,14 +224,14 @@ void Editor::RenderHierarchy()
 
     // 각 오브젝트 표시
     scene->ForEachGameObject([this](GameObject* obj)
-    {
-        Transform* tr = obj->GetComponent<Transform>();
-        if (!tr) return;
+        {
+            Transform* tr = obj->GetComponent<Transform>();
+            if (!tr) return;
 
-        if (tr->GetParent() != nullptr) return; // 루트만
+            if (tr->GetParent() != nullptr) return; // 루트만
 
-        DrawHierarchyNode(obj);
-    });
+            DrawHierarchyNode(obj);
+        });
 
     // 빈 공간을 dropspace로 만들기
     DrawHierarchyDropSpace();
@@ -302,7 +303,7 @@ void Editor::DrawHierarchyNode(GameObject* obj)
                         dtr->SetParent(tr);
                     }
                 }
-            }         
+            }
         }
 
         // 프리팹 -> 오브젝트 부모 연결 후 구성
@@ -762,7 +763,7 @@ void Editor::RenderInspector()
 {
     ImGui::Begin("Inspector");
     {
-        if(selectedObject == nullptr)
+        if (selectedObject == nullptr)
         {
             ImGui::Text("No gameObject selected");
         }
@@ -828,9 +829,11 @@ void Editor::RenderInspector()
 
                     if (auto it = registered.find(name); it != registered.end())
                     {
+                        ImGui::PushID(comp);
                         RenderComponentInfo(name, comp);
                         ImGui::NewLine();
                         ImGui::Separator();
+                        ImGui::PopID();
                     }
                 } // 컴포넌트 내용 출력 end
             } // obj is destroy end
@@ -880,7 +883,7 @@ void Editor::DrawAddComponentPopup(GameObject* obj)
                 if (ImGui::MenuItem(e->name.c_str()))
                 {
                     e->creator(obj);
-                    
+
                     ImGui::CloseCurrentPopup();
                 }
             }
@@ -1019,8 +1022,8 @@ void Editor::RenderShadowMap()
         ImGui::Image(
             (ImTextureID)shadowSRV,
             size,
-            ImVec2(0, 1),   
-            ImVec2(1, 0)    
+            ImVec2(0, 1),
+            ImVec2(1, 0)
         );
 
         ImGui::End();
@@ -1226,7 +1229,7 @@ void Editor::RenderWorldManager()
     rttr::type t = rttr::type::get(inst);
 
     // 1. worldManager의 인스턴스를 렌더링한다. ( 구조체, 클래스 내용 제외 )
-    ReadVariants(inst); 
+    ReadVariants(inst);
 
     ImGui::Separator();
     // 2. shadow data
@@ -1429,7 +1432,6 @@ void Editor::RenderComponentInfo(std::string compName, T* comp)
 
     if (compName == "Image")
     {
-
         for (auto& prop : t.get_properties())
         {
             std::string keyUITex = "ChooseUITexDlgKey##" + std::to_string((uintptr_t)comp);
@@ -1440,7 +1442,7 @@ void Editor::RenderComponentInfo(std::string compName, T* comp)
             if (value.is_type<std::string>() && name == "path")
             {
                 std::string path = value.get_value<std::string>();
-                ImGui::Text("Current Path: %s", path.c_str());
+                ImGui::Text("Current Image Path: %s", path.c_str());
 
                 if (ImGui::Button("Browse texture"))
                 {
@@ -1463,7 +1465,7 @@ void Editor::RenderComponentInfo(std::string compName, T* comp)
             }
         }
     }
-    
+
     if (compName == "AudioSourceComponent" || compName == "AudioManagerComponent")
     {
         for (auto& prop : t.get_properties())
@@ -1514,12 +1516,58 @@ void Editor::RenderComponentInfo(std::string compName, T* comp)
                 }
             }
         }
-
-        ImGui::PushID(comp);
-        ReadVariants(*comp);
-        ImGui::PopID();
-        return;
     }
+
+    if (compName == "TextUI")
+    {
+        std::string fontPathKey = "ChooseTextUIFontDlgKey##" + std::to_string((uintptr_t)comp);
+
+        for (auto& prop : t.get_properties())
+        {
+            rttr::variant value = prop.get_value(*comp);
+            std::string name = prop.get_name().to_string();
+            if (!value.is_valid()) continue;
+
+            if (value.is_type<std::wstring>() && name == "fontPath")
+            {
+                // wstring -> utf8 (표시용)
+                std::wstring curW = value.get_value<std::wstring>();
+                std::string curPathUtf8 = WStringToUtf8(curW);
+
+                ImGui::Text("Current Font Path: %s", curPathUtf8.c_str());
+
+                if (ImGui::Button("Browse"))
+                {
+                    IGFD::FileDialogConfig config;
+                    config.path = "../";
+                    ImGuiFileDialog::Instance()->OpenDialog(fontPathKey, "Choose File", ".ttf,.ttc", config);
+                }
+
+                if (ImGuiFileDialog::Instance()->Display(fontPathKey))
+                {
+                    if (ImGuiFileDialog::Instance()->IsOk())
+                    {
+                        // 다이얼로그는 보통 UTF-8 std::string 반환
+                        std::string filePathNameUtf8 = ImGuiFileDialog::Instance()->GetFilePathName();
+
+                        // relative도 UTF-8 string 기준으로 처리
+                        std::filesystem::path relativePath = std::filesystem::relative(std::filesystem::path(filePathNameUtf8));
+                        std::string relativeUtf8 = relativePath.generic_string();
+
+                        // utf8 -> wstring 저장
+                        std::wstring relativeW = Utf8ToWString(relativeUtf8);
+                        prop.set_value(*comp, relativeW);
+
+                        // 기존 로직 유지: Decal이면 ChangeData 호출 (string 필요시 utf8 전달)
+                        auto* textUI = dynamic_cast<TextUI*>(comp);
+                        if (textUI) textUI->LoadFontAtlas(relativeW);
+                    }
+                    ImGuiFileDialog::Instance()->Close();
+                }
+            }
+        }
+    }
+
 
     // 기본
     ImGui::PushID(comp);
@@ -1534,8 +1582,8 @@ void Editor::RenderDebugAABBDraw()
     context->OMSetRenderTargets(1, renderTargetView.GetAddressOf(), depthStencliView.Get());
 
     // DebugDraw의 BasicEffect 설정
-    
-    Camera* cam{}; 
+
+    Camera* cam{};
     if (PlayModeSystem::Instance().IsPlaying())
     {
         cam = CameraSystem::Instance().GetCurrCamera();
@@ -1674,60 +1722,60 @@ void Editor::RenderDebugVision()
 
 void Editor::SaveCurrentScene(HWND& hwnd)
 {
-	// 파일 저장 다이얼로그
-	OPENFILENAMEA ofn = {};
-	char szFile[260] = {};
+    // 파일 저장 다이얼로그
+    OPENFILENAMEA ofn = {};
+    char szFile[260] = {};
 
-	ofn.lStructSize = sizeof(ofn);
-	ofn.hwndOwner = hwnd;
-	ofn.lpstrFile = szFile;
-	ofn.nMaxFile = sizeof(szFile);
-	ofn.lpstrFilter = "JSON Files (*.json)\0*.json\0All Files (*.*)\0*.*\0";
-	ofn.nFilterIndex = 1;
-	ofn.lpstrFileTitle = NULL;
-	ofn.nMaxFileTitle = 0;
-	ofn.lpstrInitialDir = NULL;
-	ofn.Flags = OFN_PATHMUSTEXIST | OFN_OVERWRITEPROMPT 
-            | OFN_PATHMUSTEXIST | OFN_NOCHANGEDIR;;
-	ofn.lpstrDefExt = "json";
+    ofn.lStructSize = sizeof(ofn);
+    ofn.hwndOwner = hwnd;
+    ofn.lpstrFile = szFile;
+    ofn.nMaxFile = sizeof(szFile);
+    ofn.lpstrFilter = "JSON Files (*.json)\0*.json\0All Files (*.*)\0*.*\0";
+    ofn.nFilterIndex = 1;
+    ofn.lpstrFileTitle = NULL;
+    ofn.nMaxFileTitle = 0;
+    ofn.lpstrInitialDir = NULL;
+    ofn.Flags = OFN_PATHMUSTEXIST | OFN_OVERWRITEPROMPT
+        | OFN_PATHMUSTEXIST | OFN_NOCHANGEDIR;;
+    ofn.lpstrDefExt = "json";
 
-	if (GetSaveFileNameA(&ofn) != TRUE)
-		return; // 사용자가 취소함
+    if (GetSaveFileNameA(&ofn) != TRUE)
+        return; // 사용자가 취소함
 
-	std::string filename = szFile;
+    std::string filename = szFile;
 
-	// GameWorld를 파일에 저장
-	if (SceneSystem::Instance().GetCurrentScene()->SaveToJson(filename))
-	{
-		MessageBoxA(hwnd, "Scene saved successfully!", "Save", MB_OK | MB_ICONINFORMATION);        
-	}
-	else
-	{
-		MessageBoxA(hwnd, "Failed to save scene!", "Error", MB_OK | MB_ICONERROR);
-	}
+    // GameWorld를 파일에 저장
+    if (SceneSystem::Instance().GetCurrentScene()->SaveToJson(filename))
+    {
+        MessageBoxA(hwnd, "Scene saved successfully!", "Save", MB_OK | MB_ICONINFORMATION);
+    }
+    else
+    {
+        MessageBoxA(hwnd, "Failed to save scene!", "Error", MB_OK | MB_ICONERROR);
+    }
 }
 
-void Editor::LoadScene(HWND &hwnd)
+void Editor::LoadScene(HWND& hwnd)
 {
-    OPENFILENAMEA ofn ={};
+    OPENFILENAMEA ofn = {};
     char szFile[256] = {};
     ofn.lStructSize = sizeof(ofn);
     ofn.hwndOwner = hwnd;
     ofn.lpstrFile = szFile;
     ofn.nMaxFile = sizeof(szFile);
-	ofn.lpstrFilter = "JSON Files (*.json)\0*.json\0All Files (*.*)\0*.*\0";
-	ofn.nFilterIndex = 1;
-	ofn.lpstrFileTitle = NULL;
-	ofn.nMaxFileTitle = 0;
-	ofn.lpstrInitialDir = NULL;
-	ofn.Flags = OFN_PATHMUSTEXIST | OFN_OVERWRITEPROMPT 
-            | OFN_PATHMUSTEXIST | OFN_NOCHANGEDIR;
-	ofn.lpstrDefExt = "json";
+    ofn.lpstrFilter = "JSON Files (*.json)\0*.json\0All Files (*.*)\0*.*\0";
+    ofn.nFilterIndex = 1;
+    ofn.lpstrFileTitle = NULL;
+    ofn.nMaxFileTitle = 0;
+    ofn.lpstrInitialDir = NULL;
+    ofn.Flags = OFN_PATHMUSTEXIST | OFN_OVERWRITEPROMPT
+        | OFN_PATHMUSTEXIST | OFN_NOCHANGEDIR;
+    ofn.lpstrDefExt = "json";
 
     // NOTE : GetOpenFileNameA를 한 뒤로 CWD (Current Working Directory)가 선택한 폴더로 변경된다.
     // ->  OFN_PATHMUSTEXIST | OFN_NOCHANGEDIR 플래그 추가 해줘서 방지
-    if (GetOpenFileNameA(&ofn) != TRUE) 
-	    return; // 사용자가 취소함
+    if (GetOpenFileNameA(&ofn) != TRUE)
+        return; // 사용자가 취소함
 
     std::string filename = szFile;
 
@@ -1736,11 +1784,11 @@ void Editor::LoadScene(HWND &hwnd)
     // scene으로 파일 데이터 로드하기
     if (scene->LoadToJson(filename))
     {
-    	MessageBoxA(hwnd, "Scene loaded successfully!", "Load", MB_OK | MB_ICONINFORMATION);
+        MessageBoxA(hwnd, "Scene loaded successfully!", "Load", MB_OK | MB_ICONINFORMATION);
     }
     else
     {
-    	MessageBoxA(hwnd, "Failed to load scene! object or world data not found.", "Error", MB_OK | MB_ICONERROR);
+        MessageBoxA(hwnd, "Failed to load scene! object or world data not found.", "Error", MB_OK | MB_ICONERROR);
     }
 }
 
@@ -1752,7 +1800,7 @@ void Editor::CreatePickingStagingTex()
     desc.MipLevels = 1;
     desc.ArraySize = 1;
     desc.Format = DXGI_FORMAT_R32_UINT;
-    desc.SampleDesc.Count = 1; 
+    desc.SampleDesc.Count = 1;
     desc.SampleDesc.Quality = 0;
     desc.Usage = D3D11_USAGE_STAGING;
     desc.BindFlags = 0;
@@ -1812,9 +1860,14 @@ void Editor::ReadVariants(rttr::instance inst)
 
     rttr::type t = inst.get_derived_type();
 
+    int propIndex = 0;
     // Get value from type
     for (auto& prop : t.get_properties())
     {
+        std::string propId = prop.get_name().to_string();
+        ImGui::PushID(propIndex);
+        ImGui::PushID(propId.c_str());
+
         rttr::variant value = prop.get_value(inst);
         std::string name = prop.get_name().to_string();
 
@@ -1824,6 +1877,7 @@ void Editor::ReadVariants(rttr::instance inst)
         // check metaData
         auto metaBool = prop.get_metadata(META_BOOL);
         auto metaBrowse = prop.get_metadata(META_BROWSE);
+        auto metaInput = prop.get_metadata(META_INPUT);
 
         // Render elements
         // ImGui::Text("%s : %s", name.c_str(), value.get_type().get_name().to_string().c_str());
@@ -1893,6 +1947,25 @@ void Editor::ReadVariants(rttr::instance inst)
                 prop.set_value(inst, b ? 1 : 0);
             }
         }
+        else if (value.is_type<std::string>() && metaInput.is_valid())
+        {
+            char buf[256]{};
+            strncpy_s(buf, value.get_value<std::string>().c_str(), sizeof(buf) - 1);
+            ImGui::InputText(name.c_str(), buf, sizeof(buf), ImGuiInputTextFlags_EnterReturnsTrue);
+            prop.set_value(inst, std::string(buf));
+
+        }
+        else if (value.is_type<std::wstring>() && metaInput.is_valid())
+        {
+            std::string utf8 = WStringToUtf8(value.get_value<std::wstring>());
+
+            char buf[256]{};
+            strncpy_s(buf, utf8.c_str(), sizeof(buf) - 1);
+
+            ImGui::InputText(name.c_str(), buf, sizeof(buf), ImGuiInputTextFlags_EnterReturnsTrue);
+
+            prop.set_value(inst, Utf8ToWString(std::string(buf)));
+        }
         else if (value.is_type<float>())
         {
             float v = value.get_value<float>();
@@ -1959,6 +2032,69 @@ void Editor::ReadVariants(rttr::instance inst)
                 prop.set_value(inst, c);
             }
         }
+        else if (value.is_type<string>() && metaBrowse.is_valid())
+        {
+            std::string c = value.get_value<std::string>();
+
+            // inst 포인터 (가능하면 실제 객체 포인터)
+            void* p = inst.try_convert<void*>();
+            std::uintptr_t instId = reinterpret_cast<std::uintptr_t>(p);
+
+            // prop 이름을 섞어서 "같은 인스턴스의 다른 browse 프로퍼티"도 분리
+            std::string propName = prop.get_name().to_string();
+
+            // FileDialog key: inst + propName 조합 (표시용 텍스트는 ## 앞만, ID는 전체)
+            std::string key = "ChooseFileNormalStringKey##" + std::to_string(instId) + "##" + propName;
+
+            ImGui::Text("Current Path: %s", c.c_str());
+            if (ImGui::Button("Browse"))
+            {
+                IGFD::FileDialogConfig config;
+                config.path = "../";
+                ImGuiFileDialog::Instance()->OpenDialog(key, "Choose File", ".png,.jpg,.fbx,.glb,.ttf,.ttc,.json", config);
+            }
+            if (ImGuiFileDialog::Instance()->Display(key))
+            {
+                if (ImGuiFileDialog::Instance()->IsOk())
+                {
+                    std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
+                    std::filesystem::path relativePath = std::filesystem::relative(filePathName);
+                    prop.set_value(inst, relativePath.string());
+                }
+                ImGuiFileDialog::Instance()->Close();
+            }
+        }
+        else if (value.is_type<std::wstring>() && !metaBrowse.is_valid())
+        {
+            // wstring(UTF-16) -> UTF-8(string) : ImGui InputText 버퍼
+            std::string c = WStringToUtf8(value.get_value<std::wstring>());
+
+            if (ImGui::InputText(
+                name.c_str(),
+                c.data(),
+                c.capacity() + 1,
+                ImGuiInputTextFlags_CallbackResize,
+                [](ImGuiInputTextCallbackData* data) -> int
+                {
+                    if (data->EventFlag == ImGuiInputTextFlags_CallbackResize)
+                    {
+                        auto* str = static_cast<std::string*>(data->UserData);
+                        str->resize(data->BufTextLen);
+                        data->Buf = str->data();
+                    }
+                    return 0;
+                },
+                &c))
+            {
+                // UTF-8(string) -> wstring(UTF-16)
+                std::wstring w = Utf8ToWString(c);
+                prop.set_value(inst, w);
+            }
+        }
+
+        ImGui::PopID(); // propId
+        ImGui::PopID(); // propIndex
+        ++propIndex;
     }
 }
 
@@ -2013,7 +2149,7 @@ void Editor::RenderCameraPanel()
     ImGui::End();
 }
 
-void Editor::OnInputProcess(const Keyboard::State &KeyState, const Keyboard::KeyboardStateTracker &KeyTracker, const Mouse::State &MouseState, const Mouse::ButtonStateTracker &MouseTracker)
+void Editor::OnInputProcess(const Keyboard::State& KeyState, const Keyboard::KeyboardStateTracker& KeyTracker, const Mouse::State& MouseState, const Mouse::ButtonStateTracker& MouseTracker)
 {
     isAABBPicking = false;
 

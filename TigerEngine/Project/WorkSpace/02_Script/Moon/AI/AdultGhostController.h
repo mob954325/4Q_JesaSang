@@ -13,13 +13,27 @@ class AdultGhost_Search;
 class AdultGhost_Return;
 class AdultGhost_Attack;
 
-
 enum class AdultGhostState
 {
  // 순찰,   추격,   탐색,   복귀,   공격,    None
     Patrol, Chase, Search, Return, Attack, None
 };
 
+struct GridPos
+{
+    int x = -1;
+    int y = -1;
+    bool valid = false;
+};
+
+// Search 상태의 진입 경로 
+enum class SearchReason
+{
+    FromPatrol,   // 기척 or 함정 으로 넘어옴 
+    FromChase,    // 추격 실패    으로 넘어옴 
+    FromAttack,
+    None
+};
 
 class AdultGhostController : public ScriptComponent
 {
@@ -31,15 +45,23 @@ private:
 
     // Component 
     AgentComponent* agent = nullptr;
-    GridComponent* grid = nullptr;
     VisionComponent* vision = nullptr;
 
-    GameObject* curSeeingHideObject = nullptr;
 
     // State
     AdultGhostState state = AdultGhostState::None;
-    IAdultGhostState* curState;
+    IAdultGhostState* currentState;
     IAdultGhostState* fsmStates[5];
+
+
+    // HideObject tracking
+    GameObject* curSeeingHideObject = nullptr;
+    std::vector<GameObject*> hideObjects;
+    bool hideLookRegistered = false;
+
+
+    // AI가 처음 배치된 좌표 (웨이 포인트)
+    Vector3 initialPosition;
 
 private:
     // FSM
@@ -49,26 +71,35 @@ private:
     // Animation
     void LoadAnimation();
 
-    // Init
-    // void InitStat();
-
-    // Interaction
-    void InteractionCheak(float delta);
-
+    // Movement (공통)
+    bool MoveToTarget(float delta);
+    void RotateByDirection(const Vector3& moveDir, float delta);
 
 public:
     void OnStart() override;
     void OnUpdate(float delta) override;
     void OnFixedUpdate(float dt) override;
+    void OnDestory() override;
+
+    // Interaction
+    void OnPlayerNoise(const Vector3& noiseWorldPos); // 플레이어에서 호출 
+    void OnAttackHit(); // 유령 충돌 오브젝트에서 호출
+
+    // Helper
+    void ResetAgentForMove(float speed);
+    bool IsSeeing(GameObject* target) const;
+    bool IsPlayerInSenseRange();
+
+    GameObject* GetAITarget() const;
+    GameObject* GetPlayer() const;
 
 
-public:
-    // To. 우정 : 플레이어가 호출할 메소드
-    // 이 함수 호출하면 AI는 Search 상태로 전환 되면서 -> 그 함수가 호출되었을 때의 플레이어 위치를 향해서 이동
-    void OnPlayerNoise(const Vector3& noiseWorldPos);
+    // 플레이어 발견 마지막 위치 (그리드 좌표) 
+    GridPos lastPlayerGrid;
 
-    bool isSeeingHideObject = false;    // 시야 내에 HideObject가 감지 되는가? 
-    bool hideLookRegistered = false;    // HideObject에 카운트 올렸는가?
+
+    // 상태의 진입 경로 (어떤 이유로 들어왔는가)
+    SearchReason searchReason = SearchReason::None;
 
 public:
     // friend

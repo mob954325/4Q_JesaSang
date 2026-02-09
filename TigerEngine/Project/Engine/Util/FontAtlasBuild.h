@@ -4,6 +4,8 @@
 #include <unordered_map>
 #include "dwrite.h"
 
+#pragma comment(lib, "dwrite.lib")
+
 /// <summary>
 /// glyph 위치정보
 /// </summary>
