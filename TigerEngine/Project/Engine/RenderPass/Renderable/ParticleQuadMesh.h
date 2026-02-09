@@ -22,7 +22,7 @@ private:
     UINT stride = sizeof(ParticleQuadVertex);
 
 public:
-    void Create(ComPtr<ID3D11Device>& device);
+    void Create(const ComPtr<ID3D11Device>& device);
     void DrawIndexedInstanced(ComPtr<ID3D11DeviceContext>& context,
         UINT instanceCount, ID3D11Buffer* instanceVB, UINT instanceStride);
 };

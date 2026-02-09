@@ -2,6 +2,8 @@
 #include "Emitter.h"
 #include <vector>
 #include <directxtk/simplemath.h>
+#include "../Engine/Object/Component.h"
+#include "../Engine/Components/Transform.h"
 using std::vector;
 using namespace DirectX::SimpleMath;
 
@@ -20,13 +22,16 @@ using namespace DirectX::SimpleMath;
      근데 안에 타고타고 들어가는 데이터가 많아서 번거로운 것...
 */
 
-class Effect
+class Effect : public Component
 {
+    RTTR_ENABLE(Component)
 public:
+    void OnInitialize() override;
+
     vector<Emitter> emitters;
     bool allFinished = true;
 
-    Vector3 position = Vector3::Zero;
+    Transform* transform{};
     bool    enabled = true;
     bool    playing = true;
     bool    looping = true;
@@ -35,6 +40,14 @@ public:
     void Play();
     void Stop();
     void Update();
+
+    // register enable
+    void Enable_Inner() override;
+    void Disable_Inner() override;
+
+    // json
+    nlohmann::json Serialize();
+    void Deserialize(nlohmann::json data);
 };
 
 

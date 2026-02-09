@@ -26,6 +26,7 @@
 #include "EngineSystem/DecalSystem.h"
 #include "EngineSystem/GridSystem.h"
 #include "EngineSystem/AgentSystem.h"
+#include "EngineSystem/EffectSystem.h"
 
 #include "Components/FBXData.h"
 
@@ -112,6 +113,7 @@ bool EngineApp::OnInitialize()
     postProcessPass = std::make_unique<PostProcessPass>();
     frustumPass = std::make_unique<FrustumPass>();
     uiPass = std::make_unique<UIRenderPass>();
+    effectPass = std::make_unique<EffectPass>();
 
     shadowPass->Init();
     geometryPass->Init();
@@ -123,6 +125,7 @@ bool EngineApp::OnInitialize()
     postProcessPass->Init();
     frustumPass->Init(dxRenderer->GetDevice(), dxRenderer->GetDeviceContext());
     uiPass->Init(dxRenderer->GetDevice());
+    effectPass->Init(dxRenderer->GetDevice());
 
     // == init world data ==
     //WorldManager::Instance().shaderResourceView = shadowPass->GetShadowSRV();
@@ -221,6 +224,7 @@ void EngineApp::OnRender()
     dxRenderer->ProcessScene(*renderQueue, *lightPass, curCam);
     dxRenderer->ProcessScene(*renderQueue, *skyboxPass, curCam);
     dxRenderer->ProcessScene(*renderQueue, *forwardTransparentPass, curCam);
+    dxRenderer->ProcessScene(*renderQueue, *effectPass, curCam);    // note : 26.02.09 파티클 패스
     dxRenderer->ProcessScene(*renderQueue, *bloomPass, curCam);
     dxRenderer->ProcessScene(*renderQueue, *postProcessPass, curCam);
     dxRenderer->ProcessScene(*renderQueue, *uiPass, curCam);
@@ -451,6 +455,7 @@ void EngineApp::OnInputProcess(const Keyboard::State& KeyState, const Keyboard::
 #include "Components/UI/Image.h"
 #include "Components/RectTransform.h"
 #include "Components/UI/TextUI.h"
+#include "RenderPass/ParticleSource/Effect.h"
 
 void EngineApp::RegisterAllComponents()
 {
@@ -506,4 +511,5 @@ void EngineApp::Ho_Registeration()
     auto& cf = ComponentFactory::Instance();
 
     cf.Register<TextUI>("TextUI", ComponentCategory::UI);
+    cf.Register<Effect>("Effect", ComponentCategory::Other);
 }

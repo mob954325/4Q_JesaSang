@@ -1,7 +1,9 @@
-#include "SpriteSheet.hpp"
-#include "Particle.hpp"
+#pragma once
+#include "SpriteSheet.h"
+#include "Particle.h"
 #include <vector>
 using std::vector;
+#include "pch.h"
 
 // 하드한 부분이 많지만...
 
@@ -89,6 +91,9 @@ enum class VelocityShape
 
 struct SpawnDynamic
 {
+    RTTR_ENABLE()
+
+public:
     float   lifeMin = 0.5f;
     float   lifeMax = 1.0f;
 
@@ -108,6 +113,9 @@ struct SpawnDynamic
 
 struct SpawnFixed
 {
+    RTTR_ENABLE()
+
+public:
     float     rotation = 0.0f;
     Vector2   size = Vector2::One;
     Vector4   startColor = { 1,1,1,1 };
@@ -116,6 +124,7 @@ struct SpawnFixed
 
 class Emitter
 {
+    RTTR_ENABLE()
 public:
     SpriteSheet      sheet;
     vector<Particle> particles;
