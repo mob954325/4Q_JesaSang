@@ -1,6 +1,6 @@
 #include "ParticleQuadMesh.h"
 
-void ParticleQuadMesh::Create(ComPtr<ID3D11Device>& device)
+void ParticleQuadMesh::Create(const ComPtr<ID3D11Device>& device)
 {
     // Quad: corner(-0.5~0.5), UV(0~1)
     ParticleQuadVertex vertices[4] =

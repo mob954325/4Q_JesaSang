@@ -141,6 +141,8 @@
     <ClCompile Include="Components\RectTransform.cpp" />
     <ClCompile Include="Components\UI\Image.cpp" />
     <ClCompile Include="Components\VisionComponent.cpp" />
+    <ClCompile Include="EngineSystem\EffectSystem.cpp" />
+    <ClCompile Include="RenderPass\ParticleSource\Particle.cpp" />
     <ClCompile Include="RenderPass\Renderer\EffectPass.cpp" />
     <ClCompile Include="RenderPass\ParticleSource\Effect.cpp" />
     <ClCompile Include="RenderPass\ParticleSource\Emitter.cpp" />
@@ -213,6 +215,7 @@
     <ClInclude Include="Components\AnimationController.h" />
     <ClInclude Include="Components\UI\Image.h" />
     <ClInclude Include="Components\VisionComponent.h" />
+    <ClInclude Include="EngineSystem\EffectSystem.h" />
     <ClInclude Include="RenderPass\Renderer\EffectPass.h" />
     <ClInclude Include="RenderPass\ParticleSource\Effect.h" />
     <ClInclude Include="RenderPass\ParticleSource\Emitter.h" />
@@ -231,7 +234,7 @@
     <ClInclude Include="EngineSystem\DecalSystem.h" />
     <ClInclude Include="EngineSystem\GridSystem.h" />
     <ClInclude Include="Object\Enableable.h" />
-    <ClInclude Include="RenderPass\ParticleSource\Particle.hpp" />
+    <ClInclude Include="RenderPass\ParticleSource\Particle.h" />
     <ClInclude Include="RenderPass\ParticleSource\SpriteSheet.hpp" />
     <ClInclude Include="RenderPass\ParticleSource\ParticleRenderer.h" />
     <ClInclude Include="RenderPass\Renderable\DecalVolumeMesh.h" />

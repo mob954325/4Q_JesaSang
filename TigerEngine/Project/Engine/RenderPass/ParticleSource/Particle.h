@@ -1,3 +1,4 @@
+#pragma once
 #include <directxtk/simplemath.h>
 using namespace DirectX::SimpleMath;
 

@@ -1,5 +1,27 @@
 #include "Effect.h"
 #include "../Engine/EngineSystem/EffectSystem.h"
+#include "../Base/Datas/ReflectionMedtaDatas.hpp"
+#include "../Engine/Util/JsonHelper.h"
+
+RTTR_REGISTRATION
+{
+    using namespace rttr;
+
+    registration::class_<Effect>("Effect")
+        .constructor<>()(policy::ctor::as_raw_ptr) // 엔진 스타일에 맞게 as_object/as_raw_ptr 선택
+        // --- properties ---
+        .property("emitters", &Effect::emitters)
+        .property("allFinished", &Effect::allFinished)
+
+        .property("position", &Effect::position)
+
+        .property("enabled", &Effect::enabled)
+            (metadata(META_BOOL, true))
+        .property("playing", &Effect::playing)
+            (metadata(META_BOOL, true))
+        .property("looping", &Effect::looping)
+            (metadata(META_BOOL, true));
+}
 
 void Effect::Play()
 {
@@ -59,4 +81,15 @@ void Effect::Enable_Inner()
 void Effect::Disable_Inner()
 {
     EffectSystem::Instance().UnRegister(this);
+}
+
+
+nlohmann::json Effect::Serialize()
+{
+    return JsonHelper::MakeSaveData(this);
+}
+
+void Effect::Deserialize(nlohmann::json data)
+{
+    JsonHelper::SetDataFromJson(this, data);
 }
