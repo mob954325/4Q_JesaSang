@@ -1,6 +1,7 @@
 #pragma once
 #include "Components/ScriptComponent.h"
 
+class Image;
 class PlayerController;
 
 /*
@@ -22,6 +23,11 @@ class HideObject : public ScriptComponent
 private:
     // components
     PlayerController* player = nullptr;
+
+    // child UI
+    Image* image_sensorOn = nullptr;
+    Image* image_interactionOn = nullptr;
+
 
     // data
     float hideDurationTime = 10.0f;     // 최대 은신 시간
@@ -51,6 +57,10 @@ public :
     bool IsPossibleHide();
     void StartHide(PlayerController* p);
     void StopHide();
+
+    // UI
+    void UISensorOnOff(bool flag);              // 플레이어 감지영역 UI
+    void UIInteractionOnOff(bool flag);         // 플레이어 상호작용 영역 UI
 
 
     // AI 시야 연결 - 선민 | 02.07 

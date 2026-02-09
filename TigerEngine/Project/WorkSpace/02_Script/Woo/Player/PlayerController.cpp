@@ -306,6 +306,9 @@ void PlayerController::SerachObjectInteraction(float dt)
     float progress = searchTimer / searchTime;
     if (progress > 1.0f) progress = 1.0f;
 
+    // UI - interaction
+    curSerachObject->UIGaugeUpate(progress);
+
     // search object interaction
     if (searchTimer >= searchTime)
     {
@@ -403,6 +406,9 @@ void PlayerController::PutFoodJesaSangInteraction(float dt)
     putFoodTimer += dt;
     float progress = putFoodTimer / putFoodTime;
     if (progress > 1.0f) progress = 1.0f;
+
+    // UI - interaction
+    JesaSangManager::Instance()->UIGaugeUpate(progress);
 
     // 제사상에 음식 올리기 interaction
     if (putFoodTimer >= putFoodTime)

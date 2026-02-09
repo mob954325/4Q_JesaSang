@@ -2,6 +2,7 @@
 #include "Components/ScriptComponent.h"
 
 class GameObject;
+class Image;
 class IItem;
 
 /*
@@ -36,6 +37,12 @@ private:
     GameObject* sanjeok = nullptr;
     GameObject* dong = nullptr;
 
+    // child UI
+    Image* image_sensorOn = nullptr;
+    Image* image_interactionOn = nullptr;
+    Image* image_interactionGauge = nullptr;
+
+
 public:
     // component process
     void OnInitialize() override;
@@ -55,5 +62,10 @@ public:
     static JesaSangManager* Instance() { return s_instance; }
 
     void ReceiveFood(std::unique_ptr<IItem> food);
+
+    // UI
+    void UISensorOnOff(bool flag);              // 플레이어 감지영역 UI
+    void UIInteractionOnOff(bool flag);         // 플레이어 상호작용 영역 UI
+    void UIGaugeUpate(float progress);
 };
 

@@ -3,6 +3,8 @@
 #include "Components/FBXRenderer.h"
 #include "../Item/Item.h"
 
+class Image;
+
 /*
     [ SearchObject Script Component ]
 
@@ -19,6 +21,12 @@ class SearchObject : public ScriptComponent
 private:
     // components
     FBXRenderer* fbxRenderer = nullptr;
+
+    // child UI
+    Image* image_sensorOn = nullptr;
+    Image* image_interactionOn = nullptr;
+    Image* image_interactionGauge = nullptr;
+
     
 public:
     // data
@@ -29,7 +37,7 @@ public:
 
     // controlls
     std::unique_ptr<IItem> item = nullptr;
-    bool  isSearched;
+    bool  isSearched = false;
 
 public:
     // component process
@@ -41,6 +49,10 @@ public:
 
 public:
     // 외부 call funcs...
-    std::unique_ptr<IItem> Interaction();       // 상호작용 Enter
+    void UISensorOnOff(bool flag);              // 플레이어 감지영역 UI
+    void UIInteractionOnOff(bool flag);         // 플레이어 상호작용 영역 UI
+    void UIGaugeUpate(float progress);          // 플레이어 인터랙션 UI
+
+    std::unique_ptr<IItem> Interaction();       // 상호작용 성공
 };
 
