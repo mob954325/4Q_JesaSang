@@ -133,12 +133,13 @@ void AudioManager::Update()
 
 bool AudioManager::LoadManifest(const std::string& manifestPath)
 {
-    auto resolved = ResolveManifestPath(manifestPath);
+    auto resolved = ResolveManifestPath(manifestPath);  // .csv 디렉토리 패스 찾기
     if (resolved.empty())
     {
         return false;
     }
 
+    // 파일 열기
     std::ifstream file(resolved);
     if (!file.is_open())
     {
@@ -182,7 +183,7 @@ bool AudioManager::LoadManifest(const std::string& manifestPath)
 
         AudioManifestEntry entry{};
         entry.id = Trim(cols[0]);
-        entry.path = Trim(cols[1]);
+        entry.path = Trim(cols[1]); // NOTE : 이거 불러 올때 왜 슬래시가 4개씩 나옴
         entry.group = Trim(cols[2]);
         entry.mode = ParseMode(cols[3]);
         entry.defaultVolume = std::stof(Trim(cols[4]));

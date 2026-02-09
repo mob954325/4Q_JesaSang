@@ -56,8 +56,8 @@ private:
 	float rotSpeed = 0.004f;
 
 	float povAngle = DirectX::XM_PIDIV2;
-	float nearDist = 0.01f;
-	float farDist = 2000.0f;
+	float nearDist = 70.0f;
+	float farDist = 1800.0f;
 
     int screenWidth = 0;
     int screenHeight = 0;

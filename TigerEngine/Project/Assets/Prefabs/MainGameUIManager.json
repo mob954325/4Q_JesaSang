@@ -1,0 +1,44 @@
+{
+  "prefab": [
+    {
+      "Active": true,
+      "ID": 801,
+      "Name": "MainGameUIManager",
+      "ParentID": -1,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true
+          },
+          "type": "MainGameUIManager"
+        },
+        {
+          "properties": {
+            "Active": true
+          },
+          "type": "PauseManager"
+        }
+      ]
+    }
+  ]
+}

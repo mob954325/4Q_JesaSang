@@ -21,6 +21,8 @@ public:
     std::shared_ptr<Scene> GetCurrentScene();
     std::shared_ptr<Scene> SetCurrentSceneByIndex(int i = 0);
 
+    bool isSceneChanging = false; // 현재 씬 교체 중인가?
+
 private:
     std::map<int, std::shared_ptr<Scene>> scenes;
     std::shared_ptr<Scene> currentScene{};

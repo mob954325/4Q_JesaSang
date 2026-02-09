@@ -10,10 +10,10 @@ class Image;
     [ 칼로 썰기 게임 ]
     
     메이플 스타포스임
-    Space 누르면 슬라이더가 멈추고 판정, 일정 시간 뒤 다시 움직임
+    Space 누르면 슬라이더(칼)가 멈추고 판정, 일정 시간 뒤 다시 움직임
     슬라이더 움직이는 영역(x) 200 ~ 800
     StopPoint : pos.x = 500, size.x = 100
-    StopPoint 영역 안에 spaceBar 중심이 들어오면 성공으로 판정
+    StopPoint 영역 안에 Knife 중심이 들어오면 성공으로 판정
 
     - 게임 성공 : 5번 성공
     - 게임 실패 : 3번 실패
@@ -24,7 +24,7 @@ class Game_Cutting : public IMiniGame
 private:
     // UI
     RectTransform* stopPoint;       // 맞춰야하는 부분(영역)
-    RectTransform* spaceBar;        // 움직이는 슬라이더 (space key down시 정지)
+    RectTransform* knife;           // 움직이는 슬라이더 (space key down시 정지)
 
     // game data
     float spaceSpped = 700.0f;      // 스페이스바 슬라이드 속도
@@ -55,7 +55,8 @@ private:
     bool  IsSpaceDownOnce() const; 
     void  EvaluateOnce();          
 
-
+    Image* animImage{};
+    void SetAnimPathes();
 public:
     Game_Cutting() = default;
     ~Game_Cutting() override = default;
@@ -63,5 +64,7 @@ public:
     void StartGame() override;
     void UpdateGame(float delta)override;
     void EndGame() override;
+
+    void UpdateAnimation(float delta) override;
 };
 

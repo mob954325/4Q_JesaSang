@@ -15,7 +15,8 @@ RTTR_REGISTRATION
         rttr::value("Simple", ImageType::Simple),
         rttr::value("Fill", ImageType::Fill),
         rttr::value("Sliced", ImageType::Sliced),
-        rttr::value("FillHorizontal", ImageType::FillHorizontal)
+        rttr::value("FillHorizontal", ImageType::FillHorizontal),
+        rttr::value("FillVertical", ImageType::FillVertical)
     );
 
     rttr::registration::enumeration<DrawSpaceType>("DrawSpaceType")

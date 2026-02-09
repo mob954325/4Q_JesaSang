@@ -79,7 +79,7 @@ private:
     // hit
     float hitDuration = 5.0f;           // 패닉 유지시간
     float hitInvincibleTime = 3.0f;     // 패닉 무적타임
-
+    float renderDirectorTime = 0.2f;    // 패닉 렌더 연출시간
 
 
     // --- [ Controll ] ----------------------------
@@ -88,7 +88,14 @@ private:
     float curSpeed = 0.0f;
     Vector3 lookDir = Vector3::Zero;
     float curSenseRadius = 0.0f;         // 현재 기척 범위
+
+    // hit
     bool isPlayerInvincible = false;     // 현재 무적상태 여부
+    bool resumeHitAfterHide = false;     // hit->hide hit 초기화 방지
+    float hitTimer = 0.0f;               // hit 상태 지속시간 타이머
+    float invincibleTimer = 0.0f;        // hit 무적상태 지속시간 타이머
+    float renderDirectorTimer = 0.0f;    // 플레이어 렌더 깜빡거림 지속시간 타이머
+
 
     // search object interaction
     bool  isPossibleSearch = false;            // 기획자분이 한번에 하나만 가능한 사이즈라고 하심. 중첩된다면 추가 처리필요.
@@ -182,6 +189,9 @@ private:
     void CookingInteraction(float dt);
     void PutFoodJesaSangInteraction(float dt);
     void GetItemAltarInteraction(float dt);
+
+    // Hit
+    void UpsateHitDuration(float dt);
 
 
 public:

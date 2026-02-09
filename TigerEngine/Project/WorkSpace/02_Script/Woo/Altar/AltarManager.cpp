@@ -1,8 +1,10 @@
 #include "AltarManager.h"
 #include "Util/JsonHelper.h"
 #include "Util/ComponentAutoRegister.h"
-#include "Object/GameObject.h"
 #include "EngineSystem/SceneSystem.h"
+#include "Object/GameObject.h"
+#include "Components/UI/Image.h"
+
 #include "../Item/Item.h"
 
 REGISTER_COMPONENT(AltarManager)
@@ -12,6 +14,28 @@ RTTR_REGISTRATION
     rttr::registration::class_<AltarManager>("AltarManager")
     .constructor<>()
     (rttr::policy::ctor::as_std_shared_ptr);
+}
+
+void AltarManager::FirstReceiveDirect()
+{
+    // 최초 제단 활성화
+    altar->SetActive(true);
+
+    ingre_apple->SetActive(false);
+    ingre_pear->SetActive(false);
+    ingre_batter->SetActive(false);
+    ingre_tofu->SetActive(false);
+    ingre_sanjeok->SetActive(false);
+    ingre_dong->SetActive(false);
+
+    food_apple->SetActive(false);
+    food_pear->SetActive(false);
+    food_batter->SetActive(false);
+    food_tofu->SetActive(false);
+    food_sanjeok->SetActive(false);
+    food_dong->SetActive(false);
+
+    // TODO :: 제단 활성화 연출 여기에 연결
 }
 
 void AltarManager::OnInitialize()
@@ -24,6 +48,9 @@ void AltarManager::OnStart()
 {
     // gameobject find
     const auto& sceneSystem = SceneSystem::Instance().GetCurrentScene();
+
+    altar = sceneSystem->GetGameObjectByName("Altar");
+
     ingre_apple = sceneSystem->GetGameObjectByName("Alta_Ingre_Apple");
     ingre_pear = sceneSystem->GetGameObjectByName("Alta_Ingre_Pear");
     ingre_batter = sceneSystem->GetGameObjectByName("Alta_Ingre_Batter");
@@ -45,6 +72,18 @@ void AltarManager::OnStart()
         return;
     }
 
+    image_sensorOn = sceneSystem->GetGameObjectByName("Image_SensorOn_Altar")->GetComponent<Image>();
+    image_interactionOn = sceneSystem->GetGameObjectByName("Image_InteractionOn_Altar")->GetComponent<Image>();
+    image_interactionGauge = sceneSystem->GetGameObjectByName("Image_InteractionGauge_Altar")->GetComponent<Image>();
+
+    if (!image_sensorOn || !image_interactionOn || !image_interactionGauge)
+    {
+        cout << "[AltarManager] Missing ui!" << endl;
+        return;
+    }
+
+    altar->SetActive(false);
+
     ingre_apple->SetActive(false);
     ingre_pear->SetActive(false);
     ingre_batter->SetActive(false);
@@ -58,10 +97,18 @@ void AltarManager::OnStart()
     food_tofu->SetActive(false);
     food_sanjeok->SetActive(false);
     food_dong->SetActive(false);
+
+    image_sensorOn->SetActive(false);
+    image_interactionOn->SetActive(false);
+    image_interactionGauge->SetActive(false);
 }
 
 void AltarManager::OnDestory()
 {
+    if (s_instance == this) s_instance = nullptr;
+
+    foodQueue.clear();
+    ingreQueue.clear();
 }
 
 nlohmann::json AltarManager::Serialize()
@@ -122,25 +169,79 @@ void AltarManager::ReceiveItem(std::unique_ptr<IItem> item)
         return;
     }
 
-    if (curItem)
+    // 최초 제단 활성화
+    if (!isFirstReceiveItem)
     {
-        cout << "[AltarManager] Altar Full ! Cur Item : " << curItem->itemId << endl;
-        return;
+        isFirstReceiveItem = true;
+        FirstReceiveDirect();
     }
 
-    // 새 아이템 제단에 올리기
-    cout << "[AltarManager] Received Item :  " << item->itemId << endl;
+    // 비주얼 on
     VisualItem(item->itemId, true);
-    curItem = std::move(item);
+
+    // 아이템이 제단에 올라감
+    if (item->itemType == ItemType::Food)
+        foodQueue.push_back(std::move(item));
+    else
+        ingreQueue.push_back(std::move(item));
 }
 
 std::unique_ptr<IItem> AltarManager::GetItem()
 {
-    if(!curItem) {
-        cout << "[AltarManager] cur item null !" << endl;
-        return nullptr;
+    // 완성된 음식 우선 회수 (FIFO)
+    if (!foodQueue.empty() && foodQueue.front())
+    {
+        std::unique_ptr<IItem> out = std::move(foodQueue.front());
+        foodQueue.pop_front();
+
+        VisualItem(out->itemId, false);
+
+        // UI clear
+        UISensorOnOff(false);
+        UIInteractionOnOff(false);
+        image_interactionGauge->SetFillAmount(0.0);
+
+        return out;
     }
 
-    VisualItem(curItem->itemId, false);
-    return std::move(curItem);
+    // 음식 재료 회수 (FIFO)
+    if (!ingreQueue.empty() && ingreQueue.front())
+    {
+        std::unique_ptr<IItem> out = std::move(ingreQueue.front());
+        ingreQueue.pop_front();
+
+        VisualItem(out->itemId, false);
+
+        // UI clear
+        UISensorOnOff(false);
+        UIInteractionOnOff(false);
+        image_interactionGauge->SetFillAmount(0.0);
+
+        return out;
+    }
+
+    cout << "[AltarManager] no item !" << endl;
+    return nullptr;
+}
+
+void AltarManager::UISensorOnOff(bool flag)
+{
+    if (!image_sensorOn) return;
+    if (flag && !isFirstReceiveItem) return;
+    image_sensorOn->SetActive(flag);
+}
+
+void AltarManager::UIInteractionOnOff(bool flag)
+{
+    if (!image_interactionOn) return;
+    if (flag && !isFirstReceiveItem) return;
+    image_interactionOn->SetActive(flag);
+    image_interactionGauge->SetActive(flag);
+}
+
+void AltarManager::UIGaugeUpate(float progress)
+{
+    if (!image_interactionGauge) return;
+    if (!isFirstReceiveItem) return;
+    image_interactionGauge->SetFillAmount(progress);
 }

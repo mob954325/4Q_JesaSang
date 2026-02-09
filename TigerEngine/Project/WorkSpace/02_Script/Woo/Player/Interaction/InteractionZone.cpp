@@ -1,10 +1,15 @@
 #include "InteractionZone.h"
 #include "Util/JsonHelper.h"
 #include "Util/ComponentAutoRegister.h"
+#include "EngineSystem/PhysicsSystem.h"
+
 #include "Object/GameObject.h"
 #include "../../Object/SearchObject.h"
 #include "../../Object/HideObject.h"
-#include "EngineSystem/PhysicsSystem.h"
+#include "../../JesaSang/JesaSangManager.h"
+#include "../../Altar/AltarManager.h"
+#include "../../CookingZone/CookingZone.h"
+
 
 REGISTER_COMPONENT(InteractionZone)
 
@@ -33,7 +38,7 @@ void InteractionZone::OnFixedUpdate(float delta)
     // transform->physics udpate
     auto ob = GetOwner();
     auto tr = ob->GetTransform();
-    Vector3 upatePos = tr->GetParent()->GetOwner()->GetTransform()->GetWorldPosition() + Vector3(0,20,0);
+    Vector3 upatePos = tr->GetParent()->GetOwner()->GetTransform()->GetWorldPosition() + Vector3(0,70,0);
     tr->SetPosition(upatePos);
     GetOwner()->GetComponent<PhysicsComponent>()->SyncToPhysics();
 }
@@ -57,10 +62,9 @@ void InteractionZone::OnTriggerEnter(PhysicsComponent* other)
         if(searchOB && !searchOB->isSearched)
         {
             player->SetCurSearchObject(searchOB);
+            searchOB->UIInteractionOnOff(true);
             cout << "[InteractionZone] SearchObject In Interaction Zone" << endl;
         }
-
-        // TODO :: UI
     }
 
     // Hide Object
@@ -70,14 +74,16 @@ void InteractionZone::OnTriggerEnter(PhysicsComponent* other)
         if (hideOB)
         {
             player->SetCurHideObject(hideOB);
+            hideOB->UIInteractionOnOff(true);
             cout << "[InteractionZone] HideObject In Interaction Zone" << endl;
         }
     }
 
-    // Kitchin (MiniGame)
+    // CookingZone (MiniGame)
     if (other->GetOwner()->GetName() == "CookingZone")
     {
         player->isPossibleCooking = true;
+        CookingZone::Instance()->UIInteractionOnOff(true);
         cout << "[InteractionZone] CookingZone In Interaction Zone" << endl;
     }
 
@@ -85,6 +91,7 @@ void InteractionZone::OnTriggerEnter(PhysicsComponent* other)
     if (other->GetOwner()->GetName() == "JesaSang")
     {
         player->isPossiblePutFood = true;
+        JesaSangManager::Instance()->UIInteractionOnOff(true);
         cout << "[InteractionZone] JesaSang In Interaction Zone" << endl;
     }
 
@@ -92,6 +99,7 @@ void InteractionZone::OnTriggerEnter(PhysicsComponent* other)
     if (other->GetOwner()->GetName() == "Altar")
     {
         player->isPossibleGetFood = true;
+        AltarManager::Instance()->UIInteractionOnOff(true);
         cout << "[InteractionZone] Altar In Interaction Zone" << endl;
     }
 }
@@ -105,10 +113,9 @@ void InteractionZone::OnTriggerExit(PhysicsComponent* other)
         if (searchOB && !searchOB->isSearched)
         {
             player->SetCurSearchObject(nullptr);
+            searchOB->UIInteractionOnOff(false);
             cout << "[InteractionZone] SearchObject Out Interaction Zone" << endl;
         }
-
-        // TODO :: UI
     }
 
     // Hide Object
@@ -118,14 +125,16 @@ void InteractionZone::OnTriggerExit(PhysicsComponent* other)
         if (hideOB)
         {
             player->SetCurHideObject(nullptr);
+            hideOB->UIInteractionOnOff(false);
             cout << "[InteractionZone] HideObject Out Interaction Zone" << endl;
         }
     }
 
-    // Kitchin (MiniGame)
+    // Cooking Zone (MiniGame)
     if (other->GetOwner()->GetName() == "CookingZone")
     {
         player->isPossibleCooking = false;
+        CookingZone::Instance()->UIInteractionOnOff(false);
         cout << "[InteractionZone] CookingZone Out Interaction Zone" << endl;
     }
 
@@ -133,6 +142,7 @@ void InteractionZone::OnTriggerExit(PhysicsComponent* other)
     if (other->GetOwner()->GetName() == "JesaSang")
     {
         player->isPossiblePutFood = false;
+        JesaSangManager::Instance()->UIInteractionOnOff(false);
         cout << "[InteractionZone] JesaSang Out Interaction Zone" << endl;
     }
 
@@ -140,6 +150,7 @@ void InteractionZone::OnTriggerExit(PhysicsComponent* other)
     if (other->GetOwner()->GetName() == "Altar")
     {
         player->isPossibleGetFood = false;
+        AltarManager::Instance()->UIInteractionOnOff(false);
         cout << "[InteractionZone] Altar Out Interaction Zone" << endl;
     }
 }

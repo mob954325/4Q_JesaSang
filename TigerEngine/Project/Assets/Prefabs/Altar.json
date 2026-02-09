@@ -2,26 +2,26 @@
   "prefab": [
     {
       "Active": true,
-      "ID": 1021,
+      "ID": 862,
       "Name": "Altar",
       "ParentID": -1,
       "components": [
         {
           "properties": {
             "Position": [
-              546.7999877929688,
-              -100.0,
-              -300.0
+              567.5891723632813,
+              0.0,
+              -391.47784423828125
             ],
             "Rotation": [
               -0.0,
-              1.5707963705062866,
-              0.0
+              1.570796012878418,
+              -0.0
             ],
             "Scale": [
+              0.9999998211860657,
               1.0,
-              1.0,
-              1.0
+              0.9999998211860657
             ]
           },
           "type": "Transform"
@@ -98,20 +98,14 @@
             "radius": 50.0
           },
           "type": "PhysicsComponent"
-        },
-        {
-          "properties": {
-            "Active": true
-          },
-          "type": "AltarManager"
         }
       ]
     },
     {
       "Active": true,
-      "ID": 1022,
+      "ID": 863,
       "Name": "baseFood",
-      "ParentID": 1021,
+      "ParentID": 862,
       "components": [
         {
           "properties": {
@@ -187,9 +181,9 @@
     },
     {
       "Active": false,
-      "ID": 1023,
+      "ID": 864,
       "Name": "Alta_Apple",
-      "ParentID": 1021,
+      "ParentID": 862,
       "components": [
         {
           "properties": {
@@ -265,9 +259,9 @@
     },
     {
       "Active": false,
-      "ID": 1024,
+      "ID": 865,
       "Name": "Alta_Pear",
-      "ParentID": 1021,
+      "ParentID": 862,
       "components": [
         {
           "properties": {
@@ -343,9 +337,9 @@
     },
     {
       "Active": false,
-      "ID": 1025,
+      "ID": 866,
       "Name": "Alta_Batter",
-      "ParentID": 1021,
+      "ParentID": 862,
       "components": [
         {
           "properties": {
@@ -421,9 +415,9 @@
     },
     {
       "Active": false,
-      "ID": 1026,
+      "ID": 867,
       "Name": "Alta_Tofu",
-      "ParentID": 1021,
+      "ParentID": 862,
       "components": [
         {
           "properties": {
@@ -499,9 +493,9 @@
     },
     {
       "Active": false,
-      "ID": 1027,
+      "ID": 868,
       "Name": "Alta_Sanjeok",
-      "ParentID": 1021,
+      "ParentID": 862,
       "components": [
         {
           "properties": {
@@ -577,9 +571,9 @@
     },
     {
       "Active": false,
-      "ID": 1028,
+      "ID": 869,
       "Name": "Alta_Donggeurangttaeng",
-      "ParentID": 1021,
+      "ParentID": 862,
       "components": [
         {
           "properties": {
@@ -655,9 +649,9 @@
     },
     {
       "Active": false,
-      "ID": 1029,
+      "ID": 870,
       "Name": "Alta_Ingre_Apple",
-      "ParentID": 1021,
+      "ParentID": 862,
       "components": [
         {
           "properties": {
@@ -733,9 +727,9 @@
     },
     {
       "Active": false,
-      "ID": 1030,
+      "ID": 871,
       "Name": "Alta_Ingre_Pear",
-      "ParentID": 1021,
+      "ParentID": 862,
       "components": [
         {
           "properties": {
@@ -811,9 +805,9 @@
     },
     {
       "Active": false,
-      "ID": 1031,
+      "ID": 872,
       "Name": "Alta_Ingre_Batter",
-      "ParentID": 1021,
+      "ParentID": 862,
       "components": [
         {
           "properties": {
@@ -889,9 +883,9 @@
     },
     {
       "Active": false,
-      "ID": 1032,
+      "ID": 873,
       "Name": "Alta_Ingre_Tofu",
-      "ParentID": 1021,
+      "ParentID": 862,
       "components": [
         {
           "properties": {
@@ -967,9 +961,9 @@
     },
     {
       "Active": false,
-      "ID": 1033,
+      "ID": 874,
       "Name": "Alta_Ingre_Sanjeok",
-      "ParentID": 1021,
+      "ParentID": 862,
       "components": [
         {
           "properties": {
@@ -1045,9 +1039,9 @@
     },
     {
       "Active": false,
-      "ID": 1034,
+      "ID": 875,
       "Name": "Alta_Ingre_Donggeurangttaeng",
-      "ParentID": 1021,
+      "ParentID": 862,
       "components": [
         {
           "properties": {
@@ -1118,6 +1112,270 @@
             "isroughnessFromShininess": false
           },
           "type": "FBXRenderer"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 885,
+      "Name": "Image_SensorOn_Altar",
+      "ParentID": 862,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              100.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              3.1415927410125732,
+              3.1415927410125732
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Pivot": [
+              0.5,
+              0.5
+            ],
+            "Pos": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "Size": [
+              25.0,
+              25.0
+            ]
+          },
+          "type": "RectTransform"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "color": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "drawSpacetype": "World",
+            "fillAmount": 1.0,
+            "imageType": "Simple",
+            "isBillboard": false,
+            "isMouseCheck": false,
+            "path": "..\\Assets\\Resource\\UI\\Interaction\\point.png",
+            "sliceBorderPx": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "type": "Simple",
+            "zOrder": 0
+          },
+          "type": "Image"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 886,
+      "Name": "Image_InteractionOn_Altar",
+      "ParentID": 862,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              100.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              3.1415927410125732,
+              3.1415927410125732
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Pivot": [
+              0.5,
+              0.5
+            ],
+            "Pos": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "Size": [
+              25.0,
+              25.0
+            ]
+          },
+          "type": "RectTransform"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "color": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "drawSpacetype": "World",
+            "fillAmount": 1.0,
+            "imageType": "Simple",
+            "isBillboard": false,
+            "isMouseCheck": false,
+            "path": "..\\Assets\\Resource\\UI\\Interaction\\F.png",
+            "sliceBorderPx": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "type": "Simple",
+            "zOrder": 1
+          },
+          "type": "Image"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 887,
+      "Name": "Image_InteractionGauge_Altar",
+      "ParentID": 862,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              100.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              3.1415927410125732,
+              3.1415927410125732
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Pivot": [
+              0.5,
+              0.5
+            ],
+            "Pos": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "Size": [
+              25.0,
+              25.0
+            ]
+          },
+          "type": "RectTransform"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "color": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "drawSpacetype": "World",
+            "fillAmount": 0.0,
+            "imageType": "FillHorizontal",
+            "isBillboard": false,
+            "isMouseCheck": false,
+            "path": "..\\Assets\\Resource\\UI\\Interaction\\F_02.png",
+            "sliceBorderPx": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "type": "FillHorizontal",
+            "zOrder": 2
+          },
+          "type": "Image"
         }
       ]
     }
