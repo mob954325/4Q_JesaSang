@@ -29,7 +29,7 @@ void Weapon::OnEnable()
 
 void Weapon::OnStart()
 {
-    listener = GetOwner()->AddComponent<AudioListenerComponent>();
+    listener = GetOwner()->GetComponent<AudioListenerComponent>();
 }
 
 void Weapon::OnDisable()

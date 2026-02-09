@@ -1,4 +1,5 @@
 #pragma once
+#include <pch.h>
 
 /*
     [ Cook Minigame Interface ]
@@ -18,6 +19,11 @@ protected:
     bool isFinished = false;
     bool isSuccess = false;
 
+    // == mini game anim
+    std::vector<std::string> currAnimPathes; // 미니 게임 애니메이션 패스 컨테이너 ( 해당 컨테이너에 있는 패스만큼 애니메이션 실행함 )
+    int currAnimIndex = 0;
+    float changeAnimTime = 0.4f;    // 이미지 교체할 때 까지 걸리는 시간
+    float animTimer = 0.4f;         // 애니메이션 실행 시간
 public:
     IMiniGame() = default;
     virtual ~IMiniGame() = default;
@@ -28,5 +34,8 @@ public:
 
     bool IsFinished() { return isFinished; }
     bool IsSuccess() { return isSuccess; }
+
+    // == mini game anim
+    virtual void UpdateAnimation(float delta) = 0; // 애니메이션 업데이트 함수
 };
 

@@ -110,6 +110,8 @@ private:
 
     void FinishTurnIfNeeded();
 
+    Image* animImage{};
+    void SetAnimPathes();
 public:
     Game_Assembling() = default;
     ~Game_Assembling() override = default;
@@ -117,5 +119,7 @@ public:
     void StartGame() override;
     void UpdateGame(float delta)override;
     void EndGame() override;
+
+    void UpdateAnimation(float delta) override;
 };
 

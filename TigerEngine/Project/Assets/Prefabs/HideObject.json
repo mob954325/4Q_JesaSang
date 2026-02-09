@@ -2,7 +2,7 @@
   "prefab": [
     {
       "Active": true,
-      "ID": 1541,
+      "ID": 1519,
       "Name": "HideObject",
       "ParentID": -1,
       "components": [
@@ -109,9 +109,9 @@
     },
     {
       "Active": false,
-      "ID": 1660,
+      "ID": 1638,
       "Name": "Image_SensorOn",
-      "ParentID": 1541,
+      "ParentID": 1519,
       "components": [
         {
           "properties": {
@@ -197,9 +197,9 @@
     },
     {
       "Active": false,
-      "ID": 1661,
+      "ID": 1639,
       "Name": "Image_InteractionOn",
-      "ParentID": 1541,
+      "ParentID": 1519,
       "components": [
         {
           "properties": {

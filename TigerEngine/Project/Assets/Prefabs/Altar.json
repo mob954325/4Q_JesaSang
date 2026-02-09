@@ -2,7 +2,7 @@
   "prefab": [
     {
       "Active": true,
-      "ID": 721,
+      "ID": 1620,
       "Name": "Altar",
       "ParentID": -1,
       "components": [
@@ -98,20 +98,14 @@
             "radius": 50.0
           },
           "type": "PhysicsComponent"
-        },
-        {
-          "properties": {
-            "Active": true
-          },
-          "type": "AltarManager"
         }
       ]
     },
     {
       "Active": true,
-      "ID": 722,
+      "ID": 1621,
       "Name": "baseFood",
-      "ParentID": 721,
+      "ParentID": 1620,
       "components": [
         {
           "properties": {
@@ -187,9 +181,9 @@
     },
     {
       "Active": false,
-      "ID": 723,
+      "ID": 1622,
       "Name": "Alta_Apple",
-      "ParentID": 721,
+      "ParentID": 1620,
       "components": [
         {
           "properties": {
@@ -265,9 +259,9 @@
     },
     {
       "Active": false,
-      "ID": 724,
+      "ID": 1623,
       "Name": "Alta_Pear",
-      "ParentID": 721,
+      "ParentID": 1620,
       "components": [
         {
           "properties": {
@@ -343,9 +337,9 @@
     },
     {
       "Active": false,
-      "ID": 725,
+      "ID": 1624,
       "Name": "Alta_Batter",
-      "ParentID": 721,
+      "ParentID": 1620,
       "components": [
         {
           "properties": {
@@ -421,9 +415,9 @@
     },
     {
       "Active": false,
-      "ID": 726,
+      "ID": 1625,
       "Name": "Alta_Tofu",
-      "ParentID": 721,
+      "ParentID": 1620,
       "components": [
         {
           "properties": {
@@ -499,9 +493,9 @@
     },
     {
       "Active": false,
-      "ID": 727,
+      "ID": 1626,
       "Name": "Alta_Sanjeok",
-      "ParentID": 721,
+      "ParentID": 1620,
       "components": [
         {
           "properties": {
@@ -577,9 +571,9 @@
     },
     {
       "Active": false,
-      "ID": 728,
+      "ID": 1627,
       "Name": "Alta_Donggeurangttaeng",
-      "ParentID": 721,
+      "ParentID": 1620,
       "components": [
         {
           "properties": {
@@ -655,9 +649,9 @@
     },
     {
       "Active": false,
-      "ID": 729,
+      "ID": 1628,
       "Name": "Alta_Ingre_Apple",
-      "ParentID": 721,
+      "ParentID": 1620,
       "components": [
         {
           "properties": {
@@ -733,9 +727,9 @@
     },
     {
       "Active": false,
-      "ID": 730,
+      "ID": 1629,
       "Name": "Alta_Ingre_Pear",
-      "ParentID": 721,
+      "ParentID": 1620,
       "components": [
         {
           "properties": {
@@ -811,9 +805,9 @@
     },
     {
       "Active": false,
-      "ID": 731,
+      "ID": 1630,
       "Name": "Alta_Ingre_Batter",
-      "ParentID": 721,
+      "ParentID": 1620,
       "components": [
         {
           "properties": {
@@ -889,9 +883,9 @@
     },
     {
       "Active": false,
-      "ID": 732,
+      "ID": 1631,
       "Name": "Alta_Ingre_Tofu",
-      "ParentID": 721,
+      "ParentID": 1620,
       "components": [
         {
           "properties": {
@@ -967,9 +961,9 @@
     },
     {
       "Active": false,
-      "ID": 733,
+      "ID": 1632,
       "Name": "Alta_Ingre_Sanjeok",
-      "ParentID": 721,
+      "ParentID": 1620,
       "components": [
         {
           "properties": {
@@ -1045,9 +1039,9 @@
     },
     {
       "Active": false,
-      "ID": 734,
+      "ID": 1633,
       "Name": "Alta_Ingre_Donggeurangttaeng",
-      "ParentID": 721,
+      "ParentID": 1620,
       "components": [
         {
           "properties": {

@@ -132,6 +132,15 @@ float4 main(PS_UIImage_Input input) : SV_TARGET
         clip(fillAmount - uv.x);
     }
     
+    if (type == 4)
+    {
+        float fillAmount = saturate(imageParams.y); // 0..1
+
+        // 밑에서 위로 채움
+        
+        clip(fillAmount - (1 - uv.y));
+    }
+    
     float4 sampleTex = uiImageTex.Sample(samLinear, uv);
     return sampleTex * ImageBaseColor;
 }

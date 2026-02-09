@@ -27,5 +27,7 @@ public:
 
 private:
     AudioSourceComponent* audioClip{};
+    Vector3 prevPos{};
+    bool hasPrev = false;
 };
 
