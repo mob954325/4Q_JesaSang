@@ -7,6 +7,7 @@
 #include "../../Object/SearchObject.h"
 #include "../../Object/HideObject.h"
 #include "../../JesaSang/JesaSangManager.h"
+#include "../../Altar/AltarManager.h"
 
 
 REGISTER_COMPONENT(InteractionZone)
@@ -96,6 +97,7 @@ void InteractionZone::OnTriggerEnter(PhysicsComponent* other)
     if (other->GetOwner()->GetName() == "Altar")
     {
         player->isPossibleGetFood = true;
+        AltarManager::Instance()->UIInteractionOnOff(true);
         cout << "[InteractionZone] Altar In Interaction Zone" << endl;
     }
 }
@@ -145,6 +147,7 @@ void InteractionZone::OnTriggerExit(PhysicsComponent* other)
     if (other->GetOwner()->GetName() == "Altar")
     {
         player->isPossibleGetFood = false;
+        AltarManager::Instance()->UIInteractionOnOff(false);
         cout << "[InteractionZone] Altar Out Interaction Zone" << endl;
     }
 }

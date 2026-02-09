@@ -7,6 +7,7 @@
 #include "../../Object/SearchObject.h"
 #include "../../Object/HideObject.h"
 #include "../../JesaSang/JesaSangManager.h"
+#include "../../Altar/AltarManager.h"
 
 
 REGISTER_COMPONENT(InteractionSensor)
@@ -64,10 +65,16 @@ void InteractionSensor::OnTriggerEnter(PhysicsComponent* other)
             so->UISensorOnOff(true);
     }
 
-    // JesaSang
+    // 제사상 감지 on
     if (other->GetOwner()->GetName() == "JesaSang")
     {
         JesaSangManager::Instance()->UISensorOnOff(true);
+    }
+
+    // 제단 감지 on
+    if (other->GetOwner()->GetName() == "Altar")
+    {
+        AltarManager::Instance()->UISensorOnOff(true);
     }
 }
 
@@ -91,9 +98,15 @@ void InteractionSensor::OnTriggerExit(PhysicsComponent* other)
             so->UISensorOnOff(false);
     }
 
-    // JesaSang
+    // JesaSang 감지 off
     if (other->GetOwner()->GetName() == "JesaSang")
     {
         JesaSangManager::Instance()->UISensorOnOff(false);
+    }
+
+    // Altar 감지 off
+    if (other->GetOwner()->GetName() == "Altar")
+    {
+        AltarManager::Instance()->UISensorOnOff(false);
     }
 }

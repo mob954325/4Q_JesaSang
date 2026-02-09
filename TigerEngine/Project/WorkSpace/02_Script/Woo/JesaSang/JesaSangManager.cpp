@@ -44,7 +44,7 @@ void JesaSangManager::OnStart()
 
     if (!image_sensorOn || !image_interactionOn || !image_interactionGauge)
     {
-        cout << "[SearchObject] Missing child transforms!" << endl;
+        cout << "[SearchObject] Missing ui!" << endl;
         return;
     }
 }

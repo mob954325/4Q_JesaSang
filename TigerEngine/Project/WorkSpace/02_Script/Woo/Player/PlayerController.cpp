@@ -444,6 +444,9 @@ void PlayerController::GetItemAltarInteraction(float dt)
     float progress = getItemAltarTimer / getItemAltarTime;
     if (progress > 1.0f) progress = 1.0f;
 
+    // UI - interaction
+    AltarManager::Instance()->UIGaugeUpate(progress);
+
     // 제단 아이엠(재료/음식) 가져오기 interaction
     if (getItemAltarTimer >= getItemAltarTime)
     {

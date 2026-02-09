@@ -1,8 +1,10 @@
 #include "AltarManager.h"
 #include "Util/JsonHelper.h"
 #include "Util/ComponentAutoRegister.h"
-#include "Object/GameObject.h"
 #include "EngineSystem/SceneSystem.h"
+#include "Object/GameObject.h"
+#include "Components/UI/Image.h"
+
 #include "../Item/Item.h"
 
 REGISTER_COMPONENT(AltarManager)
@@ -70,6 +72,16 @@ void AltarManager::OnStart()
         return;
     }
 
+    image_sensorOn = sceneSystem->GetGameObjectByName("Image_SensorOn_Altar")->GetComponent<Image>();
+    image_interactionOn = sceneSystem->GetGameObjectByName("Image_InteractionOn_Altar")->GetComponent<Image>();
+    image_interactionGauge = sceneSystem->GetGameObjectByName("Image_InteractionGauge_Altar")->GetComponent<Image>();
+
+    if (!image_sensorOn || !image_interactionOn || !image_interactionGauge)
+    {
+        cout << "[AltarManager] Missing ui!" << endl;
+        return;
+    }
+
     altar->SetActive(false);
 
     ingre_apple->SetActive(false);
@@ -85,6 +97,10 @@ void AltarManager::OnStart()
     food_tofu->SetActive(false);
     food_sanjeok->SetActive(false);
     food_dong->SetActive(false);
+
+    image_sensorOn->SetActive(false);
+    image_interactionOn->SetActive(false);
+    image_interactionGauge->SetActive(false);
 }
 
 void AltarManager::OnDestory()
@@ -180,6 +196,11 @@ std::unique_ptr<IItem> AltarManager::GetItem()
 
         VisualItem(out->itemId, false);
 
+        // UI clear
+        UISensorOnOff(false);
+        UIInteractionOnOff(false);
+        image_interactionGauge->SetFillAmount(0.0);
+
         return out;
     }
 
@@ -191,9 +212,36 @@ std::unique_ptr<IItem> AltarManager::GetItem()
 
         VisualItem(out->itemId, false);
 
+        // UI clear
+        UISensorOnOff(false);
+        UIInteractionOnOff(false);
+        image_interactionGauge->SetFillAmount(0.0);
+
         return out;
     }
 
     cout << "[AltarManager] no item !" << endl;
     return nullptr;
+}
+
+void AltarManager::UISensorOnOff(bool flag)
+{
+    if (!image_sensorOn) return;
+    if (flag && !isFirstReceiveItem) return;
+    image_sensorOn->SetActive(flag);
+}
+
+void AltarManager::UIInteractionOnOff(bool flag)
+{
+    if (!image_interactionOn) return;
+    if (flag && !isFirstReceiveItem) return;
+    image_interactionOn->SetActive(flag);
+    image_interactionGauge->SetActive(flag);
+}
+
+void AltarManager::UIGaugeUpate(float progress)
+{
+    if (!image_interactionGauge) return;
+    if (!isFirstReceiveItem) return;
+    image_interactionGauge->SetFillAmount(progress);
 }
