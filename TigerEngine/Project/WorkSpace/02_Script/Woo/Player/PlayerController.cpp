@@ -30,6 +30,7 @@
 #include "../Altar/AltarManager.h"
 #include "PlayerItemVisualizer.h"
 #include "../Manager/GameManager.h"
+#include "../CookingZone/CookingZone.h"
 
 
 REGISTER_COMPONENT(PlayerController)
@@ -381,6 +382,9 @@ void PlayerController::CookingInteraction(float dt)
     float progress = cookInteractionTimer / cookInteractionTime;
     if (progress > 1.0f) progress = 1.0f;
 
+    // UI - interaction
+    CookingZone::Instance()->UIGaugeUpate(progress);
+
     // cooking interaction
     if (cookInteractionTimer >= cookInteractionTime)
     {
@@ -389,6 +393,9 @@ void PlayerController::CookingInteraction(float dt)
         MiniGameManager::Instance()->StartMiniGame(std::move(inventory->TakeCurItem()));
         ChangeState(PlayerState::Cook);
         cookInteractionTimer = 0.0f;
+
+        // ui clear
+        CookingZone::Instance()->UIGaugeUpate(0.0);
     }
 }
 
@@ -443,6 +450,9 @@ void PlayerController::GetItemAltarInteraction(float dt)
     getItemAltarTimer += dt;
     float progress = getItemAltarTimer / getItemAltarTime;
     if (progress > 1.0f) progress = 1.0f;
+
+    // UI - interaction
+    AltarManager::Instance()->UIGaugeUpate(progress);
 
     // 제단 아이엠(재료/음식) 가져오기 interaction
     if (getItemAltarTimer >= getItemAltarTime)

@@ -6,6 +6,7 @@
 #include "Components/ScriptComponent.h"
 
 class GameObject;
+class Image;
 class IItem;
 
 /*
@@ -51,6 +52,11 @@ private:
     GameObject* food_sanjeok = nullptr;
     GameObject* food_dong = nullptr;
 
+    // child UI
+    Image* image_sensorOn = nullptr;
+    Image* image_interactionOn = nullptr;
+    Image* image_interactionGauge = nullptr;
+
 private:
     // active flag
     GameObject* altar = nullptr;     // 활성화/비활성화할 제단 덩어리 부모 게임오브젝트
@@ -75,10 +81,16 @@ public:
     // 외부 call fucns..
     static AltarManager* Instance() { return s_instance; }
 
+    // Item
     bool HasItem() const { return !(foodQueue.empty() && ingreQueue.empty()); }
     size_t GetItemCount() const { return foodQueue.size() + ingreQueue.size(); }
 
     void ReceiveItem(std::unique_ptr<IItem> item);  // 제단에 아이템 올리기
     std::unique_ptr<IItem> GetItem();               // 제단 아아템 회수하기 (FIFO)
+
+    // UI
+    void UISensorOnOff(bool flag);              // 플레이어 감지영역 UI
+    void UIInteractionOnOff(bool flag);         // 플레이어 상호작용 영역 UI
+    void UIGaugeUpate(float progress);
 };
 

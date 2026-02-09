@@ -7,6 +7,8 @@
 #include "../../Object/SearchObject.h"
 #include "../../Object/HideObject.h"
 #include "../../JesaSang/JesaSangManager.h"
+#include "../../Altar/AltarManager.h"
+#include "../../CookingZone/CookingZone.h"
 
 
 REGISTER_COMPONENT(InteractionSensor)
@@ -64,10 +66,22 @@ void InteractionSensor::OnTriggerEnter(PhysicsComponent* other)
             so->UISensorOnOff(true);
     }
 
-    // JesaSang
+    // 부엌 감지 on
+    if (other->GetOwner()->GetName() == "CookingZone")
+    {
+        CookingZone::Instance()->UISensorOnOff(true);
+    }
+
+    // 제사상 감지 on
     if (other->GetOwner()->GetName() == "JesaSang")
     {
         JesaSangManager::Instance()->UISensorOnOff(true);
+    }
+
+    // 제단 감지 on
+    if (other->GetOwner()->GetName() == "Altar")
+    {
+        AltarManager::Instance()->UISensorOnOff(true);
     }
 }
 
@@ -91,9 +105,21 @@ void InteractionSensor::OnTriggerExit(PhysicsComponent* other)
             so->UISensorOnOff(false);
     }
 
-    // JesaSang
+    // 부엌 감지 off
+    if (other->GetOwner()->GetName() == "CookingZone")
+    {
+        CookingZone::Instance()->UISensorOnOff(false);
+    }
+
+    // JesaSang 감지 off
     if (other->GetOwner()->GetName() == "JesaSang")
     {
         JesaSangManager::Instance()->UISensorOnOff(false);
+    }
+
+    // Altar 감지 off
+    if (other->GetOwner()->GetName() == "Altar")
+    {
+        AltarManager::Instance()->UISensorOnOff(false);
     }
 }
