@@ -42,8 +42,11 @@ void GridComponent::OnInitialize()
 {
     // 셀 배열 초기화 
     ResizeGrid(width, height);
+
     // Physics 기반 자동 차단
-    BuildBlockedFromPhysics();
+    // BuildBlockedFromPhysics();
+    m_pendingBuild = true;
+    m_lastActorCount = -1;
      
     // 임의로 (-1,2) 그리드를 걸을 수 없게 설정
     //SetWalkableFromCenter(-1, 2, false);
@@ -83,6 +86,8 @@ void GridComponent::BuildBlockedFromPhysics()
     int centerX = (width - 1) / 2;
     int centerY = (height - 1) / 2;
 
+    std::unordered_set<GameObject*> visited;
+
     for (auto& pair : map)
     {
         PhysicsComponent* phys = pair.first;
@@ -92,6 +97,10 @@ void GridComponent::BuildBlockedFromPhysics()
 
         auto owner = phys->GetOwner();
         std::string objName = owner ? owner->GetName() : "Unknown";
+
+        // 중복 PhysicsComponent 방어
+        if (visited.count(owner)) continue;
+        visited.insert(owner);
 
         Transform* tr = phys->transform;
         if (!tr) continue;
