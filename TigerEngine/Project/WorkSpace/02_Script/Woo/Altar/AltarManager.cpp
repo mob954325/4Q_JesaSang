@@ -14,6 +14,28 @@ RTTR_REGISTRATION
     (rttr::policy::ctor::as_std_shared_ptr);
 }
 
+void AltarManager::FirstReceiveDirect()
+{
+    // 최초 제단 활성화
+    altar->SetActive(true);
+
+    ingre_apple->SetActive(false);
+    ingre_pear->SetActive(false);
+    ingre_batter->SetActive(false);
+    ingre_tofu->SetActive(false);
+    ingre_sanjeok->SetActive(false);
+    ingre_dong->SetActive(false);
+
+    food_apple->SetActive(false);
+    food_pear->SetActive(false);
+    food_batter->SetActive(false);
+    food_tofu->SetActive(false);
+    food_sanjeok->SetActive(false);
+    food_dong->SetActive(false);
+
+    // TODO :: 제단 활성화 연출 여기에 연결
+}
+
 void AltarManager::OnInitialize()
 {
     // singleton
@@ -24,6 +46,9 @@ void AltarManager::OnStart()
 {
     // gameobject find
     const auto& sceneSystem = SceneSystem::Instance().GetCurrentScene();
+
+    altar = sceneSystem->GetGameObjectByName("Altar");
+
     ingre_apple = sceneSystem->GetGameObjectByName("Alta_Ingre_Apple");
     ingre_pear = sceneSystem->GetGameObjectByName("Alta_Ingre_Pear");
     ingre_batter = sceneSystem->GetGameObjectByName("Alta_Ingre_Batter");
@@ -44,6 +69,8 @@ void AltarManager::OnStart()
         cout << "[AltarManager] Missing GameObject!" << endl;
         return;
     }
+
+    altar->SetActive(false);
 
     ingre_apple->SetActive(false);
     ingre_pear->SetActive(false);
@@ -124,6 +151,13 @@ void AltarManager::ReceiveItem(std::unique_ptr<IItem> item)
     if (!item) {
         cout << "[AltarManager] item null !" << endl;
         return;
+    }
+
+    // 최초 제단 활성화
+    if (!isFirstReceiveItem)
+    {
+        isFirstReceiveItem = true;
+        FirstReceiveDirect();
     }
 
     // 비주얼 on

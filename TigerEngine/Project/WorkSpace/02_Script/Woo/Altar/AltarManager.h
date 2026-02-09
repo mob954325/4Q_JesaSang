@@ -13,6 +13,8 @@ class IItem;
 
     플레이어가 떨어뜨린 아이템(음식재료/완성된 음식)이 올라오게 됩니다.
     플레이어는 제단에 있는 아이템을 다시 회수해갈 수 있습니다.
+
+    제단은 초기 비활성화 되어있으며, 제단에 아이템이 처음 올라간 순간 활성화 됩니다.
     
 
     0209 삭제 | 제단에는 한번에 1개의 아이템만 올라와있을 수 있습니다. (퀘스트 시스템 제어)
@@ -34,7 +36,6 @@ private:
     std::deque<std::unique_ptr<IItem>> foodQueue;       // 회수 우선순위 높음
     std::deque<std::unique_ptr<IItem>> ingreQueue;
 
-
     // visual gameobjects
     GameObject* ingre_apple = nullptr;
     GameObject* ingre_pear = nullptr;
@@ -49,6 +50,12 @@ private:
     GameObject* food_tofu = nullptr;
     GameObject* food_sanjeok = nullptr;
     GameObject* food_dong = nullptr;
+
+private:
+    // active flag
+    GameObject* altar = nullptr;     // 활성화/비활성화할 제단 덩어리 부모 게임오브젝트
+    bool isFirstReceiveItem = false;
+    void FirstReceiveDirect();       // 최초 제단 활성화
 
 
 public:
