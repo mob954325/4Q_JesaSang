@@ -176,10 +176,11 @@ bool AdultGhost_Chase::CanGiveUpChase() const
     if (chaseTimer < minChaseTime)
         return false;
 
-    //if (adultGhost->chaseReason == ChaseReason::FromBabyCry)
-    //{
-    //    return false; // BabyCry target이면 달래기 끝날때까지 포기 금지
-    //}
+    if (adultGhost->chaseReason == ChaseReason::FromBabyCry)
+    {
+        return false; // BabyCry target이면 달래기 끝날때까지 포기 금지
+    }
 
+    // 일반적인 경우 : 시야 밖이면 포기 
     return !adultGhost->IsSeeing(adultGhost->target);
 }

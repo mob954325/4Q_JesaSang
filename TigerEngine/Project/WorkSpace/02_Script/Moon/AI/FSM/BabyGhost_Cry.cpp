@@ -60,7 +60,6 @@ void BabyGhost_Cry::Update(float deltaTime)
             }
         }
 
-        // 돌바주는 유령이 근처에 도착했으면, 케어 카운트 증가 
         if (closestPatrolGhost)
         {
             closestPatrolGhost->SetAITarget(babyGhost->GetOwner());
@@ -76,7 +75,7 @@ void BabyGhost_Cry::Update(float deltaTime)
     if (caringAdult)
     {
         float dist = (cryPos - caringAdult->GetOwner()->GetTransform()->GetWorldPosition()).Length();
-        const float arriveThreshold = 10.0f; // 근접 기준
+        const float arriveThreshold = 100.0f; // 근접 기준
         if (dist <= arriveThreshold)
         {
             adultArrived = true;

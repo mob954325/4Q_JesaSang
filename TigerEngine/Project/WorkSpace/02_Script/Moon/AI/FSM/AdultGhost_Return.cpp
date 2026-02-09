@@ -36,7 +36,7 @@ void AdultGhost_Return::ChangeStateLogic()
     // 복귀 완료 : 현재 위치와 initialPosition 비교
     auto tr = adultGhost->GetOwner()->GetTransform();
     float distSqr = (tr->GetWorldPosition() - adultGhost->initialPosition).LengthSquared();
-    const float arrivalThreshold = 0.1f; // 거의 도착했으면
+    const float arrivalThreshold = 100.0f; // 거의 도착했으면
     if (distSqr <= arrivalThreshold * arrivalThreshold)
     {
         cout << "[AdultGhost_Return] Reached waypoint -> Patrol" << endl;
