@@ -62,6 +62,7 @@ void AltarManager::OnStart()
 
 void AltarManager::OnDestory()
 {
+    if (s_instance == this) s_instance = nullptr;
 }
 
 nlohmann::json AltarManager::Serialize()
@@ -122,25 +123,31 @@ void AltarManager::ReceiveItem(std::unique_ptr<IItem> item)
         return;
     }
 
-    if (curItem)
-    {
-        cout << "[AltarManager] Altar Full ! Cur Item : " << curItem->itemId << endl;
-        return;
-    }
+    const std::string id = item->itemId;
 
-    // 새 아이템 제단에 올리기
-    cout << "[AltarManager] Received Item :  " << item->itemId << endl;
-    VisualItem(item->itemId, true);
-    curItem = std::move(item);
+    // 비주얼 on
+    VisualItem(id, true);
+
+    // 아이템이 제단에 올라감
+    itemQueue.push_back(std::move(item));
+
+    cout << "[AltarManager] Received Item : " << id
+        << " (queue size after: " << itemQueue.size() << ")" << endl;
 }
 
 std::unique_ptr<IItem> AltarManager::GetItem()
 {
-    if(!curItem) {
-        cout << "[AltarManager] cur item null !" << endl;
+    if (itemQueue.empty() || !itemQueue.front()) {
+        cout << "[AltarManager] itemQueue empty or front null !" << endl;
         return nullptr;
     }
 
-    VisualItem(curItem->itemId, false);
-    return std::move(curItem);
+    // 맨 앞 아이템 비주얼 off
+    VisualItem(itemQueue.front()->itemId, false);
+
+    // FIFO 아이템 1개 회수
+    std::unique_ptr<IItem> out = std::move(itemQueue.front());
+    itemQueue.pop_front();
+
+    return out;
 }
