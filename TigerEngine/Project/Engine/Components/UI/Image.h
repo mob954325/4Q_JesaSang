@@ -10,7 +10,8 @@ enum class ImageType
     Simple,		// 기본 이미지 출력
     Sliced,		// 9-Sliced
     Fill,		// 이미지 채우기 Radial CW
-    FillHorizontal
+    FillHorizontal,     // 왼쪽에서 오른쪽으로
+    FillVertical        // 아래서 위로 
 };
 
 /// <summary>
