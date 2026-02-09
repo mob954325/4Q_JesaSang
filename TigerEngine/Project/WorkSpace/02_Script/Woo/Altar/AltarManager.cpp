@@ -62,6 +62,10 @@ void AltarManager::OnStart()
 
 void AltarManager::OnDestory()
 {
+    if (s_instance == this) s_instance = nullptr;
+
+    foodQueue.clear();
+    ingreQueue.clear();
 }
 
 nlohmann::json AltarManager::Serialize()
@@ -122,25 +126,40 @@ void AltarManager::ReceiveItem(std::unique_ptr<IItem> item)
         return;
     }
 
-    if (curItem)
-    {
-        cout << "[AltarManager] Altar Full ! Cur Item : " << curItem->itemId << endl;
-        return;
-    }
-
-    // 새 아이템 제단에 올리기
-    cout << "[AltarManager] Received Item :  " << item->itemId << endl;
+    // 비주얼 on
     VisualItem(item->itemId, true);
-    curItem = std::move(item);
+
+    // 아이템이 제단에 올라감
+    if (item->itemType == ItemType::Food)
+        foodQueue.push_back(std::move(item));
+    else
+        ingreQueue.push_back(std::move(item));
 }
 
 std::unique_ptr<IItem> AltarManager::GetItem()
 {
-    if(!curItem) {
-        cout << "[AltarManager] cur item null !" << endl;
-        return nullptr;
+    // 완성된 음식 우선 회수 (FIFO)
+    if (!foodQueue.empty() && foodQueue.front())
+    {
+        std::unique_ptr<IItem> out = std::move(foodQueue.front());
+        foodQueue.pop_front();
+
+        VisualItem(out->itemId, false);
+
+        return out;
     }
 
-    VisualItem(curItem->itemId, false);
-    return std::move(curItem);
+    // 음식 재료 회수 (FIFO)
+    if (!ingreQueue.empty() && ingreQueue.front())
+    {
+        std::unique_ptr<IItem> out = std::move(ingreQueue.front());
+        ingreQueue.pop_front();
+
+        VisualItem(out->itemId, false);
+
+        return out;
+    }
+
+    cout << "[AltarManager] no item !" << endl;
+    return nullptr;
 }

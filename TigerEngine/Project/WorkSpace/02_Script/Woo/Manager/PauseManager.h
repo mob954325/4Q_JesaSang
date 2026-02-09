@@ -31,9 +31,9 @@ public:
     nlohmann::json Serialize();
     void Deserialize(nlohmann::json data);
 
-private:
+public:
    void TogglePause();
-   void Resume();        // 인게임 일시정지
-   void Pause();         // 인게임 이어하기
+   void Resume();        // 인게임 이어하기
+   void Pause();         // 인게임 일시정지
 };
 

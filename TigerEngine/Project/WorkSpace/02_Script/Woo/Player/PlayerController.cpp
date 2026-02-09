@@ -88,6 +88,9 @@ void PlayerController::OnUpdate(float delta)
     // interaction cheak
     InteractionCheak(delta);
 
+    // hit duration
+    UpsateHitDuration(delta);
+
     // ----- test --------------
     // ai attack test
     if (Input::GetKeyDown(Keyboard::Q))
@@ -345,6 +348,10 @@ void PlayerController::HideObjectInteraction(float dt)
     // hide
     if (Input::GetKeyDown(interaction_Key) && curHideObject->IsPossibleHide())
     {
+        // hit->hide 일 경우 hide가 끝나면 hit으로 복귀하도록 플래그 설정
+        resumeHitAfterHide = (state == PlayerState::Hit);
+
+        // hide
         ChangeState(PlayerState::Hide);
         curHideObject->StartHide(this);
     }
@@ -440,6 +447,35 @@ void PlayerController::GetItemAltarInteraction(float dt)
 
         // clear
         getItemAltarTimer = 0.0f;
+    }
+}
+
+void PlayerController::UpsateHitDuration(float dt)
+{
+    // Hit일 땐 항상 업데이트
+    if (state == PlayerState::Hit)
+    {
+        hitTimer += dt;
+        invincibleTimer += dt;
+        renderDirectorTimer += dt;
+    }
+
+    // Hide일 땐 Hit에서 들어온 경우만 업데이트
+    else if (state == PlayerState::Hide)
+    {
+        if (!resumeHitAfterHide) return;
+
+        hitTimer += dt;
+        invincibleTimer += dt;
+        renderDirectorTimer += dt;
+    }
+    else
+        return;
+
+    if (isPlayerInvincible && invincibleTimer >= hitInvincibleTime)
+    {
+        isPlayerInvincible = false;
+        std::cout << "[Player] Hit Invincible Time End." << std::endl;
     }
 }
     
@@ -562,10 +598,22 @@ void PlayerController::TakeAttack()
 
     // Hit (패닉)
     if(state != PlayerState::Hit)
+    {
+        hitTimer = 0.0f;
+        invincibleTimer = 0.0f;
+        renderDirectorTimer = 0.0f;
+        isPlayerInvincible = true;
+
         ChangeState(PlayerState::Hit);
+    }
     else
     {
         // 이미 패닉상태였을경우 재시작 (무적상태는 위에서 return)
+        hitTimer = 0.0f;
+        invincibleTimer = 0.0f;
+        renderDirectorTimer = 0.0f;
+        isPlayerInvincible = true;
+
         ChangeState(PlayerState::Idle);
         ChangeState(PlayerState::Hit);
     }
