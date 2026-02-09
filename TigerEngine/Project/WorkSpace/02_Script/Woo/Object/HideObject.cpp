@@ -16,28 +16,29 @@ RTTR_REGISTRATION
 
 void HideObject::OnStart()
 {
-    // get child ui component
+    // get child compoennts
     auto t1 = GetOwner()->GetChildByName("Image_SensorOn");
     auto t2 = GetOwner()->GetChildByName("Image_InteractionOn");
-    if (!t1 || !t2)
+    auto t3 = GetOwner()->GetChildByName("Image_InteractionGauge");
+
+    if (!t1 || !t2 || !t3)
     {
-        cout << "[HideObject] Missing child transforms!" << endl;
+        cout << "[SearchObject] Missing child transforms!" << endl;
         return;
     }
 
     image_sensorOn = t1->GetOwner()->GetComponent<Image>();
     image_interactionOn = t2->GetOwner()->GetComponent<Image>();
-
-    if (!image_sensorOn || !image_interactionOn)
-    {
-        cout << "[HideObject] Missing Image component!" << endl;
-        return;
-    }
+    image_interactionGauge = t3->GetOwner()->GetComponent<Image>();
 
     // init
     hideDurationTimer = 0.0f;
-    reHideCoolTimer = reHideCoolTime;
     isHiding = false;
+    reHideReady = true;
+    reHideCoolTimer = reHideCoolTime;
+
+    // UI
+    UIGaugeUpate(0.0f);
 }
 
 void HideObject::OnUpdate(float delta)
@@ -62,10 +63,17 @@ void HideObject::OnUpdate(float delta)
     if (!reHideReady)
     {
         reHideCoolTimer += delta;
+
+        // UI
+        float progress = 1.0f - (reHideCoolTimer / reHideCoolTime);
+        progress = std::clamp(progress, 0.0f, 1.0f);
+        UIGaugeUpate(progress);
+
         if (reHideCoolTimer >= reHideCoolTime)
         {
             reHideReady = true;
             reHideCoolTimer = reHideCoolTime;
+            UIGaugeUpate(0.0f);
             cout << "[HideObject] Re Hide Possible!" << endl;
         }
     }
@@ -92,8 +100,6 @@ void HideObject::StartHide(PlayerController* p)
 
     isHiding = true;
     hideDurationTimer = 0.0f;
-    reHideReady = false;
-    reHideCoolTimer = 0.0f;
 
     UISensorOnOff(false);
     UIInteractionOnOff(false);
@@ -113,9 +119,10 @@ void HideObject::StopHide()
     reHideReady = false;
     reHideCoolTimer = 0.0f;
 
-    // 안전 처리
     player = nullptr;
 
+    // UI
+    UIGaugeUpate(1.0f);
     UISensorOnOff(true);
     UIInteractionOnOff(true);
 
@@ -133,4 +140,11 @@ void HideObject::UIInteractionOnOff(bool flag)
 {
     if (!image_interactionOn) return;
     image_interactionOn->SetActive(flag);
+    image_interactionGauge->SetActive(flag);
+}
+
+void HideObject::UIGaugeUpate(float progress)
+{
+    if (!image_interactionGauge) return;
+    image_interactionGauge->SetFillAmount(progress);
 }
