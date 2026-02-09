@@ -14,6 +14,8 @@ void AdultGhost_Chase::Enter()
     // Agent 초기화 
     adultGhost->ResetAgentForMove(4.0f); // Chase 속도
 
+    adultGhost->animController->ChangeState("Move");
+
     // 타겟이 지정되어 있으면 그대로 사용
     if (!adultGhost->target)
     {

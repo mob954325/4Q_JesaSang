@@ -3,6 +3,10 @@
 #include "Components/AgentComponent.h"
 #include "Components/GridComponent.h"
 #include "Components/VisionComponent.h"
+#include "Components/FBXRenderer.h"
+#include "Components/FBXData.h"
+#include "Components/AnimationController.h"
+
 #include "Util/CollisionLayer.h"
 
 
@@ -53,7 +57,9 @@ private:
     // Component 
     AgentComponent* agent = nullptr;
     VisionComponent* vision = nullptr;
-
+    FBXRenderer* fbxRenderer = nullptr;
+    FBXData* fbxData = nullptr;
+    AnimationController* animController = nullptr;
 
     // State
     AdultGhostState state = AdultGhostState::None;

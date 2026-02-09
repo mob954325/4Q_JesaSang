@@ -11,6 +11,8 @@ void AdultGhost_Attack::Enter()
     attackTimer = 0.0f;
     didDamage = false;
 
+    adultGhost->animController->ChangeState("Attack");
+
     // 이동 완전 정지
     adultGhost->agent->externalControl = true;
     adultGhost->agent->path.clear();

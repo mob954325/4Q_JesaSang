@@ -51,8 +51,11 @@ void AdultGhostController::OnStart()
 {
     agent = GetOwner()->GetComponent<AgentComponent>();
     vision = GetOwner()->GetComponent<VisionComponent>();
+    fbxRenderer = GetOwner()->GetComponent<FBXRenderer>();
+    fbxData = GetOwner()->GetComponent<FBXData>();
+    animController = GetOwner()->GetComponent<AnimationController>();
 
-    if (!agent || !vision)
+    if (!agent || !vision || !fbxRenderer || !fbxData || !animController)
     {
         std::cout << "[AdultGhostController] Component Missing" << std::endl;
         return;
@@ -61,7 +64,7 @@ void AdultGhostController::OnStart()
     // Hide Object 모두 수집 
     hideObjects = SceneUtil::GetObjectsByName("HideObject");
 
-    //LoadAnimation();  
+    LoadAnimation();  
 
     // 최초 시작 위치 저장
     initialPosition = GetOwner()->GetTransform()->GetWorldPosition(); // local X
@@ -132,7 +135,33 @@ void AdultGhostController::ChangeState(AdultGhostState nextState)
 
 void AdultGhostController::LoadAnimation()
 {
+    // 애니메이션 파일 로드
+    FBXResourceManager::Instance().LoadAnimationByPath(fbxData->GetFBXInfo(), "..\\Assets\\Resource\\Animation\\Adult_Ghost\\ani_attackdelay_ghost.fbx", "Idle");
+    FBXResourceManager::Instance().LoadAnimationByPath(fbxData->GetFBXInfo(), "..\\Assets\\Resource\\Animation\\Adult_Ghost\\ani_attackdelay_ghost.fbx", "Move");
+    FBXResourceManager::Instance().LoadAnimationByPath(fbxData->GetFBXInfo(), "..\\Assets\\Resource\\Animation\\Adult_Ghost\\ani_attackdelay_ghost.fbx", "Attack");
+    FBXResourceManager::Instance().LoadAnimationByPath(fbxData->GetFBXInfo(), "..\\Assets\\Resource\\Animation\\Adult_Ghost\\ani_attackdelay_ghost.fbx", "AttackDelay");
 
+    // 클립 생성
+    auto idleClip = animController->FindClip("Idle");
+    auto moveClip = animController->FindClip("Move");
+    auto attackClip = animController->FindClip("Attack");
+    auto attackDelayClip = animController->FindClip("AttackDelay");
+
+    if (!idleClip || !moveClip || !attackClip || !attackDelayClip)
+    {
+        cout << "[Player Animation] Clip not found!\n" << endl;
+        return;
+    }
+    else
+    {
+        cout << "[Player] Animation Load Success" << endl;
+    }
+
+    // 상태 등록
+    animController->AddState(std::make_unique<AnimationState>("Idle", idleClip, animController));
+    animController->AddState(std::make_unique<AnimationState>("Move", moveClip, animController));
+    animController->AddState(std::make_unique<AnimationState>("Attack", attackClip, animController));
+    animController->AddState(std::make_unique<AnimationState>("AttackDelay", attackDelayClip, animController));
 }
 
 

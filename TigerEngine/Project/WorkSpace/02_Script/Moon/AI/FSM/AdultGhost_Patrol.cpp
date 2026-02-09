@@ -15,6 +15,8 @@ void AdultGhost_Patrol::Enter()
     agent->patrolSpeed = 0.8f;  // Patrol 속도 
     agent->SetWaitTime(3.0f);   // 목표 지점에서 대기 시간 
 
+    adultGhost->animController->ChangeState("Idle");
+
     // 아직 이동 중이 아니라면 랜덤 목표 설정
     if (!agent->hasTarget && !agent->isWaiting)
         agent->PickRandomTarget();
