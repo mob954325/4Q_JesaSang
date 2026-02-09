@@ -157,6 +157,7 @@
     <ClInclude Include="02_Script\Moon\AI\FSM\AdultGhost_Search.h" />
     <ClInclude Include="02_Script\Moon\AI\FSM\BabyGhost_Cry.h" />
     <ClInclude Include="02_Script\Moon\AI\FSM\BabyGhost_Patrol.h" />
+    <ClInclude Include="02_Script\Moon\AI\FSM\BabyGhost_Return.h" />
     <ClInclude Include="02_Script\Moon\AI\FSM\BabyGhost_Search.h" />
     <ClInclude Include="02_Script\Moon\AI\FSM\IAdultGhostState.h" />
     <ClInclude Include="02_Script\Moon\AI\FSM\IBabyGhostState.h" />
@@ -227,6 +228,7 @@
     <ClCompile Include="02_Script\Moon\AI\FSM\AdultGhost_Search.cpp" />
     <ClCompile Include="02_Script\Moon\AI\FSM\BabyGhost_Cry.cpp" />
     <ClCompile Include="02_Script\Moon\AI\FSM\BabyGhost_Patrol.cpp" />
+    <ClCompile Include="02_Script\Moon\AI\FSM\BabyGhost_Return.cpp" />
     <ClCompile Include="02_Script\Moon\AI\FSM\BabyGhost_Search.cpp" />
     <ClCompile Include="02_Script\Moon\AI\GhostInteractionZone.cpp" />
     <ClCompile Include="02_Script\Moon\AnimationTest\PlayerAnimationTest.cpp" />

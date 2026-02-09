@@ -9,7 +9,7 @@
 #include "FSM/BabyGhost_Patrol.h"
 #include "FSM/BabyGhost_Search.h"
 #include "FSM/BabyGhost_Cry.h"
-//#include "FSM/BabyGhost_Return.h"
+#include "FSM/BabyGhost_Return.h"
 
 #include "../../Woo/Object/HideObject.h"
 #include "../../Woo/Player/PlayerController.h"
@@ -109,7 +109,7 @@ void BabyGhostController::InitFSMStates()
 {
     fsmStates[(int)BabyGhostState::Patrol] = new BabyGhost_Patrol(this);
     fsmStates[(int)BabyGhostState::Search] = new BabyGhost_Search(this);
-    //fsmStates[(int)BabyGhostState::Return] = new BabyGhost_Return(this);
+    fsmStates[(int)BabyGhostState::Return] = new BabyGhost_Return(this);
     fsmStates[(int)BabyGhostState::Cry] = new BabyGhost_Cry(this);
 }
 

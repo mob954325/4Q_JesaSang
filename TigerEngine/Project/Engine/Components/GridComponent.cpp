@@ -10,10 +10,7 @@ RTTR_REGISTRATION
 {
     rttr::registration::class_<GridComponent>("GridComponent")
         .constructor<>()
-        (rttr::policy::ctor::as_std_shared_ptr)
-        .property("Width", &GridComponent::width)
-        .property("Height", &GridComponent::height)
-        .property("CellSize", &GridComponent::cellSize);
+        (rttr::policy::ctor::as_std_shared_ptr);
 }
 
 nlohmann::json GridComponent::Serialize()
