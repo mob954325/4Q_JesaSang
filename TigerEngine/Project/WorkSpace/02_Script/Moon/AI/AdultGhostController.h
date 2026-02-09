@@ -70,6 +70,13 @@ private:
     // AI가 처음 배치된 좌표 (웨이 포인트)
     Vector3 initialPosition;
 
+
+    // Post BabyCare용
+    float postCareTimer = 0.0f;
+    bool postCareActive = false;
+    Vector3 forcedTargetPos;
+
+
 private:
     // FSM
     void InitFSMStates();
@@ -97,6 +104,7 @@ public:
     // void SetAITarget(GameObject* newTarget);
     bool IsSeeing(GameObject* target) const;
     bool IsPlayerInSenseRange();
+    void StartPostBabyCare();
 
     GameObject* GetAITarget() const;
     GameObject* GetPlayer() const;
@@ -109,6 +117,7 @@ public:
     // 상태의 진입 경로 (어떤 이유로 들어왔는가)
     SearchReason searchReason = SearchReason::None;
     ChaseReason  chaseReason = ChaseReason::None;
+
 
 private:
     GameObject* target = nullptr;

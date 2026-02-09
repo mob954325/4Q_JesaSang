@@ -262,6 +262,20 @@ bool AdultGhostController::IsPlayerInSenseRange()
     return Vector3::Distance(pPos, gPos) <= senseRadius;
 }
 
+void AdultGhostController::StartPostBabyCare()
+{
+    postCareTimer = 0.0f;
+    postCareActive = true;
+    if (target)
+    {
+        forcedTargetPos = target->GetTransform()->GetLocalPosition(); // 플레이어 위치 저장
+    }
+
+    // PostBabyCare 동안 기존 target 제거
+    target = nullptr;
+    agent->hasTarget = false;
+    agent->path.clear();
+}
 
 // -------------------------------------------------
 // Interaction

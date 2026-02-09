@@ -69,15 +69,57 @@ void AdultGhost_Chase::Update(float deltaTime)
     chaseTimer += deltaTime;
     repathTimer += deltaTime;
 
+    // Post BabyCare 진행 중이면
+    if (adultGhost->postCareActive)
+    {
+        adultGhost->postCareTimer += deltaTime;
+
+        // 강제 위치 이동: target을 null로 하고 forcedTargetPos를 agent 목표로
+        auto grid = GridSystem::Instance().GetMainGrid();
+        if (grid)
+        {
+            int tx, ty;
+            if (grid->WorldToGridFromCenter(adultGhost->forcedTargetPos, tx, ty))
+            {
+                adultGhost->agent->targetCX = tx;
+                adultGhost->agent->targetCY = ty;
+                adultGhost->agent->hasTarget = true;
+
+                // 경로 재생성
+                adultGhost->agent->path = grid->FindPath(adultGhost->agent->cx, adultGhost->agent->cy, tx, ty);
+            }
+        }
+
+        // 5초 경과 시 PostBabyCare 종료
+        if (adultGhost->postCareTimer >= 5.0f)
+        {
+            adultGhost->postCareActive = false;
+
+            GameObject* player = adultGhost->GetPlayer();
+            if (player && adultGhost->IsSeeing(player))
+            {
+                adultGhost->SetAITarget(player);   // Chase 재진입
+                adultGhost->ChangeState(AdultGhostState::Chase);
+            }
+            else
+            {
+                adultGhost->ChangeState(AdultGhostState::Search);
+            }
+        }
+
+        return; // PostBabyCare 동안에는 일반 Chase 로직 skip
+    }
+
+    // 일반 Chase 로직
     if (!adultGhost->target) return;
 
-    // 일정 주기로 목표 위치 갱신
     if (repathTimer >= repathInterval)
     {
         UpdateTargetGrid();
         repathTimer = 0.0f;
     }
 }
+
 
 void AdultGhost_Chase::FixedUpdate(float deltaTime)
 {

@@ -1,5 +1,6 @@
 #pragma once
 #include "IBabyGhostState.h"
+#include "../AdultGhostController.h"
 
 // -----------------------------------------------------------
 // [ 울기 Cry ]
@@ -17,6 +18,9 @@ class BabyGhost_Cry : public IBabyGhostState
 private:
     float careTimer = 0.0f;
     const float careDelay = 3.0f;
+
+    AdultGhostController* caringAdult = nullptr;
+    bool adultArrived = false; // 어른 유령이 근처에 도착했는지
 
 public:
     BabyGhost_Cry(BabyGhostController* _babyGhost) : IBabyGhostState(_babyGhost, BabyGhostState::Cry) {}
