@@ -211,6 +211,7 @@ void AdultGhostController::ResetAgentForMove(float speed)
     agent->isWaiting = false;
 }
 
+
 // Ai가 Target을 보고 있는가? // TODO : FOV, Dist 값 매개변수로 받기 
 bool AdultGhostController::IsSeeing(GameObject* target) const
 {

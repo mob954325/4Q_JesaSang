@@ -51,7 +51,7 @@ void AdultGhost_Search::ChangeStateLogic()
     if (phase == SearchPhase::RotateSearch && rotateTimer >= rotateTime)
     {
         cout << "[AdultGhost_Search] Search Fail.." << endl;
-        adultGhost->ChangeState(AdultGhostState::Return); // 나중에 Return으로 교체
+        adultGhost->ChangeState(AdultGhostState::Return);
     }
 }
 

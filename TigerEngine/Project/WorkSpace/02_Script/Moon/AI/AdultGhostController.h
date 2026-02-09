@@ -35,6 +35,13 @@ enum class SearchReason
     None
 };
 
+// Chase 상태의 진입 경로
+enum class ChaseReason
+{
+    FromBabyCry,   
+    None
+};
+
 class AdultGhostController : public ScriptComponent
 {
     RTTR_ENABLE(ScriptComponent)
@@ -87,6 +94,7 @@ public:
 
     // Helper
     void ResetAgentForMove(float speed);
+    // void SetAITarget(GameObject* newTarget);
     bool IsSeeing(GameObject* target) const;
     bool IsPlayerInSenseRange();
 
@@ -100,6 +108,33 @@ public:
 
     // 상태의 진입 경로 (어떤 이유로 들어왔는가)
     SearchReason searchReason = SearchReason::None;
+    ChaseReason  chaseReason = ChaseReason::None;
+
+private:
+    GameObject* target = nullptr;
+
+public:
+    // 외부에서 AdultGhost 상태를 가져오기
+    AdultGhostState GetState() const { return state; }
+
+    // 외부에서 AdultGhost 상태를 바꾸기
+    void ChangeStateTo(AdultGhostState nextState)
+    {
+        ChangeState(nextState);
+    }
+
+    // 외부에서 AdultGhost 타겟 지정
+    void SetAITarget(GameObject* newTarget)
+    {
+        if (!agent) return;
+
+        target = newTarget;    
+        agent->path.clear();
+        agent->hasTarget = true;
+    }
+
+    // 외부에서 타겟 확인
+    GameObject* GetTarget() const { return target; }
 
 public:
     // friend

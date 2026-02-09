@@ -43,7 +43,7 @@ void BabyGhost_Search::ChangeStateLogic()
     if (phase == SearchPhase::RotateSearch && rotateTimer >= rotateTime)
     {
         cout << "[BabyGhost_Search] Search Fail.." << endl;
-        babyGhost->ChangeState(BabyGhostState::Return); 
+        babyGhost->ChangeState(BabyGhostState::Patrol); // babyGhost->ChangeState(BabyGhostState::Return); 
     }
 }
 

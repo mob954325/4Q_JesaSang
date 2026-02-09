@@ -14,13 +14,16 @@ void AdultGhost_Chase::Enter()
     // Agent 초기화 
     adultGhost->ResetAgentForMove(4.0f); // Chase 속도
 
-    // 최초 타겟 설정
-    target = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("AITarget");
+    // 타겟이 지정되어 있으면 그대로 사용
+    if (!adultGhost->target)
+    {
+        adultGhost->target = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("AITarget");
+    }
 }
 
 void AdultGhost_Chase::ChangeStateLogic()
 {
-    if (!target) return;
+    if (!adultGhost->target) return;
 
     // 이미 Attack으로 바뀌었으면 로직 중단
     if (adultGhost->state == AdultGhostState::Attack)
@@ -34,7 +37,7 @@ void AdultGhost_Chase::ChangeStateLogic()
         if (grid)
         {
             int px, py;
-            auto wp = target->GetTransform()->GetLocalPosition();
+            auto wp = adultGhost->target->GetTransform()->GetLocalPosition();
 
             // std::cout << "[Chase] Last Player World Pos = " << wp.x << ", " << wp.y << ", " << wp.z << std::endl;
 
@@ -48,7 +51,15 @@ void AdultGhost_Chase::ChangeStateLogic()
                 std::cout << "[Chase] WorldToGrid FAILED\n";
             }
         }
-        adultGhost->searchReason = SearchReason::FromChase;
+        // adultGhost->searchReason = SearchReason::FromChase;
+        if (adultGhost->chaseReason == ChaseReason::FromBabyCry)
+        {
+            adultGhost->searchReason = SearchReason::None; // 필요 없거나 BabyCry용 처리
+        }
+        else
+        {
+            adultGhost->searchReason = SearchReason::FromChase;
+        }
         adultGhost->ChangeState(AdultGhostState::Search);
     }
 }
@@ -58,7 +69,7 @@ void AdultGhost_Chase::Update(float deltaTime)
     chaseTimer += deltaTime;
     repathTimer += deltaTime;
 
-    if (!target) return;
+    if (!adultGhost->target) return;
 
     // 일정 주기로 목표 위치 갱신
     if (repathTimer >= repathInterval)
@@ -90,7 +101,7 @@ void AdultGhost_Chase::UpdateTargetGrid()
 
     // [ 플레이어 위치 -> Grid ]
     int px, py;
-    auto wp = target->GetTransform()->GetLocalPosition();
+    auto wp = adultGhost->target->GetTransform()->GetLocalPosition();
     if (!grid->WorldToGridFromCenter(wp, px, py)) return;
     // cout << "[Chase Repath] Player Grid = (" << px << "," << py << ")\n";
 
@@ -123,5 +134,10 @@ bool AdultGhost_Chase::CanGiveUpChase() const
     if (chaseTimer < minChaseTime)
         return false;
 
-    return !adultGhost->IsSeeing(target);
+    //if (adultGhost->chaseReason == ChaseReason::FromBabyCry)
+    //{
+    //    return false; // BabyCry target이면 달래기 끝날때까지 포기 금지
+    //}
+
+    return !adultGhost->IsSeeing(adultGhost->target);
 }
