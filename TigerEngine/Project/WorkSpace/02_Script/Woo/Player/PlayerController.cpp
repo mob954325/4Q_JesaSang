@@ -395,6 +395,8 @@ void PlayerController::CookingInteraction(float dt)
         cookInteractionTimer = 0.0f;
 
         // ui clear
+        CookingZone::Instance()->UISensorOnOff(false);
+        CookingZone::Instance()->UIInteractionOnOff(false);
         CookingZone::Instance()->UIGaugeUpate(0.0);
     }
 }

@@ -2,21 +2,21 @@
   "prefab": [
     {
       "Active": true,
-      "ID": 996,
+      "ID": 812,
       "Name": "CookingZone",
       "ParentID": -1,
       "components": [
         {
           "properties": {
             "Position": [
-              -671.5999755859375,
-              -110.0,
-              500.0
+              -819.3079833984375,
+              6.36657714494504e-05,
+              626.0414428710938
             ],
             "Rotation": [
               -0.0,
               0.0,
-              0.0
+              -0.0
             ],
             "Scale": [
               1.0,
@@ -48,6 +48,276 @@
             "radius": 50.0
           },
           "type": "PhysicsComponent"
+        },
+        {
+          "properties": {
+            "Active": true
+          },
+          "type": "CookingZone"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 888,
+      "Name": "Image_SensorOn_Cook",
+      "ParentID": 812,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              50.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              3.1415927410125732,
+              3.1415927410125732
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Pivot": [
+              0.5,
+              0.5
+            ],
+            "Pos": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "Size": [
+              25.0,
+              25.0
+            ]
+          },
+          "type": "RectTransform"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "color": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "drawSpacetype": "World",
+            "fillAmount": 1.0,
+            "imageType": "Simple",
+            "isBillboard": false,
+            "isMouseCheck": false,
+            "path": "..\\Assets\\Resource\\UI\\Interaction\\point.png",
+            "sliceBorderPx": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "type": "Simple",
+            "zOrder": 0
+          },
+          "type": "Image"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 889,
+      "Name": "Image_InteractionOn_Cook",
+      "ParentID": 812,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              50.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              3.1415927410125732,
+              3.1415927410125732
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Pivot": [
+              0.5,
+              0.5
+            ],
+            "Pos": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "Size": [
+              25.0,
+              25.0
+            ]
+          },
+          "type": "RectTransform"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "color": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "drawSpacetype": "World",
+            "fillAmount": 1.0,
+            "imageType": "Simple",
+            "isBillboard": false,
+            "isMouseCheck": false,
+            "path": "..\\Assets\\Resource\\UI\\Interaction\\F.png",
+            "sliceBorderPx": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "type": "Simple",
+            "zOrder": 1
+          },
+          "type": "Image"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 890,
+      "Name": "Image_InteractionGauge_Cook",
+      "ParentID": 812,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              50.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              3.1415927410125732,
+              3.1415927410125732
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Pivot": [
+              0.5,
+              0.5
+            ],
+            "Pos": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "Size": [
+              25.0,
+              25.0
+            ]
+          },
+          "type": "RectTransform"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "color": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "drawSpacetype": "World",
+            "fillAmount": 0.0,
+            "imageType": "FillHorizontal",
+            "isBillboard": false,
+            "isMouseCheck": false,
+            "path": "..\\Assets\\Resource\\UI\\Interaction\\F_02.png",
+            "sliceBorderPx": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "type": "FillHorizontal",
+            "zOrder": 2
+          },
+          "type": "Image"
         }
       ]
     }
