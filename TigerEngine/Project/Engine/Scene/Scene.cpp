@@ -5,6 +5,7 @@
 #include "System/ObjectSystem.h"
 #include "../EngineSystem/LightSystem.h"
 #include "../EngineSystem/CameraSystem.h"
+#include "../EngineSystem/SceneSystem.h"
 
 void Scene::OnUpdate(float deltaTime)
 {
@@ -236,6 +237,7 @@ bool Scene::LoadToJson(const std::string& filename)
 
     ClearScene(); // 데이터가 존재하면 현재 씬 제거
     targetLoadedPath = filename;
+    SceneSystem::Instance().isSceneChanging = true; // 씬 교체 플래그  - 26.02.09 이성호
 
     // 데이터에 있는 게임 오브젝트 불러오기
     vector<int> parentIDs; // 넣은 순서대로 부모 ID 기억하기 ( 부모가 없으면 -1 )

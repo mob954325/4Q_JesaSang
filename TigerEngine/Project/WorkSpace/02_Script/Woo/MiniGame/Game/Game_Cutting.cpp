@@ -7,6 +7,7 @@
 #include "Object/GameObject.h"
 #include "Components/RectTransform.h"
 #include "Components/UI/Image.h"
+#include <algorithm>
 
 using std::cout;
 using std::endl;
@@ -77,7 +78,8 @@ void Game_Cutting::StartGame()
 {
     stopPoint = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("1_Image_StopPoint")->GetComponent<RectTransform>();
     knife = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("1_Image_Knife")->GetComponent<RectTransform>();
-    
+    animImage = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("1_Image_CutAnimation")->GetComponent<Image>();
+
     if (!stopPoint || !knife)
     {
         cout << "[MiniGame 1] Missing ui objects!" << endl;
@@ -96,6 +98,9 @@ void Game_Cutting::StartGame()
 
     // start pos init
     SetUIPosX(knife, (xMin + xMax) * 0.5f);
+
+    // anim image set
+    SetAnimPathes();
 
     std::cout << "[MiniGame 1] : Game_Cutting Start!" << std::endl;
 }
@@ -155,4 +160,34 @@ void Game_Cutting::UpdateGame(float delta)
 void Game_Cutting::EndGame()
 {
     std::cout << "[MiniGame 1] : Game_Cutting End!" << std::endl;
+}
+
+void Game_Cutting::UpdateAnimation(float delta)
+{
+    if (animTimer <= 0.0f)
+    {
+        animTimer = changeAnimTime;
+        currAnimIndex++;
+        if (currAnimIndex >= currAnimPathes.size()) // 인덱스 초과 시 0으로
+        {
+            currAnimIndex = 0;
+        }
+
+        animImage->ChangeData(currAnimPathes[currAnimIndex]);
+    }
+
+    animTimer -= delta;
+}
+
+void Game_Cutting::SetAnimPathes()
+{
+    // 이미지 패스 생성
+    currAnimPathes.resize(3);
+
+    currAnimPathes[0] = "..\\Assets\\Resource\\UI\\CutScenes\\happy_ending_03.png";
+    currAnimPathes[1] = "..\\Assets\\Resource\\UI\\CutScenes\\happy_ending_04.png";
+    currAnimPathes[2] = "..\\Assets\\Resource\\UI\\CutScenes\\happy_ending_05.png";
+
+    if(animImage)
+        animImage->ChangeData(currAnimPathes[0]); // 첫번째로 초기화
 }

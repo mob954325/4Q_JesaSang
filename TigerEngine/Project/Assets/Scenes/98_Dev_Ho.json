@@ -3,7 +3,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 73,
+        "ID": 111,
         "Name": "DirectionalLight(Sun)",
         "ParentID": -1,
         "components": [
@@ -57,7 +57,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 74,
+        "ID": 112,
         "Name": "Ground",
         "ParentID": -1,
         "components": [
@@ -138,7 +138,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 75,
+        "ID": 113,
         "Name": "Player",
         "ParentID": -1,
         "components": [
@@ -211,6 +211,18 @@
               "isroughnessFromShininess": false
             },
             "type": "FBXRenderer"
+          },
+          {
+            "properties": {
+              "Active": true
+            },
+            "type": "AudioListenerComponent"
+          },
+          {
+            "properties": {
+              "Active": true
+            },
+            "type": "Weapon"
           }
         ]
       },
@@ -219,16 +231,16 @@
     {
       "properties": {
         "Active": true,
-        "ID": 76,
+        "ID": 114,
         "Name": "NewGameObject",
-        "ParentID": 75,
+        "ParentID": 113,
         "components": [
           {
             "properties": {
               "Position": [
-                36.1680908203125,
-                168.33309936523438,
-                0.0
+                -3.5089111328125,
+                157.81088256835938,
+                26.317062377929688
               ],
               "Rotation": [
                 -0.0,
@@ -236,9 +248,9 @@
                 -0.0
               ],
               "Scale": [
-                1.0,
-                1.0,
-                1.0
+                0.25,
+                0.25,
+                0.5
               ]
             },
             "type": "Transform"
@@ -254,17 +266,17 @@
               ],
               "drawSpacetype": "World",
               "fillAmount": 1.0,
-              "imageType": "Simple",
+              "imageType": "Sliced",
               "isBillboard": true,
               "isMouseCheck": false,
               "path": "..\\Assets\\Resource\\UI\\Title\\yes.png",
               "sliceBorderPx": [
-                0.0,
-                0.0,
-                0.0,
-                0.0
+                65.0,
+                65.0,
+                40.0,
+                40.0
               ],
-              "type": "Simple",
+              "type": "Sliced",
               "zOrder": 0
             },
             "type": "Image"
@@ -274,7 +286,7 @@
               "Active": true,
               "Pivot": [
                 0.0,
-                0.0
+                0.4000000059604645
               ],
               "Pos": [
                 0.0,
@@ -292,13 +304,13 @@
                 0.0
               ],
               "Scale": [
-                1.0,
-                1.0,
-                1.0
+                8.100000381469727,
+                0.800000011920929,
+                0.20000000298023224
               ],
               "Size": [
-                123.19999694824219,
-                50.0
+                553.4000244140625,
+                156.5
               ]
             },
             "type": "RectTransform"
@@ -310,15 +322,15 @@
     {
       "properties": {
         "Active": true,
-        "ID": 77,
+        "ID": 115,
         "Name": "text",
-        "ParentID": 76,
+        "ParentID": 114,
         "components": [
           {
             "properties": {
               "Position": [
-                11.917877197265625,
-                -28.480743408203125,
+                0.0,
+                0.0,
                 0.0
               ],
               "Rotation": [
@@ -389,6 +401,58 @@
               ]
             },
             "type": "RectTransform"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 116,
+        "Name": "SoundObject",
+        "ParentID": -1,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                458.93914794921875,
+                180.7545928955078,
+                -0.38031005859375
+              ],
+              "Rotation": [
+                -0.0,
+                0.0,
+                -0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "ChannelGroup": "BGM",
+              "ClipId": "SFX_Footstep1",
+              "Loop": true,
+              "MaxDistance": 4.0,
+              "MinDistance": 1.0,
+              "Pitch": 1.0,
+              "Volume": 1.0
+            },
+            "type": "AudioSourceComponent"
+          },
+          {
+            "properties": {
+              "b": 0.0,
+              "g": 0.0,
+              "r": 0.0
+            },
+            "type": "Player1"
           }
         ]
       },

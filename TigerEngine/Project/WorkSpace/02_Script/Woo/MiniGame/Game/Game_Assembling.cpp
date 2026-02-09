@@ -161,6 +161,9 @@ void Game_Assembling::StartGame()
     key7 = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("3_Image_key7")->GetComponent<Image>();
     key8 = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("3_Image_key8")->GetComponent<Image>();
 
+    animImage = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("3_Image_CutAnimation")->GetComponent<Image>();
+
+
     if (!key1 || !key2 || !key3 || !key4 || !key5 || !key6 || !key7 || !key8)
     {
         cout << "[MiniGame 3] Missing ui objects!" << endl;
@@ -184,7 +187,7 @@ void Game_Assembling::StartGame()
 
     BuildDirImageTable();
     StartNewTurn();
-
+    SetAnimPathes();
     cout << "[Mini Game 3] : Game_Assembling Start!" << endl;
 }
 
@@ -220,4 +223,34 @@ void Game_Assembling::UpdateGame(float delta)
 void Game_Assembling::EndGame()
 {
     cout << "[Mini Game] : Game_Assembling End!" << endl;
+}
+
+void Game_Assembling::UpdateAnimation(float delta)
+{
+    if (animTimer <= 0.0f)
+    {
+        animTimer = changeAnimTime;
+        currAnimIndex++;
+        if (currAnimIndex >= currAnimPathes.size()) // 인덱스 초과 시 0으로
+        {
+            currAnimIndex = 0;
+        }
+
+        animImage->ChangeData(currAnimPathes[currAnimIndex]);
+    }
+
+    animTimer -= delta;
+}
+
+void Game_Assembling::SetAnimPathes()
+{
+    // 이미지 패스 생성
+    currAnimPathes.resize(3);
+
+    currAnimPathes[0] = "..\\Assets\\Resource\\UI\\CutScenes\\happy_ending_05.png";
+    currAnimPathes[1] = "..\\Assets\\Resource\\UI\\CutScenes\\happy_ending_06.png";
+    currAnimPathes[2] = "..\\Assets\\Resource\\UI\\CutScenes\\happy_ending_07.png";
+
+    if (animImage)
+        animImage->ChangeData(currAnimPathes[0]); // 첫번째로 초기화
 }

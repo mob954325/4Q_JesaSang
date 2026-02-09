@@ -85,7 +85,8 @@ private:
 
     bool  IsFoodInsideBar() const;
 
-
+    Image* animImage{};
+    void SetAnimPathes();
 public:
     Game_FireControl() = default;
     ~Game_FireControl() override = default;
@@ -93,6 +94,8 @@ public:
     void StartGame() override;
     void UpdateGame(float delta)override;
     void EndGame() override;
+
+    void UpdateAnimation(float delta) override;
 };
 
 

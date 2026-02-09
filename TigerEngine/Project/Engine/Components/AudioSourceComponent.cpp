@@ -210,8 +210,8 @@ void AudioSourceComponent::Stop()
 
 void AudioSourceComponent::Update3D()
 {
-    const AudioTransform t = ResolveAudioTransform(m_Fallback, m_Bind);
-    m_Source.SetPosition(t.position);
+    const AudioTransform t = ResolveAudioTransform(m_Fallback, m_Bind); // fallback, [out] m_bind
+    m_Source.SetPosition(t.position);   // 
     m_Source.SetVelocity(t.velocity);
     m_Source.Update3D();
 }

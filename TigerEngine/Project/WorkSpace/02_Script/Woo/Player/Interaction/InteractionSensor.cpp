@@ -2,6 +2,13 @@
 #include "Util/JsonHelper.h"
 #include "Util/ComponentAutoRegister.h"
 #include "Object/GameObject.h"
+#include "Components/FBXRenderer.h"
+
+#include "../../Object/SearchObject.h"
+#include "../../Object/HideObject.h"
+#include "../../JesaSang/JesaSangManager.h"
+#include "../../Altar/AltarManager.h"
+#include "../../CookingZone/CookingZone.h"
 
 
 REGISTER_COMPONENT(InteractionSensor)
@@ -24,7 +31,7 @@ void InteractionSensor::OnUpdate(float delta)
     // transform->physics udpate
     auto ob = GetOwner();
     auto tr = ob->GetTransform();
-    Vector3 upatePos = tr->GetParent()->GetOwner()->GetTransform()->GetWorldPosition() + Vector3(0, -20, 0);
+    Vector3 upatePos = tr->GetParent()->GetOwner()->GetTransform()->GetWorldPosition() + Vector3(0, 30, 0);
     tr->SetPosition(upatePos);
     GetOwner()->GetComponent<PhysicsComponent>()->SyncToPhysics();
 }
@@ -41,18 +48,78 @@ void InteractionSensor::Deserialize(nlohmann::json data)
 
 void InteractionSensor::OnTriggerEnter(PhysicsComponent* other)
 {
-    if (other->GetOwner()->GetName() == "SearchObject")
+    GameObject* object = other->GetOwner();
+
+    // 수색 오브젝트 감지 on
+    if (object->GetName() == "SearchObject")
     {
-        //cout << "[InteractionSensor] SearchObject In Sensor Zone" << endl;
-        // TODO :: UI
+        auto* so = object->GetComponent<SearchObject>();
+        if (so)
+            so->UISensorOnOff(true);
+    }
+
+    // 은신 오브젝트 감지 on
+    if (object->GetName() == "HideObject")
+    {
+        auto* so = object->GetComponent<HideObject>();
+        if (so)
+            so->UISensorOnOff(true);
+    }
+
+    // 부엌 감지 on
+    if (other->GetOwner()->GetName() == "CookingZone")
+    {
+        CookingZone::Instance()->UISensorOnOff(true);
+    }
+
+    // 제사상 감지 on
+    if (other->GetOwner()->GetName() == "JesaSang")
+    {
+        JesaSangManager::Instance()->UISensorOnOff(true);
+    }
+
+    // 제단 감지 on
+    if (other->GetOwner()->GetName() == "Altar")
+    {
+        AltarManager::Instance()->UISensorOnOff(true);
     }
 }
 
 void InteractionSensor::OnTriggerExit(PhysicsComponent* other)
 {
-    if (other->GetOwner()->GetName() == "SearchObject")
+    GameObject* object = other->GetOwner();
+
+    // 수색 오브젝트 감지 off
+    if (object->GetName() == "SearchObject")
     {
-        //cout << "[InteractionSensor] SearchObject Out Sensor Zone" << endl;
-        // TODO :: UI
+        auto* so = object->GetComponent<SearchObject>();
+        if (so)
+            so->UISensorOnOff(false);
+    }
+
+    // 은신 오브젝트 감지 off
+    if (object->GetName() == "HideObject")
+    {
+        auto* so = object->GetComponent<HideObject>();
+        if (so)
+            so->UISensorOnOff(false);
+    }
+
+    // 부엌 감지 off
+    if (other->GetOwner()->GetName() == "CookingZone")
+    {
+        CookingZone::Instance()->UISensorOnOff(false);
+    }
+
+    // JesaSang 감지 off
+    if (other->GetOwner()->GetName() == "JesaSang")
+    {
+        JesaSangManager::Instance()->UISensorOnOff(false);
+    }
+
+    // Altar 감지 off
+    if (other->GetOwner()->GetName() == "Altar")
+    {
+        AltarManager::Instance()->UISensorOnOff(false);
     }
 }
