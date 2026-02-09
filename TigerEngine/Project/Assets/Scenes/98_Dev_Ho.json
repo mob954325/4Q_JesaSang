@@ -3,7 +3,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 111,
+        "ID": 79,
         "Name": "DirectionalLight(Sun)",
         "ParentID": -1,
         "components": [
@@ -57,7 +57,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 112,
+        "ID": 80,
         "Name": "Ground",
         "ParentID": -1,
         "components": [
@@ -138,7 +138,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 113,
+        "ID": 81,
         "Name": "Player",
         "ParentID": -1,
         "components": [
@@ -231,9 +231,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 114,
+        "ID": 82,
         "Name": "NewGameObject",
-        "ParentID": 113,
+        "ParentID": 81,
         "components": [
           {
             "properties": {
@@ -322,9 +322,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 115,
+        "ID": 83,
         "Name": "text",
-        "ParentID": 114,
+        "ParentID": 82,
         "components": [
           {
             "properties": {
@@ -409,7 +409,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 116,
+        "ID": 84,
         "Name": "SoundObject",
         "ParentID": -1,
         "components": [
@@ -453,6 +453,47 @@
               "r": 0.0
             },
             "type": "Player1"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 86,
+        "Name": "NewGameObject",
+        "ParentID": -1,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                156.3861083984375,
+                0.0
+              ],
+              "Rotation": [
+                -0.0,
+                0.0,
+                -0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "allFinished": false,
+              "enabled": true,
+              "looping": true,
+              "playing": true
+            },
+            "type": "Effect"
           }
         ]
       },

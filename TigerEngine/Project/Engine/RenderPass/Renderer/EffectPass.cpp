@@ -74,7 +74,11 @@ void EffectPass::Execute(ComPtr<ID3D11DeviceContext>& context, RenderQueue& queu
         }
         if (!hasAnyParticles) continue;
 
-        Vector3 dist = fx->position - camPos;
+        Vector3 dist{};
+        if (fx->transform)
+        {
+            fx->transform->GetWorldPosition() - camPos;
+        }
         float key = dist.Dot(camForward);
         sortedFx.push_back({ fx, key });
     }
