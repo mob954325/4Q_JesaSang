@@ -2,7 +2,7 @@
   "prefab": [
     {
       "Active": true,
-      "ID": 1612,
+      "ID": 854,
       "Name": "JesaSang",
       "ParentID": -1,
       "components": [
@@ -109,9 +109,9 @@
     },
     {
       "Active": true,
-      "ID": 1613,
+      "ID": 855,
       "Name": "baseFood",
-      "ParentID": 1612,
+      "ParentID": 854,
       "components": [
         {
           "properties": {
@@ -187,9 +187,9 @@
     },
     {
       "Active": false,
-      "ID": 1614,
+      "ID": 856,
       "Name": "Apple",
-      "ParentID": 1612,
+      "ParentID": 854,
       "components": [
         {
           "properties": {
@@ -265,9 +265,9 @@
     },
     {
       "Active": false,
-      "ID": 1615,
+      "ID": 857,
       "Name": "Pear",
-      "ParentID": 1612,
+      "ParentID": 854,
       "components": [
         {
           "properties": {
@@ -343,9 +343,9 @@
     },
     {
       "Active": false,
-      "ID": 1616,
+      "ID": 858,
       "Name": "Batter",
-      "ParentID": 1612,
+      "ParentID": 854,
       "components": [
         {
           "properties": {
@@ -421,9 +421,9 @@
     },
     {
       "Active": false,
-      "ID": 1617,
+      "ID": 859,
       "Name": "Tofu",
-      "ParentID": 1612,
+      "ParentID": 854,
       "components": [
         {
           "properties": {
@@ -499,9 +499,9 @@
     },
     {
       "Active": false,
-      "ID": 1618,
+      "ID": 860,
       "Name": "Sanjeok",
-      "ParentID": 1612,
+      "ParentID": 854,
       "components": [
         {
           "properties": {
@@ -577,9 +577,9 @@
     },
     {
       "Active": false,
-      "ID": 1619,
+      "ID": 861,
       "Name": "Donggeurangttaeng",
-      "ParentID": 1612,
+      "ParentID": 854,
       "components": [
         {
           "properties": {
@@ -655,9 +655,9 @@
     },
     {
       "Active": true,
-      "ID": 1640,
+      "ID": 882,
       "Name": "Image_SensorOn_Jesasang",
-      "ParentID": 1612,
+      "ParentID": 854,
       "components": [
         {
           "properties": {
@@ -743,9 +743,9 @@
     },
     {
       "Active": true,
-      "ID": 1641,
+      "ID": 883,
       "Name": "Image_InteractionOn_Jesasang",
-      "ParentID": 1612,
+      "ParentID": 854,
       "components": [
         {
           "properties": {
@@ -831,9 +831,9 @@
     },
     {
       "Active": true,
-      "ID": 1642,
+      "ID": 884,
       "Name": "Image_InteractionGauge_Jesasang",
-      "ParentID": 1612,
+      "ParentID": 854,
       "components": [
         {
           "properties": {
