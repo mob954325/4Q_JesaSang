@@ -25,7 +25,7 @@ private:
     float repathTimer = 0.0f;
     float repathInterval = 0.3f;  // 목표 갱신 주기
 
-    GameObject* target = nullptr;
+    // GameObject* target = nullptr;
 
 private:
     void UpdateTargetGrid();

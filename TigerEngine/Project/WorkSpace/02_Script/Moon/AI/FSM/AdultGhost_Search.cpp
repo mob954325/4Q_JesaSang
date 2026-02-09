@@ -11,9 +11,9 @@ void AdultGhost_Search::Enter()
     rotateTimer = 0.0f;
 
     adultGhost->ResetAgentForMove(3.5f);
+    adultGhost->animController->ChangeState("Idle");
 
     phase = SearchPhase::WaitBeforeMove;
-
 
     // 1. Chase or Attack 에서 넘어온 경우 바로 이동
     if (adultGhost->searchReason == SearchReason::FromChase ||
@@ -51,7 +51,7 @@ void AdultGhost_Search::ChangeStateLogic()
     if (phase == SearchPhase::RotateSearch && rotateTimer >= rotateTime)
     {
         cout << "[AdultGhost_Search] Search Fail.." << endl;
-        adultGhost->ChangeState(AdultGhostState::Return); // 나중에 Return으로 교체
+        adultGhost->ChangeState(AdultGhostState::Return);
     }
 }
 
