@@ -30,6 +30,7 @@
 #include "../Altar/AltarManager.h"
 #include "PlayerItemVisualizer.h"
 #include "../Manager/GameManager.h"
+#include "../UI/MainGameUIManager.h"
 #include "../CookingZone/CookingZone.h"
 #include "../../Ron/MiniMapTest/MiniMapManager.h"
 
@@ -615,9 +616,11 @@ void PlayerController::TakeAttack()
         cout << "[Player] Drop Item... " << endl;
     }
 
-    // Die
+    // life
     curLife--;
-    
+    MainGameUIManager::Instance()->UpdateLifeUI(curLife);
+
+    // Die
     if (curLife <= 0)
     {
         curLife = 0;
