@@ -139,6 +139,8 @@ bool EngineApp::OnInitialize()
 
 void EngineApp::OnPreUpdate()
 {
+    if (SceneSystem::Instance().isSceneChanging) SceneSystem::Instance().isSceneChanging = false; // NOTE : 플래그 활성화 되어있으면 비활성화 하기
+
     ScriptSystem::Instance().CheckReadyQueue();
     RenderSystem::Instance().CheckReadyQueue();
 }
@@ -168,7 +170,7 @@ void EngineApp::OnRender()
 {
     BeginRender(); 					// 업데이트 준비
 
-    RenderSystem::Instance().Render(*renderQueue);
+    RenderSystem::Instance().Render(*renderQueue);  // 렌더 컴포넌트
 
     // Default CB Setting
     {
@@ -205,6 +207,12 @@ void EngineApp::OnRender()
         curCam = CameraSystem::Instance().GetCurrCamera();
     else
         curCam = CameraSystem::Instance().GetFreeCamera();
+
+    // NOTE : 렌더 패스 처리하기전에 씬을 교체하는지 확인하고 교체하면 큐 클리어
+    if(SceneSystem::Instance().isSceneChanging)
+    {
+        renderQueue->Clear();
+    }
 
     // render pass
     dxRenderer->ProcessScene(*renderQueue, *shadowPass, curCam);
