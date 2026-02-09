@@ -34,13 +34,11 @@ void AdultGhost_Attack::ChangeStateLogic()
     {
         cout << "[AdultGhost_Attack] Lost player -> Search\n";
 
-        // 마지막으로 본 위치 저장 
-        auto* target = adultGhost->GetAITarget();
         auto grid = GridSystem::Instance().GetMainGrid();
         if (grid)
         {
             int px, py;
-            auto wp = target->GetTransform()->GetLocalPosition();
+            auto wp = adultGhost->GetPlayer()->GetTransform()->GetLocalPosition();
             if (grid->WorldToGridFromCenter(wp, px, py))
             {
                 adultGhost->lastPlayerGrid = { px, py, true };
@@ -55,7 +53,8 @@ void AdultGhost_Attack::Update(float deltaTime)
 {
     attackTimer += deltaTime;
 
-    if (!didDamage /*&& attackTimer >= 0.8f*/)
+    // 공격 애니메이션 끝나고 타격 입는 듯한 연출 위해서 딜레이 
+    if (!didDamage && attackTimer >= 1.0f /*attackTimer < attackDelay*/)
     {
         auto* player = adultGhost->GetPlayer();
         if (player)

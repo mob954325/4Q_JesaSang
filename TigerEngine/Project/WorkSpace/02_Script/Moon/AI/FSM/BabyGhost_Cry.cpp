@@ -18,7 +18,7 @@ void BabyGhost_Cry::Enter()
 
 void BabyGhost_Cry::ChangeStateLogic()
 {
-    // 돌봐주는 유령이 3초 이상 돌봐주면 Patrol 상태로 복귀
+    // 돌봐주는 유령이 3초 이상 돌봐주면 복귀
     if (careTimer >= careDelay)
     {
         cout << "[BabyGhost_Cry] Care completed, returning to Patrol" << endl;

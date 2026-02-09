@@ -28,12 +28,19 @@ void AdultGhost_Chase::ChangeStateLogic()
     if (!adultGhost->target) return;
 
     // 이미 Attack으로 바뀌었으면 로직 중단
-    if (adultGhost->state == AdultGhostState::Attack)
-        return;
+    if (adultGhost->state == AdultGhostState::Attack) return;
 
     // PostBabyCare 중이면 절대 포기 금지
     if (adultGhost->postCareActive)
+    {
+        // PostBabyCare가 끝나면 강제로 Search로 보내기 (안정화)
+        if (adultGhost->postCareTimer >= careTime)
+        {
+            adultGhost->postCareActive = false;
+            adultGhost->ChangeState(AdultGhostState::Search);
+        }
         return;
+    }
 
     // 최소 추격 시간 이후에만 추격 포기 가능함 
     if (CanGiveUpChase())
@@ -55,7 +62,8 @@ void AdultGhost_Chase::ChangeStateLogic()
                 std::cout << "[Chase] WorldToGrid FAILED\n";
             }
         }
-        // adultGhost->searchReason = SearchReason::FromChase;
+
+        // Search 진입 이유 설정
         if (adultGhost->chaseReason == ChaseReason::FromBabyCry)
         {
             adultGhost->searchReason = SearchReason::None; // 필요 없거나 BabyCry용 처리
@@ -64,6 +72,8 @@ void AdultGhost_Chase::ChangeStateLogic()
         {
             adultGhost->searchReason = SearchReason::FromChase;
         }
+
+        // Search 상태로 전환
         adultGhost->ChangeState(AdultGhostState::Search);
     }
 }
@@ -73,7 +83,10 @@ void AdultGhost_Chase::Update(float deltaTime)
     chaseTimer += deltaTime;
     repathTimer += deltaTime;
 
-    // Post BabyCare 진행 중이면
+
+    // ----------------------------
+    // PostBabyCare 처리
+    // ----------------------------
     if (adultGhost->postCareActive)
     {
         adultGhost->postCareTimer += deltaTime; 
@@ -95,7 +108,7 @@ void AdultGhost_Chase::Update(float deltaTime)
         }
 
         // 5초 경과 시 PostBabyCare 종료
-        if (adultGhost->postCareTimer >= 5.0f)
+        if (adultGhost->postCareTimer >= careTime)
         {
             adultGhost->postCareActive = false;
 
@@ -114,9 +127,13 @@ void AdultGhost_Chase::Update(float deltaTime)
         return; // PostBabyCare 동안에는 일반 Chase 로직 skip
     }
 
-    // 일반 Chase 로직
+
+    // ----------------------------
+    // 일반 Chase 처리
+    // ----------------------------
     if (!adultGhost->target) return;
 
+    // 목표 위치가 변경되었는지 확인 (경로 갱신)
     if (repathTimer >= repathInterval)
     {
         UpdateTargetGrid();
@@ -175,6 +192,8 @@ void AdultGhost_Chase::UpdateTargetGrid()
     }
 }
 
+
+// 추격 포기 조건
 bool AdultGhost_Chase::CanGiveUpChase() const
 {
     if (chaseTimer < minChaseTime)

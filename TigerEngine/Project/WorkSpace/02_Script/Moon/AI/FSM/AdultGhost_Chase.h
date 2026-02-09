@@ -3,7 +3,11 @@
 
 // -----------------------------------------------------------
 // [ 추격 Chase ]
-// 플레이어 위치로 이동하는 상태 
+// 1. NormalChase
+//      플레이어를 추격하는 기본 모드
+// 2. BabyCryChase
+//      BabyCry로 진입한 경우만 사용하는 특수 모드
+//      (울었던 위치로 이동 → 회전 대기 → 플레이어로 이동)
 // 
 // - (if) Patrol에서 울기 감지로 넘어온 경우
 //      1. 애기 유령이 울었던 지점으로 이동,
@@ -25,7 +29,7 @@ private:
     float repathTimer = 0.0f;
     float repathInterval = 0.3f;  // 목표 갱신 주기
 
-    // GameObject* target = nullptr;
+    float careTime = 5.0f;
 
 private:
     void UpdateTargetGrid();

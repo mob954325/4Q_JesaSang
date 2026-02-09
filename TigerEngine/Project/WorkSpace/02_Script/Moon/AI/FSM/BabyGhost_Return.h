@@ -11,6 +11,9 @@
 
 class BabyGhost_Return : public IBabyGhostState
 {
+    float visionTimer = 0.0f;
+    float visionDelay = 3.0f;
+
 public:
     BabyGhost_Return(BabyGhostController* _babyGhost) : IBabyGhostState(_babyGhost, BabyGhostState::Return) {}
     ~BabyGhost_Return() = default;
