@@ -49,10 +49,6 @@ void JesaSangManager::OnStart()
     }
 }
 
-void JesaSangManager::OnDestory()
-{
-   
-}
 
 nlohmann::json JesaSangManager::Serialize()
 {

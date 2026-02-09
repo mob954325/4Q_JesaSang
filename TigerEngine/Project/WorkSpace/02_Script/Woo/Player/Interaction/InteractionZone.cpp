@@ -8,6 +8,7 @@
 #include "../../Object/HideObject.h"
 #include "../../JesaSang/JesaSangManager.h"
 #include "../../Altar/AltarManager.h"
+#include "../../CookingZone/CookingZone.h"
 
 
 REGISTER_COMPONENT(InteractionZone)
@@ -78,10 +79,11 @@ void InteractionZone::OnTriggerEnter(PhysicsComponent* other)
         }
     }
 
-    // Kitchin (MiniGame)
+    // CookingZone (MiniGame)
     if (other->GetOwner()->GetName() == "CookingZone")
     {
         player->isPossibleCooking = true;
+        CookingZone::Instance()->UIInteractionOnOff(true);
         cout << "[InteractionZone] CookingZone In Interaction Zone" << endl;
     }
 
@@ -128,10 +130,11 @@ void InteractionZone::OnTriggerExit(PhysicsComponent* other)
         }
     }
 
-    // Kitchin (MiniGame)
+    // Cooking Zone (MiniGame)
     if (other->GetOwner()->GetName() == "CookingZone")
     {
         player->isPossibleCooking = false;
+        CookingZone::Instance()->UIInteractionOnOff(false);
         cout << "[InteractionZone] CookingZone Out Interaction Zone" << endl;
     }
 

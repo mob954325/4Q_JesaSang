@@ -8,6 +8,7 @@
 #include "../../Object/HideObject.h"
 #include "../../JesaSang/JesaSangManager.h"
 #include "../../Altar/AltarManager.h"
+#include "../../CookingZone/CookingZone.h"
 
 
 REGISTER_COMPONENT(InteractionSensor)
@@ -65,6 +66,12 @@ void InteractionSensor::OnTriggerEnter(PhysicsComponent* other)
             so->UISensorOnOff(true);
     }
 
+    // 부엌 감지 on
+    if (other->GetOwner()->GetName() == "CookingZone")
+    {
+        CookingZone::Instance()->UISensorOnOff(true);
+    }
+
     // 제사상 감지 on
     if (other->GetOwner()->GetName() == "JesaSang")
     {
@@ -96,6 +103,12 @@ void InteractionSensor::OnTriggerExit(PhysicsComponent* other)
         auto* so = object->GetComponent<HideObject>();
         if (so)
             so->UISensorOnOff(false);
+    }
+
+    // 부엌 감지 off
+    if (other->GetOwner()->GetName() == "CookingZone")
+    {
+        CookingZone::Instance()->UISensorOnOff(false);
     }
 
     // JesaSang 감지 off
