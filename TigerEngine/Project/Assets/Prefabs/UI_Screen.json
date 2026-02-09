@@ -2,7 +2,7 @@
   "prefab": [
     {
       "Active": true,
-      "ID": 797,
+      "ID": 845,
       "Name": "UI_Screen",
       "ParentID": -1,
       "components": [
@@ -64,9 +64,9 @@
     },
     {
       "Active": false,
-      "ID": 798,
+      "ID": 846,
       "Name": "PausePannel",
-      "ParentID": 797,
+      "ParentID": 845,
       "components": [
         {
           "properties": {
@@ -152,9 +152,9 @@
     },
     {
       "Active": false,
-      "ID": 799,
-      "Name": "Button_StopYes",
-      "ParentID": 798,
+      "ID": 847,
+      "Name": "Button_StopNo",
+      "ParentID": 846,
       "components": [
         {
           "properties": {
@@ -223,7 +223,7 @@
             "fillAmount": 1.0,
             "imageType": "Simple",
             "isBillboard": false,
-            "isMouseCheck": false,
+            "isMouseCheck": true,
             "path": "..\\Assets\\Resource\\UI\\no.png",
             "sliceBorderPx": [
               0.0,
@@ -235,14 +235,22 @@
             "zOrder": 1
           },
           "type": "Image"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "normalImagePath": "",
+            "pressedImagePath": "..\\Assets\\Resource\\UI\\no_click.png"
+          },
+          "type": "Button_PausePannelOff"
         }
       ]
     },
     {
       "Active": false,
-      "ID": 800,
-      "Name": "Button_StopNo",
-      "ParentID": 798,
+      "ID": 848,
+      "Name": "Button_StopYes",
+      "ParentID": 846,
       "components": [
         {
           "properties": {
@@ -311,7 +319,7 @@
             "fillAmount": 1.0,
             "imageType": "Simple",
             "isBillboard": false,
-            "isMouseCheck": false,
+            "isMouseCheck": true,
             "path": "..\\Assets\\Resource\\UI\\yes.png",
             "sliceBorderPx": [
               0.0,
@@ -323,14 +331,23 @@
             "zOrder": 1
           },
           "type": "Image"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "normalImagePath": "",
+            "pressedImagePath": "..\\Assets\\Resource\\UI\\yes_click.png",
+            "targetScenePath": "..\\Assets\\Scenes\\01_StartScene.json"
+          },
+          "type": "Button_SceneChagne"
         }
       ]
     },
     {
       "Active": false,
-      "ID": 802,
+      "ID": 850,
       "Name": "Text_Stop",
-      "ParentID": 798,
+      "ParentID": 846,
       "components": [
         {
           "properties": {
