@@ -16,6 +16,7 @@ RTTR_REGISTRATION
 
 void GameManager::OnInitialize()
 {
+    s_instance = this;
 }
 
 void GameManager::OnStart()
@@ -24,6 +25,7 @@ void GameManager::OnStart()
 
 void GameManager::OnDestory()
 {
+    if (s_instance == this) s_instance = nullptr;
 }
 
 nlohmann::json GameManager::Serialize()

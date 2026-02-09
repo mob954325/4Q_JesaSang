@@ -37,24 +37,50 @@ void MainGameUIManager::OnStart()
         return;
     }
 
-    auto SafeGetImage = [&](const std::string& objName) -> Image*
+    auto SafeGetGO = [&](const std::string& objName) -> GameObject*
         {
             auto go = scene->GetGameObjectByName(objName);
             if (!go)
-            {
                 cout << "[MainGameUIManager] Missing GameObject: " << objName << endl;
-                return nullptr;
-            }
+            return go;
+        };
+
+    auto SafeGetImage = [&](const std::string& objName) -> Image*
+        {
+            auto go = SafeGetGO(objName);
+            if (!go) return nullptr;
 
             auto img = go->GetComponent<Image>();
             if (!img)
-            {
                 cout << "[MainGameUIManager] Missing Image Component on: " << objName << endl;
-                return nullptr;
-            }
 
             return img;
         };
+
+    auto SafeGetRect = [&](const std::string& objName) -> RectTransform*
+        {
+            auto go = SafeGetGO(objName);
+            if (!go) return nullptr;
+
+            auto rt = go->GetComponent<RectTransform>();
+            if (!rt)
+                cout << "[MainGameUIManager] Missing RectTransform Component on: " << objName << endl;
+
+            return rt;
+        };
+
+    auto SafeGetText = [&](const std::string& objName) -> TextUI*
+        {
+            auto go = SafeGetGO(objName);
+            if (!go) return nullptr;
+
+            auto txt = go->GetComponent<TextUI>();
+            if (!txt)
+                cout << "[MainGameUIManager] Missing Text Component on: " << objName << endl;
+
+            return txt;
+        };
+
 
     // life image component
     life_1 = SafeGetImage("Image_Life1");
@@ -66,6 +92,19 @@ void MainGameUIManager::OnStart()
     if (!life_1 || !life_2 || !life_3 || !life_4 || !life_5)
     {
         cout << "[MainGameUIManager] Missing life UI objects!" << endl;
+    }
+
+    // quest
+    questParent = SafeGetRect("Quest");
+    questTitle = SafeGetText("Text_QuestTitle");
+    questLable = SafeGetText("Text_QuestLabel");
+    cheakbox = SafeGetImage("Image_QuestCheckbox");
+    line = SafeGetImage("Image_QuestLine");
+
+
+    if (!questParent || !questTitle || !questLable || !cheakbox || !line)
+    {
+        cout << "[MainGameUIManager] Missing quest UI objects!" << endl;
     }
 }
 
@@ -104,4 +143,46 @@ void MainGameUIManager::UpdateLifeUI(int currentLife)
         else
             lifes[i]->ChangeData(lifeOffImagePath);
     }
+}
+
+void MainGameUIManager::UpdateQuestTitle(std::string& s)
+{
+    if (!questTitle) return;
+
+    std::wstring ws;
+    ws.assign(s.begin(), s.end());
+    questTitle->SetText(ws);
+}
+
+void MainGameUIManager::UpdateQuestLable(std::string& s)
+{
+    if (!questLable) return;
+
+    std::wstring ws;
+    ws.assign(s.begin(), s.end());
+    questLable->SetText(ws);
+}
+
+void MainGameUIManager::SetQuestTitleOn(bool flag)
+{
+    if (!questTitle) return;
+    questTitle->SetActive(flag);
+}
+
+void MainGameUIManager::SetQuestLableOn(bool flag)
+{
+    if (!questLable) return;
+    questLable->SetActive(flag);
+}
+
+void MainGameUIManager::SetQuestCheakboxOn(bool flag)
+{
+    if (!cheakbox) return;
+    cheakbox->SetActive(flag);
+}
+
+void MainGameUIManager::SetQuestLineOn(bool flag)
+{
+    if (!line) return;
+    line->SetActive(flag);
 }

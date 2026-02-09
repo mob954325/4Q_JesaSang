@@ -79,6 +79,8 @@ Matrix UIManager::GetProjection() const
 
 void UIManager::LoadFontAtlas(const std::wstring fontFilePath, TextResource* resource)
 {
+    if (fontFilePath.empty()) return;
+
     resource->atlas = builder.BuildASCII(device.Get(), fontFilePath, 
         resource->fontPx,
         resource->atlasW, resource->atlasH,

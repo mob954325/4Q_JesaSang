@@ -4,7 +4,7 @@
 class GameObject;
 class RectTransform;
 class Image;
-class Text;
+class TextUI;
 
 /*
     [ MainGameUIManager Script Component ] <Singleton>
@@ -28,6 +28,13 @@ private:
     Image* life_3 = nullptr;
     Image* life_4 = nullptr;
     Image* life_5 = nullptr;
+
+    // quest
+    RectTransform* questParent = nullptr;
+    TextUI* questTitle = nullptr;
+    TextUI* questLable = nullptr;
+    Image* cheakbox = nullptr;
+    Image* line = nullptr;
 
 public:
     // rttr
@@ -54,5 +61,14 @@ public:
 
     // Life
     void UpdateLifeUI(int currentLife);
+
+    // Quest
+    void UpdateQuestTitle(std::string& s);
+    void UpdateQuestLable(std::string& s);
+
+    void SetQuestTitleOn(bool flag);
+    void SetQuestLableOn(bool flag);
+    void SetQuestCheakboxOn(bool flag);
+    void SetQuestLineOn(bool flag);
 };
 

@@ -213,6 +213,7 @@
     <ClInclude Include="02_Script\\Ron\\Intro\IntroCutSceneController.h" />
     <ClInclude Include="02_Script\Woo\Manager\PauseManager.h" />
     <ClInclude Include="02_Script\Woo\UI\MainGameUIManager.h" />
+    <ClInclude Include="02_Script\Woo\Manager\QuestManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="02_Script\Ho\UI\MenuUI_ExitButton.cpp" />
@@ -280,6 +281,7 @@
     <ClCompile Include="02_Script\Woo\Object\TrapObject.cpp" />
     <ClCompile Include="02_Script\Woo\Manager\PauseManager.cpp" />
     <ClCompile Include="02_Script\Woo\UI\MainGameUIManager.cpp" />
+    <ClCompile Include="02_Script\Woo\Manager\QuestManager.cpp" />
     <ClCompile Include="winMain.cpp" />
     <ClCompile Include="02_Script\\Ron\\Intro\IntroCutSceneController.cpp" />
   </ItemGroup>
