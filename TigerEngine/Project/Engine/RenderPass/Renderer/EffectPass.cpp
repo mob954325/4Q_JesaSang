@@ -9,8 +9,7 @@ EffectPass::~EffectPass()
 {
 }
 
-void EffectPass::Execute(ComPtr<ID3D11DeviceContext>& context,
-    RenderQueue& queue, Camera* cam)
+void EffectPass::Init(const ComPtr<ID3D11Device>& device)
 {
 
 }
