@@ -1,4 +1,5 @@
 #include "Effect.h"
+#include "../Engine/EngineSystem/EffectSystem.h"
 
 void Effect::Play()
 {
@@ -48,4 +49,14 @@ void Effect::Update()
         else
             playing = false;
     }
+}
+
+void Effect::Enable_Inner()
+{
+    EffectSystem::Instance().Register(this);
+}
+
+void Effect::Disable_Inner()
+{
+    EffectSystem::Instance().UnRegister(this);
 }
