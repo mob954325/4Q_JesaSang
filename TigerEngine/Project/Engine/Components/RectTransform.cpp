@@ -1,6 +1,7 @@
 #include "RectTransform.h"
 #include "../Object/GameObject.h"
 #include "../Util/JsonHelper.h"
+#include "../Manager/UIManager.h"
 
 RTTR_REGISTRATION
 {
@@ -105,14 +106,22 @@ Matrix RectTransform::RemoveScale(Matrix& m)
 
 void RectTransform::UpdateMatricesIfDirty()
 {
-    if (!dirty) return;
+    //if (!dirty) return;
 
     auto& r = GetEuler();
 
+    // ---- ref -> screen 변환 ----
+    float s = UIManager::Instance().GetRefScale();
+    Vector2 off = UIManager::Instance().GetOffsetRef();
+
+    // pos/size는 ref 기준 값이라고 가정
+    Vector3 posPx(pos.x * s + off.x, pos.y * s + off.y, pos.z);
+    Vector2 sizePx(size.x * s, size.y * s);
+
     Matrix T0 = Matrix::CreateTranslation(-pivot.x, -pivot.y, 0.0f);
-    Matrix S = Matrix::CreateScale({ size.x, size.y, 1.0f });         // size = px
+    Matrix S = Matrix::CreateScale({ sizePx.x, sizePx.y, 1.0f });
     Matrix R = Matrix::CreateFromYawPitchRoll(r.y, r.x, r.z);
-    Matrix T1 = Matrix::CreateTranslation({ pos.x, pos.y, 0.0f });
+    Matrix T1 = Matrix::CreateTranslation({ posPx.x, posPx.y, 0.0f });
 
     localMatrix = T0 * S * R * T1;
 

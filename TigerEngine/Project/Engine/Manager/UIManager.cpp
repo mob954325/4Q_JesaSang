@@ -210,3 +210,15 @@ void UIManager::AppendGlyphQuad(float penX, float baselineY, std::vector<UIQuadV
     cpuVerts.push_back({ Vector3(x0,y1,0), Vector2(g.u0,g.v1) });
     cpuVerts.push_back({ Vector3(x1,y1,0), Vector2(g.u1,g.v1) });
 }
+
+float UIManager::GetRefScale()
+{
+    return std::min(width / (float)refW, height / (float)refH);
+}
+
+Vector2 UIManager::GetOffsetRef()
+{
+    float scale = GetRefScale();
+
+    return Vector2((width - refW * scale) * 0.5f, (height - refH * scale) * 0.5f);
+}

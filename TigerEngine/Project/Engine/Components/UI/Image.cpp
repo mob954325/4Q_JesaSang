@@ -4,6 +4,7 @@
 #include "../../Util/JsonHelper.h"
 #include "../Base/Datas/ReflectionMedtaDatas.hpp"
 #include "../Engine/EngineSystem/CameraSystem.h"
+#include "../Engine/Manager/UIManager.h"
 
 #include <directXTK/Mouse.h>
 #include <directXTK/Keyboard.h>
@@ -148,9 +149,14 @@ void Image::OnRender(RenderQueue& queue)
     data.isText = false;
 
     if (drawSpacetype == DrawSpaceType::World)
+    {
         data.isWorldSpace = true;
+    }
     else
+    {
         data.isWorldSpace = false;
+        data.screenMat = rect->GetWorldMatrix();
+    }
 
     data.zOrder = zOrder;
 
@@ -199,14 +205,39 @@ void Image::CheckMouseHover()
     int mouseY = DirectX::Mouse::Get().GetState().y;
 
     auto rect = GetOwner()->GetComponent<RectTransform>();
-
     if (!rect) return;
 
-    Matrix invWorld = rect->GetWorldMatrix().Invert();
-    Vector3 mouseWorld(mouseX, mouseY, 0.0f);
-    Vector3 local = Vector3::Transform(mouseWorld, invWorld);
+    Matrix M; // 렌더에서 쓰는 것과 동일한 최종 매트릭스
 
-    // 유닛 쿼드 내부 판정 (0-1)
+    if (drawSpacetype == DrawSpaceType::World)
+    {
+        M = rect->GetWorldMatrix(); // 월드 UI는 기존대로 (원하면 worldMat 기반으로 통일해도 됨)
+    }
+    else
+    {
+        float s = UIManager::Instance().GetRefScale();
+        Vector2 off = UIManager::Instance().GetOffsetRef();
+
+        Vector2 posRef = (Vector2)rect->GetPos();   // "ref 기준"이어야 함
+        Vector2 sizeRef = rect->GetSize();
+        Vector2 pivot = rect->GetPivot();
+
+        float posX = off.x + posRef.x * s;
+        float posY = off.y + posRef.y * s;
+        float w = sizeRef.x * s;
+        float h = sizeRef.y * s;
+
+        Matrix pivotOff = Matrix::CreateTranslation(-pivot.x, -pivot.y, 0.0f);
+        Matrix sizeS = Matrix::CreateScale(w, h, 1.0f);
+        Matrix posT = Matrix::CreateTranslation(posX, posY, 0.0f);
+
+        M = pivotOff * sizeS * posT;
+    }
+
+    Matrix inv = M.Invert();
+    Vector3 mouse(mouseX, mouseY, 0.0f);
+    Vector3 local = Vector3::Transform(mouse, inv);
+
     isMouseHover = (local.x >= 0.0f && local.x <= 1.0f) &&
         (local.y >= 0.0f && local.y <= 1.0f);
 }

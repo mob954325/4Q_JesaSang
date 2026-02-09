@@ -58,14 +58,31 @@ void TextUI::OnRender(RenderQueue& queue)
     item.textComp = this;
     item.geometryDirty = geometryDirty; // Note : rebuild geometry를 위한 플래그 
     item.color = color;
-    item.screenMat = rect->GetWorldMatrix();
-    item.imageSize = Vector4(rect->GetSize().x, rect->GetSize().y, rect->GetPivot().x, rect->GetPivot().y);
-    if (drawSpacetype == DrawSpaceType::World)
-        item.isWorldSpace = true;
-    else
-        item.isWorldSpace = false;
-
     item.zOrder = zOrder;
+
+    Vector2 pivot = rect->GetPivot();
+    item.params = Vector4(0.0f, 0.0f, pivot.x, pivot.y); // 일관되게 피벗넣기
+
+    if (drawSpacetype == DrawSpaceType::World)
+    {
+        item.isWorldSpace = true;
+
+        // 월드 UI에서 텍스트 영역 크기(줄바꿈/정렬)에 쓰일 rectSize
+        Vector2 size = rect->GetSize();
+        item.imageSize = Vector4(size.x, size.y, (float)resource->atlasW, (float)resource->atlasH);
+
+        item.screenMat = rect->GetWorldMatrix();
+    }
+    else
+    {   
+        // Screen UI: ref 기반 -> screen px 변환을 여기서 적용
+        Vector2 size = rect->GetSize();
+        item.imageSize = Vector4(size.x, size.y, (float)resource->atlasW, (float)resource->atlasH);
+        item.params = Vector4(0.0f, 0.0f, rect->GetPivot().x, rect->GetPivot().y); // pivot은 params.zw로
+
+        item.isWorldSpace = false;
+    }
+
 
     queue.AddUIRenderQueue(item);
 

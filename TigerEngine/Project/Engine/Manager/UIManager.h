@@ -65,4 +65,11 @@ protected:
     /// 글자 쿼드 갱신 ( RebuildGeometry 기능 분리 함수 )
     /// </summary>
     void AppendGlyphQuad(float penX, float baselineY, std::vector<UIQuadVertex>& cpuVerts, const GlyphInfo& g); // third : glyphInfo
+
+    // === UI 스케일링
+    int refW = 1920;
+    int refH = 1080;
+public:
+    float GetRefScale();
+    Vector2 GetOffsetRef();
 };
