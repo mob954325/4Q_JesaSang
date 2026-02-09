@@ -28,8 +28,7 @@ struct GridPos_Baby
 enum class SearchReason_Baby
 {
     FromPatrol,   // 기척 or 함정 으로 넘어옴 
-    FromChase,    // 추격 실패    으로 넘어옴 
-    FromAttack,
+    FromCry,    // 추격 실패    으로 넘어옴 
     None
 };
 
