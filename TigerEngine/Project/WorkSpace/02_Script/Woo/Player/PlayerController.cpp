@@ -407,6 +407,9 @@ void PlayerController::PutFoodJesaSangInteraction(float dt)
     float progress = putFoodTimer / putFoodTime;
     if (progress > 1.0f) progress = 1.0f;
 
+    // UI - interaction
+    JesaSangManager::Instance()->UIGaugeUpate(progress);
+
     // 제사상에 음식 올리기 interaction
     if (putFoodTimer >= putFoodTime)
     {

@@ -6,6 +6,7 @@
 #include "Object/GameObject.h"
 #include "../../Object/SearchObject.h"
 #include "../../Object/HideObject.h"
+#include "../../JesaSang/JesaSangManager.h"
 
 
 REGISTER_COMPONENT(InteractionZone)
@@ -87,6 +88,7 @@ void InteractionZone::OnTriggerEnter(PhysicsComponent* other)
     if (other->GetOwner()->GetName() == "JesaSang")
     {
         player->isPossiblePutFood = true;
+        JesaSangManager::Instance()->UIInteractionOnOff(true);
         cout << "[InteractionZone] JesaSang In Interaction Zone" << endl;
     }
 
@@ -135,6 +137,7 @@ void InteractionZone::OnTriggerExit(PhysicsComponent* other)
     if (other->GetOwner()->GetName() == "JesaSang")
     {
         player->isPossiblePutFood = false;
+        JesaSangManager::Instance()->UIInteractionOnOff(false);
         cout << "[InteractionZone] JesaSang Out Interaction Zone" << endl;
     }
 

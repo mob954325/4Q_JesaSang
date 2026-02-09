@@ -6,6 +6,7 @@
 
 #include "../../Object/SearchObject.h"
 #include "../../Object/HideObject.h"
+#include "../../JesaSang/JesaSangManager.h"
 
 
 REGISTER_COMPONENT(InteractionSensor)
@@ -62,6 +63,12 @@ void InteractionSensor::OnTriggerEnter(PhysicsComponent* other)
         if (so)
             so->UISensorOnOff(true);
     }
+
+    // JesaSang
+    if (other->GetOwner()->GetName() == "JesaSang")
+    {
+        JesaSangManager::Instance()->UISensorOnOff(true);
+    }
 }
 
 void InteractionSensor::OnTriggerExit(PhysicsComponent* other)
@@ -82,5 +89,11 @@ void InteractionSensor::OnTriggerExit(PhysicsComponent* other)
         auto* so = object->GetComponent<HideObject>();
         if (so)
             so->UISensorOnOff(false);
+    }
+
+    // JesaSang
+    if (other->GetOwner()->GetName() == "JesaSang")
+    {
+        JesaSangManager::Instance()->UISensorOnOff(false);
     }
 }
