@@ -340,7 +340,7 @@ void Editor::DrawHierarchyDropSpace()
     // 2. 빈 공간을 드롭 타겟으로 지정한다.
     ImVec2 avail = ImGui::GetContentRegionAvail(); // 창에서 사용 가능한 남은 공간
 
-    if (avail.y < 1.0f) avail.y = 1.0f; // 최소 남은 공간 == 1.0f
+    if (avail.y < 200.0f) avail.y = 200.0f; // 최소 남은 공간 == 1.0f
 
     // 배경 전체(남은 영역)를 아이템으로 만든다
     ImGui::InvisibleButton("##HierarchyBlankSpace", avail,
