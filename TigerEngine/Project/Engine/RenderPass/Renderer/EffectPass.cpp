@@ -127,7 +127,7 @@ void EffectPass::Execute(ComPtr<ID3D11DeviceContext>& context, RenderQueue& queu
         {
             if (!em.enabled) continue;
             if (em.particles.empty()) continue;
-            if (!em.sheet.srv) continue;
+            if (!em.sheet.resource || !em.sheet.resource->srv) continue;
 
             // CB - Effect
             const float cols = (float)std::max(1, em.sheet.cols);
@@ -139,7 +139,8 @@ void EffectPass::Execute(ComPtr<ID3D11DeviceContext>& context, RenderQueue& queu
             context->UpdateSubresource(sm.effectCB.Get(), 0, nullptr, &sm.effectCBData, 0, 0);
 
             // SRV (t18)
-            context->PSSetShaderResources(18, 1, em.sheet.srv.GetAddressOf());
+            ID3D11ShaderResourceView* effectSrv = em.sheet.resource->srv.Get();
+            context->PSSetShaderResources(18, 1, &effectSrv);
 
             // Instance Buffer
             instances.clear();

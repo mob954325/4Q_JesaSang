@@ -1,5 +1,5 @@
 #pragma once
-#include "SpriteSheet.hpp"
+#include "SpriteSheet.h"
 #include "Particle.h"
 #include <vector>
 using std::vector;

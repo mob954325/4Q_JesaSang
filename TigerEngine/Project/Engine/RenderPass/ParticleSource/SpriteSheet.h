@@ -1,6 +1,9 @@
 #pragma once
 #include <d3d11.h>
 #include <wrl/client.h>
+#include "pch.h"
+#include "../../Manager/UIData/TextureResource.h"
+
 using Microsoft::WRL::ComPtr;
 
 /*
@@ -25,10 +28,14 @@ using Microsoft::WRL::ComPtr;
 
 struct SpriteSheet
 {
-    ComPtr<ID3D11ShaderResourceView> srv = nullptr;
+    RTTR_ENABLE()
+
+public:
+    std::shared_ptr<TextureResource> resource{}; // NOTE : 텍스처 변수 대체 ( 기존 코드는 srv 였음 )
     int cols = 1;
     int rows = 1;
     float baseSizeScale = 1.0f;
+    std::string texturePath = "";
 
     // filpbook
     int   frameCount = 1;           // 실제 사용할 프레임 수 (<= cols*rows)
@@ -39,4 +46,7 @@ struct SpriteSheet
     {
         return frameCount / fps;
     }
+
+    void SetPath(std::string str);
+    std::string GetPath();
 };

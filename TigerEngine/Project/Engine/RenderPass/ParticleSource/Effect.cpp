@@ -2,6 +2,7 @@
 #include "../Engine/EngineSystem/EffectSystem.h"
 #include "../Base/Datas/ReflectionMedtaDatas.hpp"
 #include "../Engine/Util/JsonHelper.h"
+#include "../Engine/Object/GameObject.h"
 
 RTTR_REGISTRATION
 {
@@ -13,14 +14,17 @@ RTTR_REGISTRATION
         .property("emitters", &Effect::emitters)
         .property("allFinished", &Effect::allFinished)
 
-        .property("position", &Effect::position)
-
         .property("enabled", &Effect::enabled)
             (metadata(META_BOOL, true))
         .property("playing", &Effect::playing)
             (metadata(META_BOOL, true))
         .property("looping", &Effect::looping)
             (metadata(META_BOOL, true));
+}
+
+void Effect::OnInitialize()
+{
+    transform = GetOwner()->GetTransform(); // find transform
 }
 
 void Effect::Play()
@@ -30,7 +34,11 @@ void Effect::Play()
     for (auto& e : emitters)
     {
         e.playing = true;
-        e.position = position + e.localOffset;
+        if (transform)
+        {
+            auto worldPosition = transform->GetWorldPosition(); // instead vec pos
+            e.position = worldPosition + e.localOffset;
+        }
         e.elapsed = 0.0f;
         e.emitAcc = 0.0f;
         e.particles.clear();
@@ -53,10 +61,12 @@ void Effect::Update()
 
     allFinished = true;
 
+    auto worldPosition = transform->GetWorldPosition(); // instead vec pos
+
     // emitter udpate
     for (auto& e : emitters)
     {
-        e.position = e.localOffset + position;
+        e.position = e.localOffset + worldPosition;
         e.Update();
 
         if (e.playing || !e.particles.empty())

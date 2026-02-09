@@ -3,6 +3,7 @@
 #include <vector>
 #include <directxtk/simplemath.h>
 #include "../Engine/Object/Component.h"
+#include "../Engine/Components/Transform.h"
 using std::vector;
 using namespace DirectX::SimpleMath;
 
@@ -25,10 +26,12 @@ class Effect : public Component
 {
     RTTR_ENABLE(Component)
 public:
+    void OnInitialize() override;
+
     vector<Emitter> emitters;
     bool allFinished = true;
 
-    Vector3 position = Vector3::Zero;
+    Transform* transform{};
     bool    enabled = true;
     bool    playing = true;
     bool    looping = true;

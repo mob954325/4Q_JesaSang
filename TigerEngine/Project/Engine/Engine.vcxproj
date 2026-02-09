@@ -143,6 +143,7 @@
     <ClCompile Include="Components\VisionComponent.cpp" />
     <ClCompile Include="EngineSystem\EffectSystem.cpp" />
     <ClCompile Include="RenderPass\ParticleSource\Particle.cpp" />
+    <ClCompile Include="RenderPass\ParticleSource\SpriteSheet.cpp" />
     <ClCompile Include="RenderPass\Renderer\EffectPass.cpp" />
     <ClCompile Include="RenderPass\ParticleSource\Effect.cpp" />
     <ClCompile Include="RenderPass\ParticleSource\Emitter.cpp" />
@@ -235,7 +236,7 @@
     <ClInclude Include="EngineSystem\GridSystem.h" />
     <ClInclude Include="Object\Enableable.h" />
     <ClInclude Include="RenderPass\ParticleSource\Particle.h" />
-    <ClInclude Include="RenderPass\ParticleSource\SpriteSheet.hpp" />
+    <ClInclude Include="RenderPass\ParticleSource\SpriteSheet.h" />
     <ClInclude Include="RenderPass\ParticleSource\ParticleRenderer.h" />
     <ClInclude Include="RenderPass\Renderable\DecalVolumeMesh.h" />
     <ClInclude Include="RenderPass\Renderable\UIQuadMesh.h" />
