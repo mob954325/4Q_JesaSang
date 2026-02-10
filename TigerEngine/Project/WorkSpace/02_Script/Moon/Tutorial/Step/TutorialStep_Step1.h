@@ -25,9 +25,19 @@ private:
     bool isDone = false;
 
     float step1Timer = 0.0f;
-    float delayStep1 = 2.0f;
+    float BlinkTime = 10.0f;
+    float BlinkDelay = 2.0f;
 
     Step1Phase phase = Step1Phase::Blink;
+
+private:
+    void Blink();
+    void Monologue();
+    void WaitInput();
+
+private:
+    GameObject* Blink_Top = nullptr;
+    GameObject* Blink_Bottom = nullptr;
 
 public:
     TutorialStep_Step1(TutorialController* _tutorialController) : ITutorialStep(_tutorialController) {}
