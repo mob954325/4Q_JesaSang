@@ -103,6 +103,18 @@ void PlayerController::OnUpdate(float delta)
     {
         TakeAttack();
     }
+
+    // quarter view
+    if (Input::GetKeyDown(Keyboard::P))
+    {
+        camController->SetViewMode(CameraController::ViewMode::Quarter);
+    }
+
+    // front view
+    if (Input::GetKeyDown(Keyboard::W))
+    {
+        camController->SetViewMode(CameraController::ViewMode::Front);
+    }
 }
 
 void PlayerController::OnFixedUpdate(float delta)
