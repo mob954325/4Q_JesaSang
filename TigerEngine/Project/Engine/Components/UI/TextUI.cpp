@@ -89,6 +89,22 @@ void TextUI::OnRender(RenderQueue& queue)
     if (geometryDirty) geometryDirty = false;
 }
 
+void TextUI::Enable_Inner()
+{
+    auto ptr = ObjectSystem::Instance().Get<TextUI>(handle);
+    ScriptSystem::Instance().Register(ptr);
+    UIManager::Instance().Register(ptr);
+    OnDisable();
+}
+
+void TextUI::Disable_Inner()
+{
+    auto ptr = ObjectSystem::Instance().Get<TextUI>(handle);
+    ScriptSystem::Instance().UnRegister(ptr);
+    UIManager::Instance().UnRegister(ptr);
+    OnDisable();
+}
+
 void TextUI::LoadFontAtlas(const std::wstring fontFilePath, int atlasW, int atlasH, int paddingPx)
 {
     // 혼트 정보 저장
@@ -214,6 +230,11 @@ int TextUI::GetZOrder() const
 void TextUI::SetZOrder(int v)
 {
     zOrder = v;
+}
+
+void TextUI::MarkGeometryDirty()
+{
+    geometryDirty = true;
 }
 
 Matrix TextUI::GetScreenAlignedBillboardRotation()

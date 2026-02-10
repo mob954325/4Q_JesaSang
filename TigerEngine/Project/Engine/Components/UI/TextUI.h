@@ -14,6 +14,8 @@ class TextUI : public RenderComponent
     RTTR_ENABLE(RenderComponent)
 public:
     void OnRender(RenderQueue& queue) override;
+    void Enable_Inner() override;
+    void Disable_Inner() override;
 
     /// <summary>
     /// 경로에 있는 폰트 가져오기
@@ -41,6 +43,9 @@ public:
 
     int GetZOrder() const;
     void SetZOrder(int v);
+
+    // 화면 리사이즈 시 체크할 함수
+    void MarkGeometryDirty();
 
 // Private:
     // 자원

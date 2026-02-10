@@ -40,7 +40,8 @@ void UIRenderPass::Execute(ComPtr<ID3D11DeviceContext>& context, RenderQueue& qu
         Matrix mvp;
         if (!item.isWorldSpace)
         {
-            mvp = item.screenMat * um.GetProjection();	// UI에서  view는 보통 identity
+            Matrix canvas = UIManager::Instance().GetCanvasMatrixFit();
+            mvp = item.screenMat * canvas * um.GetProjection();	// UI에서  view는 보통 identity
             context->OMSetDepthStencilState(sm.disableDSS.Get(), 1);  // depth test off
 
         }

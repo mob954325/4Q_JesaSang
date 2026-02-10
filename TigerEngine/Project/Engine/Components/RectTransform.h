@@ -17,6 +17,8 @@ public:
     ~RectTransform() = default;
 
     void OnUpdate(float delta) override;
+    void Enable_Inner() override;
+    void Disable_Inner() override;
 
     nlohmann::json Serialize() override;
     void Deserialize(nlohmann::json data) override;
@@ -32,6 +34,26 @@ public:
     void SetChildrenDirty() override;
 
     Matrix RemoveScale(Matrix& m);
+
+    // === layout data ===
+    Vector2 anchorMin = { 0.5f, 0.5f };
+    Vector2 anchorMax = { 0.5f, 0.5f };
+    Vector2 anchoredPos = { 0.0f, 0.0f }; // px in REF
+    Vector2 sizeDelta = { 100.0f, 100.0f }; // px in REF
+
+    const Vector2& GetAnchorMin() const { return anchorMin; }
+    const Vector2& GetAnchorMax() const { return anchorMax; }
+    const Vector2& GetAnchoredPos() const { return anchoredPos; }
+    const Vector2& GetSizeDelta() const { return sizeDelta; }
+
+    Vector2 one = Vector2::One;
+    Vector2 zero = Vector2::Zero;
+    void SetAnchorMin(const Vector2& v) { anchorMin = { std::clamp(v.x, 0.0f, 1.0f), std::clamp(v.y,0.0f,1.0f) }; dirty = true; SetChildrenDirty(); }
+    void SetAnchorMax(const Vector2& v) { anchorMax = { std::clamp(v.x, 0.0f, 1.0f), std::clamp(v.y,0.0f,1.0f) }; dirty = true; SetChildrenDirty(); }
+    void SetAnchoredPos(const Vector2& v) { anchoredPos = v; dirty = true; SetChildrenDirty(); }
+    void SetSizeDelta(const Vector2& v) { sizeDelta = v; dirty = true; SetChildrenDirty(); }
+
+    Vector2 GetRectSizeRef() const;
 
 protected:
     void UpdateMatricesIfDirty() override;

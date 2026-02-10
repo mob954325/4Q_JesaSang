@@ -1,10 +1,13 @@
 #pragma once
 #include "../Base/pch.h"
-#include "../Components/UI/UIBase.h"
 #include "System/Singleton.h"
 #include "UIData/TextResource.h"
 #include "../RenderPass/Renderable/UIQuadMesh.h"
 #include "../Components/UI/UITextDatas.h"
+
+// NOTE : 순환 참조 조심 
+#include "../Components/UI/TextUI.h"
+#include "../Components/RectTransform.h"
 
 /// <summary>
 /// 자식 계층중 UIBase를 가지고 있는 게임 오브젝트를 관리하는 매니저
@@ -37,6 +40,12 @@ public:
                          std::vector<UIQuadVertex>& cpuVerts,       // 정점 데이터
                          int& outIndexCount);                       // [out] 인덱스 개수
 
+    void Register(RectTransform* rect); // 리사이즈 호출을 위한 등록
+    void UnRegister(RectTransform* rect);
+
+    void Register(TextUI* textui);
+    void UnRegister(TextUI* textui);   
+
 protected:
     ComPtr<ID3D11Device> device{};
     ComPtr<ID3D11DeviceContext> context{};
@@ -66,10 +75,15 @@ protected:
     /// </summary>
     void AppendGlyphQuad(float penX, float baselineY, std::vector<UIQuadVertex>& cpuVerts, const GlyphInfo& g); // third : glyphInfo
 
-    // === UI 스케일링
+    vector<RectTransform*> rects;
+    vector<TextUI*> texts;
+
+public:
+
+    // === UI 스케일링 ===
     int refW = 1920;
     int refH = 1080;
-public:
-    float GetRefScale();
-    Vector2 GetOffsetRef();
+    float GetRefScale() const;
+    Vector2 GetOffsetRef() const;
+    Matrix GetCanvasMatrixFit() const;
 };
