@@ -163,6 +163,9 @@
     <ClInclude Include="02_Script\Moon\AI\FSM\IBabyGhostState.h" />
     <ClInclude Include="02_Script\Moon\AI\GhostInteractionZone.h" />
     <ClInclude Include="02_Script\Moon\AnimationTest\PlayerAnimationTest.h" />
+    <ClInclude Include="02_Script\Moon\Tutorial\Step\ITutorialStep.h" />
+    <ClInclude Include="02_Script\Moon\Tutorial\Step\TutorialStep_Step1.h" />
+    <ClInclude Include="02_Script\Moon\Tutorial\TutorialController.h" />
     <ClInclude Include="02_Script\Woo\Altar\AltarManager.h" />
     <ClInclude Include="02_Script\Woo\Camera\CameraController.h" />
     <ClInclude Include="02_Script\Woo\Inventory\Inventory.h" />
@@ -232,6 +235,8 @@
     <ClCompile Include="02_Script\Moon\AI\FSM\BabyGhost_Search.cpp" />
     <ClCompile Include="02_Script\Moon\AI\GhostInteractionZone.cpp" />
     <ClCompile Include="02_Script\Moon\AnimationTest\PlayerAnimationTest.cpp" />
+    <ClCompile Include="02_Script\Moon\Tutorial\Step\TutorialStep_Step1.cpp" />
+    <ClCompile Include="02_Script\Moon\Tutorial\TutorialController.cpp" />
     <ClCompile Include="02_Script\Woo\Altar\AltarManager.cpp" />
     <ClCompile Include="02_Script\Woo\Camera\CameraController.cpp" />
     <ClCompile Include="02_Script\Woo\Inventory\Inventory.cpp" />
