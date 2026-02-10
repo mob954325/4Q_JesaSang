@@ -100,6 +100,7 @@ private:
     // first interaction hint
     bool isExplainedHideObject = false;
     bool isExplainedSearchObject = false;
+    bool isExplainedTrapObject = false;
     bool isExplainedCookingZone = false;
 
     // search object interaction
