@@ -245,11 +245,10 @@ void Game_Assembling::UpdateAnimation(float delta)
 void Game_Assembling::SetAnimPathes()
 {
     // 이미지 패스 생성
-    currAnimPathes.resize(3);
+    currAnimPathes.resize(2);
 
-    currAnimPathes[0] = "..\\Assets\\Resource\\UI\\CutScenes\\happy_ending_05.png";
-    currAnimPathes[1] = "..\\Assets\\Resource\\UI\\CutScenes\\happy_ending_06.png";
-    currAnimPathes[2] = "..\\Assets\\Resource\\UI\\CutScenes\\happy_ending_07.png";
+    currAnimPathes[0] = "..\\Assets\\Resource\\UI\\MiniGame\\mini_01.png";
+    currAnimPathes[1] = "..\\Assets\\Resource\\UI\\MiniGame\\mini_02.png";
 
     if (animImage)
         animImage->ChangeData(currAnimPathes[0]); // 첫번째로 초기화

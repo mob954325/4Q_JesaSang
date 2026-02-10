@@ -259,11 +259,10 @@ void Game_FireControl::UpdateAnimation(float delta)
 void Game_FireControl::SetAnimPathes()
 {
     // 이미지 패스 생성
-    currAnimPathes.resize(3);
+    currAnimPathes.resize(2);
 
-    currAnimPathes[0] = "..\\Assets\\Resource\\UI\\CutScenes\\happy_ending_02.png";
-    currAnimPathes[1] = "..\\Assets\\Resource\\UI\\CutScenes\\happy_ending_03.png";
-    currAnimPathes[2] = "..\\Assets\\Resource\\UI\\CutScenes\\happy_ending_04.png";
+    currAnimPathes[0] = "..\\Assets\\Resource\\UI\\MiniGame\\mini_01.png";
+    currAnimPathes[1] = "..\\Assets\\Resource\\UI\\MiniGame\\mini_02.png";
 
     if (animImage)
         animImage->ChangeData(currAnimPathes[0]); // 첫번째로 초기화

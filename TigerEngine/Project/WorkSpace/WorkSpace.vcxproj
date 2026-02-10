@@ -179,6 +179,7 @@
     <ClInclude Include="02_Script\Woo\UI\Button_SceneChagne.h" />
     <ClInclude Include="02_Script\Woo\UI\Button_PausePannelOff.h" />
     <ClInclude Include="02_Script\Woo\CookingZone\CookingZone.h" />
+    <ClInclude Include="02_Script\Woo\Player\DialogueUI\DialogueUIController.h" />
     <ClInclude Include="EngineApp.h" />
     <ClInclude Include="02_Script\\Ron\\MiniMapTest\MiniMapTestScript.h" />
     <ClInclude Include="02_Script\\Ron\\MiniMapTest\MiniMapManager.h" />
@@ -249,6 +250,7 @@
     <ClCompile Include="02_Script\Woo\UI\Button_SceneChagne.cpp" />
     <ClCompile Include="02_Script\Woo\UI\Button_PausePannelOff.cpp" />
     <ClCompile Include="02_Script\Woo\CookingZone\CookingZone.cpp" />
+    <ClCompile Include="02_Script\Woo\Player\DialogueUI\DialogueUIController.cpp" />
     <ClCompile Include="EngineApp.cpp" />
     <ClCompile Include="02_Script\\Ron\\MiniMapTest\MiniMapTestScript.cpp" />
     <ClCompile Include="02_Script\\Ron\\MiniMapTest\MiniMapManager.cpp" />
