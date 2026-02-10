@@ -486,6 +486,24 @@ std::shared_ptr<FBXResourceAsset> FBXResourceManager::LoadFBXByPath(std::string 
 
 	if (pScene == nullptr) return std::shared_ptr<FBXResourceAsset>();
 
+    // ==== DEBUG: FBX bone/weight check ====
+    printf("\n================ FBX DEBUG ================\n");
+    printf("FBX Path: %s\n", path.c_str());
+
+    for (int i = 0; i < pScene->mNumMeshes; i++)
+    {
+        aiMesh* m = pScene->mMeshes[i];
+        printf("Mesh %d: bones=%d\n", i, m->mNumBones);
+
+        for (int b = 0; b < m->mNumBones; b++)
+            printf("  Bone: %s weights=%d\n",
+                m->mBones[b]->mName.C_Str(),
+                m->mBones[b]->mNumWeights);
+    }
+
+    printf("===========================================\n\n");
+
+
 	// 없으면 load후 map에 추가 
 	auto sharedAsset = make_shared<FBXResourceAsset>();
 

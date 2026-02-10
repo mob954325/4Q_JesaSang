@@ -1,13 +1,15 @@
 #include "TutorialStep_Step2.h"
 
 #include "System/InputSystem.h"
-
+#include "EngineSystem/SceneSystem.h"
 
 void TutorialStep_Step2::Enter()
 {
     isDone = false;
     step2Timer = 0.0f;
     phase = Step2Phase::Sound;
+
+    baby = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("Blink_Top");
 
     std::cout << "[Step2] *BANG!* Sound from entrance!\n";
 }
