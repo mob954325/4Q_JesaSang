@@ -30,6 +30,9 @@
 #include "../Components/UI/TextUI.h"
 #include "../Util/EncodeConvertHelper.h"
 
+#include "../Manager/UIManager.h"
+#include "../Base/System/TimeSystem.h"
+
 // Payload
 // Prefab payload
 static const char* kPayload_Prefab = "DND_PREFAB";
@@ -135,6 +138,7 @@ void Editor::Render(HWND& hwnd)
     RenderGizmoSettings();
     // RenderWorldGrid();
     RenderGizmo();
+    RenderVariantDebugger();
 
     ImGui::Begin("DebugPickItem");
     {
@@ -203,6 +207,14 @@ void Editor::RenderMenuBar(HWND& hwnd)
             if (ImGui::MenuItem("Camera Setting"))
             {
                 isCameraPanelOepn = !isCameraPanelOepn;
+            }
+            ImGui::EndMenu();
+        }
+        if (ImGui::BeginMenu("Debugger"))
+        {
+            if (ImGui::MenuItem("Window n GameInfo"))
+            {
+                isOpenVariantDebugger = !isOpenVariantDebugger;
             }
             ImGui::EndMenu();
         }
@@ -2400,6 +2412,23 @@ void Editor::RenderCameraPanel()
         int maxSize = CameraSystem::Instance().GetAllCamera().size();
         ImGui::SliderInt("index", &curr, 0, maxSize - 1);
         CameraSystem::Instance().SetCurrCamera(curr);
+    }
+    ImGui::End();
+}
+
+void Editor::RenderVariantDebugger()
+{
+    if (!isOpenVariantDebugger) return;
+    ImGui::Begin("variant debugger");
+    {
+        float x = UIManager::Instance().GetSize().x;
+        float y = UIManager::Instance().GetSize().y;
+        string screenSizeStr = "ScreenSize : " + to_string(x) + ", " + to_string(y);
+        ImGui::Text(screenSizeStr.c_str());
+
+        float fps = 1.0f / GameTimer::Instance().UnscaledDeltaTime();
+        string fpsStr = "Fps : " + to_string(fps);
+        ImGui::Text(fpsStr.c_str());
     }
     ImGui::End();
 }
