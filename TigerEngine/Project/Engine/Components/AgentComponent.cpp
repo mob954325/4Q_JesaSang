@@ -212,29 +212,45 @@ void AgentComponent::SetWaitTime(float seconds)
     waitDuration = seconds;
 }
 
+
 Vector3 AgentComponent::ComputeSeparationForce(const Vector3& moveDir)
 {
-    Vector3 separation(0, 0, 0);
+    Vector3 force(0, 0, 0);
+    auto& agents = AgentSystem::Instance().GetAgents();
 
-    auto& agents = AgentSystem::Instance().GetAgents(); // 모든 Agent 리스트
     Vector3 myPos = GetOwner()->GetTransform()->GetWorldPosition();
-    float separationRadius = 120.0f; // 유령 크기 + 안전 거리
+
+    const float radius = 120.0f;   // 유령 크기 + 안전 거리
+    const float sideBias = 0.8f;   // 옆으로 비켜가는 힘
+    const float forwardBias = 0.2f;
 
     for (auto* other : agents)
     {
-        if (other == this) continue; // 자기 자신 제외
+        if (other == this) continue;
 
         Vector3 otherPos = other->GetOwner()->GetTransform()->GetWorldPosition();
-        Vector3 diff = myPos - otherPos;
-        diff.y = 0;
+        Vector3 toMe = myPos - otherPos;
+        toMe.y = 0;
 
-        float dist = diff.Length();
-        if (dist < separationRadius && dist > 0.001f)
+        float dist = toMe.Length();
+        if (dist < radius && dist > 1.0f)
         {
-            // 가까울수록 강하게 밀어내기
-            separation += diff / dist * (separationRadius - dist);
+            toMe.Normalize();
+
+            // 진행방향 기준 좌우 벡터
+            Vector3 right(-moveDir.z, 0, moveDir.x);
+
+            // 상대가 왼쪽인지 오른쪽인지
+            // float side = Vector3::Dot(right, toMe);
+            float side = right.x * toMe.x + right.y * toMe.y + right.z * toMe.z;
+
+            Vector3 sideForce = right * side * sideBias;
+            Vector3 backForce = toMe * forwardBias;
+
+            float t = (radius - dist) / radius; // 가까울수록 강함
+            force += (sideForce + backForce) * t;
         }
     }
 
-    return separation;
+    return force;
 }
