@@ -104,21 +104,21 @@ void DialogueUIController::OnUpdate(float delta)
 
     // --- test --- 
     // TODO :: Delete
-    if (Input::GetKeyDown(Keyboard::P))
-    {
-        DialogueToggle();
-    }
-    
-    if (Input::GetKeyDown(Keyboard::Q))
-        ShowDialogueText(L"123 45");
-    if (Input::GetKeyDown(Keyboard::W))
-        ShowDialogueText(L"123 456 789");
-    if (Input::GetKeyDown(Keyboard::E))
-        ShowDialogueText(L"12312 45612 78912");
-    if (Input::GetKeyDown(Keyboard::R))
-        ShowDialogueText(L"12312 45612 78912 12345");
-    if (Input::GetKeyDown(Keyboard::T))
-        ShowDialogueText(L"12312 45612 78912 12345 12345");
+    //if (Input::GetKeyDown(Keyboard::P))
+    //{
+    //    DialogueToggle();
+    //}
+    //
+    //if (Input::GetKeyDown(Keyboard::Q))
+    //    ShowDialogueText(L"123 45");
+    //if (Input::GetKeyDown(Keyboard::W))
+    //    ShowDialogueText(L"123 456 789");
+    //if (Input::GetKeyDown(Keyboard::E))
+    //    ShowDialogueText(L"12312 45612 78912");
+    //if (Input::GetKeyDown(Keyboard::R))
+    //    ShowDialogueText(L"12312 45612 78912 12345");
+    //if (Input::GetKeyDown(Keyboard::T))
+    //    ShowDialogueText(L"12312 45612 78912 12345 12345");
 }
 
 void DialogueUIController::OnDestory()
