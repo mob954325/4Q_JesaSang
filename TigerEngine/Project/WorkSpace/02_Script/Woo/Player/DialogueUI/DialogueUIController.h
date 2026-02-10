@@ -36,6 +36,9 @@ private:
     float dialogueTimer = 0.0f;
     bool isDialogueOn = false;
     
+    // 자동 종료? 
+    bool useAutoClose = true;
+
 public:
     // Component process
     void OnStart() override;
@@ -56,5 +59,9 @@ public:
 
     // 텍스트 Upate와 동시에 인게임 정지후 dialogueDuration뒤 자동 off
     void ShowInteractionHintAndPause(const wchar_t* s);
+
+    // 선민 | 02.11 
+    // 자동 종료 없이 계속 유지
+    void ShowDialogueHold(const wchar_t* s);
 };
 

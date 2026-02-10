@@ -87,7 +87,7 @@ void DialogueUIController::OnUpdate(float delta)
     dialogueParent->SetPosition(targetTr->GetWorldPosition() + offset);
 
     // 연출
-    if (isDialogueOn)
+    if (isDialogueOn && useAutoClose)
     {
         float unscaledDelta = GameTimer::Instance().UnscaledDeltaTime();
         dialogueTimer += unscaledDelta;
@@ -171,9 +171,33 @@ void DialogueUIController::ShowDialogueText(const wchar_t* s)
     // uapte text
     text_dialogue->SetText(std::wstring(s));
 
+    useAutoClose = true; // 선민 | 02.11 
+
     // 자동 연출 시작
     DialogueOnOff(true);
 }
+
+// 고정 유지 버전 
+void DialogueUIController::ShowDialogueHold(const wchar_t* s)
+{
+    if (!text_dialogue || !s) return;
+
+    const int len = CountNonSpaceChars(s);
+    const float w = SelectBubbleWidthByLen(len);
+
+    if (dialogueRect)
+    {
+        Vector2 size = dialogueRect->GetSize();
+        size.x = w;
+        dialogueRect->SetSize(size);
+    }
+
+    text_dialogue->SetText(std::wstring(s));
+
+    useAutoClose = false;   // 자동 종료 끔
+    DialogueOnOff(true);
+}
+
 
 void DialogueUIController::ShowInteractionHintAndPause(const wchar_t* s)
 {
