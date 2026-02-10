@@ -16,9 +16,6 @@ class AdultGhost_Patrol : public IAdultGhostState
 private:
     AgentComponent* agent = nullptr;
 
-    float patrolTimer = 0.0f;        
-    float forcePatrolTime = 2.0f;    // 상태 진입 직후 감지 무시 시간
-
 private:
     // 감지 헬퍼
     void UpdateHideObjectVision();

@@ -8,6 +8,7 @@
 #include "imguiFileDialog/ImGuiFileDialog.h"
 #include "../Components/FBXData.h"
 #include "../Components/Decal.h"
+#include "../RenderPass/ParticleSource/Effect.h"
 #include "../Object/GameObject.h"
 #include "../Util/DebugDraw.h"
 #include "../Manager/WorldManager.h"
@@ -1516,6 +1517,260 @@ void Editor::RenderComponentInfo(std::string compName, T* comp)
                 }
             }
         }
+    }
+
+    if (compName == "Effect")
+    {
+        auto* fx = dynamic_cast<Effect*>(comp);
+        if (!fx)
+        {
+            ImGui::PushID(comp);
+            ReadVariants(*comp);
+            ImGui::PopID();
+            return;
+        }
+
+        ImGui::PushID(comp);
+
+        if (ImGui::Button("Play"))
+            fx->Play();
+        ImGui::SameLine();
+        if (ImGui::Button("Stop"))
+            fx->Stop();
+
+        ImGui::Separator();
+        ImGui::Text("Emitters");
+
+        if (ImGui::Button("Add Emitter"))
+            fx->emitters.emplace_back();
+
+        for (size_t i = 0; i < fx->emitters.size(); )
+        {
+            Emitter& em = fx->emitters[i];
+            ImGui::PushID(static_cast<int>(i));
+
+            std::string header = "Emitter " + std::to_string(i);
+            bool openEmitter = ImGui::CollapsingHeader(header.c_str(), ImGuiTreeNodeFlags_DefaultOpen);
+
+            ImGui::SameLine();
+            if (ImGui::SmallButton("Remove"))
+            {
+                fx->emitters.erase(fx->emitters.begin() + static_cast<std::ptrdiff_t>(i));
+                ImGui::PopID();
+                continue;
+            }
+
+            if (openEmitter)
+            {
+                // basic
+                ImGui::Checkbox("enabled", &em.enabled);
+                ImGui::SameLine();
+                ImGui::Checkbox("playing", &em.playing);
+                ImGui::DragFloat3("localOffset", &em.localOffset.x, 0.1f);
+
+                // billboard
+                {
+                    const char* items[] = { "ScreenFacing", "YAxis" };
+                    int v = (em.billboard == BillboardType::ScreenFacing) ? 0 : 1;
+                    if (ImGui::Combo("billboard", &v, items, IM_ARRAYSIZE(items)))
+                        em.billboard = (v == 0) ? BillboardType::ScreenFacing : BillboardType::YAxis;
+                }
+
+                // sprite sheet
+                if (ImGui::TreeNode("SpriteSheet"))
+                {
+                    const bool hasTex = (em.sheet.resource && em.sheet.resource->srv);
+                    if (hasTex)
+                    {
+                        ImGui::Text("Texture: Loaded");
+                        ImGui::Image(
+                            (ImTextureID)em.sheet.resource->srv.Get(),
+                            ImVec2(64, 64));
+                        ImGui::SameLine();
+                        ImGui::Text("(%.0fx%.0f)", em.sheet.resource->texSizePx.x, em.sheet.resource->texSizePx.y);
+                    }
+                    else
+                    {
+                        ImGui::Text("Texture: <none>");
+                    }
+
+                    // texture path
+                    {
+                        std::string path = em.sheet.texturePath;
+                        if (ImGui::InputText(
+                            "texturePath",
+                            path.data(),
+                            path.capacity() + 1,
+                            ImGuiInputTextFlags_CallbackResize,
+                            [](ImGuiInputTextCallbackData* data) -> int
+                            {
+                                if (data->EventFlag == ImGuiInputTextFlags_CallbackResize)
+                                {
+                                    auto* str = static_cast<std::string*>(data->UserData);
+                                    str->resize(data->BufTextLen);
+                                    data->Buf = str->data();
+                                }
+                                return 0;
+                            },
+                            &path))
+                        {
+                            em.sheet.texturePath = path;
+                        }
+
+                        ImGui::SameLine();
+                        if (ImGui::SmallButton("Load##SpriteSheet"))
+                        {
+                            if (!em.sheet.texturePath.empty())
+                                em.sheet.SetPath(em.sheet.texturePath);
+                        }
+                    }
+
+                    std::string keyFxTex = "ChooseFxTexDlgKey##" + std::to_string((uintptr_t)comp) + "_" + std::to_string(i);
+                    if (ImGui::Button("Browse Texture"))
+                    {
+                        IGFD::FileDialogConfig config;
+                        config.path = "../";
+                        ImGuiFileDialog::Instance()->OpenDialog(keyFxTex, "Choose File", ".png,.jpg,.jpeg,.tga", config);
+                    }
+
+                    if (ImGuiFileDialog::Instance()->Display(keyFxTex))
+                    {
+                        if (ImGuiFileDialog::Instance()->IsOk())
+                        {
+                            std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
+                            std::filesystem::path relativePath = std::filesystem::relative(filePathName);
+                            em.sheet.SetPath(relativePath.string());
+                        }
+                        ImGuiFileDialog::Instance()->Close();
+                    }
+
+                    if (ImGui::Button("Clear Texture"))
+                    {
+                        em.sheet.texturePath.clear();
+                        em.sheet.resource.reset();
+                    }
+
+                    em.sheet.cols = std::max(1, em.sheet.cols);
+                    em.sheet.rows = std::max(1, em.sheet.rows);
+                    ImGui::DragInt("cols", &em.sheet.cols, 1.0f, 1, 256);
+                    ImGui::DragInt("rows", &em.sheet.rows, 1.0f, 1, 256);
+
+                    int maxFrames = std::max(1, em.sheet.cols * em.sheet.rows);
+                    em.sheet.frameCount = std::clamp(em.sheet.frameCount, 1, maxFrames);
+                    ImGui::DragInt("frameCount", &em.sheet.frameCount, 1.0f, 1, maxFrames);
+
+                    em.sheet.fps = std::max(0.0f, em.sheet.fps);
+                    ImGui::DragFloat("fps", &em.sheet.fps, 0.1f, 0.0f, 240.0f);
+
+                    em.sheet.baseSizeScale = std::max(0.001f, em.sheet.baseSizeScale);
+                    ImGui::DragFloat("baseSizeScale", &em.sheet.baseSizeScale, 0.01f, 0.001f, 100.0f);
+                    ImGui::Checkbox("sheet.loop", &em.sheet.loop);
+
+                    if (em.sheet.fps > 0.0f)
+                        ImGui::Text("flipbookDuration: %.3f", em.sheet.frameCount / em.sheet.fps);
+                    else
+                        ImGui::Text("flipbookDuration: <inf>");
+
+                    ImGui::TreePop();
+                }
+
+                // emission
+                ImGui::Separator();
+                ImGui::Text("Emission");
+                ImGui::DragFloat("duration", &em.duration, 0.05f, 0.0f, 99999.0f);
+                ImGui::Checkbox("looping", &em.looping);
+                ImGui::DragFloat("emitRate", &em.emitRate, 0.05f, 0.0f, 99999.0f);
+                ImGui::DragInt("burstCount", &em.burstCount, 1.0f, 0, 99999);
+                em.maxParticles = std::max(1, em.maxParticles);
+                ImGui::DragInt("maxParticles", &em.maxParticles, 1.0f, 1, 99999);
+
+                // particle mode
+                {
+                    const char* items[] = { "Dynamic", "Fixed" };
+                    int v = (em.particleMode == ParticleMode::Dynamic) ? 0 : 1;
+                    if (ImGui::Combo("particleMode", &v, items, IM_ARRAYSIZE(items)))
+                        em.particleMode = (v == 0) ? ParticleMode::Dynamic : ParticleMode::Fixed;
+                }
+
+                if (em.particleMode == ParticleMode::Dynamic)
+                {
+                    if (ImGui::TreeNode("Dynamic"))
+                    {
+                        // spawn dynamic
+                        ImGui::DragFloat("lifeMin", &em.dynamicData.lifeMin, 0.01f, 0.0f, 99999.0f);
+                        ImGui::DragFloat("lifeMax", &em.dynamicData.lifeMax, 0.01f, 0.0f, 99999.0f);
+                        em.dynamicData.lifeMax = std::max(em.dynamicData.lifeMin, em.dynamicData.lifeMax);
+
+                        ImGui::DragFloat("rotationMin", &em.dynamicData.rotationMin, 0.01f, -99999.0f, 99999.0f);
+                        ImGui::DragFloat("rotationMax", &em.dynamicData.rotationMax, 0.01f, -99999.0f, 99999.0f);
+                        em.dynamicData.rotationMax = std::max(em.dynamicData.rotationMin, em.dynamicData.rotationMax);
+
+                        ImGui::DragFloat2("sizeMin", &em.dynamicData.sizeMin.x, 0.01f, 0.0f, 99999.0f);
+                        ImGui::DragFloat2("sizeMax", &em.dynamicData.sizeMax.x, 0.01f, 0.0f, 99999.0f);
+                        em.dynamicData.sizeMax.x = std::max(em.dynamicData.sizeMin.x, em.dynamicData.sizeMax.x);
+                        em.dynamicData.sizeMax.y = std::max(em.dynamicData.sizeMin.y, em.dynamicData.sizeMax.y);
+
+                        ImGui::DragFloat("speedMin", &em.dynamicData.speedMin, 0.01f, 0.0f, 99999.0f);
+                        ImGui::DragFloat("speedMax", &em.dynamicData.speedMax, 0.01f, 0.0f, 99999.0f);
+                        em.dynamicData.speedMax = std::max(em.dynamicData.speedMin, em.dynamicData.speedMax);
+
+                        ImGui::DragFloat("angularMin", &em.dynamicData.angularMin, 0.01f, -99999.0f, 99999.0f);
+                        ImGui::DragFloat("angularMax", &em.dynamicData.angularMax, 0.01f, -99999.0f, 99999.0f);
+                        em.dynamicData.angularMax = std::max(em.dynamicData.angularMin, em.dynamicData.angularMax);
+
+                        ImGui::ColorEdit4("colorMin", &em.dynamicData.colorMin.x);
+                        ImGui::ColorEdit4("colorMax", &em.dynamicData.colorMax.x);
+
+                        // velocity shape
+                        {
+                            const char* items[] = { "Sphere", "Directional", "Cone", "Disk" };
+                            int v = static_cast<int>(em.velocityShape);
+                            if (ImGui::Combo("velocityShape", &v, items, IM_ARRAYSIZE(items)))
+                                em.velocityShape = static_cast<VelocityShape>(v);
+                        }
+
+                        ImGui::DragFloat3("emitDir", &em.emitDir.x, 0.01f, -1.0f, 1.0f);
+                        ImGui::DragFloat("coneAngleDeg", &em.coneAngleDeg, 0.1f, 0.0f, 180.0f);
+
+                        ImGui::TreePop();
+                    }
+                }
+                else // Fixed
+                {
+                    if (ImGui::TreeNode("Fixed"))
+                    {
+                        // spawn fixed
+                        ImGui::DragFloat("rotation", &em.fixedData.rotation, 0.01f, -99999.0f, 99999.0f);
+                        ImGui::DragFloat2("size", &em.fixedData.size.x, 0.01f, 0.0f, 99999.0f);
+                        ImGui::ColorEdit4("startColor", &em.fixedData.startColor.x);
+
+                        // flipbook play mode
+                        {
+                            const char* items[] = { "Once_Then_Die", "Once_Then_Hold", "Loop" };
+                            int v = static_cast<int>(em.filpbookPlayMode);
+                            if (ImGui::Combo("filpbookPlayMode", &v, items, IM_ARRAYSIZE(items)))
+                                em.filpbookPlayMode = static_cast<FlipbookPlayMode>(v);
+                        }
+
+                        ImGui::DragFloat("holdTime", &em.holdTime, 0.05f, 0.0f, 99999.0f);
+
+                        ImGui::TreePop();
+                    }
+                }
+
+                // runtime info
+                ImGui::Separator();
+                ImGui::Text("runtime: particles=%d, elapsed=%.2f", (int)em.particles.size(), em.elapsed);
+            }
+
+            ImGui::PopID();
+            ++i;
+        }
+
+        ImGui::Separator();
+        ReadVariants(*fx);
+        ImGui::PopID();
+        return;
     }
 
     if (compName == "TextUI")

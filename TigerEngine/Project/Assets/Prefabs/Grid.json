@@ -1,0 +1,41 @@
+{
+  "prefab": [
+    {
+      "Active": true,
+      "ID": 1172,
+      "Name": "Grid",
+      "ParentID": -1,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              1.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "CellSize": 100.0,
+            "Height": 50,
+            "Width": 50
+          },
+          "type": "GridComponent"
+        }
+      ]
+    }
+  ]
+}

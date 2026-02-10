@@ -7,8 +7,10 @@ class AgentComponent;
 class AgentSystem : public Singleton<AgentSystem>
 {
     std::vector<AgentComponent*> agents;
-
     std::vector<AgentComponent*> pending_agents;
+
+public:
+    std::vector<AgentComponent*>& GetAgents() { return agents; }
 
 public:
     AgentSystem(token) {}

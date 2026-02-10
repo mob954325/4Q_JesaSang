@@ -7,6 +7,7 @@
 
 #include "../Item/Item.h"
 #include "../Manager/GameManager.h"
+#include "../Manager/QuestManager.h"
 
 
 REGISTER_COMPONENT(JesaSangManager)
@@ -115,6 +116,8 @@ void JesaSangManager::ReceiveFood(std::unique_ptr<IItem> food)
         dong->SetActive(true);
     }
 
+    hasFoodCount++;
+
     // 전달받은 Food Item은 할일 끝났으니 쏘멸
     std::cout << "[JesaSangManager] Put Food : " << food->itemId << endl;
     food.reset();
@@ -123,6 +126,9 @@ void JesaSangManager::ReceiveFood(std::unique_ptr<IItem> food)
     UISensorOnOff(false);
     UIInteractionOnOff(false);
     image_interactionGauge->SetFillAmount(0.0);
+
+    // 퀘스트 4 : [완성] 제사상 완성 : 제사상에 올라온 음식 카운팅 (1/6)
+    QuestManager::Instance()->StepComplete(4);
 
     // 제사상에 음식이 다 올라오면 성공
     if(HasAllFood())

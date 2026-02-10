@@ -1,14 +1,104 @@
 #define NOMINMAX        // min, max
 #include "Emitter.h"
 #include "../Base/System/TimeSystem.h"
+#include "../Base/Datas/ReflectionMedtaDatas.hpp"
 #include <algorithm>
 
-#include <DirectXMath.h>
-using namespace DirectX;
+RTTR_REGISTRATION
+{
+    using namespace rttr;
 
-#include <directxtk/simplemath.h>
-using namespace DirectX::SimpleMath;
+// ---- enums ----
+registration::enumeration<BillboardType>("BillboardType")
+(
+    value("ScreenFacing", BillboardType::ScreenFacing),
+    value("YAxis",        BillboardType::YAxis)
+);
 
+registration::enumeration<ParticleMode>("ParticleMode")
+(
+    value("Dynamic", ParticleMode::Dynamic),
+    value("Fixed",   ParticleMode::Fixed)
+);
+
+registration::enumeration<FlipbookPlayMode>("FlipbookPlayMode")
+(
+    value("Once_Then_Die",  FlipbookPlayMode::Once_Then_Die),
+    value("Once_Then_Hold", FlipbookPlayMode::Once_Then_Hold),
+    value("Loop",           FlipbookPlayMode::Loop)
+);
+
+registration::enumeration<VelocityShape>("VelocityShape")
+(
+    value("Sphere",      VelocityShape::Sphere),
+    value("Directional", VelocityShape::Directional),
+    value("Cone",        VelocityShape::Cone),
+    value("Disk",        VelocityShape::Disk)
+);
+
+// ---- POD/config structs ----
+registration::class_<SpawnDynamic>("SpawnDynamic")
+    .constructor<>()(policy::ctor::as_object)
+    .property("lifeMin", &SpawnDynamic::lifeMin)
+    .property("lifeMax", &SpawnDynamic::lifeMax)
+    .property("rotationMin", &SpawnDynamic::rotationMin)
+    .property("rotationMax", &SpawnDynamic::rotationMax)
+    .property("sizeMin", &SpawnDynamic::sizeMin)
+    .property("sizeMax", &SpawnDynamic::sizeMax)
+    .property("speedMin", &SpawnDynamic::speedMin)
+    .property("speedMax", &SpawnDynamic::speedMax)
+    .property("angularMin", &SpawnDynamic::angularMin)
+    .property("angularMax", &SpawnDynamic::angularMax)
+    .property("colorMin", &SpawnDynamic::colorMin)
+    .property("colorMax", &SpawnDynamic::colorMax);
+
+registration::class_<SpawnFixed>("SpawnFixed")
+    .constructor<>()(policy::ctor::as_object)
+    .property("rotation",   &SpawnFixed::rotation)
+    .property("size",       &SpawnFixed::size)
+    .property("startColor", &SpawnFixed::startColor);
+
+// ---- Emitter ----
+registration::class_<Emitter>("Emitter")
+    .constructor<>()(policy::ctor::as_object)
+    // NOTE: sheet는 SpriteSheet가 RTTR 등록/JsonHelper 지원돼 있어야 함
+    .property("sheet", &Emitter::sheet)
+
+    // 런타임 상태 particles는 보통 노출 X
+    // .property("particles", &Emitter::particles)
+
+    .property("billboard", &Emitter::billboard)
+
+    // position
+    .property("position",    &Emitter::position)
+    .property("localOffset", &Emitter::localOffset)
+
+    // control
+    .property("enabled", &Emitter::enabled)(metadata(META_BOOL, true))
+    .property("playing", &Emitter::playing)(metadata(META_BOOL, true))
+
+    // emission
+    .property("duration",     &Emitter::duration)
+    .property("looping",      &Emitter::looping)(metadata(META_BOOL, true))
+    .property("emitRate",     &Emitter::emitRate)
+    .property("burstCount",   &Emitter::burstCount)
+    .property("maxParticles", &Emitter::maxParticles)
+
+    // mode + data
+    .property("particleMode", &Emitter::particleMode)
+    .property("dynamicData",  &Emitter::dynamicData)
+    .property("fixedData",    &Emitter::fixedData)
+
+    // dynamic shape
+    .property("velocityShape", &Emitter::velocityShape)
+    .property("emitDir",       &Emitter::emitDir)
+    .property("coneAngleDeg",  &Emitter::coneAngleDeg)
+
+    // flipbook
+    .property("filpbookPlayMode", &Emitter::filpbookPlayMode)
+    .property("holdTime",         &Emitter::holdTime)
+    .property("infinite",         &Emitter::infinite);
+}
 
 void Emitter::Update()
 {

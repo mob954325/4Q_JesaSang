@@ -149,12 +149,18 @@
     <ClInclude Include="02_Script\Ho\UI\MenuUI_OptionButton.h" />
     <ClInclude Include="02_Script\Ho\UI\MenuUI_StartButton.h" />
     <ClInclude Include="02_Script\Moon\AI\AdultGhostController.h" />
+    <ClInclude Include="02_Script\Moon\AI\BabyGhostController.h" />
     <ClInclude Include="02_Script\Moon\AI\FSM\AdultGhost_Attack.h" />
     <ClInclude Include="02_Script\Moon\AI\FSM\AdultGhost_Chase.h" />
     <ClInclude Include="02_Script\Moon\AI\FSM\AdultGhost_Patrol.h" />
     <ClInclude Include="02_Script\Moon\AI\FSM\AdultGhost_Return.h" />
     <ClInclude Include="02_Script\Moon\AI\FSM\AdultGhost_Search.h" />
+    <ClInclude Include="02_Script\Moon\AI\FSM\BabyGhost_Cry.h" />
+    <ClInclude Include="02_Script\Moon\AI\FSM\BabyGhost_Patrol.h" />
+    <ClInclude Include="02_Script\Moon\AI\FSM\BabyGhost_Return.h" />
+    <ClInclude Include="02_Script\Moon\AI\FSM\BabyGhost_Search.h" />
     <ClInclude Include="02_Script\Moon\AI\FSM\IAdultGhostState.h" />
+    <ClInclude Include="02_Script\Moon\AI\FSM\IBabyGhostState.h" />
     <ClInclude Include="02_Script\Moon\AI\GhostInteractionZone.h" />
     <ClInclude Include="02_Script\Moon\AnimationTest\PlayerAnimationTest.h" />
     <ClInclude Include="02_Script\Woo\Altar\AltarManager.h" />
@@ -207,18 +213,24 @@
     <ClInclude Include="02_Script\Woo\Object\TrapObject.h" />
     <ClInclude Include="02_Script\\Ron\\Intro\IntroCutSceneController.h" />
     <ClInclude Include="02_Script\Woo\Manager\PauseManager.h" />
-    <ClInclude Include="02_Script\Woo\Manager\MainGameUIManager.h" />
+    <ClInclude Include="02_Script\Woo\UI\MainGameUIManager.h" />
+    <ClInclude Include="02_Script\Woo\Manager\QuestManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="02_Script\Ho\UI\MenuUI_ExitButton.cpp" />
     <ClCompile Include="02_Script\Ho\UI\MenuUI_OptionButton.cpp" />
     <ClCompile Include="02_Script\Ho\UI\MenuUI_StartButton.cpp" />
     <ClCompile Include="02_Script\Moon\AI\AdultGhostController.cpp" />
+    <ClCompile Include="02_Script\Moon\AI\BabyGhostController.cpp" />
     <ClCompile Include="02_Script\Moon\AI\FSM\AdultGhost_Attack.cpp" />
     <ClCompile Include="02_Script\Moon\AI\FSM\AdultGhost_Chase.cpp" />
     <ClCompile Include="02_Script\Moon\AI\FSM\AdultGhost_Patrol.cpp" />
     <ClCompile Include="02_Script\Moon\AI\FSM\AdultGhost_Return.cpp" />
     <ClCompile Include="02_Script\Moon\AI\FSM\AdultGhost_Search.cpp" />
+    <ClCompile Include="02_Script\Moon\AI\FSM\BabyGhost_Cry.cpp" />
+    <ClCompile Include="02_Script\Moon\AI\FSM\BabyGhost_Patrol.cpp" />
+    <ClCompile Include="02_Script\Moon\AI\FSM\BabyGhost_Return.cpp" />
+    <ClCompile Include="02_Script\Moon\AI\FSM\BabyGhost_Search.cpp" />
     <ClCompile Include="02_Script\Moon\AI\GhostInteractionZone.cpp" />
     <ClCompile Include="02_Script\Moon\AnimationTest\PlayerAnimationTest.cpp" />
     <ClCompile Include="02_Script\Woo\Altar\AltarManager.cpp" />
@@ -270,7 +282,8 @@
     <ClCompile Include="02_Script\Woo\Manager\GameManager.cpp" />
     <ClCompile Include="02_Script\Woo\Object\TrapObject.cpp" />
     <ClCompile Include="02_Script\Woo\Manager\PauseManager.cpp" />
-    <ClCompile Include="02_Script\Woo\Manager\MainGameUIManager.cpp" />
+    <ClCompile Include="02_Script\Woo\UI\MainGameUIManager.cpp" />
+    <ClCompile Include="02_Script\Woo\Manager\QuestManager.cpp" />
     <ClCompile Include="winMain.cpp" />
     <ClCompile Include="02_Script\\Ron\\Intro\IntroCutSceneController.cpp" />
   </ItemGroup>

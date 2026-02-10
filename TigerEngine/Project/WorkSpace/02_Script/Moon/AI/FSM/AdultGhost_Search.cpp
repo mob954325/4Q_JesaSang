@@ -11,9 +11,9 @@ void AdultGhost_Search::Enter()
     rotateTimer = 0.0f;
 
     adultGhost->ResetAgentForMove(3.5f);
+    // adultGhost->animController->ChangeState("Idle");
 
     phase = SearchPhase::WaitBeforeMove;
-
 
     // 1. Chase or Attack 에서 넘어온 경우 바로 이동
     if (adultGhost->searchReason == SearchReason::FromChase ||
@@ -22,19 +22,24 @@ void AdultGhost_Search::Enter()
         phase = SearchPhase::MoveToPoint;
     }
 
-    // 마지막 플레이어 위치 있으면 사용 
-    if (adultGhost->lastPlayerGrid.valid /*&&
-        (adultGhost->searchReason == SearchReason::FromChase ||
-            adultGhost->searchReason == SearchReason::FromAttack)*/)
+    // 2. 마지막 플레이어 위치 있으면 사용 
+    if (adultGhost->lastPlayerGrid.valid)
     {
         auto& p = adultGhost->lastPlayerGrid;
-        std::cout << "[Search] Use Last Grid = (" << p.x << ", " << p.y << ")" << std::endl;
+        // std::cout << "[Search] Use Last Grid = (" << p.x << ", " << p.y << ")" << std::endl;
 
         adultGhost->agent->targetCX = p.x;
         adultGhost->agent->targetCY = p.y;
         adultGhost->agent->hasTarget = true;
 
         adultGhost->lastPlayerGrid.valid = false; // 1회성
+    }
+
+    // 3) Patrol에서 넘어왔는데도 lastPlayerGrid가 없으면 바로 Return (혹은 RotateSearch로 할까?)
+    if (phase == SearchPhase::WaitBeforeMove && !adultGhost->agent->hasTarget)
+    {
+        adultGhost->ChangeState(AdultGhostState::Return);
+        return;
     }
 }
 
@@ -51,7 +56,7 @@ void AdultGhost_Search::ChangeStateLogic()
     if (phase == SearchPhase::RotateSearch && rotateTimer >= rotateTime)
     {
         cout << "[AdultGhost_Search] Search Fail.." << endl;
-        adultGhost->ChangeState(AdultGhostState::Return); // 나중에 Return으로 교체
+        adultGhost->ChangeState(AdultGhostState::Return);
     }
 }
 
@@ -77,6 +82,11 @@ void AdultGhost_Search::FixedUpdate(float deltaTime)
             arrived = true;
             phase = SearchPhase::RotateSearch;
             rotateTimer = 0.0f;
+
+            // 도착 즉시 목표 정리
+            adultGhost->agent->externalControl = true;
+            adultGhost->agent->path.clear();
+            adultGhost->agent->hasTarget = false;
 
             auto tr = adultGhost->GetOwner()->GetTransform();
             baseYaw = tr->GetYaw();

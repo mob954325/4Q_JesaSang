@@ -504,6 +504,7 @@ void MiniMapManager::TriggerItemCollected(int index, const Vector3& worldPos)
 
 void MiniMapManager::TriggerPieceCollected(int index)
 {
+    cout << "Test" << endl;
     TriggerPieceActive(index, true);
     if (m_Map)
     {

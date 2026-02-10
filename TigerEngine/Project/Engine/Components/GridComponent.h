@@ -33,6 +33,10 @@ public:
     std::vector<GridCell> cells;
     std::vector<WalkableOverride> walkableOverrides;
 
+    // Grid 안정화용
+    bool m_pendingBuild = true;
+    int  m_lastActorCount = -1;
+
 public:
     GridComponent() = default;
     ~GridComponent() = default;

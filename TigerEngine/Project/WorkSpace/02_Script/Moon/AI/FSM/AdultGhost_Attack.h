@@ -13,7 +13,7 @@ class AdultGhost_Attack : public IAdultGhostState
 {
 private:
     float attackTimer = 0.0f;
-    const float attackDelay = 3.0f;
+    float attackDelay = 3.0f;
     bool didDamage = false;
 
 public:
