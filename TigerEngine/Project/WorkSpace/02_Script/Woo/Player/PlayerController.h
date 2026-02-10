@@ -4,7 +4,6 @@
 #include "Components/FBXData.h"
 #include "Components/AnimationController.h"
 #include "Components/CharacterControllerComponent.h"
-#include "RenderPass/ParticleSource/Effect.h"
 
 #include <directxtk/Keyboard.h>
 
@@ -18,8 +17,10 @@ class CameraController;
 class MiniGameManager;
 class JesaSangManager;
 class PlayerItemVisualizer;
+class PlayerThreatMonitor;
 class DialogueUIController;
 class IItem;
+class Effect;
 
 // Player State Enum
 enum class PlayerState
@@ -49,11 +50,11 @@ private:
     CharacterControllerComponent* cct = nullptr;
 
     Effect* fireEffect = nullptr;
-    Effect* smokeEffect = nullptr;
     AnimationController* hitEffect = nullptr;
 
     Inventory* inventory = nullptr;
     PlayerItemVisualizer* visualizer = nullptr;
+    PlayerThreatMonitor* threatMonitor = nullptr;
     DialogueUIController* dialogueController = nullptr;
 
     CameraController* camController = nullptr;

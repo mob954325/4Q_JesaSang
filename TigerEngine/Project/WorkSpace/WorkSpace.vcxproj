@@ -216,6 +216,7 @@
     <ClInclude Include="02_Script\Woo\Manager\PauseManager.h" />
     <ClInclude Include="02_Script\Woo\UI\MainGameUIManager.h" />
     <ClInclude Include="02_Script\Woo\Manager\QuestManager.h" />
+    <ClInclude Include="02_Script\Woo\Player\PlayerThreatMonitor.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="02_Script\Ho\Manager\FrozenManager.cpp" />
@@ -288,6 +289,7 @@
     <ClCompile Include="02_Script\Woo\Manager\PauseManager.cpp" />
     <ClCompile Include="02_Script\Woo\UI\MainGameUIManager.cpp" />
     <ClCompile Include="02_Script\Woo\Manager\QuestManager.cpp" />
+    <ClCompile Include="02_Script\Woo\Player\PlayerThreatMonitor.cpp" />
     <ClCompile Include="winMain.cpp" />
     <ClCompile Include="02_Script\\Ron\\Intro\IntroCutSceneController.cpp" />
   </ItemGroup>
