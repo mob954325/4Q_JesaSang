@@ -306,6 +306,8 @@ void AltarManager::BeginDirectSequence(std::string itemId)
     // 시작 상태 정리
     SetAllVisualOff();
     altar->SetActive(false);
+    UISensorOnOff(false);
+    UIInteractionOnOff(false);
 
     // direct cam 위치 캐싱
     hasDirectCamPosCached = false;
@@ -317,10 +319,14 @@ void AltarManager::BeginDirectSequence(std::string itemId)
         hasDirectCamPosCached = true;
     }
 
+    BackupPostProcess();
+
     // 연출 진입
     isDirecting = true;
     directPhase = DirectPhase::FadeOut_1;
     phaseTimer = 0.0f;
+
+    StartVignetteFade(1.0f, 0.0f, fadeOutTime_1);
 }
 
 void AltarManager::UpdateDirectSequence(float dt)
@@ -334,7 +340,9 @@ void AltarManager::UpdateDirectSequence(float dt)
     {
     case DirectPhase::FadeOut_1:
     {
-        // 1. FadeOut (미구현: renderDesc.useVignette / vignette_intensity 등으로 처리 가능)
+        // 1. FadeOut
+        UpdateVignetteFade(dt);
+        
         if (phaseTimer >= fadeOutTime_1)
         {
             phaseTimer = 0.0f;
@@ -354,13 +362,16 @@ void AltarManager::UpdateDirectSequence(float dt)
 
         phaseTimer = 0.0f;
         directPhase = DirectPhase::FadeIn_1_And_ZoomIn;
+
+        StartVignetteFade(0.0f, 1.0f, fadeInTime_1);
     }
     break;
 
     case DirectPhase::FadeIn_1_And_ZoomIn:
     {
-        // 4. FadeIn + Cam position update (z- 방향으로 천천히 조금 이동(5초정도)
-        // FadeIn 미구현
+        // 4. FadeIn + Cam position update
+        UpdateVignetteFade(dt);
+
         if (hasDirectCamPosCached && altarDirectCam)
         {
             const float t = (zoomInTime <= 0.0f) ? 1.0f : std::min(phaseTimer / zoomInTime, 1.0f);
@@ -385,13 +396,17 @@ void AltarManager::UpdateDirectSequence(float dt)
         {
             phaseTimer = 0.0f;
             directPhase = DirectPhase::FadeOut_2;
+
+            StartVignetteFade(1.0f, 0.0f, fadeOutTime_2);
         }
     }
     break;
 
     case DirectPhase::FadeOut_2:
     {
-        // 6. FadeOut (미구현)
+        // 6. FadeOut
+        UpdateVignetteFade(dt);
+
         if (phaseTimer >= fadeOutTime_2)
         {
             phaseTimer = 0.0f;
@@ -407,12 +422,16 @@ void AltarManager::UpdateDirectSequence(float dt)
 
         phaseTimer = 0.0f;
         directPhase = DirectPhase::FadeIn_2;
+
+        StartVignetteFade(0.0f, 1.0f, fadeInTime_2);
     }
     break;
 
     case DirectPhase::FadeIn_2:
     {
-        // 8. FadeIn (미구현)
+        // 8. FadeIn
+        UpdateVignetteFade(dt);
+
         if (phaseTimer >= fadeInTime_2)
         {
             phaseTimer = 0.0f;
@@ -428,8 +447,8 @@ void AltarManager::UpdateDirectSequence(float dt)
         directPhase = DirectPhase::None;
         phaseTimer = 0.0f;
 
-        // 연출 끝났으니 이제 UI 사용 가능
-        // (필요하면 여기서 UISensorOnOff(true) 같은 것도 가능)
+        // post data 복구
+        RestorePostProcess();
     }
     break;
 
@@ -438,3 +457,74 @@ void AltarManager::UpdateDirectSequence(float dt)
     }
 }
 
+float AltarManager::Clamp01(float v)
+{
+    if (v < 0.0f) return 0.0f;
+    if (v > 1.0f) return 1.0f;
+    return v;
+}
+
+float AltarManager::EaseInOut(float t)
+{
+    // smoothstep
+    t = Clamp01(t);
+    return t * t * (3.0f - 2.0f * t);
+}
+
+void AltarManager::BackupPostProcess()
+{
+    auto& pp = WorldManager::Instance().postProcessData;
+
+    vignetteBackup.valid = true;
+    vignetteBackup.useVignette = pp.useVignette;
+    vignetteBackup.intensity = pp.vignette_intensity;
+    vignetteBackup.smoothness = pp.vignette_smoothness;
+    vignetteBackup.center = pp.vignetteCenter;
+    vignetteBackup.color = pp.vignetteColor;
+}
+
+void AltarManager::RestorePostProcess()
+{
+    if (!vignetteBackup.valid) return;
+
+    auto& pp = WorldManager::Instance().postProcessData;
+
+    pp.useVignette = vignetteBackup.useVignette;
+    pp.vignette_intensity = vignetteBackup.intensity;
+    pp.vignette_smoothness = vignetteBackup.smoothness;
+    pp.vignetteCenter = vignetteBackup.center;
+    pp.vignetteColor = vignetteBackup.color;
+
+    vignetteBackup.valid = false;
+
+    // 페이드 상태도 리셋
+    vignetteFrom = vignetteTo = 0.0f;
+    vignetteDuration = 0.0f;
+}
+
+void AltarManager::StartVignetteFade(float from, float to, float duration)
+{
+    auto& pp = WorldManager::Instance().postProcessData;
+
+    pp.useVignette = true;
+    pp.vignette_intensity = 1.0f;;
+    pp.vignetteCenter = { 0.5f, 0.5f };
+    pp.vignetteColor = { 0,0,0 };
+
+    vignetteFrom = Clamp01(from);
+    vignetteTo = Clamp01(to);
+    vignetteDuration = (duration <= 0.0f) ? 0.0001f : duration;
+
+    pp.vignette_smoothness = vignetteFrom;
+}
+
+void AltarManager::UpdateVignetteFade(float dt)
+{
+    if (vignetteDuration <= 0.0f) return;
+
+    const float t = Clamp01(phaseTimer / vignetteDuration);
+    const float e = EaseInOut(t);
+
+    auto& pp = WorldManager::Instance().postProcessData;
+    pp.vignette_smoothness = vignetteFrom * (1.0f - e) + vignetteTo * e;
+}

@@ -64,8 +64,7 @@ private:
     Transform* altarDirectCam = nullptr;          // 연출 카메라
     std::string camName = "AltarDirectCamera";    // 연출 카메라 이름
     
-    void FirstReceiveDirect(std::string itemId);  // 최초 제단 활성화 연출
-
+    
     enum class DirectPhase
     {
         None,
@@ -100,10 +99,33 @@ private:
     Vector3 directCamTargetPos = { 0,0,0 };
     bool hasDirectCamPosCached = false;
 
+    // --- vignette fade helpers ---
+    struct VignetteBackup
+    {
+        bool valid = false;
+        BOOL useVignette = false;
+        float intensity = 1.0f;
+        float smoothness = 0.0f;
+        Vector2 center = { 0.5f, 0.5f };
+        Vector3 color = { 0,0,0 };
+    };
 
-private:
-    // internal helpers
-    void SetAllVisualOff();               // 모든 제단 비주얼 OFF
+    VignetteBackup vignetteBackup;
+    float vignetteFrom = 0.0f;
+    float vignetteTo = 0.0f;
+    float vignetteDuration = 0.0f;
+
+    // 연출 유틸
+    void BackupPostProcess();                 // 기존 PP 백업
+    void RestorePostProcess();                // 연출 끝나면 원복
+    void StartVignetteFade(float from, float to, float duration);
+    void UpdateVignetteFade(float dt);
+    static float EaseInOut(float t);          // 부드러운 페이드 커브
+    static float Clamp01(float v);
+    
+    // 연출 함수
+    void FirstReceiveDirect(std::string itemId);  // 최초 제단 활성화 연출
+    void SetAllVisualOff();                       // 모든 제단 비주얼 OFF
     void BeginDirectSequence(std::string itemId);
     void UpdateDirectSequence(float dt);
 
@@ -134,6 +156,9 @@ public:
 
     void ReceiveItem(std::unique_ptr<IItem> item);  // 제단에 아이템 올리기
     std::unique_ptr<IItem> GetItem();               // 제단 아아템 회수하기 (FIFO)
+
+    // Directing
+    bool IsAltarFirstDirecting() { return isDirecting; }
 
     // UI
     void UISensorOnOff(bool flag);              // 플레이어 감지영역 UI
