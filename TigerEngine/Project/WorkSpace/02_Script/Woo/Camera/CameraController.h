@@ -23,10 +23,10 @@ class CameraController : public ScriptComponent
 public:
     enum class ViewMode
     {
-        Quarter, Top
+        Quarter, Top, Front
     };
 
-    ViewMode currentMode = ViewMode::Quarter;
+    ViewMode currentMode = ViewMode::Front;
 
 private:
     // [ components ]
@@ -41,6 +41,9 @@ private:
 
     Vector3 topOffset = { 0, 550.0f, -20.0f };
     Vector3 topEuler = { 82.0f, 0.0f, 0.0f };
+
+    Vector3 frontOffset = { 0, 50.0f, -110.0f };
+    Vector3 frontEuler = { 10.0f, 0.0f, 0.0f };
 
     // view transition
     float viewBlendDuration = 0.65f;     // Quarter <-> Top 전환 시간
