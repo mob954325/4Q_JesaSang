@@ -27,7 +27,7 @@ RTTR_REGISTRATION
 
 namespace
 {
-    // 공백 제외 글자 수 세기
+    // 글자 수 세기
     int CountNonSpaceChars(const wchar_t* s)
     {
         if (!s) return 0;
@@ -35,25 +35,22 @@ namespace
         int count = 0;
         for (const wchar_t* p = s; *p; ++p)
         {
-            if (!iswspace(*p))
-                ++count;
+            ++count;
         }
         return count;
     }
 
     // 글자 수에 따른 말풍선 크기 단계 선택
-    // - 50  : 5글자 이하
-    // - 100 : 10글자 이하
-    // - 150 : 15글자 이하
-    // - 200 : 20글자 이하
-    // - 250 : 25글자 이하
     float SelectBubbleWidthByLen(int nonSpaceLen)
     {
-        if (nonSpaceLen <= 5)  return 50.0f;
-        if (nonSpaceLen <= 10) return 100.0f;
-        if (nonSpaceLen <= 15) return 150.0f;
-        if (nonSpaceLen <= 20) return 200.0f;
-        return 250.0f;
+        if (nonSpaceLen <= 5)  return 100.0f;
+        if (nonSpaceLen <= 10) return 200.0f;
+        if (nonSpaceLen <= 15) return 300.0f;
+        if (nonSpaceLen <= 20) return 400.0f;
+        if (nonSpaceLen <= 25) return 500.0f;
+        if (nonSpaceLen <= 30) return 600.0f;
+        if (nonSpaceLen <= 35) return 700.0f;
+        return 800.0f;
     }
 }
 
@@ -113,15 +110,15 @@ void DialogueUIController::OnUpdate(float delta)
     //}
     //
     //if (Input::GetKeyDown(Keyboard::Q))
-    //    UpdateText(L"123 45");
+    //    ShowDialogueText(L"123 45");
     //if (Input::GetKeyDown(Keyboard::W))
-    //    UpdateText(L"123 456 789");
+    //    ShowDialogueText(L"123 456 789");
     //if (Input::GetKeyDown(Keyboard::E))
-    //    UpdateText(L"12312 45612 78912");
+    //    ShowDialogueText(L"12312 45612 78912");
     //if (Input::GetKeyDown(Keyboard::R))
-    //    UpdateText(L"12312 45612 78912 12345");
+    //    ShowDialogueText(L"12312 45612 78912 12345");
     //if (Input::GetKeyDown(Keyboard::T))
-    //    UpdateText(L"12312 45612 78912 12345 12345");
+    //    ShowDialogueText(L"12312 45612 78912 12345 12345");
 }
 
 void DialogueUIController::OnDestory()
