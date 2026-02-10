@@ -115,8 +115,7 @@ void Image::Deserialize(nlohmann::json data)
 
 void Image::GetTextureByPath(std::string path)
 {
-    if (path.empty()) return; // 값 없으면 무시
-
+    if (path.empty()) return;
     resource = TextureResourceManager::Instance().LoadTextureResourceByPath(path);
 }
 

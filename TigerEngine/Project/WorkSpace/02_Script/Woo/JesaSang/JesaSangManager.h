@@ -22,6 +22,7 @@ private:
     inline static JesaSangManager* s_instance = nullptr;
 
     // has item (현재 제사상에 올라온 음식)
+    int hasFoodCount = 0;
     bool hasApple = false;
     bool hasPear = false;
     bool hasBatter = false;
@@ -61,6 +62,7 @@ public:
     static JesaSangManager* Instance() { return s_instance; }
 
     void ReceiveFood(std::unique_ptr<IItem> food);
+    int GetHasFoodCount() { return hasFoodCount; }
 
     // UI
     void UISensorOnOff(bool flag);              // 플레이어 감지영역 UI

@@ -162,8 +162,8 @@ void CameraController::ResolveViewParams(float dt, Vector3& outOffset, Vector3& 
     outUseLookFocus = true;
     UpdateViewBlend(dt, outOffset, outEulerDeg, outUseLookFocus);
 
-    // top view일때는 look focus(rotation) off
-    if (!isBlendingView && currentMode == ViewMode::Top)
+    // top/front view일때는 look focus(rotation) off
+    if (!isBlendingView && (currentMode == ViewMode::Top || currentMode == ViewMode::Front))
         outUseLookFocus = false;
 }
 
@@ -245,6 +245,10 @@ void CameraController::GetModeParams(ViewMode mode, Vector3& outOffset, Vector3&
     case ViewMode::Top:
         outOffset = topOffset;
         outEulerDeg = topEuler;
+        break;
+    case ViewMode::Front:
+        outOffset = frontOffset;
+        outEulerDeg = frontEuler;
         break;
     default:
         outOffset = quarterOffset;
