@@ -32,7 +32,7 @@ private:
     Vector3 offset = { 50,0,0 };
 
     // ø¨√‚
-    float dialogueDuration = 3.5f;
+    float dialogueDuration = 2.5f;
     float dialogueTimer = 0.0f;
     bool isDialogueOn = false;
     

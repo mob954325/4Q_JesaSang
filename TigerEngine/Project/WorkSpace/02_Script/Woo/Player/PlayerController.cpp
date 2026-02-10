@@ -111,7 +111,7 @@ void PlayerController::OnUpdate(float delta)
     }
 
     // front view
-    if (Input::GetKeyDown(Keyboard::W))
+    if (Input::GetKeyDown(Keyboard::O))
     {
         camController->SetViewMode(CameraController::ViewMode::Front);
     }
