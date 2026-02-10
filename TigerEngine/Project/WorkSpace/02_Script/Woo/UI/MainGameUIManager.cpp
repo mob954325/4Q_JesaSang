@@ -145,22 +145,16 @@ void MainGameUIManager::UpdateLifeUI(int currentLife)
     }
 }
 
-void MainGameUIManager::UpdateQuestTitle(std::string& s)
+void MainGameUIManager::UpdateQuestTitle(const wchar_t* s)
 {
-    if (!questTitle) return;
-
-    std::wstring ws;
-    ws.assign(s.begin(), s.end());
-    questTitle->SetText(ws);
+    if (!questTitle || !s) return;
+    questTitle->SetText(std::wstring(s));
 }
 
-void MainGameUIManager::UpdateQuestLable(std::string& s)
+void MainGameUIManager::UpdateQuestLable(const wchar_t* s)
 {
-    if (!questLable) return;
-
-    std::wstring ws;
-    ws.assign(s.begin(), s.end());
-    questLable->SetText(ws);
+    if (!questLable || !s) return; // questLabel 변수명은 실제 멤버에 맞춰
+    questLable->SetText(std::wstring(s));
 }
 
 void MainGameUIManager::SetQuestTitleOn(bool flag)

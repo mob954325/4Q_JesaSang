@@ -63,8 +63,8 @@ public:
     void UpdateLifeUI(int currentLife);
 
     // Quest
-    void UpdateQuestTitle(std::string& s);
-    void UpdateQuestLable(std::string& s);
+    void UpdateQuestTitle(const wchar_t* s);
+    void UpdateQuestLable(const wchar_t* s);
 
     void SetQuestTitleOn(bool flag);
     void SetQuestLableOn(bool flag);
