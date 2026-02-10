@@ -10,7 +10,8 @@ RTTR_REGISTRATION
             (rttr::policy::ctor::as_std_shared_ptr);
 }
 
-void AudioListenerComponent::OnStart()
+
+void AudioListenerComponent::OnInitialize()
 {
     if (!m_System)
     {
@@ -18,13 +19,16 @@ void AudioListenerComponent::OnStart()
     }
 }
 
+void AudioListenerComponent::OnStart()
+{
+
+}
+
 void AudioListenerComponent::OnUpdate(float delta)
 {
     (void)delta;
-    if (!m_System)
-    {
-        Init(&AudioManager::Instance().GetSystem());
-    }
+    if (!m_System) return;
+
     Update();
 }
 

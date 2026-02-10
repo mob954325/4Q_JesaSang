@@ -18,22 +18,18 @@ RTTR_REGISTRATION
         .property("MaxDistance", &AudioSourceComponent::GetMaxDistance, &AudioSourceComponent::SetMaxDistance);
 }
 
+void AudioSourceComponent::OnInitialize()
+{
+    Init(&AudioManager::Instance().GetSystem());
+}
+
 void AudioSourceComponent::OnStart()
 {
-    if (!m_System)
-    {
-        Init(&AudioManager::Instance().GetSystem());
-    }
 }
 
 void AudioSourceComponent::OnUpdate(float delta)
 {
     (void)delta;
-
-    if (!m_System)
-    {
-        Init(&AudioManager::Instance().GetSystem());
-    }
     Update3D();
 }
 

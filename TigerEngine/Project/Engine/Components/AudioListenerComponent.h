@@ -14,6 +14,7 @@ public:
     AudioListenerComponent() { SetName("AudioListener"); }
     ~AudioListenerComponent() override = default;
 
+    void OnInitialize() override;
     void OnStart() override;
     void OnUpdate(float delta) override;
     void OnDestory() override;
