@@ -218,6 +218,8 @@
     <ClInclude Include="02_Script\Woo\Manager\QuestManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="02_Script\Ho\Manager\FrozenManager.cpp" />
+    <ClCompile Include="02_Script\Ho\Manager\FrozenManager.h" />
     <ClCompile Include="02_Script\Ho\UI\MenuUI_ExitButton.cpp" />
     <ClCompile Include="02_Script\Ho\UI\MenuUI_OptionButton.cpp" />
     <ClCompile Include="02_Script\Ho\UI\MenuUI_StartButton.cpp" />
