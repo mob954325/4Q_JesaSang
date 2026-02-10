@@ -6,10 +6,12 @@
 
 #include "../../Object/SearchObject.h"
 #include "../../Object/HideObject.h"
+#include "../../Object/TrapObject.h"
 #include "../../JesaSang/JesaSangManager.h"
 #include "../../Altar/AltarManager.h"
 #include "../../CookingZone/CookingZone.h"
-
+#include "../PlayerController.h"
+#include "../DialogueUI/DialogueUIController.h"
 
 REGISTER_COMPONENT(InteractionSensor)
 
@@ -49,6 +51,7 @@ void InteractionSensor::Deserialize(nlohmann::json data)
 void InteractionSensor::OnTriggerEnter(PhysicsComponent* other)
 {
     GameObject* object = other->GetOwner();
+    if (!object) return;
 
     // 수색 오브젝트 감지 on
     if (object->GetName() == "SearchObject")
@@ -82,6 +85,18 @@ void InteractionSensor::OnTriggerEnter(PhysicsComponent* other)
     if (other->GetOwner()->GetName() == "Altar")
     {
         AltarManager::Instance()->UISensorOnOff(true);
+    }
+
+    // 함정 오브젝트 감지
+    // 플레이어가 감지할 필요는 없지만, 최조 기믹 설명을 위해 여기만 추가
+    if (other->GetOwner()->GetComponent<TrapObject>())
+    {
+        auto pc = GetOwner()->GetParent()->GetOwner()->GetComponent<PlayerController>();
+        if (!pc->isExplainedTrapObject)
+        {
+            pc->dialogueController->ShowInteractionHintAndPause(L"Be careful! object is Trap Object!");
+            pc->isExplainedTrapObject = true;
+        }
     }
 }
 

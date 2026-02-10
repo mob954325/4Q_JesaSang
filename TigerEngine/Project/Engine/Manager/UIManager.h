@@ -35,6 +35,7 @@ public:
                          HAlign alignType,                          // 정렬 타입
                          TextResource* resource,                    // textui 리소스
                          std::vector<UIQuadVertex>& cpuVerts,       // 정점 데이터
+                         Vector2& pivot,                            // 피벗
                          int& outIndexCount);                       // [out] 인덱스 개수
 
 protected:

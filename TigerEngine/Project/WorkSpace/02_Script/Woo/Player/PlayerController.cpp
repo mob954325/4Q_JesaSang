@@ -29,7 +29,10 @@
 #include "../JesaSang/JesaSangManager.h"
 #include "../Altar/AltarManager.h"
 #include "PlayerItemVisualizer.h"
+#include "DialogueUI/DialogueUIController.h"
 #include "../Manager/GameManager.h"
+#include "../Manager/QuestManager.h"
+#include "../UI/MainGameUIManager.h"
 #include "../CookingZone/CookingZone.h"
 #include "../../Ron/MiniMapTest/MiniMapManager.h"
 
@@ -55,11 +58,12 @@ void PlayerController::OnStart()
     cct = GetOwner()->GetComponent<CharacterControllerComponent>();
     inventory = GetOwner()->GetComponent<Inventory>();
     visualizer = GetOwner()->GetComponent<PlayerItemVisualizer>();
+    dialogueController = GetOwner()->GetComponent<DialogueUIController>();
     
     camController = CameraSystem::Instance().GetCurrCamera()->GetOwner()->GetComponent<CameraController>();
 
     // debug
-    if (!fbxRenderer || !cct || !inventory || !camController || !fbxData || !animController)
+    if (!fbxRenderer || !cct || !inventory || !camController || !fbxData || !animController || !dialogueController)
     {
         cout << "[Player] Missing COmponet!" << endl;
     }
@@ -98,6 +102,18 @@ void PlayerController::OnUpdate(float delta)
     if (Input::GetKeyDown(Keyboard::Q))
     {
         TakeAttack();
+    }
+
+    // quarter view
+    if (Input::GetKeyDown(Keyboard::P))
+    {
+        camController->SetViewMode(CameraController::ViewMode::Quarter);
+    }
+
+    // front view
+    if (Input::GetKeyDown(Keyboard::W))
+    {
+        camController->SetViewMode(CameraController::ViewMode::Front);
     }
 }
 
@@ -296,6 +312,13 @@ void PlayerController::SerachObjectInteraction(float dt)
         return;
     }
 
+    // 최초 인터랙션 기믹 설명
+    if (!isExplainedSearchObject && Input::GetKeyDown(interaction_Key))
+    {
+        dialogueController->ShowInteractionHintAndPause(L"this object is Search Object!");
+        isExplainedSearchObject = true;
+    }
+
     // inventory full
     if (inventory->HasItem())
     {
@@ -337,6 +360,11 @@ void PlayerController::SerachObjectInteraction(float dt)
                 else if (item->itemId == "4")
                     minimap->TriggerPieceCollected(4);
             }
+            // 퀘스트 1 : [탐색] 제사준비 : 최조로 음식 재료 획득시 달성
+            else if (item->itemType == ItemType::Ingredient)
+            {
+                QuestManager::Instance()->StepComplete(1);
+            }
 
             // item get
             visualizer->VisualOnItem(item->itemId);
@@ -361,6 +389,13 @@ void PlayerController::HideObjectInteraction(float dt)
     // hit, die 상태라면 return (맞겠지?) -> hit일떄 은신된대.
     if (state == PlayerState::Die)
         return;
+
+    // 최초 인터랙션 기믹 설명
+    if (!isExplainedHideObject && Input::GetKeyDown(interaction_Key))
+    {
+        dialogueController->ShowInteractionHintAndPause(L"this object is Hide Object!");
+        isExplainedHideObject = true;
+    }
 
     // hide
     if (Input::GetKeyDown(interaction_Key) && curHideObject->IsPossibleHide())
@@ -390,6 +425,13 @@ void PlayerController::CookingInteraction(float dt)
         return;
     }
 
+    // 최초 인터랙션 기믹 설명
+    if(!isExplainedCookingZone)
+    {
+        dialogueController->ShowInteractionHintAndPause(L"this zone is cooking!");
+        isExplainedCookingZone = true;
+    }
+
     // holding
     cookInteractionTimer += dt;
     float progress = cookInteractionTimer / cookInteractionTime;
@@ -408,8 +450,6 @@ void PlayerController::CookingInteraction(float dt)
         cookInteractionTimer = 0.0f;
 
         // ui clear
-        CookingZone::Instance()->UISensorOnOff(false);
-        CookingZone::Instance()->UIInteractionOnOff(false);
         CookingZone::Instance()->UIGaugeUpate(0.0);
     }
 }
@@ -439,6 +479,9 @@ void PlayerController::PutFoodJesaSangInteraction(float dt)
         JesaSangManager::Instance()->ReceiveFood(std::move(food));
         visualizer->VisualOffItem();
         visualizer->VisualItemIDNullSet();
+
+        // 퀘스트 3 : [운반] 차려지는 상 : 최조로 제사상에 음식을 올렸을시 달성
+        QuestManager::Instance()->StepComplete(3);
 
         // clear
         putFoodTimer = 0.0f;
@@ -473,6 +516,13 @@ void PlayerController::GetItemAltarInteraction(float dt)
     if (getItemAltarTimer >= getItemAltarTime)
     {
         std::unique_ptr<IItem> item = AltarManager::Instance()->GetItem();
+
+        // Dialogue
+        if (item->itemType == ItemType::Ingredient)
+            dialogueController->ShowDialogueText(L"Ingredient ReGet! Cook gogo!");
+        if (item->itemType == ItemType::Food)
+            dialogueController->ShowDialogueText(L"Good ReGet! Jesasang gogo!");
+
         visualizer->VisualOnItem(item->itemId);
         inventory->AddItem(std::move(item));
 
@@ -571,6 +621,9 @@ void PlayerController::ReceiveMiniGameResult(unique_ptr<IItem> ingredient, bool 
         // 인벤토리에 완성된 음식 추가
         visualizer->VisualOnItem(food->itemId);
         inventory->AddItem(std::move(food));
+
+        // 퀘스트 2 : [조리] 정성을 담아 : 최초로 미니게임 성공시 달성
+        QuestManager::Instance()->StepComplete(2);
     }
     else
     {
@@ -615,9 +668,11 @@ void PlayerController::TakeAttack()
         cout << "[Player] Drop Item... " << endl;
     }
 
-    // Die
+    // life
     curLife--;
-    
+    MainGameUIManager::Instance()->UpdateLifeUI(curLife);
+
+    // Die
     if (curLife <= 0)
     {
         curLife = 0;

@@ -46,19 +46,23 @@ void UIRenderPass::Execute(ComPtr<ID3D11DeviceContext>& context, RenderQueue& qu
         }
         else
         {
-            const float pivotX = item.params.z; // 0~1
-            const float pivotY = item.params.w; // 0~1
+            if (!item.isText)
+            {
+                float pivotX = item.params.z;
+                float pivotY = item.params.w;
 
-            // 로컬(유닛쿼드 0~1)에서 pivot을 원점으로 옮김
-            Matrix pivotOff = Matrix::CreateTranslation(-pivotX, -pivotY, 0.0f);
+                Matrix pivotOff = Matrix::CreateTranslation(-pivotX, -pivotY, 0.0f);
+                Matrix sizeS = Matrix::CreateScale(item.imageSize.x, item.imageSize.y, 1.0f);
 
-            // 유닛 쿼드를 실제 크기로
-            Matrix sizeS = Matrix::CreateScale(item.imageSize.x, item.imageSize.y, 1.0f);
-
-            // 최종 모델(로컬->월드)
-            Matrix model = pivotOff * sizeS * item.worldMat;
-
-            mvp = model * cam->GetView() * cam->GetProjection();
+                Matrix model = pivotOff * sizeS * item.worldMat;
+                mvp = model * cam->GetView() * cam->GetProjection();
+            }
+            else
+            {
+                // 텍스트는 px 지오메트리 → unit-quad용 sizeS/pivotOff 금지
+                Matrix model = item.worldMat;
+                mvp = model * cam->GetView() * cam->GetProjection();
+            }
 
             context->OMSetDepthStencilState(sm.defualtDSS.Get(), 1); // depth test off
         }
@@ -103,6 +107,7 @@ void UIRenderPass::Execute(ComPtr<ID3D11DeviceContext>& context, RenderQueue& qu
 
             int fontPx = t->fontSize;
             Vector2 rectSize = Vector2(item.imageSize.x, item.imageSize.y);
+            Vector2 pivot = { item.params.z, item.params.w };
 
             if (item.geometryDirty)
             {
@@ -113,6 +118,7 @@ void UIRenderPass::Execute(ComPtr<ID3D11DeviceContext>& context, RenderQueue& qu
                     t->alignType,            // align
                     t->resource.get(),
                     t->cpuVerts,
+                    pivot,
                     t->indexCount
                 );
             }
