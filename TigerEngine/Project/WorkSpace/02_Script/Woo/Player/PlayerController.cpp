@@ -8,6 +8,7 @@
 #include "System/InputSystem.h"
 #include "EngineSystem/PhysicsSystem.h"
 #include "EngineSystem/CameraSystem.h"
+#include "RenderPass/ParticleSource/Effect.h"
 
 #include "FSM/IPlayerState.h"
 #include "FSM/Player_Idle.h"
@@ -29,6 +30,7 @@
 #include "../JesaSang/JesaSangManager.h"
 #include "../Altar/AltarManager.h"
 #include "PlayerItemVisualizer.h"
+#include "PlayerThreatMonitor.h"
 #include "DialogueUI/DialogueUIController.h"
 #include "../Manager/GameManager.h"
 #include "../Manager/QuestManager.h"
@@ -60,13 +62,15 @@ void PlayerController::OnStart()
     cct = GetOwner()->GetComponent<CharacterControllerComponent>();
     inventory = GetOwner()->GetComponent<Inventory>();
     visualizer = GetOwner()->GetComponent<PlayerItemVisualizer>();
+    threatMonitor = GetOwner()->GetComponent<PlayerThreatMonitor>();
     dialogueController = GetOwner()->GetComponent<DialogueUIController>();
     
     camController = CameraSystem::Instance().GetCurrCamera()->GetOwner()->GetComponent<CameraController>();
 
     // debug
     if (!fbxRenderer || !cct || !inventory || !camController || !fbxData || 
-        !animController || !dialogueController || !fireEffect || !hitEffect)
+        !animController || !dialogueController || !fireEffect || !hitEffect ||
+        !threatMonitor || !visualizer)
     {
         cout << "[Player] Missing COmponet!" << endl;
     }
@@ -102,19 +106,19 @@ void PlayerController::OnUpdate(float delta)
 
     // ----- test --------------
     // ai attack test
-    if (Input::GetKeyDown(Keyboard::Q))
+    if (Input::GetKeyDown(Keyboard::P))
     {
         TakeAttack();
     }
 
     // quarter view
-    if (Input::GetKeyDown(Keyboard::P))
+    if (Input::GetKeyDown(Keyboard::O))
     {
         camController->SetViewMode(CameraController::ViewMode::Quarter);
     }
 
     // front view
-    if (Input::GetKeyDown(Keyboard::O))
+    if (Input::GetKeyDown(Keyboard::I))
     {
         camController->SetViewMode(CameraController::ViewMode::Front);
     }
