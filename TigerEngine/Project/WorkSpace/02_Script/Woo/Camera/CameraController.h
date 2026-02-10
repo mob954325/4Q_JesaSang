@@ -1,6 +1,7 @@
 #pragma once
 #include "Components/ScriptComponent.h"
 #include <directxtk/SimpleMath.h>
+#include <string>
 
 class Transform;
 class Camera;
@@ -32,6 +33,7 @@ private:
     // [ components ]
     Transform* transform = nullptr;       
     Transform* targetTr = nullptr;   
+    std::string camName = "MainCamera";
 
 
     // [ data ]

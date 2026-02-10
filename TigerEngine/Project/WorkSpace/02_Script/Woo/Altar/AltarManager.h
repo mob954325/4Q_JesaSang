@@ -6,6 +6,7 @@
 #include "Components/ScriptComponent.h"
 
 class GameObject;
+class Camera;
 class Image;
 class IItem;
 
@@ -54,11 +55,16 @@ private:
     Image* image_interactionOn = nullptr;
     Image* image_interactionGauge = nullptr;
 
+
 private:
-    // active flag
+    // 제단 최초 활성화 연출 Data
     GameObject* altar = nullptr;     // 활성화/비활성화할 제단 덩어리 부모 게임오브젝트
     bool isFirstReceiveItem = false;
-    void FirstReceiveDirect();       // 최초 제단 활성화
+   
+    Transform* altarDirectCam = nullptr;
+    std::string camName = "AltarDirectCamera";
+    
+    void FirstReceiveDirect(std::string itemId);       // 최초 제단 활성화 연출
 
 
 public:

@@ -2,8 +2,11 @@
 #include "Util/JsonHelper.h"
 #include "Util/ComponentAutoRegister.h"
 #include "EngineSystem/SceneSystem.h"
+#include "EngineSystem/CameraSystem.h"
+#include "Components/Camera.h"
 #include "Object/GameObject.h"
 #include "Components/UI/Image.h"
+#include "Manager/WorldManager.h"
 
 #include "../Item/Item.h"
 
@@ -16,9 +19,21 @@ RTTR_REGISTRATION
     (rttr::policy::ctor::as_std_shared_ptr);
 }
 
-void AltarManager::FirstReceiveDirect()
+void AltarManager::FirstReceiveDirect(std::string itemId)
 {
-    // 최초 제단 활성화
+    // 제단 활성화 연출
+    /*
+    - 페이드아웃 → 페이드인 (이때 카메라가 제단을 정면에서 바라보는 view)
+    - 카메라 줌인 → 제단에 푸른 불꽃 이펙트를 재생하며 음식 비주얼 on
+    - 페이드아웃 → 페이드인(이때 원시점 복귀)
+    */
+
+    // 1. FadeOut
+
+    // 2. 카메라 전환 (Direct Camera)
+    CameraSystem::Instance().SetCurrCameraByName(camName);
+    
+    // 3. 최초 제단 활성화
     altar->SetActive(true);
 
     ingre_apple->SetActive(false);
@@ -35,7 +50,18 @@ void AltarManager::FirstReceiveDirect()
     food_sanjeok->SetActive(false);
     food_dong->SetActive(false);
 
-    // TODO :: 제단 활성화 연출 여기에 연결
+    // 4. FadeIn + Cam position udpate (z-)
+
+    // 5. Effect Play + Visual On
+    VisualItem(itemId, true);
+    
+
+    // 6. FadeOut
+
+    // 7. 카메라 전환 (Main Camera)
+    CameraSystem::Instance().SetCurrCameraByName("MainCamera");
+
+    // 8. FadeIn
 }
 
 void AltarManager::OnInitialize()
@@ -46,9 +72,13 @@ void AltarManager::OnInitialize()
 
 void AltarManager::OnStart()
 {
-    // gameobject find
     const auto& sceneSystem = SceneSystem::Instance().GetCurrentScene();
 
+    // direct cam find
+    altarDirectCam = sceneSystem->GetGameObjectByName("AltarDirectCamera")->GetComponent<Transform>();
+    altarDirectCam->GetOwner()->SetName(camName);
+
+    // gameobject find
     altar = sceneSystem->GetGameObjectByName("Altar");
 
     ingre_apple = sceneSystem->GetGameObjectByName("Alta_Ingre_Apple");
@@ -172,7 +202,9 @@ void AltarManager::ReceiveItem(std::unique_ptr<IItem> item)
     if (!isFirstReceiveItem)
     {
         isFirstReceiveItem = true;
-        FirstReceiveDirect();
+        FirstReceiveDirect(item->itemId);
+        itemQueue.push_back(std::move(item));
+        return;     // 비주얼은 연출쪽에서 알맞은 타이밍에 on
     }
 
     // 비주얼 on
