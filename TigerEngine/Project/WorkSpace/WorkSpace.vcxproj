@@ -145,6 +145,12 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="02_Script\Ho\Manager\ResultPanel.h" />
+    <ClInclude Include="02_Script\Ho\ResultPanels\EdgeToCenterSampler.h" />
+    <ClInclude Include="02_Script\Ho\ResultPanels\LoseCinemachine.h" />
+    <ClInclude Include="02_Script\Ho\ResultPanels\LosePanel.h" />
+    <ClInclude Include="02_Script\Ho\ResultPanels\WinCinemachine.h" />
+    <ClInclude Include="02_Script\Ho\ResultPanels\WinPanel.h" />
     <ClInclude Include="02_Script\Ho\UI\MenuUI_ExitButton.h" />
     <ClInclude Include="02_Script\Ho\UI\MenuUI_OptionButton.h" />
     <ClInclude Include="02_Script\Ho\UI\MenuUI_StartButton.h" />
@@ -231,6 +237,11 @@
   <ItemGroup>
     <ClCompile Include="02_Script\Ho\Manager\FrozenManager.cpp" />
     <ClCompile Include="02_Script\Ho\Manager\FrozenManager.h" />
+    <ClCompile Include="02_Script\Ho\Manager\ResultPanel.cpp" />
+    <ClCompile Include="02_Script\Ho\ResultPanels\LoseCinemachine.cpp" />
+    <ClCompile Include="02_Script\Ho\ResultPanels\LosePanel.cpp" />
+    <ClCompile Include="02_Script\Ho\ResultPanels\WinCinemachine.cpp" />
+    <ClCompile Include="02_Script\Ho\ResultPanels\WinPanel.cpp" />
     <ClCompile Include="02_Script\Ho\UI\MenuUI_ExitButton.cpp" />
     <ClCompile Include="02_Script\Ho\UI\MenuUI_OptionButton.cpp" />
     <ClCompile Include="02_Script\Ho\UI\MenuUI_StartButton.cpp" />

@@ -1,0 +1,155 @@
+{
+  "prefab": [
+    {
+      "Active": true,
+      "ID": 169,
+      "Name": "WinPackage",
+      "ParentID": -1,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 165,
+      "Name": "WinCinemahcine",
+      "ParentID": 169,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              359.3421630859375,
+              190.5639190673828,
+              0.0
+            ],
+            "Rotation": [
+              -0.0,
+              0.0,
+              -0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true
+          },
+          "type": "WinCinemachine"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 166,
+      "Name": "WinCinemachineCamera",
+      "ParentID": 165,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              8.3599853515625,
+              -137.6533660888672
+            ],
+            "Rotation": [
+              -0.0,
+              0.0,
+              -0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "angle": 1.5707963705062866,
+            "farDist": 1800.0,
+            "moveSpeed": 100.0,
+            "nearDist": 70.0,
+            "rotSpeed": 0.004000000189989805
+          },
+          "type": "Camera"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 167,
+      "Name": "WinSpotLight",
+      "ParentID": 169,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              360.3035888671875,
+              253.8966827392578,
+              -2.8719749450683594
+            ],
+            "Rotation": [
+              -0.0,
+              0.0,
+              -0.0
+            ],
+            "Scale": [
+              1.0,
+              0.999997079372406,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Color": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "Direction": [
+              0.0,
+              -1.0,
+              1.0
+            ],
+            "InnerAngle": 100.0,
+            "Intensity": 2000.0,
+            "IsSunLight": false,
+            "LightType": "Spot",
+            "OuterAngle": 200.0,
+            "Range": 200.0
+          },
+          "type": "Light"
+        }
+      ]
+    }
+  ]
+}
