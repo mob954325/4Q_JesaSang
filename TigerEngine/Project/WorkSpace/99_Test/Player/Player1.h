@@ -3,6 +3,7 @@
 #include "Components/ScriptComponent.h"
 #include "Weapon.h"
 #include "../Engine/Components/AudioSourceComponent.h"
+#include "../../02_Script/Ho/Sound/PlayerSoundSource.h"
 
 /// <summary>
 /// 클라이언트 컴포넌트 테스트용 클래스.
@@ -26,7 +27,7 @@ public:
     float b = 0.0f;
 
 private:
-    AudioSourceComponent* audioClip{};
+    PlayerSoundSource* pss;
     Vector3 prevPos{};
     bool hasPrev = false;
 };

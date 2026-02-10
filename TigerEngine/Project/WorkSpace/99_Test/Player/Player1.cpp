@@ -56,14 +56,7 @@ void Player1::OnStart()
 
     // GameObject* instantiated = PrefabUtil::Instantiate("Test1");
     // instantiated->GetTransform()->SetParent(this->GetOwner()->GetTransform());
-    audioClip = GetOwner()->GetComponent<AudioSourceComponent>();
-
-    if (audioClip)
-    {
-        audioClip->Play();
-        bool isloop = audioClip->GetLoop();
-        audioClip->SetLoop(!isloop);
-    }
+    pss = GetOwner()->GetComponent<PlayerSoundSource>();
 }
 
 void Player1::OnDisable()
@@ -111,28 +104,25 @@ void Player1::OnUpdate(float delta)
 
     if (Input::GetKeyDown(DirectX::Keyboard::I))
     {
-        audioClip->Pause(true);
+        pss->PlaySound(PlayerSoundType::Sit, true);
     }
 
     if (Input::GetKeyDown(DirectX::Keyboard::O))
     {
-        audioClip->Pause(false);
+        pss->PlaySound(PlayerSoundType::Walk);
     }
 
     if (Input::GetKeyDown(DirectX::Keyboard::P))
     {
-        audioClip->Stop();
+        pss->PlaySound(PlayerSoundType::Run);
     }
 
     if (Input::GetKeyDown(DirectX::Keyboard::L))
     {
-        audioClip->Play();
     }
 
     if (Input::GetKeyDown(DirectX::Keyboard::K))
     {
-        bool isloop = audioClip->GetLoop();
-        audioClip->SetLoop(!isloop);
     }
 
     // sync 
@@ -147,13 +137,13 @@ void Player1::OnUpdate(float delta)
     prevPos = pos;
     hasPrev = true;
 
-    AudioTransform t{};
-    t.position = { pos.x, pos.y, pos.z };       // 위치
-    t.forward = { fwd.x, fwd.y, fwd.z };        // forward
-    t.up = { up.x,  up.y,  up.z };              // up vector
-    t.velocity = { vel.x, vel.y, vel.z };       // "초당 이동량"(world-space). doppler 등에 사용됨. ( 청자(Listener)가 얼마나 / 어느 방향으로 움직이는지 알려주는 값 
-
-    audioClip->SetFallback(t); // AudioListenerComponent가 Update()에서 적용(Engine/Components/AudioListenerComponent.cpp:61)
+    //AudioTransform t{};
+    //t.position = { pos.x, pos.y, pos.z };       // 위치
+    //t.forward = { fwd.x, fwd.y, fwd.z };        // forward
+    //t.up = { up.x,  up.y,  up.z };              // up vector
+    //t.velocity = { vel.x, vel.y, vel.z };       // "초당 이동량"(world-space). doppler 등에 사용됨. ( 청자(Listener)가 얼마나 / 어느 방향으로 움직이는지 알려주는 값 
+    //
+    //audioClip->SetFallback(t); // AudioListenerComponent가 Update()에서 적용(Engine/Components/AudioListenerComponent.cpp:61)
 }
 
 nlohmann::json Player1::Serialize()
