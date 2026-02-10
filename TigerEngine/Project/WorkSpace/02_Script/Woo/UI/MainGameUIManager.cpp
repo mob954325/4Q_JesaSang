@@ -23,6 +23,33 @@ RTTR_REGISTRATION
     .property("lifeOffImagePath", &MainGameUIManager::lifeOffImagePath) (metadata(META_BROWSE, ""));
 }
 
+namespace
+{
+    constexpr float kQuestOpenX = 1420.0f;
+    constexpr float kQuestCloseX = 1920.0f;
+
+    float Clamp01(float v)
+    {
+        if (v < 0.0f) return 0.0f;
+        if (v > 1.0f) return 1.0f;
+        return v;
+    }
+
+    float Lerp(float a, float b, float t)
+    {
+        return a + (b - a) * t;
+    }
+
+    // 보기 좋은 슬라이드용 이징(부드럽게)
+    float EaseOutCubic(float t)
+    {
+        t = Clamp01(t);
+        float u = 1.0f - t;
+        return 1.0f - (u * u * u);
+    }
+}       // quest 연출
+
+
 void MainGameUIManager::OnInitialize()
 {
     s_instance = this;
@@ -179,4 +206,51 @@ void MainGameUIManager::SetQuestLineOn(bool flag)
 {
     if (!line) return;
     line->SetActive(flag);
+}
+
+void MainGameUIManager::QuestPannelOpen(float durationSec)
+{
+    if (!questParent) return;
+
+    questPanelAnimating_ = true;
+    questPanelTimer_ = 0.0f;
+    questPanelDuration_ = (durationSec <= 0.0f) ? 0.0001f : durationSec;
+
+    questPanelFromX_ = questParent->GetPos().x;
+    questPanelToX_ = kQuestOpenX;
+}
+
+void MainGameUIManager::QuestPannelClose(float durationSec)
+{
+    if (!questParent) return;
+
+    questPanelAnimating_ = true;
+    questPanelTimer_ = 0.0f;
+    questPanelDuration_ = (durationSec <= 0.0f) ? 0.0001f : durationSec;
+
+    questPanelFromX_ = questParent->GetPos().x;
+    questPanelToX_ = kQuestCloseX;
+}
+
+void MainGameUIManager::TickQuestPanel(float dt)
+{
+    if (!questParent || !questPanelAnimating_)
+        return;
+
+    questPanelTimer_ += dt;
+    float t = questPanelTimer_ / questPanelDuration_;
+    float eased = EaseOutCubic(t);
+
+    Vector3 pos = questParent->GetPos();
+    pos.x = Lerp(questPanelFromX_, questPanelToX_, eased);
+    questParent->SetPos(pos);
+
+    if (t >= 1.0f)
+    {
+        // 애니메이션 종료
+        pos.x = questPanelToX_;
+        questParent->SetPos(pos);
+
+        questPanelAnimating_ = false;
+    }
 }

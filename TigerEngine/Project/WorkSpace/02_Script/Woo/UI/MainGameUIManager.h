@@ -30,11 +30,18 @@ private:
     Image* life_5 = nullptr;
 
     // quest
-    RectTransform* questParent = nullptr;
+    RectTransform* questParent = nullptr;       // x : 1420.0 ~ 1920
     TextUI* questTitle = nullptr;
     TextUI* questLable = nullptr;
     Image* cheakbox = nullptr;
     Image* line = nullptr;
+
+    // quest panel animation state
+    bool questPanelAnimating_ = false;
+    float questPanelTimer_ = 0.0f;
+    float questPanelDuration_ = 1.0f;
+    float questPanelFromX_ = 1420.0f;
+    float questPanelToX_ = 1420.0f;
 
 public:
     // rttr
@@ -70,5 +77,9 @@ public:
     void SetQuestLableOn(bool flag);
     void SetQuestCheakboxOn(bool flag);
     void SetQuestLineOn(bool flag);
+
+    void QuestPannelOpen(float durationSec);
+    void QuestPannelClose(float durationSec);
+    void TickQuestPanel(float dt); // 퀘스트창 슬라이드 연출
 };
 
