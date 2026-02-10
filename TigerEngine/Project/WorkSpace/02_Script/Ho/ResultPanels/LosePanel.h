@@ -18,12 +18,17 @@ public:
     nlohmann::json Serialize() override;
     void Deserialize(nlohmann::json data) override;
 
+    void UpdateWorldSetting(float dt);
+
     bool notified = false;  // 외부 호출을 했는가? -> Manager에서 요청
     bool isPlayed = false;  // 한 번 플레이했는가? -> 중복 플레이 방지
 
     float timer = 0.0f;     // 이미지 시퀀스 시간
     float maxTimer = 0.5f;  // 이미지 시퀀스 딜레이 시간
     int index = 0;          // 이미지 시퀀스 인덱스
+
+    float fadeOutTimer = 0.0f;      // 암전 시간
+    float fadeOutMaxTime = 6.0f;    // 암전 최대 시간
 
 private:
     Image* cutImg = nullptr;

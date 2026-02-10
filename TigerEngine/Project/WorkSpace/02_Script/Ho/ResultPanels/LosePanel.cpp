@@ -3,6 +3,7 @@
 #include "../../../Engine/EngineSystem/SceneSystem.h"
 #include "../../../Engine/Util/ComponentAutoRegister.h"
 #include "../../../Engine/Util/JsonHelper.h"
+#include "Manager/WorldManager.h"
 
 REGISTER_COMPONENT(LosePanel);
 
@@ -35,6 +36,7 @@ void LosePanel::OnUpdate(float delta)
     if (notified && !isPlayed)
     {
         timer += delta;
+        UpdateWorldSetting(delta);
 
         if (timer > maxTimer)
         {
@@ -45,6 +47,7 @@ void LosePanel::OnUpdate(float delta)
                 index++;
                 if (cutImg)
                     cutImg->ChangeData(effectsPath[index]);
+
             }
             else
             {
@@ -70,4 +73,12 @@ nlohmann::json LosePanel::Serialize()
 void LosePanel::Deserialize(nlohmann::json data)
 {
     JsonHelper::SetDataFromJson(this, data);
+}
+
+void LosePanel::UpdateWorldSetting(float dt)
+{
+    auto& postProcessData = WorldManager::Instance().postProcessData;
+
+    fadeOutTimer += dt;
+    postProcessData.exposure = std::lerp(0.0f, -10.0f, fadeOutTimer / fadeOutMaxTime);
 }
