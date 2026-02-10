@@ -81,6 +81,7 @@ private:
     };
 
     bool isDirecting = false;
+    bool startedFireFx = false;
     DirectPhase directPhase = DirectPhase::None;
     float phaseTimer = 0.0f;
 

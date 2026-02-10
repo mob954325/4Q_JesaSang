@@ -12,6 +12,7 @@
 #include "Manager/WorldManager.h"
 #include "System/TimeSystem.h"
 #include "RenderPass/ParticleSource/Effect.h"
+#include "../Player/DialogueUI/DialogueUIController.h"
 
 #include "../Item/Item.h"
 
@@ -203,8 +204,6 @@ void AltarManager::ReceiveItem(std::unique_ptr<IItem> item)
         return;
     }
 
-    // 연출 중이면 큐는 받되, 비주얼/회수 등은 연출이 끝난 후 자연스럽게 가는게 안전
-    // (지금 정책: 연출 중 Receive는 허용, 비주얼은 기본적으로 즉시 켜지지 않음)
     if (isDirecting)
     {
         itemQueue.push_back(std::move(item));
@@ -231,7 +230,6 @@ void AltarManager::ReceiveItem(std::unique_ptr<IItem> item)
 
 std::unique_ptr<IItem> AltarManager::GetItem()
 {
-    // 연출 중엔 회수 금지(화면/큐/비주얼 꼬임 방지)
     if (isDirecting)
     {
         cout << "[AltarManager] directing... can't get item now." << endl;
@@ -301,6 +299,9 @@ void AltarManager::SetAllVisualOff()
     if (food_tofu) food_tofu->SetActive(false);
     if (food_sanjeok) food_sanjeok->SetActive(false);
     if (food_dong) food_dong->SetActive(false);
+
+    UISensorOnOff(false);
+    UIInteractionOnOff(false);
 }
 
 void AltarManager::BeginDirectSequence(std::string itemId)
@@ -401,8 +402,13 @@ void AltarManager::UpdateDirectSequence(float dt)
     {
         // 5. Effect Play + Visual On
         VisualItem(directingItemId, true);
-        fireEffect1->Play();
-        fireEffect2->Play();
+
+        if (!startedFireFx)
+        {
+            if (fireEffect1) fireEffect1->Play();
+            if (fireEffect2) fireEffect2->Play();
+            startedFireFx = true;
+        }
 
         if (visualHoldTime <= 0.0f || phaseTimer >= visualHoldTime)
         {
@@ -461,6 +467,11 @@ void AltarManager::UpdateDirectSequence(float dt)
 
         // post data 복구
         RestorePostProcess();
+
+        // Player 다이얼로그
+        auto go = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("Player");
+        go->GetComponent<DialogueUIController>()->ShowDialogueText(L"뭔가 으스스해진 것 같아...");
+
     }
     break;
 
