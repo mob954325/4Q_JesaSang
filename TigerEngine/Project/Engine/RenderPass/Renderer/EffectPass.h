@@ -1,5 +1,6 @@
 #pragma once
 #include "../IRenderPass.h"
+#include "../Renderable/ParticleQuadMesh.h"
 #include "pch.h"
 
 /*
@@ -12,6 +13,9 @@
 class EffectPass : public IRenderPass
 {
 private:
+    ParticleQuadMesh quad;
+    UINT maxParticleInstances = 1024;
+    ComPtr<ID3D11Buffer> instanceBuffer = nullptr;
 
 public:
     ~EffectPass() override;
@@ -20,5 +24,7 @@ public:
     void Execute(ComPtr<ID3D11DeviceContext>& context,
         RenderQueue& queue, Camera* cam) override;
     void End(ComPtr<ID3D11DeviceContext>& context) override {}
-};
 
+private:
+    void EnsureInstanceCapacity(UINT required);
+};
