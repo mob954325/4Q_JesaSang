@@ -4,6 +4,7 @@
 #include "Components/FBXData.h"
 #include "Components/AnimationController.h"
 #include "Components/CharacterControllerComponent.h"
+#include "RenderPass/ParticleSource/Effect.h"
 
 #include <directxtk/Keyboard.h>
 
@@ -46,6 +47,7 @@ private:
     FBXData* fbxData = nullptr;
     AnimationController* animController = nullptr;
     CharacterControllerComponent* cct = nullptr;
+    Effect* fireEffect = nullptr;
 
     Inventory* inventory = nullptr;
     PlayerItemVisualizer* visualizer = nullptr;

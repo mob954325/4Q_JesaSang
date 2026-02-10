@@ -54,6 +54,7 @@ void PlayerController::OnStart()
     fbxRenderer = GetOwner()->GetComponent<FBXRenderer>();
     fbxData = GetOwner()->GetComponent<FBXData>();
     animController = GetOwner()->GetComponent<AnimationController>();
+    fireEffect = GetOwner()->GetChildByName("Player_FireEffect")->GetOwner()->GetComponent<Effect>();
 
     cct = GetOwner()->GetComponent<CharacterControllerComponent>();
     inventory = GetOwner()->GetComponent<Inventory>();
@@ -63,7 +64,8 @@ void PlayerController::OnStart()
     camController = CameraSystem::Instance().GetCurrCamera()->GetOwner()->GetComponent<CameraController>();
 
     // debug
-    if (!fbxRenderer || !cct || !inventory || !camController || !fbxData || !animController || !dialogueController)
+    if (!fbxRenderer || !cct || !inventory || !camController || !fbxData || 
+        !animController || !dialogueController || !fireEffect)
     {
         cout << "[Player] Missing COmponet!" << endl;
     }
@@ -665,6 +667,7 @@ void PlayerController::TakeAttack()
         visualizer->VisualOffItem();
         visualizer->VisualItemIDNullSet();
         AltarManager::Instance()->ReceiveItem(std::move(item));
+        fireEffect->Play();
         cout << "[Player] Drop Item... " << endl;
     }
 
