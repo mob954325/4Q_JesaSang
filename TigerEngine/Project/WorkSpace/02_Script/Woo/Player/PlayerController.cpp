@@ -30,6 +30,8 @@
 #include "../Altar/AltarManager.h"
 #include "PlayerItemVisualizer.h"
 #include "../Manager/GameManager.h"
+#include "../Manager/QuestManager.h"
+#include "../UI/MainGameUIManager.h"
 #include "../CookingZone/CookingZone.h"
 #include "../../Ron/MiniMapTest/MiniMapManager.h"
 
@@ -337,6 +339,11 @@ void PlayerController::SerachObjectInteraction(float dt)
                 else if (item->itemId == "4")
                     minimap->TriggerPieceCollected(4);
             }
+            // 퀘스트 1 : [탐색] 제사준비 : 최조로 음식 재료 획득시 달성
+            else if (item->itemType == ItemType::Ingredient)
+            {
+                QuestManager::Instance()->StepComplete(1);
+            }
 
             // item get
             visualizer->VisualOnItem(item->itemId);
@@ -408,8 +415,6 @@ void PlayerController::CookingInteraction(float dt)
         cookInteractionTimer = 0.0f;
 
         // ui clear
-        CookingZone::Instance()->UISensorOnOff(false);
-        CookingZone::Instance()->UIInteractionOnOff(false);
         CookingZone::Instance()->UIGaugeUpate(0.0);
     }
 }
@@ -439,6 +444,9 @@ void PlayerController::PutFoodJesaSangInteraction(float dt)
         JesaSangManager::Instance()->ReceiveFood(std::move(food));
         visualizer->VisualOffItem();
         visualizer->VisualItemIDNullSet();
+
+        // 퀘스트 3 : [운반] 차려지는 상 : 최조로 제사상에 음식을 올렸을시 달성
+        QuestManager::Instance()->StepComplete(3);
 
         // clear
         putFoodTimer = 0.0f;
@@ -571,6 +579,9 @@ void PlayerController::ReceiveMiniGameResult(unique_ptr<IItem> ingredient, bool 
         // 인벤토리에 완성된 음식 추가
         visualizer->VisualOnItem(food->itemId);
         inventory->AddItem(std::move(food));
+
+        // 퀘스트 2 : [조리] 정성을 담아 : 최초로 미니게임 성공시 달성
+        QuestManager::Instance()->StepComplete(2);
     }
     else
     {
@@ -615,9 +626,11 @@ void PlayerController::TakeAttack()
         cout << "[Player] Drop Item... " << endl;
     }
 
-    // Die
+    // life
     curLife--;
-    
+    MainGameUIManager::Instance()->UpdateLifeUI(curLife);
+
+    // Die
     if (curLife <= 0)
     {
         curLife = 0;

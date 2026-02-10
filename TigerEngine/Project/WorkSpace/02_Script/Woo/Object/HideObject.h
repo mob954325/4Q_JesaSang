@@ -27,6 +27,7 @@ private:
     // child UI
     Image* image_sensorOn = nullptr;
     Image* image_interactionOn = nullptr;
+    Image* image_interactionGauge = nullptr;
 
 
     // data
@@ -61,6 +62,7 @@ public :
     // UI
     void UISensorOnOff(bool flag);              // 플레이어 감지영역 UI
     void UIInteractionOnOff(bool flag);         // 플레이어 상호작용 영역 UI
+    void UIGaugeUpate(float progress);          // 플레이어 인터랙션 UI
 
 
     // AI 시야 연결 - 선민 | 02.07 

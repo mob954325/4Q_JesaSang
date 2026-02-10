@@ -107,8 +107,7 @@ void AltarManager::OnDestory()
 {
     if (s_instance == this) s_instance = nullptr;
 
-    foodQueue.clear();
-    ingreQueue.clear();
+    itemQueue.clear();
 }
 
 nlohmann::json AltarManager::Serialize()
@@ -180,35 +179,16 @@ void AltarManager::ReceiveItem(std::unique_ptr<IItem> item)
     VisualItem(item->itemId, true);
 
     // 아이템이 제단에 올라감
-    if (item->itemType == ItemType::Food)
-        foodQueue.push_back(std::move(item));
-    else
-        ingreQueue.push_back(std::move(item));
+    itemQueue.push_back(std::move(item));
 }
 
 std::unique_ptr<IItem> AltarManager::GetItem()
 {
-    // 완성된 음식 우선 회수 (FIFO)
-    if (!foodQueue.empty() && foodQueue.front())
+    // FIFO 회수
+    if (!itemQueue.empty())
     {
-        std::unique_ptr<IItem> out = std::move(foodQueue.front());
-        foodQueue.pop_front();
-
-        VisualItem(out->itemId, false);
-
-        // UI clear
-        UISensorOnOff(false);
-        UIInteractionOnOff(false);
-        image_interactionGauge->SetFillAmount(0.0);
-
-        return out;
-    }
-
-    // 음식 재료 회수 (FIFO)
-    if (!ingreQueue.empty() && ingreQueue.front())
-    {
-        std::unique_ptr<IItem> out = std::move(ingreQueue.front());
-        ingreQueue.pop_front();
+        std::unique_ptr<IItem> out = std::move(itemQueue.front());
+        itemQueue.pop_front();
 
         VisualItem(out->itemId, false);
 
