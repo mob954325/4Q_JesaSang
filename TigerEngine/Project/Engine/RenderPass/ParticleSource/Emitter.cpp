@@ -75,7 +75,7 @@ registration::class_<Emitter>("Emitter")
 
     // control
     .property("enabled", &Emitter::enabled)(metadata(META_BOOL, true))
-    .property("playing", &Emitter::playing)(metadata(META_BOOL, true))
+    //.property("playing", &Emitter::playing)(metadata(META_BOOL, true))
 
     // emission
     .property("duration",     &Emitter::duration)
