@@ -19,4 +19,5 @@ public:
     // trigger event
     void OnTriggerEnter(PhysicsComponent* other) override;
 
+    void OnCCTTriggerEnter(CharacterControllerComponent* cct) override;
 };
