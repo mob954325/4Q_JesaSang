@@ -23,7 +23,7 @@ private:
 
     // UI
     Transform* dialogueParent = nullptr;
-    Image* image_dialogue = nullptr;
+    RectTransform* dialogueRect = nullptr;
     TextUI* text_dialogue = nullptr;
 
     // offset
@@ -44,5 +44,7 @@ public:
     // UI Util Funcs
     void DialogueOnOff(bool flag);
     void DialogueToggle();
+
+    void UpdateText(const wchar_t* s);
 };
 
