@@ -6,6 +6,8 @@ void BabyGhost_Return::Enter()
 
     babyGhost->ResetAgentForMove(3.0f); // Return 속도 
 
+    visionTimer = 0.0f;
+
     // babyGhost->animController->ChangeState("Idle");
 
     // 웨이포인트 좌표
@@ -25,14 +27,17 @@ void BabyGhost_Return::Enter()
 }
 
 void BabyGhost_Return::ChangeStateLogic()
-{
-    // 시야에 플레이어가 들어오면 Cry
-    auto* player = babyGhost->GetAITarget();
-    if (player && babyGhost->IsSeeing(player))
+{ 
+    // 3초 후 부터 시야에 플레이어 감지 (바로 감지하는거 방지하기 위해)
+    if (visionTimer >= visionDelay)
     {
-        cout << "[BabyGhost_Return] Player detected -> Cry" << endl;
-        babyGhost->ChangeState(BabyGhostState::Cry);
-        return;
+        auto* player = babyGhost->GetAITarget();
+        if (player && babyGhost->IsSeeing(player))
+        {
+            cout << "[BabyGhost_Return] Player detected -> Cry" << endl;
+            babyGhost->ChangeState(BabyGhostState::Cry);
+            return;
+        }
     }
 
     // 복귀 완료 : 현재 위치와 initialPosition 비교

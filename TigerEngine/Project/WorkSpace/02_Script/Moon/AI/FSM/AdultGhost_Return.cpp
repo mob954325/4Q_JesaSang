@@ -26,7 +26,7 @@ void AdultGhost_Return::Enter()
 
 void AdultGhost_Return::ChangeStateLogic()
 {
-    // 시야에 플레이어가 들어오면 Chase
+    // 1. 시야에 플레이어가 들어오면 Chase
     auto* player = adultGhost->GetAITarget();
     if (player && adultGhost->IsSeeing(player))
     {
@@ -35,16 +35,36 @@ void AdultGhost_Return::ChangeStateLogic()
         return;
     }
 
-    // 복귀 완료 : 현재 위치와 initialPosition 비교
-    auto tr = adultGhost->GetOwner()->GetTransform();
-    float distSqr = (tr->GetWorldPosition() - adultGhost->initialPosition).LengthSquared();
-    const float arrivalThreshold = 150.0f; // 거의 도착했으면
-    if (distSqr <= arrivalThreshold * arrivalThreshold)
+
+    // 2. 복귀 완료 (그리드 좌표 적용) : 현재 위치와 initialPosition 비교
+    auto grid = GridSystem::Instance().GetMainGrid();
+    if (!grid) return;
+
+    int cx, cy;
+    if (!grid->WorldToGridFromCenter(adultGhost->GetOwner()->GetTransform()->GetWorldPosition(), cx, cy))
+        return;
+
+    // 웨이포인트 그리드 좌표
+    int wx, wy;
+    if (!grid->WorldToGridFromCenter(adultGhost->initialPosition, wx, wy))
+        return;
+    if (cx == wx && cy == wy)
     {
         cout << "[AdultGhost_Return] Reached waypoint -> Patrol" << endl;
         adultGhost->ChangeState(AdultGhostState::Patrol);
         return;
     }
+
+    //// 복귀 완료 : 현재 위치와 initialPosition 비교
+    //auto tr = adultGhost->GetOwner()->GetTransform();
+    //float distSqr = (tr->GetWorldPosition() - adultGhost->initialPosition).LengthSquared();
+    //const float arrivalThreshold = 150.0f; // 거의 도착했으면
+    //if (distSqr <= arrivalThreshold * arrivalThreshold)
+    //{
+    //    cout << "[AdultGhost_Return] Reached waypoint -> Patrol" << endl;
+    //    adultGhost->ChangeState(AdultGhostState::Patrol);
+    //    return;
+    //}
 }
 
 void AdultGhost_Return::Update(float deltaTime)

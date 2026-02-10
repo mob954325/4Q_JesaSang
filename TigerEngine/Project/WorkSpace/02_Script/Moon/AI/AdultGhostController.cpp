@@ -75,11 +75,13 @@ void AdultGhostController::OnStart()
 
 void AdultGhostController::OnUpdate(float delta)
 {
-    if (currentState)
-    {
-        currentState->ChangeStateLogic();
+    if (!currentState) return;
+
+    currentState->ChangeStateLogic();
+
+    // 상태가 바뀌었으면 Update 실행하지 않음
+    if (currentState == fsmStates[(int)state])
         currentState->Update(delta);
-    }
 }
 
 void AdultGhostController::OnFixedUpdate(float dt)
@@ -264,11 +266,11 @@ bool AdultGhostController::IsSeeing(GameObject* target) const
 }
 
 // Object Getter 
-GameObject* AdultGhostController::GetAITarget() const
+GameObject* AdultGhostController::GetAITarget() const // Raycast 전용 (IsSeeing()에서 사용)
 {
     return SceneSystem::Instance().GetCurrentScene() ->GetGameObjectByName("AITarget");
 }
-GameObject* AdultGhostController::GetPlayer() const
+GameObject* AdultGhostController::GetPlayer() const // 플레이어 
 {
     return SceneSystem::Instance().GetCurrentScene() ->GetGameObjectByName("Player");
 }
