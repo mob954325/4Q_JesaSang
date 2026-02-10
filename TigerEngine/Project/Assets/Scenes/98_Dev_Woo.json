@@ -20138,8 +20138,8 @@
                 3.1415927410125732
               ],
               "Scale": [
-                1.0,
-                1.0,
+                0.25,
+                0.25,
                 1.0
               ]
             },
@@ -20149,8 +20149,8 @@
             "properties": {
               "Active": true,
               "Pivot": [
-                0.5,
-                0.5
+                0.0,
+                0.4000000059604645
               ],
               "Pos": [
                 0.0,
@@ -20173,8 +20173,8 @@
                 1.0
               ],
               "Size": [
-                50.0,
-                30.0
+                250.0,
+                150.0
               ]
             },
             "type": "RectTransform"
@@ -20190,17 +20190,17 @@
               ],
               "drawSpacetype": "World",
               "fillAmount": 1.0,
-              "imageType": "Simple",
+              "imageType": "Sliced",
               "isBillboard": true,
               "isMouseCheck": false,
               "path": "..\\Assets\\Resource\\UI\\Player\\Dialogue.png",
               "sliceBorderPx": [
-                1.0,
-                1.0,
-                1.0,
-                1.0
+                80.0,
+                65.0,
+                40.0,
+                40.0
               ],
-              "type": "Simple",
+              "type": "Sliced",
               "zOrder": -4
             },
             "type": "Image"
@@ -20284,7 +20284,7 @@
           {
             "properties": {
               "Position": [
-                0.0,
+                7.0,
                 0.0,
                 0.0
               ],
@@ -20305,7 +20305,7 @@
             "properties": {
               "Active": true,
               "Pivot": [
-                0.5,
+                0.0,
                 0.5
               ],
               "Pos": [
