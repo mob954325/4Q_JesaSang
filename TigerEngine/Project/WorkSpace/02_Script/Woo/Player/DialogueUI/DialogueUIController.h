@@ -42,5 +42,7 @@ public:
 
 public:
     // UI Util Funcs
+    void DialogueOnOff(bool flag);
+    void DialogueToggle();
 };
 

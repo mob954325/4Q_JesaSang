@@ -11,6 +11,9 @@
 #include "Components/UI/Image.h"
 #include "Components/UI/TextUI.h"
 
+#include <directxtk/Keyboard.h>
+
+
 REGISTER_COMPONENT(DialogueUIController)
 
 RTTR_REGISTRATION
@@ -33,6 +36,9 @@ void DialogueUIController::OnStart()
     {
         cout << "[DialogueUIController] Missing Components!" << endl;
     }
+
+    // init
+    DialogueOnOff(false);
 }
 
 void DialogueUIController::OnUpdate(float delta)
@@ -42,6 +48,12 @@ void DialogueUIController::OnUpdate(float delta)
 
     // position trace
     dialogueParent->SetPosition(targetTr->GetWorldPosition() + offset);
+
+    // --- test --- // TODO :: Delete
+    if (Input::GetKeyDown(Keyboard::P))
+    {
+        DialogueToggle();
+    }
 }
 
 void DialogueUIController::OnDestory()
@@ -57,4 +69,16 @@ nlohmann::json DialogueUIController::Serialize()
 void DialogueUIController::Deserialize(nlohmann::json data)
 {
     JsonHelper::SetDataFromJson(this, data);
+}
+
+void DialogueUIController::DialogueOnOff(bool flag)
+{
+    if (!dialogueParent) return;
+    dialogueParent->GetOwner()->SetActive(flag);
+}
+
+void DialogueUIController::DialogueToggle()
+{
+    if (!dialogueParent) return;
+    dialogueParent->GetOwner()->SetActive(!dialogueParent->GetOwner()->GetActiveSelf());
 }
