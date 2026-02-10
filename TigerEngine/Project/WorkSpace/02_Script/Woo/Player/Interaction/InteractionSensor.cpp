@@ -5,8 +5,8 @@
 #include "Components/FBXRenderer.h"
 
 #include "../../Object/SearchObject.h"
-#include "../../Object/HideObject.h""
-#include "../../Object/TrapObject.h""
+#include "../../Object/HideObject.h"
+#include "../../Object/TrapObject.h"
 #include "../../JesaSang/JesaSangManager.h"
 #include "../../Altar/AltarManager.h"
 #include "../../CookingZone/CookingZone.h"
