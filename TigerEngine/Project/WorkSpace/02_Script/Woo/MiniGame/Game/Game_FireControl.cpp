@@ -190,8 +190,10 @@ void Game_FireControl::StartGame()
     spacbar = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("2_Image_SpaceBar")->GetComponent<RectTransform>();
     gauge = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("2_Image_Gauge")->GetComponent<Image>();
     animImage = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("2_Image_CutAnimation")->GetComponent<Image>();
+    
+    spacebarHold = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("Image_SpaceBarHold");
 
-    if (!foodPoint || !spacbar || !gauge)
+    if (!foodPoint || !spacbar || !gauge || !spacebarHold)
     {
         cout << "[MiniGame 2] Missing ui objects!" << endl;
         return;
@@ -221,12 +223,21 @@ void Game_FireControl::StartGame()
     // bar init
     barVel = 0.0f;
 
+    // hold ui off
+    spacebarHold->SetActive(false);
+
     cout << "[Mini Game 2] : Game_FireControl Start!" << endl;
 }
 
 void Game_FireControl::UpdateGame(float delta)
 {
     if (isFinished) return;
+
+    // 홀딩 UI
+    if (Input::GetKeyDown(spaceKey))
+        spacebarHold->SetActive(true);
+    else if (Input::GetKeyUp(spaceKey))
+        spacebarHold->SetActive(false);
 
     UpdateFood(delta);
     UpdateBar(delta);
