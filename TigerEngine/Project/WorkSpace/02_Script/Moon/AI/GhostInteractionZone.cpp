@@ -65,3 +65,11 @@ void GhostInteractionZone::OnTriggerEnter(PhysicsComponent* other)
         //}
     }
 }
+
+void GhostInteractionZone::OnCCTTriggerEnter(CharacterControllerComponent* cct)
+{
+    if (cct->GetOwner()->GetName() == "Ghost_Baby")
+    {
+        // std::cout <<" [GhostInteractionZone] OnCCTTriggerEnter : Adult is Contact Ghost_Baby " << std::endl;
+    }
+}
