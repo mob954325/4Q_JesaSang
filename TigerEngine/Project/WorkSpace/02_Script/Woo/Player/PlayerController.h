@@ -47,7 +47,9 @@ private:
     FBXData* fbxData = nullptr;
     AnimationController* animController = nullptr;
     CharacterControllerComponent* cct = nullptr;
+
     Effect* fireEffect = nullptr;
+    Effect* smokeEffect = nullptr;
     AnimationController* hitEffect = nullptr;
 
     Inventory* inventory = nullptr;

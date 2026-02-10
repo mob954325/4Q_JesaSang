@@ -55,6 +55,7 @@ void PlayerController::OnStart()
     fbxData = GetOwner()->GetComponent<FBXData>();
     animController = GetOwner()->GetComponent<AnimationController>();
     fireEffect = GetOwner()->GetChildByName("Player_FireEffect")->GetOwner()->GetComponent<Effect>();
+    smokeEffect = GetOwner()->GetChildByName("Player_SmokeEffect")->GetOwner()->GetComponent<Effect>();
     hitEffect = GetOwner()->GetChildByName("Player_HitEffect")->GetOwner()->GetComponent<AnimationController>();
 
     cct = GetOwner()->GetComponent<CharacterControllerComponent>();
@@ -66,7 +67,7 @@ void PlayerController::OnStart()
 
     // debug
     if (!fbxRenderer || !cct || !inventory || !camController || !fbxData || 
-        !animController || !dialogueController || !fireEffect || !hitEffect)
+        !animController || !dialogueController || !fireEffect || !smokeEffect || !hitEffect)
     {
         cout << "[Player] Missing COmponet!" << endl;
     }
@@ -102,20 +103,22 @@ void PlayerController::OnUpdate(float delta)
 
     // ----- test --------------
     // ai attack test
-    if (Input::GetKeyDown(Keyboard::Q))
+    if (Input::GetKeyDown(Keyboard::P))
     {
         TakeAttack();
     }
 
     // quarter view
-    if (Input::GetKeyDown(Keyboard::P))
+    if (Input::GetKeyDown(Keyboard::O))
     {
+        //smokeEffect->Play();
         camController->SetViewMode(CameraController::ViewMode::Quarter);
     }
 
     // front view
-    if (Input::GetKeyDown(Keyboard::O))
+    if (Input::GetKeyDown(Keyboard::I))
     {
+        //smokeEffect->Stop();
         camController->SetViewMode(CameraController::ViewMode::Front);
     }
 }
