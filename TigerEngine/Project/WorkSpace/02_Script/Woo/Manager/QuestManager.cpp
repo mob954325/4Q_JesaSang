@@ -157,7 +157,7 @@ void QuestManager::TickStepTransition(float dt)
     {
     case AnimPhase::ShowSuccess:
         // 2초 유지 후 패널 닫기 시작
-        if (ui) ui->QuestPannelClose(kCloseSec);   // ✅ 닫기 슬라이드 시작
+        if (ui) ui->QuestPannelClose(kCloseSec);   // 닫기 슬라이드 시작
         phase_ = AnimPhase::Closing;
         phaseTimer_ = kCloseSec;
         break;
@@ -168,7 +168,7 @@ void QuestManager::TickStepTransition(float dt)
         ApplyStepUI();
 
         // 그 다음 패널 열기
-        if (ui) ui->QuestPannelOpen(kOpenSec);     // ✅ 열기 슬라이드 시작
+        if (ui) ui->QuestPannelOpen(kOpenSec);     // 열기 슬라이드 시작
         phase_ = AnimPhase::Opening;
         phaseTimer_ = kOpenSec;
         break;

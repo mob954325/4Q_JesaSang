@@ -26,7 +26,7 @@ public:
         Quarter, Top, Front
     };
 
-    ViewMode currentMode = ViewMode::Front;
+    ViewMode currentMode = ViewMode::Quarter;
 
 private:
     // [ components ]
