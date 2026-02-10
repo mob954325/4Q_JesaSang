@@ -17,6 +17,7 @@ class CameraController;
 class MiniGameManager;
 class JesaSangManager;
 class PlayerItemVisualizer;
+class DialogueUIController;
 class IItem;
 
 // Player State Enum
@@ -46,9 +47,9 @@ private:
     AnimationController* animController = nullptr;
     CharacterControllerComponent* cct = nullptr;
 
-
     Inventory* inventory = nullptr;
     PlayerItemVisualizer* visualizer = nullptr;
+    DialogueUIController* dialogueController = nullptr;
 
     CameraController* camController = nullptr;
 

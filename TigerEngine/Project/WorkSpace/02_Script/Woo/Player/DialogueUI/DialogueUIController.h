@@ -29,6 +29,10 @@ private:
     // offset
     Vector3 offset = { 50,0,0 };
 
+    // 연출
+    float dialogueDuration = 4.5f;
+    float dialogueTimer = 0.0f;
+    bool isDialogueOn = false;
     
 public:
     // Component process
@@ -45,6 +49,7 @@ public:
     void DialogueOnOff(bool flag);
     void DialogueToggle();
 
-    void UpdateText(const wchar_t* s);
+    // 텍스트 업데이트하면서 자동 연출. 이거만 쓰면 됨.
+    void UpdateText(const wchar_t* s);      
 };
 

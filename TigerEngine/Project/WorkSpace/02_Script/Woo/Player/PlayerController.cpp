@@ -29,6 +29,7 @@
 #include "../JesaSang/JesaSangManager.h"
 #include "../Altar/AltarManager.h"
 #include "PlayerItemVisualizer.h"
+#include "DialogueUI/DialogueUIController.h"
 #include "../Manager/GameManager.h"
 #include "../Manager/QuestManager.h"
 #include "../UI/MainGameUIManager.h"
@@ -57,11 +58,12 @@ void PlayerController::OnStart()
     cct = GetOwner()->GetComponent<CharacterControllerComponent>();
     inventory = GetOwner()->GetComponent<Inventory>();
     visualizer = GetOwner()->GetComponent<PlayerItemVisualizer>();
+    dialogueController = GetOwner()->GetComponent<DialogueUIController>();
     
     camController = CameraSystem::Instance().GetCurrCamera()->GetOwner()->GetComponent<CameraController>();
 
     // debug
-    if (!fbxRenderer || !cct || !inventory || !camController || !fbxData || !animController)
+    if (!fbxRenderer || !cct || !inventory || !camController || !fbxData || !animController || !dialogueController)
     {
         cout << "[Player] Missing COmponet!" << endl;
     }
@@ -481,6 +483,13 @@ void PlayerController::GetItemAltarInteraction(float dt)
     if (getItemAltarTimer >= getItemAltarTime)
     {
         std::unique_ptr<IItem> item = AltarManager::Instance()->GetItem();
+
+        // Dialogue
+        if (item->itemType == ItemType::Ingredient)
+            dialogueController->UpdateText(L"Ingredient ReGet! Cook gogo!");
+        if (item->itemType == ItemType::Food)
+            dialogueController->UpdateText(L"Good ReGet! Jesasang gogo!");
+
         visualizer->VisualOnItem(item->itemId);
         inventory->AddItem(std::move(item));
 

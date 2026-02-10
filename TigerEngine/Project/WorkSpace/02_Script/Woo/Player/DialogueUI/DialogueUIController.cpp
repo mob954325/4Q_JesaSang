@@ -89,6 +89,17 @@ void DialogueUIController::OnUpdate(float delta)
     // position trace
     dialogueParent->SetPosition(targetTr->GetWorldPosition() + offset);
 
+    // 연출
+    if (isDialogueOn)
+    {
+        dialogueTimer += delta;
+        if (dialogueTimer >= dialogueDuration)
+        {
+            dialogueTimer = 0.0f;
+            isDialogueOn = false;
+            DialogueOnOff(false);
+        }
+    }
 
     // --- test --- 
     // TODO :: Delete
@@ -127,13 +138,18 @@ void DialogueUIController::Deserialize(nlohmann::json data)
 void DialogueUIController::DialogueOnOff(bool flag)
 {
     if (!dialogueParent) return;
+
+    // On -> 자동종료 트리거
+    isDialogueOn = flag;
+    if (flag) dialogueTimer = 0.0f;
+
     dialogueParent->GetOwner()->SetActive(flag);
 }
 
 void DialogueUIController::DialogueToggle()
 {
     if (!dialogueParent) return;
-    dialogueParent->GetOwner()->SetActive(!dialogueParent->GetOwner()->GetActiveSelf());
+    DialogueOnOff(!dialogueParent->GetOwner()->GetActiveSelf());
 }
 
 void DialogueUIController::UpdateText(const wchar_t* s)
@@ -151,5 +167,9 @@ void DialogueUIController::UpdateText(const wchar_t* s)
         dialogueRect->SetSize(size);
     }
 
+    // uapte text
     text_dialogue->SetText(std::wstring(s));
+
+    // 자동 연출 시작
+    DialogueOnOff(true);
 }
