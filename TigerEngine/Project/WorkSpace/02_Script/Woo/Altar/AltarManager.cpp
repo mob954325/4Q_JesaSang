@@ -1,3 +1,6 @@
+// ===============================
+// AltarManager.cpp
+// ===============================
 #include "AltarManager.h"
 #include "Util/JsonHelper.h"
 #include "Util/ComponentAutoRegister.h"
@@ -7,6 +10,7 @@
 #include "Object/GameObject.h"
 #include "Components/UI/Image.h"
 #include "Manager/WorldManager.h"
+#include "System/TimeSystem.h"
 
 #include "../Item/Item.h"
 
@@ -28,40 +32,12 @@ void AltarManager::FirstReceiveDirect(std::string itemId)
     - 페이드아웃 → 페이드인(이때 원시점 복귀)
     */
 
-    // 1. FadeOut
+    // 참고. 이 값만 바꾸면 알아서 포스트 프로세싱 데이터로 들어간다.
+    // 이걸로 페이드(비네트) 연출 가능!
+    auto& renderDesc = WorldManager::Instance().postProcessData;
+    (void)renderDesc; // 아직 이펙트/페이드 로직은 미구현(나중에 추가)
 
-    // 2. 카메라 전환 (Direct Camera)
-    CameraSystem::Instance().SetCurrCameraByName(camName);
-    
-    // 3. 최초 제단 활성화
-    altar->SetActive(true);
-
-    ingre_apple->SetActive(false);
-    ingre_pear->SetActive(false);
-    ingre_batter->SetActive(false);
-    ingre_tofu->SetActive(false);
-    ingre_sanjeok->SetActive(false);
-    ingre_dong->SetActive(false);
-
-    food_apple->SetActive(false);
-    food_pear->SetActive(false);
-    food_batter->SetActive(false);
-    food_tofu->SetActive(false);
-    food_sanjeok->SetActive(false);
-    food_dong->SetActive(false);
-
-    // 4. FadeIn + Cam position udpate (z-)
-
-    // 5. Effect Play + Visual On
-    VisualItem(itemId, true);
-    
-
-    // 6. FadeOut
-
-    // 7. 카메라 전환 (Main Camera)
-    CameraSystem::Instance().SetCurrCameraByName("MainCamera");
-
-    // 8. FadeIn
+    BeginDirectSequence(itemId);
 }
 
 void AltarManager::OnInitialize()
@@ -75,8 +51,25 @@ void AltarManager::OnStart()
     const auto& sceneSystem = SceneSystem::Instance().GetCurrentScene();
 
     // direct cam find
-    altarDirectCam = sceneSystem->GetGameObjectByName("AltarDirectCamera")->GetComponent<Transform>();
-    altarDirectCam->GetOwner()->SetName(camName);
+    {
+        GameObject* directCamObj = sceneSystem->GetGameObjectByName("AltarDirectCamera");
+        if (!directCamObj)
+        {
+            cout << "[AltarManager] Missing AltarDirectCamera!" << endl;
+        }
+        else
+        {
+            altarDirectCam = directCamObj->GetComponent<Transform>();
+            if (!altarDirectCam)
+            {
+                cout << "[AltarManager] Missing Transform on AltarDirectCamera!" << endl;
+            }
+            else
+            {
+                altarDirectCam->GetOwner()->SetName(camName);
+            }
+        }
+    }
 
     // gameobject find
     altar = sceneSystem->GetGameObjectByName("Altar");
@@ -94,6 +87,12 @@ void AltarManager::OnStart()
     food_tofu = sceneSystem->GetGameObjectByName("Alta_Tofu");
     food_sanjeok = sceneSystem->GetGameObjectByName("Alta_Sanjeok");
     food_dong = sceneSystem->GetGameObjectByName("Alta_Donggeurangttaeng");
+
+    if (!altar)
+    {
+        cout << "[AltarManager] Missing Altar GameObject!" << endl;
+        return;
+    }
 
     if (!ingre_apple || !ingre_pear || !ingre_batter || !ingre_tofu || !ingre_sanjeok || !ingre_dong ||
         !food_apple || !food_pear || !food_batter || !food_tofu || !food_sanjeok || !food_dong)
@@ -114,23 +113,19 @@ void AltarManager::OnStart()
 
     altar->SetActive(false);
 
-    ingre_apple->SetActive(false);
-    ingre_pear->SetActive(false);
-    ingre_batter->SetActive(false);
-    ingre_tofu->SetActive(false);
-    ingre_sanjeok->SetActive(false);
-    ingre_dong->SetActive(false);
-
-    food_apple->SetActive(false);
-    food_pear->SetActive(false);
-    food_batter->SetActive(false);
-    food_tofu->SetActive(false);
-    food_sanjeok->SetActive(false);
-    food_dong->SetActive(false);
+    SetAllVisualOff();
 
     image_sensorOn->SetActive(false);
     image_interactionOn->SetActive(false);
     image_interactionGauge->SetActive(false);
+}
+
+void AltarManager::OnUpdate(float delta)
+{
+    if (!isDirecting) return;
+
+    float unscaledDt = GameTimer::Instance().UnscaledDeltaTime();
+    UpdateDirectSequence(unscaledDt);
 }
 
 void AltarManager::OnDestory()
@@ -198,11 +193,21 @@ void AltarManager::ReceiveItem(std::unique_ptr<IItem> item)
         return;
     }
 
+    // 연출 중이면 큐는 받되, 비주얼/회수 등은 연출이 끝난 후 자연스럽게 가는게 안전
+    // (지금 정책: 연출 중 Receive는 허용, 비주얼은 기본적으로 즉시 켜지지 않음)
+    if (isDirecting)
+    {
+        itemQueue.push_back(std::move(item));
+        return;
+    }
+
     // 최초 제단 활성화
     if (!isFirstReceiveItem)
     {
         isFirstReceiveItem = true;
         FirstReceiveDirect(item->itemId);
+
+        // 아이템이 제단에 올라감(큐 적재)
         itemQueue.push_back(std::move(item));
         return;     // 비주얼은 연출쪽에서 알맞은 타이밍에 on
     }
@@ -216,6 +221,13 @@ void AltarManager::ReceiveItem(std::unique_ptr<IItem> item)
 
 std::unique_ptr<IItem> AltarManager::GetItem()
 {
+    // 연출 중엔 회수 금지(화면/큐/비주얼 꼬임 방지)
+    if (isDirecting)
+    {
+        cout << "[AltarManager] directing... can't get item now." << endl;
+        return nullptr;
+    }
+
     // FIFO 회수
     if (!itemQueue.empty())
     {
@@ -240,6 +252,7 @@ void AltarManager::UISensorOnOff(bool flag)
 {
     if (!image_sensorOn) return;
     if (flag && !isFirstReceiveItem) return;
+    if (flag && isDirecting) return;
     image_sensorOn->SetActive(flag);
 }
 
@@ -247,6 +260,7 @@ void AltarManager::UIInteractionOnOff(bool flag)
 {
     if (!image_interactionOn) return;
     if (flag && !isFirstReceiveItem) return;
+    if (flag && isDirecting) return;
     image_interactionOn->SetActive(flag);
     image_interactionGauge->SetActive(flag);
 }
@@ -255,5 +269,172 @@ void AltarManager::UIGaugeUpate(float progress)
 {
     if (!image_interactionGauge) return;
     if (!isFirstReceiveItem) return;
+    if (isDirecting) return;
     image_interactionGauge->SetFillAmount(progress);
 }
+
+// -------------------------------
+// internal helpers
+// -------------------------------
+void AltarManager::SetAllVisualOff()
+{
+    if (ingre_apple) ingre_apple->SetActive(false);
+    if (ingre_pear) ingre_pear->SetActive(false);
+    if (ingre_batter) ingre_batter->SetActive(false);
+    if (ingre_tofu) ingre_tofu->SetActive(false);
+    if (ingre_sanjeok) ingre_sanjeok->SetActive(false);
+    if (ingre_dong) ingre_dong->SetActive(false);
+
+    if (food_apple) food_apple->SetActive(false);
+    if (food_pear) food_pear->SetActive(false);
+    if (food_batter) food_batter->SetActive(false);
+    if (food_tofu) food_tofu->SetActive(false);
+    if (food_sanjeok) food_sanjeok->SetActive(false);
+    if (food_dong) food_dong->SetActive(false);
+}
+
+void AltarManager::BeginDirectSequence(std::string itemId)
+{
+    if (!altar)
+    {
+        cout << "[AltarManager] altar null! can't direct." << endl;
+        return;
+    }
+
+    directingItemId = itemId;
+
+    // 시작 상태 정리
+    SetAllVisualOff();
+    altar->SetActive(false);
+
+    // direct cam 위치 캐싱
+    hasDirectCamPosCached = false;
+    if (altarDirectCam)
+    {
+        directCamStartPos = altarDirectCam->GetWorldPosition();
+        directCamTargetPos = directCamStartPos;
+        directCamTargetPos.x += 50.0f;
+        hasDirectCamPosCached = true;
+    }
+
+    // 연출 진입
+    isDirecting = true;
+    directPhase = DirectPhase::FadeOut_1;
+    phaseTimer = 0.0f;
+}
+
+void AltarManager::UpdateDirectSequence(float dt)
+{
+    auto& renderDesc = WorldManager::Instance().postProcessData;
+    (void)renderDesc; // 아직 페이드 연출은 미구현 (나중에 여기서 값 조절)
+
+    phaseTimer += dt;
+
+    switch (directPhase)
+    {
+    case DirectPhase::FadeOut_1:
+    {
+        // 1. FadeOut (미구현: renderDesc.useVignette / vignette_intensity 등으로 처리 가능)
+        if (phaseTimer >= fadeOutTime_1)
+        {
+            phaseTimer = 0.0f;
+            directPhase = DirectPhase::SwitchToDirectCam;
+        }
+    }
+    break;
+
+    case DirectPhase::SwitchToDirectCam:
+    {
+        // 2. 카메라 전환 (Direct Camera)
+        CameraSystem::Instance().SetCurrCameraByName(camName);
+
+        // 3. 최초 제단 활성화
+        altar->SetActive(true);
+        SetAllVisualOff();
+
+        phaseTimer = 0.0f;
+        directPhase = DirectPhase::FadeIn_1_And_ZoomIn;
+    }
+    break;
+
+    case DirectPhase::FadeIn_1_And_ZoomIn:
+    {
+        // 4. FadeIn + Cam position update (z- 방향으로 천천히 조금 이동(5초정도)
+        // FadeIn 미구현
+        if (hasDirectCamPosCached && altarDirectCam)
+        {
+            const float t = (zoomInTime <= 0.0f) ? 1.0f : std::min(phaseTimer / zoomInTime, 1.0f);
+            Vector3 pos = directCamStartPos * (1.0f - t) + directCamTargetPos * t;
+            altarDirectCam->SetPosition(pos);
+        }
+
+        if (phaseTimer >= std::max(fadeInTime_1, zoomInTime))
+        {
+            phaseTimer = 0.0f;
+            directPhase = DirectPhase::VisualOn;
+        }
+    }
+    break;
+
+    case DirectPhase::VisualOn:
+    {
+        // 5. Effect Play + Visual On
+        VisualItem(directingItemId, true);
+
+        if (visualHoldTime <= 0.0f || phaseTimer >= visualHoldTime)
+        {
+            phaseTimer = 0.0f;
+            directPhase = DirectPhase::FadeOut_2;
+        }
+    }
+    break;
+
+    case DirectPhase::FadeOut_2:
+    {
+        // 6. FadeOut (미구현)
+        if (phaseTimer >= fadeOutTime_2)
+        {
+            phaseTimer = 0.0f;
+            directPhase = DirectPhase::SwitchToMainCam;
+        }
+    }
+    break;
+
+    case DirectPhase::SwitchToMainCam:
+    {
+        // 7. 카메라 전환 (Main Camera)
+        CameraSystem::Instance().SetCurrCameraByName("MainCamera");
+
+        phaseTimer = 0.0f;
+        directPhase = DirectPhase::FadeIn_2;
+    }
+    break;
+
+    case DirectPhase::FadeIn_2:
+    {
+        // 8. FadeIn (미구현)
+        if (phaseTimer >= fadeInTime_2)
+        {
+            phaseTimer = 0.0f;
+            directPhase = DirectPhase::Done;
+        }
+    }
+    break;
+
+    case DirectPhase::Done:
+    {
+        // 연출 종료
+        isDirecting = false;
+        directPhase = DirectPhase::None;
+        phaseTimer = 0.0f;
+
+        // 연출 끝났으니 이제 UI 사용 가능
+        // (필요하면 여기서 UISensorOnOff(true) 같은 것도 가능)
+    }
+    break;
+
+    default:
+        break;
+    }
+}
+
