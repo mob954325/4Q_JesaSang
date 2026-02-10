@@ -12,6 +12,9 @@ void Player_Hit::Enter()
     // set animation
     player->animController->ChangeState("Hit");
 
+    // effect
+    player->hitEffect->GetOwner()->SetActive(true);
+
     // set sense radius
     player->curSenseRadius = player->walkSenseRadius;
     if (player->inventory->GetCurItemType() == ItemType::Ingredient)
@@ -101,6 +104,9 @@ void Player_Hit::Exit()
 
     // 렌더 다시 on
     player->fbxRenderer->SetActive(true);
+
+    // effect
+    player->hitEffect->GetOwner()->SetActive(false);
 
     // 비네트 Off
     auto& postProcessData = WorldManager::Instance().postProcessData;

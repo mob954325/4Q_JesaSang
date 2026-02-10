@@ -48,6 +48,7 @@ private:
     AnimationController* animController = nullptr;
     CharacterControllerComponent* cct = nullptr;
     Effect* fireEffect = nullptr;
+    AnimationController* hitEffect = nullptr;
 
     Inventory* inventory = nullptr;
     PlayerItemVisualizer* visualizer = nullptr;

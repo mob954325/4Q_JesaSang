@@ -55,6 +55,7 @@ void PlayerController::OnStart()
     fbxData = GetOwner()->GetComponent<FBXData>();
     animController = GetOwner()->GetComponent<AnimationController>();
     fireEffect = GetOwner()->GetChildByName("Player_FireEffect")->GetOwner()->GetComponent<Effect>();
+    hitEffect = GetOwner()->GetChildByName("Player_HitEffect")->GetOwner()->GetComponent<AnimationController>();
 
     cct = GetOwner()->GetComponent<CharacterControllerComponent>();
     inventory = GetOwner()->GetComponent<Inventory>();
@@ -65,7 +66,7 @@ void PlayerController::OnStart()
 
     // debug
     if (!fbxRenderer || !cct || !inventory || !camController || !fbxData || 
-        !animController || !dialogueController || !fireEffect)
+        !animController || !dialogueController || !fireEffect || !hitEffect)
     {
         cout << "[Player] Missing COmponet!" << endl;
     }
@@ -224,14 +225,10 @@ void PlayerController::LoadAnimation()
     auto sitClip = animController->FindClip("Sit");
     auto hitClip = animController->FindClip("Hit");
 
-    if (!idleClip  || !walkClip /*|| !runClip || !sitClip || !hitClip*/)
+    if (!idleClip  || !walkClip || !runClip || !sitClip || !hitClip)
     {
         cout << "[Player Animation] Clip not found!\n" << endl;
         return;
-    }
-    else
-    {
-        cout << "[Player] Animation Load Success" << endl;
     }
 
     // 상태 등록
@@ -240,6 +237,21 @@ void PlayerController::LoadAnimation()
     animController->AddState(std::make_unique<AnimationState>("Run", runClip, animController));
     animController->AddState(std::make_unique<AnimationState>("Sit", sitClip, animController));
     animController->AddState(std::make_unique<AnimationState>("Hit", hitClip, animController));
+
+
+    // Effect Animatinon
+    // TODO :: Bone연결되면 주석 해제
+    //FBXResourceManager::Instance().LoadAnimationByPath(hitEffect->GetOwner()->GetComponent<FBXData>()->GetFBXInfo(), 
+    //    "..\\Assets\\Resource\\Effect\\ani_confused_mark.fbx", "HitEffect");
+    //auto effectHitClip = hitEffect->FindClip("HitEffect");
+    //hitEffect->AddState(std::make_unique<AnimationState>("HitEffect", effectHitClip, hitEffect));
+    //hitEffect->ChangeState("HitEffect");
+    //
+    //if (!effectHitClip)
+    //{
+    //    cout << "[Player Effect Animation] Clip not found!\n" << endl;
+    //    return;
+    //}
 }
 
 /*-------[ Init ]-------------------------------------*/
