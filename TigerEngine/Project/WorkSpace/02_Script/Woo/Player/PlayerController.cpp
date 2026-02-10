@@ -29,6 +29,7 @@
 #include "../JesaSang/JesaSangManager.h"
 #include "../Altar/AltarManager.h"
 #include "PlayerItemVisualizer.h"
+#include "DialogueUI/DialogueUIController.h"
 #include "../Manager/GameManager.h"
 #include "../Manager/QuestManager.h"
 #include "../UI/MainGameUIManager.h"
@@ -57,11 +58,12 @@ void PlayerController::OnStart()
     cct = GetOwner()->GetComponent<CharacterControllerComponent>();
     inventory = GetOwner()->GetComponent<Inventory>();
     visualizer = GetOwner()->GetComponent<PlayerItemVisualizer>();
+    dialogueController = GetOwner()->GetComponent<DialogueUIController>();
     
     camController = CameraSystem::Instance().GetCurrCamera()->GetOwner()->GetComponent<CameraController>();
 
     // debug
-    if (!fbxRenderer || !cct || !inventory || !camController || !fbxData || !animController)
+    if (!fbxRenderer || !cct || !inventory || !camController || !fbxData || !animController || !dialogueController)
     {
         cout << "[Player] Missing COmponet!" << endl;
     }
@@ -298,6 +300,13 @@ void PlayerController::SerachObjectInteraction(float dt)
         return;
     }
 
+    // 최초 인터랙션 기믹 설명
+    if (!isExplainedSearchObject && Input::GetKeyDown(interaction_Key))
+    {
+        dialogueController->ShowInteractionHintAndPause(L"this object is Search Object!");
+        isExplainedSearchObject = true;
+    }
+
     // inventory full
     if (inventory->HasItem())
     {
@@ -369,6 +378,13 @@ void PlayerController::HideObjectInteraction(float dt)
     if (state == PlayerState::Die)
         return;
 
+    // 최초 인터랙션 기믹 설명
+    if (!isExplainedHideObject && Input::GetKeyDown(interaction_Key))
+    {
+        dialogueController->ShowInteractionHintAndPause(L"this object is Hide Object!");
+        isExplainedHideObject = true;
+    }
+
     // hide
     if (Input::GetKeyDown(interaction_Key) && curHideObject->IsPossibleHide())
     {
@@ -395,6 +411,13 @@ void PlayerController::CookingInteraction(float dt)
     {
         cookInteractionTimer = 0.0f;
         return;
+    }
+
+    // 최초 인터랙션 기믹 설명
+    if(!isExplainedCookingZone)
+    {
+        dialogueController->ShowInteractionHintAndPause(L"this zone is cooking!");
+        isExplainedCookingZone = true;
     }
 
     // holding
@@ -481,6 +504,13 @@ void PlayerController::GetItemAltarInteraction(float dt)
     if (getItemAltarTimer >= getItemAltarTime)
     {
         std::unique_ptr<IItem> item = AltarManager::Instance()->GetItem();
+
+        // Dialogue
+        if (item->itemType == ItemType::Ingredient)
+            dialogueController->ShowDialogueText(L"Ingredient ReGet! Cook gogo!");
+        if (item->itemType == ItemType::Food)
+            dialogueController->ShowDialogueText(L"Good ReGet! Jesasang gogo!");
+
         visualizer->VisualOnItem(item->itemId);
         inventory->AddItem(std::move(item));
 
