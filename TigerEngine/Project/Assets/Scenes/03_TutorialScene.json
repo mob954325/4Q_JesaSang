@@ -2,21 +2,12 @@
   "objects": [
     {
       "properties": {
-        "ID": 194,
+        "Active": true,
+        "ID": 94,
         "Name": "Main Camera",
         "ParentID": -1,
-        "components": {
-          "Camera": {
-            "properties": {
-              "angle": 1.5707963705062866,
-              "farDist": 2000.0,
-              "moveSpeed": 100.0,
-              "nearDist": 0.009999999776482582,
-              "rotSpeed": 0.004000000189989805
-            },
-            "type": "Camera"
-          },
-          "Transform": {
+        "components": [
+          {
             "properties": {
               "Position": [
                 -98.92500305175781,
@@ -35,19 +26,51 @@
               ]
             },
             "type": "Transform"
+          },
+          {
+            "properties": {
+              "angle": 1.5707963705062866,
+              "farDist": 1800.0,
+              "moveSpeed": 100.0,
+              "nearDist": 70.0,
+              "rotSpeed": 0.004000000189989805
+            },
+            "type": "Camera"
           }
-        }
+        ]
       },
       "type": "GameObject"
     },
     {
       "properties": {
-        "ID": 264,
+        "Active": true,
+        "ID": 95,
         "Name": "DirectionalLight(Sun)",
         "ParentID": -1,
-        "components": {
-          "Light": {
+        "components": [
+          {
             "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true,
               "Color": [
                 1.0,
                 1.0,
@@ -67,38 +90,19 @@
               "Range": 15.0
             },
             "type": "Light"
-          },
-          "Transform": {
-            "properties": {
-              "Position": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Rotation": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ]
-            },
-            "type": "Transform"
           }
-        }
+        ]
       },
       "type": "GameObject"
     },
     {
       "properties": {
-        "ID": 267,
+        "Active": true,
+        "ID": 96,
         "Name": "----------------------",
         "ParentID": -1,
-        "components": {
-          "Transform": {
+        "components": [
+          {
             "properties": {
               "Position": [
                 0.0,
@@ -118,25 +122,48 @@
             },
             "type": "Transform"
           }
-        }
+        ]
       },
       "type": "GameObject"
     },
     {
       "properties": {
-        "ID": 269,
+        "Active": true,
+        "ID": 97,
         "Name": "Ground",
         "ParentID": -1,
-        "components": {
-          "FBXData": {
+        "components": [
+          {
             "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                10.0,
+                0.05000000074505806,
+                10.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true,
               "DataPath": "..\\Assets\\Resource\\Ground.fbx",
               "IsStatic": true
             },
             "type": "FBXData"
           },
-          "FBXRenderer": {
+          {
             "properties": {
+              "Active": true,
               "Alpha": 1.0,
               "Diffuse": [
                 1.0,
@@ -171,41 +198,23 @@
               "UseDiffuseOverride": false,
               "UseEmissiveOverride": false,
               "UseMetallicOverride": false,
-              "UseRoughnessOverride": false
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
             },
             "type": "FBXRenderer"
-          },
-          "Transform": {
-            "properties": {
-              "Position": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Rotation": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                10.0,
-                0.05000000074505806,
-                10.0
-              ]
-            },
-            "type": "Transform"
           }
-        }
+        ]
       },
       "type": "GameObject"
     },
     {
       "properties": {
-        "ID": 30,
+        "Active": true,
+        "ID": 98,
         "Name": "CurScene_03_TutorialScene",
         "ParentID": -1,
-        "components": {
-          "Transform": {
+        "components": [
+          {
             "properties": {
               "Position": [
                 0.0,
@@ -225,17 +234,18 @@
             },
             "type": "Transform"
           }
-        }
+        ]
       },
       "type": "GameObject"
     },
     {
       "properties": {
-        "ID": 270.0,
+        "Active": true,
+        "ID": 99,
         "Name": "SceneFlowManager",
         "ParentID": -1,
-        "components": {
-          "Transform": {
+        "components": [
+          {
             "properties": {
               "Position": [
                 0.0,
@@ -255,18 +265,87 @@
             },
             "type": "Transform"
           },
-          "SceneFlowManager": {
+          {
             "properties": {
-              "StartScenePath": "..\\Assets\\Scenes\\01_StartScene.json",
-              "IntroScenePath": "..\\Assets\\Scenes\\02_IntroScene.json",
-              "TutorialScenePath": "..\\Assets\\Scenes\\03_TutorialScene.json",
-              "MainScenePath": "..\\Assets\\Scenes\\04_MainGameScene.json",
+              "Active": true,
               "AllowNumberKeys": true,
-              "AllowStartAdvance": false
+              "AllowStartAdvance": false,
+              "IntroScenePath": "..\\Assets\\Scenes\\02_IntroScene.json",
+              "MainScenePath": "..\\Assets\\Scenes\\04_MainGameScene.json",
+              "StartScenePath": "..\\Assets\\Scenes\\01_StartScene.json",
+              "TutorialScenePath": "..\\Assets\\Scenes\\03_TutorialScene.json"
             },
             "type": "SceneFlowManager"
           }
-        }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 101,
+        "Name": "----------------------",
+        "ParentID": -1,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 103,
+        "Name": "TutorialController",
+        "ParentID": -1,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true
+            },
+            "type": "TutorialController"
+          }
+        ]
       },
       "type": "GameObject"
     }
@@ -364,5 +443,3 @@
     }
   ]
 }
-
-
