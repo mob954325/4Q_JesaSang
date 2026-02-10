@@ -11,6 +11,7 @@
 #include "Components/UI/Image.h"
 #include "Manager/WorldManager.h"
 #include "System/TimeSystem.h"
+#include "RenderPass/ParticleSource/Effect.h"
 
 #include "../Item/Item.h"
 
@@ -51,24 +52,33 @@ void AltarManager::OnStart()
     const auto& sceneSystem = SceneSystem::Instance().GetCurrentScene();
 
     // direct cam find
+    GameObject* directCamObj = sceneSystem->GetGameObjectByName("AltarDirectCamera");
+    if (!directCamObj)
     {
-        GameObject* directCamObj = sceneSystem->GetGameObjectByName("AltarDirectCamera");
-        if (!directCamObj)
-        {
-            cout << "[AltarManager] Missing AltarDirectCamera!" << endl;
-        }
+        cout << "[AltarManager] Missing AltarDirectCamera!" << endl;
+    }
+    else
+    {
+        altarDirectCam = directCamObj->GetComponent<Transform>();
+        if (!altarDirectCam)
+            cout << "[AltarManager] Missing Transform on AltarDirectCamera!" << endl;
         else
-        {
-            altarDirectCam = directCamObj->GetComponent<Transform>();
-            if (!altarDirectCam)
-            {
-                cout << "[AltarManager] Missing Transform on AltarDirectCamera!" << endl;
-            }
-            else
-            {
-                altarDirectCam->GetOwner()->SetName(camName);
-            }
-        }
+            altarDirectCam->GetOwner()->SetName(camName);
+    }
+
+    // direct effect find
+    GameObject* directEffectbj_1 = sceneSystem->GetGameObjectByName("AltarDirectEffect_1");
+    GameObject* directEffectbj_2 = sceneSystem->GetGameObjectByName("AltarDirectEffect_2");
+    if (!directEffectbj_1 || !directEffectbj_2)
+    {
+        cout << "[AltarManager] Missing fireEffect Object!" << endl;
+    }
+    else
+    {
+        fireEffect1 = directEffectbj_1->GetComponent<Effect>();
+        fireEffect2= directEffectbj_2->GetComponent<Effect>();
+        if (!fireEffect1 || !fireEffect2)
+            cout << "[AltarManager] Missing fireEffect!" << endl;
     }
 
     // gameobject find
@@ -391,6 +401,8 @@ void AltarManager::UpdateDirectSequence(float dt)
     {
         // 5. Effect Play + Visual On
         VisualItem(directingItemId, true);
+        fireEffect1->Play();
+        fireEffect2->Play();
 
         if (visualHoldTime <= 0.0f || phaseTimer >= visualHoldTime)
         {

@@ -9,6 +9,7 @@ class GameObject;
 class Camera;
 class Image;
 class IItem;
+class Effect;
 
 /*
     [ AltarManager Script Component ] <Singleton>
@@ -63,7 +64,8 @@ private:
    
     Transform* altarDirectCam = nullptr;          // 연출 카메라
     std::string camName = "AltarDirectCamera";    // 연출 카메라 이름
-    
+    Effect* fireEffect1 = nullptr;
+    Effect* fireEffect2 = nullptr;
     
     enum class DirectPhase
     {
