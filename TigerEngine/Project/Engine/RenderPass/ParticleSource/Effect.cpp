@@ -362,11 +362,11 @@ RTTR_REGISTRATION
         .property("allFinished", &Effect::allFinished)
 
         .property("enabled", &Effect::enabled)
-            (metadata(META_BOOL, true))
+            (metadata(META_BOOL, false))
         .property("playing", &Effect::playing)
-            (metadata(META_BOOL, true))
+            (metadata(META_BOOL, false))
         .property("looping", &Effect::looping)
-            (metadata(META_BOOL, true));
+            (metadata(META_BOOL, false));
 }
 
 void Effect::OnInitialize()

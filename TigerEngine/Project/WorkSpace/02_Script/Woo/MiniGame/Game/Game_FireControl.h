@@ -5,6 +5,7 @@
 using namespace DirectX;
 class RectTransform;
 class Image;
+class GameObject;
 
 /*
     [ 불로 지지기 컨트롤 게임 ]
@@ -32,6 +33,8 @@ private:
     RectTransform* foodPoint = nullptr;  // food
     RectTransform* spacbar = nullptr;    // player bar
     Image* gauge = nullptr;              // fill (0~1)
+
+    GameObject* spacebarHold = nullptr;
 
     // --- data ------------------------------
     float xMin = 200.0f;

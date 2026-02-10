@@ -29,10 +29,10 @@ private:
     TextUI* text_dialogue = nullptr;
 
     // offset
-    Vector3 offset = { 50,0,0 };
+    Vector3 offset = { 0, 0, 0 };
 
     // ø¨√‚
-    float dialogueDuration = 3.5f;
+    float dialogueDuration = 1.8f;
     float dialogueTimer = 0.0f;
     bool isDialogueOn = false;
     
