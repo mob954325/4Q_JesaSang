@@ -102,7 +102,7 @@ registration::class_<Emitter>("Emitter")
 
 void Emitter::Update()
 {
-    float dt = GameTimer::Instance().DeltaTime();
+    float dt = GameTimer::Instance().UnscaledDeltaTime();
     elapsed += dt;
 
     // Dynamic Emitter Life Cheak

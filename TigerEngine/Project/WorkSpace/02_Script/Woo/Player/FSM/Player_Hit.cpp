@@ -1,6 +1,7 @@
 #include "Player_Hit.h"
 #include "../../Inventory/Inventory.h"
 #include "Manager/WorldManager.h"
+#include "../../Altar/AltarManager.h"
 
 void Player_Hit::Enter()
 {
@@ -28,9 +29,12 @@ void Player_Hit::Enter()
     player->resumeHitAfterHide = false;
 
     // 비네트 On
-    auto& postProcessData = WorldManager::Instance().postProcessData;
-    postProcessData.useVignette = true;
-    postProcessData.vignetteColor = { 1,0,0 };
+    if(!AltarManager::Instance()->IsAltarFirstDirecting())
+    {
+        auto& postProcessData = WorldManager::Instance().postProcessData;
+        postProcessData.useVignette = true;
+        postProcessData.vignetteColor = { 1,0,0 };
+    }
 
     // timer -> player controller에서 init (hide 중에도 유지하기 위함)
 }
