@@ -92,12 +92,16 @@ void DialogueUIController::OnUpdate(float delta)
     // 연출
     if (isDialogueOn)
     {
-        dialogueTimer += delta;
+        float unscaledDelta = GameTimer::Instance().UnscaledDeltaTime();
+        dialogueTimer += unscaledDelta;
         if (dialogueTimer >= dialogueDuration)
         {
             dialogueTimer = 0.0f;
             isDialogueOn = false;
             DialogueOnOff(false);
+
+            // 게임 재개
+            GameTimer::Instance().SetTimeScale(1.0f);
         }
     }
 
@@ -152,7 +156,7 @@ void DialogueUIController::DialogueToggle()
     DialogueOnOff(!dialogueParent->GetOwner()->GetActiveSelf());
 }
 
-void DialogueUIController::UpdateText(const wchar_t* s)
+void DialogueUIController::ShowDialogueText(const wchar_t* s)
 {
     if (!text_dialogue || !s) return;
 
@@ -169,6 +173,31 @@ void DialogueUIController::UpdateText(const wchar_t* s)
 
     // uapte text
     text_dialogue->SetText(std::wstring(s));
+
+    // 자동 연출 시작
+    DialogueOnOff(true);
+}
+
+void DialogueUIController::ShowInteractionHintAndPause(const wchar_t* s)
+{
+    if (!text_dialogue || !s) return;
+
+    // text길이에 따른 image size 조절
+    const int len = CountNonSpaceChars(s);
+    const float w = SelectBubbleWidthByLen(len);
+
+    if (dialogueRect)
+    {
+        Vector2 size = dialogueRect->GetSize();
+        size.x = w;
+        dialogueRect->SetSize(size);
+    }
+
+    // uapte text
+    text_dialogue->SetText(std::wstring(s));
+
+    // 게임 정지
+    GameTimer::Instance().SetTimeScale(0.0);
 
     // 자동 연출 시작
     DialogueOnOff(true);
