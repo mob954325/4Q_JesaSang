@@ -17,6 +17,19 @@ void EffectSystem::UnRegister(Effect* comp)
     }
 }
 
+void EffectSystem::Update()
+{
+    for (auto& fx : comps)
+    {
+        if (!fx) continue;
+        if (!fx->transform)
+            fx->OnInitialize();
+        if (!fx->transform)
+            continue;
+        fx->Update();
+    }
+}
+
 void EffectSystem::Clear()
 {
     comps.clear();
