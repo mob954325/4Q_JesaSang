@@ -97,7 +97,7 @@ void QuestManager::ApplyStepUI()
     
     case 2:
         ui->UpdateQuestTitle(L"[조리] 정성을 담아");
-        ui->UpdateQuestLable(L"미니게임을 성공하세요.");
+        ui->UpdateQuestLable(L"부엌에서 음식을 조리하세요.");
         break;
     
     case 3:
@@ -201,6 +201,19 @@ void QuestManager::StepComplete(int compleateIndex)
     if (!ui)
     {
         std::cout << "[QuestManager] MainGameUIManager is null!" << std::endl;
+        return;
+    }
+
+    // step 4 예외 하드코딩
+    if (compleateIndex == 4)
+    {
+        ApplyStepUI();
+        if (JesaSangManager::Instance()->GetHasFoodCount() >= 6)
+        {
+            ui->SetQuestCheakboxOn(true);
+            ui->SetQuestLineOn(true);
+        }
+
         return;
     }
 
