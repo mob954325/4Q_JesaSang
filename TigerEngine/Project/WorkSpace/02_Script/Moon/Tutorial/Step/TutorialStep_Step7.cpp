@@ -7,7 +7,7 @@ void TutorialStep_Step7::Enter()
 {
     isDone = false;
     stepTimer = 0.0f;
-    phase = Step7Phase::First;
+    phase = Step7Phase::PlayerToJesasang;
 
     std::cout << "[Step7] Enter" << std::endl;
 }
@@ -18,16 +18,26 @@ void TutorialStep_Step7::Update(float deltaTime)
 
     switch (phase)
     {
-    case Step7Phase::First:
+    case Step7Phase::PlayerToJesasang:
 
         if (stepTimer >= delayStart)
         {
-            phase = Step7Phase::Second;
+            phase = Step7Phase::CameraToJesasang;
         }
         break;
 
 
-    case Step7Phase::Second:
+    case Step7Phase::CameraToJesasang:
+        phase = Step7Phase::Monologue;
+        break;
+
+
+    case Step7Phase::Monologue:
+        phase = Step7Phase::CameraToFruit;
+        break;
+
+
+    case Step7Phase::CameraToFruit:
         phase = Step7Phase::Done;
         break;
 
@@ -46,4 +56,28 @@ bool TutorialStep_Step7::IsComplete()
 void TutorialStep_Step7::Exit()
 {
     std::cout << "[Step7] Exit " << std::endl;
+}
+
+
+// --------------------------------------------------------------------
+
+
+void TutorialStep_Step7::PlayerToJesasang()
+{
+
+}
+
+void TutorialStep_Step7::CameraToJesasang()
+{
+
+}
+
+void TutorialStep_Step7::Monologue()
+{
+
+}
+
+void TutorialStep_Step7::CameraToFruit()
+{
+
 }

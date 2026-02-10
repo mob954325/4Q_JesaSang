@@ -7,7 +7,7 @@ void TutorialStep_Step6::Enter()
 {
     isDone = false;
     stepTimer = 0.0f;
-    phase = Step6Phase::First;
+    phase = Step6Phase::HideOut;
 
     std::cout << "[Step6] Enter" << std::endl;
 }
@@ -18,16 +18,21 @@ void TutorialStep_Step6::Update(float deltaTime)
 
     switch (phase)
     {
-    case Step6Phase::First:
+    case Step6Phase::HideOut:
 
         if (stepTimer >= delayStart)
         {
-            phase = Step6Phase::Second;
+            phase = Step6Phase::Monologue;
         }
         break;
 
 
-    case Step6Phase::Second:
+    case Step6Phase::Monologue:
+        phase = Step6Phase::WaitInput;
+        break;
+
+
+    case Step6Phase::WaitInput:
         phase = Step6Phase::Done;
         break;
 
@@ -46,4 +51,22 @@ bool TutorialStep_Step6::IsComplete()
 void TutorialStep_Step6::Exit()
 {
     std::cout << "[Step6] Exit " << std::endl;
+}
+
+
+// -----------------------------------------------------------
+
+void TutorialStep_Step6::HideOut()
+{
+
+}
+
+void TutorialStep_Step6::Monologue()
+{
+
+}
+
+void TutorialStep_Step6::WaitInput()
+{
+
 }

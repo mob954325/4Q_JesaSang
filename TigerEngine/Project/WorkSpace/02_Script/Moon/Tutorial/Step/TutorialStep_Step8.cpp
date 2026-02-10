@@ -7,7 +7,7 @@ void TutorialStep_Step8::Enter()
 {
     isDone = false;
     stepTimer = 0.0f;
-    phase = Step8Phase::First;
+    phase = Step8Phase::FreePlay;
 
     std::cout << "[Step8] Enter" << std::endl;
 }
@@ -18,16 +18,16 @@ void TutorialStep_Step8::Update(float deltaTime)
 
     switch (phase)
     {
-    case Step8Phase::First:
+    case Step8Phase::FreePlay:
 
         if (stepTimer >= delayStart)
         {
-            phase = Step8Phase::Second;
+            phase = Step8Phase::Monologue;
         }
         break;
 
 
-    case Step8Phase::Second:
+    case Step8Phase::Monologue:
         phase = Step8Phase::Done;
         break;
 

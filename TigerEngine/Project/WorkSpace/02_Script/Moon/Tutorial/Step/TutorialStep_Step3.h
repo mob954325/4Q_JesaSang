@@ -3,7 +3,7 @@
 
 // -----------------------------------------------------------
 // [ Step3 ]
-// 아기 유령 등장 
+// 아기 유령 입장
 // 
 // 1. 아기 유령이 방으로 들어옴
 // 2. 플레이어 쪽을 쳐다봄
@@ -14,9 +14,10 @@
 
 enum class Step3Phase
 {
-    BabyInCome,
+    BabyInCome, 
     TrunToPlayer,
-    Second,
+    Surprised,
+    Leave,
     Done
 };
 
@@ -29,6 +30,12 @@ private:
     float delayStep3 = 1.0f;
 
     Step3Phase phase = Step3Phase::BabyInCome;
+
+private:
+    void BabyInCome();
+    void TrunToPlayer();
+    void Surprised();
+    void Leave();
 
 public:
     TutorialStep_Step3(TutorialController* _tutorialController) : ITutorialStep(_tutorialController) {}

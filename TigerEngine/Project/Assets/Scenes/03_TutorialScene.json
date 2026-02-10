@@ -3,19 +3,19 @@
     {
       "properties": {
         "Active": true,
-        "ID": 94,
+        "ID": 106,
         "Name": "Main Camera",
         "ParentID": -1,
         "components": [
           {
             "properties": {
               "Position": [
-                -98.92500305175781,
-                130.0,
-                -100.0
+                0.0,
+                200.0,
+                -200.0
               ],
               "Rotation": [
-                0.06457717716693878,
+                0.3490658402442932,
                 0.0,
                 0.0
               ],
@@ -44,7 +44,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 95,
+        "ID": 107,
         "Name": "DirectionalLight(Sun)",
         "ParentID": -1,
         "components": [
@@ -56,9 +56,9 @@
                 0.0
               ],
               "Rotation": [
+                -0.0,
                 0.0,
-                0.0,
-                0.0
+                -0.0
               ],
               "Scale": [
                 1.0,
@@ -98,7 +98,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 96,
+        "ID": 108,
         "Name": "----------------------",
         "ParentID": -1,
         "components": [
@@ -129,7 +129,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 97,
+        "ID": 109,
         "Name": "Ground",
         "ParentID": -1,
         "components": [
@@ -210,7 +210,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 98,
+        "ID": 110,
         "Name": "CurScene_03_TutorialScene",
         "ParentID": -1,
         "components": [
@@ -241,7 +241,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 99,
+        "ID": 111,
         "Name": "SceneFlowManager",
         "ParentID": -1,
         "components": [
@@ -284,7 +284,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 101,
+        "ID": 112,
         "Name": "----------------------",
         "ParentID": -1,
         "components": [
@@ -315,7 +315,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 103,
+        "ID": 113,
         "Name": "TutorialController",
         "ParentID": -1,
         "components": [
@@ -344,6 +344,118 @@
               "Active": true
             },
             "type": "TutorialController"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 115,
+        "Name": "----------------------",
+        "ParentID": -1,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 117,
+        "Name": "Player",
+        "ParentID": -1,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                -177.67396545410156,
+                8.65707015991211,
+                221.79794311523438
+              ],
+              "Rotation": [
+                -0.0,
+                0.0,
+                -0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "DataPath": "..\\Assets\\Resource\\Animation\\FuckingAssimp\\ani_idle_character.fbx",
+              "IsStatic": false
+            },
+            "type": "FBXData"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "Alpha": 1.0,
+              "Diffuse": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "DiffuseOverride": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Emissive": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "EmissiveOverride": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "IsGround": false,
+              "Metalic": 1.0,
+              "MetallicOverride": 1.0,
+              "RenderBlendType": "Opaque",
+              "Roughness": 1.0,
+              "RoughnessOverride": 1.0,
+              "UseDiffuseOverride": false,
+              "UseEmissiveOverride": false,
+              "UseMetallicOverride": false,
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
+            },
+            "type": "FBXRenderer"
           }
         ]
       },
