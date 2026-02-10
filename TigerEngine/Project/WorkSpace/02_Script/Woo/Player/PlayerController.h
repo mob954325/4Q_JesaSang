@@ -97,6 +97,10 @@ private:
     float invincibleTimer = 0.0f;        // hit 무적상태 지속시간 타이머
     float renderDirectorTimer = 0.0f;    // 플레이어 렌더 깜빡거림 지속시간 타이머
 
+    // first interaction hint
+    bool isExplainedHideObject = false;
+    bool isExplainedSearchObject = false;
+    bool isExplainedCookingZone = false;
 
     // search object interaction
     bool  isPossibleSearch = false;            // 기획자분이 한번에 하나만 가능한 사이즈라고 하심. 중첩된다면 추가 처리필요.
