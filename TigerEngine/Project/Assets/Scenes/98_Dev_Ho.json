@@ -3,7 +3,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 120,
+        "ID": 3124,
         "Name": "DirectionalLight(Sun)",
         "ParentID": -1,
         "components": [
@@ -57,7 +57,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 121,
+        "ID": 3125,
         "Name": "Ground",
         "ParentID": -1,
         "components": [
@@ -138,7 +138,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 122,
+        "ID": 3126,
         "Name": "Player",
         "ParentID": -1,
         "components": [
@@ -219,9 +219,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 123,
+        "ID": 3127,
         "Name": "NewGameObject",
-        "ParentID": 122,
+        "ParentID": 3126,
         "components": [
           {
             "properties": {
@@ -310,7 +310,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 124,
+        "ID": 3128,
         "Name": "WinCinemahcine",
         "ParentID": -1,
         "components": [
@@ -347,9 +347,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 125,
+        "ID": 3129,
         "Name": "WinCinemachineCamera",
-        "ParentID": 124,
+        "ParentID": 3128,
         "components": [
           {
             "properties": {
@@ -388,7 +388,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 126,
+        "ID": 3130,
         "Name": "WinSpotLight",
         "ParentID": -1,
         "components": [
@@ -442,7 +442,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 127,
+        "ID": 3131,
         "Name": "LoseCinemahcine",
         "ParentID": -1,
         "components": [
@@ -479,9 +479,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 128,
+        "ID": 3132,
         "Name": "LoseCinemachineCamera",
-        "ParentID": 127,
+        "ParentID": 3131,
         "components": [
           {
             "properties": {
@@ -520,7 +520,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 129,
+        "ID": 3133,
         "Name": "ResultPanel",
         "ParentID": -1,
         "components": [
@@ -557,9 +557,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 130,
+        "ID": 3134,
         "Name": "WinPanel",
-        "ParentID": 129,
+        "ParentID": 3133,
         "components": [
           {
             "properties": {
@@ -654,9 +654,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 131,
+        "ID": 3135,
         "Name": "LosePanel",
-        "ParentID": 129,
+        "ParentID": 3133,
         "components": [
           {
             "properties": {
@@ -751,7 +751,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 132,
+        "ID": 3136,
         "Name": "Playerasdsdfas",
         "ParentID": -1,
         "components": [
@@ -846,7 +846,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 133,
+        "ID": 3137,
         "Name": "NewGameObject",
         "ParentID": -1,
         "components": [
@@ -854,13 +854,13 @@
             "properties": {
               "Position": [
                 0.0,
-                196.18247985839844,
+                0.0,
                 0.0
               ],
               "Rotation": [
-                -0.0,
                 0.0,
-                -0.0
+                0.0,
+                0.0
               ],
               "Scale": [
                 1.0,
@@ -869,18 +869,6 @@
               ]
             },
             "type": "Transform"
-          },
-          {
-            "properties": {
-              "Active": true
-            },
-            "type": "Weapon"
-          },
-          {
-            "properties": {
-              "Active": true
-            },
-            "type": "EnemySoundSource"
           }
         ]
       },
@@ -889,21 +877,21 @@
     {
       "properties": {
         "Active": true,
-        "ID": 134,
-        "Name": "NewGameObject",
+        "ID": 3138,
+        "Name": "SoundManager",
         "ParentID": -1,
         "components": [
           {
             "properties": {
               "Position": [
                 0.0,
-                205.2708740234375,
-                -363.39996337890625
+                0.0,
+                0.0
               ],
               "Rotation": [
-                -0.0,
                 0.0,
-                -0.0
+                0.0,
+                0.0
               ],
               "Scale": [
                 1.0,
@@ -915,101 +903,61 @@
           },
           {
             "properties": {
-              "Active": true
+              "Active": true,
+              "ChannelGroup": "",
+              "ClipId": "",
+              "Loop": false,
+              "MaxDistance": 100.0,
+              "MinDistance": 1.0,
+              "Pitch": 1.0,
+              "Volume": 1.0
             },
-            "type": "Weapon"
+            "type": "AudioSourceComponent"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "ChannelGroup": "",
+              "ClipId": "",
+              "Loop": false,
+              "MaxDistance": 100.0,
+              "MinDistance": 1.0,
+              "Pitch": 1.0,
+              "Volume": 1.0
+            },
+            "type": "AudioSourceComponent"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "ChannelGroup": "",
+              "ClipId": "",
+              "Loop": false,
+              "MaxDistance": 100.0,
+              "MinDistance": 1.0,
+              "Pitch": 1.0,
+              "Volume": 1.0
+            },
+            "type": "AudioSourceComponent"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "ChannelGroup": "",
+              "ClipId": "",
+              "Loop": false,
+              "MaxDistance": 100.0,
+              "MinDistance": 1.0,
+              "Pitch": 1.0,
+              "Volume": 1.0
+            },
+            "type": "AudioSourceComponent"
           },
           {
             "properties": {
               "Active": true
             },
-            "type": "EnemySoundSource"
-          }
-        ]
-      },
-      "type": "GameObject"
-    },
-    {
-      "properties": {
-        "Active": true,
-        "ID": 135,
-        "Name": "NewGameObject",
-        "ParentID": -1,
-        "components": [
-          {
-            "properties": {
-              "Position": [
-                255.267822265625,
-                170.14154052734375,
-                -422.9947509765625
-              ],
-              "Rotation": [
-                -0.0,
-                0.0,
-                -0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ]
-            },
-            "type": "Transform"
-          },
-          {
-            "properties": {
-              "Active": true
-            },
-            "type": "Weapon"
-          },
-          {
-            "properties": {
-              "Active": true
-            },
-            "type": "EnemySoundSource"
-          }
-        ]
-      },
-      "type": "GameObject"
-    },
-    {
-      "properties": {
-        "Active": true,
-        "ID": 136,
-        "Name": "NewGameObject",
-        "ParentID": -1,
-        "components": [
-          {
-            "properties": {
-              "Position": [
-                311.115234375,
-                225.00930786132813,
-                23.80052947998047
-              ],
-              "Rotation": [
-                -0.0,
-                0.0,
-                -0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ]
-            },
-            "type": "Transform"
-          },
-          {
-            "properties": {
-              "Active": true
-            },
-            "type": "Weapon"
-          },
-          {
-            "properties": {
-              "Active": true
-            },
-            "type": "EnemySoundSource"
+            "type": "SoundManager"
           }
         ]
       },

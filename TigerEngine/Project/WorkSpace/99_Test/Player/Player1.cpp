@@ -60,7 +60,10 @@ void Player1::OnStart()
     pss = GetOwner()->GetComponent<PlayerSoundSource>();
     alc = GetOwner()->GetComponent<AudioListenerComponent>();
 
-    soundManager = SceneUtil::GetObjectByName("SoundManager")->GetComponent<SoundManager>();
+    auto smObj = SceneUtil::GetObjectByName("SoundManager");
+
+    if(smObj)
+        soundManager = smObj->GetComponent<SoundManager>();
 }
 
 void Player1::OnDisable()
@@ -155,7 +158,9 @@ void Player1::OnUpdate(float delta)
 
    if (Input::GetKeyDown(DirectX::Keyboard::H))
    {
-       soundManager->PlaySFX(SFXType::HiddenObj_Playerin_Sound);
+       // soundManager->PlaySFX(SFXType::HiddenObj_Playerin_Sound);
+
+       pss->PlayRandomFootStep();
    }
 
     UpdateAudioTransform(delta);
