@@ -109,6 +109,9 @@ public:
     void BroadcastCCTCollisionExit(CharacterControllerComponent* cct);
 };
 
+/// <summary>
+/// NOTE: 시스템 내에서만 호출하게 하고, 외부 Script Component는 사용하지말것 ( SetActive 가 동작하지 않음 )
+/// </summary>
 template <typename T>
 inline T* GameObject::AddComponent()
 {

@@ -37,6 +37,7 @@ namespace
         {
             ++count;
         }
+        cout << "글자 수 세기 : " << count << endl;
         return count;
     }
 

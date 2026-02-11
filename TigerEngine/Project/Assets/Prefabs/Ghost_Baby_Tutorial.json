@@ -2,21 +2,21 @@
   "prefab": [
     {
       "Active": true,
-      "ID": 4295,
-      "Name": "Ghost_Adult",
+      "ID": 2042,
+      "Name": "Ghost_Baby_Tutorial",
       "ParentID": -1,
       "components": [
         {
           "properties": {
             "Position": [
-              1219.73876953125,
-              -3.814697265625e-06,
-              -46.79457092285156
+              0.0,
+              4.7192443162202835e-05,
+              -156.24853515625
             ],
             "Rotation": [
               -0.0,
-              0.0,
-              -0.0
+              3.1415927410125732,
+              0.0
             ],
             "Scale": [
               1.0,
@@ -29,7 +29,7 @@
         {
           "properties": {
             "Active": true,
-            "DataPath": "..\\Assets\\Resource\\Animation\\Adult_Ghost\\ani_idle_ghost.fbx",
+            "DataPath": "..\\Assets\\Resource\\Animation\\Baby_Ghost\\ani_idle_babyghost.fbx",
             "IsStatic": false
           },
           "type": "FBXData"
@@ -78,66 +78,29 @@
         },
         {
           "properties": {
-            "Active": true,
-            "height": 50.0,
-            "isTrigger": false,
-            "jumpSpeed": 5.5,
-            "layer": "Default",
-            "moveSpeed": 2.0,
-            "offset": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "radius": 30.0
-          },
-          "type": "CharacterControllerComponent"
-        },
-        {
-          "properties": {
-            "Active": true
-          },
-          "type": "VisionComponent"
-        },
-        {
-          "properties": {
-            "Active": true,
-            "patrolSpeed": 1.0,
-            "reachDist": 20.0
-          },
-          "type": "AgentComponent"
-        },
-        {
-          "properties": {
             "Active": true
           },
           "type": "AnimationController"
-        },
-        {
-          "properties": {
-            "Active": true
-          },
-          "type": "AdultGhostController"
         }
       ]
     },
     {
-      "Active": true,
-      "ID": 4296,
-      "Name": "GhostInteractionZone",
-      "ParentID": 4295,
+      "Active": false,
+      "ID": 2056,
+      "Name": "FX_Exclamation",
+      "ParentID": 2042,
       "components": [
         {
           "properties": {
             "Position": [
               0.0,
-              0.0,
+              103.37461853027344,
               0.0
             ],
             "Rotation": [
+              -0.0,
               0.0,
-              0.0,
-              0.0
+              -0.0
             ],
             "Scale": [
               1.0,
@@ -149,32 +112,53 @@
         },
         {
           "properties": {
-            "Active": true,
-            "ColliderType": "Box",
-            "PhysicsBodyType": "Static",
-            "density": 10.0,
-            "halfExtents": [
-              40.0,
-              30.0,
-              40.0
-            ],
-            "height": 10.0,
-            "isTrigger": true,
-            "layer": "Default",
-            "localOffset": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "radius": 50.0
+            "Active": false,
+            "DataPath": "..\\Assets\\Resource\\Animation\\Baby_Ghost\\ani_idle_babyghost.fbx",
+            "IsStatic": false
           },
-          "type": "PhysicsComponent"
+          "type": "FBXData"
         },
         {
           "properties": {
-            "Active": true
+            "Active": false,
+            "Alpha": 1.0,
+            "Diffuse": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "DiffuseOverride": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "Emissive": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "EmissiveOverride": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "IsGround": false,
+            "Metalic": 1.0,
+            "MetallicOverride": 1.0,
+            "RenderBlendType": "Opaque",
+            "Roughness": 1.0,
+            "RoughnessOverride": 1.0,
+            "UseDiffuseOverride": false,
+            "UseEmissiveOverride": false,
+            "UseMetallicOverride": false,
+            "UseRoughnessOverride": false,
+            "isroughnessFromShininess": false
           },
-          "type": "GhostInteractionZone"
+          "type": "FBXRenderer"
         }
       ]
     }

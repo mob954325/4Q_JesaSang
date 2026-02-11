@@ -2,16 +2,16 @@
   "prefab": [
     {
       "Active": true,
-      "ID": 477,
+      "ID": 4297,
       "Name": "Ghost_Baby",
       "ParentID": -1,
       "components": [
         {
           "properties": {
             "Position": [
-              -569.2680053710938,
-              0.0,
-              60.562076568603516
+              -559.1707153320313,
+              4.7192443162202835e-05,
+              -713.1060791015625
             ],
             "Rotation": [
               -0.0,
@@ -29,7 +29,7 @@
         {
           "properties": {
             "Active": true,
-            "DataPath": "..\\Assets\\Resource\\FBX\\00_character\\ani_babyghost.fbx",
+            "DataPath": "..\\Assets\\Resource\\Animation\\Baby_Ghost\\ani_idle_babyghost.fbx",
             "IsStatic": false
           },
           "type": "FBXData"
@@ -71,22 +71,15 @@
             "UseDiffuseOverride": false,
             "UseEmissiveOverride": false,
             "UseMetallicOverride": false,
-            "UseRoughnessOverride": false
+            "UseRoughnessOverride": false,
+            "isroughnessFromShininess": false
           },
           "type": "FBXRenderer"
         },
         {
           "properties": {
             "Active": true,
-            "patrolSpeed": 1.0,
-            "reachDist": 20.0
-          },
-          "type": "AgentComponent"
-        },
-        {
-          "properties": {
-            "Active": true,
-            "height": 120.0,
+            "height": 50.0,
             "isTrigger": false,
             "jumpSpeed": 5.5,
             "layer": "Default",
@@ -108,9 +101,23 @@
         },
         {
           "properties": {
+            "Active": true,
+            "patrolSpeed": 1.0,
+            "reachDist": 20.0
+          },
+          "type": "AgentComponent"
+        },
+        {
+          "properties": {
             "Active": true
           },
-          "type": "AdultGhostController"
+          "type": "AnimationController"
+        },
+        {
+          "properties": {
+            "Active": true
+          },
+          "type": "BabyGhostController"
         }
       ]
     }

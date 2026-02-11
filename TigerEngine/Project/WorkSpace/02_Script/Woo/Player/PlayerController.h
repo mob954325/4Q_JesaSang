@@ -42,6 +42,13 @@ class PlayerController : public ScriptComponent
     RTTR_ENABLE(ScriptComponent)
 
 private:
+    bool isInputLocked = false;  // 선민 Tutorial | 02.11 
+public:
+    void SetInputLock(bool lock) { isInputLocked = lock; }
+    bool IsInputLocked() const { return isInputLocked; }
+
+private:
+    
     // --- [ Component ] ---------------------------
     Transform* transform = nullptr;
     FBXRenderer* fbxRenderer = nullptr;
