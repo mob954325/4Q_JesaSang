@@ -247,6 +247,7 @@
     <ClCompile Include="02_Script\Ho\ResultPanels\WinPanel.cpp" />
     <ClCompile Include="02_Script\Ho\Sound\EnemySoundSource.cpp" />
     <ClCompile Include="02_Script\Ho\Sound\PlayerSoundSource.cpp" />
+    <ClCompile Include="02_Script\Ho\Sound\SoundManager.cpp" />
     <ClCompile Include="02_Script\Ho\UI\MenuUI_ExitButton.cpp" />
     <ClCompile Include="02_Script\Ho\UI\MenuUI_OptionButton.cpp" />
     <ClCompile Include="02_Script\Ho\UI\MenuUI_StartButton.cpp" />
