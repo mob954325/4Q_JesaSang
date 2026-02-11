@@ -2,12 +2,15 @@
 
 #include "System/InputSystem.h"
 
+#include "../../../Woo/Player/PlayerController.h"
 
 void TutorialStep_Step6::Enter()
 {
     isDone = false;
     stepTimer = 0.0f;
     phase = Step6Phase::HideOut;
+
+    tutorialController->player_Obj->GetComponent<PlayerController>()->SetInputLock(false);
 
     std::cout << "[Step6] Enter" << std::endl;
 }

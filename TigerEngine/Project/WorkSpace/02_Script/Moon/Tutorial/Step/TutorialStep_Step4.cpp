@@ -54,9 +54,6 @@ void TutorialStep_Step4::Enter()
         frozenImage->SetActive(false);
 
     // 퀘스트 창
-    //Quest = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("Quest");
-    //Quest->GetComponent<RectTransform>()->SetPos({ 1920.0f, 25.0f, 0.f });
-
     if (auto ui = MainGameUIManager::Instance())
     {
         ui->QuestPannelClose(0.0f);  // 즉시 닫힘 위치로 이동
