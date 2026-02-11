@@ -18,6 +18,7 @@
 #include "Step/TutorialStep_Step7.h"
 #include "Step/TutorialStep_Step8.h"
 #include "Step/TutorialStep_Step9.h"
+#include "../../Woo/Player/PlayerController.h"
 
 
 REGISTER_COMPONENT(TutorialController)
@@ -59,18 +60,10 @@ void TutorialController::OnStart()
     // -------------------------------------------------
     // 플레이어 세팅
     // -------------------------------------------------
-    player_Obj = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("Player_Tutorial");
-    Player_animController = player_Obj->GetComponent<AnimationController>();
-    Player_fbxRenderer = player_Obj->GetComponent<FBXRenderer>();
-    Player_fbxData = player_Obj->GetComponent<FBXData>();
+    player_Obj = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("Player");
+    player_Obj->GetComponent<PlayerController>()->SetInputLock(true);
+    InitPlayerPosition = player_Obj->GetTransform()->GetWorldPosition();
 
-    if (!Player_animController || !Player_fbxRenderer || !Player_fbxData)
-    {
-        std::cout << "[TutorialController] Player_Tutorial Component Missing" << std::endl;
-        return;
-    }
-
-    LoadPlayerAnimation();
 
 
     // -------------------------------------------------
@@ -93,19 +86,19 @@ void TutorialController::OnStart()
     // -------------------------------------------------
     // 어른 귀신 세팅
     // -------------------------------------------------
-    adultGhost_Obj = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("Ghost_Adult");
+    adultGhost_Obj = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("Ghost_Adult_Tutorial");
     AdultGhost_animController = adultGhost_Obj->GetComponent<AnimationController>();
     AdultGhost_fbxRenderer = adultGhost_Obj->GetComponent<FBXRenderer>();
     AdultGhost_fbxData = adultGhost_Obj->GetComponent<FBXData>();
 
     if (!AdultGhost_animController || !AdultGhost_fbxRenderer || !AdultGhost_fbxData)
     {
-        std::cout << "[TutorialController] Ghost_Adult Component Missing" << std::endl;
+        std::cout << "[TutorialController] Ghost_Adult_Tutorial Component Missing" << std::endl;
         return;
     }
 
     LoadAdultGhostAnimation();
-
+    InitAdultPosition = adultGhost_Obj->GetTransform()->GetWorldPosition();
 
 
     // -------------------------------------------------
@@ -178,38 +171,38 @@ void TutorialController::ChangeStep(TutorialStep next)
 // [ 플레이어 ]
 // -----------------------------------------------------------
 
-void TutorialController::LoadPlayerAnimation()
-{
-    // 애니메이션 파일 로드
-    FBXResourceManager::Instance().LoadAnimationByPath(Player_fbxData->GetFBXInfo(), "..\\Assets\\Resource\\Animation\\FuckingAssimp\\ani_idle_character.fbx", "Idle");
-    FBXResourceManager::Instance().LoadAnimationByPath(Player_fbxData->GetFBXInfo(), "..\\Assets\\Resource\\Animation\\FuckingAssimp\\ani_walk_character.fbx", "Walk");
-    FBXResourceManager::Instance().LoadAnimationByPath(Player_fbxData->GetFBXInfo(), "..\\Assets\\Resource\\Animation\\FuckingAssimp\\ani_run_character.fbx", "Run");
-    FBXResourceManager::Instance().LoadAnimationByPath(Player_fbxData->GetFBXInfo(), "..\\Assets\\Resource\\Animation\\FuckingAssimp\\ani_sit_character.fbx", "Sit");
-    FBXResourceManager::Instance().LoadAnimationByPath(Player_fbxData->GetFBXInfo(), "..\\Assets\\Resource\\Animation\\FuckingAssimp\\ani_cry_character.fbx", "Hit");
-
-    // 클립 생성
-    auto idleClip = Player_animController->FindClip("Idle");
-    auto walkClip = Player_animController->FindClip("Walk");
-    auto runClip = Player_animController->FindClip("Run");
-    auto sitClip = Player_animController->FindClip("Sit");
-    auto hitClip = Player_animController->FindClip("Hit");
-
-    if (!idleClip || !walkClip || !runClip || !sitClip || !hitClip)
-    {
-        cout << "[TutorialController] Clip not found!\n" << endl;
-        return;
-    }
-
-    // 상태 등록
-    Player_animController->AddState(std::make_unique<AnimationState>("Idle", idleClip, Player_animController));
-    Player_animController->AddState(std::make_unique<AnimationState>("Walk", walkClip, Player_animController));
-    Player_animController->AddState(std::make_unique<AnimationState>("Run", runClip, Player_animController));
-    Player_animController->AddState(std::make_unique<AnimationState>("Sit", sitClip, Player_animController));
-    Player_animController->AddState(std::make_unique<AnimationState>("Hit", hitClip, Player_animController));
-
-    // 시작 상태
-    Player_animController->ChangeState("Idle");
-}
+//void TutorialController::LoadPlayerAnimation()
+//{
+//    // 애니메이션 파일 로드
+//    FBXResourceManager::Instance().LoadAnimationByPath(Player_fbxData->GetFBXInfo(), "..\\Assets\\Resource\\Animation\\FuckingAssimp\\ani_idle_character.fbx", "Idle");
+//    FBXResourceManager::Instance().LoadAnimationByPath(Player_fbxData->GetFBXInfo(), "..\\Assets\\Resource\\Animation\\FuckingAssimp\\ani_walk_character.fbx", "Walk");
+//    FBXResourceManager::Instance().LoadAnimationByPath(Player_fbxData->GetFBXInfo(), "..\\Assets\\Resource\\Animation\\FuckingAssimp\\ani_run_character.fbx", "Run");
+//    FBXResourceManager::Instance().LoadAnimationByPath(Player_fbxData->GetFBXInfo(), "..\\Assets\\Resource\\Animation\\FuckingAssimp\\ani_sit_character.fbx", "Sit");
+//    FBXResourceManager::Instance().LoadAnimationByPath(Player_fbxData->GetFBXInfo(), "..\\Assets\\Resource\\Animation\\FuckingAssimp\\ani_cry_character.fbx", "Hit");
+//
+//    // 클립 생성
+//    auto idleClip = Player_animController->FindClip("Idle");
+//    auto walkClip = Player_animController->FindClip("Walk");
+//    auto runClip = Player_animController->FindClip("Run");
+//    auto sitClip = Player_animController->FindClip("Sit");
+//    auto hitClip = Player_animController->FindClip("Hit");
+//
+//    if (!idleClip || !walkClip || !runClip || !sitClip || !hitClip)
+//    {
+//        cout << "[TutorialController] Clip not found!\n" << endl;
+//        return;
+//    }
+//
+//    // 상태 등록
+//    Player_animController->AddState(std::make_unique<AnimationState>("Idle", idleClip, Player_animController));
+//    Player_animController->AddState(std::make_unique<AnimationState>("Walk", walkClip, Player_animController));
+//    Player_animController->AddState(std::make_unique<AnimationState>("Run", runClip, Player_animController));
+//    Player_animController->AddState(std::make_unique<AnimationState>("Sit", sitClip, Player_animController));
+//    Player_animController->AddState(std::make_unique<AnimationState>("Hit", hitClip, Player_animController));
+//
+//    // 시작 상태
+//    Player_animController->ChangeState("Idle");
+//}
 
 
 // -----------------------------------------------------------

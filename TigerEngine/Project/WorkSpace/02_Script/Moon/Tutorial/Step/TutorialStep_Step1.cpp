@@ -22,9 +22,7 @@ void TutorialStep_Step1::Enter()
     if (tutorialController->Blink_Top) tutorialController->Blink_Top->SetActive(true);
     if (tutorialController->Blink_Bottom) tutorialController->Blink_Bottom->SetActive(true);
 
-    auto player = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("Player_Tutorial");
-    if (player)
-        tutorialController->dialogue = player->GetComponent<DialogueUIController>();
+    tutorialController->dialogue = tutorialController->player_Obj->GetComponent<DialogueUIController>();
 }
 
 void TutorialStep_Step1::Update(float deltaTime)
@@ -136,5 +134,4 @@ void TutorialStep_Step1::Monologue()
     if (!tutorialController->dialogue) return;
 
     tutorialController->dialogue->ShowDialogueHold(L"Umm... Did I just fall asleep..");
-    // dialogue->ShowDialogueText(L"Umm... Did I just fall asleep..");
 }

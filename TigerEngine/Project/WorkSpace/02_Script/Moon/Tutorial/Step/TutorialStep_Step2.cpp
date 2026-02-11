@@ -9,8 +9,6 @@ void TutorialStep_Step2::Enter()
     step2Timer = 0.0f;
     soundPlayed = false;
     phase = Step2Phase::Sound;
-
-    // tutorialController->Player_animController->ChangeState("Walk");
 }
 
 

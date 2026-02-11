@@ -36,10 +36,10 @@ private:
     ITutorialStep* currentStep = nullptr;
     ITutorialStep* fsmSteps[9];
 
-    // [ Player ]
-    AnimationController* Player_animController = nullptr;
-    FBXRenderer* Player_fbxRenderer = nullptr;
-    FBXData* Player_fbxData = nullptr;
+    //// [ Player ]
+    //AnimationController* Player_animController = nullptr;
+    //FBXRenderer* Player_fbxRenderer = nullptr;
+    //FBXData* Player_fbxData = nullptr;
 
     // [ Baby Ghost ]
     AnimationController* BabyGhost_animController = nullptr;
@@ -66,7 +66,8 @@ public:
 
     // [ Player ]
     GameObject* player_Obj = nullptr;
-    void LoadPlayerAnimation();
+    //void LoadPlayerAnimation();
+    Vector3 InitPlayerPosition = {};
 
     // [ Baby Ghost ]
     GameObject* babyGhost_Obj = nullptr;
@@ -75,14 +76,8 @@ public:
     // [ Adult Ghost ]
     GameObject* adultGhost_Obj = nullptr;
     void LoadAdultGhostAnimation();
+    Vector3 InitAdultPosition = {};
 
-
-public:
-    void PlayPlayerAnim(const std::string& name, float blend = 0.2f)
-    {
-        if (!Player_animController) return;
-        Player_animController->ChangeState(name, blend);
-    }
 
 
 public:

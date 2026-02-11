@@ -39,6 +39,8 @@ private:
 
     bool phaseStarted = false;
 
+    float speed = 120.0f;
+
 private:
     void BabyInCome();
     void TrunToPlayer();

@@ -12,7 +12,6 @@ void TutorialStep_Step3::Enter()
 
     targetA = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("Baby_Target_A");
     targetB = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("Baby_Target_B");
-
     babyTranform = tutorialController->babyGhost_Obj->GetTransform();
 
     exclamation = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("FX_Exclamation");
@@ -86,7 +85,6 @@ void TutorialStep_Step3::BabyInCome()
 
     dir.Normalize();
 
-    float speed = 60.f;
     float dt = GameTimer::Instance().UnscaledDeltaTime();
 
     babyTranform->Translate(dir * speed * dt);
