@@ -9,7 +9,9 @@ void TutorialStep_Step2::Enter()
     step2Timer = 0.0f;
     phase = Step2Phase::Sound;
 
-    baby = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("Blink_Top");
+    // baby = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("Blink_Top");
+
+    tutorialController->Player_animController->ChangeState("Walk");
 
     std::cout << "[Step2] *BANG!* Sound from entrance!\n";
 }
@@ -18,12 +20,11 @@ void TutorialStep_Step2::Update(float deltaTime)
 {
     step2Timer += deltaTime;
 
-
     switch (phase)
     {
     case Step2Phase::Sound:
 
-        if (step2Timer >= delayStep2)
+        if (step2Timer >= SoundDelay)
         {
             phase = Step2Phase::Monologue;
         }

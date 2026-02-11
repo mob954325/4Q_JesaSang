@@ -3,6 +3,7 @@
 #include "Components/AnimationController.h"
 #include "Components/FBXRenderer.h"
 #include "Components/FBXData.h"
+#include "../../Woo/Player/DialogueUI/DialogueUIController.h"
 
 class ITutorialStep;
 class TutorialStep_Step1;
@@ -47,6 +48,10 @@ public:
     void InitFSMSteps();
     void ChangeStep(TutorialStep next);
 
+    // [ Tutorial ]
+    GameObject* Blink_Top = nullptr;
+    GameObject* Blink_Bottom = nullptr;
+    DialogueUIController* dialogue = nullptr;
 
     // [ Player ]
     GameObject* player_Obj = nullptr;
@@ -54,7 +59,7 @@ public:
 
 
 public:
-    void PlayAnim(const std::string& name, float blend = 0.2f)
+    void PlayPlayerAnim(const std::string& name, float blend = 0.2f)
     {
         if (!Player_animController) return;
         Player_animController->ChangeState(name, blend);

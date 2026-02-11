@@ -45,7 +45,15 @@ void TutorialController::Deserialize(nlohmann::json data)
 
 void TutorialController::OnStart() 
 {
+    // -------------------------------------------------
+    // 튜토리얼 세팅
+    // -------------------------------------------------
     InitFSMSteps();
+
+    Blink_Top = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("Blink_Top"); // rectTransform 축 -700 
+    Blink_Bottom = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("Blink_Bottom"); // rectTransform 축 700 
+
+
 
     // -------------------------------------------------
     // 플레이어 세팅
