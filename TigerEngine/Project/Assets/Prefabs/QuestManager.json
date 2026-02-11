@@ -2,8 +2,8 @@
   "prefab": [
     {
       "Active": true,
-      "ID": 8457,
-      "Name": "MainGameUIManager",
+      "ID": 8473,
+      "Name": "QuestManager",
       "ParentID": -1,
       "components": [
         {
@@ -28,11 +28,9 @@
         },
         {
           "properties": {
-            "Active": true,
-            "lifeOffImagePath": "..\\Assets\\Resource\\UI\\Player\\strength_0.png",
-            "lifeOnImagePath": "..\\Assets\\Resource\\UI\\Player\\strength.png"
+            "Active": true
           },
-          "type": "MainGameUIManager"
+          "type": "QuestManager"
         }
       ]
     }

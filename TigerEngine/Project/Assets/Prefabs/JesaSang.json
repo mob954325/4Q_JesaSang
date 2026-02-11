@@ -2,7 +2,7 @@
   "prefab": [
     {
       "Active": true,
-      "ID": 978,
+      "ID": 8357,
       "Name": "JesaSang",
       "ParentID": -1,
       "components": [
@@ -10,7 +10,7 @@
           "properties": {
             "Position": [
               -199.5185089111328,
-              -110.0,
+              0.0,
               260.0
             ],
             "Rotation": [
@@ -109,9 +109,9 @@
     },
     {
       "Active": true,
-      "ID": 981,
+      "ID": 8358,
       "Name": "baseFood",
-      "ParentID": 978,
+      "ParentID": 8357,
       "components": [
         {
           "properties": {
@@ -187,9 +187,9 @@
     },
     {
       "Active": false,
-      "ID": 1002,
+      "ID": 8359,
       "Name": "Apple",
-      "ParentID": 978,
+      "ParentID": 8357,
       "components": [
         {
           "properties": {
@@ -265,9 +265,9 @@
     },
     {
       "Active": false,
-      "ID": 1003,
+      "ID": 8360,
       "Name": "Pear",
-      "ParentID": 978,
+      "ParentID": 8357,
       "components": [
         {
           "properties": {
@@ -343,9 +343,9 @@
     },
     {
       "Active": false,
-      "ID": 1004,
+      "ID": 8361,
       "Name": "Batter",
-      "ParentID": 978,
+      "ParentID": 8357,
       "components": [
         {
           "properties": {
@@ -421,9 +421,9 @@
     },
     {
       "Active": false,
-      "ID": 1005,
+      "ID": 8362,
       "Name": "Tofu",
-      "ParentID": 978,
+      "ParentID": 8357,
       "components": [
         {
           "properties": {
@@ -499,9 +499,9 @@
     },
     {
       "Active": false,
-      "ID": 1006,
+      "ID": 8363,
       "Name": "Sanjeok",
-      "ParentID": 978,
+      "ParentID": 8357,
       "components": [
         {
           "properties": {
@@ -577,9 +577,9 @@
     },
     {
       "Active": false,
-      "ID": 1007,
+      "ID": 8364,
       "Name": "Donggeurangttaeng",
-      "ParentID": 978,
+      "ParentID": 8357,
       "components": [
         {
           "properties": {
@@ -650,6 +650,270 @@
             "isroughnessFromShininess": false
           },
           "type": "FBXRenderer"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 8365,
+      "Name": "Image_SensorOn_Jesasang",
+      "ParentID": 8357,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              100.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              3.1415927410125732,
+              3.1415927410125732
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Pivot": [
+              0.5,
+              0.5
+            ],
+            "Pos": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "Size": [
+              25.0,
+              25.0
+            ]
+          },
+          "type": "RectTransform"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "color": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "drawSpacetype": "World",
+            "fillAmount": 1.0,
+            "imageType": "Simple",
+            "isBillboard": false,
+            "isMouseCheck": false,
+            "path": "..\\Assets\\Resource\\UI\\Interaction\\point.png",
+            "sliceBorderPx": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "type": "Simple",
+            "zOrder": 0
+          },
+          "type": "Image"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 8366,
+      "Name": "Image_InteractionOn_Jesasang",
+      "ParentID": 8357,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              100.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              3.1415927410125732,
+              3.1415927410125732
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Pivot": [
+              0.5,
+              0.5
+            ],
+            "Pos": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "Size": [
+              25.0,
+              25.0
+            ]
+          },
+          "type": "RectTransform"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "color": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "drawSpacetype": "World",
+            "fillAmount": 1.0,
+            "imageType": "Simple",
+            "isBillboard": false,
+            "isMouseCheck": false,
+            "path": "..\\Assets\\Resource\\UI\\Interaction\\F.png",
+            "sliceBorderPx": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "type": "Simple",
+            "zOrder": 1
+          },
+          "type": "Image"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 8367,
+      "Name": "Image_InteractionGauge_Jesasang",
+      "ParentID": 8357,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              100.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              3.1415927410125732,
+              3.1415927410125732
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Pivot": [
+              0.5,
+              0.5
+            ],
+            "Pos": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "Size": [
+              25.0,
+              25.0
+            ]
+          },
+          "type": "RectTransform"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "color": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "drawSpacetype": "World",
+            "fillAmount": 0.0,
+            "imageType": "FillVertical",
+            "isBillboard": false,
+            "isMouseCheck": false,
+            "path": "..\\Assets\\Resource\\UI\\Interaction\\F_02.png",
+            "sliceBorderPx": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "type": "FillVertical",
+            "zOrder": 2
+          },
+          "type": "Image"
         }
       ]
     }

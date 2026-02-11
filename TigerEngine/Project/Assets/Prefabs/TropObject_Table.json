@@ -2,26 +2,26 @@
   "prefab": [
     {
       "Active": true,
-      "ID": 8268,
-      "Name": "TrapObject_Decal",
+      "ID": 1117,
+      "Name": "TropObject_Table",
       "ParentID": -1,
       "components": [
         {
           "properties": {
             "Position": [
-              -1124.458251953125,
-              4.10713255405426e-06,
-              115.1986312866211
+              448.9352722167969,
+              0.0,
+              -674.5397338867188
             ],
             "Rotation": [
               -0.0,
-              1.570796012878418,
+              0.0,
               -0.0
             ],
             "Scale": [
-              4.999998092651367,
               1.0,
-              4.999998092651367
+              1.0,
+              1.0
             ]
           },
           "type": "Transform"
@@ -29,30 +29,52 @@
         {
           "properties": {
             "Active": true,
-            "DecalType": "TextureMap",
-            "IsGroundDecal": true,
-            "Offset": [
-              0.0,
-              0.0
-            ],
-            "Opacity": 1.0,
-            "TexturePath": "..\\Assets\\Resource\\Decals\\Blood_Decals_A.tga",
-            "Tiling": [
-              1.0,
-              1.0
-            ],
-            "UpThreshold": 0.8999999761581421,
-            "ringColor": [
-              1.0,
-              1.0,
-              1.0
-            ],
-            "ringDuration": 5.0,
-            "ringFeather": 0.30000001192092896,
-            "ringSpeed": 1.5,
-            "ringThickness": 0.029999999329447746
+            "DataPath": "..\\Assets\\Resource\\ArtModel\\ola_table\\old_teble.fbx",
+            "IsStatic": false
           },
-          "type": "Decal"
+          "type": "FBXData"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Alpha": 1.0,
+            "Diffuse": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "DiffuseOverride": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "Emissive": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "EmissiveOverride": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "IsGround": false,
+            "Metalic": 1.0,
+            "MetallicOverride": 1.0,
+            "RenderBlendType": "Opaque",
+            "Roughness": 1.0,
+            "RoughnessOverride": 1.0,
+            "UseDiffuseOverride": false,
+            "UseEmissiveOverride": false,
+            "UseMetallicOverride": false,
+            "UseRoughnessOverride": false,
+            "isroughnessFromShininess": false
+          },
+          "type": "FBXRenderer"
         },
         {
           "properties": {
@@ -61,9 +83,9 @@
             "PhysicsBodyType": "Static",
             "density": 10.0,
             "halfExtents": [
-              50.0,
               100.0,
-              50.0
+              100.0,
+              80.0
             ],
             "height": 10.0,
             "isTrigger": true,
@@ -87,9 +109,9 @@
     },
     {
       "Active": false,
-      "ID": 8269,
+      "ID": 1118,
       "Name": "RingEffect",
-      "ParentID": 8268,
+      "ParentID": 1117,
       "components": [
         {
           "properties": {
@@ -104,9 +126,9 @@
               0.0
             ],
             "Scale": [
-              4.0,
-              3.0,
-              4.0
+              20.0,
+              5.0,
+              20.0
             ]
           },
           "type": "Transform"
