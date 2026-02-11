@@ -3,7 +3,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1389,
+        "ID": 317,
         "Name": "Main Camera",
         "ParentID": -1,
         "components": [
@@ -44,7 +44,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1390,
+        "ID": 318,
         "Name": "DirectionalLight(Sun)",
         "ParentID": -1,
         "components": [
@@ -98,7 +98,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1391,
+        "ID": 319,
         "Name": "----------------------",
         "ParentID": -1,
         "components": [
@@ -129,7 +129,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1392,
+        "ID": 320,
         "Name": "Ground",
         "ParentID": -1,
         "components": [
@@ -233,7 +233,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1393,
+        "ID": 321,
         "Name": "CurScene_03_TutorialScene",
         "ParentID": -1,
         "components": [
@@ -264,7 +264,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1394,
+        "ID": 322,
         "Name": "SceneFlowManager",
         "ParentID": -1,
         "components": [
@@ -307,7 +307,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1395,
+        "ID": 323,
         "Name": "----------------------",
         "ParentID": -1,
         "components": [
@@ -338,7 +338,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1396,
+        "ID": 324,
         "Name": "TutorialController",
         "ParentID": -1,
         "components": [
@@ -375,7 +375,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1397,
+        "ID": 325,
         "Name": "----------------------",
         "ParentID": -1,
         "components": [
@@ -406,7 +406,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1398,
+        "ID": 326,
         "Name": "UI_Screen_Blink",
         "ParentID": -1,
         "components": [
@@ -471,9 +471,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1399,
+        "ID": 327,
         "Name": "Blink_Top",
-        "ParentID": 1398,
+        "ParentID": 326,
         "components": [
           {
             "properties": {
@@ -562,9 +562,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1400,
+        "ID": 328,
         "Name": "Quest",
-        "ParentID": 1398,
+        "ParentID": 326,
         "components": [
           {
             "properties": {
@@ -627,9 +627,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1401,
+        "ID": 329,
         "Name": "Image_QuestBackground",
-        "ParentID": 1400,
+        "ParentID": 328,
         "components": [
           {
             "properties": {
@@ -718,9 +718,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1402,
+        "ID": 330,
         "Name": "Text_QuestTitle",
-        "ParentID": 1400,
+        "ParentID": 328,
         "components": [
           {
             "properties": {
@@ -805,9 +805,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1403,
+        "ID": 331,
         "Name": "Text_QuestLable",
-        "ParentID": 1400,
+        "ParentID": 328,
         "components": [
           {
             "properties": {
@@ -892,9 +892,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1404,
+        "ID": 332,
         "Name": "Image_Cheakbox",
-        "ParentID": 1400,
+        "ParentID": 328,
         "components": [
           {
             "properties": {
@@ -983,9 +983,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1405,
+        "ID": 333,
         "Name": "Image_Line",
-        "ParentID": 1400,
+        "ParentID": 328,
         "components": [
           {
             "properties": {
@@ -1074,7 +1074,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1406,
+        "ID": 334,
         "Name": "UI_PlayerDialogue",
         "ParentID": -1,
         "components": [
@@ -1139,9 +1139,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1407,
+        "ID": 335,
         "Name": "Image_Dialogue",
-        "ParentID": 1406,
+        "ParentID": 334,
         "components": [
           {
             "properties": {
@@ -1230,9 +1230,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1408,
+        "ID": 336,
         "Name": "Text_Dialoaue",
-        "ParentID": 1406,
+        "ParentID": 334,
         "components": [
           {
             "properties": {
@@ -1317,9 +1317,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1409,
+        "ID": 337,
         "Name": "Blink_Bottom",
-        "ParentID": 1398,
+        "ParentID": 326,
         "components": [
           {
             "properties": {
@@ -1408,7 +1408,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1410,
+        "ID": 338,
         "Name": "Ghost_Baby",
         "ParentID": -1,
         "components": [
@@ -1435,7 +1435,7 @@
           {
             "properties": {
               "Active": true,
-              "DataPath": "..\\Assets\\Resource\\Animation\\Baby_Ghost\\baby_ghost.fbx",
+              "DataPath": "..\\Assets\\Resource\\Animation\\Baby_Ghost\\ani_idle_babyghost.fbx",
               "IsStatic": false
             },
             "type": "FBXData"
@@ -1495,7 +1495,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1411,
+        "ID": 339,
         "Name": "Player_Tutorial",
         "ParentID": -1,
         "components": [
@@ -1605,9 +1605,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1412,
+        "ID": 340,
         "Name": "CameraTrackingPoint",
-        "ParentID": 1411,
+        "ParentID": 339,
         "components": [
           {
             "properties": {
@@ -1636,9 +1636,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1413,
+        "ID": 341,
         "Name": "OcclusionFadePoint",
-        "ParentID": 1411,
+        "ParentID": 339,
         "components": [
           {
             "properties": {
@@ -1667,9 +1667,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1414,
+        "ID": 342,
         "Name": "InteractionSensor",
-        "ParentID": 1411,
+        "ParentID": 339,
         "components": [
           {
             "properties": {
@@ -1727,9 +1727,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1415,
+        "ID": 343,
         "Name": "InteractZone",
-        "ParentID": 1411,
+        "ParentID": 339,
         "components": [
           {
             "properties": {
@@ -1787,9 +1787,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1416,
+        "ID": 344,
         "Name": "DialoguePoint",
-        "ParentID": 1411,
+        "ParentID": 339,
         "components": [
           {
             "properties": {
@@ -1818,9 +1818,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 1417,
+        "ID": 345,
         "Name": "Player_FireEffect",
-        "ParentID": 1411,
+        "ParentID": 339,
         "components": [
           {
             "properties": {
@@ -1944,9 +1944,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 1418,
+        "ID": 346,
         "Name": "Player_HitEffect",
-        "ParentID": 1411,
+        "ParentID": 339,
         "components": [
           {
             "properties": {
@@ -2023,6 +2023,170 @@
               "Active": false
             },
             "type": "AnimationController"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 347,
+        "Name": "Ghost_Adult",
+        "ParentID": -1,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                -702.0146484375,
+                0.0,
+                -653.1350708007813
+              ],
+              "Rotation": [
+                -0.0,
+                0.0,
+                -0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "DataPath": "..\\Assets\\Resource\\Animation\\Adult_Ghost\\ani_idle_ghost.fbx",
+              "IsStatic": false
+            },
+            "type": "FBXData"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "Alpha": 1.0,
+              "Diffuse": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "DiffuseOverride": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Emissive": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "EmissiveOverride": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "IsGround": false,
+              "Metalic": 1.0,
+              "MetallicOverride": 1.0,
+              "RenderBlendType": "Opaque",
+              "Roughness": 1.0,
+              "RoughnessOverride": 1.0,
+              "UseDiffuseOverride": false,
+              "UseEmissiveOverride": false,
+              "UseMetallicOverride": false,
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
+            },
+            "type": "FBXRenderer"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "height": 50.0,
+              "isTrigger": false,
+              "jumpSpeed": 5.5,
+              "layer": "Default",
+              "moveSpeed": 2.0,
+              "offset": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "radius": 30.0
+            },
+            "type": "CharacterControllerComponent"
+          },
+          {
+            "properties": {
+              "Active": true
+            },
+            "type": "AnimationController"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 348,
+        "Name": "GhostInteractionZone",
+        "ParentID": 347,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "ColliderType": "Box",
+              "PhysicsBodyType": "Static",
+              "density": 10.0,
+              "halfExtents": [
+                40.0,
+                30.0,
+                40.0
+              ],
+              "height": 10.0,
+              "isTrigger": true,
+              "layer": "Default",
+              "localOffset": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "radius": 50.0
+            },
+            "type": "PhysicsComponent"
+          },
+          {
+            "properties": {
+              "Active": true
+            },
+            "type": "GhostInteractionZone"
           }
         ]
       },

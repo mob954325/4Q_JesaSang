@@ -41,6 +41,17 @@ private:
     FBXRenderer* Player_fbxRenderer = nullptr;
     FBXData* Player_fbxData = nullptr;
 
+    // [ Baby Ghost ]
+    AnimationController* BabyGhost_animController = nullptr;
+    FBXRenderer* BabyGhost_fbxRenderer = nullptr;
+    FBXData* BabyGhost_fbxData = nullptr;
+
+    // [ Adult Ghost ]
+    AnimationController* AdultGhost_animController = nullptr;
+    FBXRenderer* AdultGhost_fbxRenderer = nullptr;
+    FBXData* AdultGhost_fbxData = nullptr;
+
+
 public:
     void OnStart() override;
     void OnUpdate(float dt) override;
@@ -56,6 +67,14 @@ public:
     // [ Player ]
     GameObject* player_Obj = nullptr;
     void LoadPlayerAnimation();
+
+    // [ Baby Ghost ]
+    GameObject* babyGhost_Obj = nullptr;
+    void LoadBabyGhostAnimation();
+
+    // [ Adult Ghost ]
+    GameObject* adultGhost_Obj = nullptr;
+    void LoadAdultGhostAnimation();
 
 
 public:

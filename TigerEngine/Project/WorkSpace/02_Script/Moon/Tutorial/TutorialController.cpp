@@ -50,8 +50,9 @@ void TutorialController::OnStart()
     // -------------------------------------------------
     InitFSMSteps();
 
-    Blink_Top = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("Blink_Top"); // rectTransform 축 -700 
-    Blink_Bottom = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("Blink_Bottom"); // rectTransform 축 700 
+    // Step1 연출 
+    Blink_Top = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("Blink_Top"); 
+    Blink_Bottom = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("Blink_Bottom"); 
 
 
 
@@ -71,6 +72,39 @@ void TutorialController::OnStart()
 
     LoadPlayerAnimation();
 
+
+    // -------------------------------------------------
+    // 아기 귀신 세팅
+    // -------------------------------------------------
+    babyGhost_Obj = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("Ghost_Baby");
+    BabyGhost_animController = babyGhost_Obj->GetComponent<AnimationController>();
+    BabyGhost_fbxRenderer = babyGhost_Obj->GetComponent<FBXRenderer>();
+    BabyGhost_fbxData = babyGhost_Obj->GetComponent<FBXData>();
+
+    if (!BabyGhost_animController || !BabyGhost_fbxRenderer || !BabyGhost_fbxData)
+    {
+        std::cout << "[TutorialController] Ghost_Baby Component Missing" << std::endl;
+        return;
+    }
+
+    LoadBabyGhostAnimation();
+
+
+    // -------------------------------------------------
+    // 어른 귀신 세팅
+    // -------------------------------------------------
+    adultGhost_Obj = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("Ghost_Adult");
+    AdultGhost_animController = adultGhost_Obj->GetComponent<AnimationController>();
+    AdultGhost_fbxRenderer = adultGhost_Obj->GetComponent<FBXRenderer>();
+    AdultGhost_fbxData = adultGhost_Obj->GetComponent<FBXData>();
+
+    if (!AdultGhost_animController || !AdultGhost_fbxRenderer || !AdultGhost_fbxData)
+    {
+        std::cout << "[TutorialController] Ghost_Adult Component Missing" << std::endl;
+        return;
+    }
+
+    LoadAdultGhostAnimation();
 
 
 
@@ -162,7 +196,7 @@ void TutorialController::LoadPlayerAnimation()
 
     if (!idleClip || !walkClip || !runClip || !sitClip || !hitClip)
     {
-        cout << "[Player Animation] Clip not found!\n" << endl;
+        cout << "[TutorialController] Clip not found!\n" << endl;
         return;
     }
 
@@ -175,6 +209,65 @@ void TutorialController::LoadPlayerAnimation()
 
     // 시작 상태
     Player_animController->ChangeState("Idle");
+}
+
+
+// -----------------------------------------------------------
+// [ 아기 귀신 ]
+// -----------------------------------------------------------
+
+void TutorialController::LoadBabyGhostAnimation()
+{
+    // 애니메이션 파일 로드
+    FBXResourceManager::Instance().LoadAnimationByPath(BabyGhost_fbxData->GetFBXInfo(), "..\\Assets\\Resource\\Animation\\Baby_Ghost\\ani_idle_babyghost.fbx", "Idle");
+    FBXResourceManager::Instance().LoadAnimationByPath(BabyGhost_fbxData->GetFBXInfo(), "..\\Assets\\Resource\\Animation\\Baby_Ghost\\ani_cry_babyghost.fbx", "Cry");
+
+    // 클립 생성
+    auto idleClip = BabyGhost_animController->FindClip("Idle");
+    auto cryClip = BabyGhost_animController->FindClip("Cry");
+
+    if (!idleClip || !cryClip)
+    {
+        cout << "[TutorialController] Clip not found!\n" << endl;
+        return;
+    }
+
+    // 상태 등록
+    BabyGhost_animController->AddState(std::make_unique<AnimationState>("Idle", idleClip, BabyGhost_animController));
+    BabyGhost_animController->AddState(std::make_unique<AnimationState>("Cry", cryClip, BabyGhost_animController));
+
+    // 시작 상태
+    BabyGhost_animController->ChangeState("Idle");
+}
+
+
+// -----------------------------------------------------------
+// [ 어른 귀신 ]
+// -----------------------------------------------------------
+
+void TutorialController::LoadAdultGhostAnimation()
+{
+    // 애니메이션 파일 로드
+    FBXResourceManager::Instance().LoadAnimationByPath(AdultGhost_fbxData->GetFBXInfo(), "..\\Assets\\Resource\\Animation\\Adult_Ghost\\ani_idle_ghost.fbx", "Idle");
+    FBXResourceManager::Instance().LoadAnimationByPath(AdultGhost_fbxData->GetFBXInfo(), "..\\Assets\\Resource\\Animation\\Adult_Ghost\\ani_attack_ghost.fbx", "Attack", false);
+
+    // 클립 생성
+    auto idleClip = AdultGhost_animController->FindClip("Idle");
+    auto attackClip = AdultGhost_animController->FindClip("Attack");
+
+    if (!idleClip || !attackClip)
+    {
+        cout << "[TutorialController] Clip not found!\n" << endl;
+        return;
+    }
+
+    // 상태 등록
+    AdultGhost_animController->AddState(std::make_unique<AnimationState>("Idle", idleClip, AdultGhost_animController));
+    AdultGhost_animController->AddState(std::make_unique<AnimationState>("Attack", attackClip, AdultGhost_animController));
+
+
+    // 시작 상태
+    AdultGhost_animController->ChangeState("Idle");
 }
 
 
