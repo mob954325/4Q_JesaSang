@@ -9,8 +9,8 @@ void ScriptSystem::CheckReadyQueue()
     {
         auto comp = readyQueue.front();
 
-        comp->OnStart();
         comp->SetStartTrue();
+        comp->OnStart();
 
         readyQueue.pop();
     }
@@ -56,7 +56,7 @@ void ScriptSystem::UnRegisterScript(Component* comp)
     {
         if (*it == comp)
         {
-            pending_scriptComponents.erase(it);
+            pending_scriptRemovals.push_back(*it);
             return;
         }
     }
@@ -65,7 +65,7 @@ void ScriptSystem::UnRegisterScript(Component* comp)
     {
         if (*it == comp)
         {
-            scriptComps.erase(it);
+            pending_scriptRemovals.push_back(*it);
             return;
         }
     }
@@ -104,8 +104,8 @@ void ScriptSystem::Update(float delta)
             // 이전 이벤트 함수 Oninitialize(), OnEnable은 AddComponent 시 호출됩니다.
             if (!e->IsStart()) // start 해소
             {
-                e->OnStart();
                 e->SetStartTrue();
+                e->OnStart();
             }
             else
             {
@@ -149,6 +149,8 @@ void ScriptSystem::LateUpdate(float dt)
             e->OnLateUpdate(dt);
         }
     }
+
+    ProcessRemovals(); // 제거 대상 제거
 }
 
 void ScriptSystem::Clear()
@@ -158,4 +160,29 @@ void ScriptSystem::Clear()
 
    scriptComps.clear();
    pending_scriptComponents.clear();
+}
+
+void ScriptSystem::SwapErase(std::vector<Component*> comps, Component* target)
+{
+    for (int i = 0; i < comps.size(); ++i)
+    {
+        if (comps[i] == target)
+        {
+            comps[i] = comps.back();
+            comps.pop_back();
+            return;
+        }
+    }
+}
+
+void ScriptSystem::ProcessRemovals()
+{
+    if (pending_scriptRemovals.empty()) return;
+
+    for (auto* c : pending_scriptRemovals)
+    {
+        SwapErase(pending_scriptComponents, c);
+        SwapErase(scriptComps, c);
+    }
+    pending_scriptRemovals.clear();
 }
