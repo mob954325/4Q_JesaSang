@@ -94,6 +94,11 @@ void InteractionSensor::OnTriggerEnter(PhysicsComponent* other)
         auto pc = GetOwner()->GetParent()->GetOwner()->GetComponent<PlayerController>();
         if (!pc->isExplainedTrapObject)
         {
+            if (!pc->dialogueController)
+            {
+                std::cout << "[PlayerInteractionSensor] Dialogue Null? sibaaa" << std::endl;
+                return;
+            }
             pc->dialogueController->ShowInteractionHintAndPause(L"Be careful! object is Trap Object!");
             pc->isExplainedTrapObject = true;
         }
