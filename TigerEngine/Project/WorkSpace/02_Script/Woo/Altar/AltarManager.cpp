@@ -15,6 +15,7 @@
 #include "../Player/DialogueUI/DialogueUIController.h"
 
 #include "../Item/Item.h"
+#include "../../Ho/Sound/SoundManager.h"
 
 
 REGISTER_COMPONENT(AltarManager)
