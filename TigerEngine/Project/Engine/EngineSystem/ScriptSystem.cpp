@@ -35,7 +35,7 @@ void ScriptSystem::UnRegister(Component* comp)
     {
         if (*it == comp)
         {
-            pending_components.erase(it);
+            pending_scriptRemovals.push_back(*it);
             return;
         }
     }
@@ -44,7 +44,7 @@ void ScriptSystem::UnRegister(Component* comp)
     {
         if (*it == comp)
         {
-            comps.erase(it);
+            pending_scriptRemovals.push_back(*it);
             return;
         }
     }
