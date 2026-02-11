@@ -2,7 +2,7 @@
   "prefab": [
     {
       "Active": true,
-      "ID": 8280,
+      "ID": 1319,
       "Name": "Player",
       "ParentID": -1,
       "components": [
@@ -157,9 +157,9 @@
     },
     {
       "Active": true,
-      "ID": 8281,
+      "ID": 1320,
       "Name": "CameraTrackingPoint",
-      "ParentID": 8280,
+      "ParentID": 1319,
       "components": [
         {
           "properties": {
@@ -185,9 +185,9 @@
     },
     {
       "Active": true,
-      "ID": 8282,
+      "ID": 1321,
       "Name": "OcclusionFadePoint",
-      "ParentID": 8280,
+      "ParentID": 1319,
       "components": [
         {
           "properties": {
@@ -213,9 +213,9 @@
     },
     {
       "Active": true,
-      "ID": 8283,
+      "ID": 1322,
       "Name": "InteractionSensor",
-      "ParentID": 8280,
+      "ParentID": 1319,
       "components": [
         {
           "properties": {
@@ -270,9 +270,9 @@
     },
     {
       "Active": true,
-      "ID": 8284,
+      "ID": 1323,
       "Name": "InteractZone",
-      "ParentID": 8280,
+      "ParentID": 1319,
       "components": [
         {
           "properties": {
@@ -327,9 +327,9 @@
     },
     {
       "Active": true,
-      "ID": 8285,
+      "ID": 1324,
       "Name": "ItemVisualizer",
-      "ParentID": 8280,
+      "ParentID": 1319,
       "components": [
         {
           "properties": {
@@ -355,9 +355,9 @@
     },
     {
       "Active": false,
-      "ID": 8286,
+      "ID": 1325,
       "Name": "Visual_Ingre_Apple",
-      "ParentID": 8285,
+      "ParentID": 1324,
       "components": [
         {
           "properties": {
@@ -433,9 +433,9 @@
     },
     {
       "Active": false,
-      "ID": 8287,
+      "ID": 1326,
       "Name": "Visual_Ingre_Batter",
-      "ParentID": 8285,
+      "ParentID": 1324,
       "components": [
         {
           "properties": {
@@ -511,9 +511,9 @@
     },
     {
       "Active": false,
-      "ID": 8288,
+      "ID": 1327,
       "Name": "Visual_Ingre_Donggeurangttaeng",
-      "ParentID": 8285,
+      "ParentID": 1324,
       "components": [
         {
           "properties": {
@@ -589,9 +589,9 @@
     },
     {
       "Active": false,
-      "ID": 8289,
+      "ID": 1328,
       "Name": "Visual_Ingre_Pear",
-      "ParentID": 8285,
+      "ParentID": 1324,
       "components": [
         {
           "properties": {
@@ -667,9 +667,9 @@
     },
     {
       "Active": false,
-      "ID": 8290,
+      "ID": 1329,
       "Name": "Visual_Ingre_Sanjeok",
-      "ParentID": 8285,
+      "ParentID": 1324,
       "components": [
         {
           "properties": {
@@ -745,9 +745,9 @@
     },
     {
       "Active": false,
-      "ID": 8291,
+      "ID": 1330,
       "Name": "Visual_Ingre_Tofu",
-      "ParentID": 8285,
+      "ParentID": 1324,
       "components": [
         {
           "properties": {
@@ -823,9 +823,9 @@
     },
     {
       "Active": false,
-      "ID": 8292,
+      "ID": 1331,
       "Name": "Visual_Apple",
-      "ParentID": 8285,
+      "ParentID": 1324,
       "components": [
         {
           "properties": {
@@ -901,9 +901,9 @@
     },
     {
       "Active": false,
-      "ID": 8293,
+      "ID": 1332,
       "Name": "Visual_Pear",
-      "ParentID": 8285,
+      "ParentID": 1324,
       "components": [
         {
           "properties": {
@@ -979,9 +979,9 @@
     },
     {
       "Active": false,
-      "ID": 8294,
+      "ID": 1333,
       "Name": "Visual_Batter",
-      "ParentID": 8285,
+      "ParentID": 1324,
       "components": [
         {
           "properties": {
@@ -1057,9 +1057,9 @@
     },
     {
       "Active": false,
-      "ID": 8295,
+      "ID": 1334,
       "Name": "Visual_Tofu",
-      "ParentID": 8285,
+      "ParentID": 1324,
       "components": [
         {
           "properties": {
@@ -1135,9 +1135,9 @@
     },
     {
       "Active": false,
-      "ID": 8296,
+      "ID": 1335,
       "Name": "Visual_Sanjeok",
-      "ParentID": 8285,
+      "ParentID": 1324,
       "components": [
         {
           "properties": {
@@ -1213,9 +1213,9 @@
     },
     {
       "Active": false,
-      "ID": 8297,
+      "ID": 1336,
       "Name": "Visual_Donggeurangttaeng",
-      "ParentID": 8285,
+      "ParentID": 1324,
       "components": [
         {
           "properties": {
@@ -1291,9 +1291,9 @@
     },
     {
       "Active": true,
-      "ID": 8298,
+      "ID": 1337,
       "Name": "AITarget",
-      "ParentID": 8280,
+      "ParentID": 1319,
       "components": [
         {
           "properties": {
@@ -1348,9 +1348,9 @@
     },
     {
       "Active": true,
-      "ID": 8477,
+      "ID": 1516,
       "Name": "DialoguePoint",
-      "ParentID": 8280,
+      "ParentID": 1319,
       "components": [
         {
           "properties": {
@@ -1376,9 +1376,9 @@
     },
     {
       "Active": true,
-      "ID": 8478,
+      "ID": 1517,
       "Name": "Player_FireEffect",
-      "ParentID": 8280,
+      "ParentID": 1319,
       "components": [
         {
           "properties": {
@@ -1499,9 +1499,9 @@
     },
     {
       "Active": false,
-      "ID": 8479,
+      "ID": 1518,
       "Name": "Player_HitEffect",
-      "ParentID": 8280,
+      "ParentID": 1319,
       "components": [
         {
           "properties": {
@@ -1583,9 +1583,9 @@
     },
     {
       "Active": true,
-      "ID": 8482,
+      "ID": 1521,
       "Name": "Player_SmokeEffect",
-      "ParentID": 8280,
+      "ParentID": 1319,
       "components": [
         {
           "properties": {

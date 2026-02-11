@@ -2,12 +2,16 @@
 
 #include "System/InputSystem.h"
 
+#include "../../../Woo/Player/PlayerController.h"
 
 void TutorialStep_Step5::Enter()
 {
     isDone = false;
     step5Timer = 0.0f;
     phase = Step5Phase::AdultInCome;
+
+    // 조작 불가 
+    tutorialController->player_Obj->GetComponent<PlayerController>()->SetInputLock(true);
 
     std::cout << "[Step5] Enter" << std::endl;
 }
@@ -25,7 +29,6 @@ void TutorialStep_Step5::Update(float deltaTime)
             phase = Step5Phase::LookAround;
         }
         break;
-
 
     case Step5Phase::LookAround:
         phase = Step5Phase::Monologue;

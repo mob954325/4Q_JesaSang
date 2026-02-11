@@ -1,0 +1,105 @@
+{
+  "prefab": [
+    {
+      "Active": true,
+      "ID": 403,
+      "Name": "FrozenManager",
+      "ParentID": -1,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "len1": 500.0,
+            "len2": 400.5,
+            "len3": 300.0,
+            "len4": 200.5,
+            "len5": 100.0,
+            "maxTime": 0.5,
+            "timer": 0.0
+          },
+          "type": "FrozenManager"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "color": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "drawSpacetype": "Screen",
+            "fillAmount": 1.0,
+            "imageType": "Simple",
+            "isBillboard": false,
+            "isMouseCheck": false,
+            "path": "",
+            "sliceBorderPx": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "type": "Simple",
+            "zOrder": 0
+          },
+          "type": "Image"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Pivot": [
+              0.0,
+              0.0
+            ],
+            "Pos": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "Size": [
+              0.0,
+              0.0
+            ]
+          },
+          "type": "RectTransform"
+        }
+      ]
+    }
+  ]
+}
