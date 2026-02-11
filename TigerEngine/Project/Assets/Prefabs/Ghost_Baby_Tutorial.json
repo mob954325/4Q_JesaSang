@@ -2,7 +2,7 @@
   "prefab": [
     {
       "Active": true,
-      "ID": 195,
+      "ID": 2042,
       "Name": "Ghost_Baby_Tutorial",
       "ParentID": -1,
       "components": [
@@ -86,9 +86,9 @@
     },
     {
       "Active": false,
-      "ID": 210,
+      "ID": 2056,
       "Name": "FX_Exclamation",
-      "ParentID": 195,
+      "ParentID": 2042,
       "components": [
         {
           "properties": {

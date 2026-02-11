@@ -1,5 +1,6 @@
 #pragma once
 #include "ITutorialStep.h"
+#include "Components/UI/Image.h"
 
 // -----------------------------------------------------------
 // [ Step4 ]
@@ -30,6 +31,16 @@ private:
     float delayStep4 = 1.0f;
 
     Step4Phase phase = Step4Phase::AdultInCome;
+
+
+    GameObject* hideObject = nullptr;
+
+    Image* image_sensorOn = nullptr;
+    Image* image_interactionOn = nullptr;
+    Image* image_interactionGauge = nullptr;
+
+    float hideGauge = 0.0f;
+    float hideFillSpeed = 0.4f;   // 초당 40%
 
 private:
     void AdultInCome();

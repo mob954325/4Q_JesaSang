@@ -56,6 +56,7 @@ void TutorialStep_Step2::Update(float deltaTime)
             Input::GetKeyDown(Keyboard::Right)
             )
         {
+            if (tutorialController->dialogue) tutorialController->dialogue->DialogueOnOff(false);
             phase = Step2Phase::Done;
         }
         break;
