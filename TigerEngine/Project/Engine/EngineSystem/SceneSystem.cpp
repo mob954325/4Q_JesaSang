@@ -3,6 +3,7 @@
 void SceneSystem::BeforUpdate()
 {
     if (scenes.empty()) return;
+    if (!currentScene) return;
 
     currentScene->CheckDestroy();
 }
@@ -10,6 +11,7 @@ void SceneSystem::BeforUpdate()
 void SceneSystem::UpdateScene(float deltaTime)
 {
     if (scenes.empty()) return; // 씬 없어서 터지는거 방지
+    if (!currentScene) return;
 
     currentScene->OnUpdate(deltaTime);
 }
@@ -17,6 +19,7 @@ void SceneSystem::UpdateScene(float deltaTime)
 void SceneSystem::FixedUpdateScene(float deltaTime)
 {
     if (scenes.empty()) return; // 씬 없어서 터지는거 방지
+    if (!currentScene) return;
 
     currentScene->OnFixedUpdate(deltaTime);
 }
@@ -24,6 +27,7 @@ void SceneSystem::FixedUpdateScene(float deltaTime)
 void SceneSystem::LateUpdateScene(float deltaTime)
 {
     if (scenes.empty()) return; // 씬 없어서 터지는거 방지
+    if (!currentScene) return;
 
     currentScene->OnLateUpdate(deltaTime);
 }
