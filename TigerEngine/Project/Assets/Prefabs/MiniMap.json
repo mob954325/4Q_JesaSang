@@ -2,7 +2,7 @@
   "prefab": [
     {
       "Active": true,
-      "ID": 894,
+      "ID": 3838,
       "Name": "UI_MiniMap_Controller",
       "ParentID": -1,
       "components": [
@@ -95,9 +95,9 @@
     },
     {
       "Active": true,
-      "ID": 895,
+      "ID": 3839,
       "Name": "UI_MiniMap_ItemPing_06",
-      "ParentID": 894,
+      "ParentID": 3838,
       "components": [
         {
           "properties": {
@@ -128,10 +128,7 @@
               1.0,
               1.0
             ],
-            "drawSpacetype": "Screen",
             "fillAmount": 1.0,
-            "imageType": "Simple",
-            "isBillboard": false,
             "isMouseCheck": false,
             "path": "..\\Assets\\Resource\\MiniMap\\Treasure.png",
             "sliceBorderPx": [
@@ -140,8 +137,7 @@
               0.0,
               0.0
             ],
-            "type": "Simple",
-            "zOrder": 0
+            "type": "Simple"
           },
           "type": "Image"
         },
@@ -183,9 +179,9 @@
     },
     {
       "Active": true,
-      "ID": 896,
+      "ID": 3840,
       "Name": "UI_MiniMap_ItemPing_05",
-      "ParentID": 894,
+      "ParentID": 3838,
       "components": [
         {
           "properties": {
@@ -216,10 +212,7 @@
               1.0,
               1.0
             ],
-            "drawSpacetype": "Screen",
             "fillAmount": 1.0,
-            "imageType": "Simple",
-            "isBillboard": false,
             "isMouseCheck": false,
             "path": "..\\Assets\\Resource\\MiniMap\\Treasure.png",
             "sliceBorderPx": [
@@ -228,8 +221,7 @@
               0.0,
               0.0
             ],
-            "type": "Simple",
-            "zOrder": 0
+            "type": "Simple"
           },
           "type": "Image"
         },
@@ -271,9 +263,9 @@
     },
     {
       "Active": true,
-      "ID": 897,
+      "ID": 3841,
       "Name": "UI_MiniMap_ItemPing_04",
-      "ParentID": 894,
+      "ParentID": 3838,
       "components": [
         {
           "properties": {
@@ -304,10 +296,7 @@
               1.0,
               1.0
             ],
-            "drawSpacetype": "Screen",
             "fillAmount": 1.0,
-            "imageType": "Simple",
-            "isBillboard": false,
             "isMouseCheck": false,
             "path": "..\\Assets\\Resource\\MiniMap\\Treasure.png",
             "sliceBorderPx": [
@@ -316,8 +305,7 @@
               0.0,
               0.0
             ],
-            "type": "Simple",
-            "zOrder": 0
+            "type": "Simple"
           },
           "type": "Image"
         },
@@ -359,9 +347,9 @@
     },
     {
       "Active": true,
-      "ID": 898,
+      "ID": 3842,
       "Name": "UI_MiniMap_ItemPing_03",
-      "ParentID": 894,
+      "ParentID": 3838,
       "components": [
         {
           "properties": {
@@ -392,10 +380,7 @@
               1.0,
               1.0
             ],
-            "drawSpacetype": "Screen",
             "fillAmount": 1.0,
-            "imageType": "Simple",
-            "isBillboard": false,
             "isMouseCheck": false,
             "path": "..\\Assets\\Resource\\MiniMap\\Treasure.png",
             "sliceBorderPx": [
@@ -404,8 +389,7 @@
               0.0,
               0.0
             ],
-            "type": "Simple",
-            "zOrder": 0
+            "type": "Simple"
           },
           "type": "Image"
         },
@@ -447,9 +431,9 @@
     },
     {
       "Active": true,
-      "ID": 899,
+      "ID": 3843,
       "Name": "UI_MiniMap_ItemPing_02",
-      "ParentID": 894,
+      "ParentID": 3838,
       "components": [
         {
           "properties": {
@@ -480,10 +464,7 @@
               1.0,
               1.0
             ],
-            "drawSpacetype": "Screen",
             "fillAmount": 1.0,
-            "imageType": "Simple",
-            "isBillboard": false,
             "isMouseCheck": false,
             "path": "..\\Assets\\Resource\\MiniMap\\Treasure.png",
             "sliceBorderPx": [
@@ -492,8 +473,7 @@
               0.0,
               0.0
             ],
-            "type": "Simple",
-            "zOrder": 0
+            "type": "Simple"
           },
           "type": "Image"
         },
@@ -535,9 +515,9 @@
     },
     {
       "Active": true,
-      "ID": 900,
+      "ID": 3844,
       "Name": "UI_MiniMap_ItemPing_01",
-      "ParentID": 894,
+      "ParentID": 3838,
       "components": [
         {
           "properties": {
@@ -568,10 +548,7 @@
               1.0,
               1.0
             ],
-            "drawSpacetype": "Screen",
             "fillAmount": 1.0,
-            "imageType": "Simple",
-            "isBillboard": false,
             "isMouseCheck": false,
             "path": "..\\Assets\\Resource\\MiniMap\\Treasure.png",
             "sliceBorderPx": [
@@ -580,8 +557,7 @@
               0.0,
               0.0
             ],
-            "type": "Simple",
-            "zOrder": 0
+            "type": "Simple"
           },
           "type": "Image"
         },
@@ -623,9 +599,9 @@
     },
     {
       "Active": true,
-      "ID": 901,
+      "ID": 3845,
       "Name": "UI_MiniMap_MainPing",
-      "ParentID": 894,
+      "ParentID": 3838,
       "components": [
         {
           "properties": {
@@ -656,10 +632,7 @@
               1.0,
               1.0
             ],
-            "drawSpacetype": "Screen",
             "fillAmount": 1.0,
-            "imageType": "Simple",
-            "isBillboard": false,
             "isMouseCheck": false,
             "path": "..\\Assets\\Resource\\MiniMap\\MainPing.png",
             "sliceBorderPx": [
@@ -668,8 +641,7 @@
               0.0,
               0.0
             ],
-            "type": "Simple",
-            "zOrder": 0
+            "type": "Simple"
           },
           "type": "Image"
         },
@@ -711,9 +683,9 @@
     },
     {
       "Active": false,
-      "ID": 902,
+      "ID": 3846,
       "Name": "UI_MiniMap_Piece_06",
-      "ParentID": 894,
+      "ParentID": 3838,
       "components": [
         {
           "properties": {
@@ -744,10 +716,7 @@
               1.0,
               1.0
             ],
-            "drawSpacetype": "Screen",
             "fillAmount": 1.0,
-            "imageType": "Simple",
-            "isBillboard": false,
             "isMouseCheck": false,
             "path": "..\\Assets\\Resource\\MiniMap\\MAP05.png",
             "sliceBorderPx": [
@@ -756,8 +725,7 @@
               0.0,
               0.0
             ],
-            "type": "Simple",
-            "zOrder": 0
+            "type": "Simple"
           },
           "type": "Image"
         },
@@ -799,9 +767,9 @@
     },
     {
       "Active": true,
-      "ID": 903,
+      "ID": 3847,
       "Name": "UI_MiniMap_Piece_05",
-      "ParentID": 894,
+      "ParentID": 3838,
       "components": [
         {
           "properties": {
@@ -832,10 +800,7 @@
               1.0,
               1.0
             ],
-            "drawSpacetype": "Screen",
             "fillAmount": 1.0,
-            "imageType": "Simple",
-            "isBillboard": false,
             "isMouseCheck": false,
             "path": "..\\\\Assets\\\\Resource\\\\MiniMap\\\\MAP05.png",
             "sliceBorderPx": [
@@ -844,8 +809,7 @@
               0.0,
               0.0
             ],
-            "type": "Simple",
-            "zOrder": 0
+            "type": "Simple"
           },
           "type": "Image"
         },
@@ -887,9 +851,9 @@
     },
     {
       "Active": true,
-      "ID": 904,
+      "ID": 3848,
       "Name": "UI_MiniMap_Piece_04",
-      "ParentID": 894,
+      "ParentID": 3838,
       "components": [
         {
           "properties": {
@@ -920,10 +884,7 @@
               1.0,
               1.0
             ],
-            "drawSpacetype": "Screen",
             "fillAmount": 1.0,
-            "imageType": "Simple",
-            "isBillboard": false,
             "isMouseCheck": false,
             "path": "..\\\\Assets\\\\Resource\\\\MiniMap\\\\MAP04.png",
             "sliceBorderPx": [
@@ -932,8 +893,7 @@
               0.0,
               0.0
             ],
-            "type": "Simple",
-            "zOrder": 0
+            "type": "Simple"
           },
           "type": "Image"
         },
@@ -975,9 +935,9 @@
     },
     {
       "Active": true,
-      "ID": 905,
+      "ID": 3849,
       "Name": "UI_MiniMap_Piece_03",
-      "ParentID": 894,
+      "ParentID": 3838,
       "components": [
         {
           "properties": {
@@ -1008,10 +968,7 @@
               1.0,
               1.0
             ],
-            "drawSpacetype": "Screen",
             "fillAmount": 1.0,
-            "imageType": "Simple",
-            "isBillboard": false,
             "isMouseCheck": false,
             "path": "..\\\\Assets\\\\Resource\\\\MiniMap\\\\MAP03.png",
             "sliceBorderPx": [
@@ -1020,8 +977,7 @@
               0.0,
               0.0
             ],
-            "type": "Simple",
-            "zOrder": 0
+            "type": "Simple"
           },
           "type": "Image"
         },
@@ -1063,9 +1019,9 @@
     },
     {
       "Active": true,
-      "ID": 906,
+      "ID": 3850,
       "Name": "UI_MiniMap_Piece_02",
-      "ParentID": 894,
+      "ParentID": 3838,
       "components": [
         {
           "properties": {
@@ -1096,10 +1052,7 @@
               1.0,
               1.0
             ],
-            "drawSpacetype": "Screen",
             "fillAmount": 1.0,
-            "imageType": "Simple",
-            "isBillboard": false,
             "isMouseCheck": false,
             "path": "..\\\\Assets\\\\Resource\\\\MiniMap\\\\MAP02.png",
             "sliceBorderPx": [
@@ -1108,8 +1061,7 @@
               0.0,
               0.0
             ],
-            "type": "Simple",
-            "zOrder": 0
+            "type": "Simple"
           },
           "type": "Image"
         },
@@ -1151,9 +1103,9 @@
     },
     {
       "Active": true,
-      "ID": 907,
+      "ID": 3851,
       "Name": "UI_MiniMap_Piece_01",
-      "ParentID": 894,
+      "ParentID": 3838,
       "components": [
         {
           "properties": {
@@ -1184,10 +1136,7 @@
               1.0,
               1.0
             ],
-            "drawSpacetype": "Screen",
             "fillAmount": 1.0,
-            "imageType": "Simple",
-            "isBillboard": false,
             "isMouseCheck": false,
             "path": "..\\\\Assets\\\\Resource\\\\MiniMap\\\\MAP01.png",
             "sliceBorderPx": [
@@ -1196,8 +1145,7 @@
               0.0,
               0.0
             ],
-            "type": "Simple",
-            "zOrder": 0
+            "type": "Simple"
           },
           "type": "Image"
         },
@@ -1239,9 +1187,9 @@
     },
     {
       "Active": true,
-      "ID": 908,
+      "ID": 3852,
       "Name": "UI_MiniMap_GaugeFill",
-      "ParentID": 894,
+      "ParentID": 3838,
       "components": [
         {
           "properties": {
@@ -1272,10 +1220,7 @@
               1.0,
               1.0
             ],
-            "drawSpacetype": "Screen",
             "fillAmount": 1.0,
-            "imageType": "Simple",
-            "isBillboard": false,
             "isMouseCheck": false,
             "path": "..\\Assets\\Resource\\MiniMap\\GaugeFill.png",
             "sliceBorderPx": [
@@ -1284,8 +1229,7 @@
               0.0,
               0.0
             ],
-            "type": "Simple",
-            "zOrder": 0
+            "type": "Simple"
           },
           "type": "Image"
         },
@@ -1327,9 +1271,9 @@
     },
     {
       "Active": true,
-      "ID": 909,
+      "ID": 3853,
       "Name": "UI_MiniMap_GaugeBG",
-      "ParentID": 894,
+      "ParentID": 3838,
       "components": [
         {
           "properties": {
@@ -1360,10 +1304,7 @@
               1.0,
               1.0
             ],
-            "drawSpacetype": "Screen",
             "fillAmount": 1.0,
-            "imageType": "Simple",
-            "isBillboard": false,
             "isMouseCheck": false,
             "path": "..\\Assets\\Resource\\MiniMap\\GaugeBG.png",
             "sliceBorderPx": [
@@ -1372,8 +1313,7 @@
               0.0,
               0.0
             ],
-            "type": "Simple",
-            "zOrder": 0
+            "type": "Simple"
           },
           "type": "Image"
         },
@@ -1415,9 +1355,9 @@
     },
     {
       "Active": false,
-      "ID": 910,
+      "ID": 3854,
       "Name": "UI_MiniMap_Complete",
-      "ParentID": 894,
+      "ParentID": 3838,
       "components": [
         {
           "properties": {
@@ -1448,10 +1388,7 @@
               1.0,
               1.0
             ],
-            "drawSpacetype": "Screen",
             "fillAmount": 1.0,
-            "imageType": "Simple",
-            "isBillboard": false,
             "isMouseCheck": false,
             "path": "..\\\\Assets\\\\Resource\\\\MiniMap\\\\Map.png",
             "sliceBorderPx": [
@@ -1460,8 +1397,7 @@
               0.0,
               0.0
             ],
-            "type": "Simple",
-            "zOrder": 0
+            "type": "Simple"
           },
           "type": "Image"
         },
@@ -1503,9 +1439,9 @@
     },
     {
       "Active": true,
-      "ID": 911,
+      "ID": 3855,
       "Name": "UI_MiniMap_Base",
-      "ParentID": 894,
+      "ParentID": 3838,
       "components": [
         {
           "properties": {
@@ -1536,10 +1472,7 @@
               1.0,
               1.0
             ],
-            "drawSpacetype": "Screen",
             "fillAmount": 1.0,
-            "imageType": "Simple",
-            "isBillboard": false,
             "isMouseCheck": false,
             "path": "..\\\\Assets\\\\Resource\\\\MiniMap\\\\MAP_GR.png",
             "sliceBorderPx": [
@@ -1548,8 +1481,7 @@
               0.0,
               0.0
             ],
-            "type": "Simple",
-            "zOrder": 0
+            "type": "Simple"
           },
           "type": "Image"
         },

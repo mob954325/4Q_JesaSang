@@ -2,7 +2,7 @@
   "prefab": [
     {
       "Active": true,
-      "ID": 769,
+      "ID": 6004,
       "Name": "Main Camera",
       "ParentID": -1,
       "components": [
@@ -10,11 +10,11 @@
           "properties": {
             "Position": [
               0.0,
-              230.0,
-              -230.0
+              110.0,
+              -115.0
             ],
             "Rotation": [
-              0.8726646304130554,
+              0.5235987901687622,
               0.0,
               0.0
             ],
@@ -29,9 +29,9 @@
         {
           "properties": {
             "angle": 1.5707963705062866,
-            "farDist": 2000.0,
+            "farDist": 1800.0,
             "moveSpeed": 100.0,
-            "nearDist": 0.009999999776482582,
+            "nearDist": 70.0,
             "rotSpeed": 0.004000000189989805
           },
           "type": "Camera"
