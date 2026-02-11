@@ -3,7 +3,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5086,
+        "ID": 12567,
         "Name": "Ground",
         "ParentID": -1,
         "components": [
@@ -107,7 +107,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5087,
+        "ID": 12568,
         "Name": "DirectionalLight",
         "ParentID": -1,
         "components": [
@@ -161,7 +161,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5088,
+        "ID": 12569,
         "Name": "-----------[Map]-----------",
         "ParentID": -1,
         "components": [
@@ -192,9 +192,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5089,
+        "ID": 12570,
         "Name": "Room_",
-        "ParentID": 5096,
+        "ParentID": 12577,
         "components": [
           {
             "properties": {
@@ -273,9 +273,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5090,
+        "ID": 12571,
         "Name": "Room_a_love_room",
-        "ParentID": 5096,
+        "ParentID": 12577,
         "components": [
           {
             "properties": {
@@ -354,9 +354,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5091,
+        "ID": 12572,
         "Name": "Room_Kitchen",
-        "ParentID": 5096,
+        "ParentID": 12577,
         "components": [
           {
             "properties": {
@@ -435,9 +435,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5092,
+        "ID": 12573,
         "Name": "Room_main_room",
-        "ParentID": 5096,
+        "ParentID": 12577,
         "components": [
           {
             "properties": {
@@ -516,9 +516,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5093,
+        "ID": 12574,
         "Name": "Room_saibi",
-        "ParentID": 5096,
+        "ParentID": 12577,
         "components": [
           {
             "properties": {
@@ -597,9 +597,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5094,
+        "ID": 12575,
         "Name": "Room_Table_of_memorial_ceremony",
-        "ParentID": 5096,
+        "ParentID": 12577,
         "components": [
           {
             "properties": {
@@ -678,9 +678,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5095,
+        "ID": 12576,
         "Name": "Room_Warehouse",
-        "ParentID": 5096,
+        "ParentID": 12577,
         "components": [
           {
             "properties": {
@@ -759,7 +759,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5096,
+        "ID": 12577,
         "Name": "ROOM",
         "ParentID": -1,
         "components": [
@@ -790,7 +790,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5097,
+        "ID": 12578,
         "Name": "WALL01",
         "ParentID": -1,
         "components": [
@@ -821,7 +821,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5098,
+        "ID": 12579,
         "Name": "WALL02",
         "ParentID": -1,
         "components": [
@@ -852,9 +852,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5099,
+        "ID": 12580,
         "Name": "Pillar",
-        "ParentID": 5100,
+        "ParentID": 12581,
         "components": [
           {
             "properties": {
@@ -962,7 +962,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5100,
+        "ID": 12581,
         "Name": "PILLAR",
         "ParentID": -1,
         "components": [
@@ -993,9 +993,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5101,
+        "ID": 12582,
         "Name": "Pillar",
-        "ParentID": 5100,
+        "ParentID": 12581,
         "components": [
           {
             "properties": {
@@ -1103,9 +1103,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5102,
+        "ID": 12583,
         "Name": "Pillar",
-        "ParentID": 5100,
+        "ParentID": 12581,
         "components": [
           {
             "properties": {
@@ -1213,9 +1213,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5103,
+        "ID": 12584,
         "Name": "Pillar",
-        "ParentID": 5100,
+        "ParentID": 12581,
         "components": [
           {
             "properties": {
@@ -1323,9 +1323,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5104,
+        "ID": 12585,
         "Name": "Pillar",
-        "ParentID": 5100,
+        "ParentID": 12581,
         "components": [
           {
             "properties": {
@@ -1433,9 +1433,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5105,
+        "ID": 12586,
         "Name": "Pillar",
-        "ParentID": 5100,
+        "ParentID": 12581,
         "components": [
           {
             "properties": {
@@ -1543,9 +1543,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5106,
+        "ID": 12587,
         "Name": "Pillar",
-        "ParentID": 5100,
+        "ParentID": 12581,
         "components": [
           {
             "properties": {
@@ -1653,9 +1653,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5107,
+        "ID": 12588,
         "Name": "Pillar",
-        "ParentID": 5100,
+        "ParentID": 12581,
         "components": [
           {
             "properties": {
@@ -1763,9 +1763,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5108,
+        "ID": 12589,
         "Name": "Pillar",
-        "ParentID": 5100,
+        "ParentID": 12581,
         "components": [
           {
             "properties": {
@@ -1873,9 +1873,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5109,
+        "ID": 12590,
         "Name": "Pillar",
-        "ParentID": 5100,
+        "ParentID": 12581,
         "components": [
           {
             "properties": {
@@ -1983,9 +1983,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5110,
+        "ID": 12591,
         "Name": "Pillar",
-        "ParentID": 5100,
+        "ParentID": 12581,
         "components": [
           {
             "properties": {
@@ -2093,9 +2093,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5111,
+        "ID": 12592,
         "Name": "Pillar",
-        "ParentID": 5100,
+        "ParentID": 12581,
         "components": [
           {
             "properties": {
@@ -2203,9 +2203,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5112,
+        "ID": 12593,
         "Name": "Pillar",
-        "ParentID": 5100,
+        "ParentID": 12581,
         "components": [
           {
             "properties": {
@@ -2313,9 +2313,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5113,
+        "ID": 12594,
         "Name": "Pillar",
-        "ParentID": 5100,
+        "ParentID": 12581,
         "components": [
           {
             "properties": {
@@ -2423,9 +2423,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5114,
+        "ID": 12595,
         "Name": "Pillar",
-        "ParentID": 5100,
+        "ParentID": 12581,
         "components": [
           {
             "properties": {
@@ -2533,9 +2533,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5115,
+        "ID": 12596,
         "Name": "Pillar",
-        "ParentID": 5100,
+        "ParentID": 12581,
         "components": [
           {
             "properties": {
@@ -2643,9 +2643,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5116,
+        "ID": 12597,
         "Name": "Pillar",
-        "ParentID": 5100,
+        "ParentID": 12581,
         "components": [
           {
             "properties": {
@@ -2753,9 +2753,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5117,
+        "ID": 12598,
         "Name": "Pillar",
-        "ParentID": 5100,
+        "ParentID": 12581,
         "components": [
           {
             "properties": {
@@ -2863,9 +2863,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5118,
+        "ID": 12599,
         "Name": "Pillar",
-        "ParentID": 5100,
+        "ParentID": 12581,
         "components": [
           {
             "properties": {
@@ -2973,9 +2973,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5119,
+        "ID": 12600,
         "Name": "Pillar",
-        "ParentID": 5100,
+        "ParentID": 12581,
         "components": [
           {
             "properties": {
@@ -3083,9 +3083,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5120,
+        "ID": 12601,
         "Name": "Pillar",
-        "ParentID": 5100,
+        "ParentID": 12581,
         "components": [
           {
             "properties": {
@@ -3193,9 +3193,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5121,
+        "ID": 12602,
         "Name": "Pillar",
-        "ParentID": 5100,
+        "ParentID": 12581,
         "components": [
           {
             "properties": {
@@ -3303,9 +3303,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5122,
+        "ID": 12603,
         "Name": "Pillar",
-        "ParentID": 5100,
+        "ParentID": 12581,
         "components": [
           {
             "properties": {
@@ -3413,9 +3413,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5123,
+        "ID": 12604,
         "Name": "Pillar",
-        "ParentID": 5100,
+        "ParentID": 12581,
         "components": [
           {
             "properties": {
@@ -3523,9 +3523,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5124,
+        "ID": 12605,
         "Name": "Pillar",
-        "ParentID": 5100,
+        "ParentID": 12581,
         "components": [
           {
             "properties": {
@@ -3633,9 +3633,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5125,
+        "ID": 12606,
         "Name": "Pillar",
-        "ParentID": 5100,
+        "ParentID": 12581,
         "components": [
           {
             "properties": {
@@ -3743,9 +3743,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5126,
+        "ID": 12607,
         "Name": "Pillar",
-        "ParentID": 5100,
+        "ParentID": 12581,
         "components": [
           {
             "properties": {
@@ -3853,9 +3853,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5127,
+        "ID": 12608,
         "Name": "Pillar",
-        "ParentID": 5100,
+        "ParentID": 12581,
         "components": [
           {
             "properties": {
@@ -3963,9 +3963,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5128,
+        "ID": 12609,
         "Name": "Pillar",
-        "ParentID": 5100,
+        "ParentID": 12581,
         "components": [
           {
             "properties": {
@@ -4073,9 +4073,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5129,
+        "ID": 12610,
         "Name": "Pillar",
-        "ParentID": 5100,
+        "ParentID": 12581,
         "components": [
           {
             "properties": {
@@ -4183,9 +4183,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5130,
+        "ID": 12611,
         "Name": "Pillar",
-        "ParentID": 5100,
+        "ParentID": 12581,
         "components": [
           {
             "properties": {
@@ -4293,9 +4293,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5131,
+        "ID": 12612,
         "Name": "Pillar",
-        "ParentID": 5100,
+        "ParentID": 12581,
         "components": [
           {
             "properties": {
@@ -4403,9 +4403,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5132,
+        "ID": 12613,
         "Name": "Pillar",
-        "ParentID": 5100,
+        "ParentID": 12581,
         "components": [
           {
             "properties": {
@@ -4513,9 +4513,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5133,
+        "ID": 12614,
         "Name": "Pillar",
-        "ParentID": 5100,
+        "ParentID": 12581,
         "components": [
           {
             "properties": {
@@ -4623,9 +4623,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5134,
+        "ID": 12615,
         "Name": "Pillar",
-        "ParentID": 5100,
+        "ParentID": 12581,
         "components": [
           {
             "properties": {
@@ -4733,9 +4733,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5135,
+        "ID": 12616,
         "Name": "Pillar",
-        "ParentID": 5100,
+        "ParentID": 12581,
         "components": [
           {
             "properties": {
@@ -4843,9 +4843,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5136,
+        "ID": 12617,
         "Name": "Pillar",
-        "ParentID": 5100,
+        "ParentID": 12581,
         "components": [
           {
             "properties": {
@@ -4953,9 +4953,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5137,
+        "ID": 12618,
         "Name": "Pillar",
-        "ParentID": 5100,
+        "ParentID": 12581,
         "components": [
           {
             "properties": {
@@ -5063,9 +5063,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5138,
+        "ID": 12619,
         "Name": "Pillar",
-        "ParentID": 5100,
+        "ParentID": 12581,
         "components": [
           {
             "properties": {
@@ -5173,9 +5173,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5139,
+        "ID": 12620,
         "Name": "Pillar",
-        "ParentID": 5100,
+        "ParentID": 12581,
         "components": [
           {
             "properties": {
@@ -5283,9 +5283,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5140,
+        "ID": 12621,
         "Name": "Pillar",
-        "ParentID": 5100,
+        "ParentID": 12581,
         "components": [
           {
             "properties": {
@@ -5393,9 +5393,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5141,
+        "ID": 12622,
         "Name": "Pillar",
-        "ParentID": 5100,
+        "ParentID": 12581,
         "components": [
           {
             "properties": {
@@ -5503,9 +5503,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5142,
+        "ID": 12623,
         "Name": "wall",
-        "ParentID": 5097,
+        "ParentID": 12578,
         "components": [
           {
             "properties": {
@@ -5613,9 +5613,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5143,
+        "ID": 12624,
         "Name": "wall",
-        "ParentID": 5097,
+        "ParentID": 12578,
         "components": [
           {
             "properties": {
@@ -5723,9 +5723,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5144,
+        "ID": 12625,
         "Name": "wall_2",
-        "ParentID": 5097,
+        "ParentID": 12578,
         "components": [
           {
             "properties": {
@@ -5833,9 +5833,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5145,
+        "ID": 12626,
         "Name": "wall_2",
-        "ParentID": 5097,
+        "ParentID": 12578,
         "components": [
           {
             "properties": {
@@ -5943,9 +5943,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5146,
+        "ID": 12627,
         "Name": "wall_3",
-        "ParentID": 5097,
+        "ParentID": 12578,
         "components": [
           {
             "properties": {
@@ -6053,9 +6053,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5147,
+        "ID": 12628,
         "Name": "wall_3",
-        "ParentID": 5097,
+        "ParentID": 12578,
         "components": [
           {
             "properties": {
@@ -6163,9 +6163,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5148,
+        "ID": 12629,
         "Name": "Pillar",
-        "ParentID": 5100,
+        "ParentID": 12581,
         "components": [
           {
             "properties": {
@@ -6273,9 +6273,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5149,
+        "ID": 12630,
         "Name": "Pillar",
-        "ParentID": 5100,
+        "ParentID": 12581,
         "components": [
           {
             "properties": {
@@ -6383,9 +6383,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5150,
+        "ID": 12631,
         "Name": "wall_5",
-        "ParentID": 5097,
+        "ParentID": 12578,
         "components": [
           {
             "properties": {
@@ -6493,9 +6493,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5151,
+        "ID": 12632,
         "Name": "wall_5",
-        "ParentID": 5097,
+        "ParentID": 12578,
         "components": [
           {
             "properties": {
@@ -6603,9 +6603,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5152,
+        "ID": 12633,
         "Name": "wall_12",
-        "ParentID": 5097,
+        "ParentID": 12578,
         "components": [
           {
             "properties": {
@@ -6713,9 +6713,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5153,
+        "ID": 12634,
         "Name": "wall_8",
-        "ParentID": 5097,
+        "ParentID": 12578,
         "components": [
           {
             "properties": {
@@ -6823,9 +6823,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5154,
+        "ID": 12635,
         "Name": "wall_2",
-        "ParentID": 5098,
+        "ParentID": 12579,
         "components": [
           {
             "properties": {
@@ -6933,9 +6933,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5155,
+        "ID": 12636,
         "Name": "wall_6",
-        "ParentID": 5097,
+        "ParentID": 12578,
         "components": [
           {
             "properties": {
@@ -7043,9 +7043,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5156,
+        "ID": 12637,
         "Name": "wall_5",
-        "ParentID": 5097,
+        "ParentID": 12578,
         "components": [
           {
             "properties": {
@@ -7153,9 +7153,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5157,
+        "ID": 12638,
         "Name": "wall",
-        "ParentID": 5097,
+        "ParentID": 12578,
         "components": [
           {
             "properties": {
@@ -7263,9 +7263,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5158,
+        "ID": 12639,
         "Name": "wall_5",
-        "ParentID": 5097,
+        "ParentID": 12578,
         "components": [
           {
             "properties": {
@@ -7373,9 +7373,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5159,
+        "ID": 12640,
         "Name": "wall_4",
-        "ParentID": 5098,
+        "ParentID": 12579,
         "components": [
           {
             "properties": {
@@ -7483,9 +7483,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5160,
+        "ID": 12641,
         "Name": "wall_4",
-        "ParentID": 5098,
+        "ParentID": 12579,
         "components": [
           {
             "properties": {
@@ -7593,9 +7593,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5161,
+        "ID": 12642,
         "Name": "wall",
-        "ParentID": 5097,
+        "ParentID": 12578,
         "components": [
           {
             "properties": {
@@ -7703,9 +7703,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5162,
+        "ID": 12643,
         "Name": "wall",
-        "ParentID": 5097,
+        "ParentID": 12578,
         "components": [
           {
             "properties": {
@@ -7813,9 +7813,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5163,
+        "ID": 12644,
         "Name": "wall_3",
-        "ParentID": 5097,
+        "ParentID": 12578,
         "components": [
           {
             "properties": {
@@ -7923,9 +7923,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5164,
+        "ID": 12645,
         "Name": "wall",
-        "ParentID": 5098,
+        "ParentID": 12579,
         "components": [
           {
             "properties": {
@@ -8033,9 +8033,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5165,
+        "ID": 12646,
         "Name": "wall_6",
-        "ParentID": 5098,
+        "ParentID": 12579,
         "components": [
           {
             "properties": {
@@ -8143,9 +8143,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5166,
+        "ID": 12647,
         "Name": "wall_2",
-        "ParentID": 5097,
+        "ParentID": 12578,
         "components": [
           {
             "properties": {
@@ -8253,9 +8253,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5167,
+        "ID": 12648,
         "Name": "wall_2",
-        "ParentID": 5097,
+        "ParentID": 12578,
         "components": [
           {
             "properties": {
@@ -8363,9 +8363,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5168,
+        "ID": 12649,
         "Name": "wall_2",
-        "ParentID": 5097,
+        "ParentID": 12578,
         "components": [
           {
             "properties": {
@@ -8473,9 +8473,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5169,
+        "ID": 12650,
         "Name": "wall_3",
-        "ParentID": 5097,
+        "ParentID": 12578,
         "components": [
           {
             "properties": {
@@ -8583,9 +8583,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5170,
+        "ID": 12651,
         "Name": "wall",
-        "ParentID": 5098,
+        "ParentID": 12579,
         "components": [
           {
             "properties": {
@@ -8693,9 +8693,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5171,
+        "ID": 12652,
         "Name": "wall_2",
-        "ParentID": 5098,
+        "ParentID": 12579,
         "components": [
           {
             "properties": {
@@ -8803,9 +8803,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5172,
+        "ID": 12653,
         "Name": "wall_2",
-        "ParentID": 5098,
+        "ParentID": 12579,
         "components": [
           {
             "properties": {
@@ -8913,9 +8913,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5173,
+        "ID": 12654,
         "Name": "wall_4",
-        "ParentID": 5098,
+        "ParentID": 12579,
         "components": [
           {
             "properties": {
@@ -9023,9 +9023,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5174,
+        "ID": 12655,
         "Name": "wall_4",
-        "ParentID": 5098,
+        "ParentID": 12579,
         "components": [
           {
             "properties": {
@@ -9133,9 +9133,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5175,
+        "ID": 12656,
         "Name": "wall_2",
-        "ParentID": 5098,
+        "ParentID": 12579,
         "components": [
           {
             "properties": {
@@ -9243,9 +9243,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5176,
+        "ID": 12657,
         "Name": "wall",
-        "ParentID": 5097,
+        "ParentID": 12578,
         "components": [
           {
             "properties": {
@@ -9353,9 +9353,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5177,
+        "ID": 12658,
         "Name": "wall",
-        "ParentID": 5097,
+        "ParentID": 12578,
         "components": [
           {
             "properties": {
@@ -9463,9 +9463,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5178,
+        "ID": 12659,
         "Name": "wall_4",
-        "ParentID": 5097,
+        "ParentID": 12578,
         "components": [
           {
             "properties": {
@@ -9573,9 +9573,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5179,
+        "ID": 12660,
         "Name": "wall_4",
-        "ParentID": 5097,
+        "ParentID": 12578,
         "components": [
           {
             "properties": {
@@ -9683,9 +9683,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5180,
+        "ID": 12661,
         "Name": "wall",
-        "ParentID": 5097,
+        "ParentID": 12578,
         "components": [
           {
             "properties": {
@@ -9793,9 +9793,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5181,
+        "ID": 12662,
         "Name": "wall",
-        "ParentID": 5097,
+        "ParentID": 12578,
         "components": [
           {
             "properties": {
@@ -9903,9 +9903,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5182,
+        "ID": 12663,
         "Name": "wall_8",
-        "ParentID": 5098,
+        "ParentID": 12579,
         "components": [
           {
             "properties": {
@@ -10013,9 +10013,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5183,
+        "ID": 12664,
         "Name": "wall_6",
-        "ParentID": 5098,
+        "ParentID": 12579,
         "components": [
           {
             "properties": {
@@ -10123,9 +10123,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5184,
+        "ID": 12665,
         "Name": "wall_4",
-        "ParentID": 5097,
+        "ParentID": 12578,
         "components": [
           {
             "properties": {
@@ -10233,9 +10233,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5185,
+        "ID": 12666,
         "Name": "wall_3",
-        "ParentID": 5098,
+        "ParentID": 12579,
         "components": [
           {
             "properties": {
@@ -10343,9 +10343,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5186,
+        "ID": 12667,
         "Name": "wall_13",
-        "ParentID": 5097,
+        "ParentID": 12578,
         "components": [
           {
             "properties": {
@@ -10453,9 +10453,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5187,
+        "ID": 12668,
         "Name": "wall_4",
-        "ParentID": 5098,
+        "ParentID": 12579,
         "components": [
           {
             "properties": {
@@ -10563,9 +10563,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5188,
+        "ID": 12669,
         "Name": "wall_3",
-        "ParentID": 5098,
+        "ParentID": 12579,
         "components": [
           {
             "properties": {
@@ -10673,9 +10673,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5189,
+        "ID": 12670,
         "Name": "wall_8",
-        "ParentID": 5097,
+        "ParentID": 12578,
         "components": [
           {
             "properties": {
@@ -10783,9 +10783,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5190,
+        "ID": 12671,
         "Name": "wall_8",
-        "ParentID": 5098,
+        "ParentID": 12579,
         "components": [
           {
             "properties": {
@@ -10893,9 +10893,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5191,
+        "ID": 12672,
         "Name": "wall",
-        "ParentID": 5097,
+        "ParentID": 12578,
         "components": [
           {
             "properties": {
@@ -11003,9 +11003,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5192,
+        "ID": 12673,
         "Name": "wall_2",
-        "ParentID": 5098,
+        "ParentID": 12579,
         "components": [
           {
             "properties": {
@@ -11113,9 +11113,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5193,
+        "ID": 12674,
         "Name": "wall_8",
-        "ParentID": 5097,
+        "ParentID": 12578,
         "components": [
           {
             "properties": {
@@ -11223,9 +11223,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5194,
+        "ID": 12675,
         "Name": "wall_8",
-        "ParentID": 5098,
+        "ParentID": 12579,
         "components": [
           {
             "properties": {
@@ -11333,9 +11333,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5195,
+        "ID": 12676,
         "Name": "wall_14",
-        "ParentID": 5098,
+        "ParentID": 12579,
         "components": [
           {
             "properties": {
@@ -11443,9 +11443,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5196,
+        "ID": 12677,
         "Name": "wall_5",
-        "ParentID": 5097,
+        "ParentID": 12578,
         "components": [
           {
             "properties": {
@@ -11553,9 +11553,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5197,
+        "ID": 12678,
         "Name": "wall_6",
-        "ParentID": 5098,
+        "ParentID": 12579,
         "components": [
           {
             "properties": {
@@ -11663,9 +11663,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5198,
+        "ID": 12679,
         "Name": "wall_6",
-        "ParentID": 5098,
+        "ParentID": 12579,
         "components": [
           {
             "properties": {
@@ -11773,9 +11773,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5199,
+        "ID": 12680,
         "Name": "wall_3",
-        "ParentID": 5098,
+        "ParentID": 12579,
         "components": [
           {
             "properties": {
@@ -11883,9 +11883,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5200,
+        "ID": 12681,
         "Name": "wall_5",
-        "ParentID": 5098,
+        "ParentID": 12579,
         "components": [
           {
             "properties": {
@@ -11993,9 +11993,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5201,
+        "ID": 12682,
         "Name": "wall_5",
-        "ParentID": 5098,
+        "ParentID": 12579,
         "components": [
           {
             "properties": {
@@ -12103,7 +12103,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5202,
+        "ID": 12683,
         "Name": "Door_Open",
         "ParentID": -1,
         "components": [
@@ -12213,9 +12213,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5203,
+        "ID": 12684,
         "Name": "wall_14",
-        "ParentID": 5098,
+        "ParentID": 12579,
         "components": [
           {
             "properties": {
@@ -12323,9 +12323,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5204,
+        "ID": 12685,
         "Name": "wall_9",
-        "ParentID": 5097,
+        "ParentID": 12578,
         "components": [
           {
             "properties": {
@@ -12433,9 +12433,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5205,
+        "ID": 12686,
         "Name": "wall_2",
-        "ParentID": 5098,
+        "ParentID": 12579,
         "components": [
           {
             "properties": {
@@ -12543,9 +12543,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5206,
+        "ID": 12687,
         "Name": "Cheval_glass",
-        "ParentID": 5207,
+        "ParentID": 12688,
         "components": [
           {
             "properties": {
@@ -12647,7 +12647,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5207,
+        "ID": 12688,
         "Name": "ROOM",
         "ParentID": -1,
         "components": [
@@ -12678,9 +12678,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5208,
+        "ID": 12689,
         "Name": "Closet",
-        "ParentID": 5207,
+        "ParentID": 12688,
         "components": [
           {
             "properties": {
@@ -12782,9 +12782,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5209,
+        "ID": 12690,
         "Name": "folding_screen",
-        "ParentID": 5210,
+        "ParentID": 12691,
         "components": [
           {
             "properties": {
@@ -12863,7 +12863,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5210,
+        "ID": 12691,
         "Name": "Sarang",
         "ParentID": -1,
         "components": [
@@ -12894,9 +12894,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5211,
+        "ID": 12692,
         "Name": "hanger",
-        "ParentID": 5207,
+        "ParentID": 12688,
         "components": [
           {
             "properties": {
@@ -12998,7 +12998,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5212,
+        "ID": 12693,
         "Name": "Lantern",
         "ParentID": -1,
         "components": [
@@ -13102,7 +13102,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5213,
+        "ID": 12694,
         "Name": "Lantern",
         "ParentID": -1,
         "components": [
@@ -13206,9 +13206,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5214,
+        "ID": 12695,
         "Name": "Lantern",
-        "ParentID": 5210,
+        "ParentID": 12691,
         "components": [
           {
             "properties": {
@@ -13310,9 +13310,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5215,
+        "ID": 12696,
         "Name": "Lantern",
-        "ParentID": 5210,
+        "ParentID": 12691,
         "components": [
           {
             "properties": {
@@ -13414,9 +13414,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5216,
+        "ID": 12697,
         "Name": "Living",
-        "ParentID": 5217,
+        "ParentID": 12698,
         "components": [
           {
             "properties": {
@@ -13518,7 +13518,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5217,
+        "ID": 12698,
         "Name": "Living",
         "ParentID": -1,
         "components": [
@@ -13549,9 +13549,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5218,
+        "ID": 12699,
         "Name": "Living_room_sofa_1",
-        "ParentID": 5217,
+        "ParentID": 12698,
         "components": [
           {
             "properties": {
@@ -13653,9 +13653,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5219,
+        "ID": 12700,
         "Name": "Living_room_sofa_4",
-        "ParentID": 5217,
+        "ParentID": 12698,
         "components": [
           {
             "properties": {
@@ -13757,9 +13757,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5220,
+        "ID": 12701,
         "Name": "Living_room_table",
-        "ParentID": 5217,
+        "ParentID": 12698,
         "components": [
           {
             "properties": {
@@ -13861,9 +13861,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5221,
+        "ID": 12702,
         "Name": "organized_blanket",
-        "ParentID": 5210,
+        "ParentID": 12691,
         "components": [
           {
             "properties": {
@@ -13965,9 +13965,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5222,
+        "ID": 12703,
         "Name": "Onggi_platform",
-        "ParentID": 5230,
+        "ParentID": 12711,
         "components": [
           {
             "properties": {
@@ -14069,9 +14069,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5223,
+        "ID": 12704,
         "Name": "Onggi_platform",
-        "ParentID": 5230,
+        "ParentID": 12711,
         "components": [
           {
             "properties": {
@@ -14173,9 +14173,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5224,
+        "ID": 12705,
         "Name": "Onggi_platform",
-        "ParentID": 5230,
+        "ParentID": 12711,
         "components": [
           {
             "properties": {
@@ -14277,9 +14277,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5225,
+        "ID": 12706,
         "Name": "Pillow",
-        "ParentID": 5210,
+        "ParentID": 12691,
         "components": [
           {
             "properties": {
@@ -14381,9 +14381,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5226,
+        "ID": 12707,
         "Name": "Bed",
-        "ParentID": 5207,
+        "ParentID": 12688,
         "components": [
           {
             "properties": {
@@ -14485,9 +14485,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5227,
+        "ID": 12708,
         "Name": "big_picture",
-        "ParentID": 5217,
+        "ParentID": 12698,
         "components": [
           {
             "properties": {
@@ -14566,9 +14566,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5228,
+        "ID": 12709,
         "Name": "box",
-        "ParentID": 5230,
+        "ParentID": 12711,
         "components": [
           {
             "properties": {
@@ -14670,9 +14670,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5229,
+        "ID": 12710,
         "Name": "Cushion",
-        "ParentID": 5210,
+        "ParentID": 12691,
         "components": [
           {
             "properties": {
@@ -14751,7 +14751,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5230,
+        "ID": 12711,
         "Name": "Beran",
         "ParentID": -1,
         "components": [
@@ -14782,9 +14782,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5231,
+        "ID": 12712,
         "Name": "Dresser_chair",
-        "ParentID": 5207,
+        "ParentID": 12688,
         "components": [
           {
             "properties": {
@@ -14886,9 +14886,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5232,
+        "ID": 12713,
         "Name": "dressing_table",
-        "ParentID": 5207,
+        "ParentID": 12688,
         "components": [
           {
             "properties": {
@@ -14990,9 +14990,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5233,
+        "ID": 12714,
         "Name": "hanger",
-        "ParentID": 5210,
+        "ParentID": 12691,
         "components": [
           {
             "properties": {
@@ -15094,9 +15094,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5234,
+        "ID": 12715,
         "Name": "Lantern",
-        "ParentID": 5210,
+        "ParentID": 12691,
         "components": [
           {
             "properties": {
@@ -15198,9 +15198,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5235,
+        "ID": 12716,
         "Name": "Lantern",
-        "ParentID": 5210,
+        "ParentID": 12691,
         "components": [
           {
             "properties": {
@@ -15302,9 +15302,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5236,
+        "ID": 12717,
         "Name": "rug",
-        "ParentID": 5210,
+        "ParentID": 12691,
         "components": [
           {
             "properties": {
@@ -15406,9 +15406,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5237,
+        "ID": 12718,
         "Name": "sitting_table",
-        "ParentID": 5210,
+        "ParentID": 12691,
         "components": [
           {
             "properties": {
@@ -15510,9 +15510,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5238,
+        "ID": 12719,
         "Name": "small_picture",
-        "ParentID": 5210,
+        "ParentID": 12691,
         "components": [
           {
             "properties": {
@@ -15591,9 +15591,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5239,
+        "ID": 12720,
         "Name": "small_picture",
-        "ParentID": 5210,
+        "ParentID": 12691,
         "components": [
           {
             "properties": {
@@ -15672,9 +15672,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5240,
+        "ID": 12721,
         "Name": "small_picture",
-        "ParentID": 5210,
+        "ParentID": 12691,
         "components": [
           {
             "properties": {
@@ -15753,9 +15753,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5241,
+        "ID": 12722,
         "Name": "tv",
-        "ParentID": 5217,
+        "ParentID": 12698,
         "components": [
           {
             "properties": {
@@ -15857,9 +15857,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5242,
+        "ID": 12723,
         "Name": "TV_console",
-        "ParentID": 5217,
+        "ParentID": 12698,
         "components": [
           {
             "properties": {
@@ -15961,9 +15961,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5243,
+        "ID": 12724,
         "Name": "Lantern",
-        "ParentID": 5210,
+        "ParentID": 12691,
         "components": [
           {
             "properties": {
@@ -16065,9 +16065,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5244,
+        "ID": 12725,
         "Name": "Lantern",
-        "ParentID": 5210,
+        "ParentID": 12691,
         "components": [
           {
             "properties": {
@@ -16169,9 +16169,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5245,
+        "ID": 12726,
         "Name": "Onggi_platform",
-        "ParentID": 5230,
+        "ParentID": 12711,
         "components": [
           {
             "properties": {
@@ -16273,9 +16273,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5246,
+        "ID": 12727,
         "Name": "Ritual_cabinet",
-        "ParentID": 5210,
+        "ParentID": 12691,
         "components": [
           {
             "properties": {
@@ -16377,9 +16377,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5247,
+        "ID": 12728,
         "Name": "Ritual_cabinet",
-        "ParentID": 5210,
+        "ParentID": 12691,
         "components": [
           {
             "properties": {
@@ -16481,9 +16481,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5248,
+        "ID": 12729,
         "Name": "organized_blanket",
-        "ParentID": 5210,
+        "ParentID": 12691,
         "components": [
           {
             "properties": {
@@ -16585,9 +16585,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5249,
+        "ID": 12730,
         "Name": "Cushion",
-        "ParentID": 5210,
+        "ParentID": 12691,
         "components": [
           {
             "properties": {
@@ -16666,9 +16666,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5250,
+        "ID": 12731,
         "Name": "Cushion",
-        "ParentID": 5210,
+        "ParentID": 12691,
         "components": [
           {
             "properties": {
@@ -16747,9 +16747,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5251,
+        "ID": 12732,
         "Name": "Cushion",
-        "ParentID": 5210,
+        "ParentID": 12691,
         "components": [
           {
             "properties": {
@@ -16828,9 +16828,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5252,
+        "ID": 12733,
         "Name": "big_picture",
-        "ParentID": 5210,
+        "ParentID": 12691,
         "components": [
           {
             "properties": {
@@ -16909,9 +16909,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5253,
+        "ID": 12734,
         "Name": "wastebasket",
-        "ParentID": 5217,
+        "ParentID": 12698,
         "components": [
           {
             "properties": {
@@ -17013,9 +17013,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5254,
+        "ID": 12735,
         "Name": "wastebasket",
-        "ParentID": 5207,
+        "ParentID": 12688,
         "components": [
           {
             "properties": {
@@ -17117,9 +17117,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5255,
+        "ID": 12736,
         "Name": "Pillar",
-        "ParentID": 5100,
+        "ParentID": 12581,
         "components": [
           {
             "properties": {
@@ -17227,9 +17227,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5256,
+        "ID": 12737,
         "Name": "Pillar",
-        "ParentID": 5100,
+        "ParentID": 12581,
         "components": [
           {
             "properties": {
@@ -17337,9 +17337,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5257,
+        "ID": 12738,
         "Name": "wall",
-        "ParentID": 5097,
+        "ParentID": 12578,
         "components": [
           {
             "properties": {
@@ -17447,9 +17447,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5258,
+        "ID": 12739,
         "Name": "wall",
-        "ParentID": 5097,
+        "ParentID": 12578,
         "components": [
           {
             "properties": {
@@ -17557,9 +17557,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5259,
+        "ID": 12740,
         "Name": "wall",
-        "ParentID": 5097,
+        "ParentID": 12578,
         "components": [
           {
             "properties": {
@@ -17667,9 +17667,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5260,
+        "ID": 12741,
         "Name": "wall",
-        "ParentID": 5097,
+        "ParentID": 12578,
         "components": [
           {
             "properties": {
@@ -17777,9 +17777,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5261,
+        "ID": 12742,
         "Name": "wall_3",
-        "ParentID": 5098,
+        "ParentID": 12579,
         "components": [
           {
             "properties": {
@@ -17887,7 +17887,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5262,
+        "ID": 12743,
         "Name": "------------[Woo]---------------",
         "ParentID": -1,
         "components": [
@@ -17918,7 +17918,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5263,
+        "ID": 12744,
         "Name": "Main Camera",
         "ParentID": -1,
         "components": [
@@ -17971,7 +17971,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5264,
+        "ID": 12745,
         "Name": "AltarDirectCamera",
         "ParentID": -1,
         "components": [
@@ -18012,7 +18012,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5265,
+        "ID": 12746,
         "Name": "Player",
         "ParentID": -1,
         "components": [
@@ -18170,9 +18170,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5266,
+        "ID": 12747,
         "Name": "CameraTrackingPoint",
-        "ParentID": 5265,
+        "ParentID": 12746,
         "components": [
           {
             "properties": {
@@ -18201,9 +18201,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5267,
+        "ID": 12748,
         "Name": "OcclusionFadePoint",
-        "ParentID": 5265,
+        "ParentID": 12746,
         "components": [
           {
             "properties": {
@@ -18232,9 +18232,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5268,
+        "ID": 12749,
         "Name": "InteractionSensor",
-        "ParentID": 5265,
+        "ParentID": 12746,
         "components": [
           {
             "properties": {
@@ -18292,9 +18292,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5269,
+        "ID": 12750,
         "Name": "InteractZone",
-        "ParentID": 5265,
+        "ParentID": 12746,
         "components": [
           {
             "properties": {
@@ -18352,9 +18352,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5270,
+        "ID": 12751,
         "Name": "ItemVisualizer",
-        "ParentID": 5265,
+        "ParentID": 12746,
         "components": [
           {
             "properties": {
@@ -18383,9 +18383,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 5271,
+        "ID": 12752,
         "Name": "Visual_Ingre_Apple",
-        "ParentID": 5270,
+        "ParentID": 12751,
         "components": [
           {
             "properties": {
@@ -18464,9 +18464,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 5272,
+        "ID": 12753,
         "Name": "Visual_Ingre_Batter",
-        "ParentID": 5270,
+        "ParentID": 12751,
         "components": [
           {
             "properties": {
@@ -18545,9 +18545,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 5273,
+        "ID": 12754,
         "Name": "Visual_Ingre_Donggeurangttaeng",
-        "ParentID": 5270,
+        "ParentID": 12751,
         "components": [
           {
             "properties": {
@@ -18626,9 +18626,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 5274,
+        "ID": 12755,
         "Name": "Visual_Ingre_Pear",
-        "ParentID": 5270,
+        "ParentID": 12751,
         "components": [
           {
             "properties": {
@@ -18707,9 +18707,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 5275,
+        "ID": 12756,
         "Name": "Visual_Ingre_Sanjeok",
-        "ParentID": 5270,
+        "ParentID": 12751,
         "components": [
           {
             "properties": {
@@ -18788,9 +18788,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 5276,
+        "ID": 12757,
         "Name": "Visual_Ingre_Tofu",
-        "ParentID": 5270,
+        "ParentID": 12751,
         "components": [
           {
             "properties": {
@@ -18869,9 +18869,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 5277,
+        "ID": 12758,
         "Name": "Visual_Apple",
-        "ParentID": 5270,
+        "ParentID": 12751,
         "components": [
           {
             "properties": {
@@ -18950,9 +18950,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 5278,
+        "ID": 12759,
         "Name": "Visual_Pear",
-        "ParentID": 5270,
+        "ParentID": 12751,
         "components": [
           {
             "properties": {
@@ -19031,9 +19031,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 5279,
+        "ID": 12760,
         "Name": "Visual_Batter",
-        "ParentID": 5270,
+        "ParentID": 12751,
         "components": [
           {
             "properties": {
@@ -19112,9 +19112,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 5280,
+        "ID": 12761,
         "Name": "Visual_Tofu",
-        "ParentID": 5270,
+        "ParentID": 12751,
         "components": [
           {
             "properties": {
@@ -19193,9 +19193,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 5281,
+        "ID": 12762,
         "Name": "Visual_Sanjeok",
-        "ParentID": 5270,
+        "ParentID": 12751,
         "components": [
           {
             "properties": {
@@ -19274,9 +19274,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 5282,
+        "ID": 12763,
         "Name": "Visual_Donggeurangttaeng",
-        "ParentID": 5270,
+        "ParentID": 12751,
         "components": [
           {
             "properties": {
@@ -19355,9 +19355,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5283,
+        "ID": 12764,
         "Name": "AITarget",
-        "ParentID": 5265,
+        "ParentID": 12746,
         "components": [
           {
             "properties": {
@@ -19415,9 +19415,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5284,
+        "ID": 12765,
         "Name": "DialoguePoint",
-        "ParentID": 5265,
+        "ParentID": 12746,
         "components": [
           {
             "properties": {
@@ -19446,9 +19446,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5285,
+        "ID": 12766,
         "Name": "Player_FireEffect",
-        "ParentID": 5265,
+        "ParentID": 12746,
         "components": [
           {
             "properties": {
@@ -19572,9 +19572,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 5286,
+        "ID": 12767,
         "Name": "Player_HitEffect",
-        "ParentID": 5265,
+        "ParentID": 12746,
         "components": [
           {
             "properties": {
@@ -19659,9 +19659,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5287,
+        "ID": 12768,
         "Name": "Player_SmokeEffect",
-        "ParentID": 5265,
+        "ParentID": 12746,
         "components": [
           {
             "properties": {
@@ -19785,7 +19785,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5288,
+        "ID": 12769,
         "Name": "JesaSang",
         "ParentID": -1,
         "components": [
@@ -19895,9 +19895,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5289,
+        "ID": 12770,
         "Name": "baseFood",
-        "ParentID": 5288,
+        "ParentID": 12769,
         "components": [
           {
             "properties": {
@@ -19976,9 +19976,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 5290,
+        "ID": 12771,
         "Name": "Apple",
-        "ParentID": 5288,
+        "ParentID": 12769,
         "components": [
           {
             "properties": {
@@ -20057,9 +20057,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 5291,
+        "ID": 12772,
         "Name": "Pear",
-        "ParentID": 5288,
+        "ParentID": 12769,
         "components": [
           {
             "properties": {
@@ -20138,9 +20138,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 5292,
+        "ID": 12773,
         "Name": "Batter",
-        "ParentID": 5288,
+        "ParentID": 12769,
         "components": [
           {
             "properties": {
@@ -20219,9 +20219,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 5293,
+        "ID": 12774,
         "Name": "Tofu",
-        "ParentID": 5288,
+        "ParentID": 12769,
         "components": [
           {
             "properties": {
@@ -20300,9 +20300,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 5294,
+        "ID": 12775,
         "Name": "Sanjeok",
-        "ParentID": 5288,
+        "ParentID": 12769,
         "components": [
           {
             "properties": {
@@ -20381,9 +20381,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 5295,
+        "ID": 12776,
         "Name": "Donggeurangttaeng",
-        "ParentID": 5288,
+        "ParentID": 12769,
         "components": [
           {
             "properties": {
@@ -20462,9 +20462,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5296,
+        "ID": 12777,
         "Name": "Image_SensorOn_Jesasang",
-        "ParentID": 5288,
+        "ParentID": 12769,
         "components": [
           {
             "properties": {
@@ -20553,9 +20553,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5297,
+        "ID": 12778,
         "Name": "Image_InteractionOn_Jesasang",
-        "ParentID": 5288,
+        "ParentID": 12769,
         "components": [
           {
             "properties": {
@@ -20644,9 +20644,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5298,
+        "ID": 12779,
         "Name": "Image_InteractionGauge_Jesasang",
-        "ParentID": 5288,
+        "ParentID": 12769,
         "components": [
           {
             "properties": {
@@ -20735,7 +20735,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5299,
+        "ID": 12780,
         "Name": "Altar",
         "ParentID": -1,
         "components": [
@@ -20839,9 +20839,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5300,
+        "ID": 12781,
         "Name": "baseFood",
-        "ParentID": 5299,
+        "ParentID": 12780,
         "components": [
           {
             "properties": {
@@ -20920,9 +20920,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 5301,
+        "ID": 12782,
         "Name": "Alta_Apple",
-        "ParentID": 5299,
+        "ParentID": 12780,
         "components": [
           {
             "properties": {
@@ -21001,9 +21001,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 5302,
+        "ID": 12783,
         "Name": "Alta_Pear",
-        "ParentID": 5299,
+        "ParentID": 12780,
         "components": [
           {
             "properties": {
@@ -21082,9 +21082,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 5303,
+        "ID": 12784,
         "Name": "Alta_Batter",
-        "ParentID": 5299,
+        "ParentID": 12780,
         "components": [
           {
             "properties": {
@@ -21163,9 +21163,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 5304,
+        "ID": 12785,
         "Name": "Alta_Tofu",
-        "ParentID": 5299,
+        "ParentID": 12780,
         "components": [
           {
             "properties": {
@@ -21244,9 +21244,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 5305,
+        "ID": 12786,
         "Name": "Alta_Sanjeok",
-        "ParentID": 5299,
+        "ParentID": 12780,
         "components": [
           {
             "properties": {
@@ -21325,9 +21325,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 5306,
+        "ID": 12787,
         "Name": "Alta_Donggeurangttaeng",
-        "ParentID": 5299,
+        "ParentID": 12780,
         "components": [
           {
             "properties": {
@@ -21406,9 +21406,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 5307,
+        "ID": 12788,
         "Name": "Alta_Ingre_Apple",
-        "ParentID": 5299,
+        "ParentID": 12780,
         "components": [
           {
             "properties": {
@@ -21487,9 +21487,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 5308,
+        "ID": 12789,
         "Name": "Alta_Ingre_Pear",
-        "ParentID": 5299,
+        "ParentID": 12780,
         "components": [
           {
             "properties": {
@@ -21568,9 +21568,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 5309,
+        "ID": 12790,
         "Name": "Alta_Ingre_Batter",
-        "ParentID": 5299,
+        "ParentID": 12780,
         "components": [
           {
             "properties": {
@@ -21649,9 +21649,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 5310,
+        "ID": 12791,
         "Name": "Alta_Ingre_Tofu",
-        "ParentID": 5299,
+        "ParentID": 12780,
         "components": [
           {
             "properties": {
@@ -21730,9 +21730,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 5311,
+        "ID": 12792,
         "Name": "Alta_Ingre_Sanjeok",
-        "ParentID": 5299,
+        "ParentID": 12780,
         "components": [
           {
             "properties": {
@@ -21811,9 +21811,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 5312,
+        "ID": 12793,
         "Name": "Alta_Ingre_Donggeurangttaeng",
-        "ParentID": 5299,
+        "ParentID": 12780,
         "components": [
           {
             "properties": {
@@ -21892,9 +21892,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5313,
+        "ID": 12794,
         "Name": "Image_SensorOn_Altar",
-        "ParentID": 5299,
+        "ParentID": 12780,
         "components": [
           {
             "properties": {
@@ -21983,9 +21983,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5314,
+        "ID": 12795,
         "Name": "Image_InteractionOn_Altar",
-        "ParentID": 5299,
+        "ParentID": 12780,
         "components": [
           {
             "properties": {
@@ -22074,9 +22074,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5315,
+        "ID": 12796,
         "Name": "Image_InteractionGauge_Altar",
-        "ParentID": 5299,
+        "ParentID": 12780,
         "components": [
           {
             "properties": {
@@ -22165,9 +22165,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5316,
+        "ID": 12797,
         "Name": "AltarDirectEffect_1",
-        "ParentID": 5299,
+        "ParentID": 12780,
         "components": [
           {
             "properties": {
@@ -22374,9 +22374,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5317,
+        "ID": 12798,
         "Name": "AltarDirectEffect_2",
-        "ParentID": 5299,
+        "ParentID": 12780,
         "components": [
           {
             "properties": {
@@ -22583,7 +22583,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5318,
+        "ID": 12799,
         "Name": "SearchObjects",
         "ParentID": -1,
         "components": [
@@ -22614,7 +22614,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5319,
+        "ID": 12800,
         "Name": "HideObjects",
         "ParentID": -1,
         "components": [
@@ -22645,7 +22645,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5320,
+        "ID": 12801,
         "Name": "TrapObjects",
         "ParentID": -1,
         "components": [
@@ -22676,16 +22676,16 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5321,
+        "ID": 12802,
         "Name": "SearchObject",
-        "ParentID": 5318,
+        "ParentID": 12799,
         "components": [
           {
             "properties": {
               "Position": [
-                -298.6551513671875,
-                5.012585097574629e-05,
-                -160.8609619140625
+                -1127.408203125,
+                5.0459697376936674e-05,
+                -189.7286376953125
               ],
               "Rotation": [
                 -0.0,
@@ -22703,7 +22703,7 @@
           {
             "properties": {
               "Active": true,
-              "DataPath": "..\\Assets\\Resource\\ArtModel\\JageaJang\\cabinet.fbx",
+              "DataPath": "..\\Assets\\Resource\\ArtModel\\esset_02\\box.fbx",
               "IsStatic": false
             },
             "type": "FBXData"
@@ -22757,15 +22757,15 @@
               "PhysicsBodyType": "Static",
               "density": 10.0,
               "halfExtents": [
-                50.0,
+                65.0,
                 100.0,
-                50.0
+                34.0
               ],
               "height": 10.0,
               "isTrigger": false,
               "layer": "Default",
               "localOffset": [
-                0.0,
+                5.0,
                 100.0,
                 0.0
               ],
@@ -22795,9 +22795,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 5322,
+        "ID": 12803,
         "Name": "Image_SensorOn",
-        "ParentID": 5321,
+        "ParentID": 12802,
         "components": [
           {
             "properties": {
@@ -22886,9 +22886,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 5323,
+        "ID": 12804,
         "Name": "Image_InteractionOn",
-        "ParentID": 5321,
+        "ParentID": 12802,
         "components": [
           {
             "properties": {
@@ -22977,9 +22977,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 5324,
+        "ID": 12805,
         "Name": "Image_InteractionGauge",
-        "ParentID": 5321,
+        "ParentID": 12802,
         "components": [
           {
             "properties": {
@@ -23068,9 +23068,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5325,
+        "ID": 12806,
         "Name": "TrapObject_Decal",
-        "ParentID": 5320,
+        "ParentID": 12801,
         "components": [
           {
             "properties": {
@@ -23156,9 +23156,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 5326,
+        "ID": 12807,
         "Name": "RingEffect",
-        "ParentID": 5325,
+        "ParentID": 12806,
         "components": [
           {
             "properties": {
@@ -23215,9 +23215,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5327,
+        "ID": 12808,
         "Name": "TrapObject_Decal",
-        "ParentID": 5320,
+        "ParentID": 12801,
         "components": [
           {
             "properties": {
@@ -23303,9 +23303,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 5328,
+        "ID": 12809,
         "Name": "RingEffect",
-        "ParentID": 5327,
+        "ParentID": 12808,
         "components": [
           {
             "properties": {
@@ -23362,9 +23362,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5329,
+        "ID": 12810,
         "Name": "TropObject_Table",
-        "ParentID": 5320,
+        "ParentID": 12801,
         "components": [
           {
             "properties": {
@@ -23472,9 +23472,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 5330,
+        "ID": 12811,
         "Name": "RingEffect",
-        "ParentID": 5329,
+        "ParentID": 12810,
         "components": [
           {
             "properties": {
@@ -23531,7 +23531,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5331,
+        "ID": 12812,
         "Name": "CookingZone",
         "ParentID": -1,
         "components": [
@@ -23591,9 +23591,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5332,
+        "ID": 12813,
         "Name": "Image_SensorOn_Cook",
-        "ParentID": 5331,
+        "ParentID": 12812,
         "components": [
           {
             "properties": {
@@ -23682,9 +23682,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5333,
+        "ID": 12814,
         "Name": "Image_InteractionOn_Cook",
-        "ParentID": 5331,
+        "ParentID": 12812,
         "components": [
           {
             "properties": {
@@ -23773,9 +23773,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5334,
+        "ID": 12815,
         "Name": "Image_InteractionGauge_Cook",
-        "ParentID": 5331,
+        "ParentID": 12812,
         "components": [
           {
             "properties": {
@@ -23864,7 +23864,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5335,
+        "ID": 12816,
         "Name": "UI_PlayerDialogue",
         "ParentID": -1,
         "components": [
@@ -23929,9 +23929,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5336,
+        "ID": 12817,
         "Name": "Image_Dialogue",
-        "ParentID": 5335,
+        "ParentID": 12816,
         "components": [
           {
             "properties": {
@@ -24020,9 +24020,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5337,
+        "ID": 12818,
         "Name": "Text_Dialoaue",
-        "ParentID": 5335,
+        "ParentID": 12816,
         "components": [
           {
             "properties": {
@@ -24107,7 +24107,7 @@
     {
       "properties": {
         "Active": false,
-        "ID": 5338,
+        "ID": 12819,
         "Name": "UI_MiniGame",
         "ParentID": -1,
         "components": [
@@ -24172,9 +24172,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 5339,
+        "ID": 12820,
         "Name": "Image_BackgroundTop",
-        "ParentID": 5338,
+        "ParentID": 12819,
         "components": [
           {
             "properties": {
@@ -24263,9 +24263,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 5340,
+        "ID": 12821,
         "Name": "Image_ESC",
-        "ParentID": 5339,
+        "ParentID": 12820,
         "components": [
           {
             "properties": {
@@ -24354,9 +24354,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 5341,
+        "ID": 12822,
         "Name": "Image_SpaceBarBase",
-        "ParentID": 5339,
+        "ParentID": 12820,
         "components": [
           {
             "properties": {
@@ -24445,9 +24445,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 5342,
+        "ID": 12823,
         "Name": "Image_SpaceBarHold",
-        "ParentID": 5339,
+        "ParentID": 12820,
         "components": [
           {
             "properties": {
@@ -24536,9 +24536,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 5343,
+        "ID": 12824,
         "Name": "Image_BackgroundDown",
-        "ParentID": 5338,
+        "ParentID": 12819,
         "components": [
           {
             "properties": {
@@ -24627,9 +24627,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 5344,
+        "ID": 12825,
         "Name": "UI_MiniGame1",
-        "ParentID": 5338,
+        "ParentID": 12819,
         "components": [
           {
             "properties": {
@@ -24692,9 +24692,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 5345,
+        "ID": 12826,
         "Name": "1_Image_ProgressBar",
-        "ParentID": 5344,
+        "ParentID": 12825,
         "components": [
           {
             "properties": {
@@ -24783,9 +24783,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 5346,
+        "ID": 12827,
         "Name": "1_Image_Knife",
-        "ParentID": 5344,
+        "ParentID": 12825,
         "components": [
           {
             "properties": {
@@ -24874,9 +24874,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 5347,
+        "ID": 12828,
         "Name": "1_Image_StopPoint",
-        "ParentID": 5344,
+        "ParentID": 12825,
         "components": [
           {
             "properties": {
@@ -24965,9 +24965,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 5348,
+        "ID": 12829,
         "Name": "1_Image_CutAnimation",
-        "ParentID": 5344,
+        "ParentID": 12825,
         "components": [
           {
             "properties": {
@@ -25056,9 +25056,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 5349,
+        "ID": 12830,
         "Name": "UI_MiniGame2",
-        "ParentID": 5338,
+        "ParentID": 12819,
         "components": [
           {
             "properties": {
@@ -25121,9 +25121,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 5350,
+        "ID": 12831,
         "Name": "2_Image_ProgressBar",
-        "ParentID": 5349,
+        "ParentID": 12830,
         "components": [
           {
             "properties": {
@@ -25212,9 +25212,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 5351,
+        "ID": 12832,
         "Name": "2_Image_FoodPoint",
-        "ParentID": 5349,
+        "ParentID": 12830,
         "components": [
           {
             "properties": {
@@ -25303,9 +25303,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 5352,
+        "ID": 12833,
         "Name": "2_Image_SpaceBar",
-        "ParentID": 5349,
+        "ParentID": 12830,
         "components": [
           {
             "properties": {
@@ -25394,9 +25394,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 5353,
+        "ID": 12834,
         "Name": "2_Image_Gauge",
-        "ParentID": 5349,
+        "ParentID": 12830,
         "components": [
           {
             "properties": {
@@ -25485,9 +25485,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 5354,
+        "ID": 12835,
         "Name": "2_Image_Background",
-        "ParentID": 5349,
+        "ParentID": 12830,
         "components": [
           {
             "properties": {
@@ -25576,9 +25576,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 5355,
+        "ID": 12836,
         "Name": "2_Image_CutAnimation",
-        "ParentID": 5349,
+        "ParentID": 12830,
         "components": [
           {
             "properties": {
@@ -25667,9 +25667,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 5356,
+        "ID": 12837,
         "Name": "UI_MiniGame3",
-        "ParentID": 5338,
+        "ParentID": 12819,
         "components": [
           {
             "properties": {
@@ -25732,9 +25732,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 5357,
+        "ID": 12838,
         "Name": "3_Image_key1",
-        "ParentID": 5356,
+        "ParentID": 12837,
         "components": [
           {
             "properties": {
@@ -25823,9 +25823,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 5358,
+        "ID": 12839,
         "Name": "3_Image_key2",
-        "ParentID": 5356,
+        "ParentID": 12837,
         "components": [
           {
             "properties": {
@@ -25914,9 +25914,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 5359,
+        "ID": 12840,
         "Name": "3_Image_key3",
-        "ParentID": 5356,
+        "ParentID": 12837,
         "components": [
           {
             "properties": {
@@ -26005,9 +26005,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 5360,
+        "ID": 12841,
         "Name": "3_Image_key4",
-        "ParentID": 5356,
+        "ParentID": 12837,
         "components": [
           {
             "properties": {
@@ -26096,9 +26096,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 5361,
+        "ID": 12842,
         "Name": "3_Image_key5",
-        "ParentID": 5356,
+        "ParentID": 12837,
         "components": [
           {
             "properties": {
@@ -26187,9 +26187,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 5362,
+        "ID": 12843,
         "Name": "3_Image_key6",
-        "ParentID": 5356,
+        "ParentID": 12837,
         "components": [
           {
             "properties": {
@@ -26278,9 +26278,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 5363,
+        "ID": 12844,
         "Name": "3_Image_key7",
-        "ParentID": 5356,
+        "ParentID": 12837,
         "components": [
           {
             "properties": {
@@ -26369,9 +26369,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 5364,
+        "ID": 12845,
         "Name": "3_Image_key8",
-        "ParentID": 5356,
+        "ParentID": 12837,
         "components": [
           {
             "properties": {
@@ -26460,9 +26460,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 5365,
+        "ID": 12846,
         "Name": "3_Image_CutAnimation",
-        "ParentID": 5356,
+        "ParentID": 12837,
         "components": [
           {
             "properties": {
@@ -26551,9 +26551,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 5366,
+        "ID": 12847,
         "Name": "Image_Result_Success",
-        "ParentID": 5338,
+        "ParentID": 12819,
         "components": [
           {
             "properties": {
@@ -26642,9 +26642,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 5367,
+        "ID": 12848,
         "Name": "Image_Result_Fail",
-        "ParentID": 5338,
+        "ParentID": 12819,
         "components": [
           {
             "properties": {
@@ -26733,7 +26733,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5368,
+        "ID": 12849,
         "Name": "UI_Screen",
         "ParentID": -1,
         "components": [
@@ -26798,9 +26798,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 5369,
+        "ID": 12850,
         "Name": "PausePannel",
-        "ParentID": 5368,
+        "ParentID": 12849,
         "components": [
           {
             "properties": {
@@ -26889,9 +26889,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 5370,
+        "ID": 12851,
         "Name": "Button_StopNo",
-        "ParentID": 5369,
+        "ParentID": 12850,
         "components": [
           {
             "properties": {
@@ -26988,9 +26988,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 5371,
+        "ID": 12852,
         "Name": "Button_StopYes",
-        "ParentID": 5369,
+        "ParentID": 12850,
         "components": [
           {
             "properties": {
@@ -27088,9 +27088,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 5372,
+        "ID": 12853,
         "Name": "Text_Stop",
-        "ParentID": 5369,
+        "ParentID": 12850,
         "components": [
           {
             "properties": {
@@ -27175,9 +27175,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5373,
+        "ID": 12854,
         "Name": "PlayerLife",
-        "ParentID": 5368,
+        "ParentID": 12849,
         "components": [
           {
             "properties": {
@@ -27266,9 +27266,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5374,
+        "ID": 12855,
         "Name": "Image_Life1",
-        "ParentID": 5373,
+        "ParentID": 12854,
         "components": [
           {
             "properties": {
@@ -27357,9 +27357,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5375,
+        "ID": 12856,
         "Name": "Image_Life2",
-        "ParentID": 5373,
+        "ParentID": 12854,
         "components": [
           {
             "properties": {
@@ -27448,9 +27448,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5376,
+        "ID": 12857,
         "Name": "Image_Life3",
-        "ParentID": 5373,
+        "ParentID": 12854,
         "components": [
           {
             "properties": {
@@ -27539,9 +27539,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5377,
+        "ID": 12858,
         "Name": "Image_Life4",
-        "ParentID": 5373,
+        "ParentID": 12854,
         "components": [
           {
             "properties": {
@@ -27630,9 +27630,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5378,
+        "ID": 12859,
         "Name": "Image_Life5",
-        "ParentID": 5373,
+        "ParentID": 12854,
         "components": [
           {
             "properties": {
@@ -27721,9 +27721,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5379,
+        "ID": 12860,
         "Name": "Quest",
-        "ParentID": 5368,
+        "ParentID": 12849,
         "components": [
           {
             "properties": {
@@ -27786,9 +27786,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5380,
+        "ID": 12861,
         "Name": "Image_QuestBackground",
-        "ParentID": 5379,
+        "ParentID": 12860,
         "components": [
           {
             "properties": {
@@ -27877,9 +27877,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5381,
+        "ID": 12862,
         "Name": "Text_QuestTitle",
-        "ParentID": 5379,
+        "ParentID": 12860,
         "components": [
           {
             "properties": {
@@ -27964,9 +27964,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5382,
+        "ID": 12863,
         "Name": "Text_QuestLabel",
-        "ParentID": 5379,
+        "ParentID": 12860,
         "components": [
           {
             "properties": {
@@ -28051,9 +28051,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 5383,
+        "ID": 12864,
         "Name": "Image_QuestCheckbox",
-        "ParentID": 5379,
+        "ParentID": 12860,
         "components": [
           {
             "properties": {
@@ -28142,9 +28142,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 5384,
+        "ID": 12865,
         "Name": "Image_QuestLine",
-        "ParentID": 5379,
+        "ParentID": 12860,
         "components": [
           {
             "properties": {
@@ -28233,7 +28233,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5385,
+        "ID": 12866,
         "Name": "Managers",
         "ParentID": -1,
         "components": [
@@ -28264,9 +28264,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5386,
+        "ID": 12867,
         "Name": "AltarManager",
-        "ParentID": 5385,
+        "ParentID": 12866,
         "components": [
           {
             "properties": {
@@ -28301,9 +28301,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5387,
+        "ID": 12868,
         "Name": "QuestManager",
-        "ParentID": 5385,
+        "ParentID": 12866,
         "components": [
           {
             "properties": {
@@ -28338,9 +28338,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5388,
+        "ID": 12869,
         "Name": "MiniGameManager",
-        "ParentID": 5385,
+        "ParentID": 12866,
         "components": [
           {
             "properties": {
@@ -28375,9 +28375,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5389,
+        "ID": 12870,
         "Name": "MainGameUIManager",
-        "ParentID": 5385,
+        "ParentID": 12866,
         "components": [
           {
             "properties": {
@@ -28414,9 +28414,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5390,
+        "ID": 12871,
         "Name": "PauseManager",
-        "ParentID": 5385,
+        "ParentID": 12866,
         "components": [
           {
             "properties": {
@@ -28451,9 +28451,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5391,
+        "ID": 12872,
         "Name": "GameManager",
-        "ParentID": 5385,
+        "ParentID": 12866,
         "components": [
           {
             "properties": {
@@ -28488,16 +28488,1183 @@
     {
       "properties": {
         "Active": true,
-        "ID": 5392,
+        "ID": 12873,
         "Name": "HideObject",
-        "ParentID": 5319,
+        "ParentID": 12800,
         "components": [
           {
             "properties": {
               "Position": [
-                -86.24800872802734,
+                -198.89892578125,
                 0.0,
-                601.0712890625
+                168.58612060546875
+              ],
+              "Rotation": [
+                -0.0,
+                0.0,
+                -0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "DataPath": "..\\Assets\\Resource\\ArtModel\\JageaJang\\cabinet.fbx",
+              "IsStatic": false
+            },
+            "type": "FBXData"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "Alpha": 1.0,
+              "Diffuse": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "DiffuseOverride": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Emissive": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "EmissiveOverride": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "IsGround": false,
+              "Metalic": 1.0,
+              "MetallicOverride": 1.0,
+              "RenderBlendType": "Opaque",
+              "Roughness": 1.0,
+              "RoughnessOverride": 1.0,
+              "UseDiffuseOverride": false,
+              "UseEmissiveOverride": false,
+              "UseMetallicOverride": false,
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
+            },
+            "type": "FBXRenderer"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "ColliderType": "Box",
+              "PhysicsBodyType": "Static",
+              "density": 10.0,
+              "halfExtents": [
+                50.0,
+                100.0,
+                50.0
+              ],
+              "height": 10.0,
+              "isTrigger": false,
+              "layer": "Default",
+              "localOffset": [
+                0.0,
+                100.0,
+                0.0
+              ],
+              "radius": 50.0
+            },
+            "type": "PhysicsComponent"
+          },
+          {
+            "properties": {
+              "Active": true
+            },
+            "type": "HideObject"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": false,
+        "ID": 12874,
+        "Name": "Image_SensorOn",
+        "ParentID": 12873,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                100.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                3.1415927410125732,
+                3.1415927410125732
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "Pivot": [
+                0.5,
+                0.5
+              ],
+              "Pos": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Size": [
+                25.0,
+                25.0
+              ]
+            },
+            "type": "RectTransform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "drawSpacetype": "World",
+              "fillAmount": 1.0,
+              "imageType": "Simple",
+              "isBillboard": true,
+              "isMouseCheck": false,
+              "path": "..\\Assets\\Resource\\UI\\Interaction\\point.png",
+              "sliceBorderPx": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "type": "Simple",
+              "zOrder": 0
+            },
+            "type": "Image"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": false,
+        "ID": 12875,
+        "Name": "Image_InteractionOn",
+        "ParentID": 12873,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                100.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                3.1415927410125732,
+                3.1415927410125732
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "Pivot": [
+                0.5,
+                0.5
+              ],
+              "Pos": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Size": [
+                25.0,
+                25.0
+              ]
+            },
+            "type": "RectTransform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "drawSpacetype": "World",
+              "fillAmount": 1.0,
+              "imageType": "Simple",
+              "isBillboard": true,
+              "isMouseCheck": false,
+              "path": "..\\Assets\\Resource\\UI\\Interaction\\F.png",
+              "sliceBorderPx": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "type": "Simple",
+              "zOrder": 1
+            },
+            "type": "Image"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": false,
+        "ID": 12876,
+        "Name": "Image_InteractionGauge",
+        "ParentID": 12873,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                100.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                3.1415927410125732,
+                3.1415927410125732
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "Pivot": [
+                0.5,
+                0.5
+              ],
+              "Pos": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Size": [
+                25.0,
+                25.0
+              ]
+            },
+            "type": "RectTransform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "drawSpacetype": "World",
+              "fillAmount": 0.0,
+              "imageType": "FillHorizontal",
+              "isBillboard": false,
+              "isMouseCheck": false,
+              "path": "..\\Assets\\Resource\\UI\\Interaction\\F_02.png",
+              "sliceBorderPx": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "type": "FillHorizontal",
+              "zOrder": 2
+            },
+            "type": "Image"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 12877,
+        "Name": "SearchObject",
+        "ParentID": 12799,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                -945.7042236328125,
+                0.0,
+                -184.21005249023438
+              ],
+              "Rotation": [
+                -0.0,
+                0.007638138718903065,
+                -0.0
+              ],
+              "Scale": [
+                0.9999966025352478,
+                0.999996542930603,
+                0.9999966025352478
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "DataPath": "..\\Assets\\Resource\\ArtModel\\esset_03\\Basket.fbx",
+              "IsStatic": true
+            },
+            "type": "FBXData"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "Alpha": 1.0,
+              "Diffuse": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "DiffuseOverride": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Emissive": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "EmissiveOverride": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "IsGround": false,
+              "Metalic": 1.0,
+              "MetallicOverride": 1.0,
+              "RenderBlendType": "Opaque",
+              "Roughness": 1.0,
+              "RoughnessOverride": 1.0,
+              "UseDiffuseOverride": false,
+              "UseEmissiveOverride": false,
+              "UseMetallicOverride": false,
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
+            },
+            "type": "FBXRenderer"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "ColliderType": "Box",
+              "PhysicsBodyType": "Static",
+              "density": 10.0,
+              "halfExtents": [
+                30.0,
+                100.0,
+                30.0
+              ],
+              "height": 10.0,
+              "isTrigger": true,
+              "layer": "Default",
+              "localOffset": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "radius": 50.0
+            },
+            "type": "PhysicsComponent"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "hasItem": true,
+              "interactionDiffuse": [
+                0.23529411852359772,
+                0.23529411852359772,
+                0.23529411852359772,
+                1.0
+              ],
+              "itemID": "Ingredient_Apple",
+              "itemType": "Ingredient"
+            },
+            "type": "SearchObject"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": false,
+        "ID": 12878,
+        "Name": "Image_SensorOn",
+        "ParentID": 12877,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                30.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                3.1415927410125732,
+                3.1415927410125732
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "Pivot": [
+                0.5,
+                0.5
+              ],
+              "Pos": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Size": [
+                25.0,
+                25.0
+              ]
+            },
+            "type": "RectTransform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "drawSpacetype": "World",
+              "fillAmount": 1.0,
+              "imageType": "Simple",
+              "isBillboard": false,
+              "isMouseCheck": false,
+              "path": "..\\Assets\\Resource\\UI\\Interaction\\point.png",
+              "sliceBorderPx": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "type": "Simple",
+              "zOrder": 0
+            },
+            "type": "Image"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": false,
+        "ID": 12879,
+        "Name": "Image_InteractionOn",
+        "ParentID": 12877,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                30.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                3.1415927410125732,
+                3.1415927410125732
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "Pivot": [
+                0.5,
+                0.5
+              ],
+              "Pos": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Size": [
+                25.0,
+                25.0
+              ]
+            },
+            "type": "RectTransform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "drawSpacetype": "World",
+              "fillAmount": 1.0,
+              "imageType": "Simple",
+              "isBillboard": false,
+              "isMouseCheck": false,
+              "path": "..\\Assets\\Resource\\UI\\Interaction\\F.png",
+              "sliceBorderPx": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "type": "Simple",
+              "zOrder": 1
+            },
+            "type": "Image"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": false,
+        "ID": 12880,
+        "Name": "Image_InteractionGauge",
+        "ParentID": 12877,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                30.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                3.1415927410125732,
+                3.1415927410125732
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "Pivot": [
+                0.5,
+                0.5
+              ],
+              "Pos": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Size": [
+                25.0,
+                25.0
+              ]
+            },
+            "type": "RectTransform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "drawSpacetype": "World",
+              "fillAmount": 0.0,
+              "imageType": "FillVertical",
+              "isBillboard": false,
+              "isMouseCheck": false,
+              "path": "..\\Assets\\Resource\\UI\\Interaction\\F_02.png",
+              "sliceBorderPx": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "type": "FillVertical",
+              "zOrder": 2
+            },
+            "type": "Image"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 12881,
+        "Name": "SearchObject",
+        "ParentID": 12799,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                -859.2117309570313,
+                0.0,
+                -172.12106323242188
+              ],
+              "Rotation": [
+                -0.0,
+                0.007638138718903065,
+                -0.0
+              ],
+              "Scale": [
+                0.9999966025352478,
+                0.999996542930603,
+                0.9999966025352478
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "DataPath": "..\\Assets\\Resource\\ArtModel\\esset_03\\Sculpture _core.fbx",
+              "IsStatic": true
+            },
+            "type": "FBXData"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "Alpha": 1.0,
+              "Diffuse": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "DiffuseOverride": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Emissive": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "EmissiveOverride": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "IsGround": false,
+              "Metalic": 1.0,
+              "MetallicOverride": 1.0,
+              "RenderBlendType": "Opaque",
+              "Roughness": 1.0,
+              "RoughnessOverride": 1.0,
+              "UseDiffuseOverride": false,
+              "UseEmissiveOverride": false,
+              "UseMetallicOverride": false,
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
+            },
+            "type": "FBXRenderer"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "ColliderType": "Box",
+              "PhysicsBodyType": "Static",
+              "density": 10.0,
+              "halfExtents": [
+                30.0,
+                100.0,
+                30.0
+              ],
+              "height": 10.0,
+              "isTrigger": true,
+              "layer": "Default",
+              "localOffset": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "radius": 50.0
+            },
+            "type": "PhysicsComponent"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "hasItem": true,
+              "interactionDiffuse": [
+                0.23529411852359772,
+                0.23529411852359772,
+                0.23529411852359772,
+                1.0
+              ],
+              "itemID": "Ingredient_Apple",
+              "itemType": "Ingredient"
+            },
+            "type": "SearchObject"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": false,
+        "ID": 12882,
+        "Name": "Image_SensorOn",
+        "ParentID": 12881,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                30.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                3.1415927410125732,
+                3.1415927410125732
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "Pivot": [
+                0.5,
+                0.5
+              ],
+              "Pos": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Size": [
+                25.0,
+                25.0
+              ]
+            },
+            "type": "RectTransform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "drawSpacetype": "World",
+              "fillAmount": 1.0,
+              "imageType": "Simple",
+              "isBillboard": false,
+              "isMouseCheck": false,
+              "path": "..\\Assets\\Resource\\UI\\Interaction\\point.png",
+              "sliceBorderPx": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "type": "Simple",
+              "zOrder": 0
+            },
+            "type": "Image"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": false,
+        "ID": 12883,
+        "Name": "Image_InteractionOn",
+        "ParentID": 12881,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                30.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                3.1415927410125732,
+                3.1415927410125732
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "Pivot": [
+                0.5,
+                0.5
+              ],
+              "Pos": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Size": [
+                25.0,
+                25.0
+              ]
+            },
+            "type": "RectTransform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "drawSpacetype": "World",
+              "fillAmount": 1.0,
+              "imageType": "Simple",
+              "isBillboard": false,
+              "isMouseCheck": false,
+              "path": "..\\Assets\\Resource\\UI\\Interaction\\F.png",
+              "sliceBorderPx": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "type": "Simple",
+              "zOrder": 1
+            },
+            "type": "Image"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": false,
+        "ID": 12884,
+        "Name": "Image_InteractionGauge",
+        "ParentID": 12881,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                30.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                3.1415927410125732,
+                3.1415927410125732
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "Pivot": [
+                0.5,
+                0.5
+              ],
+              "Pos": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Size": [
+                25.0,
+                25.0
+              ]
+            },
+            "type": "RectTransform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "drawSpacetype": "World",
+              "fillAmount": 0.0,
+              "imageType": "FillVertical",
+              "isBillboard": false,
+              "isMouseCheck": false,
+              "path": "..\\Assets\\Resource\\UI\\Interaction\\F_02.png",
+              "sliceBorderPx": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "type": "FillVertical",
+              "zOrder": 2
+            },
+            "type": "Image"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 12885,
+        "Name": "HideObject",
+        "ParentID": 12800,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                -48.701622009277344,
+                0.0,
+                172.27069091796875
               ],
               "Rotation": [
                 -0.0,
@@ -28598,9 +29765,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 5393,
+        "ID": 12886,
         "Name": "Image_SensorOn",
-        "ParentID": 5392,
+        "ParentID": 12885,
         "components": [
           {
             "properties": {
@@ -28689,9 +29856,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 5394,
+        "ID": 12887,
         "Name": "Image_InteractionOn",
-        "ParentID": 5392,
+        "ParentID": 12885,
         "components": [
           {
             "properties": {
@@ -28780,9 +29947,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 5395,
+        "ID": 12888,
         "Name": "Image_InteractionGauge",
-        "ParentID": 5392,
+        "ParentID": 12885,
         "components": [
           {
             "properties": {
