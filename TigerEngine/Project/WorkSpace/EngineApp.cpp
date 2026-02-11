@@ -124,6 +124,7 @@ bool EngineApp::OnInitialize()
 
 
     // PlayModeSystem::Instance().SetPlayMode(PlayModeState::Playing);
+    CameraSystem::Instance().SetCurrCameraToFreeCamera();
 
     return true;
 }
@@ -140,9 +141,13 @@ void EngineApp::OnUpdate()
 {
     Camera* curCam;
     if (PlayModeSystem::Instance().IsPlaying())
+    {
         curCam = CameraSystem::Instance().GetCurrCamera();
+    }
     else
+    {
         curCam = CameraSystem::Instance().GetFreeCamera();
+    }
 
     SceneSystem::Instance().BeforUpdate();
     CameraSystem::Instance().FreeCameraUpdate(GameTimer::Instance().DeltaTime());
@@ -193,10 +198,14 @@ void EngineApp::OnRender()
 
     // current camera
     Camera* curCam;
-    //if (PlayModeSystem::Instance().IsPlaying())
-    //    curCam = CameraSystem::Instance().GetCurrCamera();
-    //else
+    if (PlayModeSystem::Instance().IsPlaying())
+    {
+        curCam = CameraSystem::Instance().GetCurrCamera();
+    }
+    else
+    {
         curCam = CameraSystem::Instance().GetFreeCamera();
+    }
 
     // NOTE : 렌더 패스 처리하기전에 씬을 교체하는지 확인하고 교체하면 큐 클리어
     if(SceneSystem::Instance().isSceneChanging)

@@ -1192,7 +1192,15 @@ void Editor::RenderWorldGrid()
     if (!isWorldGridEnabled)
         return;
 
-    Camera* cam = CameraSystem::Instance().GetFreeCamera();
+    Camera* cam;
+    if (PlayModeSystem::Instance().IsPlaying())
+    {
+        cam = CameraSystem::Instance().GetCurrCamera();
+    }
+    else
+    {
+        cam = CameraSystem::Instance().GetFreeCamera();
+    }
     if (!cam)
         return;
 
@@ -1219,7 +1227,15 @@ void Editor::RenderGizmo()
     if (!transform)
         return;
 
-    Camera* cam = CameraSystem::Instance().GetFreeCamera();
+    Camera* cam;
+    if (PlayModeSystem::Instance().IsPlaying())
+    {
+        cam = CameraSystem::Instance().GetCurrCamera();
+    }
+    else
+    {
+        cam = CameraSystem::Instance().GetFreeCamera();
+    }
     if (!cam)
         return;
 
@@ -2083,7 +2099,7 @@ void Editor::RenderDebugAABBDraw()
 
     // DebugDraw의 BasicEffect 설정
 
-    Camera* cam{};
+    Camera* cam;
     if (PlayModeSystem::Instance().IsPlaying())
     {
         cam = CameraSystem::Instance().GetCurrCamera();
@@ -2616,7 +2632,7 @@ void Editor::OnInputProcess(const Keyboard::State& KeyState, const Keyboard::Key
             float x = (2.0f * MouseState.x) / screenWidth - 1.0f;
             float y = 1.0f - (2.0f * MouseState.y) / screenHeight;
 
-            auto cam = CameraSystem::Instance().GetFreeCamera();
+            auto cam = CameraSystem::Instance().GetCurrCamera();
             cameraView = cam->GetView();
             cameraProjection = cam->GetProjection();
             Matrix invViewProj = (cameraView * cameraProjection).Invert();

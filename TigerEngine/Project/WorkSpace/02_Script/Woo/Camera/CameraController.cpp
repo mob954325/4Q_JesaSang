@@ -20,7 +20,7 @@ RTTR_REGISTRATION
 void CameraController::OnStart()
 {
     // set name
-    GetOwner()->GetComponent<Camera>()->SetName(camName);
+    GetOwner()->SetName(camName);
     CameraSystem::Instance().SetCurrCameraByName(camName);
 
     // get components
