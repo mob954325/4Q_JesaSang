@@ -7,14 +7,12 @@ void TutorialStep_Step2::Enter()
 {
     isDone = false;
     step2Timer = 0.0f;
+    soundPlayed = false;
     phase = Step2Phase::Sound;
 
-    // baby = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("Blink_Top");
-
-    tutorialController->Player_animController->ChangeState("Walk");
-
-    std::cout << "[Step2] *BANG!* Sound from entrance!\n";
+    // tutorialController->Player_animController->ChangeState("Walk");
 }
+
 
 void TutorialStep_Step2::Update(float deltaTime)
 {
@@ -24,6 +22,12 @@ void TutorialStep_Step2::Update(float deltaTime)
     {
     case Step2Phase::Sound:
 
+        if (!soundPlayed)
+        {
+            std::cout << "[Step2] *BANG!* Sound from entrance!\n";
+            soundPlayed = true;   // 한 번만 실행
+        }
+
         if (step2Timer >= SoundDelay)
         {
             phase = Step2Phase::Monologue;
@@ -31,13 +35,11 @@ void TutorialStep_Step2::Update(float deltaTime)
         break;
 
 
-
     case Step2Phase::Monologue:
 
-        std::cout << "[Step2] \"..!! Mom's Comming?\"\n";
+        Monologue();
         phase = Step2Phase::WaitInput;
         break;
-
 
 
     case Step2Phase::WaitInput:
@@ -53,10 +55,8 @@ void TutorialStep_Step2::Update(float deltaTime)
             )
         {
             phase = Step2Phase::Done;
-            // isDone = true;
         }
         break;
-
 
 
     case Step2Phase::Done:
@@ -73,4 +73,14 @@ bool TutorialStep_Step2::IsComplete()
 void TutorialStep_Step2::Exit()
 {
     std::cout << "[Step2] Exit " << std::endl;
+}
+
+
+// -------------------------------------------------------
+
+void TutorialStep_Step2::Monologue()
+{
+    if (!tutorialController->dialogue) return;
+
+    tutorialController->dialogue->ShowDialogueHold(L"..!! Mom's Comming?");
 }

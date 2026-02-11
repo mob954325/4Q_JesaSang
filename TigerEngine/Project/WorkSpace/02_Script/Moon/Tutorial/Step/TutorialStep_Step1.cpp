@@ -44,7 +44,6 @@ void TutorialStep_Step1::Update(float deltaTime)
     case Step1Phase::Monologue:
         
         Monologue(); // 플레이어 대사창 활성화 및 독백 대사 출력
-        // std::cout << "[Step1] \" Umm... Did I just fall asleep.. \" " << std::endl;
         phase = Step1Phase::WaitInput; // 바로 입력 대기 상태로 전환
         break;
 
