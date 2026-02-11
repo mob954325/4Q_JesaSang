@@ -180,7 +180,7 @@ void TutorialStep_Step3::Surprised()
 
     step3Timer += GameTimer::Instance().UnscaledDeltaTime();
 
-    if (step3Timer >= 2.0f)
+    if (step3Timer >= 4.0f)
     {
         if (exclamation) exclamation->SetActive(false);
 
