@@ -2,6 +2,7 @@
 #include "Object/GameObject.h"
 #include "../../../Engine/Util/ComponentAutoRegister.h"
 #include "../../../Engine/Util/JsonHelper.h"
+#include <random>
 
 REGISTER_COMPONENT(PlayerSoundSource)
 
@@ -54,10 +55,10 @@ void PlayerSoundSource::PlaySound(PlayerSoundType type, bool loop)
         id = "Player_Hit_Sound";
         break;
     case PlayerSoundType::Confused:
-        id = "Player_Hpdown_Sound";
+        id = "Player_Confused_Sound";
         break;
     case PlayerSoundType::HpDown:
-        id = "Player_Sit_Sound";
+        id = "Player_HpDown_Sound";
         break;
     case PlayerSoundType::Typing:
         id = "Player_Typing_Sound";
@@ -66,6 +67,51 @@ void PlayerSoundSource::PlaySound(PlayerSoundType type, bool loop)
         break;
     }
     sound->SetLoop(loop);
+    sound->SetClipId(id);
+    sound->Play();
+}
+
+void PlayerSoundSource::PlayRandomFootStep()
+{
+    if (!sound) return;
+
+    // RNG (한 번만 초기화)
+    static std::random_device rd;
+    static std::mt19937 gen(rd());
+
+    // enum 범위: 0 ~ 4 (현재 5개라고 가정)
+    std::uniform_int_distribution<int> dist(
+        0,
+        static_cast<int>(PlayerFootStepType::Player_Walk_Sound5)
+    );
+
+    PlayerFootStepType type = static_cast<PlayerFootStepType>(dist(gen));
+
+    std::string id;
+
+    // NOTE id는 csv에서 정해짐 (여기 문자열을 csv id와 일치시키세요)
+    switch (type)
+    {
+    case PlayerFootStepType::Player_Walk_Sound1:
+        id = "Player_FootStep_Sound1";
+        break;
+    case PlayerFootStepType::Player_Walk_Sound2:
+        id = "Player_FootStep_Sound2";
+        break;
+    case PlayerFootStepType::Player_Walk_Sound3:
+        id = "Player_FootStep_Sound3";
+        break;
+    case PlayerFootStepType::Player_Walk_Sound4:
+        id = "Player_FootStep_Sound4";
+        break;
+    case PlayerFootStepType::Player_Walk_Sound5:
+        id = "Player_FootStep_Sound5";
+        break;
+    default:
+        return;
+    }
+
+    sound->SetLoop(false);
     sound->SetClipId(id);
     sound->Play();
 }
