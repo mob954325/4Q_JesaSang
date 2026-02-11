@@ -25,6 +25,15 @@ public:
     nlohmann::json Serialize();
     void Deserialize(nlohmann::json data);
 
+    // Singleton safety: no copy / move
+    GameManager() = default;
+    ~GameManager() override = default;
+
+    GameManager(const GameManager&) = delete;
+    GameManager& operator=(const GameManager&) = delete;
+    GameManager(GameManager&&) = delete;
+    GameManager& operator=(GameManager&&) = delete;
+
 private:
     // funcs..
 

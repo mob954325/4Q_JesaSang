@@ -28,10 +28,21 @@ public:
     // component process
     void OnInitialize() override;
     void OnStart() override;
+    void OnDestory() override;
+
 
     // json
     nlohmann::json Serialize();
     void Deserialize(nlohmann::json data);
+
+    // Singleton safety: no copy / move
+    CookingZone() = default;
+    ~CookingZone() override = default;
+
+    CookingZone(const CookingZone&) = delete;
+    CookingZone& operator=(const CookingZone&) = delete;
+    CookingZone(CookingZone&&) = delete;
+    CookingZone& operator=(CookingZone&&) = delete;
 
 
 public:

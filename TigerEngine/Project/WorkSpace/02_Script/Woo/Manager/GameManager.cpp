@@ -3,7 +3,7 @@
 #include "Util/ComponentAutoRegister.h"
 #include "Object/GameObject.h"
 #include "EngineSystem/SceneSystem.h"
-
+#include <cassert>
 
 REGISTER_COMPONENT(GameManager)
 
@@ -16,6 +16,13 @@ RTTR_REGISTRATION
 
 void GameManager::OnInitialize()
 {
+    // 중복 생성 방지
+    if (s_instance != nullptr && s_instance != this)
+    {
+        assert(false && "Duplicate GameManager instance detected.");
+        return;
+    }
+
     s_instance = this;
 }
 

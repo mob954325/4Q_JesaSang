@@ -16,7 +16,13 @@ RTTR_REGISTRATION
 
 void CookingZone::OnInitialize()
 {
-    // singleton
+    // 중복 생성 방지
+    if (s_instance != nullptr && s_instance != this)
+    {
+        assert(false && "Duplicate GameManager instance detected.");
+        return;
+    }
+
     s_instance = this;
 }
 
@@ -34,6 +40,11 @@ void CookingZone::OnStart()
         cout << "[CookingZone] Missing ui!" << endl;
         return;
     }
+}
+
+void CookingZone::OnDestory()
+{
+    if (s_instance == this) s_instance = nullptr;
 }
 
 nlohmann::json CookingZone::Serialize()

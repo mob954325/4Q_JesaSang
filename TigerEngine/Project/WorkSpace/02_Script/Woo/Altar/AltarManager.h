@@ -145,6 +145,15 @@ public:
     nlohmann::json Serialize();
     void Deserialize(nlohmann::json data);
 
+    // Singleton safety: no copy / move
+    AltarManager() = default;
+    ~AltarManager() override = default;
+
+    AltarManager(const AltarManager&) = delete;
+    AltarManager& operator=(const AltarManager&) = delete;
+    AltarManager(AltarManager&&) = delete;
+    AltarManager& operator=(AltarManager&&) = delete;
+
 
 public:
     // 외부 call fucns..
