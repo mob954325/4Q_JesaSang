@@ -2,9 +2,9 @@
   "prefab": [
     {
       "Active": true,
-      "ID": 5612,
+      "ID": 7497,
       "Name": "HideObject",
-      "ParentID": 5527,
+      "ParentID": 7412,
       "components": [
         {
           "properties": {
@@ -109,9 +109,9 @@
     },
     {
       "Active": false,
-      "ID": 5613,
+      "ID": 7498,
       "Name": "Image_SensorOn",
-      "ParentID": 5612,
+      "ParentID": 7497,
       "components": [
         {
           "properties": {
@@ -197,9 +197,9 @@
     },
     {
       "Active": false,
-      "ID": 5614,
+      "ID": 7499,
       "Name": "Image_InteractionOn",
-      "ParentID": 5612,
+      "ParentID": 7497,
       "components": [
         {
           "properties": {
@@ -285,9 +285,9 @@
     },
     {
       "Active": false,
-      "ID": 5615,
+      "ID": 7500,
       "Name": "Image_InteractionGauge",
-      "ParentID": 5612,
+      "ParentID": 7497,
       "components": [
         {
           "properties": {
