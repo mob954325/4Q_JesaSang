@@ -48,10 +48,20 @@ public:
     // component process
     void OnInitialize() override;
     void OnStart() override;
+    void OnDestory() override;
 
     // json
     nlohmann::json Serialize();
     void Deserialize(nlohmann::json data);
+
+    // Singleton safety: no copy / move
+    JesaSangManager() = default;
+    ~JesaSangManager() override = default;
+
+    JesaSangManager(const JesaSangManager&) = delete;
+    JesaSangManager& operator=(const JesaSangManager&) = delete;
+    JesaSangManager(JesaSangManager&&) = delete;
+    JesaSangManager& operator=(JesaSangManager&&) = delete;
 
 private:
     // funcs

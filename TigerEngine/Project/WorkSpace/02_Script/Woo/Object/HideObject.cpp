@@ -3,7 +3,7 @@
 #include "Util/ComponentAutoRegister.h"
 #include "Components/UI/Image.h"
 #include "../Player/PlayerController.h"
-
+#include "../Engine/Object/GameObject.h"
 
 REGISTER_COMPONENT(HideObject)
 
@@ -12,6 +12,16 @@ RTTR_REGISTRATION
     rttr::registration::class_<HideObject>("HideObject")
     .constructor<>()
     (rttr::policy::ctor::as_std_shared_ptr);
+}
+
+void HideObject::UpdateJagaejangModel()
+{
+    if (!isJagaejang) return;
+    if (!openModel || !closeModel) return;
+
+    // 플레이어가 안 숨어있으면 open 활성화, 숨어있으면 close 활성화
+    openModel->SetActive(!isHiding);
+    closeModel->SetActive(isHiding);
 }
 
 void HideObject::OnStart()
@@ -30,6 +40,15 @@ void HideObject::OnStart()
     image_sensorOn = t1->GetOwner()->GetComponent<Image>();
     image_interactionOn = t2->GetOwner()->GetComponent<Image>();
     image_interactionGauge = t3->GetOwner()->GetComponent<Image>();
+
+    // 자개장
+    auto openTr = GetOwner()->GetChildByName("OpenModel");
+    auto closeTr = GetOwner()->GetChildByName("CloseModel");
+
+    openModel = openTr ? openTr->GetOwner() : nullptr;
+    closeModel = closeTr ? closeTr->GetOwner() : nullptr;
+
+    isJagaejang = (openModel != nullptr && closeModel != nullptr);
 
     // init
     hideDurationTimer = 0.0f;
@@ -101,6 +120,7 @@ void HideObject::StartHide(PlayerController* p)
     isHiding = true;
     hideDurationTimer = 0.0f;
 
+    UpdateJagaejangModel();
     UISensorOnOff(false);
     UIInteractionOnOff(false);
 }
@@ -120,6 +140,8 @@ void HideObject::StopHide()
     reHideCoolTimer = 0.0f;
 
     player = nullptr;
+
+    UpdateJagaejangModel();
 
     // UI
     UIGaugeUpate(1.0f);

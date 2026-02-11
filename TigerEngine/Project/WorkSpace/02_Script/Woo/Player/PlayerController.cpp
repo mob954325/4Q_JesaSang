@@ -244,18 +244,17 @@ void PlayerController::LoadAnimation()
 
 
     // Effect Animatinon
-    // TODO :: Bone연결되면 주석 해제
-    //FBXResourceManager::Instance().LoadAnimationByPath(hitEffect->GetOwner()->GetComponent<FBXData>()->GetFBXInfo(), 
-    //    "..\\Assets\\Resource\\Effect\\ani_confused_mark.fbx", "HitEffect");
-    //auto effectHitClip = hitEffect->FindClip("HitEffect");
-    //hitEffect->AddState(std::make_unique<AnimationState>("HitEffect", effectHitClip, hitEffect));
-    //hitEffect->ChangeState("HitEffect");
-    //
-    //if (!effectHitClip)
-    //{
-    //    cout << "[Player Effect Animation] Clip not found!\n" << endl;
-    //    return;
-    //}
+    FBXResourceManager::Instance().LoadAnimationByPath(hitEffect->GetOwner()->GetComponent<FBXData>()->GetFBXInfo(), 
+        "..\\Assets\\Resource\\Effect\\ani_confused_mark.fbx", "HitEffect");
+    auto effectHitClip = hitEffect->FindClip("HitEffect");
+    hitEffect->AddState(std::make_unique<AnimationState>("HitEffect", effectHitClip, hitEffect));
+    hitEffect->ChangeState("HitEffect");
+    
+    if (!effectHitClip)
+    {
+        cout << "[Player Effect Animation] Clip not found!\n" << endl;
+        return;
+    }
 }
 
 /*-------[ Init ]-------------------------------------*/
@@ -651,7 +650,8 @@ void PlayerController::ReceiveMiniGameResult(unique_ptr<IItem> ingredient, bool 
         visualizer->VisualOnItem(ingredient->itemId);
         inventory->AddItem(std::move(ingredient));
 
-        // TODO :: 소음, AI 트리거 발생
+        // 소음, AI 트리거 발생
+        CookingZone::Instance()->StartTriggerWave();
     }
 }
 
