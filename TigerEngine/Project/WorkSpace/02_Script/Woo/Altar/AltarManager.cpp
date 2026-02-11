@@ -16,6 +16,7 @@
 
 #include "../Item/Item.h"
 
+
 REGISTER_COMPONENT(AltarManager)
 
 RTTR_REGISTRATION
@@ -23,23 +24,6 @@ RTTR_REGISTRATION
     rttr::registration::class_<AltarManager>("AltarManager")
     .constructor<>()
     (rttr::policy::ctor::as_std_shared_ptr);
-}
-
-void AltarManager::FirstReceiveDirect(std::string itemId)
-{
-    // 제단 활성화 연출
-    /*
-    - 페이드아웃 → 페이드인 (이때 카메라가 제단을 정면에서 바라보는 view)
-    - 카메라 줌인 → 제단에 푸른 불꽃 이펙트를 재생하며 음식 비주얼 on
-    - 페이드아웃 → 페이드인(이때 원시점 복귀)
-    */
-
-    // 참고. 이 값만 바꾸면 알아서 포스트 프로세싱 데이터로 들어간다.
-    // 이걸로 페이드(비네트) 연출 가능!
-    auto& renderDesc = WorldManager::Instance().postProcessData;
-    (void)renderDesc; // 아직 이펙트/페이드 로직은 미구현(나중에 추가)
-
-    BeginDirectSequence(itemId);
 }
 
 void AltarManager::OnInitialize()
@@ -74,17 +58,15 @@ void AltarManager::OnStart()
     }
 
     // direct effect find
-    GameObject* directEffectbj_1 = sceneSystem->GetGameObjectByName("AltarDirectEffect_1");
-    GameObject* directEffectbj_2 = sceneSystem->GetGameObjectByName("AltarDirectEffect_2");
-    if (!directEffectbj_1 || !directEffectbj_2)
+    GameObject* directEffectbj = sceneSystem->GetGameObjectByName("AltarDirectEffect_Item");
+    if (!directEffectbj)
     {
         cout << "[AltarManager] Missing fireEffect Object!" << endl;
     }
     else
     {
-        fireEffect1 = directEffectbj_1->GetComponent<Effect>();
-        fireEffect2= directEffectbj_2->GetComponent<Effect>();
-        if (!fireEffect1 || !fireEffect2)
+        fireEffect = directEffectbj->GetComponent<Effect>();
+        if (!fireEffect)
             cout << "[AltarManager] Missing fireEffect!" << endl;
     }
 
@@ -128,10 +110,10 @@ void AltarManager::OnStart()
         return;
     }
 
+    // active init
     altar->SetActive(false);
 
     SetAllVisualOff();
-
     image_sensorOn->SetActive(false);
     image_interactionOn->SetActive(false);
     image_interactionGauge->SetActive(false);
@@ -161,6 +143,25 @@ void AltarManager::Deserialize(nlohmann::json data)
 {
     JsonHelper::SetDataFromJson(this, data);
 }
+
+
+void AltarManager::FirstReceiveDirect(std::string itemId)
+{
+    // 제단 활성화 연출
+    /*
+    - 페이드아웃 → 페이드인 (이때 카메라가 제단을 정면에서 바라보는 view)
+    - 카메라 줌인 → 제단에 푸른 불꽃 이펙트를 재생하며 음식 비주얼 on
+    - 페이드아웃 → 페이드인(이때 원시점 복귀)
+    */
+
+    // 참고. 이 값만 바꾸면 알아서 포스트 프로세싱 데이터로 들어간다.
+    // 이걸로 페이드(비네트) 연출 가능!
+    auto& renderDesc = WorldManager::Instance().postProcessData;
+    (void)renderDesc; // 아직 이펙트/페이드 로직은 미구현(나중에 추가)
+
+    BeginDirectSequence(itemId);
+}
+
 
 /*
     [Item ID]
@@ -332,7 +333,7 @@ void AltarManager::BeginDirectSequence(std::string itemId)
     {
         directCamStartPos = altarDirectCam->GetWorldPosition();
         directCamTargetPos = directCamStartPos;
-        directCamTargetPos.x += 50.0f;
+        directCamTargetPos.z += 50.0f;
         hasDirectCamPosCached = true;
     }
 
@@ -411,8 +412,11 @@ void AltarManager::UpdateDirectSequence(float dt)
 
         if (!startedFireFx)
         {
-            if (fireEffect1) fireEffect1->Play();
-            if (fireEffect2) fireEffect2->Play();
+            Vector3 localPos = GetPositionItem(directingItemId);
+            localPos.y += 15;
+            localPos.z -= 10;
+            fireEffect->GetOwner()->GetTransform()->SetPosition(localPos);
+            if (fireEffect) fireEffect->Play();
             startedFireFx = true;
         }
 
@@ -484,6 +488,29 @@ void AltarManager::UpdateDirectSequence(float dt)
     default:
         break;
     }
+}
+
+Vector3 AltarManager::GetPositionItem(std::string id)
+{
+    if (id.empty()) return { 0,0,0 };
+    
+    // Ingredient
+    if (id == "Ingredient_Apple" && ingre_apple != nullptr) return ingre_apple->GetTransform()->GetLocalPosition();
+    else if (id == "Ingredient_Pear" && ingre_pear != nullptr)  return ingre_pear->GetTransform()->GetLocalPosition();
+    else if (id == "Ingredient_Batter" && ingre_batter != nullptr) return ingre_batter->GetTransform()->GetLocalPosition();
+    else if (id == "Ingredient_Tofu" && ingre_tofu != nullptr)  return ingre_tofu->GetTransform()->GetLocalPosition();
+    else if (id == "Ingredient_Sanjeok" && ingre_sanjeok != nullptr) return ingre_sanjeok->GetTransform()->GetLocalPosition();
+    else if (id == "Ingredient_Donggeurangttaeng" && ingre_dong != nullptr)  return ingre_dong->GetTransform()->GetLocalPosition();
+    
+    // Food
+    else if (id == "Apple" && food_apple != nullptr)  return food_apple->GetTransform()->GetLocalPosition();
+    else if (id == "Pear" && food_pear != nullptr)  return food_pear->GetTransform()->GetLocalPosition();
+    else if (id == "Batter" && food_batter != nullptr) return food_batter->GetTransform()->GetLocalPosition();
+    else if (id == "Tofu" && food_tofu != nullptr) return food_tofu->GetTransform()->GetLocalPosition();
+    else if (id == "Sanjeok" && food_sanjeok != nullptr)  return food_sanjeok->GetTransform()->GetLocalPosition();
+    else if (id == "Donggeurangttaeng" && food_dong != nullptr)  return food_dong->GetTransform()->GetLocalPosition();
+    
+    return { 0,0,0 };
 }
 
 float AltarManager::Clamp01(float v)

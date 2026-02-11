@@ -64,8 +64,7 @@ private:
    
     Transform* altarDirectCam = nullptr;          // 연출 카메라
     std::string camName = "AltarDirectCamera";    // 연출 카메라 이름
-    Effect* fireEffect1 = nullptr;
-    Effect* fireEffect2 = nullptr;
+    Effect* fireEffect = nullptr;
     
     enum class DirectPhase
     {
@@ -131,6 +130,7 @@ private:
     void SetAllVisualOff();                       // 모든 제단 비주얼 OFF
     void BeginDirectSequence(std::string itemId);
     void UpdateDirectSequence(float dt);
+    Vector3 GetPositionItem(std::string id);
 
 
 
