@@ -11,9 +11,8 @@ class AudioListenerComponent : public Component
 {
     RTTR_ENABLE(Component)
 public:
-    AudioListenerComponent() { SetName("AudioListener"); }
-    ~AudioListenerComponent() override = default;
 
+    void OnInitialize() override;
     void OnStart() override;
     void OnUpdate(float delta) override;
     void OnDestory() override;
@@ -24,10 +23,6 @@ public:
     void Init(AudioSystem* system);
     void BindTransform(const AudioTransformRef& ref);
     void SetFallback(const AudioTransform& transform);
-    void Update();
-
-    void Enable_Inner() override;
-    void Disable_Inner() override;
 
 private:
     AudioSystem* m_System = nullptr;

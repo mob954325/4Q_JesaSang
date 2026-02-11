@@ -2,6 +2,7 @@
 
 #include "..\\Manager\\AudioManager.h"
 #include "..\\Util\\JsonHelper.h"
+#include "../../Engine/Object/GameObject.h"
 
 RTTR_REGISTRATION
 {
@@ -10,7 +11,8 @@ RTTR_REGISTRATION
             (rttr::policy::ctor::as_std_shared_ptr);
 }
 
-void AudioListenerComponent::OnStart()
+
+void AudioListenerComponent::OnInitialize()
 {
     if (!m_System)
     {
@@ -18,14 +20,25 @@ void AudioListenerComponent::OnStart()
     }
 }
 
+void AudioListenerComponent::OnStart()
+{
+
+}
+
 void AudioListenerComponent::OnUpdate(float delta)
 {
     (void)delta;
-    if (!m_System)
+    if (!m_System) return;
+
+    if (!m_System || !m_System->GetSystem())
     {
-        Init(&AudioManager::Instance().GetSystem());
+        return;
     }
-    Update();
+
+    // 3d apply
+    const AudioTransform t = ResolveAudioTransform(m_Fallback, m_Bind);
+    m_Listener.Set(t.position, t.velocity, t.forward, t.up);
+    m_Listener.Apply(m_System->GetSystem());
 }
 
 void AudioListenerComponent::OnDestory()
@@ -56,26 +69,4 @@ void AudioListenerComponent::BindTransform(const AudioTransformRef& ref)
 void AudioListenerComponent::SetFallback(const AudioTransform& transform)
 {
     m_Fallback = transform;
-}
-
-void AudioListenerComponent::Update()
-{
-    if (!m_System || !m_System->GetSystem())
-    {
-        return;
-    }
-
-    const AudioTransform t = ResolveAudioTransform(m_Fallback, m_Bind);
-    m_Listener.Set(t.position, t.velocity, t.forward, t.up);
-    m_Listener.Apply(m_System->GetSystem());
-}
-
-void AudioListenerComponent::Enable_Inner()
-{
-    Component::Enable_Inner();
-}
-
-void AudioListenerComponent::Disable_Inner()
-{
-    Component::Disable_Inner();
 }

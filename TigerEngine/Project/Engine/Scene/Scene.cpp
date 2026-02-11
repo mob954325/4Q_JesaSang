@@ -30,7 +30,7 @@ void Scene::CheckDestroy()
         if (entity.objPtr->IsDestory())
         {
             // 맵 요소 제거
-            auto container = mappedGameObjects[entity.objPtr->GetName()];
+            auto& container = mappedGameObjects[entity.objPtr->GetName()];
             for (auto mapContainerIt = container.begin(); mapContainerIt != container.end(); mapContainerIt++)
             {
                 auto& [handle, index] = *mapContainerIt;
