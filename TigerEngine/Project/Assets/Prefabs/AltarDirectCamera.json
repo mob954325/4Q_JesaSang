@@ -1,0 +1,42 @@
+{
+  "prefab": [
+    {
+      "Active": true,
+      "ID": 8483,
+      "Name": "AltarDirectCamera",
+      "ParentID": -1,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              374.21197509765625,
+              99.74288940429688,
+              -398.4059753417969
+            ],
+            "Rotation": [
+              -0.0,
+              1.5707963705062866,
+              -0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "angle": 1.5707963705062866,
+            "farDist": 1800.0,
+            "moveSpeed": 100.0,
+            "nearDist": 70.0,
+            "rotSpeed": 0.004000000189989805
+          },
+          "type": "Camera"
+        }
+      ]
+    }
+  ]
+}

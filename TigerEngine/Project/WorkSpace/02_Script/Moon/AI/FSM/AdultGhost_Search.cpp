@@ -11,7 +11,7 @@ void AdultGhost_Search::Enter()
     rotateTimer = 0.0f;
 
     adultGhost->ResetAgentForMove(3.5f);
-    // adultGhost->animController->ChangeState("Idle");
+    adultGhost->animController->ChangeState("Idle");
 
     phase = SearchPhase::WaitBeforeMove;
 

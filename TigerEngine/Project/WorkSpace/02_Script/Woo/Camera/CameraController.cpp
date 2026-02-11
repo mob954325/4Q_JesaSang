@@ -5,6 +5,7 @@
 #include "Object/GameObject.h"
 #include "Components/Camera.h"
 #include "EngineSystem/SceneSystem.h"
+#include "EngineSystem/CameraSystem.h"
 
 
 REGISTER_COMPONENT(CameraController)
@@ -18,6 +19,10 @@ RTTR_REGISTRATION
 
 void CameraController::OnStart()
 {
+    // set name
+    GetOwner()->GetComponent<Camera>()->SetName(camName);
+    CameraSystem::Instance().SetCurrCameraByName(camName);
+
     // get components
     transform = GetOwner()->GetComponent<Transform>();
     targetTr = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("CameraTrackingPoint")->GetComponent<Transform>();
@@ -162,8 +167,8 @@ void CameraController::ResolveViewParams(float dt, Vector3& outOffset, Vector3& 
     outUseLookFocus = true;
     UpdateViewBlend(dt, outOffset, outEulerDeg, outUseLookFocus);
 
-    // top view일때는 look focus(rotation) off
-    if (!isBlendingView && currentMode == ViewMode::Top)
+    // top/front view일때는 look focus(rotation) off
+    if (!isBlendingView && (currentMode == ViewMode::Top || currentMode == ViewMode::Front))
         outUseLookFocus = false;
 }
 
@@ -245,6 +250,10 @@ void CameraController::GetModeParams(ViewMode mode, Vector3& outOffset, Vector3&
     case ViewMode::Top:
         outOffset = topOffset;
         outEulerDeg = topEuler;
+        break;
+    case ViewMode::Front:
+        outOffset = frontOffset;
+        outEulerDeg = frontEuler;
         break;
     default:
         outOffset = quarterOffset;

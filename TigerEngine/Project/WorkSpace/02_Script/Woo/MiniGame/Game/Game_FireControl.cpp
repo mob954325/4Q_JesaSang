@@ -190,8 +190,10 @@ void Game_FireControl::StartGame()
     spacbar = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("2_Image_SpaceBar")->GetComponent<RectTransform>();
     gauge = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("2_Image_Gauge")->GetComponent<Image>();
     animImage = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("2_Image_CutAnimation")->GetComponent<Image>();
+    
+    spacebarHold = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("Image_SpaceBarHold");
 
-    if (!foodPoint || !spacbar || !gauge)
+    if (!foodPoint || !spacbar || !gauge || !spacebarHold)
     {
         cout << "[MiniGame 2] Missing ui objects!" << endl;
         return;
@@ -221,12 +223,21 @@ void Game_FireControl::StartGame()
     // bar init
     barVel = 0.0f;
 
+    // hold ui off
+    spacebarHold->SetActive(false);
+
     cout << "[Mini Game 2] : Game_FireControl Start!" << endl;
 }
 
 void Game_FireControl::UpdateGame(float delta)
 {
     if (isFinished) return;
+
+    // 홀딩 UI
+    if (Input::GetKeyDown(spaceKey))
+        spacebarHold->SetActive(true);
+    else if (Input::GetKeyUp(spaceKey))
+        spacebarHold->SetActive(false);
 
     UpdateFood(delta);
     UpdateBar(delta);
@@ -259,11 +270,10 @@ void Game_FireControl::UpdateAnimation(float delta)
 void Game_FireControl::SetAnimPathes()
 {
     // 이미지 패스 생성
-    currAnimPathes.resize(3);
+    currAnimPathes.resize(2);
 
-    currAnimPathes[0] = "..\\Assets\\Resource\\UI\\CutScenes\\happy_ending_02.png";
-    currAnimPathes[1] = "..\\Assets\\Resource\\UI\\CutScenes\\happy_ending_03.png";
-    currAnimPathes[2] = "..\\Assets\\Resource\\UI\\CutScenes\\happy_ending_04.png";
+    currAnimPathes[0] = "..\\Assets\\Resource\\UI\\MiniGame\\mini_01.png";
+    currAnimPathes[1] = "..\\Assets\\Resource\\UI\\MiniGame\\mini_02.png";
 
     if (animImage)
         animImage->ChangeData(currAnimPathes[0]); // 첫번째로 초기화

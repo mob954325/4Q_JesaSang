@@ -97,7 +97,7 @@ void QuestManager::ApplyStepUI()
     
     case 2:
         ui->UpdateQuestTitle(L"[조리] 정성을 담아");
-        ui->UpdateQuestLable(L"미니게임을 성공하세요.");
+        ui->UpdateQuestLable(L"부엌에서 음식을 조리하세요.");
         break;
     
     case 3:
@@ -157,7 +157,7 @@ void QuestManager::TickStepTransition(float dt)
     {
     case AnimPhase::ShowSuccess:
         // 2초 유지 후 패널 닫기 시작
-        if (ui) ui->QuestPannelClose(kCloseSec);   // ✅ 닫기 슬라이드 시작
+        if (ui) ui->QuestPannelClose(kCloseSec);   // 닫기 슬라이드 시작
         phase_ = AnimPhase::Closing;
         phaseTimer_ = kCloseSec;
         break;
@@ -168,7 +168,7 @@ void QuestManager::TickStepTransition(float dt)
         ApplyStepUI();
 
         // 그 다음 패널 열기
-        if (ui) ui->QuestPannelOpen(kOpenSec);     // ✅ 열기 슬라이드 시작
+        if (ui) ui->QuestPannelOpen(kOpenSec);     // 열기 슬라이드 시작
         phase_ = AnimPhase::Opening;
         phaseTimer_ = kOpenSec;
         break;
@@ -201,6 +201,19 @@ void QuestManager::StepComplete(int compleateIndex)
     if (!ui)
     {
         std::cout << "[QuestManager] MainGameUIManager is null!" << std::endl;
+        return;
+    }
+
+    // step 4 예외 하드코딩
+    if (compleateIndex == 4)
+    {
+        ApplyStepUI();
+        if (JesaSangManager::Instance()->GetHasFoodCount() >= 6)
+        {
+            ui->SetQuestCheakboxOn(true);
+            ui->SetQuestLineOn(true);
+        }
+
         return;
     }
 

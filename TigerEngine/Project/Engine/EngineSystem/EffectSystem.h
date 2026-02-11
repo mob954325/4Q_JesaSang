@@ -22,6 +22,8 @@ public:
 
     void Register(Effect* comp);
     void UnRegister(Effect* comp);
+
+    void Update();
     void Clear();
 
     std::vector<Effect*> GetComponents();

@@ -11,6 +11,8 @@ void BabyGhost_Cry::Enter()
     caringAdult = nullptr; // 돌봐주는 유령 초기화
     adultArrived = false;
 
+    babyGhost->animController->ChangeState("Cry");
+
     // 이동 완전 정지
     babyGhost->agent->externalControl = true;
     babyGhost->agent->path.clear();
@@ -75,7 +77,7 @@ void BabyGhost_Cry::Update(float deltaTime)
     if (caringAdult)
     {
         float dist = (cryPos - caringAdult->GetOwner()->GetTransform()->GetWorldPosition()).Length();
-        const float arriveThreshold = 150.0f; // 근접 기준
+        const float arriveThreshold = 200.0f; // 근접 기준
         if (dist <= arriveThreshold)
         {
             adultArrived = true;

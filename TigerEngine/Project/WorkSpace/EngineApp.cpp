@@ -161,6 +161,7 @@ void EngineApp::OnUpdate()
     CameraSystem::Instance().LightCameraUpdate(GameTimer::Instance().DeltaTime());
     WorldManager::Instance().Update(dxRenderer->GetDeviceContext(), curCam, clientWidth, clientHeight);
     SceneSystem::Instance().UpdateScene(GameTimer::Instance().DeltaTime());
+    EffectSystem::Instance().Update();
     AudioManager::Instance().Update();
     AnimationSystem::Instance().Update(GameTimer::Instance().DeltaTime());
 

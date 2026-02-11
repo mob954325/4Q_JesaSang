@@ -80,7 +80,9 @@ void Game_Cutting::StartGame()
     knife = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("1_Image_Knife")->GetComponent<RectTransform>();
     animImage = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("1_Image_CutAnimation")->GetComponent<Image>();
 
-    if (!stopPoint || !knife)
+    spacebarHold = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("Image_SpaceBarHold");
+
+    if (!stopPoint || !knife || !spacebarHold)
     {
         cout << "[MiniGame 1] Missing ui objects!" << endl;
         return;
@@ -102,6 +104,9 @@ void Game_Cutting::StartGame()
     // anim image set
     SetAnimPathes();
 
+    // hold ui off
+    spacebarHold->SetActive(false);
+
     std::cout << "[MiniGame 1] : Game_Cutting Start!" << std::endl;
 }
 
@@ -109,6 +114,12 @@ void Game_Cutting::UpdateGame(float delta)
 {
     if (isFinished) return;
 
+    // 홀딩 UI
+    if (Input::GetKeyDown(spaceKey))
+        spacebarHold->SetActive(true);
+    else if(Input::GetKeyUp(spaceKey))
+        spacebarHold->SetActive(false);
+    
     // Space바 눌렀을때
     if (!isStopped && IsSpaceDownOnce())
     {
@@ -182,11 +193,10 @@ void Game_Cutting::UpdateAnimation(float delta)
 void Game_Cutting::SetAnimPathes()
 {
     // 이미지 패스 생성
-    currAnimPathes.resize(3);
+    currAnimPathes.resize(2);
 
-    currAnimPathes[0] = "..\\Assets\\Resource\\UI\\CutScenes\\happy_ending_03.png";
-    currAnimPathes[1] = "..\\Assets\\Resource\\UI\\CutScenes\\happy_ending_04.png";
-    currAnimPathes[2] = "..\\Assets\\Resource\\UI\\CutScenes\\happy_ending_05.png";
+    currAnimPathes[0] = "..\\Assets\\Resource\\UI\\MiniGame\\mini_01.png";
+    currAnimPathes[1] = "..\\Assets\\Resource\\UI\\MiniGame\\mini_02.png";
 
     if(animImage)
         animImage->ChangeData(currAnimPathes[0]); // 첫번째로 초기화

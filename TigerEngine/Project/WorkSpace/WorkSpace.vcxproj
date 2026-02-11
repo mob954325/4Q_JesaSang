@@ -145,6 +145,12 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="02_Script\Ho\Manager\ResultPanel.h" />
+    <ClInclude Include="02_Script\Ho\ResultPanels\EdgeToCenterSampler.h" />
+    <ClInclude Include="02_Script\Ho\ResultPanels\LoseCinemachine.h" />
+    <ClInclude Include="02_Script\Ho\ResultPanels\LosePanel.h" />
+    <ClInclude Include="02_Script\Ho\ResultPanels\WinCinemachine.h" />
+    <ClInclude Include="02_Script\Ho\ResultPanels\WinPanel.h" />
     <ClInclude Include="02_Script\Ho\UI\MenuUI_ExitButton.h" />
     <ClInclude Include="02_Script\Ho\UI\MenuUI_OptionButton.h" />
     <ClInclude Include="02_Script\Ho\UI\MenuUI_StartButton.h" />
@@ -165,6 +171,18 @@
     <ClInclude Include="02_Script\Moon\AI\FSM\IBabyGhostState.h" />
     <ClInclude Include="02_Script\Moon\AI\GhostInteractionZone.h" />
     <ClInclude Include="02_Script\Moon\AnimationTest\PlayerAnimationTest.h" />
+    <ClInclude Include="02_Script\Moon\Tutorial\PlayerController_Tutorial.h" />
+    <ClInclude Include="02_Script\Moon\Tutorial\Step\ITutorialStep.h" />
+    <ClInclude Include="02_Script\Moon\Tutorial\Step\TutorialStep_Step1.h" />
+    <ClInclude Include="02_Script\Moon\Tutorial\Step\TutorialStep_Step2.h" />
+    <ClInclude Include="02_Script\Moon\Tutorial\Step\TutorialStep_Step3.h" />
+    <ClInclude Include="02_Script\Moon\Tutorial\Step\TutorialStep_Step4.h" />
+    <ClInclude Include="02_Script\Moon\Tutorial\Step\TutorialStep_Step5.h" />
+    <ClInclude Include="02_Script\Moon\Tutorial\Step\TutorialStep_Step6.h" />
+    <ClInclude Include="02_Script\Moon\Tutorial\Step\TutorialStep_Step7.h" />
+    <ClInclude Include="02_Script\Moon\Tutorial\Step\TutorialStep_Step8.h" />
+    <ClInclude Include="02_Script\Moon\Tutorial\Step\TutorialStep_Step9.h" />
+    <ClInclude Include="02_Script\Moon\Tutorial\TutorialController.h" />
     <ClInclude Include="02_Script\Woo\Altar\AltarManager.h" />
     <ClInclude Include="02_Script\Woo\Camera\CameraController.h" />
     <ClInclude Include="02_Script\Woo\Inventory\Inventory.h" />
@@ -182,6 +200,7 @@
     <ClInclude Include="02_Script\Woo\UI\Button_PausePannelOff.h" />
     <ClInclude Include="02_Script\Ron\UI\Button_OpenPausePannel.h" />
     <ClInclude Include="02_Script\Woo\CookingZone\CookingZone.h" />
+    <ClInclude Include="02_Script\Woo\Player\DialogueUI\DialogueUIController.h" />
     <ClInclude Include="EngineApp.h" />
     <ClInclude Include="02_Script\\Ron\\MiniMapTest\MiniMapTestScript.h" />
     <ClInclude Include="02_Script\\Ron\\MiniMapTest\MiniMapManager.h" />
@@ -218,8 +237,16 @@
     <ClInclude Include="02_Script\Woo\Manager\PauseManager.h" />
     <ClInclude Include="02_Script\Woo\UI\MainGameUIManager.h" />
     <ClInclude Include="02_Script\Woo\Manager\QuestManager.h" />
+    <ClInclude Include="02_Script\Woo\Player\PlayerThreatMonitor.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="02_Script\Ho\Manager\FrozenManager.cpp" />
+    <ClCompile Include="02_Script\Ho\Manager\FrozenManager.h" />
+    <ClCompile Include="02_Script\Ho\Manager\ResultPanel.cpp" />
+    <ClCompile Include="02_Script\Ho\ResultPanels\LoseCinemachine.cpp" />
+    <ClCompile Include="02_Script\Ho\ResultPanels\LosePanel.cpp" />
+    <ClCompile Include="02_Script\Ho\ResultPanels\WinCinemachine.cpp" />
+    <ClCompile Include="02_Script\Ho\ResultPanels\WinPanel.cpp" />
     <ClCompile Include="02_Script\Ho\UI\MenuUI_ExitButton.cpp" />
     <ClCompile Include="02_Script\Ho\UI\MenuUI_OptionButton.cpp" />
     <ClCompile Include="02_Script\Ho\UI\MenuUI_StartButton.cpp" />
@@ -238,6 +265,17 @@
     <ClCompile Include="02_Script\Moon\AI\FSM\BabyGhost_Search.cpp" />
     <ClCompile Include="02_Script\Moon\AI\GhostInteractionZone.cpp" />
     <ClCompile Include="02_Script\Moon\AnimationTest\PlayerAnimationTest.cpp" />
+    <ClCompile Include="02_Script\Moon\Tutorial\PlayerController_Tutorial.cpp" />
+    <ClCompile Include="02_Script\Moon\Tutorial\Step\TutorialStep_Step1.cpp" />
+    <ClCompile Include="02_Script\Moon\Tutorial\Step\TutorialStep_Step2.cpp" />
+    <ClCompile Include="02_Script\Moon\Tutorial\Step\TutorialStep_Step3.cpp" />
+    <ClCompile Include="02_Script\Moon\Tutorial\Step\TutorialStep_Step4.cpp" />
+    <ClCompile Include="02_Script\Moon\Tutorial\Step\TutorialStep_Step5.cpp" />
+    <ClCompile Include="02_Script\Moon\Tutorial\Step\TutorialStep_Step6.cpp" />
+    <ClCompile Include="02_Script\Moon\Tutorial\Step\TutorialStep_Step7.cpp" />
+    <ClCompile Include="02_Script\Moon\Tutorial\Step\TutorialStep_Step8.cpp" />
+    <ClCompile Include="02_Script\Moon\Tutorial\Step\TutorialStep_Step9.cpp" />
+    <ClCompile Include="02_Script\Moon\Tutorial\TutorialController.cpp" />
     <ClCompile Include="02_Script\Woo\Altar\AltarManager.cpp" />
     <ClCompile Include="02_Script\Woo\Camera\CameraController.cpp" />
     <ClCompile Include="02_Script\Woo\Inventory\Inventory.cpp" />
@@ -255,6 +293,7 @@
     <ClCompile Include="02_Script\Woo\UI\Button_PausePannelOff.cpp" />
     <ClCompile Include="02_Script\Ron\UI\Button_OpenPausePannel.cpp" />
     <ClCompile Include="02_Script\Woo\CookingZone\CookingZone.cpp" />
+    <ClCompile Include="02_Script\Woo\Player\DialogueUI\DialogueUIController.cpp" />
     <ClCompile Include="EngineApp.cpp" />
     <ClCompile Include="02_Script\\Ron\\MiniMapTest\MiniMapTestScript.cpp" />
     <ClCompile Include="02_Script\\Ron\\MiniMapTest\MiniMapManager.cpp" />
@@ -290,6 +329,7 @@
     <ClCompile Include="02_Script\Woo\Manager\PauseManager.cpp" />
     <ClCompile Include="02_Script\Woo\UI\MainGameUIManager.cpp" />
     <ClCompile Include="02_Script\Woo\Manager\QuestManager.cpp" />
+    <ClCompile Include="02_Script\Woo\Player\PlayerThreatMonitor.cpp" />
     <ClCompile Include="winMain.cpp" />
     <ClCompile Include="02_Script\\Ron\\Intro\IntroCutSceneController.cpp" />
   </ItemGroup>

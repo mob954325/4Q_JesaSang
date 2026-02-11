@@ -8,7 +8,7 @@ void BabyGhost_Return::Enter()
 
     visionTimer = 0.0f;
 
-    // babyGhost->animController->ChangeState("Idle");
+    babyGhost->animController->ChangeState("Idle");
 
     // 웨이포인트 좌표
     auto grid = GridSystem::Instance().GetMainGrid();

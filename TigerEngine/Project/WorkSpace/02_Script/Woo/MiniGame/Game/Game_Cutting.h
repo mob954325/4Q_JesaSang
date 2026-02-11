@@ -5,6 +5,8 @@
 using namespace DirectX;
 class RectTransform;
 class Image;
+class GameObject;
+
 
 /*
     [ 칼로 썰기 게임 ]
@@ -25,6 +27,8 @@ private:
     // UI
     RectTransform* stopPoint;       // 맞춰야하는 부분(영역)
     RectTransform* knife;           // 움직이는 슬라이더 (space key down시 정지)
+
+    GameObject* spacebarHold = nullptr;
 
     // game data
     float spaceSpped = 700.0f;      // 스페이스바 슬라이드 속도

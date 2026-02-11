@@ -45,7 +45,10 @@ void TextUI::OnRender(RenderQueue& queue)
     {
         auto tr = GetOwner()->GetTransform();
         Matrix R = GetScreenAlignedBillboardRotation();
-        item.worldMat = Matrix::CreateScale(tr->GetScale()) *
+        Vector3 pivot = { rect->GetPivot().x,rect->GetPivot().y, 0.0f };
+        
+        item.worldMat = 
+            Matrix::CreateScale(tr->GetScale()) *
             R *
             Matrix::CreateTranslation(tr->GetWorldPosition());
     }
@@ -59,7 +62,8 @@ void TextUI::OnRender(RenderQueue& queue)
     item.geometryDirty = geometryDirty; // Note : rebuild geometry를 위한 플래그 
     item.color = color;
     item.screenMat = rect->GetWorldMatrix();
-    item.imageSize = Vector4(rect->GetSize().x, rect->GetSize().y, rect->GetPivot().x, rect->GetPivot().y);
+    item.imageSize = Vector4(rect->GetSize().x, rect->GetSize().y, atlasW, atlasH); // width, height?
+    item.params = { 0,0, rect->GetPivot().x, rect->GetPivot().y };
     if (drawSpacetype == DrawSpaceType::World)
         item.isWorldSpace = true;
     else

@@ -8,6 +8,7 @@
 #include "System/InputSystem.h"
 #include "EngineSystem/PhysicsSystem.h"
 #include "EngineSystem/CameraSystem.h"
+#include "RenderPass/ParticleSource/Effect.h"
 
 #include "FSM/IPlayerState.h"
 #include "FSM/Player_Idle.h"
@@ -29,6 +30,8 @@
 #include "../JesaSang/JesaSangManager.h"
 #include "../Altar/AltarManager.h"
 #include "PlayerItemVisualizer.h"
+#include "PlayerThreatMonitor.h"
+#include "DialogueUI/DialogueUIController.h"
 #include "../Manager/GameManager.h"
 #include "../Manager/QuestManager.h"
 #include "../UI/MainGameUIManager.h"
@@ -53,15 +56,21 @@ void PlayerController::OnStart()
     fbxRenderer = GetOwner()->GetComponent<FBXRenderer>();
     fbxData = GetOwner()->GetComponent<FBXData>();
     animController = GetOwner()->GetComponent<AnimationController>();
+    fireEffect = GetOwner()->GetChildByName("Player_FireEffect")->GetOwner()->GetComponent<Effect>();
+    hitEffect = GetOwner()->GetChildByName("Player_HitEffect")->GetOwner()->GetComponent<AnimationController>();
 
     cct = GetOwner()->GetComponent<CharacterControllerComponent>();
     inventory = GetOwner()->GetComponent<Inventory>();
     visualizer = GetOwner()->GetComponent<PlayerItemVisualizer>();
+    threatMonitor = GetOwner()->GetComponent<PlayerThreatMonitor>();
+    dialogueController = GetOwner()->GetComponent<DialogueUIController>();
     
     camController = CameraSystem::Instance().GetCurrCamera()->GetOwner()->GetComponent<CameraController>();
 
     // debug
-    if (!fbxRenderer || !cct || !inventory || !camController || !fbxData || !animController)
+    if (!fbxRenderer || !cct || !inventory || !camController || !fbxData || 
+        !animController || !dialogueController || !fireEffect || !hitEffect ||
+        !threatMonitor || !visualizer)
     {
         cout << "[Player] Missing COmponet!" << endl;
     }
@@ -97,9 +106,21 @@ void PlayerController::OnUpdate(float delta)
 
     // ----- test --------------
     // ai attack test
-    if (Input::GetKeyDown(Keyboard::Q))
+    if (Input::GetKeyDown(Keyboard::P))
     {
         TakeAttack();
+    }
+
+    // quarter view
+    if (Input::GetKeyDown(Keyboard::O))
+    {
+        camController->SetViewMode(CameraController::ViewMode::Quarter);
+    }
+
+    // front view
+    if (Input::GetKeyDown(Keyboard::I))
+    {
+        camController->SetViewMode(CameraController::ViewMode::Front);
     }
 }
 
@@ -208,14 +229,10 @@ void PlayerController::LoadAnimation()
     auto sitClip = animController->FindClip("Sit");
     auto hitClip = animController->FindClip("Hit");
 
-    if (!idleClip  || !walkClip /*|| !runClip || !sitClip || !hitClip*/)
+    if (!idleClip  || !walkClip || !runClip || !sitClip || !hitClip)
     {
         cout << "[Player Animation] Clip not found!\n" << endl;
         return;
-    }
-    else
-    {
-        cout << "[Player] Animation Load Success" << endl;
     }
 
     // 상태 등록
@@ -224,6 +241,21 @@ void PlayerController::LoadAnimation()
     animController->AddState(std::make_unique<AnimationState>("Run", runClip, animController));
     animController->AddState(std::make_unique<AnimationState>("Sit", sitClip, animController));
     animController->AddState(std::make_unique<AnimationState>("Hit", hitClip, animController));
+
+
+    // Effect Animatinon
+    // TODO :: Bone연결되면 주석 해제
+    //FBXResourceManager::Instance().LoadAnimationByPath(hitEffect->GetOwner()->GetComponent<FBXData>()->GetFBXInfo(), 
+    //    "..\\Assets\\Resource\\Effect\\ani_confused_mark.fbx", "HitEffect");
+    //auto effectHitClip = hitEffect->FindClip("HitEffect");
+    //hitEffect->AddState(std::make_unique<AnimationState>("HitEffect", effectHitClip, hitEffect));
+    //hitEffect->ChangeState("HitEffect");
+    //
+    //if (!effectHitClip)
+    //{
+    //    cout << "[Player Effect Animation] Clip not found!\n" << endl;
+    //    return;
+    //}
 }
 
 /*-------[ Init ]-------------------------------------*/
@@ -298,6 +330,13 @@ void PlayerController::SerachObjectInteraction(float dt)
         return;
     }
 
+    // 최초 인터랙션 기믹 설명
+    if (!isExplainedSearchObject && Input::GetKeyDown(interaction_Key))
+    {
+        dialogueController->ShowInteractionHintAndPause(L"this object is Search Object!");
+        isExplainedSearchObject = true;
+    }
+
     // inventory full
     if (inventory->HasItem())
     {
@@ -369,6 +408,13 @@ void PlayerController::HideObjectInteraction(float dt)
     if (state == PlayerState::Die)
         return;
 
+    // 최초 인터랙션 기믹 설명
+    if (!isExplainedHideObject && Input::GetKeyDown(interaction_Key))
+    {
+        dialogueController->ShowInteractionHintAndPause(L"this object is Hide Object!");
+        isExplainedHideObject = true;
+    }
+
     // hide
     if (Input::GetKeyDown(interaction_Key) && curHideObject->IsPossibleHide())
     {
@@ -395,6 +441,13 @@ void PlayerController::CookingInteraction(float dt)
     {
         cookInteractionTimer = 0.0f;
         return;
+    }
+
+    // 최초 인터랙션 기믹 설명
+    if(!isExplainedCookingZone)
+    {
+        dialogueController->ShowInteractionHintAndPause(L"this zone is cooking!");
+        isExplainedCookingZone = true;
     }
 
     // holding
@@ -481,6 +534,13 @@ void PlayerController::GetItemAltarInteraction(float dt)
     if (getItemAltarTimer >= getItemAltarTime)
     {
         std::unique_ptr<IItem> item = AltarManager::Instance()->GetItem();
+
+        // Dialogue
+        if (item->itemType == ItemType::Ingredient)
+            dialogueController->ShowDialogueText(L"Ingredient ReGet! Cook gogo!");
+        if (item->itemType == ItemType::Food)
+            dialogueController->ShowDialogueText(L"Good ReGet! Jesasang gogo!");
+
         visualizer->VisualOnItem(item->itemId);
         inventory->AddItem(std::move(item));
 
@@ -623,6 +683,7 @@ void PlayerController::TakeAttack()
         visualizer->VisualOffItem();
         visualizer->VisualItemIDNullSet();
         AltarManager::Instance()->ReceiveItem(std::move(item));
+        fireEffect->Play();
         cout << "[Player] Drop Item... " << endl;
     }
 

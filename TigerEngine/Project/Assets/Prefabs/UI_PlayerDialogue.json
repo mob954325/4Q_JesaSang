@@ -1,0 +1,238 @@
+{
+  "prefab": [
+    {
+      "Active": true,
+      "ID": 8475,
+      "Name": "UI_PlayerDialogue",
+      "ParentID": -1,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              51.306976318359375,
+              126.62967681884766,
+              0.0
+            ],
+            "Rotation": [
+              -0.0,
+              0.0,
+              -0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Pivot": [
+              0.0,
+              0.0
+            ],
+            "Pos": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "Size": [
+              0.0,
+              0.0
+            ]
+          },
+          "type": "RectTransform"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 8474,
+      "Name": "Image_Dialogue",
+      "ParentID": 8475,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              3.1415927410125732,
+              3.1415927410125732
+            ],
+            "Scale": [
+              0.25,
+              0.25,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Pivot": [
+              0.0,
+              0.4000000059604645
+            ],
+            "Pos": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "Size": [
+              250.0,
+              150.0
+            ]
+          },
+          "type": "RectTransform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "color": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "drawSpacetype": "World",
+            "fillAmount": 1.0,
+            "imageType": "Sliced",
+            "isBillboard": true,
+            "isMouseCheck": false,
+            "path": "..\\Assets\\Resource\\UI\\Player\\Dialogue.png",
+            "sliceBorderPx": [
+              80.0,
+              65.0,
+              40.0,
+              40.0
+            ],
+            "type": "Sliced",
+            "zOrder": -4
+          },
+          "type": "Image"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 8476,
+      "Name": "Text_Dialoaue",
+      "ParentID": 8475,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              7.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              -0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Pivot": [
+              0.0,
+              0.5
+            ],
+            "Pos": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              0.0,
+              1.0
+            ],
+            "Size": [
+              1.0,
+              1.0
+            ]
+          },
+          "type": "RectTransform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "alignType": "Center",
+            "atlasH": 2048,
+            "atlasW": 2048,
+            "color": [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "drawSpacetype": "World",
+            "fontPath": "../Assets/Resource/font/rotteMedium.ttf",
+            "fontSize": 10,
+            "isBillboard": true,
+            "paddingPx": 1,
+            "text": "why not korean?",
+            "zOrder": -3
+          },
+          "type": "TextUI"
+        }
+      ]
+    }
+  ]
+}

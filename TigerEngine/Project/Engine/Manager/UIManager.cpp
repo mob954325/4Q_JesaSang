@@ -93,6 +93,7 @@ void UIManager::RebuildGeometry(std::wstring path,
                                 HAlign alignType,
                                 TextResource* resource, 
                                 std::vector<UIQuadVertex>& cpuVerts, 
+                                Vector2& pivot,
                                 int& outIndexCount)
 {
     if (!resource) return;
@@ -153,6 +154,35 @@ void UIManager::RebuildGeometry(std::wstring path,
 
     indexCount = glyphCount * 6;
     outIndexCount = indexCount;
+
+    // 각 위치를 피벗의 비율만큼 움직여서 적용한다 (offset은 px여야한다.)
+    if (!cpuVerts.empty())
+    {
+        float minX = FLT_MAX, minY = FLT_MAX;
+        float maxX = -FLT_MAX, maxY = -FLT_MAX;
+
+        // 바운드 계산
+        for (auto& v : cpuVerts)
+        {
+            minX = std::min(minX, v.pos.x);
+            minY = std::min(minY, v.pos.y);
+            maxX = std::max(maxX, v.pos.x);
+            maxY = std::max(maxY, v.pos.y);
+        }
+
+        float contentW = maxX - minX;
+        float contentH = maxY - minY;
+
+        // 바운드 만큼 움직이기
+        float dx = -(minX + pivot.x * contentW);
+        float dy = -(minY + pivot.y * contentH);
+
+        for (auto& v : cpuVerts)
+        {
+            v.pos.x += dx;
+            v.pos.y += dy;
+        }
+    }
 }
 
 void UIManager::EnsureAtlasForText(ComPtr<ID3D11Device>& dev, 

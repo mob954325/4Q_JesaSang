@@ -75,7 +75,7 @@ registration::class_<Emitter>("Emitter")
 
     // control
     .property("enabled", &Emitter::enabled)(metadata(META_BOOL, true))
-    .property("playing", &Emitter::playing)(metadata(META_BOOL, true))
+    //.property("playing", &Emitter::playing)(metadata(META_BOOL, true))
 
     // emission
     .property("duration",     &Emitter::duration)
@@ -102,7 +102,7 @@ registration::class_<Emitter>("Emitter")
 
 void Emitter::Update()
 {
-    float dt = GameTimer::Instance().DeltaTime();
+    float dt = GameTimer::Instance().UnscaledDeltaTime();
     elapsed += dt;
 
     // Dynamic Emitter Life Cheak

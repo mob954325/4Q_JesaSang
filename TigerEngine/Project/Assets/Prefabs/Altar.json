@@ -2,7 +2,7 @@
   "prefab": [
     {
       "Active": true,
-      "ID": 862,
+      "ID": 8339,
       "Name": "Altar",
       "ParentID": -1,
       "components": [
@@ -103,9 +103,9 @@
     },
     {
       "Active": true,
-      "ID": 863,
+      "ID": 8340,
       "Name": "baseFood",
-      "ParentID": 862,
+      "ParentID": 8339,
       "components": [
         {
           "properties": {
@@ -181,9 +181,9 @@
     },
     {
       "Active": false,
-      "ID": 864,
+      "ID": 8341,
       "Name": "Alta_Apple",
-      "ParentID": 862,
+      "ParentID": 8339,
       "components": [
         {
           "properties": {
@@ -259,9 +259,9 @@
     },
     {
       "Active": false,
-      "ID": 865,
+      "ID": 8342,
       "Name": "Alta_Pear",
-      "ParentID": 862,
+      "ParentID": 8339,
       "components": [
         {
           "properties": {
@@ -337,9 +337,9 @@
     },
     {
       "Active": false,
-      "ID": 866,
+      "ID": 8343,
       "Name": "Alta_Batter",
-      "ParentID": 862,
+      "ParentID": 8339,
       "components": [
         {
           "properties": {
@@ -415,9 +415,9 @@
     },
     {
       "Active": false,
-      "ID": 867,
+      "ID": 8344,
       "Name": "Alta_Tofu",
-      "ParentID": 862,
+      "ParentID": 8339,
       "components": [
         {
           "properties": {
@@ -493,9 +493,9 @@
     },
     {
       "Active": false,
-      "ID": 868,
+      "ID": 8345,
       "Name": "Alta_Sanjeok",
-      "ParentID": 862,
+      "ParentID": 8339,
       "components": [
         {
           "properties": {
@@ -571,9 +571,9 @@
     },
     {
       "Active": false,
-      "ID": 869,
+      "ID": 8346,
       "Name": "Alta_Donggeurangttaeng",
-      "ParentID": 862,
+      "ParentID": 8339,
       "components": [
         {
           "properties": {
@@ -649,9 +649,9 @@
     },
     {
       "Active": false,
-      "ID": 870,
+      "ID": 8347,
       "Name": "Alta_Ingre_Apple",
-      "ParentID": 862,
+      "ParentID": 8339,
       "components": [
         {
           "properties": {
@@ -727,9 +727,9 @@
     },
     {
       "Active": false,
-      "ID": 871,
+      "ID": 8348,
       "Name": "Alta_Ingre_Pear",
-      "ParentID": 862,
+      "ParentID": 8339,
       "components": [
         {
           "properties": {
@@ -805,9 +805,9 @@
     },
     {
       "Active": false,
-      "ID": 872,
+      "ID": 8349,
       "Name": "Alta_Ingre_Batter",
-      "ParentID": 862,
+      "ParentID": 8339,
       "components": [
         {
           "properties": {
@@ -883,9 +883,9 @@
     },
     {
       "Active": false,
-      "ID": 873,
+      "ID": 8350,
       "Name": "Alta_Ingre_Tofu",
-      "ParentID": 862,
+      "ParentID": 8339,
       "components": [
         {
           "properties": {
@@ -961,9 +961,9 @@
     },
     {
       "Active": false,
-      "ID": 874,
+      "ID": 8351,
       "Name": "Alta_Ingre_Sanjeok",
-      "ParentID": 862,
+      "ParentID": 8339,
       "components": [
         {
           "properties": {
@@ -1039,9 +1039,9 @@
     },
     {
       "Active": false,
-      "ID": 875,
+      "ID": 8352,
       "Name": "Alta_Ingre_Donggeurangttaeng",
-      "ParentID": 862,
+      "ParentID": 8339,
       "components": [
         {
           "properties": {
@@ -1117,9 +1117,9 @@
     },
     {
       "Active": true,
-      "ID": 885,
+      "ID": 8353,
       "Name": "Image_SensorOn_Altar",
-      "ParentID": 862,
+      "ParentID": 8339,
       "components": [
         {
           "properties": {
@@ -1205,9 +1205,9 @@
     },
     {
       "Active": true,
-      "ID": 886,
+      "ID": 8354,
       "Name": "Image_InteractionOn_Altar",
-      "ParentID": 862,
+      "ParentID": 8339,
       "components": [
         {
           "properties": {
@@ -1293,9 +1293,9 @@
     },
     {
       "Active": true,
-      "ID": 887,
+      "ID": 8355,
       "Name": "Image_InteractionGauge_Altar",
-      "ParentID": 862,
+      "ParentID": 8339,
       "components": [
         {
           "properties": {
@@ -1362,7 +1362,7 @@
             ],
             "drawSpacetype": "World",
             "fillAmount": 0.0,
-            "imageType": "FillHorizontal",
+            "imageType": "FillVertical",
             "isBillboard": false,
             "isMouseCheck": false,
             "path": "..\\Assets\\Resource\\UI\\Interaction\\F_02.png",
@@ -1372,10 +1372,422 @@
               0.0,
               0.0
             ],
-            "type": "FillHorizontal",
+            "type": "FillVertical",
             "zOrder": 2
           },
           "type": "Image"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 8484,
+      "Name": "AltarDirectEffect_1",
+      "ParentID": 8339,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              -52.699249267578125,
+              88.35174560546875,
+              0.0
+            ],
+            "Rotation": [
+              -0.0,
+              0.0,
+              -0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "allFinished": false,
+            "emitters": [
+              {
+                "billboard": "ScreenFacing",
+                "burstCount": 1,
+                "coneAngleDeg": 30.0,
+                "duration": 5.0,
+                "dynamicData": {
+                  "angularMax": 0.0,
+                  "angularMin": 0.0,
+                  "colorMax": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0
+                  ],
+                  "colorMin": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0
+                  ],
+                  "lifeMax": 1.0,
+                  "lifeMin": 0.5,
+                  "rotationMax": 0.0,
+                  "rotationMin": 0.0,
+                  "sizeMax": [
+                    1.0,
+                    1.0
+                  ],
+                  "sizeMin": [
+                    1.0,
+                    1.0
+                  ],
+                  "speedMax": 10.0,
+                  "speedMin": 0.0
+                },
+                "emitDir": [
+                  0.0,
+                  1.0,
+                  0.0
+                ],
+                "emitRate": 1.0,
+                "enabled": true,
+                "filpbookPlayMode": "Once_Then_Die",
+                "fixedData": {
+                  "rotation": 0.0,
+                  "size": [
+                    1.0,
+                    1.0
+                  ],
+                  "startColor": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0
+                  ]
+                },
+                "holdTime": 5.0,
+                "infinite": 999999.0,
+                "localOffset": [
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                "looping": false,
+                "maxParticles": 256,
+                "particleMode": "Fixed",
+                "playing": false,
+                "position": [
+                  -52.699249267578125,
+                  88.35174560546875,
+                  0.0
+                ],
+                "sheet": {
+                  "baseSizeScale": 20.0,
+                  "cols": 2,
+                  "fps": 8.0,
+                  "frameCount": 4,
+                  "loop": false,
+                  "rows": 2,
+                  "texturePath": "..\\Assets\\Resource\\Effect\\Fire\\f_st.png"
+                },
+                "velocityShape": "Sphere"
+              },
+              {
+                "billboard": "ScreenFacing",
+                "burstCount": 1,
+                "coneAngleDeg": 30.0,
+                "duration": 5.0,
+                "dynamicData": {
+                  "angularMax": 0.0,
+                  "angularMin": 0.0,
+                  "colorMax": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0
+                  ],
+                  "colorMin": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0
+                  ],
+                  "lifeMax": 1.0,
+                  "lifeMin": 0.5,
+                  "rotationMax": 0.0,
+                  "rotationMin": 0.0,
+                  "sizeMax": [
+                    1.0,
+                    1.0
+                  ],
+                  "sizeMin": [
+                    1.0,
+                    1.0
+                  ],
+                  "speedMax": 10.0,
+                  "speedMin": 0.0
+                },
+                "emitDir": [
+                  0.0,
+                  1.0,
+                  0.0
+                ],
+                "emitRate": 1.0,
+                "enabled": true,
+                "filpbookPlayMode": "Loop",
+                "fixedData": {
+                  "rotation": 0.0,
+                  "size": [
+                    1.0,
+                    1.0
+                  ],
+                  "startColor": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0
+                  ]
+                },
+                "holdTime": 5.0,
+                "infinite": 999999.0,
+                "localOffset": [
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                "looping": true,
+                "maxParticles": 256,
+                "particleMode": "Fixed",
+                "playing": false,
+                "position": [
+                  -52.699249267578125,
+                  88.35174560546875,
+                  0.0
+                ],
+                "sheet": {
+                  "baseSizeScale": 20.0,
+                  "cols": 4,
+                  "fps": 8.0,
+                  "frameCount": 8,
+                  "loop": true,
+                  "rows": 2,
+                  "texturePath": "..\\Assets\\Resource\\Effect\\Fire\\f_l.png"
+                },
+                "velocityShape": "Sphere"
+              }
+            ],
+            "enabled": true,
+            "looping": false,
+            "playing": false
+          },
+          "type": "Effect"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 8485,
+      "Name": "AltarDirectEffect_2",
+      "ParentID": 8339,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              53.426116943359375,
+              88.35174560546875,
+              -0.0010986328125
+            ],
+            "Rotation": [
+              -0.0,
+              0.0,
+              -0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "allFinished": false,
+            "emitters": [
+              {
+                "billboard": "ScreenFacing",
+                "burstCount": 1,
+                "coneAngleDeg": 30.0,
+                "duration": 5.0,
+                "dynamicData": {
+                  "angularMax": 0.0,
+                  "angularMin": 0.0,
+                  "colorMax": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0
+                  ],
+                  "colorMin": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0
+                  ],
+                  "lifeMax": 1.0,
+                  "lifeMin": 0.5,
+                  "rotationMax": 0.0,
+                  "rotationMin": 0.0,
+                  "sizeMax": [
+                    1.0,
+                    1.0
+                  ],
+                  "sizeMin": [
+                    1.0,
+                    1.0
+                  ],
+                  "speedMax": 10.0,
+                  "speedMin": 0.0
+                },
+                "emitDir": [
+                  0.0,
+                  1.0,
+                  0.0
+                ],
+                "emitRate": 1.0,
+                "enabled": true,
+                "filpbookPlayMode": "Once_Then_Die",
+                "fixedData": {
+                  "rotation": 0.0,
+                  "size": [
+                    1.0,
+                    1.0
+                  ],
+                  "startColor": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0
+                  ]
+                },
+                "holdTime": 5.0,
+                "infinite": 999999.0,
+                "localOffset": [
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                "looping": false,
+                "maxParticles": 256,
+                "particleMode": "Fixed",
+                "playing": false,
+                "position": [
+                  53.426116943359375,
+                  88.35174560546875,
+                  -0.0010986328125
+                ],
+                "sheet": {
+                  "baseSizeScale": 20.0,
+                  "cols": 2,
+                  "fps": 8.0,
+                  "frameCount": 4,
+                  "loop": false,
+                  "rows": 2,
+                  "texturePath": "..\\Assets\\Resource\\Effect\\Fire\\f_st.png"
+                },
+                "velocityShape": "Sphere"
+              },
+              {
+                "billboard": "ScreenFacing",
+                "burstCount": 1,
+                "coneAngleDeg": 30.0,
+                "duration": 5.0,
+                "dynamicData": {
+                  "angularMax": 0.0,
+                  "angularMin": 0.0,
+                  "colorMax": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0
+                  ],
+                  "colorMin": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0
+                  ],
+                  "lifeMax": 1.0,
+                  "lifeMin": 0.5,
+                  "rotationMax": 0.0,
+                  "rotationMin": 0.0,
+                  "sizeMax": [
+                    1.0,
+                    1.0
+                  ],
+                  "sizeMin": [
+                    1.0,
+                    1.0
+                  ],
+                  "speedMax": 10.0,
+                  "speedMin": 0.0
+                },
+                "emitDir": [
+                  0.0,
+                  1.0,
+                  0.0
+                ],
+                "emitRate": 1.0,
+                "enabled": true,
+                "filpbookPlayMode": "Loop",
+                "fixedData": {
+                  "rotation": 0.0,
+                  "size": [
+                    1.0,
+                    1.0
+                  ],
+                  "startColor": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0
+                  ]
+                },
+                "holdTime": 5.0,
+                "infinite": 999999.0,
+                "localOffset": [
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                "looping": true,
+                "maxParticles": 256,
+                "particleMode": "Fixed",
+                "playing": false,
+                "position": [
+                  53.426116943359375,
+                  88.35174560546875,
+                  -0.0010986328125
+                ],
+                "sheet": {
+                  "baseSizeScale": 20.0,
+                  "cols": 4,
+                  "fps": 8.0,
+                  "frameCount": 8,
+                  "loop": true,
+                  "rows": 2,
+                  "texturePath": "..\\Assets\\Resource\\Effect\\Fire\\f_l.png"
+                },
+                "velocityShape": "Sphere"
+              }
+            ],
+            "enabled": true,
+            "looping": false,
+            "playing": false
+          },
+          "type": "Effect"
         }
       ]
     }
