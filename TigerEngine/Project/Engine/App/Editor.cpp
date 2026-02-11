@@ -641,6 +641,8 @@ GameObject* Editor::InstantiatePrefabFromJson(const std::vector<std::string>& js
         if (created[i] && parentIDs[i] == -1)
             return created[i];
     }
+
+    return nullptr;
 }
 
 void Editor::CollectSubtree(GameObject* root, std::vector<std::string>& out)
