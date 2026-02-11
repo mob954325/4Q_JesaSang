@@ -7,6 +7,7 @@
 #include "../Engine/EngineSystem/SceneSystem.h"
 #include "Util/PrefabUtil.h"
 #include "../Engine//EngineSystem/CameraSystem.h"
+#include "../../02_Script/Ho/Sound/SoundManager.h"
 
 REGISTER_COMPONENT(Player1);
 
@@ -57,6 +58,7 @@ void Player1::OnStart()
     // GameObject* instantiated = PrefabUtil::Instantiate("Test1");
     // instantiated->GetTransform()->SetParent(this->GetOwner()->GetTransform());
     pss = GetOwner()->GetComponent<PlayerSoundSource>();
+    alc = GetOwner()->GetComponent<AudioListenerComponent>();
 }
 
 void Player1::OnDisable()
@@ -119,31 +121,32 @@ void Player1::OnUpdate(float delta)
 
     if (Input::GetKeyDown(DirectX::Keyboard::L))
     {
+        auto curr = SoundManager::Instance().GetGroupSoundVolume("BGM");
+        SoundManager::Instance().SetGroupSoundVolume("BGM", curr - 0.1f );
+
+        if(curr <= 0) 
+            SoundManager::Instance().SetGroupSoundVolume("BGM", 1.0f );
     }
 
     if (Input::GetKeyDown(DirectX::Keyboard::K))
     {
+        auto curr = SoundManager::Instance().GetGroupSoundVolume("SFX");
+        SoundManager::Instance().SetGroupSoundVolume("SFX", curr - 0.1f);
+
+        if (curr <= 0)
+            SoundManager::Instance().SetGroupSoundVolume("SFX", 1.0f);
     }
 
-    // sync 
+    if (Input::GetKeyDown(DirectX::Keyboard::G))
+    {
+        auto curr = SoundManager::Instance().GetMasterVolume();
+        SoundManager::Instance().SetMasterVolume(curr - 0.1f);
 
-    auto pos = GetOwner()->GetTransform()->GetWorldPosition();
-    auto fwd = GetOwner()->GetTransform()->GetForward();
-    auto up = GetOwner()->GetTransform()->GetUp();
-    Vector3 vel = Vector3::Zero;
-    if (hasPrev && delta > 0.0001f)
-        vel = (pos - prevPos) / delta * 0.01f;
+        if (curr <= 0)
+            SoundManager::Instance().SetMasterVolume(1.0f);
+    }
 
-    prevPos = pos;
-    hasPrev = true;
-
-    //AudioTransform t{};
-    //t.position = { pos.x, pos.y, pos.z };       // 위치
-    //t.forward = { fwd.x, fwd.y, fwd.z };        // forward
-    //t.up = { up.x,  up.y,  up.z };              // up vector
-    //t.velocity = { vel.x, vel.y, vel.z };       // "초당 이동량"(world-space). doppler 등에 사용됨. ( 청자(Listener)가 얼마나 / 어느 방향으로 움직이는지 알려주는 값 
-    //
-    //audioClip->SetFallback(t); // AudioListenerComponent가 Update()에서 적용(Engine/Components/AudioListenerComponent.cpp:61)
+    UpdateAudioTransform(delta);
 }
 
 nlohmann::json Player1::Serialize()
@@ -196,4 +199,27 @@ void Player1::Deserialize(nlohmann::json data)
             prop.set_value(*this, data);
         }
     }
+}
+
+void Player1::UpdateAudioTransform(float dt)
+{
+    // sync 
+    if (!alc) return;
+    auto pos = GetOwner()->GetTransform()->GetWorldPosition();
+    auto fwd = GetOwner()->GetTransform()->GetForward();
+    auto up = GetOwner()->GetTransform()->GetUp();
+    Vector3 vel = Vector3::Zero;
+    if (hasPrev && dt > 0.0001f)
+        vel = (pos - prevPos) / dt * 0.01f;
+
+    prevPos = pos;
+    hasPrev = true;
+
+    AudioTransform t{};
+    t.position = { pos.x, pos.y, pos.z };       // 위치
+    t.forward = { fwd.x, fwd.y, fwd.z };        // forward
+    t.up = { up.x,  up.y,  up.z };              // up vector
+    t.velocity = { vel.x, vel.y, vel.z };       // "초당 이동량"(world-space). doppler 등에 사용됨. ( 청자(Listener)가 얼마나 / 어느 방향으로 움직이는지 알려주는 값 
+
+    alc->SetFallback(t); // AudioListenerComponent가 Update()에서 적용(Engine/Components/AudioListenerComponent.cpp:61)
 }

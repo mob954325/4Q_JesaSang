@@ -64,7 +64,7 @@ void Weapon::OnUpdate(float delta)
 
     //listener->SetFallback(t); // AudioListenerComponent가 Update()에서 적용(Engine/Components/AudioListenerComponent.cpp:61)
 
-    if (ess)ess->UpdateAudioTransform();
+    if (ess)ess->UpdateAudioTransform(delta);
     timer += delta;
     if (timer > 1.0f)
     {

@@ -26,9 +26,16 @@ public:
     float g = 0.0f;
     float b = 0.0f;
 
+    float bgmValue = 1.0f;
+    float sfxValue = 1.0f;
+    float masterValue = 1.0f;
+
 private:
     PlayerSoundSource* pss;
+    AudioListenerComponent* alc;
     Vector3 prevPos{};
     bool hasPrev = false;
+
+    void UpdateAudioTransform(float dt);
 };
 
