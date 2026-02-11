@@ -9,6 +9,7 @@
 
 enum class Step4Phase
 {
+    ShowQuest,
     AdultInComeA,
     AdultInComeB,
     AdultArrive,
@@ -65,6 +66,10 @@ private:
     float failFadeTimer = 0.0f;
     float failFadeMaxTime = 3.0f;   // 3초 동안 어두워짐
     bool failStarted = false;
+
+
+    // Quest
+    GameObject* Quest = nullptr;
 
 private:
     void AdultInComeA();

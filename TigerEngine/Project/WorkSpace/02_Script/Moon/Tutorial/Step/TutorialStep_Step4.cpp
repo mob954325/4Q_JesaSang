@@ -2,16 +2,19 @@
 
 #include "System/InputSystem.h"
 #include "System/TimeSystem.h"
+
 #include "Manager/WorldManager.h"
+//#include "Manager/QuestManager.h"
 
 #include "EngineSystem/SceneSystem.h"
 #include "../../../Woo/Player/PlayerController.h"
+#include "../../../Woo/UI/MainGameUIManager.h"
 
 void TutorialStep_Step4::Enter()
 {
     isDone = false;
     step4Timer = 0.0f;
-    phase = Step4Phase::AdultInComeA;
+    phase = Step4Phase::ShowQuest;
     phaseStarted = false;
 
     hideObject = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("HideObject");
@@ -50,6 +53,26 @@ void TutorialStep_Step4::Enter()
     if (frozenImage)
         frozenImage->SetActive(false);
 
+    // 퀘스트 창
+    //Quest = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("Quest");
+    //Quest->GetComponent<RectTransform>()->SetPos({ 1920.0f, 25.0f, 0.f });
+
+    if (auto ui = MainGameUIManager::Instance())
+    {
+        ui->QuestPannelClose(0.0f);  // 즉시 닫힘 위치로 이동
+        ui->TickQuestPanel(0.0f);    // 바로 적용
+
+        ui->UpdateQuestTitle(L"[Tutorial] Hide");
+        ui->UpdateQuestLable(L"You Should Hide");
+        ui->SetQuestTitleOn(true);
+        ui->SetQuestLableOn(true);
+        ui->SetQuestCheakboxOn(false);
+        ui->SetQuestLineOn(false);
+
+        ui->QuestPannelOpen(1.0f);  // 1초 슬라이드
+    }
+
+
     std::cout << "[Step4] Enter" << std::endl;
 }
 
@@ -57,8 +80,25 @@ void TutorialStep_Step4::Update(float deltaTime)
 {
     step4Timer += deltaTime;
 
+    if (auto ui = MainGameUIManager::Instance())
+    {
+        ui->TickQuestPanel(deltaTime);
+    }
+
     switch (phase)
     {
+    case Step4Phase::ShowQuest:
+
+        if (step4Timer >= 3.0f)   // 퀘스트 창 3초 보여주기
+        {
+            step4Timer = 0.0f;
+            if (auto ui = MainGameUIManager::Instance())
+            {
+                ui->QuestPannelClose(1.0f);  // 1초 동안 닫기
+            }
+            phase = Step4Phase::AdultInComeA;
+        }
+        break;
     case Step4Phase::AdultInComeA: AdultInComeA(); break;
     case Step4Phase::AdultInComeB: AdultInComeB(); break;
     case Step4Phase::AdultArrive:  AdultArrive();  break;
