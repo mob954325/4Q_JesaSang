@@ -119,15 +119,15 @@ void ScriptSystem::FixedUpdate(float dt)
 {
     if (PlayModeSystem::Instance().IsPlaying())
     {
+        for (auto& e : pending_scriptComponents)
+        {
+            scriptComps.push_back(e);
+        }
+        pending_scriptComponents.clear();
+
         // 사용자 정의 component update
         for (auto& e : scriptComps)
         {
-            for (auto& e : pending_scriptComponents)
-            {
-                scriptComps.push_back(e);
-            }
-            pending_scriptComponents.clear();
-
             e->OnFixedUpdate(dt);
         }
     }
@@ -137,15 +137,15 @@ void ScriptSystem::LateUpdate(float dt)
 {
     if (PlayModeSystem::Instance().IsPlaying())
     {
+        for (auto& e : pending_scriptComponents)
+        {
+            scriptComps.push_back(e);
+        }
+        pending_scriptComponents.clear();
+
         // 사용자 정의 component update
         for (auto& e : scriptComps)
         {
-            for (auto& e : pending_scriptComponents)
-            {
-                scriptComps.push_back(e);
-            }
-            pending_scriptComponents.clear();
-
             e->OnLateUpdate(dt);
         }
     }
