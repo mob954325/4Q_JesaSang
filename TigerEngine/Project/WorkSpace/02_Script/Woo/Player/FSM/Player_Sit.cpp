@@ -11,6 +11,9 @@ void Player_Sit::Enter()
     // set moved dir
     player->lookDir = Vector3::Zero;
 
+    // set animation
+    player->animController->ChangeState("Idle");
+
     // set sense radius
     player->curSenseRadius = player->sitSenseRadius;
     if (player->inventory->GetCurItemType() == ItemType::Ingredient)

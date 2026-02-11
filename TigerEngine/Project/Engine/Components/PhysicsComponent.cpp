@@ -32,7 +32,7 @@ RTTR_REGISTRATION
             rttr::value("World", CollisionLayer::World),
             rttr::value("Trigger", CollisionLayer::Trigger),
             rttr::value("Projectile", CollisionLayer::Projectile),
-            rttr::value("Ball", CollisionLayer::Ball),
+            rttr::value("Vision", CollisionLayer::Vision),
             rttr::value("Ground", CollisionLayer::Ground)
             );
 
@@ -70,6 +70,7 @@ void PhysicsComponent::Deserialize(nlohmann::json data)
     d.localOffset = m_LocalOffset;
     d.isTrigger = m_IsTrigger;
     CreateCollider(m_ColliderType, m_BodyType, d);
+    SetLayer(m_Layer);
 
     PhysicsSystem::Instance().RegisterComponent(this, m_Actor);
 
@@ -152,7 +153,6 @@ void PhysicsComponent::OnStart()
 
 void PhysicsComponent::Enable_Inner()
 {
-    // NOTE : PVD 테스트 안함
     if (m_firstRegister)
     {
         ColliderDesc d;
@@ -163,6 +163,7 @@ void PhysicsComponent::Enable_Inner()
         d.localOffset = m_LocalOffset;
         d.isTrigger = m_IsTrigger;
         CreateCollider(m_ColliderType, m_BodyType, d);
+        SetLayer(m_Layer);
 
         PhysicsSystem::Instance().RegisterComponent(this, m_Actor); 
     }

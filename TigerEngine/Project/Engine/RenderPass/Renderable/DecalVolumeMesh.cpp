@@ -30,6 +30,14 @@ void DecalVolumeMesh::Draw(ComPtr<ID3D11DeviceContext>&context, Decal* decal) co
     sm.decalCBData.upThreshold = decal->upThreshold;
     sm.decalCBData.tiling = decal->tiling;
     sm.decalCBData.offset = decal->offset;
+    sm.decalCBData.decalType = (int)decal->type;
+    sm.decalCBData.ringStartTime = decal->ringStartTime;
+    sm.decalCBData.ringDuration = decal->ringDuration;
+    sm.decalCBData.ringMaxRadius = decal->ringMaxRadius;
+    sm.decalCBData.ringSpeed = decal->ringSpeed;
+    sm.decalCBData.ringThickness = decal->ringThickness;
+    sm.decalCBData.ringFeather = decal->ringFeather;
+    sm.decalCBData.ringColor = decal->ringColor;
     context->UpdateSubresource(sm.decalCB.Get(), 0, nullptr, &sm.decalCBData, 0, 0);
 
     // VB, IB

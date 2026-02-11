@@ -10,6 +10,7 @@
 #include "Manager/WorldManager.h"
 #include "Manager/UIManager.h"
 #include "Manager/TextureResourceManager.h"
+#include "Manager/UIManager.h"
 
 #include "Entity/Object.h"
 #include "Object/GameObject.h"
@@ -23,13 +24,14 @@
 #include "EngineSystem/DecalSystem.h"
 #include "EngineSystem/GridSystem.h"
 #include "EngineSystem/AgentSystem.h"
+#include "EngineSystem/EffectSystem.h"
 
 #include "Components/FBXData.h"
 
 namespace fs = std::filesystem;
 
 EngineApp::EngineApp(HINSTANCE hInstance)
-	: GameApp(hInstance)
+    : GameApp(hInstance)
 {
 }
 
@@ -41,7 +43,7 @@ EngineApp::~EngineApp()
 
 bool EngineApp::OnInitialize()
 {
-	RegisterAllComponents();
+    RegisterAllComponents();
 
 	// == init renderer ==
 	dxRenderer = std::static_pointer_cast<DirectX11Renderer>(renderer); 
@@ -66,6 +68,7 @@ bool EngineApp::OnInitialize()
     sm.deviceContext = dxRenderer->GetDeviceContext();
 
     UIManager::Instance().SetSize(clientWidth, clientHeight);
+    UIManager::Instance().Init(dxRenderer->GetDevice(), dxRenderer->GetDeviceContext());
     TextureResourceManager::Instance().Init(dxRenderer->GetDevice(), dxRenderer->GetDeviceContext());
 
     renderQueue = std::make_unique<RenderQueue>();
@@ -77,11 +80,11 @@ bool EngineApp::OnInitialize()
 	editor->GetRTV(dxRenderer->GetBackBufferRTV());
     editor->CreatePickingStagingTex();
 
-	SceneSystem::Instance().AddScene();			    	// create first scene
-	SceneSystem::Instance().SetCurrentSceneByIndex(); 	// render first scene
+    SceneSystem::Instance().AddScene();			    	// create first scene
+    SceneSystem::Instance().SetCurrentSceneByIndex(); 	// render first scene
 
-	// create free camera
-	CameraSystem::Instance().SetScreenSize(clientWidth, clientHeight);
+    // create free camera
+    CameraSystem::Instance().SetScreenSize(clientWidth, clientHeight);
 
     // == find scene ==
     LoadSavedFirstScene(); // SceneClear 호출해서 객채 생성은 이 코드 이후에 해야함 
@@ -89,8 +92,8 @@ bool EngineApp::OnInitialize()
     auto freeCamHandle = CameraSystem::Instance().CreateFreeCamera(clientWidth, clientHeight, SceneSystem::Instance().GetCurrentScene().get());
 
 
-	// == init renderpass ==
-	// NOTE : 랜더링하는 순서대로 추가 할 것
+    // == init renderpass ==
+    // NOTE : 랜더링하는 순서대로 추가 할 것
     shadowPass = std::make_unique<ShadowPass>();
     geometryPass = std::make_unique<GeometryPass>();
     decalPass = std::make_unique<DecalPass>();
@@ -101,6 +104,7 @@ bool EngineApp::OnInitialize()
     postProcessPass = std::make_unique<PostProcessPass>();
     frustumPass = std::make_unique<FrustumPass>();
     uiPass = std::make_unique<UIRenderPass>();
+    effectPass = std::make_unique<EffectPass>();
 
     shadowPass->Init();
     geometryPass->Init();
@@ -112,19 +116,22 @@ bool EngineApp::OnInitialize()
     postProcessPass->Init();
     frustumPass->Init(dxRenderer->GetDevice(), dxRenderer->GetDeviceContext());
     uiPass->Init(dxRenderer->GetDevice());
+    effectPass->Init(dxRenderer->GetDevice());
 
     // == init world data ==
-	//WorldManager::Instance().shaderResourceView = shadowPass->GetShadowSRV();
+    //WorldManager::Instance().shaderResourceView = shadowPass->GetShadowSRV();
 
- 
+
 
     // PlayModeSystem::Instance().SetPlayMode(PlayModeState::Playing);
 
-	return true;
+    return true;
 }
 
 void EngineApp::OnPreUpdate()
 {
+    if (SceneSystem::Instance().isSceneChanging) SceneSystem::Instance().isSceneChanging = false; // NOTE : 플래그 활성화 되어있으면 비활성화 하기
+
     ScriptSystem::Instance().CheckReadyQueue();
     RenderSystem::Instance().CheckReadyQueue();
 }
@@ -132,16 +139,17 @@ void EngineApp::OnPreUpdate()
 void EngineApp::OnUpdate()
 {
     Camera* curCam;
-    //if(PlayModeSystem::Instance().IsPlaying())
-    //    curCam = CameraSystem::Instance().GetCurrCamera();
-    //else
+    if (PlayModeSystem::Instance().IsPlaying())
+        curCam = CameraSystem::Instance().GetCurrCamera();
+    else
         curCam = CameraSystem::Instance().GetFreeCamera();
 
-	SceneSystem::Instance().BeforUpdate();	
-	CameraSystem::Instance().FreeCameraUpdate(GameTimer::Instance().DeltaTime());
-	CameraSystem::Instance().LightCameraUpdate(GameTimer::Instance().DeltaTime());
-	WorldManager::Instance().Update(dxRenderer->GetDeviceContext(), curCam, clientWidth, clientHeight);
-	SceneSystem::Instance().UpdateScene(GameTimer::Instance().DeltaTime());
+    SceneSystem::Instance().BeforUpdate();
+    CameraSystem::Instance().FreeCameraUpdate(GameTimer::Instance().DeltaTime());
+    CameraSystem::Instance().LightCameraUpdate(GameTimer::Instance().DeltaTime());
+    WorldManager::Instance().Update(dxRenderer->GetDeviceContext(), curCam, clientWidth, clientHeight);
+    SceneSystem::Instance().UpdateScene(GameTimer::Instance().DeltaTime());
+    EffectSystem::Instance().Update();
     AudioManager::Instance().Update();
     AnimationSystem::Instance().Update(GameTimer::Instance().DeltaTime());
 
@@ -150,9 +158,9 @@ void EngineApp::OnUpdate()
 
 void EngineApp::OnRender()
 {
-	BeginRender(); 					// 업데이트 준비
+    BeginRender(); 					// 업데이트 준비
 
-    RenderSystem::Instance().Render(*renderQueue);
+    RenderSystem::Instance().Render(*renderQueue);  // 렌더 컴포넌트
 
     // Default CB Setting
     {
@@ -190,6 +198,12 @@ void EngineApp::OnRender()
     //else
         curCam = CameraSystem::Instance().GetFreeCamera();
 
+    // NOTE : 렌더 패스 처리하기전에 씬을 교체하는지 확인하고 교체하면 큐 클리어
+    if(SceneSystem::Instance().isSceneChanging)
+    {
+        renderQueue->Clear();
+    }
+
     // render pass
     dxRenderer->ProcessScene(*renderQueue, *shadowPass, curCam);
     dxRenderer->ProcessScene(*renderQueue, *geometryPass, curCam);
@@ -197,6 +211,7 @@ void EngineApp::OnRender()
     dxRenderer->ProcessScene(*renderQueue, *lightPass, curCam);
     dxRenderer->ProcessScene(*renderQueue, *skyboxPass, curCam);
     dxRenderer->ProcessScene(*renderQueue, *forwardTransparentPass, curCam);
+    dxRenderer->ProcessScene(*renderQueue, *effectPass, curCam);    // note : 26.02.09 파티클 패스
     dxRenderer->ProcessScene(*renderQueue, *bloomPass, curCam);
     dxRenderer->ProcessScene(*renderQueue, *postProcessPass, curCam);
     dxRenderer->ProcessScene(*renderQueue, *uiPass, curCam);
@@ -206,7 +221,7 @@ void EngineApp::OnRender()
 	imguiRenderer->Render();		// imgui 렌더링
 	editor->RenderEnd(dxRenderer->GetDeviceContext());
 
-	EndRender(); 					// 업데이트 마무리
+    EndRender(); 					// 업데이트 마무리
 }
 
 void EngineApp::OnFixedUpdate()
@@ -227,6 +242,7 @@ void EngineApp::OnFixedUpdate()
             PhysicsSystem::Instance().Simulate(fixedDt);
             AgentSystem::Instance().FixedUpdate(fixedDt);
         }
+        GridSystem::Instance().FixedUpdate(fixedDt);
 
         m_PhysicsAccumulator -= fixedDt;
     }
@@ -369,10 +385,10 @@ LRESULT EngineApp::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam
         break;
     }
 
-	return __super::WndProc(hWnd, message, wParam, lParam);
+    return __super::WndProc(hWnd, message, wParam, lParam);
 }
 
-void EngineApp::OnInputProcess(const Keyboard::State &KeyState, const Keyboard::KeyboardStateTracker &KeyTracker, const Mouse::State &MouseState, const Mouse::ButtonStateTracker &MouseTracker)
+void EngineApp::OnInputProcess(const Keyboard::State& KeyState, const Keyboard::KeyboardStateTracker& KeyTracker, const Mouse::State& MouseState, const Mouse::ButtonStateTracker& MouseTracker)
 {
 	__super::OnInputProcess(KeyState, KeyTracker, MouseState, MouseTracker);
 	editor->OnInputProcess(KeyState, KeyTracker, MouseState, MouseTracker);
@@ -401,13 +417,11 @@ void EngineApp::OnInputProcess(const Keyboard::State &KeyState, const Keyboard::
 #include "99_Test/PhysicsTest/PhysicsTestScript.h"
 #include "99_Test/PhysicsTest/GroundTestScript.h"
 #include "99_Test/PhysicsTest/CCTTest.h"
-#include "99_Test/AudioTest/AudioTestController.h"
-#include "99_Test/AudioTest/AudioManagerComponent.h"
-#include "99_Test/MiniMapTest/MiniMapTestScript.h"
-
 
 #include "Components/UI/Image.h"
 #include "Components/RectTransform.h"
+#include "Components/UI/TextUI.h"
+#include "RenderPass/ParticleSource/Effect.h"
 
 void EngineApp::RegisterAllComponents()
 {
@@ -423,9 +437,6 @@ void EngineApp::RegisterAllComponents()
 
     cf.Register<AudioListenerComponent>("AudioListenerComponent", ComponentCategory::Audio);
     cf.Register<AudioSourceComponent>("AudioSourceComponent", ComponentCategory::Audio);
-    cf.Register<AudioTestController>("AudioTestController", ComponentCategory::Script);
-    cf.Register<AudioManagerComponent>("AudioManagerComponent", ComponentCategory::Script);
-    cf.Register<MiniMapTestScript>("MiniMapTestScript", ComponentCategory::Script);
 
     cf.Register<PhysicsComponent>("PhysicsComponent", ComponentCategory::Physics);
     cf.Register<CharacterControllerComponent>("CharacterControllerComponent", ComponentCategory::Physics);
@@ -449,7 +460,7 @@ void EngineApp::RegisterAllComponents()
 }
 
 void EngineApp::Woo_Registeration()
-{    
+{
 }
 
 void EngineApp::Moon_Registeration()
@@ -463,4 +474,8 @@ void EngineApp::Ron_Registeration()
 
 void EngineApp::Ho_Registeration()
 {
+    auto& cf = ComponentFactory::Instance();
+
+    cf.Register<TextUI>("TextUI", ComponentCategory::UI);
+    cf.Register<Effect>("Effect", ComponentCategory::Other);
 }

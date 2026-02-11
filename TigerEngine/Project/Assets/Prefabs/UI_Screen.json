@@ -1,0 +1,1453 @@
+{
+  "prefab": [
+    {
+      "Active": true,
+      "ID": 8451,
+      "Name": "UI_Screen",
+      "ParentID": -1,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Pivot": [
+              0.0,
+              0.0
+            ],
+            "Pos": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "Size": [
+              1920.0,
+              1080.0
+            ]
+          },
+          "type": "RectTransform"
+        }
+      ]
+    },
+    {
+      "Active": false,
+      "ID": 8452,
+      "Name": "PausePannel",
+      "ParentID": 8451,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "Pivot": [
+              0.5,
+              0.5
+            ],
+            "Pos": [
+              960.0,
+              480.0,
+              0.0
+            ],
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "Size": [
+              900.0,
+              500.0
+            ]
+          },
+          "type": "RectTransform"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "color": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "drawSpacetype": "Screen",
+            "fillAmount": 1.0,
+            "imageType": "Simple",
+            "isBillboard": false,
+            "isMouseCheck": false,
+            "path": "..\\Assets\\Resource\\UI\\Game_Mini_01.png",
+            "sliceBorderPx": [
+              40.0,
+              40.0,
+              40.0,
+              40.0
+            ],
+            "type": "Simple",
+            "zOrder": 0
+          },
+          "type": "Image"
+        }
+      ]
+    },
+    {
+      "Active": false,
+      "ID": 8453,
+      "Name": "Button_StopNo",
+      "ParentID": 8452,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "Pivot": [
+              0.5,
+              0.5
+            ],
+            "Pos": [
+              330.0,
+              480.0,
+              0.0
+            ],
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "Size": [
+              200.0,
+              100.0
+            ]
+          },
+          "type": "RectTransform"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "color": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "drawSpacetype": "Screen",
+            "fillAmount": 1.0,
+            "imageType": "Simple",
+            "isBillboard": false,
+            "isMouseCheck": true,
+            "path": "..\\Assets\\Resource\\UI\\no.png",
+            "sliceBorderPx": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "type": "Simple",
+            "zOrder": 1
+          },
+          "type": "Image"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "normalImagePath": "",
+            "pressedImagePath": "..\\Assets\\Resource\\UI\\no_click.png"
+          },
+          "type": "Button_PausePannelOff"
+        }
+      ]
+    },
+    {
+      "Active": false,
+      "ID": 8454,
+      "Name": "Button_StopYes",
+      "ParentID": 8452,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "Pivot": [
+              0.5,
+              0.5
+            ],
+            "Pos": [
+              600.0,
+              480.0,
+              0.0
+            ],
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "Size": [
+              200.0,
+              100.0
+            ]
+          },
+          "type": "RectTransform"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "color": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "drawSpacetype": "Screen",
+            "fillAmount": 1.0,
+            "imageType": "Simple",
+            "isBillboard": false,
+            "isMouseCheck": true,
+            "path": "..\\Assets\\Resource\\UI\\yes.png",
+            "sliceBorderPx": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "type": "Simple",
+            "zOrder": 1
+          },
+          "type": "Image"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "normalImagePath": "",
+            "pressedImagePath": "..\\Assets\\Resource\\UI\\yes_click.png",
+            "targetScenePath": "..\\Assets\\Scenes\\01_StartScene.json"
+          },
+          "type": "Button_SceneChagne"
+        }
+      ]
+    },
+    {
+      "Active": false,
+      "ID": 8455,
+      "Name": "Text_Stop",
+      "ParentID": 8452,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "Pivot": [
+              0.5,
+              0.5
+            ],
+            "Pos": [
+              450.0,
+              240.0,
+              0.0
+            ],
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "Size": [
+              1.0,
+              1.0
+            ]
+          },
+          "type": "RectTransform"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "alignType": "Left",
+            "atlasH": 2048,
+            "atlasW": 2048,
+            "color": [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "drawSpacetype": "Screen",
+            "fontPath": "../Assets/Resource/font/Shilla_Culture(B).ttf",
+            "fontSize": 80,
+            "isBillboard": false,
+            "paddingPx": 1,
+            "text": "나가시겠습니까?",
+            "zOrder": 1
+          },
+          "type": "TextUI"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 8458,
+      "Name": "PlayerLife",
+      "ParentID": 8451,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Pivot": [
+              0.0,
+              0.0
+            ],
+            "Pos": [
+              37.79999923706055,
+              897.0999755859375,
+              0.0
+            ],
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "Size": [
+              310.5,
+              150.0
+            ]
+          },
+          "type": "RectTransform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "color": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "drawSpacetype": "Screen",
+            "fillAmount": 1.0,
+            "imageType": "Sliced",
+            "isBillboard": false,
+            "isMouseCheck": false,
+            "path": "..\\Assets\\Resource\\UI\\Player\\strength_line.png",
+            "sliceBorderPx": [
+              50.0,
+              50.0,
+              50.0,
+              50.0
+            ],
+            "type": "Sliced",
+            "zOrder": 0
+          },
+          "type": "Image"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 8459,
+      "Name": "Image_Life1",
+      "ParentID": 8458,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Pivot": [
+              0.5,
+              0.5
+            ],
+            "Pos": [
+              50.0,
+              70.0,
+              0.0
+            ],
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "Size": [
+              40.0,
+              90.0
+            ]
+          },
+          "type": "RectTransform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "color": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "drawSpacetype": "Screen",
+            "fillAmount": 1.0,
+            "imageType": "Simple",
+            "isBillboard": false,
+            "isMouseCheck": false,
+            "path": "..\\Assets\\Resource\\UI\\Player\\strength.png",
+            "sliceBorderPx": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "type": "Simple",
+            "zOrder": 0
+          },
+          "type": "Image"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 8460,
+      "Name": "Image_Life2",
+      "ParentID": 8458,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Pivot": [
+              0.5,
+              0.5
+            ],
+            "Pos": [
+              100.0,
+              70.0,
+              0.0
+            ],
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "Size": [
+              40.0,
+              90.0
+            ]
+          },
+          "type": "RectTransform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "color": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "drawSpacetype": "Screen",
+            "fillAmount": 1.0,
+            "imageType": "Simple",
+            "isBillboard": false,
+            "isMouseCheck": false,
+            "path": "..\\Assets\\Resource\\UI\\Player\\strength.png",
+            "sliceBorderPx": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "type": "Simple",
+            "zOrder": 0
+          },
+          "type": "Image"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 8461,
+      "Name": "Image_Life3",
+      "ParentID": 8458,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Pivot": [
+              0.5,
+              0.5
+            ],
+            "Pos": [
+              150.0,
+              70.0,
+              0.0
+            ],
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "Size": [
+              40.0,
+              90.0
+            ]
+          },
+          "type": "RectTransform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "color": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "drawSpacetype": "Screen",
+            "fillAmount": 1.0,
+            "imageType": "Simple",
+            "isBillboard": false,
+            "isMouseCheck": false,
+            "path": "..\\Assets\\Resource\\UI\\Player\\strength.png",
+            "sliceBorderPx": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "type": "Simple",
+            "zOrder": 0
+          },
+          "type": "Image"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 8462,
+      "Name": "Image_Life4",
+      "ParentID": 8458,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Pivot": [
+              0.5,
+              0.5
+            ],
+            "Pos": [
+              200.0,
+              70.0,
+              0.0
+            ],
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "Size": [
+              40.0,
+              90.0
+            ]
+          },
+          "type": "RectTransform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "color": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "drawSpacetype": "Screen",
+            "fillAmount": 1.0,
+            "imageType": "Simple",
+            "isBillboard": false,
+            "isMouseCheck": false,
+            "path": "..\\Assets\\Resource\\UI\\Player\\strength.png",
+            "sliceBorderPx": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "type": "Simple",
+            "zOrder": 0
+          },
+          "type": "Image"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 8463,
+      "Name": "Image_Life5",
+      "ParentID": 8458,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Pivot": [
+              0.5,
+              0.5
+            ],
+            "Pos": [
+              250.0,
+              70.0,
+              0.0
+            ],
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "Size": [
+              40.0,
+              90.0
+            ]
+          },
+          "type": "RectTransform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "color": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "drawSpacetype": "Screen",
+            "fillAmount": 1.0,
+            "imageType": "Simple",
+            "isBillboard": false,
+            "isMouseCheck": false,
+            "path": "..\\Assets\\Resource\\UI\\Player\\strength.png",
+            "sliceBorderPx": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "type": "Simple",
+            "zOrder": 0
+          },
+          "type": "Image"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 8467,
+      "Name": "Quest",
+      "ParentID": 8451,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Pivot": [
+              0.0,
+              1.0
+            ],
+            "Pos": [
+              1420.0,
+              250.0,
+              0.0
+            ],
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "Size": [
+              500.0,
+              150.0
+            ]
+          },
+          "type": "RectTransform"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 8468,
+      "Name": "Image_QuestBackground",
+      "ParentID": 8467,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Pivot": [
+              0.0,
+              0.0
+            ],
+            "Pos": [
+              4.400000095367432,
+              0.0,
+              0.0
+            ],
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "Size": [
+              500.0,
+              150.0
+            ]
+          },
+          "type": "RectTransform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "color": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "drawSpacetype": "Screen",
+            "fillAmount": 1.0,
+            "imageType": "Simple",
+            "isBillboard": false,
+            "isMouseCheck": false,
+            "path": "..\\Assets\\Resource\\UI\\Quest\\Game_Mini_01.png",
+            "sliceBorderPx": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "type": "Simple",
+            "zOrder": 0
+          },
+          "type": "Image"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 8469,
+      "Name": "Text_QuestTitle",
+      "ParentID": 8467,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Pivot": [
+              0.0,
+              0.5
+            ],
+            "Pos": [
+              63.20000076293945,
+              56.29999923706055,
+              0.0
+            ],
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "Size": [
+              1.0,
+              1.0
+            ]
+          },
+          "type": "RectTransform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "alignType": "Left",
+            "atlasH": 2048,
+            "atlasW": 2048,
+            "color": [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "drawSpacetype": "Screen",
+            "fontPath": "../Assets/Resource/font/rotteMedium.ttf",
+            "fontSize": 25,
+            "isBillboard": false,
+            "paddingPx": 1,
+            "text": "[퀘스트제목] 뭐뭐해라",
+            "zOrder": 0
+          },
+          "type": "TextUI"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 8470,
+      "Name": "Text_QuestLabel",
+      "ParentID": 8467,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Pivot": [
+              0.0,
+              0.5
+            ],
+            "Pos": [
+              80.5999984741211,
+              94.0999984741211,
+              0.0
+            ],
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "Size": [
+              1.0,
+              1.0
+            ]
+          },
+          "type": "RectTransform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "alignType": "Left",
+            "atlasH": 2048,
+            "atlasW": 2048,
+            "color": [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "drawSpacetype": "Screen",
+            "fontPath": "../Assets/Resource/font/rotteMedium.ttf",
+            "fontSize": 18,
+            "isBillboard": false,
+            "paddingPx": 1,
+            "text": "어쩌구저쩌구 설명 설명",
+            "zOrder": 0
+          },
+          "type": "TextUI"
+        }
+      ]
+    },
+    {
+      "Active": false,
+      "ID": 8471,
+      "Name": "Image_QuestCheckbox",
+      "ParentID": 8467,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "Pivot": [
+              0.0,
+              0.5
+            ],
+            "Pos": [
+              52.70000076293945,
+              88.69999694824219,
+              0.0
+            ],
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "Size": [
+              30.0,
+              30.0
+            ]
+          },
+          "type": "RectTransform"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "color": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "drawSpacetype": "Screen",
+            "fillAmount": 1.0,
+            "imageType": "Simple",
+            "isBillboard": false,
+            "isMouseCheck": false,
+            "path": "..\\Assets\\Resource\\UI\\Quest\\v.png",
+            "sliceBorderPx": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "type": "Simple",
+            "zOrder": 0
+          },
+          "type": "Image"
+        }
+      ]
+    },
+    {
+      "Active": false,
+      "ID": 8472,
+      "Name": "Image_QuestLine",
+      "ParentID": 8467,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "Pivot": [
+              0.0,
+              0.5
+            ],
+            "Pos": [
+              78.5999984741211,
+              92.5999984741211,
+              0.0
+            ],
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "Size": [
+              250.0,
+              3.0
+            ]
+          },
+          "type": "RectTransform"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "color": [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "drawSpacetype": "Screen",
+            "fillAmount": 1.0,
+            "imageType": "Simple",
+            "isBillboard": false,
+            "isMouseCheck": false,
+            "path": "..\\Assets\\Resource\\UI\\Quest\\sound_Gauge_bar.png",
+            "sliceBorderPx": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "type": "Simple",
+            "zOrder": 0
+          },
+          "type": "Image"
+        }
+      ]
+    }
+  ]
+}

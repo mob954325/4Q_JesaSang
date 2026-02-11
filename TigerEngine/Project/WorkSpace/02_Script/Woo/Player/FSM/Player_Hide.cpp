@@ -7,6 +7,9 @@
 
 void Player_Hide::Enter()
 {
+    // set animation
+    player->animController->ChangeState("Idle");
+
     // player render off
     player->fbxRenderer->SetActive(false);
     player->visualizer->VisualRenderOff();
@@ -26,10 +29,17 @@ void Player_Hide::Enter()
 
 void Player_Hide::ChangeStateLogic()
 {
-    if(Input::GetKeyDown(player->interaction_Key))
+    if (Input::GetKeyDown(player->interaction_Key))
     {
-        player->curHideObject->StopHide();      // 중단할때만 종료 로직 추가
-        player->ChangeState(PlayerState::Idle);
+        player->curHideObject->StopHide();
+
+        // Hit에서 Hide로 들어온 경우에만 Hit로 복귀
+        if (player->resumeHitAfterHide && player->hitTimer < player->hitDuration)
+            player->ChangeState(PlayerState::Hit);
+        else
+            player->ChangeState(PlayerState::Idle);
+
+        player->resumeHitAfterHide = false;
     }
 }
 

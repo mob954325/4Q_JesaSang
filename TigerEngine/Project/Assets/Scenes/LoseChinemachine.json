@@ -1,0 +1,76 @@
+{
+  "prefab": [
+    {
+      "Active": true,
+      "ID": 93,
+      "Name": "LoseCinemahcine",
+      "ParentID": -1,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              358.8431396484375,
+              169.77462768554688,
+              0.0
+            ],
+            "Rotation": [
+              -0.0,
+              0.0,
+              -0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true
+          },
+          "type": "LoseCinemachine"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 95,
+      "Name": "LoseCinemachineCamera",
+      "ParentID": 93,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              90.6650390625,
+              -100.174072265625
+            ],
+            "Rotation": [
+              0.7710050344467163,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              0.9999992251396179,
+              0.9999992251396179
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "angle": 1.5707963705062866,
+            "farDist": 1800.0,
+            "moveSpeed": 100.0,
+            "nearDist": 70.0,
+            "rotSpeed": 0.004000000189989805
+          },
+          "type": "Camera"
+        }
+      ]
+    }
+  ]
+}

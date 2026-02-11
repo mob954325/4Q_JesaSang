@@ -8,6 +8,7 @@
 #include "System/InputSystem.h"
 #include "EngineSystem/PhysicsSystem.h"
 #include "EngineSystem/CameraSystem.h"
+#include "RenderPass/ParticleSource/Effect.h"
 
 #include "FSM/IPlayerState.h"
 #include "FSM/Player_Idle.h"
@@ -29,7 +30,13 @@
 #include "../JesaSang/JesaSangManager.h"
 #include "../Altar/AltarManager.h"
 #include "PlayerItemVisualizer.h"
+#include "PlayerThreatMonitor.h"
+#include "DialogueUI/DialogueUIController.h"
 #include "../Manager/GameManager.h"
+#include "../Manager/QuestManager.h"
+#include "../UI/MainGameUIManager.h"
+#include "../CookingZone/CookingZone.h"
+#include "../../Ron/MiniMapTest/MiniMapManager.h"
 
 
 REGISTER_COMPONENT(PlayerController)
@@ -47,17 +54,29 @@ void PlayerController::OnStart()
     // get components
     transform = GetOwner()->GetComponent<Transform>();
     fbxRenderer = GetOwner()->GetComponent<FBXRenderer>();
+    fbxData = GetOwner()->GetComponent<FBXData>();
+    animController = GetOwner()->GetComponent<AnimationController>();
+    fireEffect = GetOwner()->GetChildByName("Player_FireEffect")->GetOwner()->GetComponent<Effect>();
+    hitEffect = GetOwner()->GetChildByName("Player_HitEffect")->GetOwner()->GetComponent<AnimationController>();
+
     cct = GetOwner()->GetComponent<CharacterControllerComponent>();
     inventory = GetOwner()->GetComponent<Inventory>();
     visualizer = GetOwner()->GetComponent<PlayerItemVisualizer>();
+    threatMonitor = GetOwner()->GetComponent<PlayerThreatMonitor>();
+    dialogueController = GetOwner()->GetComponent<DialogueUIController>();
     
     camController = CameraSystem::Instance().GetCurrCamera()->GetOwner()->GetComponent<CameraController>();
 
     // debug
-    if (!fbxRenderer || !cct || !inventory || !camController)
+    if (!fbxRenderer || !cct || !inventory || !camController || !fbxData || 
+        !animController || !dialogueController || !fireEffect || !hitEffect ||
+        !threatMonitor || !visualizer)
     {
         cout << "[Player] Missing COmponet!" << endl;
     }
+
+    // load animation
+    LoadAnimation();
 
     // init fsm
     InitFSMStates();
@@ -82,11 +101,26 @@ void PlayerController::OnUpdate(float delta)
     // interaction cheak
     InteractionCheak(delta);
 
+    // hit duration
+    UpsateHitDuration(delta);
+
     // ----- test --------------
     // ai attack test
-    if (Input::GetKeyDown(Keyboard::Q))
+    if (Input::GetKeyDown(Keyboard::P))
     {
         TakeAttack();
+    }
+
+    // quarter view
+    if (Input::GetKeyDown(Keyboard::O))
+    {
+        camController->SetViewMode(CameraController::ViewMode::Quarter);
+    }
+
+    // front view
+    if (Input::GetKeyDown(Keyboard::I))
+    {
+        camController->SetViewMode(CameraController::ViewMode::Front);
     }
 }
 
@@ -177,6 +211,53 @@ void PlayerController::ChangeState(PlayerState nextState)
         curState->Enter();
 }
 
+
+/*-------[ Animation Create ]-------------------------------------*/
+void PlayerController::LoadAnimation()
+{
+    // 애니메이션 파일 로드
+    FBXResourceManager::Instance().LoadAnimationByPath(fbxData->GetFBXInfo(), "..\\Assets\\Resource\\Animation\\FuckingAssimp\\ani_idle_character.fbx", "Idle");
+    FBXResourceManager::Instance().LoadAnimationByPath(fbxData->GetFBXInfo(), "..\\Assets\\Resource\\Animation\\FuckingAssimp\\ani_walk_character.fbx", "Walk");
+    FBXResourceManager::Instance().LoadAnimationByPath(fbxData->GetFBXInfo(), "..\\Assets\\Resource\\Animation\\FuckingAssimp\\ani_run_character.fbx", "Run");
+    FBXResourceManager::Instance().LoadAnimationByPath(fbxData->GetFBXInfo(), "..\\Assets\\Resource\\Animation\\FuckingAssimp\\ani_sit_character.fbx", "Sit");
+    FBXResourceManager::Instance().LoadAnimationByPath(fbxData->GetFBXInfo(), "..\\Assets\\Resource\\Animation\\FuckingAssimp\\ani_cry_character.fbx", "Hit");
+
+    // 클립 생성
+    auto idleClip = animController->FindClip("Idle");
+    auto walkClip = animController->FindClip("Walk");
+    auto runClip = animController->FindClip("Run");
+    auto sitClip = animController->FindClip("Sit");
+    auto hitClip = animController->FindClip("Hit");
+
+    if (!idleClip  || !walkClip || !runClip || !sitClip || !hitClip)
+    {
+        cout << "[Player Animation] Clip not found!\n" << endl;
+        return;
+    }
+
+    // 상태 등록
+    animController->AddState(std::make_unique<AnimationState>("Idle", idleClip, animController));
+    animController->AddState(std::make_unique<AnimationState>("Walk", walkClip, animController));
+    animController->AddState(std::make_unique<AnimationState>("Run", runClip, animController));
+    animController->AddState(std::make_unique<AnimationState>("Sit", sitClip, animController));
+    animController->AddState(std::make_unique<AnimationState>("Hit", hitClip, animController));
+
+
+    // Effect Animatinon
+    // TODO :: Bone연결되면 주석 해제
+    //FBXResourceManager::Instance().LoadAnimationByPath(hitEffect->GetOwner()->GetComponent<FBXData>()->GetFBXInfo(), 
+    //    "..\\Assets\\Resource\\Effect\\ani_confused_mark.fbx", "HitEffect");
+    //auto effectHitClip = hitEffect->FindClip("HitEffect");
+    //hitEffect->AddState(std::make_unique<AnimationState>("HitEffect", effectHitClip, hitEffect));
+    //hitEffect->ChangeState("HitEffect");
+    //
+    //if (!effectHitClip)
+    //{
+    //    cout << "[Player Effect Animation] Clip not found!\n" << endl;
+    //    return;
+    //}
+}
+
 /*-------[ Init ]-------------------------------------*/
 void PlayerController::InitStat()
 {
@@ -249,6 +330,13 @@ void PlayerController::SerachObjectInteraction(float dt)
         return;
     }
 
+    // 최초 인터랙션 기믹 설명
+    if (!isExplainedSearchObject && Input::GetKeyDown(interaction_Key))
+    {
+        dialogueController->ShowInteractionHintAndPause(L"this object is Search Object!");
+        isExplainedSearchObject = true;
+    }
+
     // inventory full
     if (inventory->HasItem())
     {
@@ -261,6 +349,9 @@ void PlayerController::SerachObjectInteraction(float dt)
     float progress = searchTimer / searchTime;
     if (progress > 1.0f) progress = 1.0f;
 
+    // UI - interaction
+    curSerachObject->UIGaugeUpate(progress);
+
     // search object interaction
     if (searchTimer >= searchTime)
     {
@@ -270,6 +361,30 @@ void PlayerController::SerachObjectInteraction(float dt)
         // item get or fail
         if (item)
         {
+            // 미니맵 연결
+            if (item->itemType == ItemType::Piece)
+            {
+                // 미니맵
+                auto* ob = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("UI_MiniMap_Controller");
+                auto* minimap = ob->GetComponent<MiniMapManager>();
+                if(item->itemId == "0")
+                    minimap->TriggerPieceCollected(0);
+                else if (item->itemId == "1")
+                    minimap->TriggerPieceCollected(1);
+                else if (item->itemId == "2")
+                    minimap->TriggerPieceCollected(2);
+                else if (item->itemId == "3")
+                    minimap->TriggerPieceCollected(3);
+                else if (item->itemId == "4")
+                    minimap->TriggerPieceCollected(4);
+            }
+            // 퀘스트 1 : [탐색] 제사준비 : 최조로 음식 재료 획득시 달성
+            else if (item->itemType == ItemType::Ingredient)
+            {
+                QuestManager::Instance()->StepComplete(1);
+            }
+
+            // item get
             visualizer->VisualOnItem(item->itemId);
             inventory->AddItem(std::move(item));
         }
@@ -289,9 +404,24 @@ void PlayerController::HideObjectInteraction(float dt)
     if (!isPossibleHide || !curHideObject)
         return;
 
+    // hit, die 상태라면 return (맞겠지?) -> hit일떄 은신된대.
+    if (state == PlayerState::Die)
+        return;
+
+    // 최초 인터랙션 기믹 설명
+    if (!isExplainedHideObject && Input::GetKeyDown(interaction_Key))
+    {
+        dialogueController->ShowInteractionHintAndPause(L"this object is Hide Object!");
+        isExplainedHideObject = true;
+    }
+
     // hide
     if (Input::GetKeyDown(interaction_Key) && curHideObject->IsPossibleHide())
     {
+        // hit->hide 일 경우 hide가 끝나면 hit으로 복귀하도록 플래그 설정
+        resumeHitAfterHide = (state == PlayerState::Hit);
+
+        // hide
         ChangeState(PlayerState::Hide);
         curHideObject->StartHide(this);
     }
@@ -313,10 +443,20 @@ void PlayerController::CookingInteraction(float dt)
         return;
     }
 
+    // 최초 인터랙션 기믹 설명
+    if(!isExplainedCookingZone)
+    {
+        dialogueController->ShowInteractionHintAndPause(L"this zone is cooking!");
+        isExplainedCookingZone = true;
+    }
+
     // holding
     cookInteractionTimer += dt;
     float progress = cookInteractionTimer / cookInteractionTime;
     if (progress > 1.0f) progress = 1.0f;
+
+    // UI - interaction
+    CookingZone::Instance()->UIGaugeUpate(progress);
 
     // cooking interaction
     if (cookInteractionTimer >= cookInteractionTime)
@@ -326,6 +466,9 @@ void PlayerController::CookingInteraction(float dt)
         MiniGameManager::Instance()->StartMiniGame(std::move(inventory->TakeCurItem()));
         ChangeState(PlayerState::Cook);
         cookInteractionTimer = 0.0f;
+
+        // ui clear
+        CookingZone::Instance()->UIGaugeUpate(0.0);
     }
 }
 
@@ -344,12 +487,19 @@ void PlayerController::PutFoodJesaSangInteraction(float dt)
     float progress = putFoodTimer / putFoodTime;
     if (progress > 1.0f) progress = 1.0f;
 
+    // UI - interaction
+    JesaSangManager::Instance()->UIGaugeUpate(progress);
+
     // 제사상에 음식 올리기 interaction
     if (putFoodTimer >= putFoodTime)
     {
         std::unique_ptr<IItem> food = inventory->TakeCurItem();
         JesaSangManager::Instance()->ReceiveFood(std::move(food));
         visualizer->VisualOffItem();
+        visualizer->VisualItemIDNullSet();
+
+        // 퀘스트 3 : [운반] 차려지는 상 : 최조로 제사상에 음식을 올렸을시 달성
+        QuestManager::Instance()->StepComplete(3);
 
         // clear
         putFoodTimer = 0.0f;
@@ -377,15 +527,54 @@ void PlayerController::GetItemAltarInteraction(float dt)
     float progress = getItemAltarTimer / getItemAltarTime;
     if (progress > 1.0f) progress = 1.0f;
 
+    // UI - interaction
+    AltarManager::Instance()->UIGaugeUpate(progress);
+
     // 제단 아이엠(재료/음식) 가져오기 interaction
     if (getItemAltarTimer >= getItemAltarTime)
     {
         std::unique_ptr<IItem> item = AltarManager::Instance()->GetItem();
+
+        // Dialogue
+        if (item->itemType == ItemType::Ingredient)
+            dialogueController->ShowDialogueText(L"Ingredient ReGet! Cook gogo!");
+        if (item->itemType == ItemType::Food)
+            dialogueController->ShowDialogueText(L"Good ReGet! Jesasang gogo!");
+
         visualizer->VisualOnItem(item->itemId);
         inventory->AddItem(std::move(item));
 
         // clear
         getItemAltarTimer = 0.0f;
+    }
+}
+
+void PlayerController::UpsateHitDuration(float dt)
+{
+    // Hit일 땐 항상 업데이트
+    if (state == PlayerState::Hit)
+    {
+        hitTimer += dt;
+        invincibleTimer += dt;
+        renderDirectorTimer += dt;
+    }
+
+    // Hide일 땐 Hit에서 들어온 경우만 업데이트
+    else if (state == PlayerState::Hide)
+    {
+        if (!resumeHitAfterHide) return;
+
+        hitTimer += dt;
+        invincibleTimer += dt;
+        renderDirectorTimer += dt;
+    }
+    else
+        return;
+
+    if (isPlayerInvincible && invincibleTimer >= hitInvincibleTime)
+    {
+        isPlayerInvincible = false;
+        std::cout << "[Player] Hit Invincible Time End." << std::endl;
     }
 }
     
@@ -450,6 +639,9 @@ void PlayerController::ReceiveMiniGameResult(unique_ptr<IItem> ingredient, bool 
         // 인벤토리에 완성된 음식 추가
         visualizer->VisualOnItem(food->itemId);
         inventory->AddItem(std::move(food));
+
+        // 퀘스트 2 : [조리] 정성을 담아 : 최초로 미니게임 성공시 달성
+        QuestManager::Instance()->StepComplete(2);
     }
     else
     {
@@ -489,13 +681,17 @@ void PlayerController::TakeAttack()
     {
         std::unique_ptr<IItem> item = inventory->TakeCurItem();
         visualizer->VisualOffItem();
+        visualizer->VisualItemIDNullSet();
         AltarManager::Instance()->ReceiveItem(std::move(item));
+        fireEffect->Play();
         cout << "[Player] Drop Item... " << endl;
     }
 
-    // Die
+    // life
     curLife--;
-    
+    MainGameUIManager::Instance()->UpdateLifeUI(curLife);
+
+    // Die
     if (curLife <= 0)
     {
         curLife = 0;
@@ -507,10 +703,22 @@ void PlayerController::TakeAttack()
 
     // Hit (패닉)
     if(state != PlayerState::Hit)
+    {
+        hitTimer = 0.0f;
+        invincibleTimer = 0.0f;
+        renderDirectorTimer = 0.0f;
+        isPlayerInvincible = true;
+
         ChangeState(PlayerState::Hit);
+    }
     else
     {
         // 이미 패닉상태였을경우 재시작 (무적상태는 위에서 return)
+        hitTimer = 0.0f;
+        invincibleTimer = 0.0f;
+        renderDirectorTimer = 0.0f;
+        isPlayerInvincible = true;
+
         ChangeState(PlayerState::Idle);
         ChangeState(PlayerState::Hit);
     }

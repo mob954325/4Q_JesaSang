@@ -7,6 +7,7 @@
 #include "../Externals/imguiFileDialog/ImGuiFileDialog.h"
 #include "../Components/FBXData.h"
 #include "../Components/Decal.h"
+#include "../RenderPass/ParticleSource/Effect.h"
 #include "../Object/GameObject.h"
 #include "../Util/DebugDraw.h"
 #include "../Manager/WorldManager.h"
@@ -28,6 +29,8 @@
 
 #include <unordered_map>
 #include <cmath>
+#include "../Components/UI/TextUI.h"
+#include "../Util/EncodeConvertHelper.h"
 
 // Payload
 // Prefab payload
@@ -440,6 +443,9 @@ void Editor::DrawHierarchyDropSpace()
     ImVec2 avail = ImGui::GetContentRegionAvail(); // 창에서 사용 가능한 남은 공간
     if (avail.y < 1.0f) avail.y = 1.0f;
 
+    if (avail.y < 200.0f) avail.y = 200.0f; // 최소 남은 공간 == 1.0f
+
+    // 배경 전체(남은 영역)를 아이템으로 만든다
     ImGui::InvisibleButton("##HierarchyBlankSpace", avail,
         ImGuiButtonFlags_MouseButtonLeft | ImGuiButtonFlags_MouseButtonRight);
 
@@ -925,9 +931,11 @@ void Editor::RenderInspector()
 
                     if (auto it = registered.find(name); it != registered.end())
                     {
+                        ImGui::PushID(comp);
                         RenderComponentInfo(name, comp);
                         ImGui::NewLine();
                         ImGui::Separator();
+                        ImGui::PopID();
                     }
                 }
             }
@@ -1380,6 +1388,7 @@ void Editor::RenderWorldManager()
     rttr::instance inst = wm;
     rttr::type t = rttr::type::get(inst);
 
+    // 1. worldManager의 인스턴스를 렌더링한다. ( 구조체, 클래스 내용 제외 )
     ReadVariants(inst);
 
     ImGui::Separator();
@@ -1681,7 +1690,7 @@ void Editor::RenderComponentInfo(std::string compName, T* comp)
             if (value.is_type<std::string>() && name == "path")
             {
                 std::string path = value.get_value<std::string>();
-                ImGui::Text("Current Path: %s", path.c_str());
+                ImGui::Text("Current Image Path: %s", path.c_str());
 
                 if (ImGui::Button("Browse texture"))
                 {
@@ -1755,13 +1764,314 @@ void Editor::RenderComponentInfo(std::string compName, T* comp)
                 }
             }
         }
+    }
+
+    if (compName == "Effect")
+    {
+        auto* fx = dynamic_cast<Effect*>(comp);
+        if (!fx)
+        {
+            ImGui::PushID(comp);
+            ReadVariants(*comp);
+            ImGui::PopID();
+            return;
+        }
 
         ImGui::PushID(comp);
-        ReadVariants(*comp);
+
+        if (ImGui::Button("Play"))
+            fx->Play();
+        ImGui::SameLine();
+        if (ImGui::Button("Stop"))
+            fx->Stop();
+
+        ImGui::Separator();
+        ImGui::Text("Emitters");
+
+        if (ImGui::Button("Add Emitter"))
+            fx->emitters.emplace_back();
+
+        for (size_t i = 0; i < fx->emitters.size(); )
+        {
+            Emitter& em = fx->emitters[i];
+            ImGui::PushID(static_cast<int>(i));
+
+            std::string header = "Emitter " + std::to_string(i);
+            bool openEmitter = ImGui::CollapsingHeader(header.c_str(), ImGuiTreeNodeFlags_DefaultOpen);
+
+            ImGui::SameLine();
+            if (ImGui::SmallButton("Remove"))
+            {
+                fx->emitters.erase(fx->emitters.begin() + static_cast<std::ptrdiff_t>(i));
+                ImGui::PopID();
+                continue;
+            }
+
+            if (openEmitter)
+            {
+                // basic
+                ImGui::Checkbox("enabled", &em.enabled);
+                ImGui::SameLine();
+                ImGui::Checkbox("playing", &em.playing);
+                ImGui::DragFloat3("localOffset", &em.localOffset.x, 0.1f);
+
+                // billboard
+                {
+                    const char* items[] = { "ScreenFacing", "YAxis" };
+                    int v = (em.billboard == BillboardType::ScreenFacing) ? 0 : 1;
+                    if (ImGui::Combo("billboard", &v, items, IM_ARRAYSIZE(items)))
+                        em.billboard = (v == 0) ? BillboardType::ScreenFacing : BillboardType::YAxis;
+                }
+
+                // sprite sheet
+                if (ImGui::TreeNode("SpriteSheet"))
+                {
+                    const bool hasTex = (em.sheet.resource && em.sheet.resource->srv);
+                    if (hasTex)
+                    {
+                        ImGui::Text("Texture: Loaded");
+                        ImGui::Image(
+                            (ImTextureID)em.sheet.resource->srv.Get(),
+                            ImVec2(64, 64));
+                        ImGui::SameLine();
+                        ImGui::Text("(%.0fx%.0f)", em.sheet.resource->texSizePx.x, em.sheet.resource->texSizePx.y);
+                    }
+                    else
+                    {
+                        ImGui::Text("Texture: <none>");
+                    }
+
+                    // texture path
+                    {
+                        std::string path = em.sheet.texturePath;
+                        if (ImGui::InputText(
+                            "texturePath",
+                            path.data(),
+                            path.capacity() + 1,
+                            ImGuiInputTextFlags_CallbackResize,
+                            [](ImGuiInputTextCallbackData* data) -> int
+                            {
+                                if (data->EventFlag == ImGuiInputTextFlags_CallbackResize)
+                                {
+                                    auto* str = static_cast<std::string*>(data->UserData);
+                                    str->resize(data->BufTextLen);
+                                    data->Buf = str->data();
+                                }
+                                return 0;
+                            },
+                            &path))
+                        {
+                            em.sheet.texturePath = path;
+                        }
+
+                        ImGui::SameLine();
+                        if (ImGui::SmallButton("Load##SpriteSheet"))
+                        {
+                            if (!em.sheet.texturePath.empty())
+                                em.sheet.SetPath(em.sheet.texturePath);
+                        }
+                    }
+
+                    std::string keyFxTex = "ChooseFxTexDlgKey##" + std::to_string((uintptr_t)comp) + "_" + std::to_string(i);
+                    if (ImGui::Button("Browse Texture"))
+                    {
+                        IGFD::FileDialogConfig config;
+                        config.path = "../";
+                        ImGuiFileDialog::Instance()->OpenDialog(keyFxTex, "Choose File", ".png,.jpg,.jpeg,.tga", config);
+                    }
+
+                    if (ImGuiFileDialog::Instance()->Display(keyFxTex))
+                    {
+                        if (ImGuiFileDialog::Instance()->IsOk())
+                        {
+                            std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
+                            std::filesystem::path relativePath = std::filesystem::relative(filePathName);
+                            em.sheet.SetPath(relativePath.string());
+                        }
+                        ImGuiFileDialog::Instance()->Close();
+                    }
+
+                    if (ImGui::Button("Clear Texture"))
+                    {
+                        em.sheet.texturePath.clear();
+                        em.sheet.resource.reset();
+                    }
+
+                    em.sheet.cols = std::max(1, em.sheet.cols);
+                    em.sheet.rows = std::max(1, em.sheet.rows);
+                    ImGui::DragInt("cols", &em.sheet.cols, 1.0f, 1, 256);
+                    ImGui::DragInt("rows", &em.sheet.rows, 1.0f, 1, 256);
+
+                    int maxFrames = std::max(1, em.sheet.cols * em.sheet.rows);
+                    em.sheet.frameCount = std::clamp(em.sheet.frameCount, 1, maxFrames);
+                    ImGui::DragInt("frameCount", &em.sheet.frameCount, 1.0f, 1, maxFrames);
+
+                    em.sheet.fps = std::max(0.0f, em.sheet.fps);
+                    ImGui::DragFloat("fps", &em.sheet.fps, 0.1f, 0.0f, 240.0f);
+
+                    em.sheet.baseSizeScale = std::max(0.001f, em.sheet.baseSizeScale);
+                    ImGui::DragFloat("baseSizeScale", &em.sheet.baseSizeScale, 0.01f, 0.001f, 100.0f);
+                    ImGui::Checkbox("sheet.loop", &em.sheet.loop);
+
+                    if (em.sheet.fps > 0.0f)
+                        ImGui::Text("flipbookDuration: %.3f", em.sheet.frameCount / em.sheet.fps);
+                    else
+                        ImGui::Text("flipbookDuration: <inf>");
+
+                    ImGui::TreePop();
+                }
+
+                // emission
+                ImGui::Separator();
+                ImGui::Text("Emission");
+                ImGui::DragFloat("duration", &em.duration, 0.05f, 0.0f, 99999.0f);
+                ImGui::Checkbox("looping", &em.looping);
+                ImGui::DragFloat("emitRate", &em.emitRate, 0.05f, 0.0f, 99999.0f);
+                ImGui::DragInt("burstCount", &em.burstCount, 1.0f, 0, 99999);
+                em.maxParticles = std::max(1, em.maxParticles);
+                ImGui::DragInt("maxParticles", &em.maxParticles, 1.0f, 1, 99999);
+
+                // particle mode
+                {
+                    const char* items[] = { "Dynamic", "Fixed" };
+                    int v = (em.particleMode == ParticleMode::Dynamic) ? 0 : 1;
+                    if (ImGui::Combo("particleMode", &v, items, IM_ARRAYSIZE(items)))
+                        em.particleMode = (v == 0) ? ParticleMode::Dynamic : ParticleMode::Fixed;
+                }
+
+                if (em.particleMode == ParticleMode::Dynamic)
+                {
+                    if (ImGui::TreeNode("Dynamic"))
+                    {
+                        // spawn dynamic
+                        ImGui::DragFloat("lifeMin", &em.dynamicData.lifeMin, 0.01f, 0.0f, 99999.0f);
+                        ImGui::DragFloat("lifeMax", &em.dynamicData.lifeMax, 0.01f, 0.0f, 99999.0f);
+                        em.dynamicData.lifeMax = std::max(em.dynamicData.lifeMin, em.dynamicData.lifeMax);
+
+                        ImGui::DragFloat("rotationMin", &em.dynamicData.rotationMin, 0.01f, -99999.0f, 99999.0f);
+                        ImGui::DragFloat("rotationMax", &em.dynamicData.rotationMax, 0.01f, -99999.0f, 99999.0f);
+                        em.dynamicData.rotationMax = std::max(em.dynamicData.rotationMin, em.dynamicData.rotationMax);
+
+                        ImGui::DragFloat2("sizeMin", &em.dynamicData.sizeMin.x, 0.01f, 0.0f, 99999.0f);
+                        ImGui::DragFloat2("sizeMax", &em.dynamicData.sizeMax.x, 0.01f, 0.0f, 99999.0f);
+                        em.dynamicData.sizeMax.x = std::max(em.dynamicData.sizeMin.x, em.dynamicData.sizeMax.x);
+                        em.dynamicData.sizeMax.y = std::max(em.dynamicData.sizeMin.y, em.dynamicData.sizeMax.y);
+
+                        ImGui::DragFloat("speedMin", &em.dynamicData.speedMin, 0.01f, 0.0f, 99999.0f);
+                        ImGui::DragFloat("speedMax", &em.dynamicData.speedMax, 0.01f, 0.0f, 99999.0f);
+                        em.dynamicData.speedMax = std::max(em.dynamicData.speedMin, em.dynamicData.speedMax);
+
+                        ImGui::DragFloat("angularMin", &em.dynamicData.angularMin, 0.01f, -99999.0f, 99999.0f);
+                        ImGui::DragFloat("angularMax", &em.dynamicData.angularMax, 0.01f, -99999.0f, 99999.0f);
+                        em.dynamicData.angularMax = std::max(em.dynamicData.angularMin, em.dynamicData.angularMax);
+
+                        ImGui::ColorEdit4("colorMin", &em.dynamicData.colorMin.x);
+                        ImGui::ColorEdit4("colorMax", &em.dynamicData.colorMax.x);
+
+                        // velocity shape
+                        {
+                            const char* items[] = { "Sphere", "Directional", "Cone", "Disk" };
+                            int v = static_cast<int>(em.velocityShape);
+                            if (ImGui::Combo("velocityShape", &v, items, IM_ARRAYSIZE(items)))
+                                em.velocityShape = static_cast<VelocityShape>(v);
+                        }
+
+                        ImGui::DragFloat3("emitDir", &em.emitDir.x, 0.01f, -1.0f, 1.0f);
+                        ImGui::DragFloat("coneAngleDeg", &em.coneAngleDeg, 0.1f, 0.0f, 180.0f);
+
+                        ImGui::TreePop();
+                    }
+                }
+                else // Fixed
+                {
+                    if (ImGui::TreeNode("Fixed"))
+                    {
+                        // spawn fixed
+                        ImGui::DragFloat("rotation", &em.fixedData.rotation, 0.01f, -99999.0f, 99999.0f);
+                        ImGui::DragFloat2("size", &em.fixedData.size.x, 0.01f, 0.0f, 99999.0f);
+                        ImGui::ColorEdit4("startColor", &em.fixedData.startColor.x);
+
+                        // flipbook play mode
+                        {
+                            const char* items[] = { "Once_Then_Die", "Once_Then_Hold", "Loop" };
+                            int v = static_cast<int>(em.filpbookPlayMode);
+                            if (ImGui::Combo("filpbookPlayMode", &v, items, IM_ARRAYSIZE(items)))
+                                em.filpbookPlayMode = static_cast<FlipbookPlayMode>(v);
+                        }
+
+                        ImGui::DragFloat("holdTime", &em.holdTime, 0.05f, 0.0f, 99999.0f);
+
+                        ImGui::TreePop();
+                    }
+                }
+
+                // runtime info
+                ImGui::Separator();
+                ImGui::Text("runtime: particles=%d, elapsed=%.2f", (int)em.particles.size(), em.elapsed);
+            }
+
+            ImGui::PopID();
+            ++i;
+        }
+
+        ImGui::Separator();
+        ReadVariants(*fx);
         ImGui::PopID();
         return;
     }
 
+    if (compName == "TextUI")
+    {
+        std::string fontPathKey = "ChooseTextUIFontDlgKey##" + std::to_string((uintptr_t)comp);
+
+        for (auto& prop : t.get_properties())
+        {
+            rttr::variant value = prop.get_value(*comp);
+            std::string name = prop.get_name().to_string();
+            if (!value.is_valid()) continue;
+
+            if (value.is_type<std::wstring>() && name == "fontPath")
+            {
+                // wstring -> utf8 (표시용)
+                std::wstring curW = value.get_value<std::wstring>();
+                std::string curPathUtf8 = WStringToUtf8(curW);
+
+                ImGui::Text("Current Font Path: %s", curPathUtf8.c_str());
+
+                if (ImGui::Button("Browse"))
+                {
+                    IGFD::FileDialogConfig config;
+                    config.path = "../";
+                    ImGuiFileDialog::Instance()->OpenDialog(fontPathKey, "Choose File", ".ttf,.ttc", config);
+                }
+
+                if (ImGuiFileDialog::Instance()->Display(fontPathKey))
+                {
+                    if (ImGuiFileDialog::Instance()->IsOk())
+                    {
+                        // 다이얼로그는 보통 UTF-8 std::string 반환
+                        std::string filePathNameUtf8 = ImGuiFileDialog::Instance()->GetFilePathName();
+
+                        // relative도 UTF-8 string 기준으로 처리
+                        std::filesystem::path relativePath = std::filesystem::relative(std::filesystem::path(filePathNameUtf8));
+                        std::string relativeUtf8 = relativePath.generic_string();
+
+                        // utf8 -> wstring 저장
+                        std::wstring relativeW = Utf8ToWString(relativeUtf8);
+                        prop.set_value(*comp, relativeW);
+
+                        // 기존 로직 유지: Decal이면 ChangeData 호출 (string 필요시 utf8 전달)
+                        auto* textUI = dynamic_cast<TextUI*>(comp);
+                        if (textUI) textUI->LoadFontAtlas(relativeW);
+                    }
+                    ImGuiFileDialog::Instance()->Close();
+                }
+            }
+        }
+    }
+
+
+    // 기본
     ImGui::PushID(comp);
     ReadVariants(*comp);
     ImGui::PopID();
@@ -1771,7 +2081,14 @@ void Editor::RenderDebugAABBDraw()
 {
     context->OMSetRenderTargets(1, renderTargetView.GetAddressOf(), depthStencliView.Get());
 
+    // DebugDraw의 BasicEffect 설정
+
     Camera* cam{};
+    if (PlayModeSystem::Instance().IsPlaying())
+    {
+        cam = CameraSystem::Instance().GetCurrCamera();
+    }
+    else
     {
         cam = CameraSystem::Instance().GetFreeCamera();
     }
@@ -1867,6 +2184,7 @@ void Editor::RenderDebugVision()
 
 void Editor::SaveCurrentScene(HWND& hwnd)
 {
+    // 파일 저장 다이얼로그
     OPENFILENAMEA ofn = {};
     char szFile[260] = {};
 
@@ -1884,10 +2202,11 @@ void Editor::SaveCurrentScene(HWND& hwnd)
     ofn.lpstrDefExt = "json";
 
     if (GetSaveFileNameA(&ofn) != TRUE)
-        return;
+        return; // 사용자가 취소함
 
     std::string filename = szFile;
 
+    // GameWorld를 파일에 저장
     if (SceneSystem::Instance().GetCurrentScene()->SaveToJson(filename))
     {
         MessageBoxA(hwnd, "Scene saved successfully!", "Save", MB_OK | MB_ICONINFORMATION);
@@ -1915,8 +2234,10 @@ void Editor::LoadScene(HWND& hwnd)
         | OFN_PATHMUSTEXIST | OFN_NOCHANGEDIR;
     ofn.lpstrDefExt = "json";
 
+    // NOTE : GetOpenFileNameA를 한 뒤로 CWD (Current Working Directory)가 선택한 폴더로 변경된다.
+    // ->  OFN_PATHMUSTEXIST | OFN_NOCHANGEDIR 플래그 추가 해줘서 방지
     if (GetOpenFileNameA(&ofn) != TRUE)
-        return;
+        return; // 사용자가 취소함
 
     std::string filename = szFile;
 
@@ -2000,8 +2321,14 @@ void Editor::ReadVariants(rttr::instance inst)
 
     rttr::type t = inst.get_derived_type();
 
+    int propIndex = 0;
+    // Get value from type
     for (auto& prop : t.get_properties())
     {
+        std::string propId = prop.get_name().to_string();
+        ImGui::PushID(propIndex);
+        ImGui::PushID(propId.c_str());
+
         rttr::variant value = prop.get_value(inst);
         std::string name = prop.get_name().to_string();
 
@@ -2010,6 +2337,7 @@ void Editor::ReadVariants(rttr::instance inst)
 
         auto metaBool = prop.get_metadata(META_BOOL);
         auto metaBrowse = prop.get_metadata(META_BROWSE);
+        auto metaInput = prop.get_metadata(META_INPUT);
 
         if (value.get_type().is_enumeration())
         {
@@ -2070,6 +2398,25 @@ void Editor::ReadVariants(rttr::instance inst)
             {
                 prop.set_value(inst, b ? 1 : 0);
             }
+        }
+        else if (value.is_type<std::string>() && metaInput.is_valid())
+        {
+            char buf[256]{};
+            strncpy_s(buf, value.get_value<std::string>().c_str(), sizeof(buf) - 1);
+            ImGui::InputText(name.c_str(), buf, sizeof(buf), ImGuiInputTextFlags_EnterReturnsTrue);
+            prop.set_value(inst, std::string(buf));
+
+        }
+        else if (value.is_type<std::wstring>() && metaInput.is_valid())
+        {
+            std::string utf8 = WStringToUtf8(value.get_value<std::wstring>());
+
+            char buf[256]{};
+            strncpy_s(buf, utf8.c_str(), sizeof(buf) - 1);
+
+            ImGui::InputText(name.c_str(), buf, sizeof(buf), ImGuiInputTextFlags_EnterReturnsTrue);
+
+            prop.set_value(inst, Utf8ToWString(std::string(buf)));
         }
         else if (value.is_type<float>())
         {
@@ -2137,6 +2484,69 @@ void Editor::ReadVariants(rttr::instance inst)
                 prop.set_value(inst, c);
             }
         }
+        else if (value.is_type<string>() && metaBrowse.is_valid())
+        {
+            std::string c = value.get_value<std::string>();
+
+            // inst 포인터 (가능하면 실제 객체 포인터)
+            void* p = inst.try_convert<void*>();
+            std::uintptr_t instId = reinterpret_cast<std::uintptr_t>(p);
+
+            // prop 이름을 섞어서 "같은 인스턴스의 다른 browse 프로퍼티"도 분리
+            std::string propName = prop.get_name().to_string();
+
+            // FileDialog key: inst + propName 조합 (표시용 텍스트는 ## 앞만, ID는 전체)
+            std::string key = "ChooseFileNormalStringKey##" + std::to_string(instId) + "##" + propName;
+
+            ImGui::Text("Current Path: %s", c.c_str());
+            if (ImGui::Button("Browse"))
+            {
+                IGFD::FileDialogConfig config;
+                config.path = "../";
+                ImGuiFileDialog::Instance()->OpenDialog(key, "Choose File", ".png,.jpg,.fbx,.glb,.ttf,.ttc,.json", config);
+            }
+            if (ImGuiFileDialog::Instance()->Display(key))
+            {
+                if (ImGuiFileDialog::Instance()->IsOk())
+                {
+                    std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
+                    std::filesystem::path relativePath = std::filesystem::relative(filePathName);
+                    prop.set_value(inst, relativePath.string());
+                }
+                ImGuiFileDialog::Instance()->Close();
+            }
+        }
+        else if (value.is_type<std::wstring>() && !metaBrowse.is_valid())
+        {
+            // wstring(UTF-16) -> UTF-8(string) : ImGui InputText 버퍼
+            std::string c = WStringToUtf8(value.get_value<std::wstring>());
+
+            if (ImGui::InputText(
+                name.c_str(),
+                c.data(),
+                c.capacity() + 1,
+                ImGuiInputTextFlags_CallbackResize,
+                [](ImGuiInputTextCallbackData* data) -> int
+                {
+                    if (data->EventFlag == ImGuiInputTextFlags_CallbackResize)
+                    {
+                        auto* str = static_cast<std::string*>(data->UserData);
+                        str->resize(data->BufTextLen);
+                        data->Buf = str->data();
+                    }
+                    return 0;
+                },
+                &c))
+            {
+                // UTF-8(string) -> wstring(UTF-16)
+                std::wstring w = Utf8ToWString(c);
+                prop.set_value(inst, w);
+            }
+        }
+
+        ImGui::PopID(); // propId
+        ImGui::PopID(); // propIndex
+        ++propIndex;
     }
 }
 

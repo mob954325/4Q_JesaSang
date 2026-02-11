@@ -1,5 +1,6 @@
 #pragma once
 #include "Components/ScriptComponent.h"
+class Decal;
 
 /*
     [ TrapObject Script Component ]
@@ -20,12 +21,15 @@ class TrapObject : public ScriptComponent
     RTTR_ENABLE(ScriptComponent)
 
 private:
+    // component
+    Decal* ringEffect = nullptr;;
+
     // cur
-    float waveRadius = 0.0f;
+    float curWaveRadius = 0.0f;
 
     // data
-    float walkWaveRadius = 1.5;
-    float runWaveRadius = 3.0;
+    float walkWaveRadius = 200.0f;
+    float runWaveRadius = 500.0f;
     float coolTime = 5.0f;
 
     // rewave cool time

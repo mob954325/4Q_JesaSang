@@ -90,19 +90,47 @@ void AgentComponent::PickRandomTarget()
     std::cout << "[AgentComponent] No valid target found\n";
 }
 
-
 void AgentComponent::OnFixedUpdate(float dt)
 {
     auto grid = GridSystem::Instance().GetMainGrid();
-    if (!grid || !hasTarget) return;
+    if (!grid) return;
+
+    if (externalControl)
+        return; // FSM이 직접 path/target을 관리
+
+    // 대기 중이면 시간 감소 
+    if (isWaiting)
+    {
+        waitTimer -= dt;
+        if (waitTimer <= 0.f)
+        {
+            isWaiting = false;
+            PickRandomTarget(); // 다시 탐색 시작
+        }
+        return; // 대기 중엔 이동 안함
+    }
+
+
+    // 목표가 없으면 새 목표 선택
+    if (!hasTarget)
+    {
+        PickRandomTarget();
+        if (!hasTarget) return; // 목표 선택 실패하면 종료
+    }
 
     // 경로 없으면 새 경로 생성
     if (path.empty())
     {
         path = grid->FindPath(cx, cy, targetCX, targetCY);
+        if (path.empty())
+        {
+            // 경로를 못찾으면 목표 재선택
+            PickRandomTarget();
+            path = grid->FindPath(cx, cy, targetCX, targetCY);
+            if (path.empty())
+                return; // 여전히 경로 없으면 이동 안함
+        }
     }
-
-    if (path.empty()) return; // 경로가 없으면 이동 안함
 
     auto next = path.front();
     Vector3 targetPos = grid->GridToWorldFromCenter(next.first, next.second);
@@ -116,11 +144,32 @@ void AgentComponent::OnFixedUpdate(float dt)
         cx = next.first;
         cy = next.second;
         path.erase(path.begin());
+
+        // 경로가 다 끝나면 잠시 멈췄다가 목표 재선택
+        if (path.empty())
+        {
+            isWaiting = true;
+            waitTimer = waitDuration;
+            hasTarget = false;  // 다음 탐색은 대기 후
+            return;
+        }
     }
     else
     {
         dir.Normalize();
-        MoveAgent(dir, patrolSpeed, dt);
+
+        // 주변 Agent 회피
+        Vector3 sep = ComputeSeparationForce(dir);
+        Vector3 finalDir = dir + sep;
+        float len = finalDir.Length();
+        if (len > 0.0001f)
+        {
+            finalDir.x /= len;
+            finalDir.y /= len;
+            finalDir.z /= len;
+        }
+
+        MoveAgent(finalDir, patrolSpeed, dt);
     }
 
     //// 디버그 출력
@@ -129,14 +178,79 @@ void AgentComponent::OnFixedUpdate(float dt)
     //    << "Path size: " << path.size() << std::endl;
 }
 
+
 void AgentComponent::MoveAgent(const Vector3& dir, float speed, float dt)
 {
-    if (cct)
-    {
-        cct->MoveAI(dir, speed, dt);
-    }
-    else
+    if(!cct)
     {
         std::cout << "[AgentComponent] MoveAgent에서 cct 가 NULL입니다." << std::endl;
+        return;
     }
+
+    // 1. 이동
+    cct->MoveAI(dir, speed, dt);
+
+    // 2. 이동 방향으로 회전 (Y축 기준)
+    if (dir.LengthSquared() > 0.0001f) // 거의 0이 아니면
+    {
+        auto tr = GetOwner()->GetTransform();
+
+        // 이동 방향의 Y축 회전 계산
+        float targetYaw = atan2f(-dir.x, -dir.z); // Z-forward 기준
+        float currentYaw = tr->GetYaw();
+
+        // 회전 
+        float rotationSpeed = 5.0f; // 회전 속도
+        float newYaw = currentYaw + (targetYaw - currentYaw) * std::min(dt * rotationSpeed, 1.0f);
+
+        tr->SetRotationY(newYaw);
+    }
+}
+
+void AgentComponent::SetWaitTime(float seconds)
+{
+    waitDuration = seconds;
+}
+
+
+Vector3 AgentComponent::ComputeSeparationForce(const Vector3& moveDir)
+{
+    Vector3 force(0, 0, 0);
+    auto& agents = AgentSystem::Instance().GetAgents();
+
+    Vector3 myPos = GetOwner()->GetTransform()->GetWorldPosition();
+
+    const float radius = 200.0f;   // 유령 크기 + 안전 거리
+    const float sideBias = 0.8f;   // 옆으로 비켜가는 힘
+    const float forwardBias = 0.2f;
+
+    for (auto* other : agents)
+    {
+        if (other == this) continue;
+
+        Vector3 otherPos = other->GetOwner()->GetTransform()->GetWorldPosition();
+        Vector3 toMe = myPos - otherPos;
+        toMe.y = 0;
+
+        float dist = toMe.Length();
+        if (dist < radius && dist > 1.0f)
+        {
+            toMe.Normalize();
+
+            // 진행방향 기준 좌우 벡터
+            Vector3 right(-moveDir.z, 0, moveDir.x);
+
+            // 상대가 왼쪽인지 오른쪽인지
+            // float side = Vector3::Dot(right, toMe);
+            float side = right.x * toMe.x + right.y * toMe.y + right.z * toMe.z;
+
+            Vector3 sideForce = right * side * sideBias;
+            Vector3 backForce = toMe * forwardBias;
+
+            float t = (radius - dist) / radius; // 가까울수록 강함
+            force += (sideForce + backForce) * t;
+        }
+    }
+
+    return force;
 }

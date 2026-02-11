@@ -69,6 +69,29 @@ void ControllerHitReport::onShapeHit(const PxControllerShapeHit& hit)
 }
 
 
+void ControllerHitReport::onControllerHit(const PxControllersHit& hit)
+{
+    if (!owner) return;
+
+    CharacterControllerComponent* otherCCT = nullptr;
+
+    for (auto& pair : CharacterControllerSystem::Instance().m_CCTMap)
+    {
+        if (pair.second == hit.other)
+        {
+            otherCCT = pair.first;
+            break;
+        }
+    }
+
+    if (!otherCCT) return;
+
+    owner->m_CCTCurrCCTContacts.insert(otherCCT);
+}
+
+
+
+
 
 // ------------------------------------------------------------
 // CCT Trigger Overlap Query용 필터
@@ -185,6 +208,7 @@ void CharacterControllerSystem::Simulate(float dt)
 
         comp->SyncFromController();
         comp->ResolveCollisions();
+        comp->ResolveCCTCollisions();
         comp->CheckTriggers();      // CCT 위치 기반 Overlap Query
         comp->ResolveTriggers();    // 수집만 진행 
     }

@@ -1,6 +1,8 @@
 #pragma once
 #include "Components/ScriptComponent.h"
 #include "Components/FBXRenderer.h"
+#include "Components/FBXData.h"
+#include "Components/AnimationController.h"
 #include "Components/CharacterControllerComponent.h"
 
 #include <directxtk/Keyboard.h>
@@ -15,7 +17,10 @@ class CameraController;
 class MiniGameManager;
 class JesaSangManager;
 class PlayerItemVisualizer;
+class PlayerThreatMonitor;
+class DialogueUIController;
 class IItem;
+class Effect;
 
 // Player State Enum
 enum class PlayerState
@@ -40,9 +45,17 @@ private:
     // --- [ Component ] ---------------------------
     Transform* transform = nullptr;
     FBXRenderer* fbxRenderer = nullptr;
+    FBXData* fbxData = nullptr;
+    AnimationController* animController = nullptr;
     CharacterControllerComponent* cct = nullptr;
+
+    Effect* fireEffect = nullptr;
+    AnimationController* hitEffect = nullptr;
+
     Inventory* inventory = nullptr;
     PlayerItemVisualizer* visualizer = nullptr;
+    PlayerThreatMonitor* threatMonitor = nullptr;
+    DialogueUIController* dialogueController = nullptr;
 
     CameraController* camController = nullptr;
 
@@ -56,24 +69,24 @@ private:
     int life = 5;
 
     // speed
-    float walkSpeed = 2.5f; 
-    float runSpeed  = 4.0f; 
+    float walkSpeed = 2.0f; 
+    float runSpeed  = 3.7f; 
     float sitSpeed = 1.0f;  
-    float hitSpeedUpRate = 2.0f;        // walkSpeed * 2.0f
+    float hitSpeedUpRate = 1.5f;        // walkSpeed * 2.0f
 
     // sense
     float idleSenseRadius = 0.0f;
-    float walkSenseRadius = 1.0f;
+    float walkSenseRadius = 200.0f;
     float sitSenseRadius = 0.0f;
-    float runSenseRadius = 5.0f;
+    float runSenseRadius = 500.0f;
 
-    float ingreSenseRadius = 0.5f;
-    float foodSenseRadius = 1.5f;
+    float ingreSenseRadius = 100.0f;
+    float foodSenseRadius = 200.0f;
 
     // hit
     float hitDuration = 5.0f;           // 패닉 유지시간
     float hitInvincibleTime = 3.0f;     // 패닉 무적타임
-
+    float renderDirectorTime = 0.2f;    // 패닉 렌더 연출시간
 
 
     // --- [ Controll ] ----------------------------
@@ -82,7 +95,19 @@ private:
     float curSpeed = 0.0f;
     Vector3 lookDir = Vector3::Zero;
     float curSenseRadius = 0.0f;         // 현재 기척 범위
+
+    // hit
     bool isPlayerInvincible = false;     // 현재 무적상태 여부
+    bool resumeHitAfterHide = false;     // hit->hide hit 초기화 방지
+    float hitTimer = 0.0f;               // hit 상태 지속시간 타이머
+    float invincibleTimer = 0.0f;        // hit 무적상태 지속시간 타이머
+    float renderDirectorTimer = 0.0f;    // 플레이어 렌더 깜빡거림 지속시간 타이머
+
+    // first interaction hint
+    bool isExplainedHideObject = true;      // 튜토리얼용
+    bool isExplainedSearchObject = true;    // 튜토리얼용
+    bool isExplainedTrapObject = false;
+    bool isExplainedCookingZone = false;
 
     // search object interaction
     bool  isPossibleSearch = false;            // 기획자분이 한번에 하나만 가능한 사이즈라고 하심. 중첩된다면 추가 처리필요.
@@ -156,6 +181,9 @@ private:
     void InitFSMStates();
     void ChangeState(PlayerState state);
 
+    // Animation
+    void LoadAnimation();
+
     // Init
     void InitStat();
 
@@ -174,6 +202,9 @@ private:
     void PutFoodJesaSangInteraction(float dt);
     void GetItemAltarInteraction(float dt);
 
+    // Hit
+    void UpsateHitDuration(float dt);
+
 
 public:
     // 외부 call Funcs..
@@ -190,7 +221,7 @@ public:
 
 
     // AI
-    void TakeAttack();       // AI에게 공격 당했을 때
+    void TakeAttack();                   // AI에게 공격 당했을 때
     float GetCurSenseRadiuse() const;    // 플레이어 현재 기척 getter
 
 

@@ -1,0 +1,54 @@
+{
+  "prefab": [
+    {
+      "Active": true,
+      "ID": 6004,
+      "Name": "Main Camera",
+      "ParentID": -1,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              110.0,
+              -115.0
+            ],
+            "Rotation": [
+              0.5235987901687622,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "angle": 1.5707963705062866,
+            "farDist": 1800.0,
+            "moveSpeed": 100.0,
+            "nearDist": 70.0,
+            "rotSpeed": 0.004000000189989805
+          },
+          "type": "Camera"
+        },
+        {
+          "properties": {
+            "Active": true
+          },
+          "type": "CameraController"
+        },
+        {
+          "properties": {
+            "Active": true
+          },
+          "type": "OcclusionFader"
+        }
+      ]
+    }
+  ]
+}

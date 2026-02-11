@@ -1,0 +1,40 @@
+{
+  "prefab": [
+    {
+      "Active": true,
+      "ID": 8457,
+      "Name": "MainGameUIManager",
+      "ParentID": -1,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "lifeOffImagePath": "..\\Assets\\Resource\\UI\\Player\\strength_0.png",
+            "lifeOnImagePath": "..\\Assets\\Resource\\UI\\Player\\strength.png"
+          },
+          "type": "MainGameUIManager"
+        }
+      ]
+    }
+  ]
+}

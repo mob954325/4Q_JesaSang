@@ -3,7 +3,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 202,
+        "ID": 395,
         "Name": "DirectionalLight(Sun)",
         "ParentID": -1,
         "components": [
@@ -43,7 +43,7 @@
               ],
               "InnerAngle": 15.0,
               "Intensity": 1.0,
-              "IsSunLight": true,
+              "IsSunLight": false,
               "LightType": "Directional",
               "OuterAngle": 30.0,
               "Range": 15.0
@@ -57,26 +57,26 @@
     {
       "properties": {
         "Active": true,
-        "ID": 203,
-        "Name": "Box",
+        "ID": 396,
+        "Name": "Ground",
         "ParentID": -1,
         "components": [
           {
             "properties": {
               "Position": [
-                0.0,
-                30.899999618530273,
-                70.19999694824219
-              ],
-              "Rotation": [
-                0.0,
+                6.712974548339844,
                 0.0,
                 0.0
               ],
+              "Rotation": [
+                -0.0,
+                0.0,
+                -0.0
+              ],
               "Scale": [
-                0.4000000059604645,
-                0.4000000059604645,
-                1.0
+                10.0,
+                1.0,
+                10.0
               ]
             },
             "type": "Transform"
@@ -84,7 +84,7 @@
           {
             "properties": {
               "Active": true,
-              "DataPath": "..\\Assets\\Resource\\Cube1.fbx",
+              "DataPath": "..\\Assets\\Resource\\Ground.fbx",
               "IsStatic": true
             },
             "type": "FBXData"
@@ -126,11 +126,239 @@
               "UseDiffuseOverride": false,
               "UseEmissiveOverride": false,
               "UseMetallicOverride": false,
-              "UseRoughnessOverride": false
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
+            },
+            "type": "FBXRenderer"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 397,
+        "Name": "Player",
+        "ParentID": -1,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                358.5361328125,
+                103.59076690673828,
+                0.0
+              ],
+              "Rotation": [
+                -0.0,
+                0.0,
+                -0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "DataPath": "..\\Assets\\Resource\\FBX\\00_character\\character.fbx",
+              "IsStatic": false
+            },
+            "type": "FBXData"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "Alpha": 1.0,
+              "Diffuse": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "DiffuseOverride": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Emissive": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "EmissiveOverride": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "IsGround": false,
+              "Metalic": 1.0,
+              "MetallicOverride": 1.0,
+              "RenderBlendType": "Opaque",
+              "Roughness": 1.0,
+              "RoughnessOverride": 1.0,
+              "UseDiffuseOverride": false,
+              "UseEmissiveOverride": false,
+              "UseMetallicOverride": false,
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
             },
             "type": "FBXRenderer"
           },
-          {},
+          {
+            "properties": {
+              "Active": true
+            },
+            "type": "AudioListenerComponent"
+          },
+          {
+            "properties": {
+              "Active": true
+            },
+            "type": "Weapon"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 398,
+        "Name": "NewGameObject",
+        "ParentID": 397,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                -3.5089111328125,
+                157.81088256835938,
+                26.317062377929688
+              ],
+              "Rotation": [
+                -0.0,
+                0.0,
+                -0.0
+              ],
+              "Scale": [
+                0.25,
+                0.25,
+                0.5
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "drawSpacetype": "World",
+              "fillAmount": 1.0,
+              "imageType": "Sliced",
+              "isBillboard": true,
+              "isMouseCheck": false,
+              "path": "..\\Assets\\Resource\\Bricks059_Specular.png",
+              "sliceBorderPx": [
+                81.80000305175781,
+                65.0,
+                40.0,
+                40.0
+              ],
+              "type": "Sliced",
+              "zOrder": 0
+            },
+            "type": "Image"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "Pivot": [
+                0.0,
+                0.4000000059604645
+              ],
+              "Pos": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                8.100000381469727,
+                0.800000011920929,
+                0.20000000298023224
+              ],
+              "Size": [
+                565.9000244140625,
+                160.0
+              ]
+            },
+            "type": "RectTransform"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": false,
+        "ID": 399,
+        "Name": "SoundObject",
+        "ParentID": -1,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                458.93914794921875,
+                180.7545928955078,
+                -0.38031005859375
+              ],
+              "Rotation": [
+                -0.0,
+                0.0,
+                -0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "ChannelGroup": "BGM",
+              "ClipId": "SFX_Footstep1",
+              "Loop": true,
+              "MaxDistance": 4.0,
+              "MinDistance": 1.0,
+              "Pitch": 1.0,
+              "Volume": 1.0
+            },
+            "type": "AudioSourceComponent"
+          },
           {
             "properties": {
               "b": 0.0,
@@ -146,8 +374,218 @@
     {
       "properties": {
         "Active": true,
-        "ID": 204,
-        "Name": "TestWeapon",
+        "ID": 400,
+        "Name": "WinCinemahcine",
+        "ParentID": -1,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                359.3421630859375,
+                190.5639190673828,
+                0.0
+              ],
+              "Rotation": [
+                -0.0,
+                0.0,
+                -0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true
+            },
+            "type": "WinCinemachine"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 401,
+        "Name": "WinCinemachineCamera",
+        "ParentID": 400,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                8.3599853515625,
+                -137.6533660888672
+              ],
+              "Rotation": [
+                -0.0,
+                0.0,
+                -0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "angle": 1.5707963705062866,
+              "farDist": 1800.0,
+              "moveSpeed": 100.0,
+              "nearDist": 70.0,
+              "rotSpeed": 0.004000000189989805
+            },
+            "type": "Camera"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 402,
+        "Name": "WinSpotLight",
+        "ParentID": -1,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                360.3035888671875,
+                253.8966827392578,
+                -2.8719749450683594
+              ],
+              "Rotation": [
+                -0.0,
+                0.0,
+                -0.0
+              ],
+              "Scale": [
+                1.0,
+                0.999997079372406,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "Color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Direction": [
+                0.0,
+                -1.0,
+                1.0
+              ],
+              "InnerAngle": 100.0,
+              "Intensity": 2000.0,
+              "IsSunLight": false,
+              "LightType": "Spot",
+              "OuterAngle": 200.0,
+              "Range": 200.0
+            },
+            "type": "Light"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 403,
+        "Name": "LoseCinemahcine",
+        "ParentID": -1,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                358.8431396484375,
+                169.77462768554688,
+                0.0
+              ],
+              "Rotation": [
+                -0.0,
+                0.0,
+                -0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true
+            },
+            "type": "LoseCinemachine"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 404,
+        "Name": "LoseCinemachineCamera",
+        "ParentID": 403,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                90.6650390625,
+                -100.174072265625
+              ],
+              "Rotation": [
+                0.7710050344467163,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                0.9999992251396179,
+                0.9999992251396179
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "angle": 1.5707963705062866,
+              "farDist": 1800.0,
+              "moveSpeed": 100.0,
+              "nearDist": 70.0,
+              "rotSpeed": 0.004000000189989805
+            },
+            "type": "Camera"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 405,
+        "Name": "ResultPanel",
         "ParentID": -1,
         "components": [
           {
@@ -159,68 +597,6 @@
               ],
               "Rotation": [
                 0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ]
-            },
-            "type": "Transform"
-          }
-        ]
-      },
-      "type": "GameObject"
-    },
-    {
-      "properties": {
-        "Active": true,
-        "ID": 205,
-        "Name": "PlayerSoket",
-        "ParentID": 203,
-        "components": [
-          {
-            "properties": {
-              "Position": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Rotation": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ]
-            },
-            "type": "Transform"
-          }
-        ]
-      },
-      "type": "GameObject"
-    },
-    {
-      "properties": {
-        "Active": true,
-        "ID": 208,
-        "Name": "cam1",
-        "ParentID": -1,
-        "components": [
-          {
-            "properties": {
-              "Position": [
-                11.274999618530273,
-                120.30000305175781,
-                -100.0
-              ],
-              "Rotation": [
-                0.06457717716693878,
                 0.0,
                 0.0
               ],
@@ -234,13 +610,9 @@
           },
           {
             "properties": {
-              "angle": 1.5707963705062866,
-              "farDist": 2000.0,
-              "moveSpeed": 100.0,
-              "nearDist": 0.009999999776482582,
-              "rotSpeed": 0.004000000189989805
+              "Active": true
             },
-            "type": "Camera"
+            "type": "ResultPanel"
           }
         ]
       },
@@ -249,21 +621,21 @@
     {
       "properties": {
         "Active": true,
-        "ID": 209,
-        "Name": "cam2",
-        "ParentID": -1,
+        "ID": 406,
+        "Name": "WinPanel",
+        "ParentID": 405,
         "components": [
           {
             "properties": {
               "Position": [
-                -70.625,
-                125.69999694824219,
-                41.599998474121094
+                0.0,
+                0.0,
+                0.0
               ],
               "Rotation": [
-                0.06457717716693878,
-                1.5707963705062866,
-                -0.2617993950843811
+                0.0,
+                0.0,
+                0.0
               ],
               "Scale": [
                 1.0,
@@ -275,13 +647,69 @@
           },
           {
             "properties": {
-              "angle": 1.5707963705062866,
-              "farDist": 2000.0,
-              "moveSpeed": 100.0,
-              "nearDist": 0.009999999776482582,
-              "rotSpeed": 0.004000000189989805
+              "Active": true,
+              "Pivot": [
+                0.0,
+                0.0
+              ],
+              "Pos": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Size": [
+                1920.0,
+                1080.0
+              ]
             },
-            "type": "Camera"
+            "type": "RectTransform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "drawSpacetype": "Screen",
+              "fillAmount": 1.0,
+              "imageType": "Simple",
+              "isBillboard": false,
+              "isMouseCheck": false,
+              "path": "",
+              "sliceBorderPx": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "type": "Simple",
+              "zOrder": 0
+            },
+            "type": "Image"
+          },
+          {
+            "properties": {
+              "Active": true
+            },
+            "type": "WinPanel"
           }
         ]
       },
@@ -290,21 +718,21 @@
     {
       "properties": {
         "Active": true,
-        "ID": 210,
-        "Name": "cam3",
-        "ParentID": -1,
+        "ID": 407,
+        "Name": "LosePanel",
+        "ParentID": 405,
         "components": [
           {
             "properties": {
               "Position": [
-                142.875,
-                130.0,
-                25.299999237060547
+                0.0,
+                0.0,
+                0.0
               ],
               "Rotation": [
-                0.06457717716693878,
-                -1.5707963705062866,
-                0.2617993950843811
+                0.0,
+                0.0,
+                0.0
               ],
               "Scale": [
                 1.0,
@@ -316,27 +744,16 @@
           },
           {
             "properties": {
-              "angle": 1.5707963705062866,
-              "farDist": 2000.0,
-              "moveSpeed": 100.0,
-              "nearDist": 0.009999999776482582,
-              "rotSpeed": 0.004000000189989805
-            },
-            "type": "Camera"
-          }
-        ]
-      },
-      "type": "GameObject"
-    },
-    {
-      "properties": {
-        "Active": true,
-        "ID": 211,
-        "Name": "TestWeapon",
-        "ParentID": -1,
-        "components": [
-          {
-            "properties": {
+              "Active": true,
+              "Pivot": [
+                0.0,
+                0.0
+              ],
+              "Pos": [
+                0.0,
+                0.0,
+                0.0
+              ],
               "Position": [
                 0.0,
                 0.0,
@@ -351,40 +768,45 @@
                 1.0,
                 1.0,
                 1.0
+              ],
+              "Size": [
+                1920.0,
+                1080.0
               ]
             },
-            "type": "Transform"
-          }
-        ]
-      },
-      "type": "GameObject"
-    },
-    {
-      "properties": {
-        "Active": true,
-        "ID": 212,
-        "Name": "PlayerSoket",
-        "ParentID": -1,
-        "components": [
+            "type": "RectTransform"
+          },
           {
             "properties": {
-              "Position": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Rotation": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
+              "Active": true,
+              "color": [
+                1.0,
                 1.0,
                 1.0,
                 1.0
-              ]
+              ],
+              "drawSpacetype": "Screen",
+              "fillAmount": 1.0,
+              "imageType": "Simple",
+              "isBillboard": false,
+              "isMouseCheck": false,
+              "path": "",
+              "sliceBorderPx": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "type": "Simple",
+              "zOrder": 0
             },
-            "type": "Transform"
+            "type": "Image"
+          },
+          {
+            "properties": {
+              "Active": true
+            },
+            "type": "LosePanel"
           }
         ]
       },

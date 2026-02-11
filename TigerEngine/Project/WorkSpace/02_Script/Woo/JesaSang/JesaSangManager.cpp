@@ -1,10 +1,14 @@
 #include "JesaSangManager.h"
 #include "Util/JsonHelper.h"
 #include "Util/ComponentAutoRegister.h"
-#include "Object/GameObject.h"
 #include "EngineSystem/SceneSystem.h"
+#include "Object/GameObject.h"
+#include "Components/UI/Image.h"
+
 #include "../Item/Item.h"
 #include "../Manager/GameManager.h"
+#include "../Manager/QuestManager.h"
+
 
 REGISTER_COMPONENT(JesaSangManager)
 
@@ -34,12 +38,18 @@ void JesaSangManager::OnStart()
 
     if (!apple || !pear || !batter || !sanjeok || !dong)
         std::cout << "[JesaSangManager] Missing GameObject!" << endl;
+
+    image_sensorOn = sceneSystem->GetGameObjectByName("Image_SensorOn_Jesasang")->GetComponent<Image>();
+    image_interactionOn = sceneSystem->GetGameObjectByName("Image_InteractionOn_Jesasang")->GetComponent<Image>();
+    image_interactionGauge = sceneSystem->GetGameObjectByName("Image_InteractionGauge_Jesasang")->GetComponent<Image>();
+
+    if (!image_sensorOn || !image_interactionOn || !image_interactionGauge)
+    {
+        cout << "[SearchObject] Missing ui!" << endl;
+        return;
+    }
 }
 
-void JesaSangManager::OnDestory()
-{
-   
-}
 
 nlohmann::json JesaSangManager::Serialize()
 {
@@ -106,11 +116,40 @@ void JesaSangManager::ReceiveFood(std::unique_ptr<IItem> food)
         dong->SetActive(true);
     }
 
+    hasFoodCount++;
+
     // 전달받은 Food Item은 할일 끝났으니 쏘멸
     std::cout << "[JesaSangManager] Put Food : " << food->itemId << endl;
     food.reset();
 
+    // UI clear
+    UISensorOnOff(false);
+    UIInteractionOnOff(false);
+    image_interactionGauge->SetFillAmount(0.0);
+
+    // 퀘스트 4 : [완성] 제사상 완성 : 제사상에 올라온 음식 카운팅 (1/6)
+    QuestManager::Instance()->StepComplete(4);
+
     // 제사상에 음식이 다 올라오면 성공
     if(HasAllFood())
         GameManager::Instance()->GameSuccess();
+}
+
+void JesaSangManager::UISensorOnOff(bool flag)
+{
+    if (!image_sensorOn) return;
+    image_sensorOn->SetActive(flag);
+}
+
+void JesaSangManager::UIInteractionOnOff(bool flag)
+{
+    if (!image_interactionOn) return;
+    image_interactionOn->SetActive(flag);
+    image_interactionGauge->SetActive(flag);
+}
+
+void JesaSangManager::UIGaugeUpate(float progress)
+{
+    if (!image_interactionGauge) return;
+    image_interactionGauge->SetFillAmount(progress);
 }

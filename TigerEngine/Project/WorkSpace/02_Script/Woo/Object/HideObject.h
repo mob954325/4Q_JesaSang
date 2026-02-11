@@ -1,6 +1,7 @@
 #pragma once
 #include "Components/ScriptComponent.h"
 
+class Image;
 class PlayerController;
 
 /*
@@ -23,6 +24,12 @@ private:
     // components
     PlayerController* player = nullptr;
 
+    // child UI
+    Image* image_sensorOn = nullptr;
+    Image* image_interactionOn = nullptr;
+    Image* image_interactionGauge = nullptr;
+
+
     // data
     float hideDurationTime = 10.0f;     // 최대 은신 시간
     float reHideCoolTime = 1.0f;        // 재은신 쿨타임
@@ -34,6 +41,7 @@ private:
 
     float hideDurationTimer = 0.0f;
     float reHideCoolTimer = 0.0f;
+
 
 public:
     // component process
@@ -50,6 +58,36 @@ public :
     bool IsPossibleHide();
     void StartHide(PlayerController* p);
     void StopHide();
-    void SetAILook(bool isLook);        // TODO :: 선민이 AI 시야 연결
-};
 
+    // UI
+    void UISensorOnOff(bool flag);              // 플레이어 감지영역 UI
+    void UIInteractionOnOff(bool flag);         // 플레이어 상호작용 영역 UI
+    void UIGaugeUpate(float progress);          // 플레이어 인터랙션 UI
+
+
+    // AI 시야 연결 - 선민 | 02.07 
+    // 해당 HideObject를 바라보고 있는 AI들을 Set으로 관리해서 
+    // 한 마리라도 보고 있으면 isAILooking = true
+private:
+    std::unordered_set<void*> lookingAIs;
+    void UpdateAILook()
+    {
+        isAILooking = !lookingAIs.empty();
+        std::cout << "[HideObject] isAILooking = " << isAILooking << std::endl;
+    }
+
+public:
+    void RegisterAILook(void* ai)
+    {
+        lookingAIs.insert(ai);
+        UpdateAILook();
+    }
+
+    void UnregisterAILook(void* ai)
+    {
+        lookingAIs.erase(ai);
+        UpdateAILook();
+    }
+
+    bool IsAILooking() const { return isAILooking; }
+};

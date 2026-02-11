@@ -82,6 +82,9 @@ int CameraSystem::GetCurrCameraIndex() const
 
 Camera* CameraSystem::GetCurrCamera()
 {
+    // NOTE : 씬 전환 뒤 currCamera Index 초과 방지
+    if (currCameraIndex >= registered.size()) currCameraIndex = 0; // 초과 되면 0번 초기화
+
     if (registered.size() == 1)
     {
         return registered[currCameraIndex];

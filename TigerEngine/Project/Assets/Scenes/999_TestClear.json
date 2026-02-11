@@ -1,0 +1,1074 @@
+{
+  "objects": [
+    {
+      "properties": {
+        "Active": true,
+        "ID": 161,
+        "Name": "DirectionalLight(Sun)",
+        "ParentID": -1,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "Color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Direction": [
+                -0.30000001192092896,
+                -0.30000001192092896,
+                1.0
+              ],
+              "InnerAngle": 15.0,
+              "Intensity": 1.0,
+              "IsSunLight": true,
+              "LightType": "Directional",
+              "OuterAngle": 30.0,
+              "Range": 15.0
+            },
+            "type": "Light"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 162,
+        "Name": "Ground",
+        "ParentID": -1,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                6.712974548339844,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                -0.0,
+                0.0,
+                -0.0
+              ],
+              "Scale": [
+                10.0,
+                1.0,
+                10.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "DataPath": "..\\Assets\\Resource\\Ground.fbx",
+              "IsStatic": true
+            },
+            "type": "FBXData"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "Alpha": 1.0,
+              "Diffuse": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "DiffuseOverride": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Emissive": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "EmissiveOverride": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "IsGround": false,
+              "Metalic": 1.0,
+              "MetallicOverride": 1.0,
+              "RenderBlendType": "Opaque",
+              "Roughness": 1.0,
+              "RoughnessOverride": 1.0,
+              "UseDiffuseOverride": false,
+              "UseEmissiveOverride": false,
+              "UseMetallicOverride": false,
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
+            },
+            "type": "FBXRenderer"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 163,
+        "Name": "Player",
+        "ParentID": -1,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                358.5361328125,
+                103.59076690673828,
+                0.0
+              ],
+              "Rotation": [
+                -0.0,
+                0.0,
+                -0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "DataPath": "..\\Assets\\Resource\\FBX\\00_character\\character.fbx",
+              "IsStatic": false
+            },
+            "type": "FBXData"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "Alpha": 1.0,
+              "Diffuse": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "DiffuseOverride": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Emissive": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "EmissiveOverride": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "IsGround": false,
+              "Metalic": 1.0,
+              "MetallicOverride": 1.0,
+              "RenderBlendType": "Opaque",
+              "Roughness": 1.0,
+              "RoughnessOverride": 1.0,
+              "UseDiffuseOverride": false,
+              "UseEmissiveOverride": false,
+              "UseMetallicOverride": false,
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
+            },
+            "type": "FBXRenderer"
+          },
+          {
+            "properties": {
+              "Active": true
+            },
+            "type": "AudioListenerComponent"
+          },
+          {
+            "properties": {
+              "Active": true
+            },
+            "type": "Weapon"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 164,
+        "Name": "NewGameObject",
+        "ParentID": 163,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                -3.5089111328125,
+                157.81088256835938,
+                26.317062377929688
+              ],
+              "Rotation": [
+                -0.0,
+                0.0,
+                -0.0
+              ],
+              "Scale": [
+                0.25,
+                0.25,
+                0.5
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "drawSpacetype": "World",
+              "fillAmount": 1.0,
+              "imageType": "Sliced",
+              "isBillboard": true,
+              "isMouseCheck": false,
+              "path": "..\\Assets\\Resource\\UI\\Title\\yes.png",
+              "sliceBorderPx": [
+                65.0,
+                65.0,
+                40.0,
+                40.0
+              ],
+              "type": "Sliced",
+              "zOrder": 0
+            },
+            "type": "Image"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "Pivot": [
+                0.0,
+                0.4000000059604645
+              ],
+              "Pos": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                8.100000381469727,
+                0.800000011920929,
+                0.20000000298023224
+              ],
+              "Size": [
+                553.4000244140625,
+                156.5
+              ]
+            },
+            "type": "RectTransform"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 165,
+        "Name": "text",
+        "ParentID": 164,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                -0.0,
+                0.0,
+                -0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "alignType": "Left",
+              "atlasH": 2048,
+              "atlasW": 2048,
+              "color": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ],
+              "drawSpacetype": "World",
+              "fontPath": "../Assets/Resource/font/rotteMedium.ttf",
+              "fontSize": 48,
+              "isBillboard": true,
+              "paddingPx": 1,
+              "text": "Hello World !!!",
+              "zOrder": 0
+            },
+            "type": "TextUI"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "Pivot": [
+                0.0,
+                0.0
+              ],
+              "Pos": [
+                1.2999999523162842,
+                1.2000000476837158,
+                14.300000190734863
+              ],
+              "Position": [
+                1.100000023841858,
+                -0.6000000238418579,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Size": [
+                0.30000001192092896,
+                0.30000001192092896
+              ]
+            },
+            "type": "RectTransform"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 166,
+        "Name": "SoundObject",
+        "ParentID": -1,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                458.93914794921875,
+                180.7545928955078,
+                -0.38031005859375
+              ],
+              "Rotation": [
+                -0.0,
+                0.0,
+                -0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "ChannelGroup": "BGM",
+              "ClipId": "SFX_Footstep1",
+              "Loop": true,
+              "MaxDistance": 4.0,
+              "MinDistance": 1.0,
+              "Pitch": 1.0,
+              "Volume": 1.0
+            },
+            "type": "AudioSourceComponent"
+          },
+          {
+            "properties": {
+              "b": 0.0,
+              "g": 0.0,
+              "r": 0.0
+            },
+            "type": "Player1"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 167,
+        "Name": "NewGameObject",
+        "ParentID": -1,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                156.3861083984375,
+                0.0
+              ],
+              "Rotation": [
+                -0.0,
+                0.0,
+                -0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "allFinished": false,
+              "emitters": [
+                {
+                  "billboard": "ScreenFacing",
+                  "burstCount": 1,
+                  "coneAngleDeg": 30.0,
+                  "duration": 0.0,
+                  "dynamicData": {
+                    "angularMax": 0.0,
+                    "angularMin": 0.0,
+                    "colorMax": [
+                      1.0,
+                      1.0,
+                      1.0,
+                      1.0
+                    ],
+                    "colorMin": [
+                      0.0,
+                      0.0,
+                      0.0,
+                      1.0
+                    ],
+                    "lifeMax": 1.0,
+                    "lifeMin": 0.5,
+                    "rotationMax": 0.0,
+                    "rotationMin": 0.0,
+                    "sizeMax": [
+                      1.0,
+                      1.0
+                    ],
+                    "sizeMin": [
+                      1.0,
+                      1.0
+                    ],
+                    "speedMax": 10.0,
+                    "speedMin": 0.0
+                  },
+                  "emitDir": [
+                    0.0,
+                    1.0,
+                    0.0
+                  ],
+                  "emitRate": 0.0,
+                  "enabled": true,
+                  "filpbookPlayMode": "Loop",
+                  "fixedData": {
+                    "rotation": 0.49000000953674316,
+                    "size": [
+                      1.0,
+                      1.0
+                    ],
+                    "startColor": [
+                      1.0,
+                      1.0,
+                      1.0,
+                      1.0
+                    ]
+                  },
+                  "holdTime": 5.0,
+                  "infinite": 999999.0,
+                  "localOffset": [
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  "looping": true,
+                  "maxParticles": 256,
+                  "particleMode": "Fixed",
+                  "playing": true,
+                  "position": [
+                    0.0,
+                    156.3861083984375,
+                    0.0
+                  ],
+                  "sheet": {
+                    "baseSizeScale": 10.0,
+                    "cols": 5,
+                    "fps": 60.0,
+                    "frameCount": 25,
+                    "loop": true,
+                    "rows": 5,
+                    "texturePath": "..\\Assets\\Resource\\Effect\\Explosion00_5x5.tga"
+                  },
+                  "velocityShape": "Sphere"
+                }
+              ],
+              "enabled": true,
+              "looping": true,
+              "playing": true
+            },
+            "type": "Effect"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 168,
+        "Name": "ResultPanel",
+        "ParentID": -1,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true
+            },
+            "type": "ResultPanel"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 169,
+        "Name": "WinPanel",
+        "ParentID": 168,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "Pivot": [
+                0.0,
+                0.0
+              ],
+              "Pos": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Size": [
+                1920.0,
+                1080.0
+              ]
+            },
+            "type": "RectTransform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "drawSpacetype": "Screen",
+              "fillAmount": 1.0,
+              "imageType": "Simple",
+              "isBillboard": false,
+              "isMouseCheck": false,
+              "path": "",
+              "sliceBorderPx": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "type": "Simple",
+              "zOrder": 0
+            },
+            "type": "Image"
+          },
+          {
+            "properties": {
+              "Active": true
+            },
+            "type": "WinPanel"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 170,
+        "Name": "LosePanel",
+        "ParentID": 168,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "Pivot": [
+                0.0,
+                0.0
+              ],
+              "Pos": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Size": [
+                1920.0,
+                1080.0
+              ]
+            },
+            "type": "RectTransform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "drawSpacetype": "Screen",
+              "fillAmount": 1.0,
+              "imageType": "Simple",
+              "isBillboard": false,
+              "isMouseCheck": false,
+              "path": "",
+              "sliceBorderPx": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "type": "Simple",
+              "zOrder": 0
+            },
+            "type": "Image"
+          },
+          {
+            "properties": {
+              "Active": true
+            },
+            "type": "LosePanel"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 182,
+        "Name": "WinPackage",
+        "ParentID": -1,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 183,
+        "Name": "WinCinemahcine",
+        "ParentID": 182,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                359.3421630859375,
+                190.5639190673828,
+                0.0
+              ],
+              "Rotation": [
+                -0.0,
+                0.0,
+                -0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true
+            },
+            "type": "WinCinemachine"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 184,
+        "Name": "WinCinemachineCamera",
+        "ParentID": 183,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                8.3599853515625,
+                -155.41184997558594
+              ],
+              "Rotation": [
+                -0.0,
+                0.0,
+                -0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "angle": 1.5707963705062866,
+              "farDist": 1800.0,
+              "moveSpeed": 100.0,
+              "nearDist": 70.0,
+              "rotSpeed": 0.004000000189989805
+            },
+            "type": "Camera"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 185,
+        "Name": "WinSpotLight",
+        "ParentID": 182,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                360.3035888671875,
+                253.8966827392578,
+                -2.8719749450683594
+              ],
+              "Rotation": [
+                -0.0,
+                0.0,
+                -0.0
+              ],
+              "Scale": [
+                1.0,
+                0.999997079372406,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "Color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Direction": [
+                0.0,
+                -1.0,
+                1.0
+              ],
+              "InnerAngle": 100.0,
+              "Intensity": 2000.0,
+              "IsSunLight": false,
+              "LightType": "Spot",
+              "OuterAngle": 200.0,
+              "Range": 200.0
+            },
+            "type": "Light"
+          }
+        ]
+      },
+      "type": "GameObject"
+    }
+  ],
+  "worldData": [
+    {
+      "properties": {
+        "PostProcessWorldData": {
+          "properties": {
+            "bloom_clamp": 0.0,
+            "bloom_intensity": 0.800000011920929,
+            "bloom_scatter": 0.5,
+            "bloom_threshold": 1.0,
+            "bloom_tint": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "colorTint": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "colorTint_strength": 0.5,
+            "contrast": 1.0,
+            "defaultGamma": 2.200000047683716,
+            "exposure": 0.0,
+            "gain": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "gain_strength": 0.5,
+            "gamma": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "gamma_strength": 1.0,
+            "grain_intensity": 0.20000000298023224,
+            "grain_response": 0.800000011920929,
+            "grain_scale": 1.0,
+            "hueShift": 0.0,
+            "isHDR": 1,
+            "lift": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "lift_strength": 0.5,
+            "saturation": 1.0,
+            "temperature": 0.0,
+            "tint": 0.0,
+            "useBloom": 0,
+            "useColorAdjustments": 0,
+            "useColorTint": 0,
+            "useDefaultGamma": 1,
+            "useFilmGrain": 0,
+            "useGain": 0,
+            "useGamma": 0,
+            "useHueShift": 0,
+            "useLGG": 0,
+            "useLift": 0,
+            "useVignette": 0,
+            "useWhiteBalance": 0,
+            "vignetteCenter": [
+              0.5,
+              0.5
+            ],
+            "vignetteColor": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "vignette_intensity": 0.5,
+            "vignette_smoothness": 0.5
+          },
+          "type": "PostProcessWorldData"
+        },
+        "ShadowOrthoDesc": {
+          "properties": {
+            "lookPointDist": 500.0,
+            "shadowFar": 20000.0,
+            "shadowHeight": 10000.0,
+            "shadowLightDist": 1000.0,
+            "shadowNear": 1.0,
+            "shadowWidth": 10000.0
+          },
+          "type": "ShadowOrthoDesc"
+        },
+        "indirectIntensity": 0.20000000298023224,
+        "useIBL": 1
+      },
+      "type": "WorldManager"
+    }
+  ]
+}

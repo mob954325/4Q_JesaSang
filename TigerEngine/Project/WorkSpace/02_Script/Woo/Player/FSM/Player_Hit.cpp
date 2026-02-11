@@ -1,6 +1,7 @@
 #include "Player_Hit.h"
 #include "../../Inventory/Inventory.h"
 #include "Manager/WorldManager.h"
+#include "../../Altar/AltarManager.h"
 
 void Player_Hit::Enter()
 {
@@ -8,6 +9,12 @@ void Player_Hit::Enter()
 
     // set speed
     player->curSpeed = player->walkSpeed * player->hitSpeedUpRate;
+
+    // set animation
+    player->animController->ChangeState("Hit");
+
+    // effect
+    player->hitEffect->GetOwner()->SetActive(true);
 
     // set sense radius
     player->curSenseRadius = player->walkSenseRadius;
@@ -17,23 +24,25 @@ void Player_Hit::Enter()
         player->curSenseRadius += player->foodSenseRadius;
 
     // 3초동안은 무적상태
-    player->isPlayerInvincible = true;
+    if (!player->resumeHitAfterHide)
+        player->isPlayerInvincible = true;
+    player->resumeHitAfterHide = false;
 
     // 비네트 On
-    auto& postProcessData = WorldManager::Instance().postProcessData;
-    postProcessData.useVignette = true;
-    postProcessData.vignetteColor = { 1,0,0 };
+    if(!AltarManager::Instance()->IsAltarFirstDirecting())
+    {
+        auto& postProcessData = WorldManager::Instance().postProcessData;
+        postProcessData.useVignette = true;
+        postProcessData.vignetteColor = { 1,0,0 };
+    }
 
-    // timer init
-    hitTimer = 0.0f;
-    invincibleTimer = 0.0f;
-    renderDirectorTimer = renderDirectorTime;
+    // timer -> player controller에서 init (hide 중에도 유지하기 위함)
 }
 
 void Player_Hit::ChangeStateLogic()
 {
     // hit duration 후 자동 change
-    if (hitTimer >= player->hitDuration)
+    if (player->hitTimer >= player->hitDuration)
     {
         const bool isMove =
             player->isMoveLKey || player->isMoveRKey ||
@@ -64,26 +73,14 @@ void Player_Hit::ChangeStateLogic()
 
 void Player_Hit::Update(float deltaTime)
 {
-    // timer
-    hitTimer += deltaTime;
-    invincibleTimer += deltaTime;
-    renderDirectorTimer += deltaTime;
-
-    // 무적상태 끝
-    if (player->isPlayerInvincible && invincibleTimer >= player->hitInvincibleTime)
-    {
-        player->isPlayerInvincible = false;
-        std::cout << "[Player] Hit Invencible Time End." << std::endl;
-    }
-
+    // timer -> player controller에서 update (hide 중에도 유지하기 위함)
+    
     // 플레이어 깜빡거리는 연출
-    if (renderDirectorTimer >= renderDirectorTime)
+    if (player->renderDirectorTimer >= player->renderDirectorTime)
     {
         player->fbxRenderer->SetActive(!player->fbxRenderer->GetActiveSelf());
-        renderDirectorTimer = 0.0f;
+        player->renderDirectorTimer = 0.0f;
     }
-
-    
 
     // look dir
     Vector3 input(0, 0, 0);
@@ -111,6 +108,9 @@ void Player_Hit::Exit()
 
     // 렌더 다시 on
     player->fbxRenderer->SetActive(true);
+
+    // effect
+    player->hitEffect->GetOwner()->SetActive(false);
 
     // 비네트 Off
     auto& postProcessData = WorldManager::Instance().postProcessData;

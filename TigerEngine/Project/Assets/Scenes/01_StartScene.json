@@ -2,21 +2,12 @@
   "objects": [
     {
       "properties": {
-        "ID": 194,
+        "Active": true,
+        "ID": 36,
         "Name": "Main Camera",
         "ParentID": -1,
-        "components": {
-          "Camera": {
-            "properties": {
-              "angle": 1.5707963705062866,
-              "farDist": 2000.0,
-              "moveSpeed": 100.0,
-              "nearDist": 0.009999999776482582,
-              "rotSpeed": 0.004000000189989805
-            },
-            "type": "Camera"
-          },
-          "Transform": {
+        "components": [
+          {
             "properties": {
               "Position": [
                 -98.92500305175781,
@@ -35,19 +26,51 @@
               ]
             },
             "type": "Transform"
+          },
+          {
+            "properties": {
+              "angle": 1.5707963705062866,
+              "farDist": 2000.0,
+              "moveSpeed": 100.0,
+              "nearDist": 0.009999999776482582,
+              "rotSpeed": 0.004000000189989805
+            },
+            "type": "Camera"
           }
-        }
+        ]
       },
       "type": "GameObject"
     },
     {
       "properties": {
-        "ID": 264,
+        "Active": true,
+        "ID": 37,
         "Name": "DirectionalLight(Sun)",
         "ParentID": -1,
-        "components": {
-          "Light": {
+        "components": [
+          {
             "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true,
               "Color": [
                 1.0,
                 1.0,
@@ -67,38 +90,19 @@
               "Range": 15.0
             },
             "type": "Light"
-          },
-          "Transform": {
-            "properties": {
-              "Position": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Rotation": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ]
-            },
-            "type": "Transform"
           }
-        }
+        ]
       },
       "type": "GameObject"
     },
     {
       "properties": {
-        "ID": 267,
+        "Active": true,
+        "ID": 38,
         "Name": "----------------------",
         "ParentID": -1,
-        "components": {
-          "Transform": {
+        "components": [
+          {
             "properties": {
               "Position": [
                 0.0,
@@ -118,94 +122,182 @@
             },
             "type": "Transform"
           }
-        }
+        ]
       },
       "type": "GameObject"
     },
     {
       "properties": {
-        "ID": 269,
-        "Name": "Ground",
-        "ParentID": -1,
-        "components": {
-          "FBXData": {
-            "properties": {
-              "DataPath": "..\\Assets\\Resource\\Ground.fbx",
-              "IsStatic": true
-            },
-            "type": "FBXData"
-          },
-          "FBXRenderer": {
-            "properties": {
-              "Alpha": 1.0,
-              "Diffuse": [
-                1.0,
-                1.0,
-                1.0,
-                1.0
-              ],
-              "DiffuseOverride": [
-                1.0,
-                1.0,
-                1.0,
-                1.0
-              ],
-              "Emissive": [
-                1.0,
-                1.0,
-                1.0,
-                1.0
-              ],
-              "EmissiveOverride": [
-                1.0,
-                1.0,
-                1.0,
-                1.0
-              ],
-              "IsGround": false,
-              "Metalic": 1.0,
-              "MetallicOverride": 1.0,
-              "RenderBlendType": "Opaque",
-              "Roughness": 1.0,
-              "RoughnessOverride": 1.0,
-              "UseDiffuseOverride": false,
-              "UseEmissiveOverride": false,
-              "UseMetallicOverride": false,
-              "UseRoughnessOverride": false
-            },
-            "type": "FBXRenderer"
-          },
-          "Transform": {
-            "properties": {
-              "Position": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Rotation": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                10.0,
-                0.05000000074505806,
-                10.0
-              ]
-            },
-            "type": "Transform"
-          }
-        }
-      },
-      "type": "GameObject"
-    },
-    {
-      "properties": {
-        "ID": 30,
+        "Active": true,
+        "ID": 39,
         "Name": "CurScene_01_StartScene",
         "ParentID": -1,
-        "components": {
-          "Transform": {
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "type": "Transform"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 40,
+        "Name": "UI_Start_Image",
+        "ParentID": -1,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "drawSpacetype": "Screen",
+              "fillAmount": 1.0,
+              "imageType": "Simple",
+              "isMouseCheck": false,
+              "path": "..\\Assets\\Resource\\CutScene\\Title_fix.png",
+              "sliceBorderPx": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "type": "Simple",
+              "zOrder": 0
+            },
+            "type": "Image"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "Pivot": [
+                0.0,
+                0.0
+              ],
+              "Pos": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Size": [
+                1920.0,
+                1080.0
+              ]
+            },
+            "type": "RectTransform"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 41,
+        "Name": "SceneFlowManager",
+        "ParentID": -1,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "AllowNumberKeys": true,
+              "AllowStartAdvance": true,
+              "IntroScenePath": "..\\Assets\\Scenes\\02_IntroScene.json",
+              "MainScenePath": "..\\Assets\\Scenes\\04_MainGameScene.json",
+              "StartScenePath": "..\\Assets\\Scenes\\01_StartScene.json",
+              "TutorialScenePath": "..\\Assets\\Scenes\\03_TutorialScene.json"
+            },
+            "type": "SceneFlowManager"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 42,
+        "Name": "Main Button Manager",
+        "ParentID": -1,
+        "components": [
+          {
             "properties": {
               "Position": [
                 0.0,
@@ -225,7 +317,394 @@
             },
             "type": "Transform"
           }
-        }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 43,
+        "Name": "Title",
+        "ParentID": 42,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "Pivot": [
+                1.0,
+                0.0
+              ],
+              "Pos": [
+                1700.0,
+                100.0,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Size": [
+                600.0,
+                250.0
+              ]
+            },
+            "type": "RectTransform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "drawSpacetype": "Screen",
+              "fillAmount": 1.0,
+              "imageType": "Simple",
+              "isMouseCheck": false,
+              "path": "..\\Assets\\Resource\\UI\\Title\\sound.png",
+              "sliceBorderPx": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "type": "Simple",
+              "zOrder": 1
+            },
+            "type": "Image"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 44,
+        "Name": "StartButton",
+        "ParentID": 42,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "drawSpacetype": "Screen",
+              "fillAmount": 1.0,
+              "imageType": "Simple",
+              "isMouseCheck": true,
+              "path": "..\\Assets\\Resource\\UI\\Title\\start.png",
+              "sliceBorderPx": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "type": "Simple",
+              "zOrder": 1
+            },
+            "type": "Image"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "Pivot": [
+                1.0,
+                0.0
+              ],
+              "Pos": [
+                1700.0,
+                400.0,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                0.0,
+                0.0
+              ],
+              "Size": [
+                408.0,
+                195.0
+              ]
+            },
+            "type": "RectTransform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "normalImagePath": "",
+              "pressedImagePath": "..\\Assets\\Resource\\UI\\Title\\start_click.png",
+              "targetScenePath": "..\\Assets\\Scenes\\02_IntroScene.json"
+            },
+            "type": "MenuUI_StartButton"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 45,
+        "Name": "OptionsButton",
+        "ParentID": 42,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "drawSpacetype": "Screen",
+              "fillAmount": 1.0,
+              "imageType": "Simple",
+              "isMouseCheck": true,
+              "path": "..\\Assets\\Resource\\UI\\Title\\system.png",
+              "sliceBorderPx": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "type": "Simple",
+              "zOrder": 1
+            },
+            "type": "Image"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "Pivot": [
+                1.0,
+                0.0
+              ],
+              "Pos": [
+                1700.0,
+                600.0,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Size": [
+                408.0,
+                195.0
+              ]
+            },
+            "type": "RectTransform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "normalImagePath": "",
+              "pressedImagePath": "..\\Assets\\Resource\\UI\\Title\\system_click.png",
+              "targetScenePath": ""
+            },
+            "type": "MenuUI_OptionButton"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 46,
+        "Name": "ExitButton",
+        "ParentID": 42,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "drawSpacetype": "Screen",
+              "fillAmount": 1.0,
+              "imageType": "Simple",
+              "isMouseCheck": true,
+              "path": "..\\Assets\\Resource\\UI\\Title\\yes.png",
+              "sliceBorderPx": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "type": "Simple",
+              "zOrder": 1
+            },
+            "type": "Image"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "Pivot": [
+                1.0,
+                0.0
+              ],
+              "Pos": [
+                1700.0,
+                800.0,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                0.0,
+                1.0,
+                1.0
+              ],
+              "Size": [
+                408.0,
+                195.0
+              ]
+            },
+            "type": "RectTransform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "normalImagePath": "",
+              "pressedImagePath": "..\\Assets\\Resource\\UI\\Title\\yes_click.png",
+              "targetScenePath": ""
+            },
+            "type": "MenuUI_ExitButton"
+          }
+        ]
       },
       "type": "GameObject"
     }

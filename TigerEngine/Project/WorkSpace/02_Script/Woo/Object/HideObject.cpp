@@ -1,7 +1,9 @@
 #include "HideObject.h"
 #include "Util/JsonHelper.h"
 #include "Util/ComponentAutoRegister.h"
+#include "Components/UI/Image.h"
 #include "../Player/PlayerController.h"
+
 
 REGISTER_COMPONENT(HideObject)
 
@@ -14,9 +16,29 @@ RTTR_REGISTRATION
 
 void HideObject::OnStart()
 {
+    // get child compoennts
+    auto t1 = GetOwner()->GetChildByName("Image_SensorOn");
+    auto t2 = GetOwner()->GetChildByName("Image_InteractionOn");
+    auto t3 = GetOwner()->GetChildByName("Image_InteractionGauge");
+
+    if (!t1 || !t2 || !t3)
+    {
+        cout << "[SearchObject] Missing child transforms!" << endl;
+        return;
+    }
+
+    image_sensorOn = t1->GetOwner()->GetComponent<Image>();
+    image_interactionOn = t2->GetOwner()->GetComponent<Image>();
+    image_interactionGauge = t3->GetOwner()->GetComponent<Image>();
+
+    // init
     hideDurationTimer = 0.0f;
-    reHideCoolTimer = reHideCoolTime;
     isHiding = false;
+    reHideReady = true;
+    reHideCoolTimer = reHideCoolTime;
+
+    // UI
+    UIGaugeUpate(0.0f);
 }
 
 void HideObject::OnUpdate(float delta)
@@ -41,10 +63,17 @@ void HideObject::OnUpdate(float delta)
     if (!reHideReady)
     {
         reHideCoolTimer += delta;
+
+        // UI
+        float progress = 1.0f - (reHideCoolTimer / reHideCoolTime);
+        progress = std::clamp(progress, 0.0f, 1.0f);
+        UIGaugeUpate(progress);
+
         if (reHideCoolTimer >= reHideCoolTime)
         {
             reHideReady = true;
             reHideCoolTimer = reHideCoolTime;
+            UIGaugeUpate(0.0f);
             cout << "[HideObject] Re Hide Possible!" << endl;
         }
     }
@@ -71,8 +100,9 @@ void HideObject::StartHide(PlayerController* p)
 
     isHiding = true;
     hideDurationTimer = 0.0f;
-    reHideReady = false;
-    reHideCoolTimer = 0.0f;
+
+    UISensorOnOff(false);
+    UIInteractionOnOff(false);
 }
 
 void HideObject::StopHide()
@@ -89,13 +119,32 @@ void HideObject::StopHide()
     reHideReady = false;
     reHideCoolTimer = 0.0f;
 
-    // 안전 처리
     player = nullptr;
+
+    // UI
+    UIGaugeUpate(1.0f);
+    UISensorOnOff(true);
+    UIInteractionOnOff(true);
 
     cout << "[HideObject] Stop Hide Interrupted" << endl;
 }
 
-void HideObject::SetAILook(bool isLook)
+void HideObject::UISensorOnOff(bool flag)
 {
-    isAILooking = isLook;
+    if (!image_sensorOn) return;
+    if (flag && !IsPossibleHide()) return;
+    image_sensorOn->SetActive(flag);
+}
+
+void HideObject::UIInteractionOnOff(bool flag)
+{
+    if (!image_interactionOn) return;
+    image_interactionOn->SetActive(flag);
+    image_interactionGauge->SetActive(flag);
+}
+
+void HideObject::UIGaugeUpate(float progress)
+{
+    if (!image_interactionGauge) return;
+    image_interactionGauge->SetFillAmount(progress);
 }

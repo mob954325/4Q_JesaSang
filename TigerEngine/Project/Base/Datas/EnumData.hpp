@@ -55,7 +55,7 @@ enum class CollisionLayer : uint32_t
     World = 1 << 3,
     Trigger = 1 << 4,
     Projectile = 1 << 5,
-    Ball = 1 << 6,
+    Vision = 1 << 6,
     Ground = 1 << 7 // Grid에서 Ground는 탐색영역으로 감지한다. 
 };
 

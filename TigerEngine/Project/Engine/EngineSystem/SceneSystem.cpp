@@ -2,16 +2,16 @@
 
 void SceneSystem::BeforUpdate()
 {
-	if(scenes.empty()) return;
+    if (scenes.empty()) return;
 
-	currentScene->CheckDestroy();
+    currentScene->CheckDestroy();
 }
 
 void SceneSystem::UpdateScene(float deltaTime)
 {
-	if(scenes.empty()) return; // 씬 없어서 터지는거 방지
+    if (scenes.empty()) return; // 씬 없어서 터지는거 방지
 
-	currentScene->OnUpdate(deltaTime);
+    currentScene->OnUpdate(deltaTime);
 }
 
 void SceneSystem::FixedUpdateScene(float deltaTime)
@@ -30,12 +30,12 @@ void SceneSystem::LateUpdateScene(float deltaTime)
 
 std::shared_ptr<Scene> SceneSystem::GetSceneByIndex(int index)
 {
-	return scenes.find(index)->second;
+    return scenes.find(index)->second;
 }
 
 void SceneSystem::AddScene()
 {
-	scenes.insert({scenes.size(), std::make_shared<Scene>()});
+    scenes.insert({ scenes.size(), std::make_shared<Scene>() });
 }
 
 std::shared_ptr<Scene> SceneSystem::GetCurrentScene()
@@ -45,6 +45,6 @@ std::shared_ptr<Scene> SceneSystem::GetCurrentScene()
 
 std::shared_ptr<Scene> SceneSystem::SetCurrentSceneByIndex(int i)
 {
-	currentScene = scenes.find(i)->second;
-	return currentScene;
+    currentScene = scenes.find(i)->second;
+    return currentScene;
 }

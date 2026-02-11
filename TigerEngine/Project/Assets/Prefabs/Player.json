@@ -1,0 +1,1708 @@
+{
+  "prefab": [
+    {
+      "Active": true,
+      "ID": 8280,
+      "Name": "Player",
+      "ParentID": -1,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "height": 90.0,
+            "isTrigger": false,
+            "jumpSpeed": 5.5,
+            "layer": "Player",
+            "moveSpeed": 0.0,
+            "offset": [
+              0.0,
+              53.0,
+              0.0
+            ],
+            "radius": 13.0
+          },
+          "type": "CharacterControllerComponent"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "DataPath": "..\\Assets\\Resource\\Animation\\FuckingAssimp\\ani_idle_character.fbx",
+            "IsStatic": false
+          },
+          "type": "FBXData"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Alpha": 1.0,
+            "Diffuse": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "DiffuseOverride": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "Emissive": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "EmissiveOverride": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "IsGround": false,
+            "Metalic": 1.0,
+            "MetallicOverride": 1.0,
+            "RenderBlendType": "Opaque",
+            "Roughness": 1.0,
+            "RoughnessOverride": 0.0,
+            "UseDiffuseOverride": false,
+            "UseEmissiveOverride": false,
+            "UseMetallicOverride": false,
+            "UseRoughnessOverride": false,
+            "isroughnessFromShininess": true
+          },
+          "type": "FBXRenderer"
+        },
+        {
+          "properties": {
+            "Active": true
+          },
+          "type": "PlayerController"
+        },
+        {
+          "properties": {
+            "Active": true
+          },
+          "type": "Inventory"
+        },
+        {
+          "properties": {
+            "Active": true
+          },
+          "type": "PlayerItemVisualizer"
+        },
+        {
+          "properties": {
+            "Active": true
+          },
+          "type": "AnimationController"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "CollectedItems": 0,
+            "CollectedPieces": 0,
+            "MapSize": [
+              256.0,
+              256.0
+            ],
+            "TotalItems": 6,
+            "TotalPieces": 6,
+            "WorldMax": [
+              500.0,
+              0.0,
+              500.0
+            ],
+            "WorldMin": [
+              -500.0,
+              0.0,
+              -500.0
+            ]
+          },
+          "type": "MiniMapTestScript"
+        },
+        {
+          "properties": {
+            "Active": true
+          },
+          "type": "DialogueUIController"
+        },
+        {
+          "properties": {
+            "Active": true
+          },
+          "type": "PlayerThreatMonitor"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 8281,
+      "Name": "CameraTrackingPoint",
+      "ParentID": 8280,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              79.69999694824219,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 8282,
+      "Name": "OcclusionFadePoint",
+      "ParentID": 8280,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              25.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 8283,
+      "Name": "InteractionSensor",
+      "ParentID": 8280,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              -152.70001220703125,
+              0.0
+            ],
+            "Rotation": [
+              -0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true
+          },
+          "type": "InteractionSensor"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "ColliderType": "Box",
+            "PhysicsBodyType": "Static",
+            "density": 10.0,
+            "halfExtents": [
+              130.0,
+              10.0,
+              130.0
+            ],
+            "height": 10.0,
+            "isTrigger": true,
+            "layer": "Player",
+            "localOffset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "radius": 50.0
+          },
+          "type": "PhysicsComponent"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 8284,
+      "Name": "InteractZone",
+      "ParentID": 8280,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              -112.70001220703125,
+              0.0
+            ],
+            "Rotation": [
+              -0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true
+          },
+          "type": "InteractionZone"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "ColliderType": "Box",
+            "PhysicsBodyType": "Static",
+            "density": 10.0,
+            "halfExtents": [
+              35.0,
+              10.0,
+              35.0
+            ],
+            "height": 10.0,
+            "isTrigger": true,
+            "layer": "Player",
+            "localOffset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "radius": 50.0
+          },
+          "type": "PhysicsComponent"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 8285,
+      "Name": "ItemVisualizer",
+      "ParentID": 8280,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              120.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        }
+      ]
+    },
+    {
+      "Active": false,
+      "ID": 8286,
+      "Name": "Visual_Ingre_Apple",
+      "ParentID": 8285,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              0.20000000298023224,
+              0.20000000298023224,
+              0.20000000298023224
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "DataPath": "..\\Assets\\Resource\\sphere.fbx",
+            "IsStatic": true
+          },
+          "type": "FBXData"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "Alpha": 1.0,
+            "Diffuse": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "DiffuseOverride": [
+              1.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "Emissive": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "EmissiveOverride": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "IsGround": false,
+            "Metalic": 1.0,
+            "MetallicOverride": 0.0,
+            "RenderBlendType": "Opaque",
+            "Roughness": 1.0,
+            "RoughnessOverride": 1.0,
+            "UseDiffuseOverride": true,
+            "UseEmissiveOverride": false,
+            "UseMetallicOverride": true,
+            "UseRoughnessOverride": true,
+            "isroughnessFromShininess": false
+          },
+          "type": "FBXRenderer"
+        }
+      ]
+    },
+    {
+      "Active": false,
+      "ID": 8287,
+      "Name": "Visual_Ingre_Batter",
+      "ParentID": 8285,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              0.20000000298023224,
+              0.20000000298023224,
+              0.20000000298023224
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "DataPath": "..\\Assets\\Resource\\sphere.fbx",
+            "IsStatic": true
+          },
+          "type": "FBXData"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "Alpha": 1.0,
+            "Diffuse": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "DiffuseOverride": [
+              1.0,
+              0.44117647409439087,
+              0.0,
+              1.0
+            ],
+            "Emissive": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "EmissiveOverride": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "IsGround": false,
+            "Metalic": 1.0,
+            "MetallicOverride": 0.0,
+            "RenderBlendType": "Opaque",
+            "Roughness": 1.0,
+            "RoughnessOverride": 1.0,
+            "UseDiffuseOverride": true,
+            "UseEmissiveOverride": false,
+            "UseMetallicOverride": true,
+            "UseRoughnessOverride": true,
+            "isroughnessFromShininess": false
+          },
+          "type": "FBXRenderer"
+        }
+      ]
+    },
+    {
+      "Active": false,
+      "ID": 8288,
+      "Name": "Visual_Ingre_Donggeurangttaeng",
+      "ParentID": 8285,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              0.20000000298023224,
+              0.20000000298023224,
+              0.20000000298023224
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "DataPath": "..\\Assets\\Resource\\sphere.fbx",
+            "IsStatic": true
+          },
+          "type": "FBXData"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "Alpha": 1.0,
+            "Diffuse": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "DiffuseOverride": [
+              0.9999995231628418,
+              0.0,
+              1.0,
+              1.0
+            ],
+            "Emissive": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "EmissiveOverride": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "IsGround": false,
+            "Metalic": 1.0,
+            "MetallicOverride": 0.0,
+            "RenderBlendType": "Opaque",
+            "Roughness": 1.0,
+            "RoughnessOverride": 1.0,
+            "UseDiffuseOverride": true,
+            "UseEmissiveOverride": false,
+            "UseMetallicOverride": true,
+            "UseRoughnessOverride": true,
+            "isroughnessFromShininess": false
+          },
+          "type": "FBXRenderer"
+        }
+      ]
+    },
+    {
+      "Active": false,
+      "ID": 8289,
+      "Name": "Visual_Ingre_Pear",
+      "ParentID": 8285,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              0.20000000298023224,
+              0.20000000298023224,
+              0.20000000298023224
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "DataPath": "..\\Assets\\Resource\\sphere.fbx",
+            "IsStatic": true
+          },
+          "type": "FBXData"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "Alpha": 1.0,
+            "Diffuse": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "DiffuseOverride": [
+              1.0,
+              0.9031141996383667,
+              0.7254902124404907,
+              1.0
+            ],
+            "Emissive": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "EmissiveOverride": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "IsGround": false,
+            "Metalic": 1.0,
+            "MetallicOverride": 0.0,
+            "RenderBlendType": "Opaque",
+            "Roughness": 1.0,
+            "RoughnessOverride": 1.0,
+            "UseDiffuseOverride": true,
+            "UseEmissiveOverride": false,
+            "UseMetallicOverride": true,
+            "UseRoughnessOverride": true,
+            "isroughnessFromShininess": false
+          },
+          "type": "FBXRenderer"
+        }
+      ]
+    },
+    {
+      "Active": false,
+      "ID": 8290,
+      "Name": "Visual_Ingre_Sanjeok",
+      "ParentID": 8285,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              0.20000000298023224,
+              0.20000000298023224,
+              0.20000000298023224
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "DataPath": "..\\Assets\\Resource\\sphere.fbx",
+            "IsStatic": true
+          },
+          "type": "FBXData"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "Alpha": 1.0,
+            "Diffuse": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "DiffuseOverride": [
+              0.0,
+              0.23529410362243652,
+              1.0,
+              1.0
+            ],
+            "Emissive": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "EmissiveOverride": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "IsGround": false,
+            "Metalic": 1.0,
+            "MetallicOverride": 0.0,
+            "RenderBlendType": "Opaque",
+            "Roughness": 1.0,
+            "RoughnessOverride": 1.0,
+            "UseDiffuseOverride": true,
+            "UseEmissiveOverride": false,
+            "UseMetallicOverride": true,
+            "UseRoughnessOverride": true,
+            "isroughnessFromShininess": false
+          },
+          "type": "FBXRenderer"
+        }
+      ]
+    },
+    {
+      "Active": false,
+      "ID": 8291,
+      "Name": "Visual_Ingre_Tofu",
+      "ParentID": 8285,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              0.20000000298023224,
+              0.20000000298023224,
+              0.20000000298023224
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "DataPath": "..\\Assets\\Resource\\sphere.fbx",
+            "IsStatic": true
+          },
+          "type": "FBXData"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "Alpha": 1.0,
+            "Diffuse": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "DiffuseOverride": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "Emissive": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "EmissiveOverride": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "IsGround": false,
+            "Metalic": 1.0,
+            "MetallicOverride": 0.0,
+            "RenderBlendType": "Opaque",
+            "Roughness": 1.0,
+            "RoughnessOverride": 1.0,
+            "UseDiffuseOverride": true,
+            "UseEmissiveOverride": false,
+            "UseMetallicOverride": true,
+            "UseRoughnessOverride": true,
+            "isroughnessFromShininess": false
+          },
+          "type": "FBXRenderer"
+        }
+      ]
+    },
+    {
+      "Active": false,
+      "ID": 8292,
+      "Name": "Visual_Apple",
+      "ParentID": 8285,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              -32.0,
+              -55.0,
+              32.099998474121094
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.2999999523162842,
+              1.2999999523162842,
+              1.2999999523162842
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "DataPath": "..\\Assets\\Resource\\FBX\\New_Food\\apple.fbx",
+            "IsStatic": false
+          },
+          "type": "FBXData"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "Alpha": 1.0,
+            "Diffuse": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "DiffuseOverride": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "Emissive": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "EmissiveOverride": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "IsGround": false,
+            "Metalic": 1.0,
+            "MetallicOverride": 1.0,
+            "RenderBlendType": "Opaque",
+            "Roughness": 1.0,
+            "RoughnessOverride": 1.0,
+            "UseDiffuseOverride": false,
+            "UseEmissiveOverride": false,
+            "UseMetallicOverride": false,
+            "UseRoughnessOverride": false,
+            "isroughnessFromShininess": false
+          },
+          "type": "FBXRenderer"
+        }
+      ]
+    },
+    {
+      "Active": false,
+      "ID": 8293,
+      "Name": "Visual_Pear",
+      "ParentID": 8285,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              15.199999809265137,
+              -55.0,
+              33.099998474121094
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.2999999523162842,
+              1.2999999523162842,
+              1.2999999523162842
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "DataPath": "..\\Assets\\Resource\\FBX\\New_Food\\pear.fbx",
+            "IsStatic": false
+          },
+          "type": "FBXData"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "Alpha": 1.0,
+            "Diffuse": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "DiffuseOverride": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "Emissive": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "EmissiveOverride": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "IsGround": false,
+            "Metalic": 1.0,
+            "MetallicOverride": 1.0,
+            "RenderBlendType": "Opaque",
+            "Roughness": 1.0,
+            "RoughnessOverride": 1.0,
+            "UseDiffuseOverride": false,
+            "UseEmissiveOverride": false,
+            "UseMetallicOverride": false,
+            "UseRoughnessOverride": false,
+            "isroughnessFromShininess": false
+          },
+          "type": "FBXRenderer"
+        }
+      ]
+    },
+    {
+      "Active": false,
+      "ID": 8294,
+      "Name": "Visual_Batter",
+      "ParentID": 8285,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              7.400000095367432,
+              -61.099998474121094,
+              1.399999976158142
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.5,
+              1.5,
+              1.5
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "DataPath": "..\\Assets\\Resource\\FBX\\New_Food\\skewer_pancake.fbx",
+            "IsStatic": false
+          },
+          "type": "FBXData"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "Alpha": 1.0,
+            "Diffuse": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "DiffuseOverride": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "Emissive": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "EmissiveOverride": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "IsGround": false,
+            "Metalic": 1.0,
+            "MetallicOverride": 1.0,
+            "RenderBlendType": "Opaque",
+            "Roughness": 1.0,
+            "RoughnessOverride": 1.0,
+            "UseDiffuseOverride": false,
+            "UseEmissiveOverride": false,
+            "UseMetallicOverride": false,
+            "UseRoughnessOverride": false,
+            "isroughnessFromShininess": false
+          },
+          "type": "FBXRenderer"
+        }
+      ]
+    },
+    {
+      "Active": false,
+      "ID": 8295,
+      "Name": "Visual_Tofu",
+      "ParentID": 8285,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              -33.29999923706055,
+              -60.900001525878906,
+              -1.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.5,
+              1.5,
+              1.5
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "DataPath": "..\\Assets\\Resource\\FBX\\New_Food\\tofu.fbx",
+            "IsStatic": false
+          },
+          "type": "FBXData"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "Alpha": 1.0,
+            "Diffuse": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "DiffuseOverride": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "Emissive": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "EmissiveOverride": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "IsGround": false,
+            "Metalic": 1.0,
+            "MetallicOverride": 1.0,
+            "RenderBlendType": "Opaque",
+            "Roughness": 1.0,
+            "RoughnessOverride": 1.0,
+            "UseDiffuseOverride": false,
+            "UseEmissiveOverride": false,
+            "UseMetallicOverride": false,
+            "UseRoughnessOverride": false,
+            "isroughnessFromShininess": false
+          },
+          "type": "FBXRenderer"
+        }
+      ]
+    },
+    {
+      "Active": false,
+      "ID": 8296,
+      "Name": "Visual_Sanjeok",
+      "ParentID": 8285,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              28.799999237060547,
+              -55.0,
+              -20.799999237060547
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.2999999523162842,
+              1.2999999523162842,
+              1.2999999523162842
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "DataPath": "..\\Assets\\Resource\\FBX\\New_Food\\Korean_st_Pancake.fbx",
+            "IsStatic": true
+          },
+          "type": "FBXData"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "Alpha": 1.0,
+            "Diffuse": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "DiffuseOverride": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "Emissive": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "EmissiveOverride": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "IsGround": false,
+            "Metalic": 1.0,
+            "MetallicOverride": 1.0,
+            "RenderBlendType": "Opaque",
+            "Roughness": 1.0,
+            "RoughnessOverride": 1.0,
+            "UseDiffuseOverride": false,
+            "UseEmissiveOverride": false,
+            "UseMetallicOverride": false,
+            "UseRoughnessOverride": false,
+            "isroughnessFromShininess": false
+          },
+          "type": "FBXRenderer"
+        }
+      ]
+    },
+    {
+      "Active": false,
+      "ID": 8297,
+      "Name": "Visual_Donggeurangttaeng",
+      "ParentID": 8285,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              29.0,
+              -62.20000076293945,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.5,
+              1.5,
+              1.5
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "DataPath": "..\\Assets\\Resource\\FBX\\New_Food\\Korean_st_meatball.fbx",
+            "IsStatic": false
+          },
+          "type": "FBXData"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "Alpha": 1.0,
+            "Diffuse": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "DiffuseOverride": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "Emissive": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "EmissiveOverride": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "IsGround": false,
+            "Metalic": 1.0,
+            "MetallicOverride": 1.0,
+            "RenderBlendType": "Opaque",
+            "Roughness": 1.0,
+            "RoughnessOverride": 1.0,
+            "UseDiffuseOverride": false,
+            "UseEmissiveOverride": false,
+            "UseMetallicOverride": false,
+            "UseRoughnessOverride": false,
+            "isroughnessFromShininess": false
+          },
+          "type": "FBXRenderer"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 8298,
+      "Name": "AITarget",
+      "ParentID": 8280,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "ColliderType": "Box",
+            "PhysicsBodyType": "Static",
+            "density": 10.0,
+            "halfExtents": [
+              10.0,
+              5.0,
+              10.0
+            ],
+            "height": 10.0,
+            "isTrigger": false,
+            "layer": "Player",
+            "localOffset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "radius": 50.0
+          },
+          "type": "PhysicsComponent"
+        },
+        {
+          "properties": {
+            "Active": true
+          },
+          "type": "AITarget"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 8477,
+      "Name": "DialoguePoint",
+      "ParentID": 8280,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              130.0,
+              0.0
+            ],
+            "Rotation": [
+              -0.0,
+              0.0,
+              -0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 8478,
+      "Name": "Player_FireEffect",
+      "ParentID": 8280,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              135.0,
+              0.0
+            ],
+            "Rotation": [
+              -0.0,
+              0.0,
+              -0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "allFinished": true,
+            "emitters": [
+              {
+                "billboard": "ScreenFacing",
+                "burstCount": 1,
+                "coneAngleDeg": 30.0,
+                "duration": 5.0,
+                "dynamicData": {
+                  "angularMax": 0.0,
+                  "angularMin": 0.0,
+                  "colorMax": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0
+                  ],
+                  "colorMin": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0
+                  ],
+                  "lifeMax": 1.0,
+                  "lifeMin": 0.5,
+                  "rotationMax": 0.0,
+                  "rotationMin": 0.0,
+                  "sizeMax": [
+                    1.0,
+                    1.0
+                  ],
+                  "sizeMin": [
+                    1.0,
+                    1.0
+                  ],
+                  "speedMax": 10.0,
+                  "speedMin": 0.0
+                },
+                "emitDir": [
+                  0.0,
+                  1.0,
+                  0.0
+                ],
+                "emitRate": 1.0,
+                "enabled": true,
+                "filpbookPlayMode": "Once_Then_Die",
+                "fixedData": {
+                  "rotation": 0.0,
+                  "size": [
+                    1.0,
+                    1.0
+                  ],
+                  "startColor": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0
+                  ]
+                },
+                "holdTime": 0.0,
+                "infinite": 999999.0,
+                "localOffset": [
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                "looping": false,
+                "maxParticles": 1,
+                "particleMode": "Fixed",
+                "playing": false,
+                "position": [
+                  0.0,
+                  135.0,
+                  0.0
+                ],
+                "sheet": {
+                  "baseSizeScale": 40.0,
+                  "cols": 4,
+                  "fps": 14.0,
+                  "frameCount": 12,
+                  "loop": false,
+                  "rows": 3,
+                  "texturePath": "..\\Assets\\Resource\\Effect\\Fire\\f_a.png"
+                },
+                "velocityShape": "Sphere"
+              }
+            ],
+            "enabled": true,
+            "looping": false,
+            "playing": false
+          },
+          "type": "Effect"
+        }
+      ]
+    },
+    {
+      "Active": false,
+      "ID": 8479,
+      "Name": "Player_HitEffect",
+      "ParentID": 8280,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "DataPath": "..\\Assets\\Resource\\Effect\\ani_confused_mark.fbx",
+            "IsStatic": true
+          },
+          "type": "FBXData"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "Alpha": 1.0,
+            "Diffuse": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "DiffuseOverride": [
+              1.0,
+              0.9721741676330566,
+              0.05392158031463623,
+              1.0
+            ],
+            "Emissive": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "EmissiveOverride": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "IsGround": false,
+            "Metalic": 1.0,
+            "MetallicOverride": 1.0,
+            "RenderBlendType": "Opaque",
+            "Roughness": 1.0,
+            "RoughnessOverride": 1.0,
+            "UseDiffuseOverride": true,
+            "UseEmissiveOverride": false,
+            "UseMetallicOverride": false,
+            "UseRoughnessOverride": false,
+            "isroughnessFromShininess": false
+          },
+          "type": "FBXRenderer"
+        },
+        {
+          "properties": {
+            "Active": false
+          },
+          "type": "AnimationController"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 8482,
+      "Name": "Player_SmokeEffect",
+      "ParentID": 8280,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              -0.0,
+              0.0,
+              -0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "allFinished": false,
+            "emitters": [
+              {
+                "billboard": "ScreenFacing",
+                "burstCount": 10,
+                "coneAngleDeg": 30.0,
+                "duration": 1.0,
+                "dynamicData": {
+                  "angularMax": 1.0,
+                  "angularMin": 0.0,
+                  "colorMax": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0
+                  ],
+                  "colorMin": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0
+                  ],
+                  "lifeMax": 3.0,
+                  "lifeMin": 2.0,
+                  "rotationMax": 10.0,
+                  "rotationMin": -10.0,
+                  "sizeMax": [
+                    2.0,
+                    1.0
+                  ],
+                  "sizeMin": [
+                    1.0,
+                    1.0
+                  ],
+                  "speedMax": 30.0,
+                  "speedMin": 20.0
+                },
+                "emitDir": [
+                  0.0,
+                  1.0,
+                  0.0
+                ],
+                "emitRate": 20.0,
+                "enabled": true,
+                "filpbookPlayMode": "Loop",
+                "fixedData": {
+                  "rotation": 0.0,
+                  "size": [
+                    1.0,
+                    1.0
+                  ],
+                  "startColor": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0
+                  ]
+                },
+                "holdTime": 5.0,
+                "infinite": 999999.0,
+                "localOffset": [
+                  0.0,
+                  5.0,
+                  0.0
+                ],
+                "looping": true,
+                "maxParticles": 256,
+                "particleMode": "Dynamic",
+                "playing": false,
+                "position": [
+                  0.0,
+                  5.0,
+                  0.0
+                ],
+                "sheet": {
+                  "baseSizeScale": 10.0,
+                  "cols": 1,
+                  "fps": 0.0,
+                  "frameCount": 1,
+                  "loop": true,
+                  "rows": 1,
+                  "texturePath": "..\\Assets\\Resource\\Effect\\dust.png"
+                },
+                "velocityShape": "Disk"
+              }
+            ],
+            "enabled": true,
+            "looping": false,
+            "playing": false
+          },
+          "type": "Effect"
+        }
+      ]
+    }
+  ]
+}
