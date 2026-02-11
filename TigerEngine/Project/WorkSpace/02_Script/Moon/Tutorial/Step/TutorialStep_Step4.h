@@ -46,10 +46,10 @@ private:
     //float len4 = 200.5f;
     //float len5 = 100.0f;
     float len1 = 1000.0f;
-    float len2 = 900.5f;
-    float len3 = 700.0f;
-    float len4 = 400.5f;
-    float len5 = 200.0f;
+    float len2 = 400.5f;
+    float len3 = 300.0f;
+    float len4 = 200.5f;
+    float len5 = 100.0f;
 
     int frozenLevel = 0;
     int nextFrozenLevel = 0;
@@ -61,10 +61,16 @@ private:
 
     void UpdateFrozen(float dt);
 
+    // --- fade out ---
+    float failFadeTimer = 0.0f;
+    float failFadeMaxTime = 3.0f;   // 3초 동안 어두워짐
+    bool failStarted = false;
+
 private:
     void AdultInComeA();
     void AdultInComeB();
     void AdultArrive();
+    void FailUpdate(float dt);
 
 public:
     TutorialStep_Step4(TutorialController* _tutorialController) : ITutorialStep(_tutorialController) {}
