@@ -2,16 +2,16 @@
   "prefab": [
     {
       "Active": true,
-      "ID": 4295,
+      "ID": 3730,
       "Name": "Ghost_Adult",
       "ParentID": -1,
       "components": [
         {
           "properties": {
             "Position": [
-              1219.73876953125,
-              -3.814697265625e-06,
-              -46.79457092285156
+              -417.22900390625,
+              6.479217699961737e-05,
+              31.564727783203125
             ],
             "Rotation": [
               -0.0,
@@ -123,9 +123,9 @@
     },
     {
       "Active": true,
-      "ID": 4296,
+      "ID": 3731,
       "Name": "GhostInteractionZone",
-      "ParentID": 4295,
+      "ParentID": 3730,
       "components": [
         {
           "properties": {
@@ -135,9 +135,9 @@
               0.0
             ],
             "Rotation": [
+              -0.0,
               0.0,
-              0.0,
-              0.0
+              -0.0
             ],
             "Scale": [
               1.0,
