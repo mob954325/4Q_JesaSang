@@ -113,6 +113,8 @@ void ScriptSystem::Update(float delta)
             }
         }
     }
+
+    ProcessRemovals(); // 제거 대상 확인
 }
 
 void ScriptSystem::FixedUpdate(float dt)
@@ -131,6 +133,8 @@ void ScriptSystem::FixedUpdate(float dt)
             e->OnFixedUpdate(dt);
         }
     }
+
+    ProcessRemovals(); // 제거 대상 확인
 }
 
 void ScriptSystem::LateUpdate(float dt)
@@ -150,7 +154,7 @@ void ScriptSystem::LateUpdate(float dt)
         }
     }
 
-    ProcessRemovals(); // 제거 대상 제거
+    ProcessRemovals(); // 제거 대상 확인
 }
 
 void ScriptSystem::Clear()
@@ -162,7 +166,7 @@ void ScriptSystem::Clear()
    pending_scriptComponents.clear();
 }
 
-void ScriptSystem::SwapErase(std::vector<Component*> comps, Component* target)
+void ScriptSystem::SwapErase(std::vector<Component*>& comps, Component* target)
 {
     for (int i = 0; i < comps.size(); ++i)
     {
@@ -181,6 +185,9 @@ void ScriptSystem::ProcessRemovals()
 
     for (auto* c : pending_scriptRemovals)
     {
+        SwapErase(pending_components, c);
+        SwapErase(comps, c);
+
         SwapErase(pending_scriptComponents, c);
         SwapErase(scriptComps, c);
     }

@@ -99,6 +99,6 @@ private:
     /// </summary>
     std::vector<Component*> pending_scriptRemovals{};
 
-    void SwapErase(std::vector<Component*> comps, Component* target);
+    void SwapErase(std::vector<Component*>& comps, Component* target);
     void ProcessRemovals();
 };
