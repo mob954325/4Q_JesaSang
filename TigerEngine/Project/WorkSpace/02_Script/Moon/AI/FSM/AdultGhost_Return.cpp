@@ -6,7 +6,7 @@ void AdultGhost_Return::Enter()
 
     adultGhost->ResetAgentForMove(3.0f); // Return 속도 
 
-    // adultGhost->animController->ChangeState("Idle");
+    adultGhost->animController->ChangeState("Idle");
 
     // 웨이포인트 좌표
     auto grid = GridSystem::Instance().GetMainGrid();

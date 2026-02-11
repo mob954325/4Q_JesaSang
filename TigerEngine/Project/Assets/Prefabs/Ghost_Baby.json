@@ -2,7 +2,7 @@
   "prefab": [
     {
       "Active": true,
-      "ID": 2283,
+      "ID": 1171,
       "Name": "Ghost_Baby",
       "ParentID": -1,
       "components": [
@@ -29,7 +29,7 @@
         {
           "properties": {
             "Active": true,
-            "DataPath": "..\\Assets\\Resource\\Animation\\Baby_Ghost\\baby_ghost.fbx",
+            "DataPath": "..\\Assets\\Resource\\Animation\\Baby_Ghost\\ani_idle_babyghost.fbx",
             "IsStatic": false
           },
           "type": "FBXData"

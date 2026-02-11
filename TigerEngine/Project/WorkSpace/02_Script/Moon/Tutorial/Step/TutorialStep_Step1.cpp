@@ -2,7 +2,8 @@
 
 #include "System/InputSystem.h"
 #include "EngineSystem/SceneSystem.h"
-#include <Components/RectTransform.h>
+#include "Components/RectTransform.h"
+#include "../WorkSpace/02_Script/Woo/Player/DialogueUI/DialogueUIController.h"
 
 float Lerp(float a, float b, float t)
 {
@@ -16,9 +17,12 @@ void TutorialStep_Step1::Enter()
     step1Timer = 0.0f;
     phase = Step1Phase::Blink;
 
+    Blink_Top = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("Blink_Top"); // rectTransform 축 -700 
+    Blink_Bottom = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("Blink_Bottom"); // rectTransform 축 700 
 
-    Blink_Top = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("Blink_Top"); // rectTransform 축 -800 
-    Blink_Bottom = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("Blink_Bottom"); // rectTransform 축 800 
+    auto player = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("Player_Tutorial");
+    if (player)
+        dialogue = player->GetComponent<DialogueUIController>();
 }
 
 void TutorialStep_Step1::Update(float deltaTime)
@@ -29,18 +33,18 @@ void TutorialStep_Step1::Update(float deltaTime)
     {
     case Step1Phase::Blink:
 
-        // 5초 동안 눈깜빡임 
-        Blink();
-
-        // 연출 끝나면 전환 
-        if (step1Timer >= BlinkTime)  phase = Step1Phase::Monologue;
-
+        Blink(); 
+        if (step1Timer >= BlinkDelay + 5.0f) // 연출 끝
+        {
+            phase = Step1Phase::Monologue;
+        }
         break;
 
 
     case Step1Phase::Monologue:
-
-        std::cout << "[Step1] \" Umm... Did I just fall asleep.. \" " << std::endl;
+        
+        Monologue(); // 플레이어 대사창 활성화 및 독백 대사 출력
+        // std::cout << "[Step1] \" Umm... Did I just fall asleep.. \" " << std::endl;
         phase = Step1Phase::WaitInput; // 바로 입력 대기 상태로 전환
         break;
 
@@ -57,6 +61,8 @@ void TutorialStep_Step1::Update(float deltaTime)
             Input::GetKeyDown(Keyboard::Right)
             )
         {
+            if (dialogue) dialogue->DialogueOnOff(false);
+
             phase = Step1Phase::Done;
         }
         break;
@@ -79,11 +85,9 @@ void TutorialStep_Step1::Exit()
 }
 
 
-// ------------------
+// ----------------------------------------------
 
-// Image 2개로 눈 깜빡이는 것 같은 연출 주기
-// - Blink_Top    : (윗 눈꺼풀)   -800에서 -500 까지 이동 
-// - Blink_Bottom : (아래 눈꺼풀)  800에서  500 까지 이동 
+// 1. 눈 깜빡이는 것 같은 연출 주기
 void TutorialStep_Step1::Blink()
 {
     if (!Blink_Top || !Blink_Bottom) return;
@@ -125,12 +129,11 @@ void TutorialStep_Step1::Blink()
 }
 
 
+// 2. 독백 출력
+// "Umm... Did I just fall asleep.."
 void TutorialStep_Step1::Monologue()
 {
+    if (!dialogue) return;
 
-}
-
-void TutorialStep_Step1::WaitInput()
-{
-
+    dialogue->ShowDialogueHold(L"Umm... Did I just fall asleep..");
 }

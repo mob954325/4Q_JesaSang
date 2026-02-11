@@ -12,6 +12,8 @@ void BabyGhost_Search::Enter()
 
     babyGhost->ResetAgentForMove(3.5f);
 
+    babyGhost->animController->ChangeState("Idle");
+
     phase = SearchPhase::WaitBeforeMove;
 
     // 마지막 플레이어 위치 있으면 사용 

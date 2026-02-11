@@ -29,6 +29,8 @@ private:
 
     Step2Phase phase = Step2Phase::Sound;
 
+    GameObject* baby = nullptr;
+
 public:
     TutorialStep_Step2(TutorialController* _tutorialController) : ITutorialStep(_tutorialController) {}
     ~TutorialStep_Step2() = default;
