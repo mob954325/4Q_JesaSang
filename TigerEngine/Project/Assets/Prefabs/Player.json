@@ -2,7 +2,7 @@
   "prefab": [
     {
       "Active": true,
-      "ID": 3491,
+      "ID": 982,
       "Name": "Player",
       "ParentID": -1,
       "components": [
@@ -46,7 +46,7 @@
         {
           "properties": {
             "Active": true,
-            "DataPath": "..\\Assets\\Resource\\Animation\\FuckingAssimp\\ani_idle_character.fbx",
+            "DataPath": "..\\Assets\\Resource\\FBX\\00_character\\Player\\ani_idle_character.glb",
             "IsStatic": false
           },
           "type": "FBXData"
@@ -116,44 +116,14 @@
             "Active": true
           },
           "type": "AnimationController"
-        },
-        {
-          "properties": {
-            "Active": true,
-            "CollectedItems": 0,
-            "CollectedPieces": 0,
-            "MapSize": [
-              256.0,
-              256.0
-            ],
-            "TotalItems": 6,
-            "TotalPieces": 6,
-            "WorldMax": [
-              500.0,
-              0.0,
-              500.0
-            ],
-            "WorldMin": [
-              -500.0,
-              0.0,
-              -500.0
-            ]
-          },
-          "type": "MiniMapTestScript"
-        },
-        {
-          "properties": {
-            "Active": true
-          },
-          "type": "DialogueUIController"
         }
       ]
     },
     {
       "Active": true,
-      "ID": 3492,
+      "ID": 990,
       "Name": "CameraTrackingPoint",
-      "ParentID": 3491,
+      "ParentID": 982,
       "components": [
         {
           "properties": {
@@ -179,9 +149,9 @@
     },
     {
       "Active": true,
-      "ID": 3493,
+      "ID": 991,
       "Name": "OcclusionFadePoint",
-      "ParentID": 3491,
+      "ParentID": 982,
       "components": [
         {
           "properties": {
@@ -207,9 +177,9 @@
     },
     {
       "Active": true,
-      "ID": 3494,
+      "ID": 993,
       "Name": "InteractionSensor",
-      "ParentID": 3491,
+      "ParentID": 982,
       "components": [
         {
           "properties": {
@@ -264,9 +234,9 @@
     },
     {
       "Active": true,
-      "ID": 3495,
+      "ID": 994,
       "Name": "InteractZone",
-      "ParentID": 3491,
+      "ParentID": 982,
       "components": [
         {
           "properties": {
@@ -321,9 +291,9 @@
     },
     {
       "Active": true,
-      "ID": 3496,
+      "ID": 1014,
       "Name": "ItemVisualizer",
-      "ParentID": 3491,
+      "ParentID": 982,
       "components": [
         {
           "properties": {
@@ -349,9 +319,9 @@
     },
     {
       "Active": false,
-      "ID": 3497,
+      "ID": 1008,
       "Name": "Visual_Ingre_Apple",
-      "ParentID": 3496,
+      "ParentID": 1014,
       "components": [
         {
           "properties": {
@@ -427,9 +397,9 @@
     },
     {
       "Active": false,
-      "ID": 3498,
+      "ID": 1009,
       "Name": "Visual_Ingre_Batter",
-      "ParentID": 3496,
+      "ParentID": 1014,
       "components": [
         {
           "properties": {
@@ -505,9 +475,9 @@
     },
     {
       "Active": false,
-      "ID": 3499,
+      "ID": 1010,
       "Name": "Visual_Ingre_Donggeurangttaeng",
-      "ParentID": 3496,
+      "ParentID": 1014,
       "components": [
         {
           "properties": {
@@ -583,9 +553,9 @@
     },
     {
       "Active": false,
-      "ID": 3500,
+      "ID": 1011,
       "Name": "Visual_Ingre_Pear",
-      "ParentID": 3496,
+      "ParentID": 1014,
       "components": [
         {
           "properties": {
@@ -661,9 +631,9 @@
     },
     {
       "Active": false,
-      "ID": 3501,
+      "ID": 1012,
       "Name": "Visual_Ingre_Sanjeok",
-      "ParentID": 3496,
+      "ParentID": 1014,
       "components": [
         {
           "properties": {
@@ -739,9 +709,9 @@
     },
     {
       "Active": false,
-      "ID": 3502,
+      "ID": 1013,
       "Name": "Visual_Ingre_Tofu",
-      "ParentID": 3496,
+      "ParentID": 1014,
       "components": [
         {
           "properties": {
@@ -817,9 +787,9 @@
     },
     {
       "Active": false,
-      "ID": 3503,
+      "ID": 1015,
       "Name": "Visual_Apple",
-      "ParentID": 3496,
+      "ParentID": 1014,
       "components": [
         {
           "properties": {
@@ -895,9 +865,9 @@
     },
     {
       "Active": false,
-      "ID": 3504,
+      "ID": 1016,
       "Name": "Visual_Pear",
-      "ParentID": 3496,
+      "ParentID": 1014,
       "components": [
         {
           "properties": {
@@ -973,9 +943,9 @@
     },
     {
       "Active": false,
-      "ID": 3505,
+      "ID": 1017,
       "Name": "Visual_Batter",
-      "ParentID": 3496,
+      "ParentID": 1014,
       "components": [
         {
           "properties": {
@@ -1051,9 +1021,9 @@
     },
     {
       "Active": false,
-      "ID": 3506,
+      "ID": 1018,
       "Name": "Visual_Tofu",
-      "ParentID": 3496,
+      "ParentID": 1014,
       "components": [
         {
           "properties": {
@@ -1129,9 +1099,9 @@
     },
     {
       "Active": false,
-      "ID": 3507,
+      "ID": 1019,
       "Name": "Visual_Sanjeok",
-      "ParentID": 3496,
+      "ParentID": 1014,
       "components": [
         {
           "properties": {
@@ -1207,9 +1177,9 @@
     },
     {
       "Active": false,
-      "ID": 3508,
+      "ID": 1020,
       "Name": "Visual_Donggeurangttaeng",
-      "ParentID": 3496,
+      "ParentID": 1014,
       "components": [
         {
           "properties": {
@@ -1285,9 +1255,9 @@
     },
     {
       "Active": true,
-      "ID": 3509,
+      "ID": 1044,
       "Name": "AITarget",
-      "ParentID": 3491,
+      "ParentID": 982,
       "components": [
         {
           "properties": {
@@ -1337,241 +1307,6 @@
             "Active": true
           },
           "type": "AITarget"
-        }
-      ]
-    },
-    {
-      "Active": true,
-      "ID": 3688,
-      "Name": "DialoguePoint",
-      "ParentID": 3491,
-      "components": [
-        {
-          "properties": {
-            "Position": [
-              0.0,
-              130.0,
-              0.0
-            ],
-            "Rotation": [
-              -0.0,
-              0.0,
-              -0.0
-            ],
-            "Scale": [
-              1.0,
-              1.0,
-              1.0
-            ]
-          },
-          "type": "Transform"
-        }
-      ]
-    },
-    {
-      "Active": true,
-      "ID": 3689,
-      "Name": "Player_FireEffect",
-      "ParentID": 3491,
-      "components": [
-        {
-          "properties": {
-            "Position": [
-              0.0,
-              135.0,
-              0.0
-            ],
-            "Rotation": [
-              -0.0,
-              0.0,
-              -0.0
-            ],
-            "Scale": [
-              1.0,
-              1.0,
-              1.0
-            ]
-          },
-          "type": "Transform"
-        },
-        {
-          "properties": {
-            "Active": true,
-            "allFinished": true,
-            "emitters": [
-              {
-                "billboard": "ScreenFacing",
-                "burstCount": 1,
-                "coneAngleDeg": 30.0,
-                "duration": 5.0,
-                "dynamicData": {
-                  "angularMax": 0.0,
-                  "angularMin": 0.0,
-                  "colorMax": [
-                    1.0,
-                    1.0,
-                    1.0,
-                    1.0
-                  ],
-                  "colorMin": [
-                    0.0,
-                    0.0,
-                    0.0,
-                    1.0
-                  ],
-                  "lifeMax": 1.0,
-                  "lifeMin": 0.5,
-                  "rotationMax": 0.0,
-                  "rotationMin": 0.0,
-                  "sizeMax": [
-                    1.0,
-                    1.0
-                  ],
-                  "sizeMin": [
-                    1.0,
-                    1.0
-                  ],
-                  "speedMax": 10.0,
-                  "speedMin": 0.0
-                },
-                "emitDir": [
-                  0.0,
-                  1.0,
-                  0.0
-                ],
-                "emitRate": 1.0,
-                "enabled": true,
-                "filpbookPlayMode": "Once_Then_Die",
-                "fixedData": {
-                  "rotation": 0.0,
-                  "size": [
-                    1.0,
-                    1.0
-                  ],
-                  "startColor": [
-                    1.0,
-                    1.0,
-                    1.0,
-                    1.0
-                  ]
-                },
-                "holdTime": 0.0,
-                "infinite": 999999.0,
-                "localOffset": [
-                  0.0,
-                  0.0,
-                  0.0
-                ],
-                "looping": false,
-                "maxParticles": 1,
-                "particleMode": "Fixed",
-                "playing": false,
-                "position": [
-                  0.0,
-                  135.0,
-                  0.0
-                ],
-                "sheet": {
-                  "baseSizeScale": 40.0,
-                  "cols": 4,
-                  "fps": 17.0,
-                  "frameCount": 12,
-                  "loop": false,
-                  "rows": 3,
-                  "texturePath": "..\\Assets\\Resource\\Effect\\Fire\\f_a.png"
-                },
-                "velocityShape": "Sphere"
-              }
-            ],
-            "enabled": true,
-            "looping": false,
-            "playing": false
-          },
-          "type": "Effect"
-        }
-      ]
-    },
-    {
-      "Active": false,
-      "ID": 3690,
-      "Name": "Player_HitEffect",
-      "ParentID": 3491,
-      "components": [
-        {
-          "properties": {
-            "Position": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Rotation": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Scale": [
-              1.0,
-              1.0,
-              1.0
-            ]
-          },
-          "type": "Transform"
-        },
-        {
-          "properties": {
-            "Active": false,
-            "DataPath": "..\\Assets\\Resource\\Effect\\ani_confused_mark.fbx",
-            "IsStatic": true
-          },
-          "type": "FBXData"
-        },
-        {
-          "properties": {
-            "Active": false,
-            "Alpha": 1.0,
-            "Diffuse": [
-              1.0,
-              1.0,
-              1.0,
-              1.0
-            ],
-            "DiffuseOverride": [
-              1.0,
-              0.9721741676330566,
-              0.05392158031463623,
-              1.0
-            ],
-            "Emissive": [
-              1.0,
-              1.0,
-              1.0,
-              1.0
-            ],
-            "EmissiveOverride": [
-              1.0,
-              1.0,
-              1.0,
-              1.0
-            ],
-            "IsGround": false,
-            "Metalic": 1.0,
-            "MetallicOverride": 1.0,
-            "RenderBlendType": "Opaque",
-            "Roughness": 1.0,
-            "RoughnessOverride": 1.0,
-            "UseDiffuseOverride": true,
-            "UseEmissiveOverride": false,
-            "UseMetallicOverride": false,
-            "UseRoughnessOverride": false,
-            "isroughnessFromShininess": false
-          },
-          "type": "FBXRenderer"
-        },
-        {
-          "properties": {
-            "Active": false
-          },
-          "type": "AnimationController"
         }
       ]
     }

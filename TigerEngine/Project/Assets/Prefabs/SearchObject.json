@@ -2,26 +2,26 @@
   "prefab": [
     {
       "Active": true,
-      "ID": 1529,
+      "ID": 979,
       "Name": "SearchObject",
-      "ParentID": -1,
+      "ParentID": 977,
       "components": [
         {
           "properties": {
             "Position": [
-              21.79772186279297,
-              0.0,
-              391.97314453125
+              139.6999969482422,
+              -110.0,
+              280.0
             ],
             "Rotation": [
-              0.0,
-              0.007638138718903065,
-              0.0
+              0.0009890493238344789,
+              0.007638114038854837,
+              -0.004344874992966652
             ],
             "Scale": [
-              0.9999966025352478,
-              0.999996542930603,
-              0.9999966025352478
+              1.0,
+              0.9999999403953552,
+              1.0
             ]
           },
           "type": "Transform"
@@ -109,274 +109,10 @@
               0.23529411852359772,
               1.0
             ],
-            "itemID": "Ingredient_Apple",
+            "itemID": "Ingredient_Pear",
             "itemType": "Ingredient"
           },
           "type": "SearchObject"
-        }
-      ]
-    },
-    {
-      "Active": false,
-      "ID": 1635,
-      "Name": "Image_SensorOn",
-      "ParentID": 1529,
-      "components": [
-        {
-          "properties": {
-            "Position": [
-              0.0,
-              100.0,
-              0.0
-            ],
-            "Rotation": [
-              0.0,
-              3.1415927410125732,
-              3.1415927410125732
-            ],
-            "Scale": [
-              1.0,
-              1.0,
-              1.0
-            ]
-          },
-          "type": "Transform"
-        },
-        {
-          "properties": {
-            "Active": false,
-            "Pivot": [
-              0.5,
-              0.5
-            ],
-            "Pos": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Position": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Rotation": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Scale": [
-              1.0,
-              1.0,
-              1.0
-            ],
-            "Size": [
-              25.0,
-              25.0
-            ]
-          },
-          "type": "RectTransform"
-        },
-        {
-          "properties": {
-            "Active": false,
-            "color": [
-              1.0,
-              1.0,
-              1.0,
-              1.0
-            ],
-            "drawSpacetype": "World",
-            "fillAmount": 1.0,
-            "imageType": "Simple",
-            "isBillboard": false,
-            "isMouseCheck": false,
-            "path": "..\\Assets\\Resource\\UI\\Interaction\\point.png",
-            "sliceBorderPx": [
-              0.0,
-              0.0,
-              0.0,
-              0.0
-            ],
-            "type": "Simple",
-            "zOrder": 0
-          },
-          "type": "Image"
-        }
-      ]
-    },
-    {
-      "Active": false,
-      "ID": 1636,
-      "Name": "Image_InteractionOn",
-      "ParentID": 1529,
-      "components": [
-        {
-          "properties": {
-            "Position": [
-              0.0,
-              100.0,
-              0.0
-            ],
-            "Rotation": [
-              0.0,
-              3.1415927410125732,
-              3.1415927410125732
-            ],
-            "Scale": [
-              1.0,
-              1.0,
-              1.0
-            ]
-          },
-          "type": "Transform"
-        },
-        {
-          "properties": {
-            "Active": false,
-            "Pivot": [
-              0.5,
-              0.5
-            ],
-            "Pos": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Position": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Rotation": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Scale": [
-              1.0,
-              1.0,
-              1.0
-            ],
-            "Size": [
-              25.0,
-              25.0
-            ]
-          },
-          "type": "RectTransform"
-        },
-        {
-          "properties": {
-            "Active": false,
-            "color": [
-              1.0,
-              1.0,
-              1.0,
-              1.0
-            ],
-            "drawSpacetype": "World",
-            "fillAmount": 1.0,
-            "imageType": "Simple",
-            "isBillboard": false,
-            "isMouseCheck": false,
-            "path": "..\\Assets\\Resource\\UI\\Interaction\\F.png",
-            "sliceBorderPx": [
-              0.0,
-              0.0,
-              0.0,
-              0.0
-            ],
-            "type": "Simple",
-            "zOrder": 1
-          },
-          "type": "Image"
-        }
-      ]
-    },
-    {
-      "Active": false,
-      "ID": 1637,
-      "Name": "Image_InteractionGauge",
-      "ParentID": 1529,
-      "components": [
-        {
-          "properties": {
-            "Position": [
-              0.0,
-              100.0,
-              0.0
-            ],
-            "Rotation": [
-              0.0,
-              3.1415927410125732,
-              3.1415927410125732
-            ],
-            "Scale": [
-              1.0,
-              1.0,
-              1.0
-            ]
-          },
-          "type": "Transform"
-        },
-        {
-          "properties": {
-            "Active": false,
-            "Pivot": [
-              0.5,
-              0.5
-            ],
-            "Pos": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Position": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Rotation": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Scale": [
-              1.0,
-              1.0,
-              1.0
-            ],
-            "Size": [
-              25.0,
-              25.0
-            ]
-          },
-          "type": "RectTransform"
-        },
-        {
-          "properties": {
-            "Active": false,
-            "color": [
-              1.0,
-              1.0,
-              1.0,
-              1.0
-            ],
-            "drawSpacetype": "World",
-            "fillAmount": 0.0,
-            "imageType": "FillHorizontal",
-            "isBillboard": false,
-            "isMouseCheck": false,
-            "path": "..\\Assets\\Resource\\UI\\Interaction\\F_02.png",
-            "sliceBorderPx": [
-              0.0,
-              0.0,
-              0.0,
-              0.0
-            ],
-            "type": "FillHorizontal",
-            "zOrder": 2
-          },
-          "type": "Image"
         }
       ]
     }
