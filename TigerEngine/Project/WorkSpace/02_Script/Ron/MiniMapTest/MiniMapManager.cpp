@@ -47,6 +47,11 @@ RTTR_REGISTRATION
         .property("Zone2IngredientIds", &MiniMapManager::zone2IngredientIds)
         .property("Zone3IngredientIds", &MiniMapManager::zone3IngredientIds)
         .property("Zone4IngredientIds", &MiniMapManager::zone4IngredientIds)
+        .property("Zone0PingIndices", &MiniMapManager::zone0PingIndices)
+        .property("Zone1PingIndices", &MiniMapManager::zone1PingIndices)
+        .property("Zone2PingIndices", &MiniMapManager::zone2PingIndices)
+        .property("Zone3PingIndices", &MiniMapManager::zone3PingIndices)
+        .property("Zone4PingIndices", &MiniMapManager::zone4PingIndices)
         .property("ItemWorldPos1", &MiniMapManager::itemWorldPos1)
         .property("ItemWorldPos2", &MiniMapManager::itemWorldPos2)
         .property("ItemWorldPos3", &MiniMapManager::itemWorldPos3)
@@ -223,6 +228,30 @@ static std::vector<std::string> ParseIdList(const std::string& csv)
     return out;
 }
 
+static std::vector<int> ParseIndexList(const std::string& csv)
+{
+    std::vector<int> out;
+    std::stringstream ss(csv);
+    std::string token;
+    while (std::getline(ss, token, ','))
+    {
+        const std::string t = TrimCopy(token);
+        if (t.empty()) continue;
+        try
+        {
+            int v = std::stoi(t);
+            if (v >= 0 && v <= 5)
+            {
+                out.push_back(v);
+            }
+        }
+        catch (...)
+        {
+        }
+    }
+    return out;
+}
+
 static bool ContainsId(const std::vector<std::string>& list, const std::string& id)
 {
     for (const auto& v : list)
@@ -238,6 +267,19 @@ void MiniMapManager::OnInitialize()
 
 void MiniMapManager::OnStart()
 {
+    if (zone0IngredientIds.empty() &&
+        zone1IngredientIds.empty() &&
+        zone2IngredientIds.empty() &&
+        zone3IngredientIds.empty() &&
+        zone4IngredientIds.empty())
+    {
+        zone0IngredientIds = "Ingredient_Apple,Ingredient_Pear";
+        zone1IngredientIds = "Ingredient_Batter";
+        zone2IngredientIds = "Ingredient_Tofu";
+        zone3IngredientIds = "Ingredient_Sanjeok";
+        zone4IngredientIds = "Ingredient_Donggeurangttaeng";
+    }
+
     auto scene = SceneSystem::Instance().GetCurrentScene();
     if (!scene)
     {
@@ -345,7 +387,14 @@ void MiniMapManager::OnStart()
     ApplyLayout();
     if (useFixedItemPingPositions && !m_HasFixedItemPingPos)
     {
-        CaptureFixedPingPositions(m_ItemPingRects, m_ItemPingFixedPos, m_HasFixedItemPingPos);
+        // Hard-coded fixed positions (UI space)
+        m_ItemPingFixedPos[0] = Vector3(1611.500f, 759.400f, 0.0f);
+        m_ItemPingFixedPos[1] = Vector3(1812.700f, 752.600f, 0.0f);
+        m_ItemPingFixedPos[2] = Vector3(1755.400f, 821.000f, 0.0f);
+        m_ItemPingFixedPos[3] = Vector3(1661.700f, 853.400f, 0.0f);
+        m_ItemPingFixedPos[4] = Vector3(1791.200f, 876.000f, 0.0f);
+        m_ItemPingFixedPos[5] = Vector3(1646.700f, 964.200f, 0.0f);
+        m_HasFixedItemPingPos = true;
     }
 
     m_ItemWorldPos[0] = itemWorldPos1;
@@ -639,14 +688,28 @@ void MiniMapManager::ActivateIngredientsForZone(int zoneIndex)
     }
 
     const std::string* zoneCsv = nullptr;
+    const std::string* zonePingCsv = nullptr;
     switch (zoneIndex)
     {
-    case 0: zoneCsv = &zone0IngredientIds; break;
-    case 1: zoneCsv = &zone1IngredientIds; break;
-    case 2: zoneCsv = &zone2IngredientIds; break;
-    case 3: zoneCsv = &zone3IngredientIds; break;
-    case 4: zoneCsv = &zone4IngredientIds; break;
+    case 0: zoneCsv = &zone0IngredientIds; zonePingCsv = &zone0PingIndices; break;
+    case 1: zoneCsv = &zone1IngredientIds; zonePingCsv = &zone1PingIndices; break;
+    case 2: zoneCsv = &zone2IngredientIds; zonePingCsv = &zone2PingIndices; break;
+    case 3: zoneCsv = &zone3IngredientIds; zonePingCsv = &zone3PingIndices; break;
+    case 4: zoneCsv = &zone4IngredientIds; zonePingCsv = &zone4PingIndices; break;
     default: return;
+    }
+
+    if (zonePingCsv && !zonePingCsv->empty())
+    {
+        const std::vector<int> indices = ParseIndexList(*zonePingCsv);
+        for (int idx : indices)
+        {
+            if (idx < 0 || idx > 5) continue;
+            m_ItemActive[idx] = true;
+            SetRectActive(m_ItemPingRects[idx], true);
+        }
+        m_ZoneActivated[zoneIndex] = true;
+        return;
     }
 
     if (!zoneCsv || zoneCsv->empty())

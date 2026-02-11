@@ -51,6 +51,12 @@ public:
     std::string zone2IngredientIds = "";
     std::string zone3IngredientIds = "";
     std::string zone4IngredientIds = "";
+    // Map piece -> ping indices (comma-separated, e.g., "0,2,5")
+    std::string zone0PingIndices = "";
+    std::string zone1PingIndices = "";
+    std::string zone2PingIndices = "";
+    std::string zone3PingIndices = "";
+    std::string zone4PingIndices = "";
 
     Vector3 itemWorldPos1{ -300.0f, 0.0f, -300.0f };
     Vector3 itemWorldPos2{ 300.0f, 0.0f, -300.0f };
