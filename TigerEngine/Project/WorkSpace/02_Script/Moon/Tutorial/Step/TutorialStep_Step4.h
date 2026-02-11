@@ -37,6 +37,25 @@ private:
     float speed = 120.0f;
     float fast_speed = 200.0;
 
+    // --- Frozen Effect ---
+    Image* frozenImage = nullptr;
+
+    float len1 = 500.0f;
+    float len2 = 400.5f;
+    float len3 = 300.0f;
+    float len4 = 200.5f;
+    float len5 = 100.0f;
+
+    int frozenLevel = 0;
+    int nextFrozenLevel = 0;
+
+    float frozenTimer = 0.0f;
+    float frozenMaxTime = 0.5f;
+
+    std::vector<std::string> frozenPaths;
+
+    void UpdateFrozen(float dt);
+
 private:
     void AdultInComeA();
     void AdultInComeB();

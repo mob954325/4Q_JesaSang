@@ -3,7 +3,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 330,
+        "ID": 286,
         "Name": "DirectionalLight(Sun)",
         "ParentID": -1,
         "components": [
@@ -57,7 +57,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 331,
+        "ID": 287,
         "Name": "----------------------",
         "ParentID": -1,
         "components": [
@@ -88,7 +88,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 332,
+        "ID": 288,
         "Name": "Ground",
         "ParentID": -1,
         "components": [
@@ -192,7 +192,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 333,
+        "ID": 289,
         "Name": "CurScene_03_TutorialScene",
         "ParentID": -1,
         "components": [
@@ -223,7 +223,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 334,
+        "ID": 290,
         "Name": "SceneFlowManager",
         "ParentID": -1,
         "components": [
@@ -266,7 +266,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 335,
+        "ID": 291,
         "Name": "----------------------",
         "ParentID": -1,
         "components": [
@@ -297,7 +297,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 336,
+        "ID": 292,
         "Name": "TutorialController",
         "ParentID": -1,
         "components": [
@@ -334,7 +334,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 337,
+        "ID": 293,
         "Name": "----------------------",
         "ParentID": -1,
         "components": [
@@ -365,7 +365,7 @@
     {
       "properties": {
         "Active": false,
-        "ID": 338,
+        "ID": 294,
         "Name": "UI_Screen_Blink",
         "ParentID": -1,
         "components": [
@@ -430,9 +430,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 339,
+        "ID": 295,
         "Name": "Blink_Top",
-        "ParentID": 338,
+        "ParentID": 294,
         "components": [
           {
             "properties": {
@@ -520,455 +520,8 @@
     },
     {
       "properties": {
-        "Active": false,
-        "ID": 340,
-        "Name": "Image_QuestBackground",
-        "ParentID": -1,
-        "components": [
-          {
-            "properties": {
-              "Position": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Rotation": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ]
-            },
-            "type": "Transform"
-          },
-          {
-            "properties": {
-              "Active": false,
-              "Pivot": [
-                0.0,
-                0.0
-              ],
-              "Pos": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Position": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Rotation": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ],
-              "Size": [
-                0.0,
-                0.0
-              ]
-            },
-            "type": "RectTransform"
-          },
-          {
-            "properties": {
-              "Active": false,
-              "color": [
-                1.0,
-                1.0,
-                1.0,
-                1.0
-              ],
-              "drawSpacetype": "Screen",
-              "fillAmount": 1.0,
-              "imageType": "Simple",
-              "isBillboard": false,
-              "isMouseCheck": false,
-              "path": "",
-              "sliceBorderPx": [
-                0.0,
-                0.0,
-                0.0,
-                0.0
-              ],
-              "type": "Simple",
-              "zOrder": 0
-            },
-            "type": "Image"
-          }
-        ]
-      },
-      "type": "GameObject"
-    },
-    {
-      "properties": {
-        "Active": false,
-        "ID": 341,
-        "Name": "Text_QuestTitle",
-        "ParentID": -1,
-        "components": [
-          {
-            "properties": {
-              "Position": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Rotation": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ]
-            },
-            "type": "Transform"
-          },
-          {
-            "properties": {
-              "Active": false,
-              "Pivot": [
-                0.0,
-                0.0
-              ],
-              "Pos": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Position": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Rotation": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ],
-              "Size": [
-                0.0,
-                0.0
-              ]
-            },
-            "type": "RectTransform"
-          },
-          {
-            "properties": {
-              "Active": false,
-              "alignType": "Left",
-              "atlasH": 2048,
-              "atlasW": 2048,
-              "color": [
-                0.0,
-                0.0,
-                0.0,
-                1.0
-              ],
-              "drawSpacetype": "Screen",
-              "fontPath": "",
-              "fontSize": 1,
-              "isBillboard": false,
-              "paddingPx": 1,
-              "text": "",
-              "zOrder": 0
-            },
-            "type": "TextUI"
-          }
-        ]
-      },
-      "type": "GameObject"
-    },
-    {
-      "properties": {
-        "Active": false,
-        "ID": 342,
-        "Name": "Text_QuestLable",
-        "ParentID": -1,
-        "components": [
-          {
-            "properties": {
-              "Position": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Rotation": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ]
-            },
-            "type": "Transform"
-          },
-          {
-            "properties": {
-              "Active": false,
-              "Pivot": [
-                0.0,
-                0.0
-              ],
-              "Pos": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Position": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Rotation": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ],
-              "Size": [
-                0.0,
-                0.0
-              ]
-            },
-            "type": "RectTransform"
-          },
-          {
-            "properties": {
-              "Active": false,
-              "alignType": "Left",
-              "atlasH": 2048,
-              "atlasW": 2048,
-              "color": [
-                0.0,
-                0.0,
-                0.0,
-                1.0
-              ],
-              "drawSpacetype": "Screen",
-              "fontPath": "",
-              "fontSize": 1,
-              "isBillboard": false,
-              "paddingPx": 1,
-              "text": "",
-              "zOrder": 0
-            },
-            "type": "TextUI"
-          }
-        ]
-      },
-      "type": "GameObject"
-    },
-    {
-      "properties": {
-        "Active": false,
-        "ID": 343,
-        "Name": "Image_Cheakbox",
-        "ParentID": -1,
-        "components": [
-          {
-            "properties": {
-              "Position": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Rotation": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ]
-            },
-            "type": "Transform"
-          },
-          {
-            "properties": {
-              "Active": false,
-              "Pivot": [
-                0.0,
-                0.0
-              ],
-              "Pos": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Position": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Rotation": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ],
-              "Size": [
-                0.0,
-                0.0
-              ]
-            },
-            "type": "RectTransform"
-          },
-          {
-            "properties": {
-              "Active": false,
-              "color": [
-                1.0,
-                1.0,
-                1.0,
-                1.0
-              ],
-              "drawSpacetype": "Screen",
-              "fillAmount": 1.0,
-              "imageType": "Simple",
-              "isBillboard": false,
-              "isMouseCheck": false,
-              "path": "",
-              "sliceBorderPx": [
-                0.0,
-                0.0,
-                0.0,
-                0.0
-              ],
-              "type": "Simple",
-              "zOrder": 0
-            },
-            "type": "Image"
-          }
-        ]
-      },
-      "type": "GameObject"
-    },
-    {
-      "properties": {
-        "Active": false,
-        "ID": 344,
-        "Name": "Image_Line",
-        "ParentID": -1,
-        "components": [
-          {
-            "properties": {
-              "Position": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Rotation": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ]
-            },
-            "type": "Transform"
-          },
-          {
-            "properties": {
-              "Active": false,
-              "Pivot": [
-                0.0,
-                0.0
-              ],
-              "Pos": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Position": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Rotation": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ],
-              "Size": [
-                0.0,
-                0.0
-              ]
-            },
-            "type": "RectTransform"
-          },
-          {
-            "properties": {
-              "Active": false,
-              "color": [
-                1.0,
-                1.0,
-                1.0,
-                1.0
-              ],
-              "drawSpacetype": "Screen",
-              "fillAmount": 1.0,
-              "imageType": "Simple",
-              "isBillboard": false,
-              "isMouseCheck": false,
-              "path": "",
-              "sliceBorderPx": [
-                0.0,
-                0.0,
-                0.0,
-                0.0
-              ],
-              "type": "Simple",
-              "zOrder": 0
-            },
-            "type": "Image"
-          }
-        ]
-      },
-      "type": "GameObject"
-    },
-    {
-      "properties": {
         "Active": true,
-        "ID": 345,
+        "ID": 296,
         "Name": "UI_PlayerDialogue",
         "ParentID": -1,
         "components": [
@@ -1033,9 +586,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 346,
+        "ID": 297,
         "Name": "Image_Dialogue",
-        "ParentID": 345,
+        "ParentID": 296,
         "components": [
           {
             "properties": {
@@ -1124,9 +677,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 347,
+        "ID": 298,
         "Name": "Text_Dialoaue",
-        "ParentID": 345,
+        "ParentID": 296,
         "components": [
           {
             "properties": {
@@ -1211,9 +764,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 348,
+        "ID": 299,
         "Name": "Blink_Bottom",
-        "ParentID": 338,
+        "ParentID": 294,
         "components": [
           {
             "properties": {
@@ -1302,7 +855,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 349,
+        "ID": 300,
         "Name": "Ghost_Baby_Tutorial",
         "ParentID": -1,
         "components": [
@@ -1389,7 +942,7 @@
     {
       "properties": {
         "Active": false,
-        "ID": 350,
+        "ID": 301,
         "Name": "Player_HitEffect",
         "ParentID": -1,
         "components": [
@@ -1476,7 +1029,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 351,
+        "ID": 302,
         "Name": "Ghost_Adult_Tutorial",
         "ParentID": -1,
         "components": [
@@ -1563,7 +1116,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 353,
+        "ID": 303,
         "Name": "----------------------",
         "ParentID": -1,
         "components": [
@@ -1594,7 +1147,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 354,
+        "ID": 304,
         "Name": "Baby_Target_A",
         "ParentID": -1,
         "components": [
@@ -1625,7 +1178,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 355,
+        "ID": 305,
         "Name": "Baby_Target_B",
         "ParentID": -1,
         "components": [
@@ -1656,9 +1209,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 356,
+        "ID": 306,
         "Name": "FX_Exclamation",
-        "ParentID": 349,
+        "ParentID": 300,
         "components": [
           {
             "properties": {
@@ -1737,7 +1290,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 357,
+        "ID": 307,
         "Name": "HideObject",
         "ParentID": -1,
         "components": [
@@ -1847,9 +1400,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 358,
+        "ID": 308,
         "Name": "Image_SensorOn",
-        "ParentID": 357,
+        "ParentID": 307,
         "components": [
           {
             "properties": {
@@ -1938,9 +1491,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 359,
+        "ID": 309,
         "Name": "Image_InteractionOn",
-        "ParentID": 357,
+        "ParentID": 307,
         "components": [
           {
             "properties": {
@@ -2029,9 +1582,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 360,
+        "ID": 310,
         "Name": "Image_InteractionGauge",
-        "ParentID": 357,
+        "ParentID": 307,
         "components": [
           {
             "properties": {
@@ -2120,7 +1673,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 361,
+        "ID": 311,
         "Name": "Player",
         "ParentID": -1,
         "components": [
@@ -2278,9 +1831,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 362,
+        "ID": 312,
         "Name": "CameraTrackingPoint",
-        "ParentID": 361,
+        "ParentID": 311,
         "components": [
           {
             "properties": {
@@ -2309,9 +1862,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 363,
+        "ID": 313,
         "Name": "OcclusionFadePoint",
-        "ParentID": 361,
+        "ParentID": 311,
         "components": [
           {
             "properties": {
@@ -2340,9 +1893,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 364,
+        "ID": 314,
         "Name": "InteractionSensor",
-        "ParentID": 361,
+        "ParentID": 311,
         "components": [
           {
             "properties": {
@@ -2400,9 +1953,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 365,
+        "ID": 315,
         "Name": "InteractZone",
-        "ParentID": 361,
+        "ParentID": 311,
         "components": [
           {
             "properties": {
@@ -2460,9 +2013,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 366,
+        "ID": 316,
         "Name": "ItemVisualizer",
-        "ParentID": 361,
+        "ParentID": 311,
         "components": [
           {
             "properties": {
@@ -2491,9 +2044,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 367,
+        "ID": 317,
         "Name": "Visual_Ingre_Apple",
-        "ParentID": 366,
+        "ParentID": 316,
         "components": [
           {
             "properties": {
@@ -2572,9 +2125,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 368,
+        "ID": 318,
         "Name": "Visual_Ingre_Batter",
-        "ParentID": 366,
+        "ParentID": 316,
         "components": [
           {
             "properties": {
@@ -2653,9 +2206,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 369,
+        "ID": 319,
         "Name": "Visual_Ingre_Donggeurangttaeng",
-        "ParentID": 366,
+        "ParentID": 316,
         "components": [
           {
             "properties": {
@@ -2734,9 +2287,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 370,
+        "ID": 320,
         "Name": "Visual_Ingre_Pear",
-        "ParentID": 366,
+        "ParentID": 316,
         "components": [
           {
             "properties": {
@@ -2815,9 +2368,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 371,
+        "ID": 321,
         "Name": "Visual_Ingre_Sanjeok",
-        "ParentID": 366,
+        "ParentID": 316,
         "components": [
           {
             "properties": {
@@ -2896,9 +2449,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 372,
+        "ID": 322,
         "Name": "Visual_Ingre_Tofu",
-        "ParentID": 366,
+        "ParentID": 316,
         "components": [
           {
             "properties": {
@@ -2977,9 +2530,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 373,
+        "ID": 323,
         "Name": "Visual_Apple",
-        "ParentID": 366,
+        "ParentID": 316,
         "components": [
           {
             "properties": {
@@ -3058,9 +2611,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 374,
+        "ID": 324,
         "Name": "Visual_Pear",
-        "ParentID": 366,
+        "ParentID": 316,
         "components": [
           {
             "properties": {
@@ -3139,9 +2692,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 375,
+        "ID": 325,
         "Name": "Visual_Batter",
-        "ParentID": 366,
+        "ParentID": 316,
         "components": [
           {
             "properties": {
@@ -3220,9 +2773,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 376,
+        "ID": 326,
         "Name": "Visual_Tofu",
-        "ParentID": 366,
+        "ParentID": 316,
         "components": [
           {
             "properties": {
@@ -3301,9 +2854,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 377,
+        "ID": 327,
         "Name": "Visual_Sanjeok",
-        "ParentID": 366,
+        "ParentID": 316,
         "components": [
           {
             "properties": {
@@ -3382,9 +2935,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 378,
+        "ID": 328,
         "Name": "Visual_Donggeurangttaeng",
-        "ParentID": 366,
+        "ParentID": 316,
         "components": [
           {
             "properties": {
@@ -3463,9 +3016,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 379,
+        "ID": 329,
         "Name": "AITarget",
-        "ParentID": 361,
+        "ParentID": 311,
         "components": [
           {
             "properties": {
@@ -3523,9 +3076,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 380,
+        "ID": 330,
         "Name": "DialoguePoint",
-        "ParentID": 361,
+        "ParentID": 311,
         "components": [
           {
             "properties": {
@@ -3554,9 +3107,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 381,
+        "ID": 331,
         "Name": "Player_FireEffect",
-        "ParentID": 361,
+        "ParentID": 311,
         "components": [
           {
             "properties": {
@@ -3680,9 +3233,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 382,
+        "ID": 332,
         "Name": "Player_HitEffect",
-        "ParentID": 361,
+        "ParentID": 311,
         "components": [
           {
             "properties": {
@@ -3767,9 +3320,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 383,
+        "ID": 333,
         "Name": "Player_SmokeEffect",
-        "ParentID": 361,
+        "ParentID": 311,
         "components": [
           {
             "properties": {
@@ -3893,7 +3446,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 384,
+        "ID": 334,
         "Name": "Main Camera",
         "ParentID": -1,
         "components": [
@@ -3945,75 +3498,10 @@
     },
     {
       "properties": {
-        "Active": true,
-        "ID": 385,
-        "Name": "UI_Screen",
-        "ParentID": -1,
-        "components": [
-          {
-            "properties": {
-              "Position": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Rotation": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ]
-            },
-            "type": "Transform"
-          },
-          {
-            "properties": {
-              "Active": true,
-              "Pivot": [
-                0.0,
-                0.0
-              ],
-              "Pos": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Position": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Rotation": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ],
-              "Size": [
-                1920.0,
-                1080.0
-              ]
-            },
-            "type": "RectTransform"
-          }
-        ]
-      },
-      "type": "GameObject"
-    },
-    {
-      "properties": {
         "Active": false,
-        "ID": 386,
+        "ID": 335,
         "Name": "PausePannel",
-        "ParentID": 385,
+        "ParentID": -1,
         "components": [
           {
             "properties": {
@@ -4102,9 +3590,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 387,
+        "ID": 336,
         "Name": "Button_StopNo",
-        "ParentID": 386,
+        "ParentID": 335,
         "components": [
           {
             "properties": {
@@ -4201,9 +3689,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 388,
+        "ID": 337,
         "Name": "Button_StopYes",
-        "ParentID": 386,
+        "ParentID": 335,
         "components": [
           {
             "properties": {
@@ -4301,9 +3789,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 389,
+        "ID": 338,
         "Name": "Text_Stop",
-        "ParentID": 386,
+        "ParentID": 335,
         "components": [
           {
             "properties": {
@@ -4387,556 +3875,10 @@
     },
     {
       "properties": {
-        "Active": true,
-        "ID": 390,
-        "Name": "PlayerLife",
-        "ParentID": 385,
-        "components": [
-          {
-            "properties": {
-              "Position": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Rotation": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ]
-            },
-            "type": "Transform"
-          },
-          {
-            "properties": {
-              "Active": true,
-              "Pivot": [
-                0.0,
-                0.0
-              ],
-              "Pos": [
-                37.79999923706055,
-                897.0999755859375,
-                0.0
-              ],
-              "Position": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Rotation": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ],
-              "Size": [
-                310.5,
-                150.0
-              ]
-            },
-            "type": "RectTransform"
-          },
-          {
-            "properties": {
-              "Active": true,
-              "color": [
-                1.0,
-                1.0,
-                1.0,
-                1.0
-              ],
-              "drawSpacetype": "Screen",
-              "fillAmount": 1.0,
-              "imageType": "Sliced",
-              "isBillboard": false,
-              "isMouseCheck": false,
-              "path": "..\\Assets\\Resource\\UI\\Player\\strength_line.png",
-              "sliceBorderPx": [
-                50.0,
-                50.0,
-                50.0,
-                50.0
-              ],
-              "type": "Sliced",
-              "zOrder": 0
-            },
-            "type": "Image"
-          }
-        ]
-      },
-      "type": "GameObject"
-    },
-    {
-      "properties": {
-        "Active": true,
-        "ID": 391,
-        "Name": "Image_Life1",
-        "ParentID": 390,
-        "components": [
-          {
-            "properties": {
-              "Position": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Rotation": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ]
-            },
-            "type": "Transform"
-          },
-          {
-            "properties": {
-              "Active": true,
-              "Pivot": [
-                0.5,
-                0.5
-              ],
-              "Pos": [
-                50.0,
-                70.0,
-                0.0
-              ],
-              "Position": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Rotation": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ],
-              "Size": [
-                40.0,
-                90.0
-              ]
-            },
-            "type": "RectTransform"
-          },
-          {
-            "properties": {
-              "Active": true,
-              "color": [
-                1.0,
-                1.0,
-                1.0,
-                1.0
-              ],
-              "drawSpacetype": "Screen",
-              "fillAmount": 1.0,
-              "imageType": "Simple",
-              "isBillboard": false,
-              "isMouseCheck": false,
-              "path": "..\\Assets\\Resource\\UI\\Player\\strength.png",
-              "sliceBorderPx": [
-                0.0,
-                0.0,
-                0.0,
-                0.0
-              ],
-              "type": "Simple",
-              "zOrder": 0
-            },
-            "type": "Image"
-          }
-        ]
-      },
-      "type": "GameObject"
-    },
-    {
-      "properties": {
-        "Active": true,
-        "ID": 392,
-        "Name": "Image_Life2",
-        "ParentID": 390,
-        "components": [
-          {
-            "properties": {
-              "Position": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Rotation": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ]
-            },
-            "type": "Transform"
-          },
-          {
-            "properties": {
-              "Active": true,
-              "Pivot": [
-                0.5,
-                0.5
-              ],
-              "Pos": [
-                100.0,
-                70.0,
-                0.0
-              ],
-              "Position": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Rotation": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ],
-              "Size": [
-                40.0,
-                90.0
-              ]
-            },
-            "type": "RectTransform"
-          },
-          {
-            "properties": {
-              "Active": true,
-              "color": [
-                1.0,
-                1.0,
-                1.0,
-                1.0
-              ],
-              "drawSpacetype": "Screen",
-              "fillAmount": 1.0,
-              "imageType": "Simple",
-              "isBillboard": false,
-              "isMouseCheck": false,
-              "path": "..\\Assets\\Resource\\UI\\Player\\strength.png",
-              "sliceBorderPx": [
-                0.0,
-                0.0,
-                0.0,
-                0.0
-              ],
-              "type": "Simple",
-              "zOrder": 0
-            },
-            "type": "Image"
-          }
-        ]
-      },
-      "type": "GameObject"
-    },
-    {
-      "properties": {
-        "Active": true,
-        "ID": 393,
-        "Name": "Image_Life3",
-        "ParentID": 390,
-        "components": [
-          {
-            "properties": {
-              "Position": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Rotation": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ]
-            },
-            "type": "Transform"
-          },
-          {
-            "properties": {
-              "Active": true,
-              "Pivot": [
-                0.5,
-                0.5
-              ],
-              "Pos": [
-                150.0,
-                70.0,
-                0.0
-              ],
-              "Position": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Rotation": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ],
-              "Size": [
-                40.0,
-                90.0
-              ]
-            },
-            "type": "RectTransform"
-          },
-          {
-            "properties": {
-              "Active": true,
-              "color": [
-                1.0,
-                1.0,
-                1.0,
-                1.0
-              ],
-              "drawSpacetype": "Screen",
-              "fillAmount": 1.0,
-              "imageType": "Simple",
-              "isBillboard": false,
-              "isMouseCheck": false,
-              "path": "..\\Assets\\Resource\\UI\\Player\\strength.png",
-              "sliceBorderPx": [
-                0.0,
-                0.0,
-                0.0,
-                0.0
-              ],
-              "type": "Simple",
-              "zOrder": 0
-            },
-            "type": "Image"
-          }
-        ]
-      },
-      "type": "GameObject"
-    },
-    {
-      "properties": {
-        "Active": true,
-        "ID": 394,
-        "Name": "Image_Life4",
-        "ParentID": 390,
-        "components": [
-          {
-            "properties": {
-              "Position": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Rotation": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ]
-            },
-            "type": "Transform"
-          },
-          {
-            "properties": {
-              "Active": true,
-              "Pivot": [
-                0.5,
-                0.5
-              ],
-              "Pos": [
-                200.0,
-                70.0,
-                0.0
-              ],
-              "Position": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Rotation": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ],
-              "Size": [
-                40.0,
-                90.0
-              ]
-            },
-            "type": "RectTransform"
-          },
-          {
-            "properties": {
-              "Active": true,
-              "color": [
-                1.0,
-                1.0,
-                1.0,
-                1.0
-              ],
-              "drawSpacetype": "Screen",
-              "fillAmount": 1.0,
-              "imageType": "Simple",
-              "isBillboard": false,
-              "isMouseCheck": false,
-              "path": "..\\Assets\\Resource\\UI\\Player\\strength.png",
-              "sliceBorderPx": [
-                0.0,
-                0.0,
-                0.0,
-                0.0
-              ],
-              "type": "Simple",
-              "zOrder": 0
-            },
-            "type": "Image"
-          }
-        ]
-      },
-      "type": "GameObject"
-    },
-    {
-      "properties": {
-        "Active": true,
-        "ID": 395,
-        "Name": "Image_Life5",
-        "ParentID": 390,
-        "components": [
-          {
-            "properties": {
-              "Position": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Rotation": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ]
-            },
-            "type": "Transform"
-          },
-          {
-            "properties": {
-              "Active": true,
-              "Pivot": [
-                0.5,
-                0.5
-              ],
-              "Pos": [
-                250.0,
-                70.0,
-                0.0
-              ],
-              "Position": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Rotation": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ],
-              "Size": [
-                40.0,
-                90.0
-              ]
-            },
-            "type": "RectTransform"
-          },
-          {
-            "properties": {
-              "Active": true,
-              "color": [
-                1.0,
-                1.0,
-                1.0,
-                1.0
-              ],
-              "drawSpacetype": "Screen",
-              "fillAmount": 1.0,
-              "imageType": "Simple",
-              "isBillboard": false,
-              "isMouseCheck": false,
-              "path": "..\\Assets\\Resource\\UI\\Player\\strength.png",
-              "sliceBorderPx": [
-                0.0,
-                0.0,
-                0.0,
-                0.0
-              ],
-              "type": "Simple",
-              "zOrder": 0
-            },
-            "type": "Image"
-          }
-        ]
-      },
-      "type": "GameObject"
-    },
-    {
-      "properties": {
-        "Active": true,
-        "ID": 396,
+        "Active": false,
+        "ID": 339,
         "Name": "Quest",
-        "ParentID": 385,
+        "ParentID": -1,
         "components": [
           {
             "properties": {
@@ -4960,7 +3902,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "Pivot": [
                 0.0,
                 1.0
@@ -4998,10 +3940,10 @@
     },
     {
       "properties": {
-        "Active": true,
-        "ID": 397,
+        "Active": false,
+        "ID": 340,
         "Name": "Image_QuestBackground",
-        "ParentID": 396,
+        "ParentID": 339,
         "components": [
           {
             "properties": {
@@ -5025,7 +3967,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "Pivot": [
                 0.0,
                 0.0
@@ -5059,7 +4001,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "color": [
                 1.0,
                 1.0,
@@ -5089,10 +4031,10 @@
     },
     {
       "properties": {
-        "Active": true,
-        "ID": 398,
+        "Active": false,
+        "ID": 341,
         "Name": "Text_QuestTitle",
-        "ParentID": 396,
+        "ParentID": 339,
         "components": [
           {
             "properties": {
@@ -5116,7 +4058,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "Pivot": [
                 0.0,
                 0.5
@@ -5150,7 +4092,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "alignType": "Left",
               "atlasH": 2048,
               "atlasW": 2048,
@@ -5176,10 +4118,10 @@
     },
     {
       "properties": {
-        "Active": true,
-        "ID": 399,
+        "Active": false,
+        "ID": 342,
         "Name": "Text_QuestLabel",
-        "ParentID": 396,
+        "ParentID": 339,
         "components": [
           {
             "properties": {
@@ -5203,7 +4145,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "Pivot": [
                 0.0,
                 0.5
@@ -5237,7 +4179,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "alignType": "Left",
               "atlasH": 2048,
               "atlasW": 2048,
@@ -5264,9 +4206,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 400,
+        "ID": 343,
         "Name": "Image_QuestCheckbox",
-        "ParentID": 396,
+        "ParentID": 339,
         "components": [
           {
             "properties": {
@@ -5355,9 +4297,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 401,
+        "ID": 344,
         "Name": "Image_QuestLine",
-        "ParentID": 396,
+        "ParentID": 339,
         "components": [
           {
             "properties": {
@@ -5446,7 +4388,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 403,
+        "ID": 345,
         "Name": "Adult_Target_A",
         "ParentID": -1,
         "components": [
@@ -5477,7 +4419,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 405,
+        "ID": 346,
         "Name": "Adult_Target_B",
         "ParentID": -1,
         "components": [
@@ -5500,6 +4442,97 @@
               ]
             },
             "type": "Transform"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 347,
+        "Name": "FrozenManager",
+        "ParentID": -1,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "drawSpacetype": "Screen",
+              "fillAmount": 1.0,
+              "imageType": "Simple",
+              "isBillboard": false,
+              "isMouseCheck": false,
+              "path": "",
+              "sliceBorderPx": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "type": "Simple",
+              "zOrder": 0
+            },
+            "type": "Image"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "Pivot": [
+                0.0,
+                0.0
+              ],
+              "Pos": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Size": [
+                1920.0,
+                1080.0
+              ]
+            },
+            "type": "RectTransform"
           }
         ]
       },

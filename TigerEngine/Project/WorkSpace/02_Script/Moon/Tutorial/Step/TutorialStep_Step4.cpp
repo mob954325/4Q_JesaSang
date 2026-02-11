@@ -28,6 +28,27 @@ void TutorialStep_Step4::Enter()
     // 조작 불가 
     tutorialController->player_Obj->GetComponent<PlayerController>()->SetInputLock(true);
 
+    // 프로즌 
+    frozenImage = SceneSystem::Instance().GetCurrentScene()
+        ->GetGameObjectByName("FrozenManager")
+        ->GetComponent<Image>();
+
+    frozenPaths = {
+        "",
+        "..\\Assets\\Resource\\Effect\\Freezing\\Freezing_effect01.png",
+        "..\\Assets\\Resource\\Effect\\Freezing\\Freezing_effect02.png",
+        "..\\Assets\\Resource\\Effect\\Freezing\\Freezing_effect03.png",
+        "..\\Assets\\Resource\\Effect\\Freezing\\Freezing_effect04.png",
+        "..\\Assets\\Resource\\Effect\\Freezing\\Freezing_effect05.png"
+    };
+
+    frozenLevel = 0;
+    nextFrozenLevel = 0;
+    frozenTimer = frozenMaxTime;
+
+    if (frozenImage)
+        frozenImage->SetActive(false);
+
     std::cout << "[Step4] Enter" << std::endl;
 }
 
@@ -42,9 +63,9 @@ void TutorialStep_Step4::Update(float deltaTime)
     case Step4Phase::AdultArrive:  AdultArrive();  break;
     case Step4Phase::Fail:
         std::cout << "[Step4] Fail → Restart\n";
-        // TODO : 3초간 실패 효과 
-        Enter();  // 리셋
+        Enter();
         break;
+
     case Step4Phase::Clear:
         isDone = true;
         break;
@@ -66,10 +87,13 @@ void TutorialStep_Step4::Exit()
 // ------------------------------------------------------------------
 
 
-
-// 1. 조상 유령 접근 + 거리에 따라서 화면 Frozen 
+// 1. 조상 유령 접근 
+// TODO : 거리에 따라서 화면 Frozen 
+// TODO : 퀘스트 띄우기  
 void TutorialStep_Step4::AdultInComeA()
 {
+    UpdateFrozen(GameTimer::Instance().UnscaledDeltaTime());
+
     // 조작 가능 
     if (!phaseStarted)
     {
@@ -109,6 +133,8 @@ void TutorialStep_Step4::AdultInComeA()
 
 void TutorialStep_Step4::AdultInComeB()
 {
+    UpdateFrozen(GameTimer::Instance().UnscaledDeltaTime());
+
     // 만약 플레이어가 Hide 상태면 바로 Clear 
     if (tutorialController->player_Obj->GetComponent<PlayerController>()->GetPlayerState() == PlayerState::Hide)
     {
@@ -141,6 +167,8 @@ void TutorialStep_Step4::AdultInComeB()
 
 void TutorialStep_Step4::AdultArrive()
 {
+    UpdateFrozen(GameTimer::Instance().UnscaledDeltaTime());
+
     if (tutorialController->player_Obj->GetComponent<PlayerController>()->GetPlayerState() == PlayerState::Hide)
     {
         phase = Step4Phase::Clear;
@@ -167,5 +195,46 @@ void TutorialStep_Step4::AdultArrive()
         // 이동 방향 바라보게 회전
         float yaw = atan2f(-dir.x, -dir.z);
         adultTranform->SetRotationY(yaw);
+    }
+}
+
+
+// ----------------------------------
+
+void TutorialStep_Step4::UpdateFrozen(float dt)
+{
+    if (!frozenImage || !tutorialController->adultGhost_Obj) return;
+
+    auto pPos = tutorialController->player_Obj->GetTransform()->GetWorldPosition();
+    auto gPos = tutorialController->adultGhost_Obj->GetTransform()->GetWorldPosition();
+    float len = Vector3::Distance(pPos, gPos);
+
+    if (len <= len1 && len > len2) nextFrozenLevel = 1;
+    else if (len <= len2 && len > len3) nextFrozenLevel = 2;
+    else if (len <= len3 && len > len4) nextFrozenLevel = 3;
+    else if (len <= len4 && len > len5) nextFrozenLevel = 4;
+    else if (len <= len5)               nextFrozenLevel = 5;
+    else                               nextFrozenLevel = 0;
+
+    if (nextFrozenLevel > frozenLevel)
+    {
+        frozenLevel = nextFrozenLevel;
+        frozenImage->SetActive(true);
+        frozenImage->ChangeData(frozenPaths[frozenLevel]);
+        frozenTimer = frozenMaxTime;
+    }
+    else if (nextFrozenLevel < frozenLevel)
+    {
+        frozenTimer -= dt;
+        if (frozenTimer <= 0.0f)
+        {
+            frozenLevel--;
+            if (frozenLevel == 0)
+                frozenImage->SetActive(false);
+            else
+                frozenImage->ChangeData(frozenPaths[frozenLevel]);
+
+            frozenTimer = frozenMaxTime;
+        }
     }
 }
