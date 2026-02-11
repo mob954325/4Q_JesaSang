@@ -2,8 +2,8 @@
   "prefab": [
     {
       "Active": true,
-      "ID": 2450,
-      "Name": "UI_MiniMap_Controller",
+      "ID": 348,
+      "Name": "UI_Settings",
       "ParentID": -1,
       "components": [
         {
@@ -29,132 +29,13 @@
         {
           "properties": {
             "Active": true,
-            "BaseMapObjectName": "UI_MiniMap_Base",
-            "BaseMapPath": "..\\Assets\\Resource\\MiniMap\\MAP_GR.png",
-            "BottomRightMargin": [
-              60.0,
-              80.0
-            ],
-            "CompleteMapObjectName": "UI_MiniMap_Complete",
-            "CompleteMapPath": "..\\Assets\\Resource\\MiniMap\\Map.png",
-            "DebugShowAllItemPings": false,
-            "DebugShowAllPieces": false,
-            "GaugeBgObjectName": "UI_MiniMap_GaugeBG",
-            "GaugeObjectName": "UI_MiniMap_GaugeFill",
-            "ItemWorldPos1": [
-              -300.0,
-              0.0,
-              -300.0
-            ],
-            "ItemWorldPos2": [
-              300.0,
-              0.0,
-              -300.0
-            ],
-            "ItemWorldPos3": [
-              -300.0,
-              0.0,
-              300.0
-            ],
-            "ItemWorldPos4": [
-              300.0,
-              0.0,
-              300.0
-            ],
-            "ItemWorldPos5": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "ItemWorldPos6": [
-              200.0,
-              0.0,
-              100.0
-            ],
-            "MainPingObjectName": "UI_MiniMap_MainPing",
-            "PieceObjectName1": "UI_MiniMap_Piece_01",
-            "PieceObjectName2": "UI_MiniMap_Piece_02",
-            "PieceObjectName3": "UI_MiniMap_Piece_03",
-            "PieceObjectName4": "UI_MiniMap_Piece_04",
-            "PieceObjectName5": "UI_MiniMap_Piece_05",
-            "PieceObjectName6": "",
-            "PingObjectName1": "UI_MiniMap_ItemPing_01",
-            "PingObjectName2": "UI_MiniMap_ItemPing_02",
-            "PingObjectName3": "UI_MiniMap_ItemPing_03",
-            "PingObjectName4": "UI_MiniMap_ItemPing_04",
-            "PingObjectName5": "UI_MiniMap_ItemPing_05",
-            "PingObjectName6": "UI_MiniMap_ItemPing_06",
-            "PlaceBottomRight": true,
-            "PlayerObjectName": "Player",
-            "ShiftLeftByMapCount": 0,
-            "ShowCompleteOnFull": false
-          },
-          "type": "MiniMapManager"
-        }
-      ]
-    },
-    {
-      "Active": true,
-      "ID": 2451,
-      "Name": "UI_MiniMap_ItemPing_06",
-      "ParentID": 2450,
-      "components": [
-        {
-          "properties": {
-            "Position": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Rotation": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Scale": [
-              1.0,
-              1.0,
-              1.0
-            ]
-          },
-          "type": "Transform"
-        },
-        {
-          "properties": {
-            "Active": false,
-            "color": [
-              1.0,
-              1.0,
-              1.0,
-              1.0
-            ],
-            "drawSpacetype": "Screen",
-            "fillAmount": 1.0,
-            "imageType": "Simple",
-            "isBillboard": false,
-            "isMouseCheck": false,
-            "path": "..\\Assets\\Resource\\MiniMap\\map_ghost.png",
-            "sliceBorderPx": [
-              0.0,
-              0.0,
-              0.0,
-              0.0
-            ],
-            "type": "Simple",
-            "zOrder": 0
-          },
-          "type": "Image"
-        },
-        {
-          "properties": {
-            "Active": true,
             "Pivot": [
-              0.0,
-              0.0
+              0.5,
+              0.5
             ],
             "Pos": [
-              1500.0,
-              40.0,
+              960.0,
+              540.0,
               0.0
             ],
             "Position": [
@@ -173,547 +54,42 @@
               1.0
             ],
             "Size": [
-              12.0,
-              12.0
+              1920.0,
+              1080.0
             ]
           },
           "type": "RectTransform"
-        }
-      ]
-    },
-    {
-      "Active": true,
-      "ID": 2452,
-      "Name": "UI_MiniMap_ItemPing_05",
-      "ParentID": 2450,
-      "components": [
-        {
-          "properties": {
-            "Position": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Rotation": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Scale": [
-              1.0,
-              1.0,
-              1.0
-            ]
-          },
-          "type": "Transform"
-        },
-        {
-          "properties": {
-            "Active": false,
-            "color": [
-              1.0,
-              1.0,
-              1.0,
-              1.0
-            ],
-            "drawSpacetype": "Screen",
-            "fillAmount": 1.0,
-            "imageType": "Simple",
-            "isBillboard": false,
-            "isMouseCheck": false,
-            "path": "..\\Assets\\Resource\\MiniMap\\map_ghost.png",
-            "sliceBorderPx": [
-              0.0,
-              0.0,
-              0.0,
-              0.0
-            ],
-            "type": "Simple",
-            "zOrder": 0
-          },
-          "type": "Image"
         },
         {
           "properties": {
             "Active": true,
-            "Pivot": [
-              0.0,
-              0.0
-            ],
-            "Pos": [
-              1500.0,
-              40.0,
-              0.0
-            ],
-            "Position": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Rotation": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Scale": [
-              1.0,
-              1.0,
-              1.0
-            ],
-            "Size": [
-              12.0,
-              12.0
-            ]
+            "AllowEscClose": false,
+            "CloseButtonObjectName": "UI_Settings_CloseButton",
+            "CloseNormalPath": "..\\Assets\\Resource\\UI\\yes.png",
+            "ClosePressedPath": "..\\Assets\\Resource\\UI\\yes_click.png",
+            "CreditButtonObjectName": "UI_Settings_CreditButton",
+            "CreditNormalPath": "..\\\\Assets\\\\Resource\\\\UI\\\\credit.png",
+            "CreditPanelObjectName": "UI_Settings_CreditPanel",
+            "CreditPressedPath": "..\\\\Assets\\\\Resource\\\\UI\\\\credit_click.png",
+            "ExitButtonObjectName": "",
+            "ExitNormalPath": "..\\Assets\\Resource\\UI\\yes.png",
+            "ExitPressedPath": "..\\Assets\\Resource\\UI\\yes_click.png",
+            "MenuRootObjectName": "Main Button Manager",
+            "SoundButtonObjectName": "UI_Settings_SoundButton",
+            "SoundNormalPath": "..\\\\Assets\\\\Resource\\\\UI\\\\sound.png",
+            "SoundPanelObjectName": "UI_Settings_SoundPanel",
+            "SoundPressedPath": "..\\\\Assets\\\\Resource\\\\UI\\\\sound_click.png",
+            "StartOpen": false
           },
-          "type": "RectTransform"
-        }
-      ]
-    },
-    {
-      "Active": true,
-      "ID": 2453,
-      "Name": "UI_MiniMap_ItemPing_04",
-      "ParentID": 2450,
-      "components": [
-        {
-          "properties": {
-            "Position": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Rotation": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Scale": [
-              1.0,
-              1.0,
-              1.0
-            ]
-          },
-          "type": "Transform"
-        },
-        {
-          "properties": {
-            "Active": false,
-            "color": [
-              1.0,
-              1.0,
-              1.0,
-              1.0
-            ],
-            "drawSpacetype": "Screen",
-            "fillAmount": 1.0,
-            "imageType": "Simple",
-            "isBillboard": false,
-            "isMouseCheck": false,
-            "path": "..\\Assets\\Resource\\MiniMap\\map_ghost.png",
-            "sliceBorderPx": [
-              0.0,
-              0.0,
-              0.0,
-              0.0
-            ],
-            "type": "Simple",
-            "zOrder": 0
-          },
-          "type": "Image"
-        },
-        {
-          "properties": {
-            "Active": true,
-            "Pivot": [
-              0.0,
-              0.0
-            ],
-            "Pos": [
-              1500.0,
-              40.0,
-              0.0
-            ],
-            "Position": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Rotation": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Scale": [
-              1.0,
-              1.0,
-              1.0
-            ],
-            "Size": [
-              12.0,
-              12.0
-            ]
-          },
-          "type": "RectTransform"
-        }
-      ]
-    },
-    {
-      "Active": true,
-      "ID": 2454,
-      "Name": "UI_MiniMap_ItemPing_03",
-      "ParentID": 2450,
-      "components": [
-        {
-          "properties": {
-            "Position": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Rotation": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Scale": [
-              1.0,
-              1.0,
-              1.0
-            ]
-          },
-          "type": "Transform"
-        },
-        {
-          "properties": {
-            "Active": false,
-            "color": [
-              1.0,
-              1.0,
-              1.0,
-              1.0
-            ],
-            "drawSpacetype": "Screen",
-            "fillAmount": 1.0,
-            "imageType": "Simple",
-            "isBillboard": false,
-            "isMouseCheck": false,
-            "path": "..\\Assets\\Resource\\MiniMap\\map_ghost.png",
-            "sliceBorderPx": [
-              0.0,
-              0.0,
-              0.0,
-              0.0
-            ],
-            "type": "Simple",
-            "zOrder": 0
-          },
-          "type": "Image"
-        },
-        {
-          "properties": {
-            "Active": true,
-            "Pivot": [
-              0.0,
-              0.0
-            ],
-            "Pos": [
-              1500.0,
-              40.0,
-              0.0
-            ],
-            "Position": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Rotation": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Scale": [
-              1.0,
-              1.0,
-              1.0
-            ],
-            "Size": [
-              12.0,
-              12.0
-            ]
-          },
-          "type": "RectTransform"
-        }
-      ]
-    },
-    {
-      "Active": true,
-      "ID": 2455,
-      "Name": "UI_MiniMap_ItemPing_02",
-      "ParentID": 2450,
-      "components": [
-        {
-          "properties": {
-            "Position": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Rotation": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Scale": [
-              1.0,
-              1.0,
-              1.0
-            ]
-          },
-          "type": "Transform"
-        },
-        {
-          "properties": {
-            "Active": false,
-            "color": [
-              1.0,
-              1.0,
-              1.0,
-              1.0
-            ],
-            "drawSpacetype": "Screen",
-            "fillAmount": 1.0,
-            "imageType": "Simple",
-            "isBillboard": false,
-            "isMouseCheck": false,
-            "path": "..\\Assets\\Resource\\MiniMap\\map_ghost.png",
-            "sliceBorderPx": [
-              0.0,
-              0.0,
-              0.0,
-              0.0
-            ],
-            "type": "Simple",
-            "zOrder": 0
-          },
-          "type": "Image"
-        },
-        {
-          "properties": {
-            "Active": true,
-            "Pivot": [
-              0.0,
-              0.0
-            ],
-            "Pos": [
-              1500.0,
-              40.0,
-              0.0
-            ],
-            "Position": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Rotation": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Scale": [
-              1.0,
-              1.0,
-              1.0
-            ],
-            "Size": [
-              12.0,
-              12.0
-            ]
-          },
-          "type": "RectTransform"
-        }
-      ]
-    },
-    {
-      "Active": true,
-      "ID": 2456,
-      "Name": "UI_MiniMap_ItemPing_01",
-      "ParentID": 2450,
-      "components": [
-        {
-          "properties": {
-            "Position": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Rotation": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Scale": [
-              1.0,
-              1.0,
-              1.0
-            ]
-          },
-          "type": "Transform"
-        },
-        {
-          "properties": {
-            "Active": false,
-            "color": [
-              1.0,
-              1.0,
-              1.0,
-              1.0
-            ],
-            "drawSpacetype": "Screen",
-            "fillAmount": 1.0,
-            "imageType": "Simple",
-            "isBillboard": false,
-            "isMouseCheck": false,
-            "path": "..\\Assets\\Resource\\MiniMap\\map_ghost.png",
-            "sliceBorderPx": [
-              0.0,
-              0.0,
-              0.0,
-              0.0
-            ],
-            "type": "Simple",
-            "zOrder": 0
-          },
-          "type": "Image"
-        },
-        {
-          "properties": {
-            "Active": true,
-            "Pivot": [
-              0.0,
-              0.0
-            ],
-            "Pos": [
-              1500.0,
-              40.0,
-              0.0
-            ],
-            "Position": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Rotation": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Scale": [
-              1.0,
-              1.0,
-              1.0
-            ],
-            "Size": [
-              12.0,
-              12.0
-            ]
-          },
-          "type": "RectTransform"
-        }
-      ]
-    },
-    {
-      "Active": true,
-      "ID": 2457,
-      "Name": "UI_MiniMap_MainPing",
-      "ParentID": 2450,
-      "components": [
-        {
-          "properties": {
-            "Position": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Rotation": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Scale": [
-              1.0,
-              1.0,
-              1.0
-            ]
-          },
-          "type": "Transform"
-        },
-        {
-          "properties": {
-            "Active": true,
-            "color": [
-              1.0,
-              1.0,
-              1.0,
-              1.0
-            ],
-            "drawSpacetype": "Screen",
-            "fillAmount": 1.0,
-            "imageType": "Simple",
-            "isBillboard": false,
-            "isMouseCheck": false,
-            "path": "..\\Assets\\Resource\\MiniMap\\map_charater.png",
-            "sliceBorderPx": [
-              0.0,
-              0.0,
-              0.0,
-              0.0
-            ],
-            "type": "Simple",
-            "zOrder": 0
-          },
-          "type": "Image"
-        },
-        {
-          "properties": {
-            "Active": true,
-            "Pivot": [
-              0.0,
-              0.0
-            ],
-            "Pos": [
-              1500.0,
-              40.0,
-              0.0
-            ],
-            "Position": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Rotation": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Scale": [
-              1.0,
-              1.0,
-              1.0
-            ],
-            "Size": [
-              16.0,
-              16.0
-            ]
-          },
-          "type": "RectTransform"
+          "type": "SettingsUIController"
         }
       ]
     },
     {
       "Active": false,
-      "ID": 2458,
-      "Name": "UI_MiniMap_Piece_06",
-      "ParentID": 2450,
+      "ID": 349,
+      "Name": "UI_Settings_SoundPanel",
+      "ParentID": 348,
       "components": [
         {
           "properties": {
@@ -738,39 +114,13 @@
         {
           "properties": {
             "Active": false,
-            "color": [
-              1.0,
-              1.0,
-              1.0,
-              1.0
-            ],
-            "drawSpacetype": "Screen",
-            "fillAmount": 1.0,
-            "imageType": "Simple",
-            "isBillboard": false,
-            "isMouseCheck": false,
-            "path": "..\\Assets\\Resource\\MiniMap\\MAP05.png",
-            "sliceBorderPx": [
-              0.0,
-              0.0,
-              0.0,
-              0.0
-            ],
-            "type": "Simple",
-            "zOrder": 0
-          },
-          "type": "Image"
-        },
-        {
-          "properties": {
-            "Active": false,
             "Pivot": [
-              0.0,
-              0.0
+              0.5,
+              0.5
             ],
             "Pos": [
-              1670.666748046875,
-              168.0,
+              960.0,
+              540.0,
               0.0
             ],
             "Position": [
@@ -789,39 +139,11 @@
               1.0
             ],
             "Size": [
-              85.33333587646484,
-              128.0
+              1472.0,
+              832.0
             ]
           },
           "type": "RectTransform"
-        }
-      ]
-    },
-    {
-      "Active": true,
-      "ID": 2459,
-      "Name": "UI_MiniMap_Piece_05",
-      "ParentID": 2450,
-      "components": [
-        {
-          "properties": {
-            "Position": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Rotation": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Scale": [
-              1.0,
-              1.0,
-              1.0
-            ]
-          },
-          "type": "Transform"
         },
         {
           "properties": {
@@ -837,7 +159,7 @@
             "imageType": "Simple",
             "isBillboard": false,
             "isMouseCheck": false,
-            "path": "..\\\\Assets\\\\Resource\\\\MiniMap\\\\MAP05.png",
+            "path": "..\\\\Assets\\\\Resource\\\\UI\\\\Game_Mini_01.png",
             "sliceBorderPx": [
               0.0,
               0.0,
@@ -845,579 +167,17 @@
               0.0
             ],
             "type": "Simple",
-            "zOrder": 0
+            "zOrder": 50
           },
           "type": "Image"
-        },
-        {
-          "properties": {
-            "Active": true,
-            "Pivot": [
-              0.0,
-              0.0
-            ],
-            "Pos": [
-              1500.0,
-              40.0,
-              0.0
-            ],
-            "Position": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Rotation": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Scale": [
-              1.0,
-              1.0,
-              1.0
-            ],
-            "Size": [
-              256.0,
-              256.0
-            ]
-          },
-          "type": "RectTransform"
-        }
-      ]
-    },
-    {
-      "Active": true,
-      "ID": 2460,
-      "Name": "UI_MiniMap_Piece_04",
-      "ParentID": 2450,
-      "components": [
-        {
-          "properties": {
-            "Position": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Rotation": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Scale": [
-              1.0,
-              1.0,
-              1.0
-            ]
-          },
-          "type": "Transform"
-        },
-        {
-          "properties": {
-            "Active": false,
-            "color": [
-              1.0,
-              1.0,
-              1.0,
-              1.0
-            ],
-            "drawSpacetype": "Screen",
-            "fillAmount": 1.0,
-            "imageType": "Simple",
-            "isBillboard": false,
-            "isMouseCheck": false,
-            "path": "..\\\\Assets\\\\Resource\\\\MiniMap\\\\MAP04.png",
-            "sliceBorderPx": [
-              0.0,
-              0.0,
-              0.0,
-              0.0
-            ],
-            "type": "Simple",
-            "zOrder": 0
-          },
-          "type": "Image"
-        },
-        {
-          "properties": {
-            "Active": true,
-            "Pivot": [
-              0.0,
-              0.0
-            ],
-            "Pos": [
-              1500.0,
-              40.0,
-              0.0
-            ],
-            "Position": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Rotation": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Scale": [
-              1.0,
-              1.0,
-              1.0
-            ],
-            "Size": [
-              256.0,
-              256.0
-            ]
-          },
-          "type": "RectTransform"
-        }
-      ]
-    },
-    {
-      "Active": true,
-      "ID": 2461,
-      "Name": "UI_MiniMap_Piece_03",
-      "ParentID": 2450,
-      "components": [
-        {
-          "properties": {
-            "Position": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Rotation": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Scale": [
-              1.0,
-              1.0,
-              1.0
-            ]
-          },
-          "type": "Transform"
-        },
-        {
-          "properties": {
-            "Active": false,
-            "color": [
-              1.0,
-              1.0,
-              1.0,
-              1.0
-            ],
-            "drawSpacetype": "Screen",
-            "fillAmount": 1.0,
-            "imageType": "Simple",
-            "isBillboard": false,
-            "isMouseCheck": false,
-            "path": "..\\\\Assets\\\\Resource\\\\MiniMap\\\\MAP03.png",
-            "sliceBorderPx": [
-              0.0,
-              0.0,
-              0.0,
-              0.0
-            ],
-            "type": "Simple",
-            "zOrder": 0
-          },
-          "type": "Image"
-        },
-        {
-          "properties": {
-            "Active": true,
-            "Pivot": [
-              0.0,
-              0.0
-            ],
-            "Pos": [
-              1500.0,
-              40.0,
-              0.0
-            ],
-            "Position": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Rotation": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Scale": [
-              1.0,
-              1.0,
-              1.0
-            ],
-            "Size": [
-              256.0,
-              256.0
-            ]
-          },
-          "type": "RectTransform"
-        }
-      ]
-    },
-    {
-      "Active": true,
-      "ID": 2462,
-      "Name": "UI_MiniMap_Piece_02",
-      "ParentID": 2450,
-      "components": [
-        {
-          "properties": {
-            "Position": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Rotation": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Scale": [
-              1.0,
-              1.0,
-              1.0
-            ]
-          },
-          "type": "Transform"
-        },
-        {
-          "properties": {
-            "Active": false,
-            "color": [
-              1.0,
-              1.0,
-              1.0,
-              1.0
-            ],
-            "drawSpacetype": "Screen",
-            "fillAmount": 1.0,
-            "imageType": "Simple",
-            "isBillboard": false,
-            "isMouseCheck": false,
-            "path": "..\\\\Assets\\\\Resource\\\\MiniMap\\\\MAP02.png",
-            "sliceBorderPx": [
-              0.0,
-              0.0,
-              0.0,
-              0.0
-            ],
-            "type": "Simple",
-            "zOrder": 0
-          },
-          "type": "Image"
-        },
-        {
-          "properties": {
-            "Active": true,
-            "Pivot": [
-              0.0,
-              0.0
-            ],
-            "Pos": [
-              1500.0,
-              40.0,
-              0.0
-            ],
-            "Position": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Rotation": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Scale": [
-              1.0,
-              1.0,
-              1.0
-            ],
-            "Size": [
-              256.0,
-              256.0
-            ]
-          },
-          "type": "RectTransform"
-        }
-      ]
-    },
-    {
-      "Active": true,
-      "ID": 2463,
-      "Name": "UI_MiniMap_Piece_01",
-      "ParentID": 2450,
-      "components": [
-        {
-          "properties": {
-            "Position": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Rotation": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Scale": [
-              1.0,
-              1.0,
-              1.0
-            ]
-          },
-          "type": "Transform"
-        },
-        {
-          "properties": {
-            "Active": false,
-            "color": [
-              1.0,
-              1.0,
-              1.0,
-              1.0
-            ],
-            "drawSpacetype": "Screen",
-            "fillAmount": 1.0,
-            "imageType": "Simple",
-            "isBillboard": false,
-            "isMouseCheck": false,
-            "path": "..\\\\Assets\\\\Resource\\\\MiniMap\\\\MAP01.png",
-            "sliceBorderPx": [
-              0.0,
-              0.0,
-              0.0,
-              0.0
-            ],
-            "type": "Simple",
-            "zOrder": 0
-          },
-          "type": "Image"
-        },
-        {
-          "properties": {
-            "Active": true,
-            "Pivot": [
-              0.0,
-              0.0
-            ],
-            "Pos": [
-              1500.0,
-              40.0,
-              0.0
-            ],
-            "Position": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Rotation": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Scale": [
-              1.0,
-              1.0,
-              1.0
-            ],
-            "Size": [
-              256.0,
-              256.0
-            ]
-          },
-          "type": "RectTransform"
-        }
-      ]
-    },
-    {
-      "Active": true,
-      "ID": 2464,
-      "Name": "UI_MiniMap_GaugeFill",
-      "ParentID": 2450,
-      "components": [
-        {
-          "properties": {
-            "Position": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Rotation": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Scale": [
-              1.0,
-              1.0,
-              1.0
-            ]
-          },
-          "type": "Transform"
-        },
-        {
-          "properties": {
-            "Active": false,
-            "color": [
-              1.0,
-              1.0,
-              1.0,
-              1.0
-            ],
-            "drawSpacetype": "Screen",
-            "fillAmount": 1.0,
-            "imageType": "Simple",
-            "isBillboard": false,
-            "isMouseCheck": false,
-            "path": "..\\Assets\\Resource\\MiniMap\\GaugeFill.png",
-            "sliceBorderPx": [
-              0.0,
-              0.0,
-              0.0,
-              0.0
-            ],
-            "type": "Simple",
-            "zOrder": 0
-          },
-          "type": "Image"
-        },
-        {
-          "properties": {
-            "Active": true,
-            "Pivot": [
-              0.0,
-              0.0
-            ],
-            "Pos": [
-              1500.0,
-              302.0,
-              0.0
-            ],
-            "Position": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Rotation": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Scale": [
-              1.0,
-              1.0,
-              1.0
-            ],
-            "Size": [
-              256.0,
-              16.0
-            ]
-          },
-          "type": "RectTransform"
-        }
-      ]
-    },
-    {
-      "Active": true,
-      "ID": 2465,
-      "Name": "UI_MiniMap_GaugeBG",
-      "ParentID": 2450,
-      "components": [
-        {
-          "properties": {
-            "Position": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Rotation": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Scale": [
-              1.0,
-              1.0,
-              1.0
-            ]
-          },
-          "type": "Transform"
-        },
-        {
-          "properties": {
-            "Active": false,
-            "color": [
-              1.0,
-              1.0,
-              1.0,
-              1.0
-            ],
-            "drawSpacetype": "Screen",
-            "fillAmount": 1.0,
-            "imageType": "Simple",
-            "isBillboard": false,
-            "isMouseCheck": false,
-            "path": "..\\Assets\\Resource\\MiniMap\\GaugeBG.png",
-            "sliceBorderPx": [
-              0.0,
-              0.0,
-              0.0,
-              0.0
-            ],
-            "type": "Simple",
-            "zOrder": 0
-          },
-          "type": "Image"
-        },
-        {
-          "properties": {
-            "Active": true,
-            "Pivot": [
-              0.0,
-              0.0
-            ],
-            "Pos": [
-              1500.0,
-              302.0,
-              0.0
-            ],
-            "Position": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Rotation": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Scale": [
-              1.0,
-              1.0,
-              1.0
-            ],
-            "Size": [
-              256.0,
-              16.0
-            ]
-          },
-          "type": "RectTransform"
         }
       ]
     },
     {
       "Active": false,
-      "ID": 2466,
-      "Name": "UI_MiniMap_Complete",
-      "ParentID": 2450,
+      "ID": 350,
+      "Name": "UI_Settings_SoundText_Top",
+      "ParentID": 349,
       "components": [
         {
           "properties": {
@@ -1442,39 +202,13 @@
         {
           "properties": {
             "Active": false,
-            "color": [
-              1.0,
-              1.0,
-              1.0,
-              1.0
-            ],
-            "drawSpacetype": "Screen",
-            "fillAmount": 1.0,
-            "imageType": "Simple",
-            "isBillboard": false,
-            "isMouseCheck": false,
-            "path": "..\\\\Assets\\\\Resource\\\\MiniMap\\\\Map.png",
-            "sliceBorderPx": [
-              0.0,
-              0.0,
-              0.0,
-              0.0
-            ],
-            "type": "Simple",
-            "zOrder": 0
-          },
-          "type": "Image"
-        },
-        {
-          "properties": {
-            "Active": false,
             "Pivot": [
-              0.0,
-              0.0
+              0.5,
+              0.5
             ],
             "Pos": [
-              1500.0,
-              40.0,
+              746.5999755859375,
+              202.1999969482422,
               0.0
             ],
             "Position": [
@@ -1493,19 +227,45 @@
               1.0
             ],
             "Size": [
-              1075.0,
-              1048.0
+              174.0,
+              68.5999984741211
             ]
           },
           "type": "RectTransform"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "color": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "drawSpacetype": "Screen",
+            "fillAmount": 1.0,
+            "imageType": "Simple",
+            "isBillboard": false,
+            "isMouseCheck": false,
+            "path": "..\\\\Assets\\\\Resource\\\\UI\\\\sound_text_01.png",
+            "sliceBorderPx": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "type": "Simple",
+            "zOrder": 75
+          },
+          "type": "Image"
         }
       ]
     },
     {
-      "Active": true,
-      "ID": 2467,
-      "Name": "UI_MiniMap_Base",
-      "ParentID": 2450,
+      "Active": false,
+      "ID": 351,
+      "Name": "UI_Settings_SoundText_Bottom",
+      "ParentID": 349,
       "components": [
         {
           "properties": {
@@ -1529,40 +289,14 @@
         },
         {
           "properties": {
-            "Active": true,
-            "color": [
-              1.0,
-              1.0,
-              1.0,
-              1.0
-            ],
-            "drawSpacetype": "Screen",
-            "fillAmount": 1.0,
-            "imageType": "Simple",
-            "isBillboard": false,
-            "isMouseCheck": false,
-            "path": "..\\\\Assets\\\\Resource\\\\MiniMap\\\\MAP_GR.png",
-            "sliceBorderPx": [
-              0.0,
-              0.0,
-              0.0,
-              0.0
-            ],
-            "type": "Simple",
-            "zOrder": 0
-          },
-          "type": "Image"
-        },
-        {
-          "properties": {
-            "Active": true,
+            "Active": false,
             "Pivot": [
-              0.0,
-              0.0
+              0.5,
+              0.5
             ],
             "Pos": [
-              1500.0,
-              40.0,
+              746.5999755859375,
+              467.29998779296875,
               0.0
             ],
             "Position": [
@@ -1581,11 +315,917 @@
               1.0
             ],
             "Size": [
-              256.0,
-              256.0
+              174.0,
+              68.5999984741211
             ]
           },
           "type": "RectTransform"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "color": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "drawSpacetype": "Screen",
+            "fillAmount": 1.0,
+            "imageType": "Simple",
+            "isBillboard": false,
+            "isMouseCheck": false,
+            "path": "..\\\\Assets\\\\Resource\\\\UI\\\\sound_text.png",
+            "sliceBorderPx": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "type": "Simple",
+            "zOrder": 75
+          },
+          "type": "Image"
+        }
+      ]
+    },
+    {
+      "Active": false,
+      "ID": 355,
+      "Name": "UI_Settings_SoundBar1_BG",
+      "ParentID": 349,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "Pivot": [
+              0.5,
+              0.5
+            ],
+            "Pos": [
+              712.0,
+              290.20001220703125,
+              0.0
+            ],
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "Size": [
+              1052.800048828125,
+              69.30000305175781
+            ]
+          },
+          "type": "RectTransform"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "color": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "drawSpacetype": "Screen",
+            "fillAmount": 1.0,
+            "imageType": "Simple",
+            "isBillboard": false,
+            "isMouseCheck": false,
+            "path": "..\\\\Assets\\\\Resource\\\\UI\\\\sound_bar.png",
+            "sliceBorderPx": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "type": "Simple",
+            "zOrder": 70
+          },
+          "type": "Image"
+        }
+      ]
+    },
+    {
+      "Active": false,
+      "ID": 356,
+      "Name": "UI_Settings_SoundBar1_Gauge",
+      "ParentID": 349,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "Pivot": [
+              0.5,
+              0.5
+            ],
+            "Pos": [
+              710.7000122070313,
+              290.5,
+              0.0
+            ],
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "Size": [
+              1000.0,
+              7.0
+            ]
+          },
+          "type": "RectTransform"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "color": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "drawSpacetype": "Screen",
+            "fillAmount": 1.0,
+            "imageType": "Simple",
+            "isBillboard": false,
+            "isMouseCheck": false,
+            "path": "..\\\\Assets\\\\Resource\\\\UI\\\\sound_gaige.png",
+            "sliceBorderPx": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "type": "Simple",
+            "zOrder": 71
+          },
+          "type": "Image"
+        }
+      ]
+    },
+    {
+      "Active": false,
+      "ID": 357,
+      "Name": "UI_Settings_SoundBar1_Point",
+      "ParentID": 349,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "Pivot": [
+              0.5,
+              0.5
+            ],
+            "Pos": [
+              227.0,
+              290.5,
+              0.0
+            ],
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "Size": [
+              40.0,
+              40.0
+            ]
+          },
+          "type": "RectTransform"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "color": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "drawSpacetype": "Screen",
+            "fillAmount": 1.0,
+            "imageType": "Simple",
+            "isBillboard": false,
+            "isMouseCheck": false,
+            "path": "..\\\\Assets\\\\Resource\\\\UI\\\\sound_bar_point.png",
+            "sliceBorderPx": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "type": "Simple",
+            "zOrder": 72
+          },
+          "type": "Image"
+        }
+      ]
+    },
+    {
+      "Active": false,
+      "ID": 358,
+      "Name": "UI_Settings_SoundBar2_BG",
+      "ParentID": 349,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "Pivot": [
+              0.5,
+              0.5
+            ],
+            "Pos": [
+              712.0,
+              553.0,
+              0.0
+            ],
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "Size": [
+              1052.800048828125,
+              69.30000305175781
+            ]
+          },
+          "type": "RectTransform"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "color": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "drawSpacetype": "Screen",
+            "fillAmount": 1.0,
+            "imageType": "Simple",
+            "isBillboard": false,
+            "isMouseCheck": false,
+            "path": "..\\\\Assets\\\\Resource\\\\UI\\\\sound_bar.png",
+            "sliceBorderPx": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "type": "Simple",
+            "zOrder": 70
+          },
+          "type": "Image"
+        }
+      ]
+    },
+    {
+      "Active": false,
+      "ID": 359,
+      "Name": "UI_Settings_SoundBar2_Gauge",
+      "ParentID": 349,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "Pivot": [
+              0.5,
+              0.5
+            ],
+            "Pos": [
+              710.7000122070313,
+              553.0,
+              0.0
+            ],
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "Size": [
+              1000.0,
+              7.0
+            ]
+          },
+          "type": "RectTransform"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "color": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "drawSpacetype": "Screen",
+            "fillAmount": 1.0,
+            "imageType": "Simple",
+            "isBillboard": false,
+            "isMouseCheck": false,
+            "path": "..\\\\Assets\\\\Resource\\\\UI\\\\sound_gaige.png",
+            "sliceBorderPx": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "type": "Simple",
+            "zOrder": 71
+          },
+          "type": "Image"
+        }
+      ]
+    },
+    {
+      "Active": false,
+      "ID": 360,
+      "Name": "UI_Settings_SoundBar2_Point",
+      "ParentID": 349,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "Pivot": [
+              0.5,
+              0.5
+            ],
+            "Pos": [
+              227.0,
+              553.0,
+              0.0
+            ],
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "Size": [
+              40.0,
+              40.0
+            ]
+          },
+          "type": "RectTransform"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "color": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "drawSpacetype": "Screen",
+            "fillAmount": 1.0,
+            "imageType": "Simple",
+            "isBillboard": false,
+            "isMouseCheck": false,
+            "path": "..\\\\Assets\\\\Resource\\\\UI\\\\sound_bar_point.png",
+            "sliceBorderPx": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "type": "Simple",
+            "zOrder": 72
+          },
+          "type": "Image"
+        }
+      ]
+    },
+    {
+      "Active": false,
+      "ID": 352,
+      "Name": "UI_Settings_CreditPanel",
+      "ParentID": 348,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "Pivot": [
+              0.5,
+              0.5
+            ],
+            "Pos": [
+              960.0,
+              540.0,
+              0.0
+            ],
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "Size": [
+              1472.0,
+              832.0
+            ]
+          },
+          "type": "RectTransform"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "color": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "drawSpacetype": "Screen",
+            "fillAmount": 1.0,
+            "imageType": "Simple",
+            "isBillboard": false,
+            "isMouseCheck": false,
+            "path": "..\\\\Assets\\\\Resource\\\\UI\\\\credit.png",
+            "sliceBorderPx": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "type": "Simple",
+            "zOrder": 50
+          },
+          "type": "Image"
+        }
+      ]
+    },
+    {
+      "Active": false,
+      "ID": 353,
+      "Name": "UI_Settings_SoundButton",
+      "ParentID": 348,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "Pivot": [
+              0.5,
+              0.5
+            ],
+            "Pos": [
+              224.13999938964844,
+              790.0,
+              0.0
+            ],
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "Size": [
+              125.52999877929688,
+              60.0
+            ]
+          },
+          "type": "RectTransform"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "color": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "drawSpacetype": "Screen",
+            "fillAmount": 1.0,
+            "imageType": "Simple",
+            "isBillboard": false,
+            "isMouseCheck": true,
+            "path": "..\\\\Assets\\\\Resource\\\\UI\\\\sound.png",
+            "sliceBorderPx": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "type": "Simple",
+            "zOrder": 60
+          },
+          "type": "Image"
+        }
+      ]
+    },
+    {
+      "Active": false,
+      "ID": 354,
+      "Name": "UI_Settings_CreditButton",
+      "ParentID": 348,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "Pivot": [
+              0.5,
+              0.5
+            ],
+            "Pos": [
+              224.13999938964844,
+              850.0,
+              0.0
+            ],
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "Size": [
+              125.52999877929688,
+              60.0
+            ]
+          },
+          "type": "RectTransform"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "color": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "drawSpacetype": "Screen",
+            "fillAmount": 1.0,
+            "imageType": "Simple",
+            "isBillboard": false,
+            "isMouseCheck": true,
+            "path": "..\\\\Assets\\\\Resource\\\\UI\\\\credit.png",
+            "sliceBorderPx": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "type": "Simple",
+            "zOrder": 60
+          },
+          "type": "Image"
+        }
+      ]
+    },
+    {
+      "Active": false,
+      "ID": 361,
+      "Name": "UI_Settings_CloseButton",
+      "ParentID": 348,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "Pivot": [
+              0.5,
+              0.5
+            ],
+            "Pos": [
+              224.13999938964844,
+              920.0,
+              0.0
+            ],
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "Size": [
+              125.52999877929688,
+              60.0
+            ]
+          },
+          "type": "RectTransform"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "color": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "drawSpacetype": "Screen",
+            "fillAmount": 1.0,
+            "imageType": "Simple",
+            "isBillboard": false,
+            "isMouseCheck": true,
+            "path": "..\\\\Assets\\\\Resource\\\\UI\\\\yes.png",
+            "sliceBorderPx": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "type": "Simple",
+            "zOrder": 60
+          },
+          "type": "Image"
         }
       ]
     }

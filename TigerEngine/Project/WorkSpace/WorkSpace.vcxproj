@@ -148,6 +148,8 @@
     <ClInclude Include="02_Script\Ho\UI\MenuUI_ExitButton.h" />
     <ClInclude Include="02_Script\Ho\UI\MenuUI_OptionButton.h" />
     <ClInclude Include="02_Script\Ho\UI\MenuUI_StartButton.h" />
+    <ClInclude Include="02_Script\Ron\Start\StartSceneController.h" />
+    <ClInclude Include="02_Script\Ron\UI\SettingsUIController.h" />
     <ClInclude Include="02_Script\Moon\AI\AdultGhostController.h" />
     <ClInclude Include="02_Script\Moon\AI\BabyGhostController.h" />
     <ClInclude Include="02_Script\Moon\AI\FSM\AdultGhost_Attack.h" />
@@ -178,6 +180,7 @@
     <ClInclude Include="99_Test\Player\TestButton.h" />
     <ClInclude Include="02_Script\Woo\UI\Button_SceneChagne.h" />
     <ClInclude Include="02_Script\Woo\UI\Button_PausePannelOff.h" />
+    <ClInclude Include="02_Script\Ron\UI\Button_OpenPausePannel.h" />
     <ClInclude Include="02_Script\Woo\CookingZone\CookingZone.h" />
     <ClInclude Include="EngineApp.h" />
     <ClInclude Include="02_Script\\Ron\\MiniMapTest\MiniMapTestScript.h" />
@@ -220,6 +223,8 @@
     <ClCompile Include="02_Script\Ho\UI\MenuUI_ExitButton.cpp" />
     <ClCompile Include="02_Script\Ho\UI\MenuUI_OptionButton.cpp" />
     <ClCompile Include="02_Script\Ho\UI\MenuUI_StartButton.cpp" />
+    <ClCompile Include="02_Script\Ron\Start\StartSceneController.cpp" />
+    <ClCompile Include="02_Script\Ron\UI\SettingsUIController.cpp" />
     <ClCompile Include="02_Script\Moon\AI\AdultGhostController.cpp" />
     <ClCompile Include="02_Script\Moon\AI\BabyGhostController.cpp" />
     <ClCompile Include="02_Script\Moon\AI\FSM\AdultGhost_Attack.cpp" />
@@ -248,6 +253,7 @@
     <ClCompile Include="99_Test\Player\TestButton.cpp" />
     <ClCompile Include="02_Script\Woo\UI\Button_SceneChagne.cpp" />
     <ClCompile Include="02_Script\Woo\UI\Button_PausePannelOff.cpp" />
+    <ClCompile Include="02_Script\Ron\UI\Button_OpenPausePannel.cpp" />
     <ClCompile Include="02_Script\Woo\CookingZone\CookingZone.cpp" />
     <ClCompile Include="EngineApp.cpp" />
     <ClCompile Include="02_Script\\Ron\\MiniMapTest\MiniMapTestScript.cpp" />
