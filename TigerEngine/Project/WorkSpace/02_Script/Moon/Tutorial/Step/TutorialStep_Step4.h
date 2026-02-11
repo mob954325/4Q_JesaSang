@@ -40,11 +40,16 @@ private:
     // --- Frozen Effect ---
     Image* frozenImage = nullptr;
 
-    float len1 = 500.0f;
-    float len2 = 400.5f;
-    float len3 = 300.0f;
-    float len4 = 200.5f;
-    float len5 = 100.0f;
+    //float len1 = 500.0f;
+    //float len2 = 400.5f;
+    //float len3 = 300.0f;
+    //float len4 = 200.5f;
+    //float len5 = 100.0f;
+    float len1 = 1000.0f;
+    float len2 = 900.5f;
+    float len3 = 700.0f;
+    float len4 = 400.5f;
+    float len5 = 200.0f;
 
     int frozenLevel = 0;
     int nextFrozenLevel = 0;

@@ -1,5 +1,6 @@
 #pragma once
 #include "ITutorialStep.h"
+#include "Components/UI/Image.h"
 
 // -----------------------------------------------------------
 // [ Step3 ]
@@ -18,6 +19,7 @@ enum class Step3Phase
     TrunToPlayer,
     Surprised,
     Leave,
+    Frozen,
     Done
 };
 
@@ -29,11 +31,15 @@ private:
     float step3Timer = 0.0f;
     float delayStep3 = 1.0f;
 
+    float frozenPhaseTimer = 0.0f;
+    bool dialogueShown = false;
+
     Step3Phase phase = Step3Phase::BabyInCome;
 
     GameObject* targetA = nullptr;
     GameObject* targetB = nullptr;
     GameObject* exclamation = nullptr;
+    AnimationController* ExclEffect = nullptr;
 
     Transform* babyTranform = nullptr;
 
@@ -41,11 +47,31 @@ private:
 
     float speed = 120.0f;
 
+    // --- Frozen Effect ---
+    Image* frozenImage = nullptr;
+
+    float len1 = 1000.0f;
+    float len2 = 900.5f;
+    float len3 = 700.0f;
+    float len4 = 400.5f;
+    float len5 = 200.0f;
+
+    int frozenLevel = 0;
+    int nextFrozenLevel = 0;
+
+    float frozenTimer = 0.0f;
+    float frozenMaxTime = 0.5f;
+
+    std::vector<std::string> frozenPaths;
+
+    void UpdateFrozen(float dt);
+
 private:
     void BabyInCome();
     void TrunToPlayer();
     void Surprised();
     void Leave();
+    void Frozen();
 
 public:
     TutorialStep_Step3(TutorialController* _tutorialController) : ITutorialStep(_tutorialController) {}
