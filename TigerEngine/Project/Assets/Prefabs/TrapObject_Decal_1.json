@@ -2,16 +2,16 @@
   "prefab": [
     {
       "Active": true,
-      "ID": 1036,
+      "ID": 1115,
       "Name": "TrapObject_Decal",
       "ParentID": -1,
       "components": [
         {
           "properties": {
             "Position": [
-              -833.989990234375,
-              -109.50004577636719,
-              -60.04458236694336
+              -1288.24462890625,
+              1.1028728485107422,
+              105.56759643554688
             ],
             "Rotation": [
               -0.0,
@@ -19,9 +19,9 @@
               -0.0
             ],
             "Scale": [
-              4.999998569488525,
+              4.999997615814209,
               1.0,
-              4.999998569488525
+              4.999997615814209
             ]
           },
           "type": "Transform"
@@ -30,13 +30,13 @@
           "properties": {
             "Active": true,
             "DecalType": "TextureMap",
-            "IsGroundDecal": false,
+            "IsGroundDecal": true,
             "Offset": [
               0.0,
               0.0
             ],
             "Opacity": 1.0,
-            "TexturePath": "..\\Assets\\Resource\\Decals\\Blood_Decals_A.tga",
+            "TexturePath": "..\\Assets\\Resource\\Decals\\decal.png",
             "Tiling": [
               1.0,
               1.0
@@ -87,9 +87,9 @@
     },
     {
       "Active": false,
-      "ID": 1045,
+      "ID": 1116,
       "Name": "RingEffect",
-      "ParentID": 1036,
+      "ParentID": 1115,
       "components": [
         {
           "properties": {

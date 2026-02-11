@@ -2,7 +2,7 @@
   "prefab": [
     {
       "Active": true,
-      "ID": 854,
+      "ID": 8357,
       "Name": "JesaSang",
       "ParentID": -1,
       "components": [
@@ -109,9 +109,9 @@
     },
     {
       "Active": true,
-      "ID": 855,
+      "ID": 8358,
       "Name": "baseFood",
-      "ParentID": 854,
+      "ParentID": 8357,
       "components": [
         {
           "properties": {
@@ -187,9 +187,9 @@
     },
     {
       "Active": false,
-      "ID": 856,
+      "ID": 8359,
       "Name": "Apple",
-      "ParentID": 854,
+      "ParentID": 8357,
       "components": [
         {
           "properties": {
@@ -265,9 +265,9 @@
     },
     {
       "Active": false,
-      "ID": 857,
+      "ID": 8360,
       "Name": "Pear",
-      "ParentID": 854,
+      "ParentID": 8357,
       "components": [
         {
           "properties": {
@@ -343,9 +343,9 @@
     },
     {
       "Active": false,
-      "ID": 858,
+      "ID": 8361,
       "Name": "Batter",
-      "ParentID": 854,
+      "ParentID": 8357,
       "components": [
         {
           "properties": {
@@ -421,9 +421,9 @@
     },
     {
       "Active": false,
-      "ID": 859,
+      "ID": 8362,
       "Name": "Tofu",
-      "ParentID": 854,
+      "ParentID": 8357,
       "components": [
         {
           "properties": {
@@ -499,9 +499,9 @@
     },
     {
       "Active": false,
-      "ID": 860,
+      "ID": 8363,
       "Name": "Sanjeok",
-      "ParentID": 854,
+      "ParentID": 8357,
       "components": [
         {
           "properties": {
@@ -577,9 +577,9 @@
     },
     {
       "Active": false,
-      "ID": 861,
+      "ID": 8364,
       "Name": "Donggeurangttaeng",
-      "ParentID": 854,
+      "ParentID": 8357,
       "components": [
         {
           "properties": {
@@ -655,9 +655,9 @@
     },
     {
       "Active": true,
-      "ID": 882,
+      "ID": 8365,
       "Name": "Image_SensorOn_Jesasang",
-      "ParentID": 854,
+      "ParentID": 8357,
       "components": [
         {
           "properties": {
@@ -743,9 +743,9 @@
     },
     {
       "Active": true,
-      "ID": 883,
+      "ID": 8366,
       "Name": "Image_InteractionOn_Jesasang",
-      "ParentID": 854,
+      "ParentID": 8357,
       "components": [
         {
           "properties": {
@@ -831,9 +831,9 @@
     },
     {
       "Active": true,
-      "ID": 884,
+      "ID": 8367,
       "Name": "Image_InteractionGauge_Jesasang",
-      "ParentID": 854,
+      "ParentID": 8357,
       "components": [
         {
           "properties": {
@@ -900,7 +900,7 @@
             ],
             "drawSpacetype": "World",
             "fillAmount": 0.0,
-            "imageType": "FillHorizontal",
+            "imageType": "FillVertical",
             "isBillboard": false,
             "isMouseCheck": false,
             "path": "..\\Assets\\Resource\\UI\\Interaction\\F_02.png",
@@ -910,7 +910,7 @@
               0.0,
               0.0
             ],
-            "type": "FillHorizontal",
+            "type": "FillVertical",
             "zOrder": 2
           },
           "type": "Image"

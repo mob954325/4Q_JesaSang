@@ -2,7 +2,7 @@
   "prefab": [
     {
       "Active": true,
-      "ID": 812,
+      "ID": 8368,
       "Name": "CookingZone",
       "ParentID": -1,
       "components": [
@@ -59,9 +59,9 @@
     },
     {
       "Active": true,
-      "ID": 888,
+      "ID": 8369,
       "Name": "Image_SensorOn_Cook",
-      "ParentID": 812,
+      "ParentID": 8368,
       "components": [
         {
           "properties": {
@@ -139,7 +139,7 @@
               0.0
             ],
             "type": "Simple",
-            "zOrder": 0
+            "zOrder": -3
           },
           "type": "Image"
         }
@@ -147,9 +147,9 @@
     },
     {
       "Active": true,
-      "ID": 889,
+      "ID": 8370,
       "Name": "Image_InteractionOn_Cook",
-      "ParentID": 812,
+      "ParentID": 8368,
       "components": [
         {
           "properties": {
@@ -227,7 +227,7 @@
               0.0
             ],
             "type": "Simple",
-            "zOrder": 1
+            "zOrder": -2
           },
           "type": "Image"
         }
@@ -235,9 +235,9 @@
     },
     {
       "Active": true,
-      "ID": 890,
+      "ID": 8371,
       "Name": "Image_InteractionGauge_Cook",
-      "ParentID": 812,
+      "ParentID": 8368,
       "components": [
         {
           "properties": {
@@ -304,7 +304,7 @@
             ],
             "drawSpacetype": "World",
             "fillAmount": 0.0,
-            "imageType": "FillHorizontal",
+            "imageType": "FillVertical",
             "isBillboard": false,
             "isMouseCheck": false,
             "path": "..\\Assets\\Resource\\UI\\Interaction\\F_02.png",
@@ -314,8 +314,8 @@
               0.0,
               0.0
             ],
-            "type": "FillHorizontal",
-            "zOrder": 2
+            "type": "FillVertical",
+            "zOrder": -1
           },
           "type": "Image"
         }

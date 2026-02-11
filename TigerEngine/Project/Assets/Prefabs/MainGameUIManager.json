@@ -2,7 +2,7 @@
   "prefab": [
     {
       "Active": true,
-      "ID": 801,
+      "ID": 8457,
       "Name": "MainGameUIManager",
       "ParentID": -1,
       "components": [
@@ -28,15 +28,11 @@
         },
         {
           "properties": {
-            "Active": true
+            "Active": true,
+            "lifeOffImagePath": "..\\Assets\\Resource\\UI\\Player\\strength_0.png",
+            "lifeOnImagePath": "..\\Assets\\Resource\\UI\\Player\\strength.png"
           },
           "type": "MainGameUIManager"
-        },
-        {
-          "properties": {
-            "Active": true
-          },
-          "type": "PauseManager"
         }
       ]
     }
