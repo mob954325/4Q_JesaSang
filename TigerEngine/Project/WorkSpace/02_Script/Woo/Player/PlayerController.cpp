@@ -244,18 +244,17 @@ void PlayerController::LoadAnimation()
 
 
     // Effect Animatinon
-    // TODO :: Bone연결되면 주석 해제
-    //FBXResourceManager::Instance().LoadAnimationByPath(hitEffect->GetOwner()->GetComponent<FBXData>()->GetFBXInfo(), 
-    //    "..\\Assets\\Resource\\Effect\\ani_confused_mark.fbx", "HitEffect");
-    //auto effectHitClip = hitEffect->FindClip("HitEffect");
-    //hitEffect->AddState(std::make_unique<AnimationState>("HitEffect", effectHitClip, hitEffect));
-    //hitEffect->ChangeState("HitEffect");
-    //
-    //if (!effectHitClip)
-    //{
-    //    cout << "[Player Effect Animation] Clip not found!\n" << endl;
-    //    return;
-    //}
+    FBXResourceManager::Instance().LoadAnimationByPath(hitEffect->GetOwner()->GetComponent<FBXData>()->GetFBXInfo(), 
+        "..\\Assets\\Resource\\Effect\\ani_confused_mark.fbx", "HitEffect");
+    auto effectHitClip = hitEffect->FindClip("HitEffect");
+    hitEffect->AddState(std::make_unique<AnimationState>("HitEffect", effectHitClip, hitEffect));
+    hitEffect->ChangeState("HitEffect");
+    
+    if (!effectHitClip)
+    {
+        cout << "[Player Effect Animation] Clip not found!\n" << endl;
+        return;
+    }
 }
 
 /*-------[ Init ]-------------------------------------*/

@@ -455,7 +455,7 @@ void AltarManager::UpdateDirectSequence(float dt)
 
         // 공간 오픈
         altarOffWall->SetActive(false);
-        altarOnWall->SetActive(false);
+        altarOnWall->SetActive(true);
 
         StartVignetteFade(0.0f, 1.0f, fadeInTime_2);
     }
