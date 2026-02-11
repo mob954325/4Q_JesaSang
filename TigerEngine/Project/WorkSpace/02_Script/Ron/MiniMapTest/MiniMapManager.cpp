@@ -240,7 +240,12 @@ static std::vector<int> ParseIndexList(const std::string& csv)
         try
         {
             int v = std::stoi(t);
-            if (v >= 0 && v <= 5)
+            // allow 1..6 (user-facing) or 0..5 (internal)
+            if (v >= 1 && v <= 6)
+            {
+                out.push_back(v - 1);
+            }
+            else if (v >= 0 && v <= 5)
             {
                 out.push_back(v);
             }
@@ -278,6 +283,15 @@ void MiniMapManager::OnStart()
         zone2IngredientIds = "Ingredient_Tofu";
         zone3IngredientIds = "Ingredient_Sanjeok";
         zone4IngredientIds = "Ingredient_Donggeurangttaeng";
+    }
+    if (zone0PingIndices.empty() &&
+        zone1PingIndices.empty() &&
+        zone2PingIndices.empty() &&
+        zone3PingIndices.empty() &&
+        zone4PingIndices.empty())
+    {
+        // default: piece index 3 -> ping 3,5 (user-facing 1-based indices)
+        zone3PingIndices = "3,5";
     }
 
     auto scene = SceneSystem::Instance().GetCurrentScene();
@@ -529,13 +543,15 @@ void MiniMapManager::OnUpdate(float delta)
             }
         }
 
-        if (!m_ItemPingRects[i] || !m_ItemActive[i]) continue;
-
-        if (useFixedItemPingPositions && m_HasFixedItemPingPos)
+        if (useFixedItemPingPositions && m_HasFixedItemPingPos && m_ItemPingRects[i])
         {
+            // keep fixed positions even when inactive
             m_ItemPingRects[i]->SetPos(m_ItemPingFixedPos[i]);
         }
-        else
+
+        if (!m_ItemPingRects[i] || !m_ItemActive[i]) continue;
+
+        if (!useFixedItemPingPositions || !m_HasFixedItemPingPos)
         {
             const Vector2 local = WorldToMiniMap(m_ItemWorldPos[i], worldMin, worldMax, mapSize);
             const Vector3 pingPos(basePos.x + local.x, basePos.y + local.y, basePos.z + kPingZOffset);
@@ -699,21 +715,22 @@ void MiniMapManager::ActivateIngredientsForZone(int zoneIndex)
     default: return;
     }
 
-    if (zonePingCsv && !zonePingCsv->empty())
-    {
-        const std::vector<int> indices = ParseIndexList(*zonePingCsv);
-        for (int idx : indices)
-        {
-            if (idx < 0 || idx > 5) continue;
-            m_ItemActive[idx] = true;
-            SetRectActive(m_ItemPingRects[idx], true);
-        }
-        m_ZoneActivated[zoneIndex] = true;
-        return;
-    }
+    const std::vector<int> indices = (zonePingCsv && !zonePingCsv->empty())
+        ? ParseIndexList(*zonePingCsv)
+        : std::vector<int>{};
 
     if (!zoneCsv || zoneCsv->empty())
     {
+        if (!indices.empty())
+        {
+            for (int idx : indices)
+            {
+                if (idx < 0 || idx > 5) continue;
+                m_ItemActive[idx] = true;
+                SetRectActive(m_ItemPingRects[idx], true);
+            }
+            m_ZoneActivated[zoneIndex] = true;
+        }
         return;
     }
 
@@ -741,20 +758,34 @@ void MiniMapManager::ActivateIngredientsForZone(int zoneIndex)
         if (!ContainsId(ids, search->itemID)) return;
         if (search->isSearched) return;
 
-        while (pingIndex <= 5 && m_ItemSearchObjects[pingIndex] != nullptr)
+        int targetIndex = -1;
+        if (!indices.empty())
         {
+            if (pingIndex >= static_cast<int>(indices.size())) return;
+            targetIndex = indices[pingIndex];
             pingIndex++;
         }
-        if (pingIndex > 5) return;
+        else
+        {
+            while (pingIndex <= 5 && m_ItemSearchObjects[pingIndex] != nullptr)
+            {
+                pingIndex++;
+            }
+            if (pingIndex > 5) return;
+            targetIndex = pingIndex;
+            pingIndex++;
+        }
+
+        if (targetIndex < 0 || targetIndex > 5) return;
+        if (m_ItemSearchObjects[targetIndex] != nullptr) return;
 
         auto* tr = obj->GetTransform();
         if (!tr) return;
 
         const Vector3 pos = tr->GetWorldPosition();
-        m_ItemSearchObjects[pingIndex] = search;
-        m_ItemWorldPos[pingIndex] = pos;
-        TriggerItemPing(pingIndex, pos);
-        pingIndex++;
+        m_ItemSearchObjects[targetIndex] = search;
+        m_ItemWorldPos[targetIndex] = pos;
+        TriggerItemPing(targetIndex, pos);
     });
 
     m_ZoneActivated[zoneIndex] = true;
