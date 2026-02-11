@@ -38,8 +38,8 @@ private:
 
     // [ data ]
     // offset
-    Vector3 quarterOffset = { 0, 240.0f, -200.0f };
-    Vector3 quarterEuler = { 50.0f, 0.0f, 0.0f };
+    Vector3 quarterOffset = { 0, 280.0f, -200.0f };
+    Vector3 quarterEuler = { 60.0f, 0.0f, 0.0f };
 
     Vector3 topOffset = { 0, 550.0f, -20.0f };
     Vector3 topEuler = { 82.0f, 0.0f, 0.0f };
