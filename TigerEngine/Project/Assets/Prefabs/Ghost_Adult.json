@@ -2,7 +2,7 @@
   "prefab": [
     {
       "Active": true,
-      "ID": 2281,
+      "ID": 1169,
       "Name": "Ghost_Adult",
       "ParentID": -1,
       "components": [
@@ -29,7 +29,7 @@
         {
           "properties": {
             "Active": true,
-            "DataPath": "..\\Assets\\Resource\\Animation\\Adult_Ghost\\ghost.fbx",
+            "DataPath": "..\\Assets\\Resource\\Animation\\Adult_Ghost\\ani_idle_ghost.fbx",
             "IsStatic": false
           },
           "type": "FBXData"
@@ -123,9 +123,9 @@
     },
     {
       "Active": true,
-      "ID": 2282,
+      "ID": 1170,
       "Name": "GhostInteractionZone",
-      "ParentID": 2281,
+      "ParentID": 1169,
       "components": [
         {
           "properties": {

@@ -11,6 +11,8 @@ void BabyGhost_Cry::Enter()
     caringAdult = nullptr; // 돌봐주는 유령 초기화
     adultArrived = false;
 
+    babyGhost->animController->ChangeState("Cry");
+
     // 이동 완전 정지
     babyGhost->agent->externalControl = true;
     babyGhost->agent->path.clear();

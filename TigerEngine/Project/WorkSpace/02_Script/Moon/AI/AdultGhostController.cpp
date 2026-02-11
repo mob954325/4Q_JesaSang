@@ -139,29 +139,26 @@ void AdultGhostController::LoadAnimation()
 {
     // 애니메이션 파일 로드
     FBXResourceManager::Instance().LoadAnimationByPath(fbxData->GetFBXInfo(), "..\\Assets\\Resource\\Animation\\Adult_Ghost\\ani_idle_ghost.fbx", "Idle");
-    FBXResourceManager::Instance().LoadAnimationByPath(fbxData->GetFBXInfo(), "..\\Assets\\Resource\\Animation\\Adult_Ghost\\ani_idle_ghost.fbx", "Move");
-    FBXResourceManager::Instance().LoadAnimationByPath(fbxData->GetFBXInfo(), "..\\Assets\\Resource\\Animation\\Adult_Ghost\\ani_idle_ghost.fbx", "Attack");
-    FBXResourceManager::Instance().LoadAnimationByPath(fbxData->GetFBXInfo(), "..\\Assets\\Resource\\Animation\\Adult_Ghost\\ani_idle_ghost.fbx", "AttackDelay");
+    FBXResourceManager::Instance().LoadAnimationByPath(fbxData->GetFBXInfo(), "..\\Assets\\Resource\\Animation\\Adult_Ghost\\ani_attack_ghost.fbx", "Attack", false);
+    FBXResourceManager::Instance().LoadAnimationByPath(fbxData->GetFBXInfo(), "..\\Assets\\Resource\\Animation\\Adult_Ghost\\ani_attackdelay_ghost.fbx", "AttackDelay", false);
 
     // 클립 생성
     auto idleClip = animController->FindClip("Idle");
-    auto moveClip = animController->FindClip("Move");
     auto attackClip = animController->FindClip("Attack");
     auto attackDelayClip = animController->FindClip("AttackDelay");
 
-    if (!idleClip || !moveClip || !attackClip || !attackDelayClip)
+    if (!idleClip || !attackClip || !attackDelayClip)
     {
-        cout << "[Player Animation] Clip not found!\n" << endl;
+        cout << "[AdultGhostController] Clip not found!\n" << endl;
         return;
     }
     else
     {
-        cout << "[Player] Animation Load Success" << endl;
+        cout << "[AdultGhostController] Animation Load Success" << endl;
     }
 
     // 상태 등록
     animController->AddState(std::make_unique<AnimationState>("Idle", idleClip, animController));
-    animController->AddState(std::make_unique<AnimationState>("Move", moveClip, animController));
     animController->AddState(std::make_unique<AnimationState>("Attack", attackClip, animController));
     animController->AddState(std::make_unique<AnimationState>("AttackDelay", attackDelayClip, animController));
 }
