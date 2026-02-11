@@ -1,6 +1,8 @@
 #pragma once
 #include "Components/ScriptComponent.h"
-
+#include "Components/AnimationController.h"
+#include "Components/FBXRenderer.h"
+#include "Components/FBXData.h"
 
 class ITutorialStep;
 class TutorialStep_Step1;
@@ -33,6 +35,10 @@ private:
     ITutorialStep* currentStep = nullptr;
     ITutorialStep* fsmSteps[9];
 
+    // [ Player ]
+    AnimationController* Player_animController = nullptr;
+    FBXRenderer* Player_fbxRenderer = nullptr;
+    FBXData* Player_fbxData = nullptr;
 
 public:
     void OnStart() override;
@@ -40,6 +46,19 @@ public:
 
     void InitFSMSteps();
     void ChangeStep(TutorialStep next);
+
+
+    // [ Player ]
+    GameObject* player_Obj = nullptr;
+    void LoadPlayerAnimation();
+
+
+public:
+    void PlayAnim(const std::string& name, float blend = 0.2f)
+    {
+        if (!Player_animController) return;
+        Player_animController->ChangeState(name, blend);
+    }
 
 
 public:

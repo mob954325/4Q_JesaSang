@@ -5,6 +5,9 @@
 
 #include "System/InputSystem.h"
 
+#include "EngineSystem/SceneSystem.h"
+
+
 #include "Step/ITutorialStep.h"
 #include "Step/TutorialStep_Step1.h"
 #include "Step/TutorialStep_Step2.h"
@@ -44,6 +47,28 @@ void TutorialController::OnStart()
 {
     InitFSMSteps();
 
+    // -------------------------------------------------
+    // 플레이어 세팅
+    // -------------------------------------------------
+    player_Obj = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("Player_Tutorial");
+    Player_animController = player_Obj->GetComponent<AnimationController>();
+    Player_fbxRenderer = player_Obj->GetComponent<FBXRenderer>();
+    Player_fbxData = player_Obj->GetComponent<FBXData>();
+
+    if (!Player_animController || !Player_fbxRenderer || !Player_fbxData)
+    {
+        std::cout << "[TutorialController] Player_Tutorial Component Missing" << std::endl;
+        return;
+    }
+
+    LoadPlayerAnimation();
+
+
+
+
+    // -------------------------------------------------
+    // 튜토리얼 
+    // -------------------------------------------------
     ChangeStep(TutorialStep::Step1);
 }
 
@@ -64,7 +89,7 @@ void TutorialController::OnUpdate(float dt)
 
 
 // -----------------------------------------------------------
-// [ FSM ]
+// [ Tutorial FSM ]
 // -----------------------------------------------------------
 
 void TutorialController::InitFSMSteps()
@@ -103,6 +128,45 @@ void TutorialController::ChangeStep(TutorialStep next)
     state = next;
 
     if (currentStep) currentStep->Enter();
+}
+
+
+
+// -----------------------------------------------------------
+// [ 플레이어 ]
+// -----------------------------------------------------------
+
+void TutorialController::LoadPlayerAnimation()
+{
+    // 애니메이션 파일 로드
+    FBXResourceManager::Instance().LoadAnimationByPath(Player_fbxData->GetFBXInfo(), "..\\Assets\\Resource\\Animation\\FuckingAssimp\\ani_idle_character.fbx", "Idle");
+    FBXResourceManager::Instance().LoadAnimationByPath(Player_fbxData->GetFBXInfo(), "..\\Assets\\Resource\\Animation\\FuckingAssimp\\ani_walk_character.fbx", "Walk");
+    FBXResourceManager::Instance().LoadAnimationByPath(Player_fbxData->GetFBXInfo(), "..\\Assets\\Resource\\Animation\\FuckingAssimp\\ani_run_character.fbx", "Run");
+    FBXResourceManager::Instance().LoadAnimationByPath(Player_fbxData->GetFBXInfo(), "..\\Assets\\Resource\\Animation\\FuckingAssimp\\ani_sit_character.fbx", "Sit");
+    FBXResourceManager::Instance().LoadAnimationByPath(Player_fbxData->GetFBXInfo(), "..\\Assets\\Resource\\Animation\\FuckingAssimp\\ani_cry_character.fbx", "Hit");
+
+    // 클립 생성
+    auto idleClip = Player_animController->FindClip("Idle");
+    auto walkClip = Player_animController->FindClip("Walk");
+    auto runClip = Player_animController->FindClip("Run");
+    auto sitClip = Player_animController->FindClip("Sit");
+    auto hitClip = Player_animController->FindClip("Hit");
+
+    if (!idleClip || !walkClip || !runClip || !sitClip || !hitClip)
+    {
+        cout << "[Player Animation] Clip not found!\n" << endl;
+        return;
+    }
+
+    // 상태 등록
+    Player_animController->AddState(std::make_unique<AnimationState>("Idle", idleClip, Player_animController));
+    Player_animController->AddState(std::make_unique<AnimationState>("Walk", walkClip, Player_animController));
+    Player_animController->AddState(std::make_unique<AnimationState>("Run", runClip, Player_animController));
+    Player_animController->AddState(std::make_unique<AnimationState>("Sit", sitClip, Player_animController));
+    Player_animController->AddState(std::make_unique<AnimationState>("Hit", hitClip, Player_animController));
+
+    // 시작 상태
+    Player_animController->ChangeState("Idle");
 }
 
 
