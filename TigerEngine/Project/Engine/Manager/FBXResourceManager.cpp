@@ -5,55 +5,8 @@
 #include <assimp\postprocess.h>
 #include <DirectXTex.h>
 #include <algorithm>
-#include <atomic>
-#include <condition_variable>
-#include <mutex>
-#include <thread>
 #include <wincodec.h>
 #pragma comment(lib, "windowscodecs.lib")
-
-namespace
-{
-    class CountingSemaphore
-    {
-    public:
-        explicit CountingSemaphore(int count) : count_(count) {}
-
-        void Acquire()
-        {
-            std::unique_lock<std::mutex> lock(mutex_);
-            cv_.wait(lock, [&] { return count_ > 0; });
-            --count_;
-        }
-
-        void Release()
-        {
-            {
-                std::lock_guard<std::mutex> lock(mutex_);
-                ++count_;
-            }
-            cv_.notify_one();
-        }
-
-    private:
-        std::mutex mutex_;
-        std::condition_variable cv_;
-        int count_;
-    };
-
-    class SemaphoreGuard
-    {
-    public:
-        explicit SemaphoreGuard(CountingSemaphore& sem) : sem_(sem) { sem_.Acquire(); }
-        ~SemaphoreGuard() { sem_.Release(); }
-
-        SemaphoreGuard(const SemaphoreGuard&) = delete;
-        SemaphoreGuard& operator=(const SemaphoreGuard&) = delete;
-
-    private:
-        CountingSemaphore& sem_;
-    };
-}
 
 inline Matrix ToSimpleMathMatrix(const aiMatrix4x4& m)
 {
@@ -500,21 +453,18 @@ void FBXResourceManager::GetDevice(const ComPtr<ID3D11Device> &pDevice, const Co
 std::shared_ptr<FBXResourceAsset> FBXResourceManager::LoadFBXByPath(std::string path)
 {
 	// map에 먼저 있는지 확인
-	{
-		std::lock_guard<std::mutex> lock(assetsMutex);
-		auto it = assets.find(path);
+	auto it = assets.find(path);
 
-		if (it != assets.end()) // ?????
+	if (it != assets.end()) // 존재함
+	{
+		if (!it->second.expired())
 		{
-			if (!it->second.expired())
-			{
-				shared_ptr<FBXResourceAsset> assetPtr = it->second.lock();
-				return assetPtr;
-			}
-			else
-			{
-				assets.erase(it); // ????? ??? ?????
-			}
+			shared_ptr<FBXResourceAsset> assetPtr = it->second.lock();
+			return assetPtr;
+		}
+		else
+		{
+			assets.erase(it); // 지우고 새로 만들기
 		}
 	}
 
@@ -615,10 +565,7 @@ std::shared_ptr<FBXResourceAsset> FBXResourceManager::LoadFBXByPath(std::string 
 
 	// map에 저장하기
 	weak_ptr<FBXResourceAsset> weakAsset = sharedAsset;
-	{
-		std::lock_guard<std::mutex> lock(assetsMutex);
-		assets.insert({ path, weakAsset });
-	}
+	assets.insert({ path, weakAsset });
 
 	return sharedAsset;
 }
@@ -626,22 +573,19 @@ std::shared_ptr<FBXResourceAsset> FBXResourceManager::LoadFBXByPath(std::string 
 std::shared_ptr<FBXResourceAsset> FBXResourceManager::LoadStaticFBXByPath(std::string path)
 {
     // map에 먼저 있는지 확인
-    {
-    	std::lock_guard<std::mutex> lock(assetsMutex);
-    	auto it = assets.find(path);
+    auto it = assets.find(path);
 
-    	if (it != assets.end()) //
-    	{
-    		if (!it->second.expired())
-    		{
-    			shared_ptr<FBXResourceAsset> assetPtr = it->second.lock();
-    			return assetPtr;
-    		}
-    		else
-    		{
-    			assets.erase(it); // 
-    		}
-    	}
+    if (it != assets.end()) // 존재함
+    {
+        if (!it->second.expired())
+        {
+            shared_ptr<FBXResourceAsset> assetPtr = it->second.lock();
+            return assetPtr;
+        }
+        else
+        {
+            assets.erase(it); // 지우고 새로 만들기
+        }
     }
 
     // static mesh 불러오기
@@ -681,65 +625,6 @@ std::shared_ptr<FBXResourceAsset> FBXResourceManager::LoadStaticFBXByPath(std::s
     sharedAsset->boxCenter = (sharedAsset->boxMin + sharedAsset->boxMax) * 0.5f;
 
     return sharedAsset;
-}
-
-std::vector<std::shared_ptr<FBXResourceAsset>> FBXResourceManager::LoadFBXByPathMultiThread(const std::vector<std::string>& paths)
-{
-    if (paths.empty())
-        return {};
-
-    std::vector<std::shared_ptr<FBXResourceAsset>> results(paths.size());
-
-    // GPU 메모리 압박을 고려한 동적 설정
-    const unsigned int hc = std::thread::hardware_concurrency();
-    const size_t maxConcurrent = std::min(hc / 2, 4u);  // CPU 코어의 절반 또는 최대 4개
-    CountingSemaphore semaphore(maxConcurrent);
-
-    std::atomic<size_t> nextIndex{ 0 };
-    std::vector<std::thread> workers;
-    workers.reserve(maxConcurrent);
-
-    std::atomic<size_t> completed{ 0 };
-
-    for (size_t t = 0; t < maxConcurrent; ++t)
-    {
-        workers.emplace_back([&]() {
-            while (true) {
-                const size_t i = nextIndex.fetch_add(1, std::memory_order_relaxed);
-                if (i >= paths.size())
-                    return;
-
-                try {
-                    SemaphoreGuard guard(semaphore);
-                    results[i] = LoadFBXByPath(paths[i]);
-
-                    size_t done = completed.fetch_add(1, std::memory_order_relaxed) + 1;
-                    if (done % 10 == 0 || done == paths.size()) {
-                        std::cout << "[FBX Loading] " << done << " / " << paths.size() << "\n";
-                    }
-
-                }
-                catch (const std::exception& e) {
-                    std::cerr << "[ERROR] Failed to load FBX[" << i << "]: "
-                        << paths[i] << " - " << e.what() << "\n";
-                    results[i] = nullptr;  // 실패 명시
-                }
-                catch (...) {
-                    std::cerr << "[ERROR] Unknown error loading FBX[" << i << "]: "
-                        << paths[i] << "\n";
-                    results[i] = nullptr;
-                }
-            }
-            });
-    }
-
-    for (auto& th : workers)
-    {
-        if (th.joinable())
-            th.join();
-    }
-
-    return results;
 }
 
 
