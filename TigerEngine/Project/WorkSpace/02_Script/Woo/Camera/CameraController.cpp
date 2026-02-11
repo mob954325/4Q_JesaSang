@@ -5,6 +5,7 @@
 #include "Object/GameObject.h"
 #include "Components/Camera.h"
 #include "EngineSystem/SceneSystem.h"
+#include "EngineSystem/CameraSystem.h"
 
 
 REGISTER_COMPONENT(CameraController)
@@ -18,6 +19,10 @@ RTTR_REGISTRATION
 
 void CameraController::OnStart()
 {
+    // set name
+    GetOwner()->GetComponent<Camera>()->SetName(camName);
+    CameraSystem::Instance().SetCurrCameraByName(camName);
+
     // get components
     transform = GetOwner()->GetComponent<Transform>();
     targetTr = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("CameraTrackingPoint")->GetComponent<Transform>();

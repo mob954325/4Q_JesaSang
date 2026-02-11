@@ -38,18 +38,7 @@ void EffectPass::Execute(ComPtr<ID3D11DeviceContext>& context, RenderQueue& queu
     if (!cam) return;
 
     auto& sm = ShaderManager::Instance();
-
-    // Update (Effect component doesn't receive OnUpdate)
     auto effects = EffectSystem::Instance().GetComponents();
-    for (Effect* fx : effects)
-    {
-        if (!fx) continue;
-        if (!fx->transform)
-            fx->OnInitialize();
-        if (!fx->transform)
-            continue;
-        fx->Update();
-    }
 
     // Sort (Back-to-Front)
     vector<FxSortItem> sortedFx;
