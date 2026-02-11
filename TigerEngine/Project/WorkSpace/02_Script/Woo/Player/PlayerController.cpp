@@ -459,7 +459,7 @@ void PlayerController::CookingInteraction(float dt)
     // 최초 인터랙션 기믹 설명
     if(!isExplainedCookingZone)
     {
-        dialogueController->ShowInteractionHintAndPause(L"this zone is cooking!");
+        dialogueController->ShowInteractionHintAndPause(L"여기서 음식을 만들 수 있겠어. 망치지 않게 집중해야지!");
         isExplainedCookingZone = true;
     }
 
@@ -550,9 +550,9 @@ void PlayerController::GetItemAltarInteraction(float dt)
 
         // Dialogue
         if (item->itemType == ItemType::Ingredient)
-            dialogueController->ShowDialogueText(L"Ingredient ReGet! Cook gogo!");
+            dialogueController->ShowDialogueText(L"재료를 되찾았어. 어서 요리를 하러 가야겠어");
         if (item->itemType == ItemType::Food)
-            dialogueController->ShowDialogueText(L"Good ReGet! Jesasang gogo!");
+            dialogueController->ShowDialogueText(L"완성된 음식을 무사히 되찾았어. 제사상으로 가져가자.");
 
         visualizer->VisualOnItem(item->itemId);
         inventory->AddItem(std::move(item));
