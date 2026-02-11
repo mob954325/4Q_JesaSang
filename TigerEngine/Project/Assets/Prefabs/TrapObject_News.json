@@ -1,0 +1,781 @@
+{
+  "prefab": [
+    {
+      "Active": true,
+      "ID": 12324,
+      "Name": "TrapObjects",
+      "ParentID": -1,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              -0.0,
+              0.0,
+              -0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 12692,
+      "Name": "TrapObject_Decal",
+      "ParentID": 12324,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              -1348.5723876953125,
+              1.1028728485107422,
+              316.5298767089844
+            ],
+            "Rotation": [
+              -0.0,
+              1.570796012878418,
+              -0.0
+            ],
+            "Scale": [
+              4.999997138977051,
+              1.0,
+              4.999997138977051
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "DecalType": "TextureMap",
+            "IsGroundDecal": true,
+            "Offset": [
+              0.0,
+              0.0
+            ],
+            "Opacity": 1.0,
+            "TexturePath": "..\\Assets\\Resource\\Decals\\decal.png",
+            "Tiling": [
+              1.0,
+              1.0
+            ],
+            "UpThreshold": 0.8999999761581421,
+            "ringColor": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "ringDuration": 5.0,
+            "ringFeather": 0.30000001192092896,
+            "ringSpeed": 1.5,
+            "ringThickness": 0.029999999329447746
+          },
+          "type": "Decal"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "ColliderType": "Box",
+            "PhysicsBodyType": "Static",
+            "density": 10.0,
+            "halfExtents": [
+              50.0,
+              100.0,
+              50.0
+            ],
+            "height": 10.0,
+            "isTrigger": true,
+            "layer": "Default",
+            "localOffset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "radius": 50.0
+          },
+          "type": "PhysicsComponent"
+        },
+        {
+          "properties": {
+            "Active": true
+          },
+          "type": "TrapObject"
+        }
+      ]
+    },
+    {
+      "Active": false,
+      "ID": 12693,
+      "Name": "RingEffect",
+      "ParentID": 12692,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              4.0,
+              3.0,
+              4.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "DecalType": "RingEffect",
+            "IsGroundDecal": true,
+            "Offset": [
+              0.0,
+              0.0
+            ],
+            "Opacity": 1.0,
+            "TexturePath": "",
+            "Tiling": [
+              1.0,
+              1.0
+            ],
+            "UpThreshold": 0.8999999761581421,
+            "ringColor": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "ringDuration": 10.0,
+            "ringFeather": 0.009999999776482582,
+            "ringSpeed": 0.44999998807907104,
+            "ringThickness": 0.004999999888241291
+          },
+          "type": "Decal"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 12768,
+      "Name": "TrapObject_Decal",
+      "ParentID": 12324,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              -216.88946533203125,
+              1.1028728485107422,
+              -1338.84033203125
+            ],
+            "Rotation": [
+              -0.0,
+              0.0,
+              -0.0
+            ],
+            "Scale": [
+              4.999997138977051,
+              1.0,
+              4.999997138977051
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "DecalType": "TextureMap",
+            "IsGroundDecal": true,
+            "Offset": [
+              0.0,
+              0.0
+            ],
+            "Opacity": 1.0,
+            "TexturePath": "..\\Assets\\Resource\\Decals\\decal01.png",
+            "Tiling": [
+              1.0,
+              1.0
+            ],
+            "UpThreshold": 0.8999999761581421,
+            "ringColor": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "ringDuration": 5.0,
+            "ringFeather": 0.30000001192092896,
+            "ringSpeed": 1.5,
+            "ringThickness": 0.029999999329447746
+          },
+          "type": "Decal"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "ColliderType": "Box",
+            "PhysicsBodyType": "Static",
+            "density": 10.0,
+            "halfExtents": [
+              50.0,
+              100.0,
+              50.0
+            ],
+            "height": 10.0,
+            "isTrigger": true,
+            "layer": "Default",
+            "localOffset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "radius": 50.0
+          },
+          "type": "PhysicsComponent"
+        },
+        {
+          "properties": {
+            "Active": true
+          },
+          "type": "TrapObject"
+        }
+      ]
+    },
+    {
+      "Active": false,
+      "ID": 12769,
+      "Name": "RingEffect",
+      "ParentID": 12768,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              4.0,
+              3.0,
+              4.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "DecalType": "RingEffect",
+            "IsGroundDecal": true,
+            "Offset": [
+              0.0,
+              0.0
+            ],
+            "Opacity": 1.0,
+            "TexturePath": "",
+            "Tiling": [
+              1.0,
+              1.0
+            ],
+            "UpThreshold": 0.8999999761581421,
+            "ringColor": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "ringDuration": 10.0,
+            "ringFeather": 0.009999999776482582,
+            "ringSpeed": 0.44999998807907104,
+            "ringThickness": 0.004999999888241291
+          },
+          "type": "Decal"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 12845,
+      "Name": "TrapObject_Table",
+      "ParentID": 12324,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              -1349.2900390625,
+              0.0,
+              -1686.2821044921875
+            ],
+            "Rotation": [
+              -0.0,
+              0.0,
+              -0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "DataPath": "..\\Assets\\Resource\\ArtModel\\ola_table\\old_teble.fbx",
+            "IsStatic": false
+          },
+          "type": "FBXData"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Alpha": 1.0,
+            "Diffuse": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "DiffuseOverride": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "Emissive": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "EmissiveOverride": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "IsGround": false,
+            "Metalic": 1.0,
+            "MetallicOverride": 1.0,
+            "RenderBlendType": "Opaque",
+            "Roughness": 1.0,
+            "RoughnessOverride": 1.0,
+            "UseDiffuseOverride": false,
+            "UseEmissiveOverride": false,
+            "UseMetallicOverride": false,
+            "UseRoughnessOverride": false,
+            "isroughnessFromShininess": false
+          },
+          "type": "FBXRenderer"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "ColliderType": "Box",
+            "PhysicsBodyType": "Static",
+            "density": 10.0,
+            "halfExtents": [
+              80.0,
+              50.0,
+              80.0
+            ],
+            "height": 10.0,
+            "isTrigger": true,
+            "layer": "Default",
+            "localOffset": [
+              150.0,
+              30.0,
+              0.0
+            ],
+            "radius": 50.0
+          },
+          "type": "PhysicsComponent"
+        },
+        {
+          "properties": {
+            "Active": true
+          },
+          "type": "TrapObject"
+        }
+      ]
+    },
+    {
+      "Active": false,
+      "ID": 12846,
+      "Name": "RingEffect",
+      "ParentID": 12845,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              157.10687255859375,
+              0.0,
+              39.821685791015625
+            ],
+            "Rotation": [
+              -0.0,
+              0.0,
+              -0.0
+            ],
+            "Scale": [
+              20.0,
+              5.0,
+              20.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "DecalType": "RingEffect",
+            "IsGroundDecal": true,
+            "Offset": [
+              0.0,
+              0.0
+            ],
+            "Opacity": 1.0,
+            "TexturePath": "",
+            "Tiling": [
+              1.0,
+              1.0
+            ],
+            "UpThreshold": 0.8999999761581421,
+            "ringColor": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "ringDuration": 10.0,
+            "ringFeather": 0.009999999776482582,
+            "ringSpeed": 0.44999998807907104,
+            "ringThickness": 0.004999999888241291
+          },
+          "type": "Decal"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 13135,
+      "Name": "TrapObject_Decal",
+      "ParentID": 12324,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              1288.236328125,
+              1.1028728485107422,
+              -562.6707763671875
+            ],
+            "Rotation": [
+              -0.0,
+              0.0,
+              -0.0
+            ],
+            "Scale": [
+              4.999997138977051,
+              1.0,
+              4.999997138977051
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "DecalType": "TextureMap",
+            "IsGroundDecal": true,
+            "Offset": [
+              0.0,
+              0.0
+            ],
+            "Opacity": 1.0,
+            "TexturePath": "..\\Assets\\Resource\\Decals\\decal01.png",
+            "Tiling": [
+              1.0,
+              1.0
+            ],
+            "UpThreshold": 0.8999999761581421,
+            "ringColor": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "ringDuration": 5.0,
+            "ringFeather": 0.30000001192092896,
+            "ringSpeed": 1.5,
+            "ringThickness": 0.029999999329447746
+          },
+          "type": "Decal"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "ColliderType": "Box",
+            "PhysicsBodyType": "Static",
+            "density": 10.0,
+            "halfExtents": [
+              50.0,
+              100.0,
+              50.0
+            ],
+            "height": 10.0,
+            "isTrigger": true,
+            "layer": "Default",
+            "localOffset": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "radius": 50.0
+          },
+          "type": "PhysicsComponent"
+        },
+        {
+          "properties": {
+            "Active": true
+          },
+          "type": "TrapObject"
+        }
+      ]
+    },
+    {
+      "Active": false,
+      "ID": 13136,
+      "Name": "RingEffect",
+      "ParentID": 13135,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              4.0,
+              3.0,
+              4.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "DecalType": "RingEffect",
+            "IsGroundDecal": true,
+            "Offset": [
+              0.0,
+              0.0
+            ],
+            "Opacity": 1.0,
+            "TexturePath": "",
+            "Tiling": [
+              1.0,
+              1.0
+            ],
+            "UpThreshold": 0.8999999761581421,
+            "ringColor": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "ringDuration": 10.0,
+            "ringFeather": 0.009999999776482582,
+            "ringSpeed": 0.44999998807907104,
+            "ringThickness": 0.004999999888241291
+          },
+          "type": "Decal"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 13223,
+      "Name": "TrapObject_Table",
+      "ParentID": 12324,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              637.486572265625,
+              0.0,
+              -1364.5634765625
+            ],
+            "Rotation": [
+              -0.0,
+              0.0,
+              -0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "DataPath": "..\\Assets\\Resource\\ArtModel\\ola_table\\old_teble.fbx",
+            "IsStatic": false
+          },
+          "type": "FBXData"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Alpha": 1.0,
+            "Diffuse": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "DiffuseOverride": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "Emissive": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "EmissiveOverride": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "IsGround": false,
+            "Metalic": 1.0,
+            "MetallicOverride": 1.0,
+            "RenderBlendType": "Opaque",
+            "Roughness": 1.0,
+            "RoughnessOverride": 1.0,
+            "UseDiffuseOverride": false,
+            "UseEmissiveOverride": false,
+            "UseMetallicOverride": false,
+            "UseRoughnessOverride": false,
+            "isroughnessFromShininess": false
+          },
+          "type": "FBXRenderer"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "ColliderType": "Box",
+            "PhysicsBodyType": "Static",
+            "density": 10.0,
+            "halfExtents": [
+              80.0,
+              50.0,
+              80.0
+            ],
+            "height": 10.0,
+            "isTrigger": true,
+            "layer": "Default",
+            "localOffset": [
+              150.0,
+              30.0,
+              0.0
+            ],
+            "radius": 50.0
+          },
+          "type": "PhysicsComponent"
+        },
+        {
+          "properties": {
+            "Active": true
+          },
+          "type": "TrapObject"
+        }
+      ]
+    },
+    {
+      "Active": false,
+      "ID": 13224,
+      "Name": "RingEffect",
+      "ParentID": 13223,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              157.10687255859375,
+              0.0,
+              39.821685791015625
+            ],
+            "Rotation": [
+              -0.0,
+              0.0,
+              -0.0
+            ],
+            "Scale": [
+              20.0,
+              5.0,
+              20.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "DecalType": "RingEffect",
+            "IsGroundDecal": true,
+            "Offset": [
+              0.0,
+              0.0
+            ],
+            "Opacity": 1.0,
+            "TexturePath": "",
+            "Tiling": [
+              1.0,
+              1.0
+            ],
+            "UpThreshold": 0.8999999761581421,
+            "ringColor": [
+              0.0,
+              0.0,
+              1.0
+            ],
+            "ringDuration": 10.0,
+            "ringFeather": 0.009999999776482582,
+            "ringSpeed": 0.44999998807907104,
+            "ringThickness": 0.004999999888241291
+          },
+          "type": "Decal"
+        }
+      ]
+    }
+  ]
+}

@@ -58,6 +58,15 @@ public:
     nlohmann::json Serialize();
     void Deserialize(nlohmann::json data);
 
+    // Singleton safety: no copy / move
+    MainGameUIManager() = default;
+    ~MainGameUIManager() override = default;
+
+    MainGameUIManager(const MainGameUIManager&) = delete;
+    MainGameUIManager& operator=(const MainGameUIManager&) = delete;
+    MainGameUIManager(MainGameUIManager&&) = delete;
+    MainGameUIManager& operator=(MainGameUIManager&&) = delete;
+
     // image path
     const std::string& GetPressImagePath() const;
     void SetPressImagePath(const std::string& path);
