@@ -1,16 +1,53 @@
 ﻿#pragma once
 #include "../../../Base/System/Singleton.h"
+#include "../../../Engine/Components/AudioSourceComponent.h"
+#include "../../../Engine/Components/ScriptComponent.h"
 #include <string>
+#include <queue>
 
 #include "Manager/AudioManager.h"
 
+enum class BGMType
+{
+    Main,
+    InGame_BG,
+    Minigmae_BG
+};
+
+enum class SFXType
+{
+    HiddenObj_Playerin_Sound,               //은신 옵젝 들어갈 때 소리
+    HiddenObj_Playerout_Sound,              //은신 옵젝 나올 때 소리
+    HiddenObj_Nointeraction_Sound,          //은신 옵젝 은신 불가능할 때 상호작용 시 사운드
+    FindObj_Interaction_1_Sound,            //수색 옵젝(조각보, 바구니) 수색 사운드
+    FindObj_Interaction_2_Sound,            //수색 옵젝(박스) 수색 사운드
+    FindObj_Acquiremap_Sound,               //수색 옵젝 지도 조각 확득 사운드
+    FindObj_Acquireitem_Sound,              //수색 옵젝 재료 아이템 획득 사운드
+    PitfallObj_Floor_Sound,                 //함정 오브젝트 (깨진 바닥) 사운드
+    PitfallObj_Table_Sound,                 //함정 오브젝트 (낡은 책상) 사운드
+    PitfallObj_SleepGhost_Sound,            //함정 오브젝트 (자는 애기 유령) 사운드
+    PitfallObj_SleepGhost_Wakeup_Sound,     //함정 오브젝트 (자는 애기 유령) 깨어나는 사운드
+    GoalObj_Sound                           //제사상에 음식 내려놓는 사운드
+};
+
 /// <summary>
 /// 클라이언트 사운드 관리 매니저
+/// 반드시 최소 2개의 AudioSourceComponent가 존재해야한다.
 /// </summary>
-class SoundManager : public Singleton<SoundManager>
+class SoundManager : public ScriptComponent
 {
 public:
-    SoundManager(token) {}
+    SoundManager() { SetName("SoundManager"); }
+    ~SoundManager() = default;
+
+    void OnInitialize() override;
+    void OnStart() override;
+
+    void PlayBGM(BGMType type, bool restart = true);
+    void StopBGM();
+    void PauseBGM(bool paused);
+
+    void PlaySFX(SFXType type); // 무조건 한 번
 
     /// <summary>
     /// 그룹(채널 그룹) 볼륨 설정. (예: BGM, SFX 등)
@@ -37,4 +74,12 @@ public:
     {
         return AudioManager::Instance().GetSystem().GetMasterVolume();
     }
+
+    AudioSourceComponent* bgmSource;                // NOTE : BGM은 1개만 실행된다.
+    std::vector<AudioSourceComponent*> sfxSources;  // 8개 생성하고 번갈아가면서 사용하기
+
+private:
+
+    std::string ToString(BGMType type);
+    std::string ToString(SFXType type);
 };
