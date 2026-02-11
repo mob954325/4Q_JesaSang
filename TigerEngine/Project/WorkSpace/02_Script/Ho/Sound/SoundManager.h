@@ -36,10 +36,8 @@ enum class SFXType
 /// </summary>
 class SoundManager : public ScriptComponent
 {
+    RTTR_ENABLE(ScriptComponent)
 public:
-    SoundManager() { SetName("SoundManager"); }
-    ~SoundManager() = default;
-
     void OnInitialize() override;
     void OnStart() override;
 
@@ -48,6 +46,9 @@ public:
     void PauseBGM(bool paused);
 
     void PlaySFX(SFXType type); // 무조건 한 번
+
+    nlohmann::json Serialize() override;
+    void Deserialize(nlohmann::json data) override;
 
     /// <summary>
     /// 그룹(채널 그룹) 볼륨 설정. (예: BGM, SFX 등)
