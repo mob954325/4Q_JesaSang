@@ -72,6 +72,8 @@ void AltarManager::OnStart()
 
     // gameobject find
     altar = sceneSystem->GetGameObjectByName("Altar");
+    altarOffWall = sceneSystem->GetGameObjectByName("AltarOffWall");
+    altarOnWall = sceneSystem->GetGameObjectByName("AltarOnWall");
 
     ingre_apple = sceneSystem->GetGameObjectByName("Alta_Ingre_Apple");
     ingre_pear = sceneSystem->GetGameObjectByName("Alta_Ingre_Pear");
@@ -87,7 +89,7 @@ void AltarManager::OnStart()
     food_sanjeok = sceneSystem->GetGameObjectByName("Alta_Sanjeok");
     food_dong = sceneSystem->GetGameObjectByName("Alta_Donggeurangttaeng");
 
-    if (!altar)
+    if (!altar || !altarOffWall || !altarOnWall)
     {
         cout << "[AltarManager] Missing Altar GameObject!" << endl;
         return;
@@ -350,7 +352,7 @@ void AltarManager::BeginDirectSequence(std::string itemId)
 void AltarManager::UpdateDirectSequence(float dt)
 {
     auto& renderDesc = WorldManager::Instance().postProcessData;
-    (void)renderDesc; // 아직 페이드 연출은 미구현 (나중에 여기서 값 조절)
+    (void)renderDesc;
 
     phaseTimer += dt;
 
@@ -450,6 +452,10 @@ void AltarManager::UpdateDirectSequence(float dt)
 
         phaseTimer = 0.0f;
         directPhase = DirectPhase::FadeIn_2;
+
+        // 공간 오픈
+        altarOffWall->SetActive(false);
+        altarOnWall->SetActive(false);
 
         StartVignetteFade(0.0f, 1.0f, fadeInTime_2);
     }

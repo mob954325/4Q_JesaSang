@@ -59,8 +59,10 @@ private:
 
 private:
     // 제단 최초 활성화 연출
-    GameObject* altar = nullptr;       // 활성화/비활성화할 제단 덩어리 부모 게임오브젝트
-    bool isFirstReceiveItem = false;   // 최초 트리거
+    GameObject* altar = nullptr;           // 활성화/비활성화할 제단 덩어리 부모 게임오브젝트
+    GameObject* altarOffWall = nullptr;    // 제단 활성화 전 벽
+    GameObject* altarOnWall = nullptr;     // 제단 활성화 이후 벽
+    bool isFirstReceiveItem = false;       // 최초 트리거
    
     Transform* altarDirectCam = nullptr;          // 연출 카메라
     std::string camName = "AltarDirectCamera";    // 연출 카메라 이름
