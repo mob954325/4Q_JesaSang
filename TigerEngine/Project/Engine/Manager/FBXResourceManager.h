@@ -2,6 +2,8 @@
 #include <map>
 #include <string>
 #include <memory>
+#include <mutex>
+#include <vector>
 
 #include "directxtk/WICTextureLoader.h"
 #include "Datas/SkeletonInfo.h"
@@ -15,6 +17,7 @@ class FBXResourceManager : public Singleton<FBXResourceManager>
 	// 해당 매니저에서 fbx를 읽는다.
 	// 이미 읽은 fbx는 map에 저장된다.
 	std::map<std::string, std::weak_ptr<FBXResourceAsset>> assets;
+	std::mutex assetsMutex;
 
 	// texture 불러오기 위한 device, deviceContext
 	ComPtr<ID3D11Device> device = nullptr;
@@ -57,6 +60,11 @@ public:
     /// </summary>
     /// <param name="path">상대 경로</param>
     std::shared_ptr<FBXResourceAsset> LoadStaticFBXByPath(std::string path);
+
+    /// <summary>
+    /// 
+    /// </summary>
+    std::vector<std::shared_ptr<FBXResourceAsset>> LoadFBXByPathMultiThread(const std::vector<std::string>& paths);
 
 
     /// <summary>
