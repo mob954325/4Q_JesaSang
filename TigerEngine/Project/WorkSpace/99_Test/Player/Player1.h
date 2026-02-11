@@ -4,6 +4,7 @@
 #include "Weapon.h"
 #include "../Engine/Components/AudioSourceComponent.h"
 #include "../../02_Script/Ho/Sound/PlayerSoundSource.h"
+#include "../../02_Script/Ho/Sound/SoundManager.h"
 
 /// <summary>
 /// 클라이언트 컴포넌트 테스트용 클래스.
@@ -34,8 +35,11 @@ private:
     PlayerSoundSource* pss;
     AudioListenerComponent* alc;
     Vector3 prevPos{};
-    bool hasPrev = false;
+    bool hasPrev = false;    
 
     void UpdateAudioTransform(float dt);
+
+
+    SoundManager* soundManager;
 };
 

@@ -59,6 +59,8 @@ void Player1::OnStart()
     // instantiated->GetTransform()->SetParent(this->GetOwner()->GetTransform());
     pss = GetOwner()->GetComponent<PlayerSoundSource>();
     alc = GetOwner()->GetComponent<AudioListenerComponent>();
+
+    soundManager = SceneUtil::GetObjectByName("SoundManager")->GetComponent<SoundManager>();
 }
 
 void Player1::OnDisable()
@@ -119,32 +121,42 @@ void Player1::OnUpdate(float delta)
         pss->PlaySound(PlayerSoundType::Run);
     }
 
-    if (Input::GetKeyDown(DirectX::Keyboard::L))
-    {
-        auto curr = SoundManager::Instance().GetGroupSoundVolume("BGM");
-        SoundManager::Instance().SetGroupSoundVolume("BGM", curr - 0.1f );
+   if (Input::GetKeyDown(DirectX::Keyboard::J))
+   {
+       auto curr = soundManager->GetGroupSoundVolume("BGM");
+       soundManager->SetGroupSoundVolume("BGM", curr - 0.1f );
+   
+       if(curr <= 0) 
+           soundManager->SetGroupSoundVolume("BGM", 1.0f );
+   }
+   
+   if (Input::GetKeyDown(DirectX::Keyboard::K))
+   {
+       auto curr = soundManager->GetGroupSoundVolume("SFX");
+       soundManager->SetGroupSoundVolume("SFX", curr - 0.1f);
 
-        if(curr <= 0) 
-            SoundManager::Instance().SetGroupSoundVolume("BGM", 1.0f );
-    }
+       if (curr <= 0)
+           soundManager->SetGroupSoundVolume("SFX", 1.0f);
+   }
 
-    if (Input::GetKeyDown(DirectX::Keyboard::K))
-    {
-        auto curr = SoundManager::Instance().GetGroupSoundVolume("SFX");
-        SoundManager::Instance().SetGroupSoundVolume("SFX", curr - 0.1f);
+   if (Input::GetKeyDown(DirectX::Keyboard::L))
+   {
+       auto curr = soundManager->GetMasterVolume();
+       soundManager->SetMasterVolume(curr - 0.1f);
 
-        if (curr <= 0)
-            SoundManager::Instance().SetGroupSoundVolume("SFX", 1.0f);
-    }
+       if (curr <= 0)
+           soundManager->SetMasterVolume(1.0f);
+   }
 
-    if (Input::GetKeyDown(DirectX::Keyboard::G))
-    {
-        auto curr = SoundManager::Instance().GetMasterVolume();
-        SoundManager::Instance().SetMasterVolume(curr - 0.1f);
+   if (Input::GetKeyDown(DirectX::Keyboard::G))
+   {
+       soundManager->PlayBGM(BGMType::InGame_BG);
+   }
 
-        if (curr <= 0)
-            SoundManager::Instance().SetMasterVolume(1.0f);
-    }
+   if (Input::GetKeyDown(DirectX::Keyboard::H))
+   {
+       soundManager->PlaySFX(SFXType::HiddenObj_Playerin_Sound);
+   }
 
     UpdateAudioTransform(delta);
 }
