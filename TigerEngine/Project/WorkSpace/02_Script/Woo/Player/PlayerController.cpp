@@ -267,6 +267,18 @@ void PlayerController::InitStat()
 /*-------[ Input ]-------------------------------------*/
 void PlayerController::InputProcess()
 {
+    if (isInputLocked) // 선민 | 02.11 
+    {
+        isMoveLKey = false;
+        isMoveRKey = false;
+        isMoveFKey = false;
+        isMoveBKey = false;
+        isSitKey = false;
+        isRunKey = false;
+        isInteractionKey = false;
+        return;
+    }
+
     // key
     isMoveLKey = Input::GetKey(moveL_Key);
     isMoveRKey = Input::GetKey(moveR_Key);
@@ -280,6 +292,7 @@ void PlayerController::InputProcess()
 /*-------[ Movement ]----------------------------------*/
 void PlayerController::Move(float delta)
 {
+    if (isInputLocked) return; // 선민 | 02.11 
     if (!cct) return;
 
     // cct->m_MoveSpeed = curSpeed;
@@ -296,6 +309,7 @@ static float WrapAngleRad(float a)      // util
 
 void PlayerController::Rotation(float delta)
 {
+    if (isInputLocked) return; // 선민 | 02.11 
     if (lookDir.LengthSquared() <= 0.0001f)
         return;
 
