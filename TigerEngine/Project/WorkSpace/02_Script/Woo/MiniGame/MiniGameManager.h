@@ -79,6 +79,15 @@ public:
     nlohmann::json Serialize();
     void Deserialize(nlohmann::json data);
 
+    // Singleton safety: no copy / move
+    MiniGameManager() = default;
+    ~MiniGameManager() override = default;
+
+    MiniGameManager(const MiniGameManager&) = delete;
+    MiniGameManager& operator=(const MiniGameManager&) = delete;
+    MiniGameManager(MiniGameManager&&) = delete;
+    MiniGameManager& operator=(MiniGameManager&&) = delete;
+
 private:
     // funcs..
     // start/end

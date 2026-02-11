@@ -1,10 +1,7 @@
 #pragma once
-// #include "../TutorialController.h"
+#include "../TutorialController.h"
 #include "../../../Engine/Object/GameObject.h"
 #include "../../../Engine/Object/Component.h"
-
-
-class TutorialController;
 
 class ITutorialStep
 {

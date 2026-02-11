@@ -2,9 +2,9 @@
   "prefab": [
     {
       "Active": true,
-      "ID": 18445,
+      "ID": 7497,
       "Name": "HideObject",
-      "ParentID": 18360,
+      "ParentID": 7412,
       "components": [
         {
           "properties": {
@@ -109,9 +109,9 @@
     },
     {
       "Active": false,
-      "ID": 18446,
+      "ID": 7498,
       "Name": "Image_SensorOn",
-      "ParentID": 18445,
+      "ParentID": 7497,
       "components": [
         {
           "properties": {
@@ -197,9 +197,9 @@
     },
     {
       "Active": false,
-      "ID": 18447,
+      "ID": 7499,
       "Name": "Image_InteractionOn",
-      "ParentID": 18445,
+      "ParentID": 7497,
       "components": [
         {
           "properties": {
@@ -285,9 +285,9 @@
     },
     {
       "Active": false,
-      "ID": 18448,
+      "ID": 7500,
       "Name": "Image_InteractionGauge",
-      "ParentID": 18445,
+      "ParentID": 7497,
       "components": [
         {
           "properties": {
@@ -354,7 +354,7 @@
             ],
             "drawSpacetype": "World",
             "fillAmount": 0.0,
-            "imageType": "FillHorizontal",
+            "imageType": "FillVertical",
             "isBillboard": false,
             "isMouseCheck": false,
             "path": "..\\Assets\\Resource\\UI\\Interaction\\F_02.png",
@@ -364,7 +364,7 @@
               0.0,
               0.0
             ],
-            "type": "FillHorizontal",
+            "type": "FillVertical",
             "zOrder": 2
           },
           "type": "Image"

@@ -1,6 +1,9 @@
 #pragma once
 #include "Components/ScriptComponent.h"
-
+#include "Components/AnimationController.h"
+#include "Components/FBXRenderer.h"
+#include "Components/FBXData.h"
+#include "../../Woo/Player/DialogueUI/DialogueUIController.h"
 
 class ITutorialStep;
 class TutorialStep_Step1;
@@ -33,6 +36,21 @@ private:
     ITutorialStep* currentStep = nullptr;
     ITutorialStep* fsmSteps[9];
 
+    //// [ Player ]
+    //AnimationController* Player_animController = nullptr;
+    //FBXRenderer* Player_fbxRenderer = nullptr;
+    //FBXData* Player_fbxData = nullptr;
+
+    // [ Baby Ghost ]
+    AnimationController* BabyGhost_animController = nullptr;
+    FBXRenderer* BabyGhost_fbxRenderer = nullptr;
+    FBXData* BabyGhost_fbxData = nullptr;
+
+    // [ Adult Ghost ]
+    AnimationController* AdultGhost_animController = nullptr;
+    FBXRenderer* AdultGhost_fbxRenderer = nullptr;
+    FBXData* AdultGhost_fbxData = nullptr;
+
 
 public:
     void OnStart() override;
@@ -40,6 +58,26 @@ public:
 
     void InitFSMSteps();
     void ChangeStep(TutorialStep next);
+
+    // [ Tutorial ]
+    GameObject* Blink_Top = nullptr;
+    GameObject* Blink_Bottom = nullptr;
+    DialogueUIController* dialogue = nullptr;
+
+    // [ Player ]
+    GameObject* player_Obj = nullptr;
+    //void LoadPlayerAnimation();
+    Vector3 InitPlayerPosition = {};
+
+    // [ Baby Ghost ]
+    GameObject* babyGhost_Obj = nullptr;
+    void LoadBabyGhostAnimation();
+
+    // [ Adult Ghost ]
+    GameObject* adultGhost_Obj = nullptr;
+    void LoadAdultGhostAnimation();
+    Vector3 InitAdultPosition = {};
+
 
 
 public:

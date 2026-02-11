@@ -2,7 +2,7 @@
   "prefab": [
     {
       "Active": true,
-      "ID": 3141,
+      "ID": 2043,
       "Name": "Player_Tutorial",
       "ParentID": -1,
       "components": [
@@ -97,12 +97,6 @@
           "properties": {
             "Active": true
           },
-          "type": "PlayerController"
-        },
-        {
-          "properties": {
-            "Active": true
-          },
           "type": "AnimationController"
         },
         {
@@ -115,9 +109,9 @@
     },
     {
       "Active": true,
-      "ID": 3142,
+      "ID": 2044,
       "Name": "CameraTrackingPoint",
-      "ParentID": 3141,
+      "ParentID": 2043,
       "components": [
         {
           "properties": {
@@ -143,9 +137,9 @@
     },
     {
       "Active": true,
-      "ID": 3143,
+      "ID": 2045,
       "Name": "OcclusionFadePoint",
-      "ParentID": 3141,
+      "ParentID": 2043,
       "components": [
         {
           "properties": {
@@ -171,9 +165,9 @@
     },
     {
       "Active": true,
-      "ID": 3144,
+      "ID": 2046,
       "Name": "InteractionSensor",
-      "ParentID": 3141,
+      "ParentID": 2043,
       "components": [
         {
           "properties": {
@@ -228,9 +222,9 @@
     },
     {
       "Active": true,
-      "ID": 3145,
+      "ID": 2047,
       "Name": "InteractZone",
-      "ParentID": 3141,
+      "ParentID": 2043,
       "components": [
         {
           "properties": {
@@ -285,9 +279,9 @@
     },
     {
       "Active": true,
-      "ID": 3160,
+      "ID": 2048,
       "Name": "DialoguePoint",
-      "ParentID": 3141,
+      "ParentID": 2043,
       "components": [
         {
           "properties": {
@@ -313,9 +307,9 @@
     },
     {
       "Active": true,
-      "ID": 3161,
+      "ID": 2049,
       "Name": "Player_FireEffect",
-      "ParentID": 3141,
+      "ParentID": 2043,
       "components": [
         {
           "properties": {
@@ -436,9 +430,9 @@
     },
     {
       "Active": false,
-      "ID": 3162,
+      "ID": 2050,
       "Name": "Player_HitEffect",
-      "ParentID": 3141,
+      "ParentID": 2043,
       "components": [
         {
           "properties": {
