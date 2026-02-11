@@ -24,8 +24,10 @@ void TutorialStep_Step2::Update(float deltaTime)
 
         if (!soundPlayed)
         {
+            // TODO: 쿵 사운드 재생 
             std::cout << "[Step2] *BANG!* Sound from entrance!\n";
-            soundPlayed = true;   // 한 번만 실행
+            // TODO: 캐릭터 머리 위 놀람 오브젝트 활성화 
+            soundPlayed = true;   
         }
 
         if (step2Timer >= SoundDelay)

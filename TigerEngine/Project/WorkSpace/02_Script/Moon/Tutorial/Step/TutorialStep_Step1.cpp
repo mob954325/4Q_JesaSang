@@ -19,6 +19,8 @@ void TutorialStep_Step1::Enter()
 
     tutorialController->Blink_Top = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("Blink_Top"); // rectTransform 축 -700 
     tutorialController->Blink_Bottom = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("Blink_Bottom"); // rectTransform 축 700 
+    if (tutorialController->Blink_Top) tutorialController->Blink_Top->SetActive(true);
+    if (tutorialController->Blink_Bottom) tutorialController->Blink_Bottom->SetActive(true);
 
     auto player = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("Player_Tutorial");
     if (player)

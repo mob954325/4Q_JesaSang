@@ -76,14 +76,14 @@ void TutorialController::OnStart()
     // -------------------------------------------------
     // 아기 귀신 세팅
     // -------------------------------------------------
-    babyGhost_Obj = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("Ghost_Baby");
+    babyGhost_Obj = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("Ghost_Baby_Tutorial");
     BabyGhost_animController = babyGhost_Obj->GetComponent<AnimationController>();
     BabyGhost_fbxRenderer = babyGhost_Obj->GetComponent<FBXRenderer>();
     BabyGhost_fbxData = babyGhost_Obj->GetComponent<FBXData>();
 
     if (!BabyGhost_animController || !BabyGhost_fbxRenderer || !BabyGhost_fbxData)
     {
-        std::cout << "[TutorialController] Ghost_Baby Component Missing" << std::endl;
+        std::cout << "[TutorialController] Ghost_Baby_Tutorial Component Missing" << std::endl;
         return;
     }
 
