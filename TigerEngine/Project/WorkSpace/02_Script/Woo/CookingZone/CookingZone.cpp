@@ -2,8 +2,12 @@
 #include "Util/JsonHelper.h"
 #include "Util/ComponentAutoRegister.h"
 #include "EngineSystem/SceneSystem.h"
+#include "Components/Decal.h"
+#include "Components/Transform.h"
 #include "Object/GameObject.h"
 #include "Components/UI/Image.h"
+#include "System/TimeSystem.h"
+#include "../../Moon/AI/AdultGhostController.h"
 
 REGISTER_COMPONENT(CookingZone)
 
@@ -40,6 +44,11 @@ void CookingZone::OnStart()
         cout << "[CookingZone] Missing ui!" << endl;
         return;
     }
+
+    // effect find
+    ringEffect = this->GetOwner()->GetChildByName("RingEffect")->GetOwner()->GetComponent<Decal>();
+    if (!ringEffect)
+        cout << "[TrapObject] Missing Decal Component!" << endl;
 }
 
 void CookingZone::OnDestory()
@@ -74,4 +83,37 @@ void CookingZone::UIGaugeUpate(float progress)
 {
     if (!image_interactionGauge) return;
     image_interactionGauge->SetFillAmount(progress);
+}
+
+// 플레이어 미니게임 실패시 호출
+void CookingZone::StartTriggerWave()
+{
+    // 링 파동 이펙트
+    auto curTime = GameTimer::Instance().TotalTime();
+    ringEffect->StartRingEffect(curTime);
+
+    // AI
+    NotifyAIInRange();
+}
+
+void CookingZone::NotifyAIInRange()
+{
+    // 어른 유령 호출  // TODO :: 1마리만!!
+    auto adultGhosts = SceneSystem::Instance().GetCurrentScene()->GetGameObjectsByName("Ghost_Adult");
+    if (!adultGhosts.empty())
+    {
+        for (auto ag : adultGhosts)
+        {
+            Vector3 originPos = this->GetOwner()->GetTransform()->GetWorldPosition();
+            Vector3 targetPos = ag->GetTransform()->GetWorldPosition();
+
+            float dist = Vector3::Distance(originPos, targetPos);
+
+            // 파동 범위 안에 AI가 있다면 호출
+            if (dist <= radius)
+            {
+                ag->GetComponent<AdultGhostController>()->OnPlayerNoise(originPos);
+            }
+        }
+    }
 }

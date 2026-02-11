@@ -2,12 +2,15 @@
 #include "Components/ScriptComponent.h"
 
 class Image;
+class Decal;
 
 /*
     [ CookingZone Script Component ] <Singleton>
 
     Cooking Zone UI 인터랙션용으로 급하게 만듦
-
+    
+    오 추가 잘했다. 여기 기능 다른버전 함정 넣어야함
+    가장 가까운 성인유령 1명만 호출함!
 */
 
 
@@ -24,12 +27,16 @@ private:
     Image* image_interactionOn = nullptr;
     Image* image_interactionGauge = nullptr;
 
+    // ring effect
+    Decal* ringEffect = nullptr;;
+    float radius = 1000.0f;
+
+
 public:
     // component process
     void OnInitialize() override;
     void OnStart() override;
     void OnDestory() override;
-
 
     // json
     nlohmann::json Serialize();
@@ -53,5 +60,9 @@ public:
     void UISensorOnOff(bool flag);              // 플레이어 감지영역 UI
     void UIInteractionOnOff(bool flag);         // 플레이어 상호작용 영역 UI
     void UIGaugeUpate(float progress);
+
+    // Effect
+    void StartTriggerWave();        // 파장 웨이브
+    void NotifyAIInRange();         // AI 찾아서 호출
 };
 

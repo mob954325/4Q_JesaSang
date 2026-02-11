@@ -650,7 +650,8 @@ void PlayerController::ReceiveMiniGameResult(unique_ptr<IItem> ingredient, bool 
         visualizer->VisualOnItem(ingredient->itemId);
         inventory->AddItem(std::move(ingredient));
 
-        // TODO :: 소음, AI 트리거 발생
+        // 소음, AI 트리거 발생
+        CookingZone::Instance()->StartTriggerWave();
     }
 }
 
