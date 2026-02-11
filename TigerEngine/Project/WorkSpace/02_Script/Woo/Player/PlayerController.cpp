@@ -37,6 +37,7 @@
 #include "../UI/MainGameUIManager.h"
 #include "../CookingZone/CookingZone.h"
 #include "../../Ron/MiniMapTest/MiniMapManager.h"
+#include "../../Ho/Sound/PlayerSoundSource.h"
 
 
 REGISTER_COMPONENT(PlayerController)
@@ -56,6 +57,7 @@ void PlayerController::OnStart()
     fbxRenderer = GetOwner()->GetComponent<FBXRenderer>();
     fbxData = GetOwner()->GetComponent<FBXData>();
     animController = GetOwner()->GetComponent<AnimationController>();
+    sound = GetOwner()->GetComponent<PlayerSoundSource>();
     fireEffect = GetOwner()->GetChildByName("Player_FireEffect")->GetOwner()->GetComponent<Effect>();
     hitEffect = GetOwner()->GetChildByName("Player_HitEffect")->GetOwner()->GetComponent<AnimationController>();
 
@@ -68,7 +70,7 @@ void PlayerController::OnStart()
     camController = CameraSystem::Instance().GetCurrCamera()->GetOwner()->GetComponent<CameraController>();
 
     // debug
-    if (!fbxRenderer || !cct || !inventory || !camController || !fbxData || 
+    if (!fbxRenderer || !cct || !inventory || !camController || !fbxData || !sound ||
         !animController || !dialogueController || !fireEffect || !hitEffect ||
         !threatMonitor || !visualizer)
     {

@@ -40,6 +40,7 @@ public:
     /// </summary>
     /// <param name="type">플레이어 사운드 타입</param>
     void PlaySound(PlayerSoundType type, bool loop = false);
+    void StopSound();
 
     /// <summary>
     /// PlayerFootStepType 에서 랜덤으로 소리 재생하는 함수

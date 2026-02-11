@@ -71,6 +71,12 @@ void PlayerSoundSource::PlaySound(PlayerSoundType type, bool loop)
     sound->Play();
 }
 
+void PlayerSoundSource::StopSound()
+{
+    if (!sound) return;
+    sound->Stop();
+}
+
 void PlayerSoundSource::PlayRandomFootStep()
 {
     if (!sound) return;

@@ -1,5 +1,6 @@
 #include "Player_SitWalk.h"
 #include "../../Inventory/Inventory.h"
+#include "../../../Ho/Sound/PlayerSoundSource.h"
 
 void Player_SitWalk::Enter()
 {
@@ -11,6 +12,9 @@ void Player_SitWalk::Enter()
     // set animation
     player->animController->ChangeState("Sit");
 
+    // set sound
+    player->sound->PlaySound(PlayerSoundType::Sit, true);
+    
     // set sense radius
     player->curSenseRadius = player->sitSenseRadius;
     if (player->inventory->GetCurItemType() == ItemType::Ingredient)

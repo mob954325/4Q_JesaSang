@@ -1,5 +1,6 @@
 #include "Player_Die.h"
 #include "../../Inventory/Inventory.h"
+#include "../../../Ho/Sound/PlayerSoundSource.h"
 
 void Player_Die::Enter()
 {
@@ -13,6 +14,9 @@ void Player_Die::Enter()
 
     // set animation
     player->animController->ChangeState("Hit");
+
+    // set sound
+    player->sound->PlaySound(PlayerSoundType::HpDown, false);
 }
 
 void Player_Die::ChangeStateLogic()
