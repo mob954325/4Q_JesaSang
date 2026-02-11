@@ -52,8 +52,11 @@ void BabyGhostController::OnStart()
 {
     agent = GetOwner()->GetComponent<AgentComponent>();
     vision = GetOwner()->GetComponent<VisionComponent>();
+    fbxRenderer = GetOwner()->GetComponent<FBXRenderer>();
+    fbxData = GetOwner()->GetComponent<FBXData>();
+    animController = GetOwner()->GetComponent<AnimationController>();
 
-    if (!agent || !vision)
+    if (!agent || !vision || !fbxRenderer || !fbxData || !animController)
     {
         std::cout << "[BabyGhostController] Component Missing" << std::endl;
         return;
@@ -62,7 +65,7 @@ void BabyGhostController::OnStart()
     // Hide Object 모두 수집 
     hideObjects = SceneUtil::GetObjectsByName("HideObject");
 
-    //LoadAnimation();  
+    LoadAnimation();  
 
     // 최초 시작 위치 저장
     initialPosition = GetOwner()->GetTransform()->GetWorldPosition(); // local X
@@ -131,7 +134,27 @@ void BabyGhostController::ChangeState(BabyGhostState nextState)
 
 void BabyGhostController::LoadAnimation()
 {
+    // 애니메이션 파일 로드
+    FBXResourceManager::Instance().LoadAnimationByPath(fbxData->GetFBXInfo(), "..\\Assets\\Resource\\Animation\\Baby_Ghost\\ani_idle_babyghost.fbx", "Idle");
+    FBXResourceManager::Instance().LoadAnimationByPath(fbxData->GetFBXInfo(), "..\\Assets\\Resource\\Animation\\Baby_Ghost\\ani_cry_babyghost.fbx", "Cry");
 
+    // 클립 생성
+    auto idleClip = animController->FindClip("Idle");
+    auto cryClip = animController->FindClip("Cry");
+
+    if (!idleClip || !cryClip)
+    {
+        cout << "[BabyGhostController] Clip not found!\n" << endl;
+        return;
+    }
+    else
+    {
+        cout << "[BabyGhostController] Animation Load Success" << endl;
+    }
+
+    // 상태 등록
+    animController->AddState(std::make_unique<AnimationState>("Idle", idleClip, animController));
+    animController->AddState(std::make_unique<AnimationState>("Cry", cryClip, animController));
 }
 
 // -------------------------------------------------

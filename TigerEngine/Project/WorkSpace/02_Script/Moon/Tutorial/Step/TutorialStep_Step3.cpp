@@ -9,6 +9,8 @@ void TutorialStep_Step3::Enter()
     step3Timer = 0.0f;
     phase = Step3Phase::BabyInCome;
 
+
+
     std::cout << "[Step3] Enter" << std::endl;
 }
 

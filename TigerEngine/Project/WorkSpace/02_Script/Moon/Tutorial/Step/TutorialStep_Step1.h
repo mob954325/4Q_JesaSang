@@ -6,10 +6,12 @@
 // 오프닝 일러스트 종료 후, 방에서 깨어나는 단계 
 // 
 // 1. 눈을 깜빡이는 듯한 연출 (약 3초)
-// 2. 대화창 ON 독백 출력 
+// 2. 대화창(다이얼로그) ON -> 독백 출력 
 // 3. [F] / [Space] / [클릭] / 방향키 중 하나의 입력 : 대화창 OFF 
 // 4. Step2 전환 
 // -----------------------------------------------------------
+
+class DialogueUIController;
 
 enum class Step1Phase
 {
@@ -33,11 +35,11 @@ private:
 private:
     void Blink();
     void Monologue();
-    void WaitInput();
 
 private:
     GameObject* Blink_Top = nullptr;
     GameObject* Blink_Bottom = nullptr;
+    DialogueUIController* dialogue = nullptr;
 
 public:
     TutorialStep_Step1(TutorialController* _tutorialController) : ITutorialStep(_tutorialController) {}

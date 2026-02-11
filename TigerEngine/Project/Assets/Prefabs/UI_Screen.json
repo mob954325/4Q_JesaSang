@@ -2,7 +2,7 @@
   "prefab": [
     {
       "Active": true,
-      "ID": 1229,
+      "ID": 8451,
       "Name": "UI_Screen",
       "ParentID": -1,
       "components": [
@@ -64,9 +64,9 @@
     },
     {
       "Active": false,
-      "ID": 1230,
+      "ID": 8452,
       "Name": "PausePannel",
-      "ParentID": 1229,
+      "ParentID": 8451,
       "components": [
         {
           "properties": {
@@ -152,9 +152,9 @@
     },
     {
       "Active": false,
-      "ID": 1231,
+      "ID": 8453,
       "Name": "Button_StopNo",
-      "ParentID": 1230,
+      "ParentID": 8452,
       "components": [
         {
           "properties": {
@@ -248,9 +248,9 @@
     },
     {
       "Active": false,
-      "ID": 1232,
+      "ID": 8454,
       "Name": "Button_StopYes",
-      "ParentID": 1230,
+      "ParentID": 8452,
       "components": [
         {
           "properties": {
@@ -345,9 +345,9 @@
     },
     {
       "Active": false,
-      "ID": 1233,
+      "ID": 8455,
       "Name": "Text_Stop",
-      "ParentID": 1230,
+      "ParentID": 8452,
       "components": [
         {
           "properties": {
@@ -377,8 +377,8 @@
               0.5
             ],
             "Pos": [
-              200.0,
-              180.0,
+              450.0,
+              240.0,
               0.0
             ],
             "Position": [
@@ -429,9 +429,9 @@
     },
     {
       "Active": true,
-      "ID": 1236,
+      "ID": 8458,
       "Name": "PlayerLife",
-      "ParentID": 1229,
+      "ParentID": 8451,
       "components": [
         {
           "properties": {
@@ -461,8 +461,8 @@
               0.0
             ],
             "Pos": [
-              30.0,
-              850.0,
+              37.79999923706055,
+              897.0999755859375,
               0.0
             ],
             "Position": [
@@ -481,15 +481,15 @@
               1.0
             ],
             "Size": [
-              400.0,
-              200.0
+              310.5,
+              150.0
             ]
           },
           "type": "RectTransform"
         },
         {
           "properties": {
-            "Active": false,
+            "Active": true,
             "color": [
               1.0,
               1.0,
@@ -498,17 +498,17 @@
             ],
             "drawSpacetype": "Screen",
             "fillAmount": 1.0,
-            "imageType": "Simple",
+            "imageType": "Sliced",
             "isBillboard": false,
             "isMouseCheck": false,
-            "path": "..\\Assets\\Resource\\ely-vanguardsoldier-kerwinatienza_diffuse.png",
+            "path": "..\\Assets\\Resource\\UI\\Player\\strength_line.png",
             "sliceBorderPx": [
-              0.0,
-              0.0,
-              0.0,
-              0.0
+              50.0,
+              50.0,
+              50.0,
+              50.0
             ],
-            "type": "Simple",
+            "type": "Sliced",
             "zOrder": 0
           },
           "type": "Image"
@@ -517,9 +517,9 @@
     },
     {
       "Active": true,
-      "ID": 1237,
+      "ID": 8459,
       "Name": "Image_Life1",
-      "ParentID": 1236,
+      "ParentID": 8458,
       "components": [
         {
           "properties": {
@@ -550,7 +550,7 @@
             ],
             "Pos": [
               50.0,
-              100.0,
+              70.0,
               0.0
             ],
             "Position": [
@@ -605,9 +605,9 @@
     },
     {
       "Active": true,
-      "ID": 1238,
+      "ID": 8460,
       "Name": "Image_Life2",
-      "ParentID": 1236,
+      "ParentID": 8458,
       "components": [
         {
           "properties": {
@@ -638,7 +638,7 @@
             ],
             "Pos": [
               100.0,
-              100.0,
+              70.0,
               0.0
             ],
             "Position": [
@@ -657,8 +657,8 @@
               1.0
             ],
             "Size": [
-              50.0,
-              100.0
+              40.0,
+              90.0
             ]
           },
           "type": "RectTransform"
@@ -693,9 +693,9 @@
     },
     {
       "Active": true,
-      "ID": 1239,
+      "ID": 8461,
       "Name": "Image_Life3",
-      "ParentID": 1236,
+      "ParentID": 8458,
       "components": [
         {
           "properties": {
@@ -726,7 +726,7 @@
             ],
             "Pos": [
               150.0,
-              100.0,
+              70.0,
               0.0
             ],
             "Position": [
@@ -745,8 +745,8 @@
               1.0
             ],
             "Size": [
-              50.0,
-              100.0
+              40.0,
+              90.0
             ]
           },
           "type": "RectTransform"
@@ -781,9 +781,9 @@
     },
     {
       "Active": true,
-      "ID": 1240,
+      "ID": 8462,
       "Name": "Image_Life4",
-      "ParentID": 1236,
+      "ParentID": 8458,
       "components": [
         {
           "properties": {
@@ -814,7 +814,7 @@
             ],
             "Pos": [
               200.0,
-              100.0,
+              70.0,
               0.0
             ],
             "Position": [
@@ -833,8 +833,8 @@
               1.0
             ],
             "Size": [
-              50.0,
-              100.0
+              40.0,
+              90.0
             ]
           },
           "type": "RectTransform"
@@ -869,9 +869,9 @@
     },
     {
       "Active": true,
-      "ID": 1241,
+      "ID": 8463,
       "Name": "Image_Life5",
-      "ParentID": 1236,
+      "ParentID": 8458,
       "components": [
         {
           "properties": {
@@ -902,7 +902,7 @@
             ],
             "Pos": [
               250.0,
-              100.0,
+              70.0,
               0.0
             ],
             "Position": [
@@ -921,8 +921,8 @@
               1.0
             ],
             "Size": [
-              50.0,
-              100.0
+              40.0,
+              90.0
             ]
           },
           "type": "RectTransform"
@@ -957,9 +957,9 @@
     },
     {
       "Active": true,
-      "ID": 1246,
+      "ID": 8467,
       "Name": "Quest",
-      "ParentID": 1229,
+      "ParentID": 8451,
       "components": [
         {
           "properties": {
@@ -986,11 +986,11 @@
             "Active": true,
             "Pivot": [
               0.0,
-              0.0
+              1.0
             ],
             "Pos": [
-              0.0,
-              0.0,
+              1420.0,
+              250.0,
               0.0
             ],
             "Position": [
@@ -1009,8 +1009,8 @@
               1.0
             ],
             "Size": [
-              0.0,
-              0.0
+              500.0,
+              150.0
             ]
           },
           "type": "RectTransform"
@@ -1019,9 +1019,9 @@
     },
     {
       "Active": true,
-      "ID": 1249,
+      "ID": 8468,
       "Name": "Image_QuestBackground",
-      "ParentID": 1246,
+      "ParentID": 8467,
       "components": [
         {
           "properties": {
@@ -1051,7 +1051,7 @@
               0.0
             ],
             "Pos": [
-              0.0,
+              4.400000095367432,
               0.0,
               0.0
             ],
@@ -1071,8 +1071,8 @@
               1.0
             ],
             "Size": [
-              0.0,
-              0.0
+              500.0,
+              150.0
             ]
           },
           "type": "RectTransform"
@@ -1091,7 +1091,7 @@
             "imageType": "Simple",
             "isBillboard": false,
             "isMouseCheck": false,
-            "path": "",
+            "path": "..\\Assets\\Resource\\UI\\Quest\\Game_Mini_01.png",
             "sliceBorderPx": [
               0.0,
               0.0,
@@ -1107,9 +1107,9 @@
     },
     {
       "Active": true,
-      "ID": 1251,
+      "ID": 8469,
       "Name": "Text_QuestTitle",
-      "ParentID": 1246,
+      "ParentID": 8467,
       "components": [
         {
           "properties": {
@@ -1136,11 +1136,11 @@
             "Active": true,
             "Pivot": [
               0.0,
-              0.0
+              0.5
             ],
             "Pos": [
-              0.0,
-              0.0,
+              63.20000076293945,
+              56.29999923706055,
               0.0
             ],
             "Position": [
@@ -1159,8 +1159,8 @@
               1.0
             ],
             "Size": [
-              0.0,
-              0.0
+              1.0,
+              1.0
             ]
           },
           "type": "RectTransform"
@@ -1178,11 +1178,11 @@
               1.0
             ],
             "drawSpacetype": "Screen",
-            "fontPath": "",
-            "fontSize": 1,
+            "fontPath": "../Assets/Resource/font/rotteMedium.ttf",
+            "fontSize": 25,
             "isBillboard": false,
             "paddingPx": 1,
-            "text": "",
+            "text": "[퀘스트제목] 뭐뭐해라",
             "zOrder": 0
           },
           "type": "TextUI"
@@ -1191,9 +1191,9 @@
     },
     {
       "Active": true,
-      "ID": 1253,
-      "Name": "Text_QuestLable",
-      "ParentID": 1246,
+      "ID": 8470,
+      "Name": "Text_QuestLabel",
+      "ParentID": 8467,
       "components": [
         {
           "properties": {
@@ -1220,11 +1220,11 @@
             "Active": true,
             "Pivot": [
               0.0,
-              0.0
+              0.5
             ],
             "Pos": [
-              0.0,
-              0.0,
+              80.5999984741211,
+              94.0999984741211,
               0.0
             ],
             "Position": [
@@ -1243,8 +1243,8 @@
               1.0
             ],
             "Size": [
-              0.0,
-              0.0
+              1.0,
+              1.0
             ]
           },
           "type": "RectTransform"
@@ -1262,11 +1262,11 @@
               1.0
             ],
             "drawSpacetype": "Screen",
-            "fontPath": "",
-            "fontSize": 1,
+            "fontPath": "../Assets/Resource/font/rotteMedium.ttf",
+            "fontSize": 18,
             "isBillboard": false,
             "paddingPx": 1,
-            "text": "",
+            "text": "어쩌구저쩌구 설명 설명",
             "zOrder": 0
           },
           "type": "TextUI"
@@ -1274,10 +1274,10 @@
       ]
     },
     {
-      "Active": true,
-      "ID": 1255,
-      "Name": "Image_Cheakbox",
-      "ParentID": 1246,
+      "Active": false,
+      "ID": 8471,
+      "Name": "Image_QuestCheckbox",
+      "ParentID": 8467,
       "components": [
         {
           "properties": {
@@ -1301,14 +1301,14 @@
         },
         {
           "properties": {
-            "Active": true,
+            "Active": false,
             "Pivot": [
               0.0,
-              0.0
+              0.5
             ],
             "Pos": [
-              0.0,
-              0.0,
+              52.70000076293945,
+              88.69999694824219,
               0.0
             ],
             "Position": [
@@ -1327,15 +1327,15 @@
               1.0
             ],
             "Size": [
-              0.0,
-              0.0
+              30.0,
+              30.0
             ]
           },
           "type": "RectTransform"
         },
         {
           "properties": {
-            "Active": true,
+            "Active": false,
             "color": [
               1.0,
               1.0,
@@ -1347,7 +1347,7 @@
             "imageType": "Simple",
             "isBillboard": false,
             "isMouseCheck": false,
-            "path": "",
+            "path": "..\\Assets\\Resource\\UI\\Quest\\v.png",
             "sliceBorderPx": [
               0.0,
               0.0,
@@ -1362,10 +1362,10 @@
       ]
     },
     {
-      "Active": true,
-      "ID": 1257,
-      "Name": "Image_Line",
-      "ParentID": 1246,
+      "Active": false,
+      "ID": 8472,
+      "Name": "Image_QuestLine",
+      "ParentID": 8467,
       "components": [
         {
           "properties": {
@@ -1389,14 +1389,14 @@
         },
         {
           "properties": {
-            "Active": true,
+            "Active": false,
             "Pivot": [
               0.0,
-              0.0
+              0.5
             ],
             "Pos": [
-              0.0,
-              0.0,
+              78.5999984741211,
+              92.5999984741211,
               0.0
             ],
             "Position": [
@@ -1415,19 +1415,19 @@
               1.0
             ],
             "Size": [
-              0.0,
-              0.0
+              250.0,
+              3.0
             ]
           },
           "type": "RectTransform"
         },
         {
           "properties": {
-            "Active": true,
+            "Active": false,
             "color": [
-              1.0,
-              1.0,
-              1.0,
+              0.0,
+              0.0,
+              0.0,
               1.0
             ],
             "drawSpacetype": "Screen",
@@ -1435,7 +1435,7 @@
             "imageType": "Simple",
             "isBillboard": false,
             "isMouseCheck": false,
-            "path": "",
+            "path": "..\\Assets\\Resource\\UI\\Quest\\sound_Gauge_bar.png",
             "sliceBorderPx": [
               0.0,
               0.0,

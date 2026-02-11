@@ -10,8 +10,9 @@ void AdultGhost_Attack::Enter()
 
     attackTimer = 0.0f;
     didDamage = false;
+    isChangeAnim = false;
 
-    // adultGhost->animController->ChangeState("Attack");
+    adultGhost->animController->ChangeState("Attack");
 
     // 이동 완전 정지
     adultGhost->agent->externalControl = true;
@@ -20,8 +21,9 @@ void AdultGhost_Attack::Enter()
 
 void AdultGhost_Attack::ChangeStateLogic()
 {
-    // 딜레이 이후 전환 로직 실행 
-    if (attackTimer < attackDelay) return;
+    // 딜레이 이후 전환 로직 실행 ㄱㄱ
+    if (attackTimer < attackAnimTime + attackDelayTime)
+        return;
 
     auto* player = adultGhost->GetPlayer();
 
@@ -40,10 +42,9 @@ void AdultGhost_Attack::ChangeStateLogic()
             int px, py;
             auto wp = adultGhost->GetPlayer()->GetTransform()->GetLocalPosition();
             if (grid->WorldToGridFromCenter(wp, px, py))
-            {
                 adultGhost->lastPlayerGrid = { px, py, true };
-            }
         }
+
         adultGhost->searchReason = SearchReason::FromAttack;
         adultGhost->ChangeState(AdultGhostState::Search);
     }
@@ -53,12 +54,19 @@ void AdultGhost_Attack::Update(float deltaTime)
 {
     attackTimer += deltaTime;
 
-    // 공격 애니메이션 끝나고 타격 입는 듯한 연출 위해서 딜레이 
-    if (!didDamage && attackTimer >= 1.0f /*attackTimer < attackDelay*/)
+    // 1. Attack -> AttackDelay 애니메이션 전환
+    if (!isChangeAnim && attackTimer >= attackAnimTime)
+    {
+        adultGhost->animController->ChangeState("AttackDelay");
+        isChangeAnim = true;
+    }
+
+    // 2. 데미지 타이밍 
+    if (!didDamage && attackTimer >= 0.5f)
     {
         auto* player = adultGhost->GetPlayer();
         if (player)
-            player->GetComponent<PlayerController>()->TakeAttack(); // AI에게 공격 당했을 때 
+            player->GetComponent<PlayerController>()->TakeAttack();
 
         didDamage = true;
     }

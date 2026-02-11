@@ -172,6 +172,7 @@
     <ClInclude Include="02_Script\Moon\AI\FSM\IBabyGhostState.h" />
     <ClInclude Include="02_Script\Moon\AI\GhostInteractionZone.h" />
     <ClInclude Include="02_Script\Moon\AnimationTest\PlayerAnimationTest.h" />
+    <ClInclude Include="02_Script\Moon\Tutorial\PlayerController_Tutorial.h" />
     <ClInclude Include="02_Script\Moon\Tutorial\Step\ITutorialStep.h" />
     <ClInclude Include="02_Script\Moon\Tutorial\Step\TutorialStep_Step1.h" />
     <ClInclude Include="02_Script\Moon\Tutorial\Step\TutorialStep_Step2.h" />
@@ -236,6 +237,7 @@
     <ClInclude Include="02_Script\Woo\Manager\PauseManager.h" />
     <ClInclude Include="02_Script\Woo\UI\MainGameUIManager.h" />
     <ClInclude Include="02_Script\Woo\Manager\QuestManager.h" />
+    <ClInclude Include="02_Script\Woo\Player\PlayerThreatMonitor.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="02_Script\Ho\Manager\FrozenManager.cpp" />
@@ -264,6 +266,7 @@
     <ClCompile Include="02_Script\Moon\AI\FSM\BabyGhost_Search.cpp" />
     <ClCompile Include="02_Script\Moon\AI\GhostInteractionZone.cpp" />
     <ClCompile Include="02_Script\Moon\AnimationTest\PlayerAnimationTest.cpp" />
+    <ClCompile Include="02_Script\Moon\Tutorial\PlayerController_Tutorial.cpp" />
     <ClCompile Include="02_Script\Moon\Tutorial\Step\TutorialStep_Step1.cpp" />
     <ClCompile Include="02_Script\Moon\Tutorial\Step\TutorialStep_Step2.cpp" />
     <ClCompile Include="02_Script\Moon\Tutorial\Step\TutorialStep_Step3.cpp" />
@@ -326,6 +329,7 @@
     <ClCompile Include="02_Script\Woo\Manager\PauseManager.cpp" />
     <ClCompile Include="02_Script\Woo\UI\MainGameUIManager.cpp" />
     <ClCompile Include="02_Script\Woo\Manager\QuestManager.cpp" />
+    <ClCompile Include="02_Script\Woo\Player\PlayerThreatMonitor.cpp" />
     <ClCompile Include="winMain.cpp" />
     <ClCompile Include="02_Script\\Ron\\Intro\IntroCutSceneController.cpp" />
   </ItemGroup>
