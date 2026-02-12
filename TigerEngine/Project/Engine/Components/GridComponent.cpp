@@ -55,16 +55,10 @@ void GridComponent::OnInitialize()
     walkableOverrides.push_back({ 2, 2, true });
     walkableOverrides.push_back({ 7, 2, true });
     walkableOverrides.push_back({ 8, 2, true });
-    walkableOverrides.push_back({ 8, 1, true });
 
     walkableOverrides.push_back({ 7, -2, true });
     walkableOverrides.push_back({ 8, -2, true });
     walkableOverrides.push_back({ 9, -2, true });
-    walkableOverrides.push_back({ 10, -2, true });
-    walkableOverrides.push_back({ 11, -2, true });
-    walkableOverrides.push_back({ 12, -2, true });
-    walkableOverrides.push_back({ 13, -2, true });
-    walkableOverrides.push_back({ 14, -2, true });
 }
 
 void GridComponent::Enable_Inner()
@@ -180,31 +174,21 @@ void GridComponent::BuildBlockedFromPhysics()
             {
                 if (auto* cell = GetCell(x, y))
                 {
-                    Vector3 cellCenter = GridToWorld(x, y);
-                    Vector3 cellMin = cellCenter - Vector3(cellSize * 0.5f, 0, cellSize * 0.5f);
-                    Vector3 cellMax = cellCenter + Vector3(cellSize * 0.5f, 0, cellSize * 0.5f);
+                    cell->walkable = false;
 
-                    float overlapX = std::max(0.f, std::min(cellMax.x, maxW.x) - std::max(cellMin.x, minW.x));
-                    float overlapZ = std::max(0.f, std::min(cellMax.z, maxW.z) - std::max(cellMin.z, minW.z));
+                    int cx = x - centerX;
+                    int cy = y - centerY;
+                    Vector3 cellWorld = GridToWorld(x, y);
 
-                    float overlapArea = overlapX * overlapZ;
-                    float cellArea = cellSize * cellSize;
-
-                    // 1% 이상 겹칠 때만 막기
-                    if (overlapArea > cellArea * 0.10f)
-                    {
-                        cell->walkable = false;
-
-                        int cx = x - centerX;
-                        int cy = y - centerY;
-                        Vector3 cellWorld = GridToWorld(x, y);
-
-                        DebugPrintBlock(objName, x, y, cx, cy, cellWorld, phys->m_ColliderType);
-                    }
+                    DebugPrintBlock(
+                        objName,
+                        x, y,
+                        cx, cy,
+                        cellWorld,
+                        phys->m_ColliderType);
                 }
             }
         }
-
     }
 
     std::cout << "===========================================\n";

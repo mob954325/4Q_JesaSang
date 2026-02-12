@@ -70,42 +70,6 @@ void AdultGhostController::OnStart()
     initialPosition = GetOwner()->GetTransform()->GetWorldPosition(); // local X
 
     InitFSMStates();
-
-    // 웨이포인트 수집 
-    waypoints.clear();
-    auto grid = GridSystem::Instance().GetMainGrid();
-    if (grid)
-    {
-        auto& children = GetOwner()->GetTransform()->GetChildren(); // 자식 Transform 목록
-        for (auto* childTr : children)
-        {
-            auto childObj = childTr->GetOwner();
-            if (!childObj) continue;
-
-            std::string name = childObj->GetName(); // 오브젝트 이름 가져오기
-            // Way1, Way2, ... WayN
-            if (name.rfind("Way", 0) == 0) // 이름이 "Way"로 시작하면
-            {
-                int gx, gy;
-                if (grid->WorldToGridFromCenter(childTr->GetWorldPosition(), gx, gy))
-                {
-                    waypoints.push_back({ gx, gy });
-                    std::cout << "[AdultGhost] Added Waypoint (" << gx << "," << gy << ") from " << name << "\n";
-                }
-            }
-        }
-    }
-    // 웨이포인트 수집 후
-    if (!waypoints.empty() && agent)
-    {
-        agent->waypoints = waypoints;  // 수집한 웨이포인트 전달
-        agent->currentWaypointIndex = 0;
-
-        // 처음 목표 지정
-        agent->PickNextWaypoint();
-    }
-
-
     ChangeState(AdultGhostState::Patrol);
 }
 

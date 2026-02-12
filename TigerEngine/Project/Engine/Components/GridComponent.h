@@ -26,9 +26,9 @@ public:
     void Deserialize(nlohmann::json data) override;
 
 public:
-    int width = 70;
-    int height = 70;
-    float cellSize = 80.0f;
+    int width = 50;
+    int height = 50;
+    float cellSize = 100.0f;
 
     std::vector<GridCell> cells;
     std::vector<WalkableOverride> walkableOverrides;

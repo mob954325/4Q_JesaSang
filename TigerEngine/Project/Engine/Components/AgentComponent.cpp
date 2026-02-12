@@ -44,20 +44,11 @@ void AgentComponent::OnInitialize()
     cct = GetOwner()->GetComponent<CharacterControllerComponent>();
     if (!cct) return;
 
-    //auto grid = GridSystem::Instance().GetMainGrid();
-    //if (!grid) return;
+    auto grid = GridSystem::Instance().GetMainGrid();
+    if (!grid) return;
 
-    //auto tr = GetOwner()->GetTransform();
-    //grid->WorldToGridFromCenter(tr->GetWorldPosition(), cx, cy);
-
-   //auto grid = GridSystem::Instance().GetMainGrid();
-   //for (auto* wpObj : waypointObjects) // waypointObjects는 에디터에서 연결
-   //{
-   //    int gx, gy;
-   //    if (grid->WorldToGridFromCenter(wpObj->GetTransform()->GetWorldPosition(), gx, gy))
-   //        waypoints.push_back({ gx, gy });
-   //}
-   //currentWaypointIndex = 0;
+    auto tr = GetOwner()->GetTransform();
+    grid->WorldToGridFromCenter(tr->GetWorldPosition(), cx, cy);
 }
 
 void AgentComponent::OnStart()
@@ -67,57 +58,45 @@ void AgentComponent::OnStart()
 // -----------------------------------------
 // 무작위 목표(Grid 좌표)를 선택하는 함수
 // -----------------------------------------
-//void AgentComponent::PickRandomTarget()
-//{
-//    auto grid = GridSystem::Instance().GetMainGrid();
-//    if (!grid) return;
-//      
-//    int range = 10; // 현재 위치(cx, cy)를 기준으로 목표를 선택할 범위
-//     
-//    hasTarget = false;
-//
-//    static std::random_device rd; 
-//    static std::mt19937 gen(rd()); // 메르센 트위스터 난수 생성기
-//    std::uniform_int_distribution<> dis(-range, range); // -range ~ +range 범위의 균등 정수 분포
-//
-//    for (int i = 0; i < 20; ++i) // 최대 20번 
-//    {
-//        // 현재 좌표(cx, cy) 기준으로 랜덤한 좌표(rx, ry) 생성
-//        int rx = cx + dis(gen);
-//        int ry = cy + dis(gen);
-//
-//        // 생성된 좌표가 이동 가능한지 체크
-//        if (grid->IsWalkableFromCenter(rx, ry))
-//        {
-//            targetCX = rx; // 목표 X 좌표 설정
-//            targetCY = ry; // 목표 Y 좌표 설정
-//            hasTarget = true;
-//            return;
-//        }
-//    }
-//
-//    std::cout << "[AgentComponent] No valid target found\n";
-//}
-
-void AgentComponent::PickNextWaypoint()
+void AgentComponent::PickRandomTarget()
 {
-    if (waypoints.empty()) return;
+    auto grid = GridSystem::Instance().GetMainGrid();
+    if (!grid) return;
+      
+    int range = 10; // 현재 위치(cx, cy)를 기준으로 목표를 선택할 범위
+     
+    hasTarget = false;
 
-    targetCX = waypoints[currentWaypointIndex].first;
-    targetCY = waypoints[currentWaypointIndex].second;
-    hasTarget = true;
+    static std::random_device rd; 
+    static std::mt19937 gen(rd()); // 메르센 트위스터 난수 생성기
+    std::uniform_int_distribution<> dis(-range, range); // -range ~ +range 범위의 균등 정수 분포
 
-    // 다음 순환 준비
-    currentWaypointIndex = (currentWaypointIndex + 1) % waypoints.size();
+    for (int i = 0; i < 20; ++i) // 최대 20번 
+    {
+        // 현재 좌표(cx, cy) 기준으로 랜덤한 좌표(rx, ry) 생성
+        int rx = cx + dis(gen);
+        int ry = cy + dis(gen);
+
+        // 생성된 좌표가 이동 가능한지 체크
+        if (grid->IsWalkableFromCenter(rx, ry))
+        {
+            targetCX = rx; // 목표 X 좌표 설정
+            targetCY = ry; // 목표 Y 좌표 설정
+            hasTarget = true;
+            return;
+        }
+    }
+
+    std::cout << "[AgentComponent] No valid target found\n";
 }
-
 
 void AgentComponent::OnFixedUpdate(float dt)
 {
     auto grid = GridSystem::Instance().GetMainGrid();
     if (!grid) return;
 
-    if (externalControl) return; // FSM이 직접 path/target을 관리
+    if (externalControl)
+        return; // FSM이 직접 path/target을 관리
 
     // 대기 중이면 시간 감소 
     if (isWaiting)
@@ -126,8 +105,7 @@ void AgentComponent::OnFixedUpdate(float dt)
         if (waitTimer <= 0.f)
         {
             isWaiting = false;
-            // PickRandomTarget(); // 다시 탐색 시작
-            PickNextWaypoint();
+            PickRandomTarget(); // 다시 탐색 시작
         }
         return; // 대기 중엔 이동 안함
     }
@@ -136,8 +114,7 @@ void AgentComponent::OnFixedUpdate(float dt)
     // 목표가 없으면 새 목표 선택
     if (!hasTarget)
     {
-        // PickRandomTarget();
-        PickNextWaypoint();
+        PickRandomTarget();
         if (!hasTarget) return; // 목표 선택 실패하면 종료
     }
 
@@ -148,8 +125,7 @@ void AgentComponent::OnFixedUpdate(float dt)
         if (path.empty())
         {
             // 경로를 못찾으면 목표 재선택
-            // PickRandomTarget();
-            PickNextWaypoint();
+            PickRandomTarget();
             path = grid->FindPath(cx, cy, targetCX, targetCY);
             if (path.empty())
                 return; // 여전히 경로 없으면 이동 안함
