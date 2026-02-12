@@ -69,6 +69,9 @@ public:
 
     // [Bone] -----------------
     void CreateBoneInfo();
+
+    // [culling] --------------
+    bool IsVisiableFrustum(Camera* camera);
     
 private:
     // FBX Asset Data

@@ -122,6 +122,8 @@ void Camera::SetProjection(float povAngle, int width, int height, float targetNe
 	this->povAngle = povAngle;
 	this->nearDist = targetNear;
 	this->farDist = targetFar;
+
+    frustum = BoundingFrustum(projection);
 }
 
 Matrix Camera::GetProjection() const
@@ -183,4 +185,15 @@ void Camera::Deserialize(nlohmann::json data)
             prop.set_value(*this, v);
         }
 	}
+}
+
+BoundingFrustum Camera::GetWorldFrustum()
+{
+    BoundingFrustum fr = BoundingFrustum(projection);
+
+    Matrix camWorld = owner->GetTransform()->GetWorldMatrix();
+    BoundingFrustum frWorld;
+    fr.Transform(frWorld, camWorld);   // 월드로 변환
+
+    return frWorld;
 }
