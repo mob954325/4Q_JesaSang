@@ -3,7 +3,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 337,
+        "ID": 392,
         "Name": "Main Camera",
         "ParentID": -1,
         "components": [
@@ -44,7 +44,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 338,
+        "ID": 393,
         "Name": "DirectionalLight(Sun)",
         "ParentID": -1,
         "components": [
@@ -98,7 +98,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 339,
+        "ID": 394,
         "Name": "----------------------",
         "ParentID": -1,
         "components": [
@@ -129,7 +129,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 340,
+        "ID": 395,
         "Name": "CurScene_01_StartScene",
         "ParentID": -1,
         "components": [
@@ -152,6 +152,14 @@
               ]
             },
             "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "ImageObjectName": "UI_Start_Image",
+              "NextScenePath": "..\\Assets\\Scenes\\02_IntroScene.json"
+            },
+            "type": "StartSceneController"
           }
         ]
       },
@@ -160,7 +168,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 341,
+        "ID": 396,
         "Name": "UI_Start_Image",
         "ParentID": -1,
         "components": [
@@ -251,7 +259,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 342,
+        "ID": 397,
         "Name": "SceneFlowManager",
         "ParentID": -1,
         "components": [
@@ -293,8 +301,8 @@
     },
     {
       "properties": {
-        "Active": false,
-        "ID": 343,
+        "Active": true,
+        "ID": 398,
         "Name": "Main Button Manager",
         "ParentID": -1,
         "components": [
@@ -325,9 +333,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 344,
+        "ID": 399,
         "Name": "Title",
-        "ParentID": 343,
+        "ParentID": 398,
         "components": [
           {
             "properties": {
@@ -397,7 +405,7 @@
               "imageType": "Simple",
               "isBillboard": false,
               "isMouseCheck": false,
-              "path": "..\\Assets\\Resource\\UI\\Title\\sound.png",
+              "path": "..\\Assets\\Resource\\UI\\logo.png",
               "sliceBorderPx": [
                 0.0,
                 0.0,
@@ -416,9 +424,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 345,
+        "ID": 400,
         "Name": "StartButton",
-        "ParentID": 343,
+        "ParentID": 398,
         "components": [
           {
             "properties": {
@@ -516,9 +524,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 346,
+        "ID": 401,
         "Name": "OptionsButton",
-        "ParentID": 343,
+        "ParentID": 398,
         "components": [
           {
             "properties": {
@@ -616,9 +624,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 347,
+        "ID": 402,
         "Name": "ExitButton",
-        "ParentID": 343,
+        "ParentID": 398,
         "components": [
           {
             "properties": {
@@ -716,7 +724,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 348,
+        "ID": 403,
         "Name": "UI_Settings",
         "ParentID": -1,
         "components": [
@@ -785,6 +793,7 @@
               "CreditNormalPath": "..\\\\Assets\\\\Resource\\\\UI\\\\credit.png",
               "CreditPanelObjectName": "UI_Settings_CreditPanel",
               "CreditPressedPath": "..\\\\Assets\\\\Resource\\\\UI\\\\credit_click.png",
+              "EscImageObjectName": "UI_Settings_ESC_Image",
               "ExitButtonObjectName": "",
               "ExitNormalPath": "..\\Assets\\Resource\\UI\\yes.png",
               "ExitPressedPath": "..\\Assets\\Resource\\UI\\yes_click.png",
@@ -804,9 +813,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 349,
+        "ID": 404,
         "Name": "UI_Settings_SoundPanel",
-        "ParentID": 348,
+        "ParentID": 403,
         "components": [
           {
             "properties": {
@@ -895,9 +904,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 350,
+        "ID": 405,
         "Name": "UI_Settings_SoundText_Top",
-        "ParentID": 349,
+        "ParentID": 404,
         "components": [
           {
             "properties": {
@@ -986,9 +995,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 351,
+        "ID": 406,
         "Name": "UI_Settings_SoundText_Bottom",
-        "ParentID": 349,
+        "ParentID": 404,
         "components": [
           {
             "properties": {
@@ -1077,9 +1086,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 352,
+        "ID": 407,
         "Name": "UI_Settings_CreditPanel",
-        "ParentID": 348,
+        "ParentID": 403,
         "components": [
           {
             "properties": {
@@ -1149,7 +1158,7 @@
               "imageType": "Simple",
               "isBillboard": false,
               "isMouseCheck": false,
-              "path": "..\\\\Assets\\\\Resource\\\\UI\\\\credit.png",
+              "path": "..\\Assets\\Resource\\UI\\Game_Mini_01.png",
               "sliceBorderPx": [
                 0.0,
                 0.0,
@@ -1168,9 +1177,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 353,
+        "ID": 408,
         "Name": "UI_Settings_SoundButton",
-        "ParentID": 348,
+        "ParentID": 403,
         "components": [
           {
             "properties": {
@@ -1259,9 +1268,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 354,
+        "ID": 409,
         "Name": "UI_Settings_CreditButton",
-        "ParentID": 348,
+        "ParentID": 403,
         "components": [
           {
             "properties": {
@@ -1350,9 +1359,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 355,
+        "ID": 410,
         "Name": "UI_Settings_SoundBar1_BG",
-        "ParentID": 349,
+        "ParentID": 404,
         "components": [
           {
             "properties": {
@@ -1441,9 +1450,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 356,
+        "ID": 411,
         "Name": "UI_Settings_SoundBar1_Gauge",
-        "ParentID": 349,
+        "ParentID": 404,
         "components": [
           {
             "properties": {
@@ -1532,9 +1541,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 357,
+        "ID": 412,
         "Name": "UI_Settings_SoundBar1_Point",
-        "ParentID": 349,
+        "ParentID": 404,
         "components": [
           {
             "properties": {
@@ -1623,9 +1632,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 358,
+        "ID": 413,
         "Name": "UI_Settings_SoundBar2_BG",
-        "ParentID": 349,
+        "ParentID": 404,
         "components": [
           {
             "properties": {
@@ -1714,9 +1723,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 359,
+        "ID": 414,
         "Name": "UI_Settings_SoundBar2_Gauge",
-        "ParentID": 349,
+        "ParentID": 404,
         "components": [
           {
             "properties": {
@@ -1805,9 +1814,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 360,
+        "ID": 415,
         "Name": "UI_Settings_SoundBar2_Point",
-        "ParentID": 349,
+        "ParentID": 404,
         "components": [
           {
             "properties": {
@@ -1896,9 +1905,9 @@
     {
       "properties": {
         "Active": false,
-        "ID": 361,
+        "ID": 416,
         "Name": "UI_Settings_CloseButton",
-        "ParentID": 348,
+        "ParentID": 403,
         "components": [
           {
             "properties": {
@@ -1929,7 +1938,7 @@
               ],
               "Pos": [
                 224.13999938964844,
-                920.0,
+                910.0,
                 0.0
               ],
               "Position": [
@@ -1979,6 +1988,279 @@
               "zOrder": 60
             },
             "type": "Image"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": false,
+        "ID": 417,
+        "Name": "UI_Settings_SettingButton",
+        "ParentID": 404,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "drawSpacetype": "Screen",
+              "fillAmount": 1.0,
+              "imageType": "Simple",
+              "isBillboard": false,
+              "isMouseCheck": false,
+              "path": "..\\Assets\\Resource\\UI\\system.png",
+              "sliceBorderPx": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "type": "Simple",
+              "zOrder": 90
+            },
+            "type": "Image"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "Pivot": [
+                0.0,
+                0.0
+              ],
+              "Pos": [
+                548.2999877929688,
+                -83.19999694824219,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Size": [
+                408.0,
+                195.0
+              ]
+            },
+            "type": "RectTransform"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": false,
+        "ID": 418,
+        "Name": "Credit_Text",
+        "ParentID": 407,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "drawSpacetype": "Screen",
+              "fillAmount": 1.0,
+              "imageType": "Simple",
+              "isBillboard": false,
+              "isMouseCheck": false,
+              "path": "..\\Assets\\Resource\\UI\\credit_text.png",
+              "sliceBorderPx": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "type": "Simple",
+              "zOrder": 74
+            },
+            "type": "Image"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "Pivot": [
+                0.0,
+                0.0
+              ],
+              "Pos": [
+                106.5,
+                113.5,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Size": [
+                1249.0,
+                586.0
+              ]
+            },
+            "type": "RectTransform"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": false,
+        "ID": 419,
+        "Name": "UI_Settings_SettingButton",
+        "ParentID": 407,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "drawSpacetype": "Screen",
+              "fillAmount": 1.0,
+              "imageType": "Simple",
+              "isBillboard": false,
+              "isMouseCheck": false,
+              "path": "..\\Assets\\Resource\\UI\\system.png",
+              "sliceBorderPx": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "type": "Simple",
+              "zOrder": 90
+            },
+            "type": "Image"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "Pivot": [
+                0.0,
+                0.0
+              ],
+              "Pos": [
+                548.0999755859375,
+                -83.0,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Size": [
+                408.0,
+                195.0
+              ]
+            },
+            "type": "RectTransform"
           }
         ]
       },

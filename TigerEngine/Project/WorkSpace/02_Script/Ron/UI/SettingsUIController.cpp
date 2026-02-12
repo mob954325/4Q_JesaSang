@@ -3,6 +3,7 @@
 #include "Util/JsonHelper.h"
 #include "Util/ComponentAutoRegister.h"
 #include "EngineSystem/SceneSystem.h"
+#include "Components/AudioSourceComponent.h"
 #include "Components/UI/Image.h"
 #include "Components/RectTransform.h"
 #include "Object/GameObject.h"
@@ -12,6 +13,11 @@
 #include <directXTK/Mouse.h>
 
 REGISTER_COMPONENT(SettingsUIController);
+
+namespace
+{
+    constexpr const char* kStartSceneButtonClickClipId = "Intro_Button_Sound";
+}
 
 RTTR_REGISTRATION
 {
@@ -51,6 +57,7 @@ void SettingsUIController::OnInitialize()
 void SettingsUIController::OnStart()
 {
     m_Root = GetOwner();
+    EnsureClickAudioSource();
     ResolveRefs();
     CaptureSoundBarBase();
     UpdateSoundBarVisuals();
@@ -92,21 +99,21 @@ void SettingsUIController::OnUpdate(float delta)
 
     ResolveRefs();
     CaptureSoundBarBase();
+    BindSoundBarInputOnce();
 
     auto ms = DirectX::Mouse::Get().GetState();
     bool leftDown = (ms.leftButton != 0);
 
-    if (leftDown && !m_WasLeftDown)
+    // Fallback: bar image event miss가 있어도 드래그 시작 가능하게 유지
+    if (leftDown && !m_DraggingBar1 && !m_DraggingBar2)
     {
         if (IsMouseOverRect(m_SoundBar1PointRect) || IsMouseOverRect(m_SoundBar1BgRect) || IsMouseOverRect(m_SoundBar1GaugeRect))
         {
-            m_DraggingBar1 = true;
-            m_DraggingBar2 = false;
+            BeginSoundBarDrag(1);
         }
         else if (IsMouseOverRect(m_SoundBar2PointRect) || IsMouseOverRect(m_SoundBar2BgRect) || IsMouseOverRect(m_SoundBar2GaugeRect))
         {
-            m_DraggingBar2 = true;
-            m_DraggingBar1 = false;
+            BeginSoundBarDrag(2);
         }
     }
 
@@ -153,6 +160,10 @@ void SettingsUIController::ToggleRoot()
 void SettingsUIController::SetOpen(bool open)
 {
     ResolveRefs();
+    if (m_Root)
+    {
+        m_Root->SetActive(open);
+    }
     m_IsOpen = open;
     if (m_SoundPanel) m_SoundPanel->SetActive(open);
     if (m_CreditPanel) m_CreditPanel->SetActive(false);
@@ -182,6 +193,12 @@ void SettingsUIController::SetOpen(bool open)
 
 void SettingsUIController::ShowSoundTab()
 {
+    if (m_TabSwitchInProgress)
+    {
+        return;
+    }
+    m_TabSwitchInProgress = true;
+
     ResolveRefs();
     if (m_SoundPanel) m_SoundPanel->SetActive(true);
     if (m_CreditPanel) m_CreditPanel->SetActive(false);
@@ -219,10 +236,22 @@ void SettingsUIController::ShowSoundTab()
     }
 
     UpdateSoundBarVisuals();
+    m_CurrentTab = SettingsTab::Sound;
+    m_TabSwitchInProgress = false;
 }
 
 void SettingsUIController::ShowCreditTab()
 {
+    if (m_TabSwitchInProgress)
+    {
+        return;
+    }
+    if (m_CurrentTab == SettingsTab::Credit)
+    {
+        return;
+    }
+    m_TabSwitchInProgress = true;
+
     ResolveRefs();
     if (m_SoundPanel) m_SoundPanel->SetActive(false);
     if (m_CreditPanel) m_CreditPanel->SetActive(true);
@@ -259,6 +288,9 @@ void SettingsUIController::ShowCreditTab()
         m_CreditButtonRect->SetSize(creditSize);
         m_CreditButtonRect->SetPos(creditPos);
     }
+
+    m_CurrentTab = SettingsTab::Credit;
+    m_TabSwitchInProgress = false;
 }
 
 void SettingsUIController::ResolveRefs()
@@ -295,13 +327,11 @@ void SettingsUIController::ResolveRefs()
             m_SoundButtonRect = m_SoundButtonObj->GetComponent<RectTransform>();
             if (m_SoundButtonImage)
             {
+                m_SoundButtonImage->SetMouseEventActive(true);
                 m_SoundButtonImage->ChangeData(soundNormalPath);
-                m_SoundButtonImage->OnPressed.AddListener(m_SoundButtonImage, [this]()
-                {
-                    m_SoundButtonImage->ChangeData(soundPressedPath);
-                });
                 m_SoundButtonImage->OnPressOut.AddListener(m_SoundButtonImage, [this]()
                 {
+                    PlayClickSound();
                     ShowSoundTab();
                 });
             }
@@ -316,13 +346,11 @@ void SettingsUIController::ResolveRefs()
             m_CreditButtonRect = m_CreditButtonObj->GetComponent<RectTransform>();
             if (m_CreditButtonImage)
             {
+                m_CreditButtonImage->SetMouseEventActive(true);
                 m_CreditButtonImage->ChangeData(creditNormalPath);
-                m_CreditButtonImage->OnPressed.AddListener(m_CreditButtonImage, [this]()
-                {
-                    m_CreditButtonImage->ChangeData(creditPressedPath);
-                });
                 m_CreditButtonImage->OnPressOut.AddListener(m_CreditButtonImage, [this]()
                 {
+                    PlayClickSound();
                     ShowCreditTab();
                 });
             }
@@ -339,13 +367,11 @@ void SettingsUIController::ResolveRefs()
                 m_CloseButtonImage = m_CloseButtonObj->GetComponent<Image>();
                 if (m_CloseButtonImage)
                 {
+                    m_CloseButtonImage->SetMouseEventActive(true);
                     m_CloseButtonImage->ChangeData(closeNormalPath);
-                    m_CloseButtonImage->OnPressed.AddListener(m_CloseButtonImage, [this]()
-                    {
-                        m_CloseButtonImage->ChangeData(closePressedPath);
-                    });
                     m_CloseButtonImage->OnPressOut.AddListener(m_CloseButtonImage, [this]()
                     {
+                        PlayClickSound();
                         if (m_CloseButtonImage)
                         {
                             m_CloseButtonImage->ChangeData(closeNormalPath);
@@ -367,13 +393,11 @@ void SettingsUIController::ResolveRefs()
                 m_ExitButtonImage = m_ExitButtonObj->GetComponent<Image>();
                 if (m_ExitButtonImage)
                 {
+                    m_ExitButtonImage->SetMouseEventActive(true);
                     m_ExitButtonImage->ChangeData(exitNormalPath);
-                    m_ExitButtonImage->OnPressed.AddListener(m_ExitButtonImage, [this]()
-                    {
-                        m_ExitButtonImage->ChangeData(exitPressedPath);
-                    });
                     m_ExitButtonImage->OnPressOut.AddListener(m_ExitButtonImage, [this]()
                     {
+                        PlayClickSound();
                         if (m_ExitButtonImage)
                         {
                             m_ExitButtonImage->ChangeData(exitNormalPath);
@@ -404,6 +428,13 @@ void SettingsUIController::ResolveRefs()
     if (!m_SoundBar2Bg) m_SoundBar2Bg = scene->GetGameObjectByName("UI_Settings_SoundBar2_BG");
     if (!m_SoundBar2Gauge) m_SoundBar2Gauge = scene->GetGameObjectByName("UI_Settings_SoundBar2_Gauge");
     if (!m_SoundBar2Point) m_SoundBar2Point = scene->GetGameObjectByName("UI_Settings_SoundBar2_Point");
+
+    if (!m_SoundBar1BgImage && m_SoundBar1Bg) m_SoundBar1BgImage = m_SoundBar1Bg->GetComponent<Image>();
+    if (!m_SoundBar1GaugeImage && m_SoundBar1Gauge) m_SoundBar1GaugeImage = m_SoundBar1Gauge->GetComponent<Image>();
+    if (!m_SoundBar1PointImage && m_SoundBar1Point) m_SoundBar1PointImage = m_SoundBar1Point->GetComponent<Image>();
+    if (!m_SoundBar2BgImage && m_SoundBar2Bg) m_SoundBar2BgImage = m_SoundBar2Bg->GetComponent<Image>();
+    if (!m_SoundBar2GaugeImage && m_SoundBar2Gauge) m_SoundBar2GaugeImage = m_SoundBar2Gauge->GetComponent<Image>();
+    if (!m_SoundBar2PointImage && m_SoundBar2Point) m_SoundBar2PointImage = m_SoundBar2Point->GetComponent<Image>();
 
     if (!m_SoundBar1BgRect && m_SoundBar1Bg) m_SoundBar1BgRect = m_SoundBar1Bg->GetComponent<RectTransform>();
     if (!m_SoundBar1GaugeRect && m_SoundBar1Gauge) m_SoundBar1GaugeRect = m_SoundBar1Gauge->GetComponent<RectTransform>();
@@ -448,9 +479,9 @@ void SettingsUIController::UpdateSoundBarVisuals()
     }
 
     auto& system = AudioManager::Instance().GetSystem();
-    // Bar1: SFX (top), Bar2: BGM (bottom)
-    m_SoundBar1Value = std::clamp(system.GetChannelGroupVolume("SFX"), 0.0f, 1.0f);
-    m_SoundBar2Value = std::clamp(system.GetChannelGroupVolume("BGM"), 0.0f, 1.0f);
+    // Bar1(top): BGM, Bar2(bottom): SFX
+    m_SoundBar1Value = std::clamp(system.GetChannelGroupVolume("BGM"), 0.0f, 0.5f);
+    m_SoundBar2Value = std::clamp(system.GetChannelGroupVolume("SFX"), 0.0f, 0.5f);
 
     UpdateSoundBarVisual(1, m_SoundBar1Value);
     UpdateSoundBarVisual(2, m_SoundBar2Value);
@@ -522,10 +553,110 @@ void SettingsUIController::ApplyVolume(int barIndex, float value)
 
     if (barIndex == 1)
     {
-        system.SetChannelGroupVolume("SFX", value);
+        system.SetChannelGroupVolume("BGM", value);
     }
     else
     {
-        system.SetChannelGroupVolume("BGM", value);
+        system.SetChannelGroupVolume("SFX", value);
     }
+}
+
+void SettingsUIController::BindSoundBarInputOnce()
+{
+    if (m_SoundBarInputBound)
+    {
+        return;
+    }
+
+    if (!m_SoundBar1BgImage || !m_SoundBar1GaugeImage || !m_SoundBar1PointImage
+        || !m_SoundBar2BgImage || !m_SoundBar2GaugeImage || !m_SoundBar2PointImage)
+    {
+        return;
+    }
+
+    m_SoundBar1BgImage->SetMouseEventActive(true);
+    m_SoundBar1GaugeImage->SetMouseEventActive(true);
+    m_SoundBar1PointImage->SetMouseEventActive(true);
+    m_SoundBar2BgImage->SetMouseEventActive(true);
+    m_SoundBar2GaugeImage->SetMouseEventActive(true);
+    m_SoundBar2PointImage->SetMouseEventActive(true);
+
+    m_SoundBar1BgImage->OnPressed.AddListener(m_SoundBar1BgImage, [this]() { BeginSoundBarDrag(1); });
+    m_SoundBar1GaugeImage->OnPressed.AddListener(m_SoundBar1GaugeImage, [this]() { BeginSoundBarDrag(1); });
+    m_SoundBar1PointImage->OnPressed.AddListener(m_SoundBar1PointImage, [this]() { BeginSoundBarDrag(1); });
+    // Drag는 마우스 버튼 업 시점에 종료한다. (OnPressOut로 끊기지 않게)
+
+    m_SoundBar2BgImage->OnPressed.AddListener(m_SoundBar2BgImage, [this]() { BeginSoundBarDrag(2); });
+    m_SoundBar2GaugeImage->OnPressed.AddListener(m_SoundBar2GaugeImage, [this]() { BeginSoundBarDrag(2); });
+    m_SoundBar2PointImage->OnPressed.AddListener(m_SoundBar2PointImage, [this]() { BeginSoundBarDrag(2); });
+    // Drag는 마우스 버튼 업 시점에 종료한다. (OnPressOut로 끊기지 않게)
+
+    m_SoundBarInputBound = true;
+}
+
+void SettingsUIController::BeginSoundBarDrag(int barIndex)
+{
+    if (!m_IsOpen)
+    {
+        return;
+    }
+
+    if (barIndex == 1 && m_SoundBar1BgRect)
+    {
+        m_DraggingBar1 = true;
+        m_DraggingBar2 = false;
+        const float v = GetMouseBarValue(m_SoundBar1BgRect);
+        m_SoundBar1Value = v;
+        ApplyVolume(1, v);
+        UpdateSoundBarVisual(1, v);
+    }
+    else if (barIndex == 2 && m_SoundBar2BgRect)
+    {
+        m_DraggingBar2 = true;
+        m_DraggingBar1 = false;
+        const float v = GetMouseBarValue(m_SoundBar2BgRect);
+        m_SoundBar2Value = v;
+        ApplyVolume(2, v);
+        UpdateSoundBarVisual(2, v);
+    }
+}
+
+void SettingsUIController::EndSoundBarDrag(int barIndex)
+{
+    if (barIndex == 1)
+    {
+        m_DraggingBar1 = false;
+    }
+    else
+    {
+        m_DraggingBar2 = false;
+    }
+}
+
+void SettingsUIController::EnsureClickAudioSource()
+{
+    auto* owner = GetOwner();
+    if (!owner)
+    {
+        return;
+    }
+
+    m_ClickAudioSource = owner->GetComponent<AudioSourceComponent>();
+    if (!m_ClickAudioSource)
+    {
+        m_ClickAudioSource = owner->AddComponent<AudioSourceComponent>();
+    }
+}
+
+void SettingsUIController::PlayClickSound()
+{
+    if (!m_ClickAudioSource)
+    {
+        return;
+    }
+
+    m_ClickAudioSource->SetChannelGroup("SFX");
+    m_ClickAudioSource->SetLoop(false);
+    m_ClickAudioSource->SetClipId(kStartSceneButtonClickClipId);
+    m_ClickAudioSource->Play(true);
 }

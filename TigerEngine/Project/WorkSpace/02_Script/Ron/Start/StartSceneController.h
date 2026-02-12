@@ -5,6 +5,7 @@
 
 class Image;
 class RectTransform;
+class AudioSourceComponent;
 
 class StartSceneController : public ScriptComponent
 {
@@ -25,11 +26,14 @@ public:
 
 private:
     void ApplyLayout();
+    void EnsureAudioSource();
+    void PlayTitleBgm();
     void LoadNextScene();
     static bool IsAdvancePressed(bool down, bool& prevDown);
 
     Image* m_Image = nullptr;
     RectTransform* m_ImageRect = nullptr;
+    AudioSourceComponent* m_AudioSource = nullptr;
 
     bool m_LayoutApplied = false;
     bool m_PrevSpace = false;
