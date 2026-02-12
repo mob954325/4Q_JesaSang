@@ -38,6 +38,7 @@
 #include "../CookingZone/CookingZone.h"
 #include "../../Ron/MiniMapTest/MiniMapManager.h"
 #include "../../Ho/Sound/PlayerSoundSource.h"
+#include "../../Ho/Sound/SoundManager.h"
 
 
 REGISTER_COMPONENT(PlayerController)
@@ -359,6 +360,10 @@ void PlayerController::SerachObjectInteraction(float dt)
         return;
     }
 
+    // sound
+    if(Input::GetKeyDown(interaction_Key))
+        SoundManager::Instance()->PlaySFX(SFXType::FindObj_Interaction_2_Sound);
+
     // holding
     searchTimer += dt;
     float progress = searchTimer / searchTime;
@@ -392,11 +397,17 @@ void PlayerController::SerachObjectInteraction(float dt)
                     minimap->TriggerPieceCollected(3);
                 else if (item->itemId == "4")
                     minimap->TriggerPieceCollected(4);
+
+                // sound
+                SoundManager::Instance()->PlaySFX(SFXType::FindObj_Acquiremap_Sound);
             }
             // 퀘스트 1 : [탐색] 제사준비 : 최조로 음식 재료 획득시 달성
             else if (item->itemType == ItemType::Ingredient)
             {
                 QuestManager::Instance()->StepComplete(1);
+
+                // sound
+                SoundManager::Instance()->PlaySFX(SFXType::FindObj_Acquireitem_Sound);
             }
 
             // item get
@@ -515,6 +526,9 @@ void PlayerController::PutFoodJesaSangInteraction(float dt)
 
         // 퀘스트 3 : [운반] 차려지는 상 : 최조로 제사상에 음식을 올렸을시 달성
         QuestManager::Instance()->StepComplete(3);
+
+        // sound
+        SoundManager::Instance()->PlaySFX(SFXType::GoalObj_Sound);
 
         // clear
         putFoodTimer = 0.0f;
