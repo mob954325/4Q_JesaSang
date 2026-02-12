@@ -123,7 +123,7 @@ private:
     void BackupPostProcess();                 // 기존 PP 백업
     void RestorePostProcess();                // 연출 끝나면 원복
     void StartVignetteFade(float from, float to, float duration);
-    void UpdateVignetteFade(float dt);
+    void UpdateVignetteFade();
     static float EaseInOut(float t);          // 부드러운 페이드 커브
     static float Clamp01(float v);
     
@@ -131,7 +131,7 @@ private:
     void FirstReceiveDirect(std::string itemId);  // 최초 제단 활성화 연출
     void SetAllVisualOff();                       // 모든 제단 비주얼 OFF
     void BeginDirectSequence(std::string itemId);
-    void UpdateDirectSequence(float dt);
+    void UpdateDirectSequence();
     Vector3 GetPositionItem(std::string id);
 
 
