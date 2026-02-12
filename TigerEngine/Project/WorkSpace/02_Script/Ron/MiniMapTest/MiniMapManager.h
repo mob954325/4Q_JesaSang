@@ -6,6 +6,7 @@ class RectTransform;
 class Image;
 class MiniMapTestScript;
 class GameObject;
+class SearchObject;
 
 class MiniMapManager : public ScriptComponent
 {
@@ -44,6 +45,19 @@ public:
     std::string pieceObjectName5 = "UI_MiniMap_Piece_05";
     std::string pieceObjectName6 = "UI_MiniMap_Piece_06";
 
+    // Map piece -> ingredient IDs (comma-separated, e.g., "Ingredient_Apple,Ingredient_Pear")
+    std::string zone0IngredientIds = "";
+    std::string zone1IngredientIds = "";
+    std::string zone2IngredientIds = "";
+    std::string zone3IngredientIds = "";
+    std::string zone4IngredientIds = "";
+    // Map piece -> ping indices (comma-separated, e.g., "0,2,5")
+    std::string zone0PingIndices = "";
+    std::string zone1PingIndices = "";
+    std::string zone2PingIndices = "";
+    std::string zone3PingIndices = "";
+    std::string zone4PingIndices = "";
+
     Vector3 itemWorldPos1{ -300.0f, 0.0f, -300.0f };
     Vector3 itemWorldPos2{ 300.0f, 0.0f, -300.0f };
     Vector3 itemWorldPos3{ -300.0f, 0.0f, 300.0f };
@@ -52,6 +66,7 @@ public:
     Vector3 itemWorldPos6{ 200.0f, 0.0f, 100.0f };
     bool debugShowAllItemPings = false;
     bool debugShowAllPieces = true;
+    bool useFixedItemPingPositions = true;
     bool placeBottomRight = true;
     Vector2 bottomRightMargin{ 20.0f, 20.0f };
     int shiftLeftByMapCount = 1;
@@ -86,15 +101,20 @@ private:
     Image* m_TreasureImage = nullptr;
     RectTransform* m_TreasureRect = nullptr;
     bool m_UsingCompleteMap = false;
+    bool m_ZoneActivated[5]{};
 
     Vector2 m_GaugeBaseSize{};
     bool m_HasGaugeBaseSize = false;
 
     Vector3 m_ItemWorldPos[6]{};
     bool m_ItemActive[6]{};
+    SearchObject* m_ItemSearchObjects[6]{};
+    Vector3 m_ItemPingFixedPos[6]{};
+    bool m_HasFixedItemPingPos = false;
     bool m_PieceActive[6]{};
     bool m_LayoutApplied = false;
 
     void BumpPingRenderOrder();
     void ApplyLayout();
+    void ActivateIngredientsForZone(int zoneIndex);
 };

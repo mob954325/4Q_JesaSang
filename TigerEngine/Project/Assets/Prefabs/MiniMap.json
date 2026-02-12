@@ -8,21 +8,9 @@
       "components": [
         {
           "properties": {
-            "Position": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Rotation": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Scale": [
-              1.0,
-              1.0,
-              1.0
-            ]
+            "Position": [0.0, 0.0, 0.0],
+            "Rotation": [0.0, 0.0, 0.0],
+            "Scale": [1.0, 1.0, 1.0]
           },
           "type": "Transform"
         },
@@ -31,46 +19,19 @@
             "Active": true,
             "BaseMapObjectName": "UI_MiniMap_Base",
             "BaseMapPath": "..\\Assets\\Resource\\MiniMap\\MAP_GR.png",
-            "BottomRightMargin": [
-              60.0,
-              80.0
-            ],
+            "BottomRightMargin": [60.0, 80.0],
             "CompleteMapObjectName": "UI_MiniMap_Complete",
             "CompleteMapPath": "..\\Assets\\Resource\\MiniMap\\Map.png",
             "DebugShowAllItemPings": false,
             "DebugShowAllPieces": false,
             "GaugeBgObjectName": "UI_MiniMap_GaugeBG",
             "GaugeObjectName": "UI_MiniMap_GaugeFill",
-            "ItemWorldPos1": [
-              -300.0,
-              0.0,
-              -300.0
-            ],
-            "ItemWorldPos2": [
-              300.0,
-              0.0,
-              -300.0
-            ],
-            "ItemWorldPos3": [
-              -300.0,
-              0.0,
-              300.0
-            ],
-            "ItemWorldPos4": [
-              300.0,
-              0.0,
-              300.0
-            ],
-            "ItemWorldPos5": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "ItemWorldPos6": [
-              200.0,
-              0.0,
-              100.0
-            ],
+            "ItemWorldPos1": [-300.0, 0.0, -300.0],
+            "ItemWorldPos2": [300.0, 0.0, -300.0],
+            "ItemWorldPos3": [-300.0, 0.0, 300.0],
+            "ItemWorldPos4": [300.0, 0.0, 300.0],
+            "ItemWorldPos5": [0.0, 0.0, 0.0],
+            "ItemWorldPos6": [200.0, 0.0, 100.0],
             "MainPingObjectName": "UI_MiniMap_MainPing",
             "PieceObjectName1": "UI_MiniMap_Piece_01",
             "PieceObjectName2": "UI_MiniMap_Piece_02",
@@ -101,42 +62,20 @@
       "components": [
         {
           "properties": {
-            "Position": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Rotation": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Scale": [
-              1.0,
-              1.0,
-              1.0
-            ]
+            "Position": [0.0, 0.0, 0.0],
+            "Rotation": [0.0, 0.0, 0.0],
+            "Scale": [1.0, 1.0, 1.0]
           },
           "type": "Transform"
         },
         {
           "properties": {
             "Active": false,
-            "color": [
-              1.0,
-              1.0,
-              1.0,
-              1.0
-            ],
+            "color": [1.0, 1.0, 1.0, 1.0],
             "fillAmount": 1.0,
             "isMouseCheck": false,
-            "path": "..\\Assets\\Resource\\MiniMap\\Treasure.png",
-            "sliceBorderPx": [
-              0.0,
-              0.0,
-              0.0,
-              0.0
-            ],
+            "path": "..\\Assets\\Resource\\MiniMap\\map_ghost.png",
+            "sliceBorderPx": [0.0, 0.0, 0.0, 0.0],
             "type": "Simple"
           },
           "type": "Image"
@@ -144,34 +83,12 @@
         {
           "properties": {
             "Active": true,
-            "Pivot": [
-              0.0,
-              0.0
-            ],
-            "Pos": [
-              1500.0,
-              40.0,
-              0.0
-            ],
-            "Position": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Rotation": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Scale": [
-              1.0,
-              1.0,
-              1.0
-            ],
-            "Size": [
-              12.0,
-              12.0
-            ]
+            "Pivot": [0.0, 0.0],
+            "Pos": [1500.0, 40.0, 0.0],
+            "Position": [0.0, 0.0, 0.0],
+            "Rotation": [0.0, 0.0, 0.0],
+            "Scale": [1.0, 1.0, 1.0],
+            "Size": [12.0, 12.0]
           },
           "type": "RectTransform"
         }
@@ -185,42 +102,20 @@
       "components": [
         {
           "properties": {
-            "Position": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Rotation": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Scale": [
-              1.0,
-              1.0,
-              1.0
-            ]
+            "Position": [0.0, 0.0, 0.0],
+            "Rotation": [0.0, 0.0, 0.0],
+            "Scale": [1.0, 1.0, 1.0]
           },
           "type": "Transform"
         },
         {
           "properties": {
             "Active": false,
-            "color": [
-              1.0,
-              1.0,
-              1.0,
-              1.0
-            ],
+            "color": [1.0, 1.0, 1.0, 1.0],
             "fillAmount": 1.0,
             "isMouseCheck": false,
-            "path": "..\\Assets\\Resource\\MiniMap\\Treasure.png",
-            "sliceBorderPx": [
-              0.0,
-              0.0,
-              0.0,
-              0.0
-            ],
+            "path": "..\\Assets\\Resource\\MiniMap\\map_ghost.png",
+            "sliceBorderPx": [0.0, 0.0, 0.0, 0.0],
             "type": "Simple"
           },
           "type": "Image"
@@ -228,34 +123,12 @@
         {
           "properties": {
             "Active": true,
-            "Pivot": [
-              0.0,
-              0.0
-            ],
-            "Pos": [
-              1500.0,
-              40.0,
-              0.0
-            ],
-            "Position": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Rotation": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Scale": [
-              1.0,
-              1.0,
-              1.0
-            ],
-            "Size": [
-              12.0,
-              12.0
-            ]
+            "Pivot": [0.0, 0.0],
+            "Pos": [1500.0, 40.0, 0.0],
+            "Position": [0.0, 0.0, 0.0],
+            "Rotation": [0.0, 0.0, 0.0],
+            "Scale": [1.0, 1.0, 1.0],
+            "Size": [12.0, 12.0]
           },
           "type": "RectTransform"
         }
@@ -269,42 +142,20 @@
       "components": [
         {
           "properties": {
-            "Position": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Rotation": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Scale": [
-              1.0,
-              1.0,
-              1.0
-            ]
+            "Position": [0.0, 0.0, 0.0],
+            "Rotation": [0.0, 0.0, 0.0],
+            "Scale": [1.0, 1.0, 1.0]
           },
           "type": "Transform"
         },
         {
           "properties": {
             "Active": false,
-            "color": [
-              1.0,
-              1.0,
-              1.0,
-              1.0
-            ],
+            "color": [1.0, 1.0, 1.0, 1.0],
             "fillAmount": 1.0,
             "isMouseCheck": false,
-            "path": "..\\Assets\\Resource\\MiniMap\\Treasure.png",
-            "sliceBorderPx": [
-              0.0,
-              0.0,
-              0.0,
-              0.0
-            ],
+            "path": "..\\Assets\\Resource\\MiniMap\\map_ghost.png",
+            "sliceBorderPx": [0.0, 0.0, 0.0, 0.0],
             "type": "Simple"
           },
           "type": "Image"
@@ -312,34 +163,12 @@
         {
           "properties": {
             "Active": true,
-            "Pivot": [
-              0.0,
-              0.0
-            ],
-            "Pos": [
-              1500.0,
-              40.0,
-              0.0
-            ],
-            "Position": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Rotation": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Scale": [
-              1.0,
-              1.0,
-              1.0
-            ],
-            "Size": [
-              12.0,
-              12.0
-            ]
+            "Pivot": [0.0, 0.0],
+            "Pos": [1500.0, 40.0, 0.0],
+            "Position": [0.0, 0.0, 0.0],
+            "Rotation": [0.0, 0.0, 0.0],
+            "Scale": [1.0, 1.0, 1.0],
+            "Size": [12.0, 12.0]
           },
           "type": "RectTransform"
         }
@@ -353,42 +182,20 @@
       "components": [
         {
           "properties": {
-            "Position": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Rotation": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Scale": [
-              1.0,
-              1.0,
-              1.0
-            ]
+            "Position": [0.0, 0.0, 0.0],
+            "Rotation": [0.0, 0.0, 0.0],
+            "Scale": [1.0, 1.0, 1.0]
           },
           "type": "Transform"
         },
         {
           "properties": {
             "Active": false,
-            "color": [
-              1.0,
-              1.0,
-              1.0,
-              1.0
-            ],
+            "color": [1.0, 1.0, 1.0, 1.0],
             "fillAmount": 1.0,
             "isMouseCheck": false,
-            "path": "..\\Assets\\Resource\\MiniMap\\Treasure.png",
-            "sliceBorderPx": [
-              0.0,
-              0.0,
-              0.0,
-              0.0
-            ],
+            "path": "..\\Assets\\Resource\\MiniMap\\map_ghost.png",
+            "sliceBorderPx": [0.0, 0.0, 0.0, 0.0],
             "type": "Simple"
           },
           "type": "Image"
@@ -396,34 +203,12 @@
         {
           "properties": {
             "Active": true,
-            "Pivot": [
-              0.0,
-              0.0
-            ],
-            "Pos": [
-              1500.0,
-              40.0,
-              0.0
-            ],
-            "Position": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Rotation": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Scale": [
-              1.0,
-              1.0,
-              1.0
-            ],
-            "Size": [
-              12.0,
-              12.0
-            ]
+            "Pivot": [0.0, 0.0],
+            "Pos": [1500.0, 40.0, 0.0],
+            "Position": [0.0, 0.0, 0.0],
+            "Rotation": [0.0, 0.0, 0.0],
+            "Scale": [1.0, 1.0, 1.0],
+            "Size": [12.0, 12.0]
           },
           "type": "RectTransform"
         }
@@ -437,42 +222,20 @@
       "components": [
         {
           "properties": {
-            "Position": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Rotation": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Scale": [
-              1.0,
-              1.0,
-              1.0
-            ]
+            "Position": [0.0, 0.0, 0.0],
+            "Rotation": [0.0, 0.0, 0.0],
+            "Scale": [1.0, 1.0, 1.0]
           },
           "type": "Transform"
         },
         {
           "properties": {
             "Active": false,
-            "color": [
-              1.0,
-              1.0,
-              1.0,
-              1.0
-            ],
+            "color": [1.0, 1.0, 1.0, 1.0],
             "fillAmount": 1.0,
             "isMouseCheck": false,
-            "path": "..\\Assets\\Resource\\MiniMap\\Treasure.png",
-            "sliceBorderPx": [
-              0.0,
-              0.0,
-              0.0,
-              0.0
-            ],
+            "path": "..\\Assets\\Resource\\MiniMap\\map_ghost.png",
+            "sliceBorderPx": [0.0, 0.0, 0.0, 0.0],
             "type": "Simple"
           },
           "type": "Image"
@@ -480,34 +243,12 @@
         {
           "properties": {
             "Active": true,
-            "Pivot": [
-              0.0,
-              0.0
-            ],
-            "Pos": [
-              1500.0,
-              40.0,
-              0.0
-            ],
-            "Position": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Rotation": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Scale": [
-              1.0,
-              1.0,
-              1.0
-            ],
-            "Size": [
-              12.0,
-              12.0
-            ]
+            "Pivot": [0.0, 0.0],
+            "Pos": [1500.0, 40.0, 0.0],
+            "Position": [0.0, 0.0, 0.0],
+            "Rotation": [0.0, 0.0, 0.0],
+            "Scale": [1.0, 1.0, 1.0],
+            "Size": [12.0, 12.0]
           },
           "type": "RectTransform"
         }
@@ -521,42 +262,20 @@
       "components": [
         {
           "properties": {
-            "Position": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Rotation": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Scale": [
-              1.0,
-              1.0,
-              1.0
-            ]
+            "Position": [0.0, 0.0, 0.0],
+            "Rotation": [0.0, 0.0, 0.0],
+            "Scale": [1.0, 1.0, 1.0]
           },
           "type": "Transform"
         },
         {
           "properties": {
             "Active": false,
-            "color": [
-              1.0,
-              1.0,
-              1.0,
-              1.0
-            ],
+            "color": [1.0, 1.0, 1.0, 1.0],
             "fillAmount": 1.0,
             "isMouseCheck": false,
-            "path": "..\\Assets\\Resource\\MiniMap\\Treasure.png",
-            "sliceBorderPx": [
-              0.0,
-              0.0,
-              0.0,
-              0.0
-            ],
+            "path": "..\\Assets\\Resource\\MiniMap\\map_ghost.png",
+            "sliceBorderPx": [0.0, 0.0, 0.0, 0.0],
             "type": "Simple"
           },
           "type": "Image"
@@ -564,34 +283,12 @@
         {
           "properties": {
             "Active": true,
-            "Pivot": [
-              0.0,
-              0.0
-            ],
-            "Pos": [
-              1500.0,
-              40.0,
-              0.0
-            ],
-            "Position": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Rotation": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Scale": [
-              1.0,
-              1.0,
-              1.0
-            ],
-            "Size": [
-              12.0,
-              12.0
-            ]
+            "Pivot": [0.0, 0.0],
+            "Pos": [1500.0, 40.0, 0.0],
+            "Position": [0.0, 0.0, 0.0],
+            "Rotation": [0.0, 0.0, 0.0],
+            "Scale": [1.0, 1.0, 1.0],
+            "Size": [12.0, 12.0]
           },
           "type": "RectTransform"
         }
@@ -605,42 +302,20 @@
       "components": [
         {
           "properties": {
-            "Position": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Rotation": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Scale": [
-              1.0,
-              1.0,
-              1.0
-            ]
+            "Position": [0.0, 0.0, 0.0],
+            "Rotation": [0.0, 0.0, 0.0],
+            "Scale": [1.0, 1.0, 1.0]
           },
           "type": "Transform"
         },
         {
           "properties": {
             "Active": true,
-            "color": [
-              1.0,
-              1.0,
-              1.0,
-              1.0
-            ],
+            "color": [1.0, 1.0, 1.0, 1.0],
             "fillAmount": 1.0,
             "isMouseCheck": false,
-            "path": "..\\Assets\\Resource\\MiniMap\\MainPing.png",
-            "sliceBorderPx": [
-              0.0,
-              0.0,
-              0.0,
-              0.0
-            ],
+            "path": "..\\Assets\\Resource\\MiniMap\\map_charater.png",
+            "sliceBorderPx": [0.0, 0.0, 0.0, 0.0],
             "type": "Simple"
           },
           "type": "Image"
@@ -648,34 +323,12 @@
         {
           "properties": {
             "Active": true,
-            "Pivot": [
-              0.0,
-              0.0
-            ],
-            "Pos": [
-              1500.0,
-              40.0,
-              0.0
-            ],
-            "Position": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Rotation": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Scale": [
-              1.0,
-              1.0,
-              1.0
-            ],
-            "Size": [
-              16.0,
-              16.0
-            ]
+            "Pivot": [0.0, 0.0],
+            "Pos": [1500.0, 40.0, 0.0],
+            "Position": [0.0, 0.0, 0.0],
+            "Rotation": [0.0, 0.0, 0.0],
+            "Scale": [1.0, 1.0, 1.0],
+            "Size": [16.0, 16.0]
           },
           "type": "RectTransform"
         }
@@ -689,42 +342,20 @@
       "components": [
         {
           "properties": {
-            "Position": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Rotation": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Scale": [
-              1.0,
-              1.0,
-              1.0
-            ]
+            "Position": [0.0, 0.0, 0.0],
+            "Rotation": [0.0, 0.0, 0.0],
+            "Scale": [1.0, 1.0, 1.0]
           },
           "type": "Transform"
         },
         {
           "properties": {
             "Active": false,
-            "color": [
-              1.0,
-              1.0,
-              1.0,
-              1.0
-            ],
+            "color": [1.0, 1.0, 1.0, 1.0],
             "fillAmount": 1.0,
             "isMouseCheck": false,
             "path": "..\\Assets\\Resource\\MiniMap\\MAP05.png",
-            "sliceBorderPx": [
-              0.0,
-              0.0,
-              0.0,
-              0.0
-            ],
+            "sliceBorderPx": [0.0, 0.0, 0.0, 0.0],
             "type": "Simple"
           },
           "type": "Image"
@@ -732,34 +363,12 @@
         {
           "properties": {
             "Active": false,
-            "Pivot": [
-              0.0,
-              0.0
-            ],
-            "Pos": [
-              1670.666748046875,
-              168.0,
-              0.0
-            ],
-            "Position": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Rotation": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Scale": [
-              1.0,
-              1.0,
-              1.0
-            ],
-            "Size": [
-              85.33333587646484,
-              128.0
-            ]
+            "Pivot": [0.0, 0.0],
+            "Pos": [1670.666748046875, 168.0, 0.0],
+            "Position": [0.0, 0.0, 0.0],
+            "Rotation": [0.0, 0.0, 0.0],
+            "Scale": [1.0, 1.0, 1.0],
+            "Size": [85.33333587646484, 128.0]
           },
           "type": "RectTransform"
         }
@@ -773,42 +382,20 @@
       "components": [
         {
           "properties": {
-            "Position": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Rotation": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Scale": [
-              1.0,
-              1.0,
-              1.0
-            ]
+            "Position": [0.0, 0.0, 0.0],
+            "Rotation": [0.0, 0.0, 0.0],
+            "Scale": [1.0, 1.0, 1.0]
           },
           "type": "Transform"
         },
         {
           "properties": {
             "Active": false,
-            "color": [
-              1.0,
-              1.0,
-              1.0,
-              1.0
-            ],
+            "color": [1.0, 1.0, 1.0, 1.0],
             "fillAmount": 1.0,
             "isMouseCheck": false,
             "path": "..\\\\Assets\\\\Resource\\\\MiniMap\\\\MAP05.png",
-            "sliceBorderPx": [
-              0.0,
-              0.0,
-              0.0,
-              0.0
-            ],
+            "sliceBorderPx": [0.0, 0.0, 0.0, 0.0],
             "type": "Simple"
           },
           "type": "Image"
@@ -816,34 +403,12 @@
         {
           "properties": {
             "Active": true,
-            "Pivot": [
-              0.0,
-              0.0
-            ],
-            "Pos": [
-              1500.0,
-              40.0,
-              0.0
-            ],
-            "Position": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Rotation": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Scale": [
-              1.0,
-              1.0,
-              1.0
-            ],
-            "Size": [
-              256.0,
-              256.0
-            ]
+            "Pivot": [0.0, 0.0],
+            "Pos": [1500.0, 40.0, 0.0],
+            "Position": [0.0, 0.0, 0.0],
+            "Rotation": [0.0, 0.0, 0.0],
+            "Scale": [1.0, 1.0, 1.0],
+            "Size": [256.0, 256.0]
           },
           "type": "RectTransform"
         }
@@ -857,42 +422,20 @@
       "components": [
         {
           "properties": {
-            "Position": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Rotation": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Scale": [
-              1.0,
-              1.0,
-              1.0
-            ]
+            "Position": [0.0, 0.0, 0.0],
+            "Rotation": [0.0, 0.0, 0.0],
+            "Scale": [1.0, 1.0, 1.0]
           },
           "type": "Transform"
         },
         {
           "properties": {
             "Active": false,
-            "color": [
-              1.0,
-              1.0,
-              1.0,
-              1.0
-            ],
+            "color": [1.0, 1.0, 1.0, 1.0],
             "fillAmount": 1.0,
             "isMouseCheck": false,
             "path": "..\\\\Assets\\\\Resource\\\\MiniMap\\\\MAP04.png",
-            "sliceBorderPx": [
-              0.0,
-              0.0,
-              0.0,
-              0.0
-            ],
+            "sliceBorderPx": [0.0, 0.0, 0.0, 0.0],
             "type": "Simple"
           },
           "type": "Image"
@@ -900,34 +443,12 @@
         {
           "properties": {
             "Active": true,
-            "Pivot": [
-              0.0,
-              0.0
-            ],
-            "Pos": [
-              1500.0,
-              40.0,
-              0.0
-            ],
-            "Position": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Rotation": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Scale": [
-              1.0,
-              1.0,
-              1.0
-            ],
-            "Size": [
-              256.0,
-              256.0
-            ]
+            "Pivot": [0.0, 0.0],
+            "Pos": [1500.0, 40.0, 0.0],
+            "Position": [0.0, 0.0, 0.0],
+            "Rotation": [0.0, 0.0, 0.0],
+            "Scale": [1.0, 1.0, 1.0],
+            "Size": [256.0, 256.0]
           },
           "type": "RectTransform"
         }
@@ -941,42 +462,20 @@
       "components": [
         {
           "properties": {
-            "Position": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Rotation": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Scale": [
-              1.0,
-              1.0,
-              1.0
-            ]
+            "Position": [0.0, 0.0, 0.0],
+            "Rotation": [0.0, 0.0, 0.0],
+            "Scale": [1.0, 1.0, 1.0]
           },
           "type": "Transform"
         },
         {
           "properties": {
             "Active": false,
-            "color": [
-              1.0,
-              1.0,
-              1.0,
-              1.0
-            ],
+            "color": [1.0, 1.0, 1.0, 1.0],
             "fillAmount": 1.0,
             "isMouseCheck": false,
             "path": "..\\\\Assets\\\\Resource\\\\MiniMap\\\\MAP03.png",
-            "sliceBorderPx": [
-              0.0,
-              0.0,
-              0.0,
-              0.0
-            ],
+            "sliceBorderPx": [0.0, 0.0, 0.0, 0.0],
             "type": "Simple"
           },
           "type": "Image"
@@ -984,34 +483,12 @@
         {
           "properties": {
             "Active": true,
-            "Pivot": [
-              0.0,
-              0.0
-            ],
-            "Pos": [
-              1500.0,
-              40.0,
-              0.0
-            ],
-            "Position": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Rotation": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Scale": [
-              1.0,
-              1.0,
-              1.0
-            ],
-            "Size": [
-              256.0,
-              256.0
-            ]
+            "Pivot": [0.0, 0.0],
+            "Pos": [1500.0, 40.0, 0.0],
+            "Position": [0.0, 0.0, 0.0],
+            "Rotation": [0.0, 0.0, 0.0],
+            "Scale": [1.0, 1.0, 1.0],
+            "Size": [256.0, 256.0]
           },
           "type": "RectTransform"
         }
@@ -1025,42 +502,20 @@
       "components": [
         {
           "properties": {
-            "Position": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Rotation": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Scale": [
-              1.0,
-              1.0,
-              1.0
-            ]
+            "Position": [0.0, 0.0, 0.0],
+            "Rotation": [0.0, 0.0, 0.0],
+            "Scale": [1.0, 1.0, 1.0]
           },
           "type": "Transform"
         },
         {
           "properties": {
             "Active": false,
-            "color": [
-              1.0,
-              1.0,
-              1.0,
-              1.0
-            ],
+            "color": [1.0, 1.0, 1.0, 1.0],
             "fillAmount": 1.0,
             "isMouseCheck": false,
             "path": "..\\\\Assets\\\\Resource\\\\MiniMap\\\\MAP02.png",
-            "sliceBorderPx": [
-              0.0,
-              0.0,
-              0.0,
-              0.0
-            ],
+            "sliceBorderPx": [0.0, 0.0, 0.0, 0.0],
             "type": "Simple"
           },
           "type": "Image"
@@ -1068,34 +523,12 @@
         {
           "properties": {
             "Active": true,
-            "Pivot": [
-              0.0,
-              0.0
-            ],
-            "Pos": [
-              1500.0,
-              40.0,
-              0.0
-            ],
-            "Position": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Rotation": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Scale": [
-              1.0,
-              1.0,
-              1.0
-            ],
-            "Size": [
-              256.0,
-              256.0
-            ]
+            "Pivot": [0.0, 0.0],
+            "Pos": [1500.0, 40.0, 0.0],
+            "Position": [0.0, 0.0, 0.0],
+            "Rotation": [0.0, 0.0, 0.0],
+            "Scale": [1.0, 1.0, 1.0],
+            "Size": [256.0, 256.0]
           },
           "type": "RectTransform"
         }
@@ -1109,42 +542,20 @@
       "components": [
         {
           "properties": {
-            "Position": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Rotation": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Scale": [
-              1.0,
-              1.0,
-              1.0
-            ]
+            "Position": [0.0, 0.0, 0.0],
+            "Rotation": [0.0, 0.0, 0.0],
+            "Scale": [1.0, 1.0, 1.0]
           },
           "type": "Transform"
         },
         {
           "properties": {
             "Active": false,
-            "color": [
-              1.0,
-              1.0,
-              1.0,
-              1.0
-            ],
+            "color": [1.0, 1.0, 1.0, 1.0],
             "fillAmount": 1.0,
             "isMouseCheck": false,
             "path": "..\\\\Assets\\\\Resource\\\\MiniMap\\\\MAP01.png",
-            "sliceBorderPx": [
-              0.0,
-              0.0,
-              0.0,
-              0.0
-            ],
+            "sliceBorderPx": [0.0, 0.0, 0.0, 0.0],
             "type": "Simple"
           },
           "type": "Image"
@@ -1152,34 +563,12 @@
         {
           "properties": {
             "Active": true,
-            "Pivot": [
-              0.0,
-              0.0
-            ],
-            "Pos": [
-              1500.0,
-              40.0,
-              0.0
-            ],
-            "Position": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Rotation": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Scale": [
-              1.0,
-              1.0,
-              1.0
-            ],
-            "Size": [
-              256.0,
-              256.0
-            ]
+            "Pivot": [0.0, 0.0],
+            "Pos": [1500.0, 40.0, 0.0],
+            "Position": [0.0, 0.0, 0.0],
+            "Rotation": [0.0, 0.0, 0.0],
+            "Scale": [1.0, 1.0, 1.0],
+            "Size": [256.0, 256.0]
           },
           "type": "RectTransform"
         }
@@ -1193,42 +582,20 @@
       "components": [
         {
           "properties": {
-            "Position": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Rotation": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Scale": [
-              1.0,
-              1.0,
-              1.0
-            ]
+            "Position": [0.0, 0.0, 0.0],
+            "Rotation": [0.0, 0.0, 0.0],
+            "Scale": [1.0, 1.0, 1.0]
           },
           "type": "Transform"
         },
         {
           "properties": {
             "Active": false,
-            "color": [
-              1.0,
-              1.0,
-              1.0,
-              1.0
-            ],
+            "color": [1.0, 1.0, 1.0, 1.0],
             "fillAmount": 1.0,
             "isMouseCheck": false,
             "path": "..\\Assets\\Resource\\MiniMap\\GaugeFill.png",
-            "sliceBorderPx": [
-              0.0,
-              0.0,
-              0.0,
-              0.0
-            ],
+            "sliceBorderPx": [0.0, 0.0, 0.0, 0.0],
             "type": "Simple"
           },
           "type": "Image"
@@ -1236,34 +603,12 @@
         {
           "properties": {
             "Active": true,
-            "Pivot": [
-              0.0,
-              0.0
-            ],
-            "Pos": [
-              1500.0,
-              302.0,
-              0.0
-            ],
-            "Position": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Rotation": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Scale": [
-              1.0,
-              1.0,
-              1.0
-            ],
-            "Size": [
-              256.0,
-              16.0
-            ]
+            "Pivot": [0.0, 0.0],
+            "Pos": [1500.0, 302.0, 0.0],
+            "Position": [0.0, 0.0, 0.0],
+            "Rotation": [0.0, 0.0, 0.0],
+            "Scale": [1.0, 1.0, 1.0],
+            "Size": [256.0, 16.0]
           },
           "type": "RectTransform"
         }
@@ -1277,42 +622,20 @@
       "components": [
         {
           "properties": {
-            "Position": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Rotation": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Scale": [
-              1.0,
-              1.0,
-              1.0
-            ]
+            "Position": [0.0, 0.0, 0.0],
+            "Rotation": [0.0, 0.0, 0.0],
+            "Scale": [1.0, 1.0, 1.0]
           },
           "type": "Transform"
         },
         {
           "properties": {
             "Active": false,
-            "color": [
-              1.0,
-              1.0,
-              1.0,
-              1.0
-            ],
+            "color": [1.0, 1.0, 1.0, 1.0],
             "fillAmount": 1.0,
             "isMouseCheck": false,
             "path": "..\\Assets\\Resource\\MiniMap\\GaugeBG.png",
-            "sliceBorderPx": [
-              0.0,
-              0.0,
-              0.0,
-              0.0
-            ],
+            "sliceBorderPx": [0.0, 0.0, 0.0, 0.0],
             "type": "Simple"
           },
           "type": "Image"
@@ -1320,34 +643,12 @@
         {
           "properties": {
             "Active": true,
-            "Pivot": [
-              0.0,
-              0.0
-            ],
-            "Pos": [
-              1500.0,
-              302.0,
-              0.0
-            ],
-            "Position": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Rotation": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Scale": [
-              1.0,
-              1.0,
-              1.0
-            ],
-            "Size": [
-              256.0,
-              16.0
-            ]
+            "Pivot": [0.0, 0.0],
+            "Pos": [1500.0, 302.0, 0.0],
+            "Position": [0.0, 0.0, 0.0],
+            "Rotation": [0.0, 0.0, 0.0],
+            "Scale": [1.0, 1.0, 1.0],
+            "Size": [256.0, 16.0]
           },
           "type": "RectTransform"
         }
@@ -1361,42 +662,20 @@
       "components": [
         {
           "properties": {
-            "Position": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Rotation": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Scale": [
-              1.0,
-              1.0,
-              1.0
-            ]
+            "Position": [0.0, 0.0, 0.0],
+            "Rotation": [0.0, 0.0, 0.0],
+            "Scale": [1.0, 1.0, 1.0]
           },
           "type": "Transform"
         },
         {
           "properties": {
             "Active": false,
-            "color": [
-              1.0,
-              1.0,
-              1.0,
-              1.0
-            ],
+            "color": [1.0, 1.0, 1.0, 1.0],
             "fillAmount": 1.0,
             "isMouseCheck": false,
             "path": "..\\\\Assets\\\\Resource\\\\MiniMap\\\\Map.png",
-            "sliceBorderPx": [
-              0.0,
-              0.0,
-              0.0,
-              0.0
-            ],
+            "sliceBorderPx": [0.0, 0.0, 0.0, 0.0],
             "type": "Simple"
           },
           "type": "Image"
@@ -1404,34 +683,12 @@
         {
           "properties": {
             "Active": false,
-            "Pivot": [
-              0.0,
-              0.0
-            ],
-            "Pos": [
-              1500.0,
-              40.0,
-              0.0
-            ],
-            "Position": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Rotation": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Scale": [
-              1.0,
-              1.0,
-              1.0
-            ],
-            "Size": [
-              1075.0,
-              1048.0
-            ]
+            "Pivot": [0.0, 0.0],
+            "Pos": [1500.0, 40.0, 0.0],
+            "Position": [0.0, 0.0, 0.0],
+            "Rotation": [0.0, 0.0, 0.0],
+            "Scale": [1.0, 1.0, 1.0],
+            "Size": [1075.0, 1048.0]
           },
           "type": "RectTransform"
         }
@@ -1445,42 +702,20 @@
       "components": [
         {
           "properties": {
-            "Position": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Rotation": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Scale": [
-              1.0,
-              1.0,
-              1.0
-            ]
+            "Position": [0.0, 0.0, 0.0],
+            "Rotation": [0.0, 0.0, 0.0],
+            "Scale": [1.0, 1.0, 1.0]
           },
           "type": "Transform"
         },
         {
           "properties": {
             "Active": true,
-            "color": [
-              1.0,
-              1.0,
-              1.0,
-              1.0
-            ],
+            "color": [1.0, 1.0, 1.0, 1.0],
             "fillAmount": 1.0,
             "isMouseCheck": false,
             "path": "..\\\\Assets\\\\Resource\\\\MiniMap\\\\MAP_GR.png",
-            "sliceBorderPx": [
-              0.0,
-              0.0,
-              0.0,
-              0.0
-            ],
+            "sliceBorderPx": [0.0, 0.0, 0.0, 0.0],
             "type": "Simple"
           },
           "type": "Image"
@@ -1488,34 +723,12 @@
         {
           "properties": {
             "Active": true,
-            "Pivot": [
-              0.0,
-              0.0
-            ],
-            "Pos": [
-              1500.0,
-              40.0,
-              0.0
-            ],
-            "Position": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Rotation": [
-              0.0,
-              0.0,
-              0.0
-            ],
-            "Scale": [
-              1.0,
-              1.0,
-              1.0
-            ],
-            "Size": [
-              256.0,
-              256.0
-            ]
+            "Pivot": [0.0, 0.0],
+            "Pos": [1500.0, 40.0, 0.0],
+            "Position": [0.0, 0.0, 0.0],
+            "Rotation": [0.0, 0.0, 0.0],
+            "Scale": [1.0, 1.0, 1.0],
+            "Size": [256.0, 256.0]
           },
           "type": "RectTransform"
         }
