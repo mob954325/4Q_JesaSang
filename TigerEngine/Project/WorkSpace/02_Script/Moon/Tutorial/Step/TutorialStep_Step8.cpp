@@ -7,6 +7,7 @@
 #include "../SearchObject_Tutorial.h"
 #include "../../../Woo/Player/PlayerController.h"
 
+
 void TutorialStep_Step8::Enter()
 {
     isDone = false;
@@ -96,7 +97,14 @@ void TutorialStep_Step8::Monologue()
 
     tutorialController->dialogue->ShowDialogueHold(line);
 
-    if (Input::GetKeyDown(Keyboard::F) || Input::GetMouseButtonDown(0))
+    if (Input::GetKeyDown(Keyboard::F) ||
+        Input::GetKeyDown(Keyboard::Space) ||
+        Input::GetMouseButtonDown(0) ||
+        Input::GetKeyDown(Keyboard::Up) ||
+        Input::GetKeyDown(Keyboard::Down) ||
+        Input::GetKeyDown(Keyboard::Left) ||
+        Input::GetKeyDown(Keyboard::Right)
+        )
     {
         tutorialController->dialogue->DialogueOnOff(false);
         phase = Step8Phase::Done;
