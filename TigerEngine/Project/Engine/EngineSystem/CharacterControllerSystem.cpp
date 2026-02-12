@@ -260,7 +260,7 @@ PxController* CharacterControllerSystem::CreateCapsuleCollider(
     desc.density = density;
     desc.climbingMode = PxCapsuleClimbingMode::eCONSTRAINED;
     desc.slopeLimit = cosf(PxPi / 4);   // 오를 수 있는 최대 경사 : 45도
-    desc.stepOffset = 0.2f;             // 자동으로 넘을 수 있는 턱 (20cm)
+    desc.stepOffset = 0.1f;             // 자동으로 넘을 수 있는 턱 (20cm)
     desc.contactOffset = 0.05f;         // 충돌 여유 (떨림 방지) : 값이 클수록 더 쉽게 계단으로 인식 
     desc.reportCallback = &m_ControllerHitReport;
 
