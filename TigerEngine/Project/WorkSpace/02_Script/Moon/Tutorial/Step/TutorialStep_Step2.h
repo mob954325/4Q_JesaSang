@@ -25,11 +25,14 @@ private:
     bool isDone = false;
 
     float step2Timer = 0.0f;
-    float delayStep2 = 2.0f;
+    float SoundDelay = 2.0f;
+
+    bool soundPlayed = false;
+
 
     Step2Phase phase = Step2Phase::Sound;
 
-    GameObject* baby = nullptr;
+    void Monologue();
 
 public:
     TutorialStep_Step2(TutorialController* _tutorialController) : ITutorialStep(_tutorialController) {}

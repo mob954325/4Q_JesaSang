@@ -4,6 +4,7 @@
 #include "../../Camera/CameraController.h"
 #include "../../Object/HideObject.h"
 #include "../../Inventory/Inventory.h"
+#include "../../../Ho/Sound/PlayerSoundSource.h"
 
 void Player_Hide::Enter()
 {
@@ -23,6 +24,9 @@ void Player_Hide::Enter()
 
     // set sense radius
     player->curSenseRadius = 0;
+
+    // set sound
+    player->sound->StopSound();
 
     //cout << "[Player] Enter Hide State" << endl;
 }

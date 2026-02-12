@@ -12,15 +12,10 @@ class AudioSourceComponent : public Component
 {
     RTTR_ENABLE(Component)
 public:
-    AudioSourceComponent() { SetName("AudioSource"); }
-    ~AudioSourceComponent() override = default;
-
+    void OnInitialize() override;
     void OnStart() override;
     void OnUpdate(float delta) override;
     void OnDestory() override;
-
-    void Enable_Inner() override;
-    void Disable_Inner() override;
 
     nlohmann::json Serialize() override;
     void Deserialize(nlohmann::json data) override;

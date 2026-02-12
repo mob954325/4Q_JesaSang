@@ -41,6 +41,13 @@ namespace
 
 void QuestManager::OnInitialize()
 {
+    // 중복 생성 방지
+    if (s_instance != nullptr && s_instance != this)
+    {
+        assert(false && "Duplicate GameManager instance detected.");
+        return;
+    }
+
     s_instance = this;
 }
 

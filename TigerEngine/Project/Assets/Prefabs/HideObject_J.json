@@ -2,20 +2,21 @@
   "prefab": [
     {
       "Active": true,
-      "ID": 18433,
+      "ID": 21997,
       "Name": "HideObject",
-      "ParentID": 18360,
+      "ParentID": -1,
       "components": [
         {
           "properties": {
             "Position": [
-              -198.89892578125,
+              252.10914611816406,
               0.0,
-              168.58612060546875
+              -596.6998291015625
             ],
             "Rotation": [
               -0.0,
               0.0,
+              -0.0
             ],
             "Scale": [
               1.0,
@@ -24,56 +25,6 @@
             ]
           },
           "type": "Transform"
-        },
-        {
-          "properties": {
-            "Active": true,
-            "DataPath": "..\\Assets\\Resource\\ArtModel\\JageaJang\\cabinet.fbx",
-            "IsStatic": false
-          },
-          "type": "FBXData"
-        },
-        {
-          "properties": {
-            "Active": true,
-            "Alpha": 1.0,
-            "Diffuse": [
-              1.0,
-              1.0,
-              1.0,
-              1.0
-            ],
-            "DiffuseOverride": [
-              1.0,
-              1.0,
-              1.0,
-              1.0
-            ],
-            "Emissive": [
-              1.0,
-              1.0,
-              1.0,
-              1.0
-            ],
-            "EmissiveOverride": [
-              1.0,
-              1.0,
-              1.0,
-              1.0
-            ],
-            "IsGround": false,
-            "Metalic": 1.0,
-            "MetallicOverride": 1.0,
-            "RenderBlendType": "Opaque",
-            "Roughness": 1.0,
-            "RoughnessOverride": 1.0,
-            "UseDiffuseOverride": false,
-            "UseEmissiveOverride": false,
-            "UseMetallicOverride": false,
-            "UseRoughnessOverride": false,
-            "isroughnessFromShininess": false
-          },
-          "type": "FBXRenderer"
         },
         {
           "properties": {
@@ -108,9 +59,9 @@
     },
     {
       "Active": false,
-      "ID": 18434,
+      "ID": 21998,
       "Name": "Image_SensorOn",
-      "ParentID": 18433,
+      "ParentID": 21997,
       "components": [
         {
           "properties": {
@@ -196,9 +147,9 @@
     },
     {
       "Active": false,
-      "ID": 18435,
+      "ID": 21999,
       "Name": "Image_InteractionOn",
-      "ParentID": 18433,
+      "ParentID": 21997,
       "components": [
         {
           "properties": {
@@ -266,7 +217,7 @@
             "drawSpacetype": "World",
             "fillAmount": 1.0,
             "imageType": "Simple",
-            "isBillboard": true,
+            "isBillboard": false,
             "isMouseCheck": false,
             "path": "..\\Assets\\Resource\\UI\\Interaction\\F.png",
             "sliceBorderPx": [
@@ -284,9 +235,9 @@
     },
     {
       "Active": false,
-      "ID": 18436,
+      "ID": 22000,
       "Name": "Image_InteractionGauge",
-      "ParentID": 18433,
+      "ParentID": 21997,
       "components": [
         {
           "properties": {
@@ -353,7 +304,7 @@
             ],
             "drawSpacetype": "World",
             "fillAmount": 0.0,
-            "imageType": "FillHorizontal",
+            "imageType": "FillVertical",
             "isBillboard": false,
             "isMouseCheck": false,
             "path": "..\\Assets\\Resource\\UI\\Interaction\\F_02.png",
@@ -363,10 +314,166 @@
               0.0,
               0.0
             ],
-            "type": "FillHorizontal",
+            "type": "FillVertical",
             "zOrder": 2
           },
           "type": "Image"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 22001,
+      "Name": "OpenModel",
+      "ParentID": 21997,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "DataPath": "..\\Assets\\Resource\\ArtModel\\JageaJang\\cabinet_open.fbx",
+            "IsStatic": false
+          },
+          "type": "FBXData"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Alpha": 1.0,
+            "Diffuse": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "DiffuseOverride": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "Emissive": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "EmissiveOverride": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "IsGround": false,
+            "Metalic": 1.0,
+            "MetallicOverride": 1.0,
+            "RenderBlendType": "Opaque",
+            "Roughness": 1.0,
+            "RoughnessOverride": 1.0,
+            "UseDiffuseOverride": false,
+            "UseEmissiveOverride": false,
+            "UseMetallicOverride": false,
+            "UseRoughnessOverride": false,
+            "isroughnessFromShininess": false
+          },
+          "type": "FBXRenderer"
+        }
+      ]
+    },
+    {
+      "Active": false,
+      "ID": 22002,
+      "Name": "CloseModel",
+      "ParentID": 21997,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "DataPath": "..\\Assets\\Resource\\ArtModel\\JageaJang\\cabinet.fbx",
+            "IsStatic": false
+          },
+          "type": "FBXData"
+        },
+        {
+          "properties": {
+            "Active": false,
+            "Alpha": 1.0,
+            "Diffuse": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "DiffuseOverride": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "Emissive": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "EmissiveOverride": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "IsGround": false,
+            "Metalic": 1.0,
+            "MetallicOverride": 1.0,
+            "RenderBlendType": "Opaque",
+            "Roughness": 1.0,
+            "RoughnessOverride": 1.0,
+            "UseDiffuseOverride": false,
+            "UseEmissiveOverride": false,
+            "UseMetallicOverride": false,
+            "UseRoughnessOverride": false,
+            "isroughnessFromShininess": false
+          },
+          "type": "FBXRenderer"
         }
       ]
     }

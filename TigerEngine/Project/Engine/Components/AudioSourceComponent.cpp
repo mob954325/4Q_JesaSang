@@ -3,6 +3,7 @@
 #include "..\\Manager\\AudioManager.h"
 #include "..\\Util\\JsonHelper.h"
 #include "..\\..\\Externals\\AudioModule_FMOD\\include\\AudioClip.h"
+#include "../../Engine/Object/GameObject.h"
 
 RTTR_REGISTRATION
 {
@@ -18,22 +19,18 @@ RTTR_REGISTRATION
         .property("MaxDistance", &AudioSourceComponent::GetMaxDistance, &AudioSourceComponent::SetMaxDistance);
 }
 
+void AudioSourceComponent::OnInitialize()
+{
+    Init(&AudioManager::Instance().GetSystem());
+}
+
 void AudioSourceComponent::OnStart()
 {
-    if (!m_System)
-    {
-        Init(&AudioManager::Instance().GetSystem());
-    }
 }
 
 void AudioSourceComponent::OnUpdate(float delta)
 {
     (void)delta;
-
-    if (!m_System)
-    {
-        Init(&AudioManager::Instance().GetSystem());
-    }
     Update3D();
 }
 
@@ -91,7 +88,7 @@ void AudioSourceComponent::SetClipId(const std::string& id)
         m_Source.SetClip(std::move(clip));
     }
 
-    if (m_ChannelGroup.empty())
+    if (m_ChannelGroup.empty()) // 해당 컴포넌트에 채널 그룹 이름이 없으면 AudioManager에서 저장된 그룹이름을 가져와 새로만듬
     {
         if (const auto* entry = AudioManager::Instance().GetEntry(m_ClipId))
         {
@@ -219,14 +216,4 @@ void AudioSourceComponent::Update3D()
 bool AudioSourceComponent::IsPlaying() const
 {
     return m_Source.IsPlaying();
-}
-
-void AudioSourceComponent::Enable_Inner()
-{
-    Component::Enable_Inner();
-}
-
-void AudioSourceComponent::Disable_Inner()
-{
-    Component::Disable_Inner();
 }

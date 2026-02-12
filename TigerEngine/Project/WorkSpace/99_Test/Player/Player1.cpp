@@ -1,4 +1,4 @@
-#include "Player1.h"
+﻿#include "Player1.h"
 #include "Object/GameObject.h"
 #include "System/InputSystem.h"
 #include "Object/Component.h"
@@ -7,6 +7,7 @@
 #include "../Engine/EngineSystem/SceneSystem.h"
 #include "Util/PrefabUtil.h"
 #include "../Engine//EngineSystem/CameraSystem.h"
+#include "../../02_Script/Ho/Sound/SoundManager.h"
 
 REGISTER_COMPONENT(Player1);
 
@@ -56,13 +57,19 @@ void Player1::OnStart()
 
     // GameObject* instantiated = PrefabUtil::Instantiate("Test1");
     // instantiated->GetTransform()->SetParent(this->GetOwner()->GetTransform());
-    audioClip = GetOwner()->GetComponent<AudioSourceComponent>();
+    pss = GetOwner()->GetComponent<PlayerSoundSource>();
+    alc = GetOwner()->GetComponent<AudioListenerComponent>();
 
-    if (audioClip)
+    auto smObj = SceneUtil::GetObjectByName("SoundManager");
+
+    if(smObj)
+        soundManager = smObj->GetComponent<SoundManager>();
+
+
+    text = GetOwner()->GetComponent<TextUI>();
+    if (text)
     {
-        audioClip->Play();
-        bool isloop = audioClip->GetLoop();
-        audioClip->SetLoop(!isloop);
+        text->SetText(L"한글한글");
     }
 }
 
@@ -111,49 +118,59 @@ void Player1::OnUpdate(float delta)
 
     if (Input::GetKeyDown(DirectX::Keyboard::I))
     {
-        audioClip->Pause(true);
+        pss->PlaySound(PlayerSoundType::Sit, true);
     }
 
     if (Input::GetKeyDown(DirectX::Keyboard::O))
     {
-        audioClip->Pause(false);
+        pss->PlaySound(PlayerSoundType::Walk);
     }
 
     if (Input::GetKeyDown(DirectX::Keyboard::P))
     {
-        audioClip->Stop();
+        pss->PlaySound(PlayerSoundType::Run);
     }
 
-    if (Input::GetKeyDown(DirectX::Keyboard::L))
-    {
-        audioClip->Play();
-    }
+   if (Input::GetKeyDown(DirectX::Keyboard::J))
+   {
+       auto curr = soundManager->GetGroupSoundVolume("BGM");
+       soundManager->SetGroupSoundVolume("BGM", curr - 0.1f );
+   
+       if(curr <= 0) 
+           soundManager->SetGroupSoundVolume("BGM", 1.0f );
+   }
+   
+   if (Input::GetKeyDown(DirectX::Keyboard::K))
+   {
+       auto curr = soundManager->GetGroupSoundVolume("SFX");
+       soundManager->SetGroupSoundVolume("SFX", curr - 0.1f);
 
-    if (Input::GetKeyDown(DirectX::Keyboard::K))
-    {
-        bool isloop = audioClip->GetLoop();
-        audioClip->SetLoop(!isloop);
-    }
+       if (curr <= 0)
+           soundManager->SetGroupSoundVolume("SFX", 1.0f);
+   }
 
-    // sync 
+   if (Input::GetKeyDown(DirectX::Keyboard::L))
+   {
+       auto curr = soundManager->GetMasterVolume();
+       soundManager->SetMasterVolume(curr - 0.1f);
 
-    auto pos = GetOwner()->GetTransform()->GetWorldPosition();
-    auto fwd = GetOwner()->GetTransform()->GetForward();
-    auto up = GetOwner()->GetTransform()->GetUp();
-    Vector3 vel = Vector3::Zero;
-    if (hasPrev && delta > 0.0001f)
-        vel = (pos - prevPos) / delta * 0.01f;
+       if (curr <= 0)
+           soundManager->SetMasterVolume(1.0f);
+   }
 
-    prevPos = pos;
-    hasPrev = true;
+   if (Input::GetKeyDown(DirectX::Keyboard::G))
+   {
+       soundManager->PlayBGM(BGMType::InGame_BG);
+   }
 
-    AudioTransform t{};
-    t.position = { pos.x, pos.y, pos.z };       // 위치
-    t.forward = { fwd.x, fwd.y, fwd.z };        // forward
-    t.up = { up.x,  up.y,  up.z };              // up vector
-    t.velocity = { vel.x, vel.y, vel.z };       // "초당 이동량"(world-space). doppler 등에 사용됨. ( 청자(Listener)가 얼마나 / 어느 방향으로 움직이는지 알려주는 값 
+   if (Input::GetKeyDown(DirectX::Keyboard::H))
+   {
+       // soundManager->PlaySFX(SFXType::HiddenObj_Playerin_Sound);
 
-    audioClip->SetFallback(t); // AudioListenerComponent가 Update()에서 적용(Engine/Components/AudioListenerComponent.cpp:61)
+       pss->PlayRandomFootStep();
+   }
+
+    UpdateAudioTransform(delta);
 }
 
 nlohmann::json Player1::Serialize()
@@ -206,4 +223,27 @@ void Player1::Deserialize(nlohmann::json data)
             prop.set_value(*this, data);
         }
     }
+}
+
+void Player1::UpdateAudioTransform(float dt)
+{
+    // sync 
+    if (!alc) return;
+    auto pos = GetOwner()->GetTransform()->GetWorldPosition();
+    auto fwd = GetOwner()->GetTransform()->GetForward();
+    auto up = GetOwner()->GetTransform()->GetUp();
+    Vector3 vel = Vector3::Zero;
+    if (hasPrev && dt > 0.0001f)
+        vel = (pos - prevPos) / dt * 0.01f;
+
+    prevPos = pos;
+    hasPrev = true;
+
+    AudioTransform t{};
+    t.position = { pos.x, pos.y, pos.z };       // 위치
+    t.forward = { fwd.x, fwd.y, fwd.z };        // forward
+    t.up = { up.x,  up.y,  up.z };              // up vector
+    t.velocity = { vel.x, vel.y, vel.z };       // "초당 이동량"(world-space). doppler 등에 사용됨. ( 청자(Listener)가 얼마나 / 어느 방향으로 움직이는지 알려주는 값 
+
+    alc->SetFallback(t); // AudioListenerComponent가 Update()에서 적용(Engine/Components/AudioListenerComponent.cpp:61)
 }

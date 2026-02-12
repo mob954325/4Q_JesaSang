@@ -22,12 +22,13 @@ RTTR_REGISTRATION
 
 void WinPanel::OnInitialize()
 {
-    effectsPath.resize(5);
-    effectsPath[0] = "..\\Assets\\Resource\\Effect\\Freezing\\Freezing_effect01.png";
-    effectsPath[1] = "..\\Assets\\Resource\\Effect\\Freezing\\Freezing_effect02.png";
-    effectsPath[2] = "..\\Assets\\Resource\\Effect\\Freezing\\Freezing_effect03.png";
-    effectsPath[3] = "..\\Assets\\Resource\\Effect\\Freezing\\Freezing_effect04.png";
-    effectsPath[4] = "..\\Assets\\Resource\\Effect\\Freezing\\Freezing_effect05.png";
+    effectsPath.resize(80);
+    for (int i = 0; i < 80; ++i)
+    
+        if(i < 10)
+            effectsPath[i] = "..\\Assets\\Resource\\Ending\\happy\\main0" + std::to_string(i) + ".png";
+        else
+            effectsPath[i] = "..\\Assets\\Resource\\Ending\\happy\\main" + std::to_string(i) + ".png";
 }
 
 void WinPanel::OnStart()

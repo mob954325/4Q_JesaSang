@@ -36,11 +36,6 @@ private:
     void Blink();
     void Monologue();
 
-private:
-    GameObject* Blink_Top = nullptr;
-    GameObject* Blink_Bottom = nullptr;
-    DialogueUIController* dialogue = nullptr;
-
 public:
     TutorialStep_Step1(TutorialController* _tutorialController) : ITutorialStep(_tutorialController) {}
     ~TutorialStep_Step1() = default;

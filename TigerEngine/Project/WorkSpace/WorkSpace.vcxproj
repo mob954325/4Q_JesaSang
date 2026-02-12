@@ -92,6 +92,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)Engine;$(SolutionDir)Base;$(SolutionDir)Externals;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -130,6 +131,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalIncludeDirectories>$(MSBuildStartupDirectory)\Engine;$(MSBuildStartupDirectory)\Base;$(SolutionDir)ThirdParty\PhysX_5\include;$(SolutionDir)ThirdParty\PhysX_5\pxshared\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -151,6 +153,9 @@
     <ClInclude Include="02_Script\Ho\ResultPanels\LosePanel.h" />
     <ClInclude Include="02_Script\Ho\ResultPanels\WinCinemachine.h" />
     <ClInclude Include="02_Script\Ho\ResultPanels\WinPanel.h" />
+    <ClInclude Include="02_Script\Ho\Sound\EnemySoundSource.h" />
+    <ClInclude Include="02_Script\Ho\Sound\PlayerSoundSource.h" />
+    <ClInclude Include="02_Script\Ho\Sound\SoundManager.h" />
     <ClInclude Include="02_Script\Ho\UI\MenuUI_ExitButton.h" />
     <ClInclude Include="02_Script\Ho\UI\MenuUI_OptionButton.h" />
     <ClInclude Include="02_Script\Ho\UI\MenuUI_StartButton.h" />
@@ -244,6 +249,9 @@
     <ClCompile Include="02_Script\Ho\ResultPanels\LosePanel.cpp" />
     <ClCompile Include="02_Script\Ho\ResultPanels\WinCinemachine.cpp" />
     <ClCompile Include="02_Script\Ho\ResultPanels\WinPanel.cpp" />
+    <ClCompile Include="02_Script\Ho\Sound\EnemySoundSource.cpp" />
+    <ClCompile Include="02_Script\Ho\Sound\PlayerSoundSource.cpp" />
+    <ClCompile Include="02_Script\Ho\Sound\SoundManager.cpp" />
     <ClCompile Include="02_Script\Ho\UI\MenuUI_ExitButton.cpp" />
     <ClCompile Include="02_Script\Ho\UI\MenuUI_OptionButton.cpp" />
     <ClCompile Include="02_Script\Ho\UI\MenuUI_StartButton.cpp" />

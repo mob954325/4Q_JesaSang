@@ -221,6 +221,10 @@ private:
     std::vector<std::unique_ptr<ICommand>> redoStack;
     size_t maxHistory = 200;
 
+    // === etc ==
+    void RenderVariantDebugger();   // 각종 디버그 보여주는 창 ( 아무거나 ) 
+    bool isOpenVariantDebugger = false;
+
 public:
     void OnInputProcess(const Keyboard::State& KeyState, const Keyboard::KeyboardStateTracker& KeyTracker,
         const Mouse::State& MouseState, const Mouse::ButtonStateTracker& MouseTracker) override;

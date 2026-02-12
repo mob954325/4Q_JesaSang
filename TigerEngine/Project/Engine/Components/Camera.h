@@ -48,8 +48,11 @@ public:
 	nlohmann::json Serialize() override;
 	void Deserialize(nlohmann::json data) override;
 
+    BoundingFrustum GetWorldFrustum();
+
 private:
 	Matrix projection = Matrix::Identity;
+    BoundingFrustum frustum;
 
 	Vector3 inputVec{};
 	float moveSpeed = 100.0f;

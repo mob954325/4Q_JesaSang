@@ -17,12 +17,12 @@ void TutorialStep_Step1::Enter()
     step1Timer = 0.0f;
     phase = Step1Phase::Blink;
 
-    Blink_Top = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("Blink_Top"); // rectTransform 축 -700 
-    Blink_Bottom = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("Blink_Bottom"); // rectTransform 축 700 
+    tutorialController->Blink_Top = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("Blink_Top"); // rectTransform 축 -700 
+    tutorialController->Blink_Bottom = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("Blink_Bottom"); // rectTransform 축 700 
+    if (tutorialController->Blink_Top) tutorialController->Blink_Top->SetActive(true);
+    if (tutorialController->Blink_Bottom) tutorialController->Blink_Bottom->SetActive(true);
 
-    auto player = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("Player_Tutorial");
-    if (player)
-        dialogue = player->GetComponent<DialogueUIController>();
+    tutorialController->dialogue = tutorialController->player_Obj->GetComponent<DialogueUIController>();
 }
 
 void TutorialStep_Step1::Update(float deltaTime)
@@ -44,7 +44,6 @@ void TutorialStep_Step1::Update(float deltaTime)
     case Step1Phase::Monologue:
         
         Monologue(); // 플레이어 대사창 활성화 및 독백 대사 출력
-        // std::cout << "[Step1] \" Umm... Did I just fall asleep.. \" " << std::endl;
         phase = Step1Phase::WaitInput; // 바로 입력 대기 상태로 전환
         break;
 
@@ -61,7 +60,7 @@ void TutorialStep_Step1::Update(float deltaTime)
             Input::GetKeyDown(Keyboard::Right)
             )
         {
-            if (dialogue) dialogue->DialogueOnOff(false);
+            if (tutorialController->dialogue) tutorialController->dialogue->DialogueOnOff(false);
 
             phase = Step1Phase::Done;
         }
@@ -90,10 +89,10 @@ void TutorialStep_Step1::Exit()
 // 1. 눈 깜빡이는 것 같은 연출 주기
 void TutorialStep_Step1::Blink()
 {
-    if (!Blink_Top || !Blink_Bottom) return;
+    if (!tutorialController->Blink_Top || !tutorialController->Blink_Bottom) return;
 
-    auto* topRect = Blink_Top->GetComponent<RectTransform>();
-    auto* botRect = Blink_Bottom->GetComponent<RectTransform>();
+    auto* topRect = tutorialController->Blink_Top->GetComponent<RectTransform>();
+    auto* botRect = tutorialController->Blink_Bottom->GetComponent<RectTransform>();
     if (!topRect || !botRect) return;
 
     const float BlinkDelay = 2.0f;
@@ -114,15 +113,15 @@ void TutorialStep_Step1::Blink()
         };
 
     if (t < 1.0f)
-        Move(t, 1.0f, -400, -700, 400, 700);
+        Move(t, 1.0f, -200, -600, 200, 600);
     else if (t < 2.0f)
-        Move(t - 1, 1.0f, -700, -600, 700, 600);
+        Move(t - 1, 1.0f, -600, -500, 600, 500);
     else if (t < 3.0f)
-        Move(t - 2, 1.0f, -600, -800, 600, 800);
+        Move(t - 2, 1.0f, -500, -700, 500, 700);
     else if (t < 4.0f)
-        Move(t - 3, 1.0f, -800, -700, 800, 700);
+        Move(t - 3, 1.0f, -700, -600, 700, 600);
     else if (t < 5.0f)
-        Move(t - 4, 1.0f, -700, -1100, 700, 1100);
+        Move(t - 4, 1.0f, -600, -1100, 600, 1100);
 
     topRect->SetPos(topPos);
     botRect->SetPos(botPos);
@@ -130,10 +129,9 @@ void TutorialStep_Step1::Blink()
 
 
 // 2. 독백 출력
-// "Umm... Did I just fall asleep.."
 void TutorialStep_Step1::Monologue()
 {
-    if (!dialogue) return;
+    if (!tutorialController->dialogue) return;
 
-    dialogue->ShowDialogueHold(L"Umm... Did I just fall asleep..");
+    tutorialController->dialogue->ShowDialogueHold(L"Umm... Did I just fall asleep..");
 }

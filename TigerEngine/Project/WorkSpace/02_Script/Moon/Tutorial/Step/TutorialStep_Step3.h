@@ -31,6 +31,16 @@ private:
 
     Step3Phase phase = Step3Phase::BabyInCome;
 
+    GameObject* targetA = nullptr;
+    GameObject* targetB = nullptr;
+    GameObject* exclamation = nullptr;
+
+    Transform* babyTranform = nullptr;
+
+    bool phaseStarted = false;
+
+    float speed = 120.0f;
+
 private:
     void BabyInCome();
     void TrunToPlayer();

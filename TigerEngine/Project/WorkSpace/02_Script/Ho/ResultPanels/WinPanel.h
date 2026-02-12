@@ -27,7 +27,7 @@ public:
     float firstWaitMaxTime = 1.5f; 
 
     float timer = 0.0f;     // 이미지 시퀀스 시간
-    float maxTimer = 0.5f;  // 이미지 시퀀스 딜레이 시간
+    float maxTimer = 0.1f;  // 이미지 시퀀스 딜레이 시간
     int index = 0;          // 이미지 시퀀스 인덱스
 
 private:
