@@ -488,6 +488,7 @@ void IntroCutSceneController::LoadNextScene()
 
     if (auto scene = SceneSystem::Instance().GetCurrentScene())
     {
+        nextScenePath = "..\\Assets\\Scenes\\03_TutorialScene.json";
         scene->LoadToJson(nextScenePath);
     }
 }
