@@ -72,6 +72,11 @@ public:
     Vector2 bottomRightMargin{ 20.0f, 20.0f };
     int shiftLeftByMapCount = 1;
     bool showCompleteOnFull = false;
+    int pieceToZoneIndex0 = 0;
+    int pieceToZoneIndex1 = 1;
+    int pieceToZoneIndex2 = 2;
+    int pieceToZoneIndex3 = 3;
+    int pieceToZoneIndex4 = 4;
 
     // External trigger hooks (call from gameplay code on pickup)
     void TriggerItemPing(int index, const Vector3& worldPos);
