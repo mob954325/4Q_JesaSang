@@ -50,7 +50,15 @@ void GridComponent::OnInitialize()
      
     // 임의로 (-1,2) 그리드를 걸을 수 없게 설정
     //SetWalkableFromCenter(-1, 2, false);
-    //SetWalkableFromCenter(3, -4, false);
+
+    walkableOverrides.push_back({ 1, 2, true });
+    walkableOverrides.push_back({ 2, 2, true });
+    walkableOverrides.push_back({ 7, 2, true });
+    walkableOverrides.push_back({ 8, 2, true });
+
+    walkableOverrides.push_back({ 7, -2, true });
+    walkableOverrides.push_back({ 8, -2, true });
+    walkableOverrides.push_back({ 9, -2, true });
 }
 
 void GridComponent::Enable_Inner()
@@ -184,6 +192,17 @@ void GridComponent::BuildBlockedFromPhysics()
     }
 
     std::cout << "===========================================\n";
+}
+
+void GridComponent::BuildWalkableFromCostum()
+{
+    for (auto& ovr : walkableOverrides)
+    {
+        SetWalkableFromCenter(ovr.cx, ovr.cy, ovr.walkable);
+        std::cout << "[GridComponent] Override applied: ("
+            << ovr.cx << "," << ovr.cy << ") walkable="
+            << ovr.walkable << "\n";
+    }
 }
 
 
