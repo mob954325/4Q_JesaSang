@@ -104,7 +104,7 @@ void TutorialController::OnStart()
     // -------------------------------------------------
     // 튜토리얼 
     // -------------------------------------------------
-    ChangeStep(TutorialStep::Step1);
+    ChangeStep(TutorialStep::Step7);
 }
 
 

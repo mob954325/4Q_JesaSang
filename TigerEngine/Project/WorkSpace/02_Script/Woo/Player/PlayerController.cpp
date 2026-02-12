@@ -291,8 +291,16 @@ void PlayerController::InputProcess()
 /*-------[ Movement ]----------------------------------*/
 void PlayerController::Move(float delta)
 {
-    if (isInputLocked) return; // 선민 | 02.11 
     if (!cct) return;
+
+    //// 연출 강제 이동 // 선민 | 02.11 
+    //if (isForcedMove)
+    //{
+    //    cct->MovePlayer(forcedDir, forcedSpeed, delta);
+    //    return;
+    //}
+
+    if (isInputLocked) return; // 선민 | 02.11 
 
     // cct->m_MoveSpeed = curSpeed;
     cct->MovePlayer(lookDir, curSpeed, delta);
@@ -308,7 +316,8 @@ static float WrapAngleRad(float a)      // util
 
 void PlayerController::Rotation(float delta)
 {
-    if (isInputLocked) return; // 선민 | 02.11 
+    // if (isForcedMove) return;   // 선민 | 02.11 
+    if (isInputLocked) return;  // 선민 | 02.11 
     if (lookDir.LengthSquared() <= 0.0001f)
         return;
 
@@ -742,3 +751,19 @@ float PlayerController::GetCurSenseRadiuse() const
 {
     return curSenseRadius;
 }
+
+
+//// 선민 | 02.12 ------------------------------------------
+//
+//void PlayerController::SetForcedMove(const Vector3& dir, float speed)
+//{
+//    forcedDir = dir;
+//    forcedSpeed = speed;
+//    isForcedMove = true;
+//}
+//
+//void PlayerController::ClearForcedMove()
+//{
+//    isForcedMove = false;
+//}
+

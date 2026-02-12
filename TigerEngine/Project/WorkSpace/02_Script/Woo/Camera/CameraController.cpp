@@ -67,6 +67,31 @@ void CameraController::OnFixedUpdate(float delta)
         return;
     }
 
+    if (isCinematic) // 시네마틱 전용이면 
+    {
+        cinematicTimer += delta;
+
+        float t = cinematicTimer / cinematicMoveTime;
+        if (t > 1.0f) t = 1.0f;
+
+        // 위치
+        Vector3 pos =
+            cinematicStartPos +
+            (cinematicTargetPos - cinematicStartPos) * t;
+
+        transform->SetPosition(pos);
+
+        // 회전
+        Vector3 look = ComputeLookEulerRad(pos, cinematicLookPos);
+        transform->SetEuler(look);
+
+        // 이동 + 홀드 종료
+        if (cinematicTimer >= cinematicMoveTime + cinematicHold)
+            isCinematic = false;
+
+        return; // 기존 로직 차단
+    }
+
     // target udpate
     const Vector3 targetPos = GetTargetPosWithOffset();
 
@@ -394,4 +419,39 @@ void CameraController::SetTargetTransform(Transform* tr)
 {
     if (!tr) return;
     targetTr = tr;
+}
+
+
+// --------------------------------------
+
+void CameraController::PlayCinematic(const Vector3& camPos,
+    const Vector3& lookAt,
+    float holdTime)
+{
+    isCinematic = true;
+
+    cinematicStartPos = transform->GetWorldPosition(); // 시작 위치 저장
+    cinematicTargetPos = camPos;
+    cinematicLookPos = lookAt;
+
+    cinematicHold = holdTime;
+    cinematicTimer = 0.0f;
+}
+
+void CameraController::PlayCinematic(
+    Transform* startTr,
+    Transform* endTr,
+    float holdTime)
+{
+    isCinematic = true;
+
+    cinematicStartTr = startTr;
+    cinematicEndTr = endTr;
+
+    cinematicStartPos = startTr->GetWorldPosition();
+    cinematicTargetPos = endTr->GetWorldPosition();
+
+    cinematicLookPos = endTr->GetWorldPosition(); // 기본은 end를 바라봄
+    cinematicHold = holdTime;
+    cinematicTimer = 0.0f;
 }

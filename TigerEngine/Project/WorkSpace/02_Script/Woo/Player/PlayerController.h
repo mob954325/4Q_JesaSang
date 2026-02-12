@@ -235,6 +235,15 @@ public:
     float GetCurSenseRadiuse() const;    // 플레이어 현재 기척 getter
 
 
+    //// 선민 | 02.12 
+    //bool isForcedMove = false;
+    //Vector3 forcedDir;
+    //float forcedSpeed = 0.0f;
+
+    //void SetForcedMove(const Vector3& dir, float speed);
+    //void ClearForcedMove();
+
+
 
     //---------------------------------------------------------------
     // friend
