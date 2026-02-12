@@ -55,6 +55,7 @@ void BabyGhostController::OnStart()
     fbxRenderer = GetOwner()->GetComponent<FBXRenderer>();
     fbxData = GetOwner()->GetComponent<FBXData>();
     animController = GetOwner()->GetComponent<AnimationController>();
+    enemySound = GetOwner()->GetComponent<EnemySoundSource>();
 
     if (!agent || !vision || !fbxRenderer || !fbxData || !animController)
     {
