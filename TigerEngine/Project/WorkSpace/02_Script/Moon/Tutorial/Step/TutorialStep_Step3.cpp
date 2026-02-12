@@ -14,8 +14,43 @@ void TutorialStep_Step3::Enter()
     targetB = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("Baby_Target_B");
     babyTranform = tutorialController->babyGhost_Obj->GetTransform();
 
+    // 느낌표 
     exclamation = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("FX_Exclamation");
     if (exclamation) exclamation->SetActive(false);
+    ExclEffect = exclamation->GetComponent<AnimationController>();
+    
+    FBXResourceManager::Instance().LoadAnimationByPath(exclamation->GetComponent<FBXData>()->GetFBXInfo(),
+        "..\\Assets\\Resource\\Effect\\ani_exclamation_mark.fbx", "ExclEffect");
+    auto effectExclClip = ExclEffect->FindClip("ExclEffect");
+    ExclEffect->AddState(std::make_unique<AnimationState>("ExclEffect", effectExclClip, ExclEffect));
+    ExclEffect->ChangeState("ExclEffect");
+
+    if (!effectExclClip)
+    {
+        cout << "[Player Effect Animation] Clip not found!\n" << endl;
+        return;
+    }
+
+    // 프로즌 
+    frozenImage = SceneSystem::Instance().GetCurrentScene()
+        ->GetGameObjectByName("FrozenManager")
+        ->GetComponent<Image>();
+
+    frozenPaths = {
+        "",
+        "..\\Assets\\Resource\\Effect\\Freezing\\Freezing_effect01.png",
+        "..\\Assets\\Resource\\Effect\\Freezing\\Freezing_effect02.png",
+        "..\\Assets\\Resource\\Effect\\Freezing\\Freezing_effect03.png",
+        "..\\Assets\\Resource\\Effect\\Freezing\\Freezing_effect04.png",
+        "..\\Assets\\Resource\\Effect\\Freezing\\Freezing_effect05.png"
+    };
+
+    frozenLevel = 0;
+    nextFrozenLevel = 0;
+    frozenTimer = frozenMaxTime;
+
+    if (frozenImage)
+        frozenImage->SetActive(false);
 
     std::cout << "[Step3] Enter" << std::endl;
 }
@@ -48,6 +83,11 @@ void TutorialStep_Step3::Update(float deltaTime)
         Leave();
         break;
 
+    case Step3Phase::Frozen:
+
+        Frozen();
+        break;
+
 
     case Step3Phase::Done:
         isDone = true;
@@ -62,6 +102,9 @@ bool TutorialStep_Step3::IsComplete()
 
 void TutorialStep_Step3::Exit()
 {
+    // 귀신 끄기 
+    tutorialController->babyGhost_Obj->GetComponent<FBXRenderer>()->SetActive(false);
+
     std::cout << "[Step3] Exit " << std::endl;
 }
 
@@ -140,7 +183,7 @@ void TutorialStep_Step3::Surprised()
 
     step3Timer += GameTimer::Instance().UnscaledDeltaTime();
 
-    if (step3Timer >= 2.0f)
+    if (step3Timer >= 4.0f)
     {
         if (exclamation) exclamation->SetActive(false);
 
@@ -167,7 +210,11 @@ void TutorialStep_Step3::Leave()
 
     if (dir.Length() < 5.0f)
     {
-        phase = Step3Phase::Done;
+        frozenPhaseTimer = 0.0f;  
+        dialogueShown = false;     
+
+        phase = Step3Phase::Frozen;
+        phaseStarted = false;
         return;
     }
 
@@ -181,4 +228,66 @@ void TutorialStep_Step3::Leave()
     // 이동 방향 바라보게 회전
     float yaw = atan2f(-dir.x, -dir.z);
     babyTranform->SetRotationY(yaw);
+}
+
+
+void TutorialStep_Step3::Frozen()
+{
+    float dt = GameTimer::Instance().UnscaledDeltaTime();
+
+    UpdateFrozen(dt);
+
+    frozenPhaseTimer += dt;
+
+    // 3초 후 대사 출력
+    if (!dialogueShown && frozenPhaseTimer >= 3.0f)
+    {
+        tutorialController->dialogue->ShowDialogueText(L"..!! What..?");
+        dialogueShown = true;
+    }
+
+    // 대사 출력 후 3초 뒤 Done 상태로 전환
+    if (dialogueShown && frozenPhaseTimer >= 6.0f)
+    {
+        phase = Step3Phase::Done;
+    }
+}
+
+
+void TutorialStep_Step3::UpdateFrozen(float dt)
+{
+    if (!frozenImage || !tutorialController->adultGhost_Obj) return;
+
+    auto pPos = tutorialController->player_Obj->GetTransform()->GetWorldPosition();
+    auto gPos = tutorialController->adultGhost_Obj->GetTransform()->GetWorldPosition();
+    float len = Vector3::Distance(pPos, gPos);
+
+    if (len <= len1 && len > len2) nextFrozenLevel = 1;
+    else if (len <= len2 && len > len3) nextFrozenLevel = 2;
+    else if (len <= len3 && len > len4) nextFrozenLevel = 3;
+    else if (len <= len4 && len > len5) nextFrozenLevel = 4;
+    else if (len <= len5)               nextFrozenLevel = 5;
+    else                               nextFrozenLevel = 0;
+
+    if (nextFrozenLevel > frozenLevel)
+    {
+        frozenLevel = nextFrozenLevel;
+        frozenImage->SetActive(true);
+        frozenImage->ChangeData(frozenPaths[frozenLevel]);
+        frozenTimer = frozenMaxTime;
+    }
+    else if (nextFrozenLevel < frozenLevel)
+    {
+        frozenTimer -= dt;
+        if (frozenTimer <= 0.0f)
+        {
+            frozenLevel--;
+            if (frozenLevel == 0)
+                frozenImage->SetActive(false);
+            else
+                frozenImage->ChangeData(frozenPaths[frozenLevel]);
+
+            frozenTimer = frozenMaxTime;
+        }
+    }
 }

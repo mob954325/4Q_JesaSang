@@ -139,4 +139,26 @@ public:
     void ToggleViewMode(bool animate = true);
 
     void SetTargetTransform(Transform* tr);
+
+
+    // 선민 | 연출용 override
+    Transform* cinematicStartTr = nullptr;
+    Transform* cinematicEndTr = nullptr;
+    Transform* cinematicLookTr = nullptr;
+
+    Vector3 cinematicStartPos = Vector3::Zero;
+    Vector3 cinematicEndPos = Vector3::Zero;
+    Vector3 cinematicLookPos = Vector3::Zero;
+
+    float cinematicMoveTime = 1.5f; // 이동 시간
+    float cinematicHoldTime = 0.0f; // 멈춤 시간
+    float cinematicTimer = 0.0f;
+    bool isCinematic = false;
+
+    void PlayCinematic(Transform* startTr,
+        Transform* endTr,
+        Transform* lookTr,
+        float moveTime,
+        float holdTime);
+
 };

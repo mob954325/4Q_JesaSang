@@ -220,9 +220,9 @@ Vector3 AgentComponent::ComputeSeparationForce(const Vector3& moveDir)
 
     Vector3 myPos = GetOwner()->GetTransform()->GetWorldPosition();
 
-    const float radius = 200.0f;   // 유령 크기 + 안전 거리
-    const float sideBias = 0.8f;   // 옆으로 비켜가는 힘
-    const float forwardBias = 0.2f;
+    const float radius = 90.0f;   // 유령 크기 + 안전 거리
+    const float sideBias = 0.5f;   // 옆으로 비켜가는 힘
+    const float forwardBias = 0.1f;
 
     for (auto* other : agents)
     {

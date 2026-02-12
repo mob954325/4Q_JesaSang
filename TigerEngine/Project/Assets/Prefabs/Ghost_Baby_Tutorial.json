@@ -2,7 +2,7 @@
   "prefab": [
     {
       "Active": true,
-      "ID": 2042,
+      "ID": 1470,
       "Name": "Ghost_Baby_Tutorial",
       "ParentID": -1,
       "components": [
@@ -86,21 +86,21 @@
     },
     {
       "Active": false,
-      "ID": 2056,
+      "ID": 1476,
       "Name": "FX_Exclamation",
-      "ParentID": 2042,
+      "ParentID": 1470,
       "components": [
         {
           "properties": {
             "Position": [
               0.0,
-              103.37461853027344,
+              0.0,
               0.0
             ],
             "Rotation": [
-              -0.0,
+              -0.3420843780040741,
               0.0,
-              -0.0
+              0.10995574295520782
             ],
             "Scale": [
               1.0,
@@ -113,7 +113,7 @@
         {
           "properties": {
             "Active": false,
-            "DataPath": "..\\Assets\\Resource\\Animation\\Baby_Ghost\\ani_idle_babyghost.fbx",
+            "DataPath": "..\\Assets\\Resource\\Effect\\ani_exclamation_mark.fbx",
             "IsStatic": false
           },
           "type": "FBXData"
@@ -130,8 +130,8 @@
             ],
             "DiffuseOverride": [
               1.0,
-              1.0,
-              1.0,
+              0.9721741676330566,
+              0.05392158031463623,
               1.0
             ],
             "Emissive": [
@@ -159,6 +159,12 @@
             "isroughnessFromShininess": false
           },
           "type": "FBXRenderer"
+        },
+        {
+          "properties": {
+            "Active": true
+          },
+          "type": "AnimationController"
         }
       ]
     }

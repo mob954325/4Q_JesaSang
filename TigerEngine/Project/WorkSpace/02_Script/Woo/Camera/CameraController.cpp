@@ -67,6 +67,34 @@ void CameraController::OnFixedUpdate(float delta)
         return;
     }
 
+    if (isCinematic)
+    {
+        cinematicTimer += delta;
+
+        float t = cinematicTimer / cinematicMoveTime;
+        if (t > 1.0f) t = 1.0f;
+
+        Vector3 pos =
+            cinematicStartPos +
+            (cinematicEndPos - cinematicStartPos) * t;
+
+        transform->SetPosition(pos);
+
+        // 항상 lookTr 바라봄
+        Vector3 lookPos = cinematicLookTr
+            ? cinematicLookTr->GetWorldPosition()
+            : cinematicLookPos;
+
+        Vector3 look = ComputeLookEulerRad(pos, lookPos);
+        transform->SetEuler(look);
+
+        if (cinematicTimer >= cinematicMoveTime + cinematicHoldTime)
+            isCinematic = false;
+
+        return; // 기존 로직 X 
+    }
+
+
     // target udpate
     const Vector3 targetPos = GetTargetPosWithOffset();
 
@@ -394,4 +422,31 @@ void CameraController::SetTargetTransform(Transform* tr)
 {
     if (!tr) return;
     targetTr = tr;
+}
+
+
+// --------------------------------------
+void CameraController::PlayCinematic(
+    Transform* startTr,
+    Transform* endTr,
+    Transform* lookTr,
+    float moveTime,
+    float holdTime)
+{
+    isCinematic = true;
+
+    cinematicStartTr = startTr;
+    cinematicEndTr = endTr;
+    cinematicLookTr = lookTr;
+
+    cinematicStartPos = startTr->GetWorldPosition();
+    cinematicEndPos = endTr->GetWorldPosition();
+    cinematicLookPos = lookTr->GetWorldPosition();
+
+    cinematicMoveTime = moveTime;
+    cinematicHoldTime = holdTime;
+    cinematicTimer = 0.0f;
+
+    camPosSmooth = cinematicStartPos; // 즉시 시작 위치로
+    transform->SetPosition(camPosSmooth);
 }
