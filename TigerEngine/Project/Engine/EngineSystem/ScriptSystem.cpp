@@ -31,12 +31,6 @@ void ScriptSystem::RegisterScript(Component* comp)
 
 void ScriptSystem::UnRegister(Component* comp)
 {
-    if (!isIterating)
-    {
-        RemoveImmediate(comp);
-        return;
-    }
-
     for (auto it = pending_components.begin(); it != pending_components.end(); it++)
     {
         if (*it == comp)
@@ -58,12 +52,6 @@ void ScriptSystem::UnRegister(Component* comp)
 
 void ScriptSystem::UnRegisterScript(Component* comp)
 {
-    if (!isIterating)
-    {
-        RemoveImmediate(comp);
-        return;
-    }
-
     for (auto it = pending_scriptComponents.begin(); it != pending_scriptComponents.end(); it++)
     {
         if (*it == comp)
@@ -85,14 +73,12 @@ void ScriptSystem::UnRegisterScript(Component* comp)
 
 void ScriptSystem::Update(float delta)
 {
-    // ?�반 component update
+    // 일반 component update
     for (auto& e : pending_components)
     {
         comps.push_back(e);
     }
     pending_components.clear();
-
-    isIterating = true;
 
     for (auto& e : comps)
     {
@@ -103,7 +89,7 @@ void ScriptSystem::Update(float delta)
     }
 
 
-    // ?�크립트 컴포?�트 ?�데?�트
+    // 스크립트 컴포넌트 업데이트
     if (PlayModeSystem::Instance().IsPlaying())
     {
         for (auto& e : pending_scriptComponents)
@@ -112,11 +98,11 @@ void ScriptSystem::Update(float delta)
         }
         pending_scriptComponents.clear();
 
-        // ?�용???�의 component update
+        // 사용자 정의 component update
         for (auto& e : scriptComps)
         {
-            // ?�전 ?�벤???�수 Oninitialize(), OnEnable?� AddComponent ???�출?�니??
-            if (!e->IsStart()) // start ?�소
+            // 이전 이벤트 함수 Oninitialize(), OnEnable은 AddComponent 시 호출됩니다.
+            if (!e->IsStart()) // start 해소
             {
                 e->SetStartTrue();
                 e->OnStart();
@@ -128,8 +114,7 @@ void ScriptSystem::Update(float delta)
         }
     }
 
-    isIterating = false;
-    ProcessRemovals(); // ?�거 ?�???�인
+    ProcessRemovals(); // 제거 대상 확인
 }
 
 void ScriptSystem::FixedUpdate(float dt)
@@ -142,16 +127,14 @@ void ScriptSystem::FixedUpdate(float dt)
         }
         pending_scriptComponents.clear();
 
-        // ?�용???�의 component update
-        isIterating = true;
+        // 사용자 정의 component update
         for (auto& e : scriptComps)
         {
             e->OnFixedUpdate(dt);
         }
     }
 
-    isIterating = false;
-    ProcessRemovals(); // ?�거 ?�???�인
+    ProcessRemovals(); // 제거 대상 확인
 }
 
 void ScriptSystem::LateUpdate(float dt)
@@ -164,16 +147,14 @@ void ScriptSystem::LateUpdate(float dt)
         }
         pending_scriptComponents.clear();
 
-        // ?�용???�의 component update
-        isIterating = true;
+        // 사용자 정의 component update
         for (auto& e : scriptComps)
         {
             e->OnLateUpdate(dt);
         }
     }
 
-    isIterating = false;
-    ProcessRemovals(); // ?�거 ?�???�인
+    ProcessRemovals(); // 제거 대상 확인
 }
 
 void ScriptSystem::Clear()
@@ -185,29 +166,6 @@ void ScriptSystem::Clear()
    pending_scriptComponents.clear();
    pending_components.clear();
    pending_scriptRemovals.clear();
-}
-
-void ScriptSystem::RemoveFromReadyQueue(Component* comp)
-{
-    std::queue<Component*> q;
-    while (!readyQueue.empty())
-    {
-        auto* c = readyQueue.front();
-        readyQueue.pop();
-        if (c != comp)
-            q.push(c);
-    }
-    readyQueue.swap(q);
-}
-
-void ScriptSystem::RemoveImmediate(Component* comp)
-{
-    SwapErase(pending_components, comp);
-    SwapErase(comps, comp);
-    SwapErase(pending_scriptComponents, comp);
-    SwapErase(scriptComps, comp);
-    SwapErase(pending_scriptRemovals, comp);
-    RemoveFromReadyQueue(comp);
 }
 
 void ScriptSystem::SwapErase(std::vector<Component*>& comps, Component* target)

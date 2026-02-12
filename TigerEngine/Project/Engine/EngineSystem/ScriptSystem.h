@@ -99,10 +99,6 @@ private:
     /// </summary>
     std::vector<Component*> pending_scriptRemovals{};
 
-    bool isIterating = false;
-
-    void RemoveImmediate(Component* comp);
-    void RemoveFromReadyQueue(Component* comp);
     void SwapErase(std::vector<Component*>& comps, Component* target);
     void ProcessRemovals();
 };
