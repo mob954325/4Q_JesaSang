@@ -11,7 +11,12 @@ enum class BGMType
 {
     Main,
     InGame_BG,
-    Minigmae_BG
+    Minigame_BG,
+
+    Ghost_Chase_BG,
+    Altar_BG,
+    Game_Win_BG,
+    Game_Lose_BG
 };
 
 enum class SFXType
@@ -27,7 +32,35 @@ enum class SFXType
     PitfallObj_Table_Sound,                 //함정 오브젝트 (낡은 책상) 사운드
     PitfallObj_SleepGhost_Sound,            //함정 오브젝트 (자는 애기 유령) 사운드
     PitfallObj_SleepGhost_Wakeup_Sound,     //함정 오브젝트 (자는 애기 유령) 깨어나는 사운드
-    GoalObj_Sound                           //제사상에 음식 내려놓는 사운드
+    GoalObj_Sound,                           //제사상에 음식 내려놓는 사운드
+
+    // ---- Ghost ----
+    Ghost_Move_Sound,
+    Ghost_Frozen_Sound,
+    Ghost_Playerfind_Sound,
+    Ghost_Attack_Sound,
+    Ghost_AttackDelay_Sound,
+
+    // ---- BabyGhost ----
+    BabyGhost_Move_Sound,
+    BabyGhost_Playerfind_Sound,
+    BabyGhost_Crying_Sound,
+
+    // ---- Altar ----
+    //Altar_BG_Sound,          // 배경이지만 SFX로 관리 시
+    Altar_Fire_Sound,
+    Altar_Mapchange_Sound,
+
+    // ---- Minigame ----
+    Minigame_Interaction_Sound,
+    Minigame_Clear_Sound,
+    Minigame_Success_Sound,
+    Minigame_Fail_Sound,
+    Minigame_Wrong_Sound,
+
+    // ---- Game Result ----
+    //Game_Win_BG_Sound,
+    //Game_Lose_BG_Sound
 };
 
 /// <summary>
