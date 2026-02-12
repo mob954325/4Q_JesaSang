@@ -38,8 +38,23 @@ class SoundManager : public ScriptComponent
 {
     RTTR_ENABLE(ScriptComponent)
 public:
+    // singleton
+    inline static SoundManager* s_instance = nullptr;
+
+    SoundManager() = default;
+    ~SoundManager() override = default;
+
+    SoundManager(const SoundManager&) = delete;
+    SoundManager& operator=(const SoundManager&) = delete;
+    SoundManager(SoundManager&&) = delete;
+    SoundManager& operator=(SoundManager&&) = delete;
+
+    static SoundManager* Instance() { return s_instance; }
+
+    // component process
     void OnInitialize() override;
     void OnStart() override;
+    void OnDestory() override;
 
     void PlayBGM(BGMType type, bool restart = true);
     void StopBGM();

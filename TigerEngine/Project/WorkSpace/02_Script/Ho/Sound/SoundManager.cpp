@@ -14,6 +14,14 @@ RTTR_REGISTRATION
 
 void SoundManager::OnInitialize()
 {
+    // 중복 생성 방지
+    if (s_instance != nullptr && s_instance != this)
+    {
+        assert(false && "Duplicate GameManager instance detected.");
+        return;
+    }
+
+    s_instance = this;
 }
 
 void SoundManager::OnStart()
@@ -33,6 +41,11 @@ void SoundManager::OnStart()
             else sfxSources.push_back(src);       // 나머지 SFX로
         }
     }
+}
+
+void SoundManager::OnDestory()
+{
+    if (s_instance == this) s_instance = nullptr;
 }
 
 void SoundManager::PlayBGM(BGMType type, bool restart)

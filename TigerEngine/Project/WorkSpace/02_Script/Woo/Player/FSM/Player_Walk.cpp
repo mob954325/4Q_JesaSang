@@ -1,5 +1,6 @@
 #include "Player_Walk.h"
 #include "../../Inventory/Inventory.h"
+#include "../../../Ho/Sound/PlayerSoundSource.h"
 
 void Player_Walk::Enter()
 {
@@ -10,6 +11,9 @@ void Player_Walk::Enter()
 
     // set animation
     player->animController->ChangeState("Walk");
+
+    // set sound
+    player->sound->PlaySound(PlayerSoundType::Walk, true);
 
     // set sense radius
     player->curSenseRadius = player->walkSenseRadius;

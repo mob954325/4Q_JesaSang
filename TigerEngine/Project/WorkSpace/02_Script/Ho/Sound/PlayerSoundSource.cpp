@@ -16,10 +16,12 @@ RTTR_REGISTRATION
 void PlayerSoundSource::OnStart()
 {
     sound = GetOwner()->GetComponent<AudioSourceComponent>();
+    std::cout << "[Player Sound Source] Getcomponent AudioSOurce" << endl;
 
     if (!sound) // 없으면 생성후 연결
     {
         sound = GetOwner()->AddComponent<AudioSourceComponent>();
+        std::cout << "[Player Sound Source] Addcomponent AudioSOurce" << endl;
     }
 }
 
@@ -37,7 +39,6 @@ void PlayerSoundSource::PlaySound(PlayerSoundType type, bool loop)
 {
     if (!sound) return;
     std::string id = "";
-
 
     // NOTE id는 csv에서 정해짐
     switch (type)
@@ -69,6 +70,14 @@ void PlayerSoundSource::PlaySound(PlayerSoundType type, bool loop)
     sound->SetLoop(loop);
     sound->SetClipId(id);
     sound->Play();
+
+    std::cout << "Play Sound : " << id << std::endl;
+}
+
+void PlayerSoundSource::StopSound()
+{
+    if (!sound) return;
+    sound->Stop();
 }
 
 void PlayerSoundSource::PlayRandomFootStep()

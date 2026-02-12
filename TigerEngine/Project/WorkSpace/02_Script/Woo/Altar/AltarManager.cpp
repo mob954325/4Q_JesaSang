@@ -15,6 +15,7 @@
 #include "../Player/DialogueUI/DialogueUIController.h"
 
 #include "../Item/Item.h"
+#include "../../Ho/Sound/SoundManager.h"
 
 
 REGISTER_COMPONENT(AltarManager)
@@ -486,7 +487,7 @@ void AltarManager::UpdateDirectSequence(float dt)
 
         // Player 다이얼로그
         auto go = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("Player");
-        go->GetComponent<DialogueUIController>()->ShowDialogueText(L"뭔가 으스스해진 것 같아...");
+        go->GetComponent<DialogueUIController>()->ShowDialogueText(L"집안 어딘가에 이상한 기운이 생겼어... 확인해봐야겠어.");
 
     }
     break;
