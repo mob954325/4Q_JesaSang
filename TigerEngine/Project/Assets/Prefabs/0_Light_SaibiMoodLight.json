@@ -1,0 +1,338 @@
+{
+  "prefab": [
+    {
+      "Active": true,
+      "ID": 1986,
+      "Name": "SAIBI_MOOD_LIGHT",
+      "ParentID": -1,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 1987,
+      "Name": "MOOD_LIGHT",
+      "ParentID": 1986,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              -814.0362548828125,
+              81.26839447021484,
+              202.0584716796875
+            ],
+            "Rotation": [
+              -0.0,
+              0.0,
+              -0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Color": [
+              0.7107843160629272,
+              0.459919273853302,
+              0.459919273853302,
+              1.0
+            ],
+            "Direction": [
+              200.0,
+              200.0,
+              200.0
+            ],
+            "InnerAngle": 100.0,
+            "Intensity": 2000.0,
+            "IsSunLight": false,
+            "LightType": "Point",
+            "OuterAngle": 1000.0,
+            "Range": 5000.0
+          },
+          "type": "Light"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 1998,
+      "Name": "MOOD_LIGHT",
+      "ParentID": 1986,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              -920.7809448242188,
+              83.22921752929688,
+              198.80099487304688
+            ],
+            "Rotation": [
+              -0.0,
+              0.0,
+              -0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Color": [
+              0.7107843160629272,
+              0.459919273853302,
+              0.459919273853302,
+              1.0
+            ],
+            "Direction": [
+              200.0,
+              200.0,
+              200.0
+            ],
+            "InnerAngle": 100.0,
+            "Intensity": 2000.0,
+            "IsSunLight": false,
+            "LightType": "Point",
+            "OuterAngle": 1000.0,
+            "Range": 5000.0
+          },
+          "type": "Light"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 1999,
+      "Name": "MOOD_LIGHT",
+      "ParentID": 1986,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              -864.818359375,
+              95.47693634033203,
+              186.7664337158203
+            ],
+            "Rotation": [
+              -0.0,
+              0.0,
+              -0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Color": [
+              1.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "Direction": [
+              200.0,
+              200.0,
+              200.0
+            ],
+            "InnerAngle": 100.0,
+            "Intensity": 10000.0,
+            "IsSunLight": false,
+            "LightType": "Point",
+            "OuterAngle": 1000.0,
+            "Range": 1000.0
+          },
+          "type": "Light"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 2043,
+      "Name": "MOOD_LIGHT",
+      "ParentID": 1986,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              -774.6895751953125,
+              90.54985809326172,
+              137.83201599121094
+            ],
+            "Rotation": [
+              -0.0,
+              0.0,
+              -0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Color": [
+              0.7107843160629272,
+              0.459919273853302,
+              0.459919273853302,
+              1.0
+            ],
+            "Direction": [
+              200.0,
+              200.0,
+              200.0
+            ],
+            "InnerAngle": 100.0,
+            "Intensity": 5000.0,
+            "IsSunLight": false,
+            "LightType": "Point",
+            "OuterAngle": 1000.0,
+            "Range": 10000.0
+          },
+          "type": "Light"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 2044,
+      "Name": "MOOD_LIGHT",
+      "ParentID": 1986,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              -1018.776123046875,
+              73.80558013916016,
+              159.77972412109375
+            ],
+            "Rotation": [
+              -0.0,
+              0.0,
+              -0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Color": [
+              0.7107843160629272,
+              0.459919273853302,
+              0.459919273853302,
+              1.0
+            ],
+            "Direction": [
+              200.0,
+              200.0,
+              200.0
+            ],
+            "InnerAngle": 100.0,
+            "Intensity": 5000.0,
+            "IsSunLight": false,
+            "LightType": "Point",
+            "OuterAngle": 1000.0,
+            "Range": 10000.0
+          },
+          "type": "Light"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 2045,
+      "Name": "MOOD_LIGHT",
+      "ParentID": 1986,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              -885.243896484375,
+              88.62947082519531,
+              -18.881267547607422
+            ],
+            "Rotation": [
+              -0.0,
+              0.0,
+              -0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Color": [
+              1.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "Direction": [
+              200.0,
+              200.0,
+              200.0
+            ],
+            "InnerAngle": 100.0,
+            "Intensity": 5000.0,
+            "IsSunLight": false,
+            "LightType": "Point",
+            "OuterAngle": 1000.0,
+            "Range": 10000.0
+          },
+          "type": "Light"
+        }
+      ]
+    }
+  ]
+}
