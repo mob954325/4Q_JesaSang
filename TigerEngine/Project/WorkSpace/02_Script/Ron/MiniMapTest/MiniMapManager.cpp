@@ -169,6 +169,13 @@ static int ClampItemIndex(int index)
     return index;
 }
 
+static int ClampZoneIndex(int index)
+{
+    if (index < 0) return 0;
+    if (index > 4) return 4;
+    return index;
+}
+
 static constexpr float kPingZOffset = 2.0f;
 static constexpr float kPieceZOffset = -1.0f;
 static constexpr float kCompleteZOffset = 1.0f;
@@ -246,12 +253,8 @@ static std::vector<int> ParseIndexList(const std::string& csv)
         try
         {
             int v = std::stoi(t);
-            // allow 1..6 (user-facing) or 0..5 (internal)
-            if (v >= 1 && v <= 6)
-            {
-                out.push_back(v - 1);
-            }
-            else if (v >= 0 && v <= 5)
+            // Use internal 0..5 indices only to avoid 1/0 ambiguity.
+            if (v >= 0 && v <= 5)
             {
                 out.push_back(v);
             }
@@ -288,6 +291,12 @@ void MiniMapManager::OnInitialize()
 void MiniMapManager::OnStart()
 {
     // Source of truth in code (independent from scene JSON values).
+    pieceToZoneIndex0 = 0; // piece 0 -> zone 0
+    pieceToZoneIndex1 = 1; // piece 1 -> zone 1
+    pieceToZoneIndex2 = 2; // piece 2 -> zone 2
+    pieceToZoneIndex3 = 3; // piece 3 -> zone 3
+    pieceToZoneIndex4 = 4; // piece 4 -> zone 4
+
     zone0IngredientIds = "Ingredient_Apple";
     zone1IngredientIds = "Ingredient_Donggeurangttaeng";
     zone2IngredientIds = "Ingredient_Pear,Ingredient_Sanjeok";
@@ -301,6 +310,15 @@ void MiniMapManager::OnStart()
     zone2PingIndices = "2,3";
     zone3PingIndices = "4";
     zone4PingIndices = "5";
+
+    for (int i = 0; i < 5; ++i)
+    {
+        m_ZoneActivated[i] = false;
+    }
+    for (int i = 0; i < 6; ++i)
+    {
+        m_ItemSearchObjects[i] = nullptr;
+    }
 
     auto scene = SceneSystem::Instance().GetCurrentScene();
     if (!scene)
@@ -710,15 +728,25 @@ void MiniMapManager::TriggerItemCollected(int index, const Vector3& worldPos)
 
 void MiniMapManager::TriggerPieceCollected(int index)
 {
-    cout << "Test" << endl;
     TriggerPieceActive(index, true);
-    // Piece index uses direct mapping 0..4 -> zone 0..4.
-    static constexpr int kPieceToZone[5] = { 0, 1, 2, 3, 4 };
+
+    const int pieceToZone[5] = {
+        pieceToZoneIndex0,
+        pieceToZoneIndex1,
+        pieceToZoneIndex2,
+        pieceToZoneIndex3,
+        pieceToZoneIndex4
+    };
+
     int zoneIndex = index;
     if (index >= 0 && index < 5)
     {
-        zoneIndex = kPieceToZone[index];
+        zoneIndex = pieceToZone[index];
     }
+    zoneIndex = ClampZoneIndex(zoneIndex);
+
+    cout << "[MiniMap] TriggerPieceCollected piece=" << index
+         << " -> zone=" << zoneIndex << endl;
 
     ActivateIngredientsForZone(zoneIndex);
     if (m_Map)
@@ -767,6 +795,10 @@ void MiniMapManager::ActivateIngredientsForZone(int zoneIndex)
     const std::vector<int> indices = (zonePingCsv && !zonePingCsv->empty())
         ? ParseIndexList(*zonePingCsv)
         : std::vector<int>{};
+
+    cout << "[MiniMap] Activate zone=" << zoneIndex
+         << " ids=" << (zoneCsv ? *zoneCsv : "")
+         << " pingIndices=" << (zonePingCsv ? *zonePingCsv : "") << endl;
 
     if (!zoneCsv || zoneCsv->empty())
     {
