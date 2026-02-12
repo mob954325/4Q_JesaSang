@@ -1,3 +1,4 @@
+#include "../../Base/pch.h"
 #include "Animation.h"
 #include <stdexcept>
 

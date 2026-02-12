@@ -1,3 +1,4 @@
+#include "../../Base/pch.h"
 #include "Bone.h"
 
 void Bone::CreateBone(string objName, int parentIndex, int boneIndex, Matrix worldMat, Matrix localMat)
