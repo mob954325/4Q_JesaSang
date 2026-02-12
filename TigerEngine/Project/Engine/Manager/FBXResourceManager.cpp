@@ -560,24 +560,8 @@ std::shared_ptr<FBXResourceAsset> FBXResourceManager::LoadFBXByPath(std::string 
         mesh.CreateIndexBuffer(device);
     }
 
-    // 피킹 aabb
-    //if (pScene->mRootNode->mNumChildren > 0) 
-    //{
-    //    if (pScene->HasAnimations()) // gltf 파일이 RootNode->mChildren[0] 이 nullptr
-    //    {
-    //        // NOTE : 애니메이션 박스들은 절반씩 위로 올려줌 ( 모델이랑 어긋나서 하드 코딩 )
-    //        sharedAsset->boxMin = Vector3::Transform(sharedAsset->boxMin, ToSimpleMathMatrix(pScene->mRootNode->mChildren[0]->mTransformation));
-    //        sharedAsset->boxMax = Vector3::Transform(sharedAsset->boxMax, ToSimpleMathMatrix(pScene->mRootNode->mChildren[0]->mTransformation));
-    //        sharedAsset->boxCenter = { 0.0f, (sharedAsset->boxMax - sharedAsset->boxMin).y / 2.0f, 0.0f };
-    //    }
-    //    else
-    //    {
-    //        sharedAsset->boxMin = Vector3::Transform(sharedAsset->boxMin, ToSimpleMathMatrix(pScene->mRootNode->mChildren[0]->mTransformation));
-    //        sharedAsset->boxMax = Vector3::Transform(sharedAsset->boxMax, ToSimpleMathMatrix(pScene->mRootNode->mChildren[0]->mTransformation));
-    //        sharedAsset->boxCenter = Vector3::Zero;
-    //    }
-    //}
-
+    // AABB 중심점 계산 추가
+    sharedAsset->boxCenter = (sharedAsset->boxMin + sharedAsset->boxMax) * 0.5f;
 
 	// map에 저장하기
 	weak_ptr<FBXResourceAsset> weakAsset = sharedAsset;
@@ -635,10 +619,10 @@ std::shared_ptr<FBXResourceAsset> FBXResourceManager::LoadStaticFBXByPath(std::s
         mesh.CreateIndexBuffer(device);
     }
 
-    // aabb bound -> 마우스 피킹용
+    // Transform 적용 후 중심점 계산
     sharedAsset->boxMin = Vector3::Transform(sharedAsset->boxMin, ToSimpleMathMatrix(pScene->mRootNode->mTransformation));
     sharedAsset->boxMax = Vector3::Transform(sharedAsset->boxMax, ToSimpleMathMatrix(pScene->mRootNode->mTransformation));
-    sharedAsset->boxCenter = Vector3::Zero;
+    sharedAsset->boxCenter = (sharedAsset->boxMin + sharedAsset->boxMax) * 0.5f;
 
     return sharedAsset;
 }

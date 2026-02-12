@@ -7,6 +7,7 @@
 #include "../Util/JsonHelper.h"
 #include "AnimationController.h"
 #include "../EngineSystem/PlayModeSystem.h"
+#include "../EngineSystem/CameraSystem.h"
 
 RTTR_REGISTRATION
 {
@@ -98,13 +99,13 @@ void FBXRenderer::OnDisable()
 
 void FBXRenderer::OnDestory()
 {
-    Vector3 center = { 0.0f, 0.0f, 0.0f };
-    Vector3 extent = { 10.0f, 10.0f, 10.0f };
-
-    Vector3 min = center - extent;
-    Vector3 max = center + extent;
-
-    GetOwner()->SetAABB(min, max, center);
+    // Vector3 center = { 0.0f, 0.0f, 0.0f };
+    // Vector3 extent = { 10.0f, 10.0f, 10.0f };
+    // 
+    // Vector3 min = center - extent;
+    // Vector3 max = center + extent;
+    // 
+    // GetOwner()->SetAABB(min, max, center);
 
     // std::cout << "FBXRenderer : OnDestory\n";
 }
@@ -112,6 +113,15 @@ void FBXRenderer::OnDestory()
 void FBXRenderer::OnRender(RenderQueue& queue)
 {
     if (fbxData == nullptr || fbxData->GetMesh().empty()) return;
+
+    // 프러스텀 컬링
+    //auto camera = CameraSystem::Instance().GetCurrCamera(); // 현재 카메라 기준 컬링
+    //if (camera && !IsVisiableFrustum(camera))
+    //{
+    //    std::cout << "culled !!\n";
+    //    return;
+    //}
+
 
     ModelType modelType = fbxData->GetFBXInfo()->type;
 
@@ -297,4 +307,10 @@ void FBXRenderer::SetRoughnessOverride(float value)
     roughnessOverride = value;
     for (auto& material : fbxData->GetMesh())
         material.GetMaterial().roughnessOverride = roughnessOverride;
+}
+
+bool FBXRenderer::IsVisiableFrustum(Camera* camera)
+{
+    auto aabb = GetOwner()->GetAABB();
+    return camera->GetWorldFrustum().Contains(aabb) != DirectX::DISJOINT;
 }

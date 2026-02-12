@@ -29,6 +29,8 @@
 #include "../Components/VisionComponent.h"
 #include "../Components/UI/TextUI.h"
 #include "../Util/EncodeConvertHelper.h"
+#include "../Manager/UIManager.h"
+#include "../Base/System/TimeSystem.h"
 
 // Payload
 // Prefab payload
@@ -135,6 +137,7 @@ void Editor::Render(HWND& hwnd)
     RenderGizmoSettings();
     // RenderWorldGrid();
     RenderGizmo();
+    RenderVariantDebugger();
 
     ImGui::Begin("DebugPickItem");
     {
@@ -206,6 +209,15 @@ void Editor::RenderMenuBar(HWND& hwnd)
             }
             ImGui::EndMenu();
         }
+        if (ImGui::BeginMenu("Debugger"))
+        {
+            if (ImGui::MenuItem("Window n GameInfo"))
+            {
+                isOpenVariantDebugger = !isOpenVariantDebugger;
+            }
+            ImGui::EndMenu();
+        }
+
         RenderPlayModeControls();
     }
     ImGui::EndMainMenuBar();
@@ -641,6 +653,8 @@ GameObject* Editor::InstantiatePrefabFromJson(const std::vector<std::string>& js
         if (created[i] && parentIDs[i] == -1)
             return created[i];
     }
+
+    return nullptr;
 }
 
 void Editor::CollectSubtree(GameObject* root, std::vector<std::string>& out)
@@ -2403,6 +2417,24 @@ void Editor::RenderCameraPanel()
     }
     ImGui::End();
 }
+
+void Editor::RenderVariantDebugger()
+{
+    if (!isOpenVariantDebugger) return;
+    ImGui::Begin("variant debugger");
+    {
+        float x = UIManager::Instance().GetSize().x;
+        float y = UIManager::Instance().GetSize().y;
+        string screenSizeStr = "ScreenSize : " + to_string(x) + ", " + to_string(y);
+        ImGui::Text(screenSizeStr.c_str());
+
+        float fps = 1.0f / GameTimer::Instance().UnscaledDeltaTime();
+        string fpsStr = "Fps : " + to_string(fps);
+        ImGui::Text(fpsStr.c_str());
+    }
+    ImGui::End();
+}
+
 
 void Editor::OnInputProcess(const Keyboard::State& KeyState, const Keyboard::KeyboardStateTracker& KeyTracker, const Mouse::State& MouseState, const Mouse::ButtonStateTracker& MouseTracker)
 {

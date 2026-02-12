@@ -93,6 +93,7 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(MSBuildStartupDirectory)\Base\;$(MSBuildStartupDirectory)\External\</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -127,6 +128,7 @@
       <AdditionalIncludeDirectories>$(MSBuildStartupDirectory)\Base\;$(MSBuildStartupDirectory)\External\;$(MSBuildStartupDirectory)\Externals\AudioModule_FMOD\include;$(MSBuildStartupDirectory)\Externals\AudioModule_FMOD\fmod\inc;%(AdditionalIncludeDirectories);$(SolutionDir)ThirdParty\PhysX_5\include;$(SolutionDir)ThirdParty\PhysX_5\pxshared\include</AdditionalIncludeDirectories>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

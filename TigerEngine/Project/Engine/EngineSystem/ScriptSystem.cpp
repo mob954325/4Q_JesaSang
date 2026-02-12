@@ -9,8 +9,8 @@ void ScriptSystem::CheckReadyQueue()
     {
         auto comp = readyQueue.front();
 
-        comp->OnStart();
         comp->SetStartTrue();
+        comp->OnStart();
 
         readyQueue.pop();
     }
@@ -35,7 +35,7 @@ void ScriptSystem::UnRegister(Component* comp)
     {
         if (*it == comp)
         {
-            pending_components.erase(it);
+            pending_scriptRemovals.push_back(*it);
             return;
         }
     }
@@ -44,7 +44,7 @@ void ScriptSystem::UnRegister(Component* comp)
     {
         if (*it == comp)
         {
-            comps.erase(it);
+            pending_scriptRemovals.push_back(*it);
             return;
         }
     }
@@ -56,7 +56,7 @@ void ScriptSystem::UnRegisterScript(Component* comp)
     {
         if (*it == comp)
         {
-            pending_scriptComponents.erase(it);
+            pending_scriptRemovals.push_back(*it);
             return;
         }
     }
@@ -65,7 +65,7 @@ void ScriptSystem::UnRegisterScript(Component* comp)
     {
         if (*it == comp)
         {
-            scriptComps.erase(it);
+            pending_scriptRemovals.push_back(*it);
             return;
         }
     }
@@ -104,8 +104,8 @@ void ScriptSystem::Update(float delta)
             // 이전 이벤트 함수 Oninitialize(), OnEnable은 AddComponent 시 호출됩니다.
             if (!e->IsStart()) // start 해소
             {
-                e->OnStart();
                 e->SetStartTrue();
+                e->OnStart();
             }
             else
             {
@@ -113,42 +113,48 @@ void ScriptSystem::Update(float delta)
             }
         }
     }
+
+    ProcessRemovals(); // 제거 대상 확인
 }
 
 void ScriptSystem::FixedUpdate(float dt)
 {
     if (PlayModeSystem::Instance().IsPlaying())
     {
+        for (auto& e : pending_scriptComponents)
+        {
+            scriptComps.push_back(e);
+        }
+        pending_scriptComponents.clear();
+
         // 사용자 정의 component update
         for (auto& e : scriptComps)
         {
-            for (auto& e : pending_scriptComponents)
-            {
-                scriptComps.push_back(e);
-            }
-            pending_scriptComponents.clear();
-
             e->OnFixedUpdate(dt);
         }
     }
+
+    ProcessRemovals(); // 제거 대상 확인
 }
 
 void ScriptSystem::LateUpdate(float dt)
 {
     if (PlayModeSystem::Instance().IsPlaying())
     {
+        for (auto& e : pending_scriptComponents)
+        {
+            scriptComps.push_back(e);
+        }
+        pending_scriptComponents.clear();
+
         // 사용자 정의 component update
         for (auto& e : scriptComps)
         {
-            for (auto& e : pending_scriptComponents)
-            {
-                scriptComps.push_back(e);
-            }
-            pending_scriptComponents.clear();
-
             e->OnLateUpdate(dt);
         }
     }
+
+    ProcessRemovals(); // 제거 대상 확인
 }
 
 void ScriptSystem::Clear()
@@ -158,4 +164,32 @@ void ScriptSystem::Clear()
 
    scriptComps.clear();
    pending_scriptComponents.clear();
+}
+
+void ScriptSystem::SwapErase(std::vector<Component*>& comps, Component* target)
+{
+    for (int i = 0; i < comps.size(); ++i)
+    {
+        if (comps[i] == target)
+        {
+            comps[i] = comps.back();
+            comps.pop_back();
+            return;
+        }
+    }
+}
+
+void ScriptSystem::ProcessRemovals()
+{
+    if (pending_scriptRemovals.empty()) return;
+
+    for (auto* c : pending_scriptRemovals)
+    {
+        SwapErase(pending_components, c);
+        SwapErase(comps, c);
+
+        SwapErase(pending_scriptComponents, c);
+        SwapErase(scriptComps, c);
+    }
+    pending_scriptRemovals.clear();
 }

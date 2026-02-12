@@ -127,6 +127,7 @@ Matrix& Transform::GetLocalMatrix()
 
 Vector3 Transform::GetWorldPosition()
 {
+    if (this == nullptr) return Vector3::Zero;  // 방어
     UpdateMatricesIfDirty();
     return worldMatrix.Translation();
 }
@@ -138,6 +139,8 @@ const Vector3& Transform::GetLocalPosition()
 
 void Transform::SetPosition(const Vector3& pos)
 {
+    if (this == nullptr) return; // 방어
+
     position = pos;
     dirty = true;
     SetChildrenDirty();

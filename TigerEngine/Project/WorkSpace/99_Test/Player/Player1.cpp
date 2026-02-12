@@ -1,4 +1,4 @@
-#include "Player1.h"
+﻿#include "Player1.h"
 #include "Object/GameObject.h"
 #include "System/InputSystem.h"
 #include "Object/Component.h"
@@ -64,6 +64,13 @@ void Player1::OnStart()
 
     if(smObj)
         soundManager = smObj->GetComponent<SoundManager>();
+
+
+    text = GetOwner()->GetComponent<TextUI>();
+    if (text)
+    {
+        text->SetText(L"한글한글");
+    }
 }
 
 void Player1::OnDisable()

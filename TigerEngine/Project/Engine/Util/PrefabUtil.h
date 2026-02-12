@@ -124,5 +124,7 @@ public:
             if (created[i] && parentIDs[i] == -1)
                 return created[i];
         }
+
+        return nullptr;
     }
 };
