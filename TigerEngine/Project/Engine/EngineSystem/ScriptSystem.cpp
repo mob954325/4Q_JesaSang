@@ -164,6 +164,8 @@ void ScriptSystem::Clear()
 
    scriptComps.clear();
    pending_scriptComponents.clear();
+   pending_components.clear();
+   pending_scriptRemovals.clear();
 }
 
 void ScriptSystem::SwapErase(std::vector<Component*>& comps, Component* target)
