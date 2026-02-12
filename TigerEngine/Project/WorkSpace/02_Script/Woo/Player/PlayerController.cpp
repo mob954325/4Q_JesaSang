@@ -108,11 +108,11 @@ void PlayerController::OnUpdate(float delta)
     UpsateHitDuration(delta);
 
     // ----- test --------------
-    // ai attack test
-    //if (Input::GetKeyDown(Keyboard::P))
-    //{
-    //    TakeAttack();
-    //}
+    //ai attack test
+    if (Input::GetKeyDown(Keyboard::P))
+    {
+        TakeAttack();
+    }
     //
     //// quarter view
     //if (Input::GetKeyDown(Keyboard::O))
