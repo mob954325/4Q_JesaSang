@@ -48,6 +48,15 @@ public:
     nlohmann::json Serialize();
     void Deserialize(nlohmann::json data);
 
+    // Singleton safety: no copy / 
+    QuestManager() = default;
+    ~QuestManager() override = default;
+
+    QuestManager(const QuestManager&) = delete;
+    QuestManager& operator=(const QuestManager&) = delete;
+    QuestManager(QuestManager&&) = delete;
+    QuestManager& operator=(QuestManager&&) = delete;
+
 private:
     // Quset UI Update Setting
     void ApplyStepUI();     

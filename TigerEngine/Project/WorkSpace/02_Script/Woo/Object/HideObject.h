@@ -1,6 +1,7 @@
 #pragma once
 #include "Components/ScriptComponent.h"
 
+class GameObject;
 class Image;
 class PlayerController;
 
@@ -28,8 +29,7 @@ private:
     Image* image_sensorOn = nullptr;
     Image* image_interactionOn = nullptr;
     Image* image_interactionGauge = nullptr;
-
-
+   
     // data
     float hideDurationTime = 10.0f;     // 최대 은신 시간
     float reHideCoolTime = 1.0f;        // 재은신 쿨타임
@@ -41,6 +41,13 @@ private:
 
     float hideDurationTimer = 0.0f;
     float reHideCoolTimer = 0.0f;
+
+
+    // 자개장은 추가 연출 필요
+    bool isJagaejang = false;
+    GameObject* openModel = nullptr;
+    GameObject* closeModel = nullptr;
+    void UpdateJagaejangModel();
 
 
 public:

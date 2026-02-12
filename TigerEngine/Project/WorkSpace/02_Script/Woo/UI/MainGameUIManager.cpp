@@ -1,4 +1,4 @@
-#include "MainGameUIManager.h"
+﻿#include "MainGameUIManager.h"
 #include "Util/JsonHelper.h"
 #include "Util/ComponentAutoRegister.h"
 #include "../Base/Datas/ReflectionMedtaDatas.hpp"
@@ -52,6 +52,13 @@ namespace
 
 void MainGameUIManager::OnInitialize()
 {
+    // 중복 생성 방지
+    if (s_instance != nullptr && s_instance != this)
+    {
+        assert(false && "Duplicate GameManager instance detected.");
+        return;
+    }
+
     s_instance = this;
 }
 
@@ -133,6 +140,9 @@ void MainGameUIManager::OnStart()
     {
         cout << "[MainGameUIManager] Missing quest UI objects!" << endl;
     }
+
+    UpdateQuestTitle(L"[탐색] 제사 준비");
+    UpdateQuestLable(L"음식 재료를 획득하세요.");
 }
 
 void MainGameUIManager::OnDestory()

@@ -3,7 +3,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 395,
+        "ID": 3124,
         "Name": "DirectionalLight(Sun)",
         "ParentID": -1,
         "components": [
@@ -57,7 +57,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 396,
+        "ID": 3125,
         "Name": "Ground",
         "ParentID": -1,
         "components": [
@@ -138,7 +138,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 397,
+        "ID": 3126,
         "Name": "Player",
         "ParentID": -1,
         "components": [
@@ -211,18 +211,6 @@
               "isroughnessFromShininess": false
             },
             "type": "FBXRenderer"
-          },
-          {
-            "properties": {
-              "Active": true
-            },
-            "type": "AudioListenerComponent"
-          },
-          {
-            "properties": {
-              "Active": true
-            },
-            "type": "Weapon"
           }
         ]
       },
@@ -231,9 +219,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 398,
+        "ID": 3127,
         "Name": "NewGameObject",
-        "ParentID": 397,
+        "ParentID": 3126,
         "components": [
           {
             "properties": {
@@ -321,60 +309,8 @@
     },
     {
       "properties": {
-        "Active": false,
-        "ID": 399,
-        "Name": "SoundObject",
-        "ParentID": -1,
-        "components": [
-          {
-            "properties": {
-              "Position": [
-                458.93914794921875,
-                180.7545928955078,
-                -0.38031005859375
-              ],
-              "Rotation": [
-                -0.0,
-                0.0,
-                -0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ]
-            },
-            "type": "Transform"
-          },
-          {
-            "properties": {
-              "Active": false,
-              "ChannelGroup": "BGM",
-              "ClipId": "SFX_Footstep1",
-              "Loop": true,
-              "MaxDistance": 4.0,
-              "MinDistance": 1.0,
-              "Pitch": 1.0,
-              "Volume": 1.0
-            },
-            "type": "AudioSourceComponent"
-          },
-          {
-            "properties": {
-              "b": 0.0,
-              "g": 0.0,
-              "r": 0.0
-            },
-            "type": "Player1"
-          }
-        ]
-      },
-      "type": "GameObject"
-    },
-    {
-      "properties": {
         "Active": true,
-        "ID": 400,
+        "ID": 3128,
         "Name": "WinCinemahcine",
         "ParentID": -1,
         "components": [
@@ -411,9 +347,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 401,
+        "ID": 3129,
         "Name": "WinCinemachineCamera",
-        "ParentID": 400,
+        "ParentID": 3128,
         "components": [
           {
             "properties": {
@@ -452,7 +388,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 402,
+        "ID": 3130,
         "Name": "WinSpotLight",
         "ParentID": -1,
         "components": [
@@ -506,7 +442,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 403,
+        "ID": 3131,
         "Name": "LoseCinemahcine",
         "ParentID": -1,
         "components": [
@@ -543,9 +479,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 404,
+        "ID": 3132,
         "Name": "LoseCinemachineCamera",
-        "ParentID": 403,
+        "ParentID": 3131,
         "components": [
           {
             "properties": {
@@ -584,7 +520,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 405,
+        "ID": 3133,
         "Name": "ResultPanel",
         "ParentID": -1,
         "components": [
@@ -621,9 +557,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 406,
+        "ID": 3134,
         "Name": "WinPanel",
-        "ParentID": 405,
+        "ParentID": 3133,
         "components": [
           {
             "properties": {
@@ -718,9 +654,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 407,
+        "ID": 3135,
         "Name": "LosePanel",
-        "ParentID": 405,
+        "ParentID": 3133,
         "components": [
           {
             "properties": {
@@ -807,6 +743,221 @@
               "Active": true
             },
             "type": "LosePanel"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 3136,
+        "Name": "Playerasdsdfas",
+        "ParentID": -1,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                197.1030731201172,
+                169.3203125,
+                0.0
+              ],
+              "Rotation": [
+                -0.0,
+                0.0,
+                -0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "b": 0.0,
+              "g": 0.0,
+              "r": 0.0
+            },
+            "type": "Player1"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "DataPath": "..\\Assets\\Resource\\sphere.fbx",
+              "IsStatic": true
+            },
+            "type": "FBXData"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "Alpha": 1.0,
+              "Diffuse": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "DiffuseOverride": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Emissive": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "EmissiveOverride": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "IsGround": false,
+              "Metalic": 1.0,
+              "MetallicOverride": 1.0,
+              "RenderBlendType": "Opaque",
+              "Roughness": 1.0,
+              "RoughnessOverride": 1.0,
+              "UseDiffuseOverride": false,
+              "UseEmissiveOverride": false,
+              "UseMetallicOverride": false,
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
+            },
+            "type": "FBXRenderer"
+          },
+          {
+            "properties": {
+              "Active": true
+            },
+            "type": "PlayerSoundSource"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 3137,
+        "Name": "NewGameObject",
+        "ParentID": -1,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 3138,
+        "Name": "SoundManager",
+        "ParentID": -1,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "ChannelGroup": "",
+              "ClipId": "",
+              "Loop": false,
+              "MaxDistance": 100.0,
+              "MinDistance": 1.0,
+              "Pitch": 1.0,
+              "Volume": 1.0
+            },
+            "type": "AudioSourceComponent"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "ChannelGroup": "",
+              "ClipId": "",
+              "Loop": false,
+              "MaxDistance": 100.0,
+              "MinDistance": 1.0,
+              "Pitch": 1.0,
+              "Volume": 1.0
+            },
+            "type": "AudioSourceComponent"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "ChannelGroup": "",
+              "ClipId": "",
+              "Loop": false,
+              "MaxDistance": 100.0,
+              "MinDistance": 1.0,
+              "Pitch": 1.0,
+              "Volume": 1.0
+            },
+            "type": "AudioSourceComponent"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "ChannelGroup": "",
+              "ClipId": "",
+              "Loop": false,
+              "MaxDistance": 100.0,
+              "MinDistance": 1.0,
+              "Pitch": 1.0,
+              "Volume": 1.0
+            },
+            "type": "AudioSourceComponent"
+          },
+          {
+            "properties": {
+              "Active": true
+            },
+            "type": "SoundManager"
           }
         ]
       },

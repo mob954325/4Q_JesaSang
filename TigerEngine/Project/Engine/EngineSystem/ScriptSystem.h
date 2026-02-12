@@ -8,6 +8,11 @@ class Component; // 순환 참조 방지
 /// 렌더링을 하지 않는 단순 컴포넌트를 상속받은 컴포넌트들을 관리합니다.
 /// 객체의 생명주기는 관리하지 않습니다.
 /// </summary>
+/// <remarks>
+/// 등록 흐름 
+///     등록 호출 -> pending에 삽입 -> 매 프레임마다 pending에서 각 컨테이너로 추가 후 pending clear
+///     제거 호출 -> removeal에 삽입 -> 매 마지막 (LateUpdate) 에서 removals에 있는 컴포넌트 제거
+/// </remkars>
 class ScriptSystem : public Singleton<ScriptSystem>
 {
 public:
@@ -88,4 +93,12 @@ private:
     /// script component 지연 등록을 위한 펜딩 벡터 
     /// </summary>
     std::vector<Component*> pending_scriptComponents{};
+
+    /// <summary>
+    /// 제거될 예정인 컴포넌트 모음 
+    /// </summary>
+    std::vector<Component*> pending_scriptRemovals{};
+
+    void SwapErase(std::vector<Component*>& comps, Component* target);
+    void ProcessRemovals();
 };

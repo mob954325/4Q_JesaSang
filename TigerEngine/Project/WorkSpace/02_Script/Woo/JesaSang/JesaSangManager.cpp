@@ -21,7 +21,13 @@ RTTR_REGISTRATION
 
 void JesaSangManager::OnInitialize()
 {
-    // singleton
+    // 중복 생성 방지
+    if (s_instance != nullptr && s_instance != this)
+    {
+        assert(false && "Duplicate GameManager instance detected.");
+        return;
+    }
+
     s_instance = this;
 }
 
@@ -48,6 +54,11 @@ void JesaSangManager::OnStart()
         cout << "[SearchObject] Missing ui!" << endl;
         return;
     }
+}
+
+void JesaSangManager::OnDestory()
+{
+    if (s_instance == this) s_instance = nullptr;
 }
 
 

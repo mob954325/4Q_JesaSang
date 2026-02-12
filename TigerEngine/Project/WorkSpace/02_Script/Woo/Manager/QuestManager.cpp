@@ -41,6 +41,13 @@ namespace
 
 void QuestManager::OnInitialize()
 {
+    // 중복 생성 방지
+    if (s_instance != nullptr && s_instance != this)
+    {
+        assert(false && "Duplicate GameManager instance detected.");
+        return;
+    }
+
     s_instance = this;
 }
 
@@ -49,6 +56,10 @@ void QuestManager::OnStart()
     // step 1 퀘스트 시작
     curStep = 1;
     ApplyStepUI();
+
+    //auto ui = MainGameUIManager::Instance();
+    //ui->UpdateQuestTitle(L"[탐색] 제사 준비");
+    //ui->UpdateQuestLable(L"음식 재료를 획득하세요.");
 }
 
 void QuestManager::OnUpdate(float delta)

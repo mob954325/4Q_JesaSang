@@ -2,16 +2,16 @@
   "prefab": [
     {
       "Active": true,
-      "ID": 18441,
+      "ID": 19384,
       "Name": "SearchObject",
-      "ParentID": 18359,
+      "ParentID": -1,
       "components": [
         {
           "properties": {
             "Position": [
-              -859.2117309570313,
+              -322.09808349609375,
               0.0,
-              -172.12106323242188
+              -352.071533203125
             ],
             "Rotation": [
               -0.0,
@@ -118,9 +118,9 @@
     },
     {
       "Active": false,
-      "ID": 18442,
+      "ID": 19385,
       "Name": "Image_SensorOn",
-      "ParentID": 18441,
+      "ParentID": 19384,
       "components": [
         {
           "properties": {
@@ -206,9 +206,9 @@
     },
     {
       "Active": false,
-      "ID": 18443,
+      "ID": 19386,
       "Name": "Image_InteractionOn",
-      "ParentID": 18441,
+      "ParentID": 19384,
       "components": [
         {
           "properties": {
@@ -276,7 +276,7 @@
             "drawSpacetype": "World",
             "fillAmount": 1.0,
             "imageType": "Simple",
-            "isBillboard": false,
+            "isBillboard": true,
             "isMouseCheck": false,
             "path": "..\\Assets\\Resource\\UI\\Interaction\\F.png",
             "sliceBorderPx": [
@@ -294,9 +294,9 @@
     },
     {
       "Active": false,
-      "ID": 18444,
+      "ID": 19387,
       "Name": "Image_InteractionGauge",
-      "ParentID": 18441,
+      "ParentID": 19384,
       "components": [
         {
           "properties": {
@@ -364,7 +364,7 @@
             "drawSpacetype": "World",
             "fillAmount": 0.0,
             "imageType": "FillVertical",
-            "isBillboard": false,
+            "isBillboard": true,
             "isMouseCheck": false,
             "path": "..\\Assets\\Resource\\UI\\Interaction\\F_02.png",
             "sliceBorderPx": [

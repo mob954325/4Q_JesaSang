@@ -1,5 +1,6 @@
 #include "Player_Run.h"
 #include "../../Inventory/Inventory.h"
+#include "../../../Ho/Sound/PlayerSoundSource.h"
 
 void Player_Run::Enter()
 {
@@ -10,6 +11,9 @@ void Player_Run::Enter()
 
     // set animation
     player->animController->ChangeState("Run");
+
+    // set sound
+    player->sound->PlaySound(PlayerSoundType::Run, true);
 
     // set sense radius
     player->curSenseRadius = player->runSenseRadius;

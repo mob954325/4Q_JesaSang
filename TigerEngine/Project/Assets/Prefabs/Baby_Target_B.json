@@ -1,0 +1,32 @@
+{
+  "prefab": [
+    {
+      "Active": true,
+      "ID": 2055,
+      "Name": "Baby_Target_B",
+      "ParentID": -1,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              0.0,
+              -448.44354248046875
+            ],
+            "Rotation": [
+              -0.0,
+              0.0,
+              -0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        }
+      ]
+    }
+  ]
+}

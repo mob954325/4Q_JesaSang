@@ -2,7 +2,7 @@
   "prefab": [
     {
       "Active": true,
-      "ID": 169,
+      "ID": 4414,
       "Name": "WinPackage",
       "ParentID": -1,
       "components": [
@@ -30,16 +30,16 @@
     },
     {
       "Active": true,
-      "ID": 165,
+      "ID": 4415,
       "Name": "WinCinemahcine",
-      "ParentID": 169,
+      "ParentID": 4414,
       "components": [
         {
           "properties": {
             "Position": [
-              359.3421630859375,
-              190.5639190673828,
-              0.0
+              186.93826293945313,
+              100.46530151367188,
+              506.9891662597656
             ],
             "Rotation": [
               -0.0,
@@ -64,9 +64,9 @@
     },
     {
       "Active": true,
-      "ID": 166,
+      "ID": 4416,
       "Name": "WinCinemachineCamera",
-      "ParentID": 165,
+      "ParentID": 4415,
       "components": [
         {
           "properties": {
@@ -102,16 +102,16 @@
     },
     {
       "Active": true,
-      "ID": 167,
+      "ID": 4417,
       "Name": "WinSpotLight",
-      "ParentID": 169,
+      "ParentID": 4414,
       "components": [
         {
           "properties": {
             "Position": [
-              360.3035888671875,
-              253.8966827392578,
-              -2.8719749450683594
+              185.00277709960938,
+              122.60077667236328,
+              561.51171875
             ],
             "Rotation": [
               -0.0,
@@ -138,14 +138,14 @@
             "Direction": [
               0.0,
               -1.0,
-              1.0
+              0.0
             ],
-            "InnerAngle": 100.0,
+            "InnerAngle": 86.69999694824219,
             "Intensity": 2000.0,
             "IsSunLight": false,
             "LightType": "Spot",
-            "OuterAngle": 200.0,
-            "Range": 200.0
+            "OuterAngle": 0.0,
+            "Range": 123.69999694824219
           },
           "type": "Light"
         }

@@ -59,9 +59,15 @@ std::shared_ptr<FBXResourceAsset> FBXData::GetFBXInfo()
 void FBXData::ChangeData(std::string path)
 {
     isStatic = false;
+
+    // fbx 찾기
     auto getData = FBXResourceManager::Instance().LoadFBXByPath(path);
     fbxAsset.reset();
     fbxAsset = getData;
+
+    if (!fbxAsset) return; // 없으면 무시
+
+    // 메쉬 저장
     meshes = fbxAsset->meshes; 
     this->path = path;
     owner->SetAABB(fbxAsset->boxMin, fbxAsset->boxMax, fbxAsset->boxCenter);
@@ -76,6 +82,9 @@ void FBXData::ChangeStaticData(std::string path)
     auto getData = FBXResourceManager::Instance().LoadStaticFBXByPath(path);
     fbxAsset.reset();
     fbxAsset = getData;
+
+    if (!fbxAsset) return; // 없으면 무시
+
     meshes = fbxAsset->meshes;
     this->path = path;
     owner->SetAABB(fbxAsset->boxMin, fbxAsset->boxMax, fbxAsset->boxCenter);
@@ -101,6 +110,8 @@ void FBXData::Deserialize(nlohmann::json data)
             fbxAsset = FBXResourceManager::Instance().LoadStaticFBXByPath(path);
         else
             fbxAsset = FBXResourceManager::Instance().LoadFBXByPath(path);
+
+        if (!fbxAsset) return; // 없으면 무시
 
         meshes = fbxAsset->meshes;
         owner->SetAABB(fbxAsset->boxMin, fbxAsset->boxMax, fbxAsset->boxCenter);

@@ -18,12 +18,11 @@ RTTR_REGISTRATION
 
 void LosePanel::OnInitialize()
 {
-    effectsPath.resize(5);
-    effectsPath[0] = "..\\Assets\\Resource\\Effect\\Freezing\\Freezing_effect01.png";
-    effectsPath[1] = "..\\Assets\\Resource\\Effect\\Freezing\\Freezing_effect02.png";
-    effectsPath[2] = "..\\Assets\\Resource\\Effect\\Freezing\\Freezing_effect03.png";
-    effectsPath[3] = "..\\Assets\\Resource\\Effect\\Freezing\\Freezing_effect04.png";
-    effectsPath[4] = "..\\Assets\\Resource\\Effect\\Freezing\\Freezing_effect05.png";
+    effectsPath.resize(9);
+    for (int i = 1; i < 10; i++)
+    {
+        effectsPath[i - 1] = "..\\Assets\\Resource\\Ending\\bad\\main0" + to_string(i) + ".png";
+    }
 }
 
 void LosePanel::OnStart()
@@ -36,7 +35,7 @@ void LosePanel::OnUpdate(float delta)
     if (notified && !isPlayed)
     {
         timer += delta;
-        UpdateWorldSetting(delta);
+        //UpdateWorldSetting(delta);
 
         if (timer > maxTimer)
         {

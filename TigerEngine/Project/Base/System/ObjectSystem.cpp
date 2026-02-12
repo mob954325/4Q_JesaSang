@@ -11,6 +11,7 @@ void ObjectSystem::Destory(Handle h)
 
 	slot.ptr->~Object();
 	slot.ptr = nullptr;
+    delete slot.ptr;
 
 	slot.generation++;
 

@@ -1,4 +1,4 @@
-#include "PlayerController.h"
+﻿#include "PlayerController.h"
 #include "Util/DebugDraw.h"
 #include "Util/JsonHelper.h"
 #include "Util/ComponentAutoRegister.h"
@@ -37,6 +37,7 @@
 #include "../UI/MainGameUIManager.h"
 #include "../CookingZone/CookingZone.h"
 #include "../../Ron/MiniMapTest/MiniMapManager.h"
+#include "../../Ho/Sound/PlayerSoundSource.h"
 
 
 REGISTER_COMPONENT(PlayerController)
@@ -56,6 +57,7 @@ void PlayerController::OnStart()
     fbxRenderer = GetOwner()->GetComponent<FBXRenderer>();
     fbxData = GetOwner()->GetComponent<FBXData>();
     animController = GetOwner()->GetComponent<AnimationController>();
+    sound = GetOwner()->GetComponent<PlayerSoundSource>();
     fireEffect = GetOwner()->GetChildByName("Player_FireEffect")->GetOwner()->GetComponent<Effect>();
     hitEffect = GetOwner()->GetChildByName("Player_HitEffect")->GetOwner()->GetComponent<AnimationController>();
 
@@ -68,7 +70,7 @@ void PlayerController::OnStart()
     camController = CameraSystem::Instance().GetCurrCamera()->GetOwner()->GetComponent<CameraController>();
 
     // debug
-    if (!fbxRenderer || !cct || !inventory || !camController || !fbxData || 
+    if (!fbxRenderer || !cct || !inventory || !camController || !fbxData || !sound ||
         !animController || !dialogueController || !fireEffect || !hitEffect ||
         !threatMonitor || !visualizer)
     {
@@ -244,18 +246,17 @@ void PlayerController::LoadAnimation()
 
 
     // Effect Animatinon
-    // TODO :: Bone연결되면 주석 해제
-    //FBXResourceManager::Instance().LoadAnimationByPath(hitEffect->GetOwner()->GetComponent<FBXData>()->GetFBXInfo(), 
-    //    "..\\Assets\\Resource\\Effect\\ani_confused_mark.fbx", "HitEffect");
-    //auto effectHitClip = hitEffect->FindClip("HitEffect");
-    //hitEffect->AddState(std::make_unique<AnimationState>("HitEffect", effectHitClip, hitEffect));
-    //hitEffect->ChangeState("HitEffect");
-    //
-    //if (!effectHitClip)
-    //{
-    //    cout << "[Player Effect Animation] Clip not found!\n" << endl;
-    //    return;
-    //}
+    FBXResourceManager::Instance().LoadAnimationByPath(hitEffect->GetOwner()->GetComponent<FBXData>()->GetFBXInfo(), 
+        "..\\Assets\\Resource\\Effect\\ani_confused_mark.fbx", "HitEffect");
+    auto effectHitClip = hitEffect->FindClip("HitEffect");
+    hitEffect->AddState(std::make_unique<AnimationState>("HitEffect", effectHitClip, hitEffect));
+    hitEffect->ChangeState("HitEffect");
+    
+    if (!effectHitClip)
+    {
+        cout << "[Player Effect Animation] Clip not found!\n" << endl;
+        return;
+    }
 }
 
 /*-------[ Init ]-------------------------------------*/
@@ -267,6 +268,18 @@ void PlayerController::InitStat()
 /*-------[ Input ]-------------------------------------*/
 void PlayerController::InputProcess()
 {
+    if (isInputLocked) // 선민 | 02.11 
+    {
+        isMoveLKey = false;
+        isMoveRKey = false;
+        isMoveFKey = false;
+        isMoveBKey = false;
+        isSitKey = false;
+        isRunKey = false;
+        isInteractionKey = false;
+        return;
+    }
+
     // key
     isMoveLKey = Input::GetKey(moveL_Key);
     isMoveRKey = Input::GetKey(moveR_Key);
@@ -280,6 +293,7 @@ void PlayerController::InputProcess()
 /*-------[ Movement ]----------------------------------*/
 void PlayerController::Move(float delta)
 {
+    if (isInputLocked) return; // 선민 | 02.11 
     if (!cct) return;
 
     // cct->m_MoveSpeed = curSpeed;
@@ -296,6 +310,7 @@ static float WrapAngleRad(float a)      // util
 
 void PlayerController::Rotation(float delta)
 {
+    if (isInputLocked) return; // 선민 | 02.11 
     if (lookDir.LengthSquared() <= 0.0001f)
         return;
 
@@ -446,7 +461,7 @@ void PlayerController::CookingInteraction(float dt)
     // 최초 인터랙션 기믹 설명
     if(!isExplainedCookingZone)
     {
-        dialogueController->ShowInteractionHintAndPause(L"this zone is cooking!");
+        dialogueController->ShowInteractionHintAndPause(L"여기서 음식을 만들 수 있겠어. 망치지 않게 집중해야지!");
         isExplainedCookingZone = true;
     }
 
@@ -537,9 +552,9 @@ void PlayerController::GetItemAltarInteraction(float dt)
 
         // Dialogue
         if (item->itemType == ItemType::Ingredient)
-            dialogueController->ShowDialogueText(L"Ingredient ReGet! Cook gogo!");
+            dialogueController->ShowDialogueText(L"재료를 되찾았어. 어서 요리를 하러 가야겠어");
         if (item->itemType == ItemType::Food)
-            dialogueController->ShowDialogueText(L"Good ReGet! Jesasang gogo!");
+            dialogueController->ShowDialogueText(L"완성된 음식을 무사히 되찾았어. 제사상으로 가져가자.");
 
         visualizer->VisualOnItem(item->itemId);
         inventory->AddItem(std::move(item));
@@ -651,7 +666,8 @@ void PlayerController::ReceiveMiniGameResult(unique_ptr<IItem> ingredient, bool 
         visualizer->VisualOnItem(ingredient->itemId);
         inventory->AddItem(std::move(ingredient));
 
-        // TODO :: 소음, AI 트리거 발생
+        // 소음, AI 트리거 발생
+        CookingZone::Instance()->StartTriggerWave();
     }
 }
 
