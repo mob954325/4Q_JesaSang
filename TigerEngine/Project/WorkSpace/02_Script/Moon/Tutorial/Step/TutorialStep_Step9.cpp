@@ -1,6 +1,9 @@
 #include "TutorialStep_Step9.h"
 
 #include "System/InputSystem.h"
+#include "System/TimeSystem.h"
+#include "EngineSystem/SceneSystem.h"
+#include "Manager/WorldManager.h"
 
 #include "../../../Woo/Player/PlayerController.h"
 
@@ -8,7 +11,12 @@ void TutorialStep_Step9::Enter()
 {
     isDone = false;
     stepTimer = 0.0f;
+    monoIndex = 0;
+    phaseStarted = false;
     phase = Step9Phase::Monologue;
+
+    fadeTimer = 0.0f;
+    fadeStarted = false;
 
     // 조작 불가 
     tutorialController->player_Obj->GetComponent<PlayerController>()->SetInputLock(true);
@@ -29,15 +37,13 @@ void TutorialStep_Step9::Update(float deltaTime)
         if (stepTimer >= delayStart)
         {
             Monologue();
-            phase = Step9Phase::PlayerOut;
         }
         break;
 
 
-    case Step9Phase::PlayerOut:
-        phase = Step9Phase::Done;
+    case Step9Phase::FadeOut:
+        FadeOut(deltaTime);
         break;
-
 
     case Step9Phase::Done:
         isDone = true;
@@ -87,22 +93,35 @@ void TutorialStep_Step9::Monologue()
 
         if (monoIndex >= 2)
         {
-            phase = Step9Phase::PlayerOut;
+            phase = Step9Phase::FadeOut;
             phaseStarted = false;
         }
     }
 }
 
 
-void TutorialStep_Step9::PlayerOut()
+void TutorialStep_Step9::FadeOut(float dt)
 {
-    if (!phaseStarted)
+    auto& postProcessData = WorldManager::Instance().postProcessData;
+
+    if (!fadeStarted)
     {
-        // 진짜 플레이어 Off
-        // 가짜 플레이어 On 
+        fadeStarted = true;
 
-        // 가짜 플레이어가 Move하면서 이동하는 연출 
+        // 조작 잠금
+        tutorialController->player_Obj->GetComponent<PlayerController>()->SetInputLock(true);
+    }
 
-        phaseStarted = true;
+    fadeTimer += dt;
+
+    float t = std::clamp(fadeTimer / fadeMaxTime, 0.0f, 1.0f);
+
+    if (fadeTimer <= fadeMaxTime)
+    {
+        postProcessData.exposure = std::lerp(0.0f, -10.0f, t);
+    }
+    else
+    {
+        phase = Step9Phase::Done;
     }
 }
