@@ -5,6 +5,9 @@
 #include "EngineSystem/SceneSystem.h"
 #include <cassert>
 
+#include "../../Ho/ResultPanels/WinCinemachine.h"
+#include "../../Ho/ResultPanels/LoseCinemachine.h"
+
 REGISTER_COMPONENT(GameManager)
 
 RTTR_REGISTRATION
@@ -52,6 +55,9 @@ void GameManager::GameSuccess()
         1. 마지막 음식이 제사상에 올라오는 순간 제사상에서 이팩트 발생 
         2. 화면이 전환되며 해피 엔딩 일러스트 등장
     */
+    auto panel = SceneUtil::GetObjectByName("WinCinemachine")->GetComponent<WinCinemachine>();
+    if (panel)
+        panel->Play();
 
     std::cout << "[GameManager] Game Success!" << endl;
 }
@@ -63,6 +69,9 @@ void GameManager::GameOver()
         1. 음산한 기운이 화면을 뒤덮음 
         2. 화면이 전환되며 배드 엔딩 일러스트 등장
     */
+    auto panel = SceneUtil::GetObjectByName("LoseCinemachine")->GetComponent<LoseCinemachine>();
+    if (panel)
+        panel->Play();
 
     std::cout << "[GameManager] Game Over..." << endl;
 }
