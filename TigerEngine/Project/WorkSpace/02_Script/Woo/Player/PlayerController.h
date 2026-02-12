@@ -21,6 +21,7 @@ class PlayerThreatMonitor;
 class DialogueUIController;
 class IItem;
 class Effect;
+class PlayerSoundSource;
 
 // Player State Enum
 enum class PlayerState
@@ -55,6 +56,7 @@ private:
     FBXData* fbxData = nullptr;
     AnimationController* animController = nullptr;
     CharacterControllerComponent* cct = nullptr;
+    PlayerSoundSource* sound = nullptr;
 
     Effect* fireEffect = nullptr;
     AnimationController* hitEffect = nullptr;

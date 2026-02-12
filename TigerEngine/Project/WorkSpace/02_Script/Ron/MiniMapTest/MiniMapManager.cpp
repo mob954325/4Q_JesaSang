@@ -8,9 +8,12 @@
 #include "Util/ComponentAutoRegister.h"
 #include "Util/JsonHelper.h"
 #include "MiniMapTestScript.h"
+#include "../../Woo/Object/SearchObject.h"
+#include "Components/Transform.h"
 
 #include <algorithm>
 #include <iostream>
+#include <sstream>
 
 REGISTER_COMPONENT(MiniMapManager)
 
@@ -39,6 +42,16 @@ RTTR_REGISTRATION
         .property("PieceObjectName4", &MiniMapManager::pieceObjectName4)
         .property("PieceObjectName5", &MiniMapManager::pieceObjectName5)
         .property("PieceObjectName6", &MiniMapManager::pieceObjectName6)
+        .property("Zone0IngredientIds", &MiniMapManager::zone0IngredientIds)
+        .property("Zone1IngredientIds", &MiniMapManager::zone1IngredientIds)
+        .property("Zone2IngredientIds", &MiniMapManager::zone2IngredientIds)
+        .property("Zone3IngredientIds", &MiniMapManager::zone3IngredientIds)
+        .property("Zone4IngredientIds", &MiniMapManager::zone4IngredientIds)
+        .property("Zone0PingIndices", &MiniMapManager::zone0PingIndices)
+        .property("Zone1PingIndices", &MiniMapManager::zone1PingIndices)
+        .property("Zone2PingIndices", &MiniMapManager::zone2PingIndices)
+        .property("Zone3PingIndices", &MiniMapManager::zone3PingIndices)
+        .property("Zone4PingIndices", &MiniMapManager::zone4PingIndices)
         .property("ItemWorldPos1", &MiniMapManager::itemWorldPos1)
         .property("ItemWorldPos2", &MiniMapManager::itemWorldPos2)
         .property("ItemWorldPos3", &MiniMapManager::itemWorldPos3)
@@ -47,6 +60,7 @@ RTTR_REGISTRATION
         .property("ItemWorldPos6", &MiniMapManager::itemWorldPos6)
         .property("DebugShowAllItemPings", &MiniMapManager::debugShowAllItemPings)
         .property("DebugShowAllPieces", &MiniMapManager::debugShowAllPieces)
+        .property("UseFixedItemPingPositions", &MiniMapManager::useFixedItemPingPositions)
         .property("PlaceBottomRight", &MiniMapManager::placeBottomRight)
         .property("BottomRightMargin", &MiniMapManager::bottomRightMargin)
         .property("ShiftLeftByMapCount", &MiniMapManager::shiftLeftByMapCount)
@@ -177,12 +191,109 @@ static void ShiftRect(RectTransform* rect, const Vector3& delta)
     rect->SetPos(pos);
 }
 
+static void CaptureFixedPingPositions(RectTransform* rects[6], Vector3 outPos[6], bool& hasPos)
+{
+    for (int i = 0; i < 6; ++i)
+    {
+        if (rects[i])
+        {
+            outPos[i] = rects[i]->GetPos();
+        }
+    }
+    hasPos = true;
+}
+
+static std::string TrimCopy(const std::string& s)
+{
+    size_t start = 0;
+    while (start < s.size() && isspace(static_cast<unsigned char>(s[start]))) ++start;
+    size_t end = s.size();
+    while (end > start && isspace(static_cast<unsigned char>(s[end - 1]))) --end;
+    return s.substr(start, end - start);
+}
+
+static std::vector<std::string> ParseIdList(const std::string& csv)
+{
+    std::vector<std::string> out;
+    std::stringstream ss(csv);
+    std::string token;
+    while (std::getline(ss, token, ','))
+    {
+        const std::string t = TrimCopy(token);
+        if (!t.empty())
+        {
+            out.push_back(t);
+        }
+    }
+    return out;
+}
+
+static std::vector<int> ParseIndexList(const std::string& csv)
+{
+    std::vector<int> out;
+    std::stringstream ss(csv);
+    std::string token;
+    while (std::getline(ss, token, ','))
+    {
+        const std::string t = TrimCopy(token);
+        if (t.empty()) continue;
+        try
+        {
+            int v = std::stoi(t);
+            // allow 1..6 (user-facing) or 0..5 (internal)
+            if (v >= 1 && v <= 6)
+            {
+                out.push_back(v - 1);
+            }
+            else if (v >= 0 && v <= 5)
+            {
+                out.push_back(v);
+            }
+        }
+        catch (...)
+        {
+        }
+    }
+    return out;
+}
+
+static bool ContainsId(const std::vector<std::string>& list, const std::string& id)
+{
+    for (const auto& v : list)
+    {
+        if (v == id) return true;
+    }
+    return false;
+}
+
 void MiniMapManager::OnInitialize()
 {
 }
 
 void MiniMapManager::OnStart()
 {
+    if (zone0IngredientIds.empty() &&
+        zone1IngredientIds.empty() &&
+        zone2IngredientIds.empty() &&
+        zone3IngredientIds.empty() &&
+        zone4IngredientIds.empty())
+    {
+        zone0IngredientIds = "Ingredient_Apple,Ingredient_Pear";
+        zone1IngredientIds = "Ingredient_Batter";
+        zone2IngredientIds = "Ingredient_Tofu";
+        zone3IngredientIds = "Ingredient_Sanjeok";
+        zone4IngredientIds = "Ingredient_Donggeurangttaeng";
+    }
+    if (zone0PingIndices.empty() &&
+        zone1PingIndices.empty() &&
+        zone2PingIndices.empty() &&
+        zone3PingIndices.empty() &&
+        zone4PingIndices.empty())
+    {
+        // default: piece index 3 -> ping 3,5 (user-facing 1-based indices)
+        zone3PingIndices = "3,5";
+    }
+
     auto scene = SceneSystem::Instance().GetCurrentScene();
     if (!scene)
     {
@@ -226,6 +337,10 @@ void MiniMapManager::OnStart()
     {
         m_ItemPingRects[i] = GetRectOrLog(scene, pingNames[i], "RectTransform on item ping object");
         m_ItemPingImages[i] = GetImage(scene, pingNames[i]);
+        if (m_ItemPingImages[i])
+        {
+            m_ItemPingImages[i]->ChangeData("..\\Assets\\Resource\\MiniMap\\map_ghost.png");
+        }
     }
 
     const char* pieceNames[6] = {
@@ -248,6 +363,15 @@ void MiniMapManager::OnStart()
 
     m_TreasureImage = GetImage(scene, "UI_MiniMap_Treasure");
     m_TreasureRect = GetRectOrLog(scene, "UI_MiniMap_Treasure", "RectTransform on treasure object");
+
+    if (m_MainPingImage)
+    {
+        m_MainPingImage->ChangeData("..\\Assets\\Resource\\MiniMap\\map_charater.png");
+    }
+    if (m_TreasureImage)
+    {
+        m_TreasureImage->ChangeData("..\\Assets\\Resource\\MiniMap\\map_ghost.png");
+    }
 
     if (m_BaseImage)
     {
@@ -275,6 +399,17 @@ void MiniMapManager::OnStart()
     }
 
     ApplyLayout();
+    if (useFixedItemPingPositions && !m_HasFixedItemPingPos)
+    {
+        // Hard-coded fixed positions (UI space)
+        m_ItemPingFixedPos[0] = Vector3(1611.500f, 759.400f, 0.0f);
+        m_ItemPingFixedPos[1] = Vector3(1812.700f, 752.600f, 0.0f);
+        m_ItemPingFixedPos[2] = Vector3(1755.400f, 821.000f, 0.0f);
+        m_ItemPingFixedPos[3] = Vector3(1661.700f, 853.400f, 0.0f);
+        m_ItemPingFixedPos[4] = Vector3(1791.200f, 876.000f, 0.0f);
+        m_ItemPingFixedPos[5] = Vector3(1646.700f, 964.200f, 0.0f);
+        m_HasFixedItemPingPos = true;
+    }
 
     m_ItemWorldPos[0] = itemWorldPos1;
     m_ItemWorldPos[1] = itemWorldPos2;
@@ -318,6 +453,10 @@ void MiniMapManager::OnUpdate(float delta)
     if (!m_LayoutApplied)
     {
         ApplyLayout();
+        if (useFixedItemPingPositions && !m_HasFixedItemPingPos)
+        {
+            CaptureFixedPingPositions(m_ItemPingRects, m_ItemPingFixedPos, m_HasFixedItemPingPos);
+        }
     }
 
     if (m_BaseImage)
@@ -373,11 +512,51 @@ void MiniMapManager::OnUpdate(float delta)
 
     for (int i = 0; i < 6; ++i)
     {
+        if (m_ItemSearchObjects[i])
+        {
+            auto* search = m_ItemSearchObjects[i];
+            bool shouldActive = search->hasItem && search->itemType == ItemType::Ingredient && !search->isSearched;
+            if (!shouldActive)
+            {
+                if (m_ItemActive[i])
+                {
+                    TriggerItemPingActive(i, false);
+                }
+                if (search->isSearched)
+                {
+                    m_ItemSearchObjects[i] = nullptr;
+                }
+                continue;
+            }
+
+            if (auto* owner = search->GetOwner())
+            {
+                if (auto* tr = owner->GetTransform())
+                {
+                    m_ItemWorldPos[i] = tr->GetWorldPosition();
+                }
+            }
+
+            if (!m_ItemActive[i])
+            {
+                TriggerItemPing(i, m_ItemWorldPos[i]);
+            }
+        }
+
+        if (useFixedItemPingPositions && m_HasFixedItemPingPos && m_ItemPingRects[i])
+        {
+            // keep fixed positions even when inactive
+            m_ItemPingRects[i]->SetPos(m_ItemPingFixedPos[i]);
+        }
+
         if (!m_ItemPingRects[i] || !m_ItemActive[i]) continue;
 
-        const Vector2 local = WorldToMiniMap(m_ItemWorldPos[i], worldMin, worldMax, mapSize);
-        const Vector3 pingPos(basePos.x + local.x, basePos.y + local.y, basePos.z + kPingZOffset);
-        m_ItemPingRects[i]->SetPos(pingPos);
+        if (!useFixedItemPingPositions || !m_HasFixedItemPingPos)
+        {
+            const Vector2 local = WorldToMiniMap(m_ItemWorldPos[i], worldMin, worldMax, mapSize);
+            const Vector3 pingPos(basePos.x + local.x, basePos.y + local.y, basePos.z + kPingZOffset);
+            m_ItemPingRects[i]->SetPos(pingPos);
+        }
     }
 
     if (m_GaugeRect && m_HasGaugeBaseSize)
@@ -506,8 +685,108 @@ void MiniMapManager::TriggerPieceCollected(int index)
 {
     cout << "Test" << endl;
     TriggerPieceActive(index, true);
+    ActivateIngredientsForZone(index);
     if (m_Map)
     {
         m_Map->TriggerPieceCollected();
     }
+}
+
+void MiniMapManager::ActivateIngredientsForZone(int zoneIndex)
+{
+    if (zoneIndex < 0 || zoneIndex > 4)
+    {
+        return;
+    }
+    if (m_ZoneActivated[zoneIndex])
+    {
+        return;
+    }
+
+    const std::string* zoneCsv = nullptr;
+    const std::string* zonePingCsv = nullptr;
+    switch (zoneIndex)
+    {
+    case 0: zoneCsv = &zone0IngredientIds; zonePingCsv = &zone0PingIndices; break;
+    case 1: zoneCsv = &zone1IngredientIds; zonePingCsv = &zone1PingIndices; break;
+    case 2: zoneCsv = &zone2IngredientIds; zonePingCsv = &zone2PingIndices; break;
+    case 3: zoneCsv = &zone3IngredientIds; zonePingCsv = &zone3PingIndices; break;
+    case 4: zoneCsv = &zone4IngredientIds; zonePingCsv = &zone4PingIndices; break;
+    default: return;
+    }
+
+    const std::vector<int> indices = (zonePingCsv && !zonePingCsv->empty())
+        ? ParseIndexList(*zonePingCsv)
+        : std::vector<int>{};
+
+    if (!zoneCsv || zoneCsv->empty())
+    {
+        if (!indices.empty())
+        {
+            for (int idx : indices)
+            {
+                if (idx < 0 || idx > 5) continue;
+                m_ItemActive[idx] = true;
+                SetRectActive(m_ItemPingRects[idx], true);
+            }
+            m_ZoneActivated[zoneIndex] = true;
+        }
+        return;
+    }
+
+    auto scene = SceneSystem::Instance().GetCurrentScene();
+    if (!scene)
+    {
+        return;
+    }
+
+    const std::vector<std::string> ids = ParseIdList(*zoneCsv);
+    if (ids.empty())
+    {
+        return;
+    }
+
+    int pingIndex = 0;
+    scene->ForEachGameObject([&](GameObject* obj)
+    {
+        if (!obj) return;
+
+        auto* search = obj->GetComponent<SearchObject>();
+        if (!search) return;
+        if (!search->hasItem) return;
+        if (search->itemType != ItemType::Ingredient) return;
+        if (!ContainsId(ids, search->itemID)) return;
+        if (search->isSearched) return;
+
+        int targetIndex = -1;
+        if (!indices.empty())
+        {
+            if (pingIndex >= static_cast<int>(indices.size())) return;
+            targetIndex = indices[pingIndex];
+            pingIndex++;
+        }
+        else
+        {
+            while (pingIndex <= 5 && m_ItemSearchObjects[pingIndex] != nullptr)
+            {
+                pingIndex++;
+            }
+            if (pingIndex > 5) return;
+            targetIndex = pingIndex;
+            pingIndex++;
+        }
+
+        if (targetIndex < 0 || targetIndex > 5) return;
+        if (m_ItemSearchObjects[targetIndex] != nullptr) return;
+
+        auto* tr = obj->GetTransform();
+        if (!tr) return;
+
+        const Vector3 pos = tr->GetWorldPosition();
+        m_ItemSearchObjects[targetIndex] = search;
+        m_ItemWorldPos[targetIndex] = pos;
+        TriggerItemPing(targetIndex, pos);
+    });
+
+    m_ZoneActivated[zoneIndex] = true;
 }

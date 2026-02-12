@@ -1,4 +1,4 @@
-// ===============================
+﻿// ===============================
 // AltarManager.cpp
 // ===============================
 #include "AltarManager.h"
@@ -15,6 +15,7 @@
 #include "../Player/DialogueUI/DialogueUIController.h"
 
 #include "../Item/Item.h"
+#include "../../Ho/Sound/SoundManager.h"
 
 
 REGISTER_COMPONENT(AltarManager)
@@ -420,6 +421,9 @@ void AltarManager::UpdateDirectSequence(float dt)
             fireEffect->GetOwner()->GetTransform()->SetPosition(localPos);
             if (fireEffect) fireEffect->Play();
             startedFireFx = true;
+
+            // sound
+            SoundManager::Instance()->PlaySFX(SFXType::Altar_Fire_Sound);
         }
 
         if (visualHoldTime <= 0.0f || phaseTimer >= visualHoldTime)
@@ -457,6 +461,11 @@ void AltarManager::UpdateDirectSequence(float dt)
         altarOffWall->SetActive(false);
         altarOnWall->SetActive(true);
 
+        // TODO :: 여기 미니맵 호출 연결
+
+        // sound
+        SoundManager::Instance()->PlaySFX(SFXType::Altar_Mapchange_Sound);
+
         StartVignetteFade(0.0f, 1.0f, fadeInTime_2);
     }
     break;
@@ -486,7 +495,7 @@ void AltarManager::UpdateDirectSequence(float dt)
 
         // Player 다이얼로그
         auto go = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("Player");
-        go->GetComponent<DialogueUIController>()->ShowDialogueText(L"뭔가 으스스해진 것 같아...");
+        go->GetComponent<DialogueUIController>()->ShowDialogueText(L"집안 어딘가에 이상한 기운이 생겼어... 확인해봐야겠어.");
 
     }
     break;

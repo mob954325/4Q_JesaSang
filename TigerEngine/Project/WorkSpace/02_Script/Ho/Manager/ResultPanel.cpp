@@ -36,18 +36,6 @@ void ResultPanel::OnStart()
     }
 }
 
-void ResultPanel::OnUpdate(float dt)
-{
-    if (Input::GetKeyDown(DirectX::Keyboard::N))
-    {
-        losePanel->Play();
-    }
-    else if (Input::GetKeyDown(DirectX::Keyboard::M))
-    {
-        winPanel->Play();
-    }
-}
-
 nlohmann::json ResultPanel::Serialize()
 {
     return JsonHelper::MakeSaveData(this);

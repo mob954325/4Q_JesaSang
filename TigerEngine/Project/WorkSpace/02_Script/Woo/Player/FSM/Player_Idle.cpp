@@ -1,5 +1,6 @@
 #include "Player_Idle.h"
 #include "../../Inventory/Inventory.h"
+#include "../../../Ho/Sound/PlayerSoundSource.h"
 
 void Player_Idle::Enter()
 {
@@ -10,6 +11,9 @@ void Player_Idle::Enter()
 
     // set animation
     player->animController->ChangeState("Idle");
+
+    // set sound
+    player->sound->StopSound();
 
     // set sense radius
     player->curSenseRadius = player->idleSenseRadius;

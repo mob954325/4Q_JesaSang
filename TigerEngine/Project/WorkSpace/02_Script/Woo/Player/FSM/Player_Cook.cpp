@@ -1,5 +1,6 @@
 #include "Player_Cook.h"
 #include "../../Inventory/Inventory.h"
+#include "../../../Ho/Sound/PlayerSoundSource.h"
 
 void Player_Cook::Enter()
 {
@@ -13,6 +14,9 @@ void Player_Cook::Enter()
 
     // set animation
     player->animController->ChangeState("Idle");
+
+    // set sound
+    player->sound->StopSound();
 }
 
 void Player_Cook::ChangeStateLogic()

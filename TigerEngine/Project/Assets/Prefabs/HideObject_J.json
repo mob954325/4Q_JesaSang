@@ -2,16 +2,16 @@
   "prefab": [
     {
       "Active": true,
-      "ID": 7485,
+      "ID": 21997,
       "Name": "HideObject",
-      "ParentID": 7412,
+      "ParentID": -1,
       "components": [
         {
           "properties": {
             "Position": [
-              -198.89892578125,
+              252.10914611816406,
               0.0,
-              168.58612060546875
+              -596.6998291015625
             ],
             "Rotation": [
               -0.0,
@@ -59,9 +59,9 @@
     },
     {
       "Active": false,
-      "ID": 7486,
+      "ID": 21998,
       "Name": "Image_SensorOn",
-      "ParentID": 7485,
+      "ParentID": 21997,
       "components": [
         {
           "properties": {
@@ -147,9 +147,9 @@
     },
     {
       "Active": false,
-      "ID": 7487,
+      "ID": 21999,
       "Name": "Image_InteractionOn",
-      "ParentID": 7485,
+      "ParentID": 21997,
       "components": [
         {
           "properties": {
@@ -217,7 +217,7 @@
             "drawSpacetype": "World",
             "fillAmount": 1.0,
             "imageType": "Simple",
-            "isBillboard": true,
+            "isBillboard": false,
             "isMouseCheck": false,
             "path": "..\\Assets\\Resource\\UI\\Interaction\\F.png",
             "sliceBorderPx": [
@@ -235,9 +235,9 @@
     },
     {
       "Active": false,
-      "ID": 7488,
+      "ID": 22000,
       "Name": "Image_InteractionGauge",
-      "ParentID": 7485,
+      "ParentID": 21997,
       "components": [
         {
           "properties": {
@@ -323,9 +323,9 @@
     },
     {
       "Active": true,
-      "ID": 7502,
+      "ID": 22001,
       "Name": "OpenModel",
-      "ParentID": 7485,
+      "ParentID": 21997,
       "components": [
         {
           "properties": {
@@ -401,9 +401,9 @@
     },
     {
       "Active": false,
-      "ID": 7503,
+      "ID": 22002,
       "Name": "CloseModel",
-      "ParentID": 7485,
+      "ParentID": 21997,
       "components": [
         {
           "properties": {

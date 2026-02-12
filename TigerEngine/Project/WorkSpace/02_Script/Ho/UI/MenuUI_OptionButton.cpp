@@ -3,6 +3,8 @@
 #include "../Engine/Object/GameObject.h"
 #include "../Base/Datas/ReflectionMedtaDatas.hpp"
 #include "../Engine/Util/ComponentAutoRegister.h"
+#include "../../Ron/UI/SettingsUIController.h"
+#include "../Engine/EngineSystem/SceneSystem.h"
 
 REGISTER_COMPONENT(MenuUI_OptionButton);
 
@@ -43,9 +45,36 @@ void MenuUI_OptionButton::OnStart()
 
         image->OnPressOut.AddListener(image, [this]()
             {
-                image->ChangeData(normalImagePath);
-                // 시작 씬으로 전환
-            }); // 누르는거 땠으면 이미지 바꾸기
+                {
+                    image->ChangeData(normalImagePath);
+                    SettingsUIController* settings = SettingsUIController::Instance();
+                    if (settings != nullptr)
+                        settings->ToggleRoot();
+                    return;
+                }
+
+                if (auto scene = SceneSystem::Instance().GetCurrentScene())
+                {
+                    if (auto obj = scene->GetGameObjectByName("UI_Settings"))
+                    {
+                        if (auto ctrl = obj->GetComponent<SettingsUIController>())
+                        {
+                            ctrl->ToggleRoot();
+                            return;
+                        }
+                        // Fallback: toggle panels directly if controller is missing
+                        auto soundPanel = scene->GetGameObjectByName("UI_Settings_SoundPanel");
+                        auto creditPanel = scene->GetGameObjectByName("UI_Settings_CreditPanel");
+                        auto soundButton = scene->GetGameObjectByName("UI_Settings_SoundButton");
+                        auto creditButton = scene->GetGameObjectByName("UI_Settings_CreditButton");
+                        const bool open = soundPanel ? !soundPanel->GetActiveSelf() : true;
+                        if (soundPanel) soundPanel->SetActive(open);
+                        if (creditPanel) creditPanel->SetActive(false);
+                        if (soundButton) soundButton->SetActive(open);
+                        if (creditButton) creditButton->SetActive(open);
+                    }
+                }
+            });
     }
 }
 

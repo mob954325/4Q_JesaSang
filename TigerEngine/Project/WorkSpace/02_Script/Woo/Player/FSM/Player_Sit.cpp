@@ -1,5 +1,6 @@
 #include "Player_Sit.h"
 #include "../../Inventory/Inventory.h"
+#include "../../../Ho/Sound/PlayerSoundSource.h"
 
 void Player_Sit::Enter()
 {
@@ -10,6 +11,9 @@ void Player_Sit::Enter()
 
     // set moved dir
     player->lookDir = Vector3::Zero;
+
+    // set sound
+    player->sound->StopSound();
 
     // set animation
     player->animController->ChangeState("Idle");

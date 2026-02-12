@@ -2,6 +2,8 @@
 #include "../../Inventory/Inventory.h"
 #include "Manager/WorldManager.h"
 #include "../../Altar/AltarManager.h"
+#include "../../../Ho/Sound/PlayerSoundSource.h"
+#include "../../../Ho/Sound/SoundManager.h"
 
 void Player_Hit::Enter()
 {
@@ -12,6 +14,11 @@ void Player_Hit::Enter()
 
     // set animation
     player->animController->ChangeState("Hit");
+
+    // sound
+    player->sound->PlaySound(PlayerSoundType::Hit, false);
+    //SoundManager::Instance()->PlaySFX(SFXType::Confused);
+    //player->sound->PlaySound(PlayerSoundType::HpDown, false);
 
     // effect
     player->hitEffect->GetOwner()->SetActive(true);

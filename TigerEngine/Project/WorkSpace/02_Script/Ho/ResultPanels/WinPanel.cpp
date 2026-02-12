@@ -26,9 +26,9 @@ void WinPanel::OnInitialize()
     for (int i = 0; i < 80; ++i)
     
         if(i < 10)
-            effectsPath[i] = "..\\Assets\\Resource\\Effect\\Ending\\happy\\main0" + std::to_string(i) + ".png";
+            effectsPath[i] = "..\\Assets\\Resource\\Ending\\happy\\main0" + std::to_string(i) + ".png";
         else
-            effectsPath[i] = "..\\Assets\\Resource\\Effect\\Ending\\happy\\main" + std::to_string(i) + ".png";
+            effectsPath[i] = "..\\Assets\\Resource\\Ending\\happy\\main" + std::to_string(i) + ".png";
 }
 
 void WinPanel::OnStart()

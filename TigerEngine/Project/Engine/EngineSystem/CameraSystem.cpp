@@ -136,8 +136,14 @@ void CameraSystem::SetCurrCameraToFreeCamera()
 
 void CameraSystem::Clear()
 {
-    for (auto& cam : registered)
+    while (!registered.empty())
     {
+        Camera* cam = registered.back();
+        if (cam && cam->GetOwner() && cam->GetOwner()->GetName() == "FreeCamera")
+        {
+            registered.pop_back(); // 혹은 계속 유지할 거면 break/continue 정책을 명확히
+            continue;
+        }
         RemoveCamera(cam);
     }
 }

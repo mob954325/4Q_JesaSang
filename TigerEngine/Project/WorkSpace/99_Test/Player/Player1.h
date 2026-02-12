@@ -5,6 +5,7 @@
 #include "../Engine/Components/AudioSourceComponent.h"
 #include "../../02_Script/Ho/Sound/PlayerSoundSource.h"
 #include "../../02_Script/Ho/Sound/SoundManager.h"
+#include "../Engine/Components/UI/TextUI.h"
 
 /// <summary>
 /// 클라이언트 컴포넌트 테스트용 클래스.
@@ -41,5 +42,6 @@ private:
 
 
     SoundManager* soundManager;
+    TextUI* text{};
 };
 

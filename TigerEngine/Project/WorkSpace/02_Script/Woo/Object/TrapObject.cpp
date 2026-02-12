@@ -9,6 +9,8 @@
 #include "System/TimeSystem.h"
 #include "../../Moon/AI/AdultGhostController.h"
 #include "../../Moon/AI/BabyGhostController.h"
+#include "../../Ho/Sound/SoundManager.h"
+
 
 REGISTER_COMPONENT(TrapObject)
 
@@ -94,6 +96,9 @@ void TrapObject::StartTriggerWave()
 
     // AI
     NotifyAIInRange();
+
+    // sound
+    SoundManager::Instance()->PlaySFX(SFXType::PitfallObj_Floor_Sound);
     
     // re wave cool time start
     isWaveing = true;
