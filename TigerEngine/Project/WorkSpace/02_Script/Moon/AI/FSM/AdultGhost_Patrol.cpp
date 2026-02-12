@@ -17,9 +17,9 @@ void AdultGhost_Patrol::Enter()
 
     adultGhost->animController->ChangeState("Idle");
 
-    // 아직 이동 중이 아니라면 랜덤 목표 설정
+    // 아직 이동 중이 아니라면 목표 설정  → 웨이포인트 순환 사용
     if (!agent->hasTarget && !agent->isWaiting)
-        agent->PickRandomTarget();
+        agent->PickNextWaypoint(); // agent->PickRandomTarget();
 }
 
 void AdultGhost_Patrol::ChangeStateLogic()
@@ -62,6 +62,27 @@ void AdultGhost_Patrol::Update(float deltaTime)
 
 void AdultGhost_Patrol::FixedUpdate(float deltaTime)
 {
+    if (!agent) return;
+
+    // 목표 없으면 다음 웨이포인트 선택
+    if (!agent->hasTarget && !agent->isWaiting)
+    {
+        agent->PickNextWaypoint();
+    }
+
+    // 목표 이동
+    if (agent->hasTarget)
+    {
+        bool reached = adultGhost->MoveToTarget(deltaTime);
+
+        // 목표 도착 시 대기 시작
+        if (reached)
+        {
+            agent->hasTarget = false;  // 다음 웨이포인트 준비
+            agent->isWaiting = true;
+            agent->waitTimer = agent->waitDuration;
+        }
+    }
 }
 
 void AdultGhost_Patrol::Exit()

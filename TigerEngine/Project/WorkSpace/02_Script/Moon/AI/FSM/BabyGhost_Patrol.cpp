@@ -19,7 +19,7 @@ void BabyGhost_Patrol::Enter()
 
     // 아직 이동 중이 아니라면 랜덤 목표 설정
     if (!agent->hasTarget && !agent->isWaiting)
-        agent->PickRandomTarget();
+        agent->PickNextWaypoint();
 }
 
 void BabyGhost_Patrol::ChangeStateLogic()

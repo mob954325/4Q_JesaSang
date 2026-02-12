@@ -16,6 +16,13 @@ public:
     ~AgentComponent() = default;
 
 public:
+    std::vector<std::pair<int, int>> waypoints; // 중앙 기준 Grid 좌표 웨이포인트
+    int currentWaypointIndex = 0;               // 현재 목표 웨이포인트
+    bool chasingPlayer = false;                 // 플레이어 추격 상태
+    Vector3 playerPos;                          // 플레이어 위치 (실제 월드 좌표)
+    float detectionRadius = 500.0f;             // 플레이어 감지 거리
+
+public:
     bool externalControl = false; // FSM이 제어중인가? 
 
     CharacterControllerComponent* cct = nullptr;
@@ -42,7 +49,8 @@ public:
     void Enable_Inner() override;
     void Disable_Inner() override;
 
-    void PickRandomTarget();
+    // void PickRandomTarget();
+    void PickNextWaypoint();
     void MoveAgent(const Vector3& dir, float speed, float dt);
 
     void SetWaitTime(float seconds);

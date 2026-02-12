@@ -96,6 +96,8 @@ private:
     void RotateByDirection(const Vector3& moveDir, float delta);
 
 public:
+    std::vector<std::pair<int, int>> waypoints; //웨이 포인트 가져오기 
+
     void OnStart() override;
     void OnUpdate(float delta) override;
     void OnFixedUpdate(float dt) override;
