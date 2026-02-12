@@ -72,7 +72,7 @@ void HappyEndingPanel::OnUpdate(float dt)
             // TODO: 돌아가기 처리
             // 예) 씬 전환, 패널 비활성화, 메인 메뉴로 이동 등
             auto s = SceneSystem::Instance().GetCurrentScene();
-            s->LoadToJson("..\\Assets\\Scenes\\01_StartScene.json")
+            s->LoadToJson("..\\Assets\\Scenes\\01_StartScene.json");
                 //GetOwner()->SetActive(false);
         }
     }

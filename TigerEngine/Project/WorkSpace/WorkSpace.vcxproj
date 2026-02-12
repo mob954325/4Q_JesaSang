@@ -250,6 +250,7 @@
     <ClCompile Include="02_Script\Ho\Manager\FrozenManager.cpp" />
     <ClCompile Include="02_Script\Ho\Manager\FrozenManager.h" />
     <ClCompile Include="02_Script\Ho\Manager\ResultPanel.cpp" />
+    <ClCompile Include="02_Script\Ho\ResultPanels\HappyEndingPanel.cpp" />
     <ClCompile Include="02_Script\Ho\ResultPanels\LoseCinemachine.cpp" />
     <ClCompile Include="02_Script\Ho\ResultPanels\LosePanel.cpp" />
     <ClCompile Include="02_Script\Ho\ResultPanels\SadEndingPanel.cpp" />
