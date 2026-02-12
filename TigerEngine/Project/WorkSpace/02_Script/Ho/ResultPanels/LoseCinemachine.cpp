@@ -25,7 +25,7 @@ void LoseCinemachine::OnStart()
 
 void LoseCinemachine::OnUpdate(float dt)
 {
-    if (Input::GetKeyDown(DirectX::Keyboard::V)) Play();
+    //if (Input::GetKeyDown(DirectX::Keyboard::V)) Play();
 
     if (!cam) return;
     if (notified && !isPlayed)

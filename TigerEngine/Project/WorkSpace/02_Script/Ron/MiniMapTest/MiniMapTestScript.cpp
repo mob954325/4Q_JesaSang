@@ -103,35 +103,35 @@ void MiniMapTestScript::HandleDebugInput(float delta)
     static bool wasNDown = false;
     static bool wasODown = false;
     static bool wasPDown = false;
-    const bool isNDown = Input::GetKey(DirectX::Keyboard::Keys::N);
-    const bool isODown = Input::GetKey(DirectX::Keyboard::Keys::O);
-    const bool isPDown = Input::GetKey(DirectX::Keyboard::Keys::P);
+    //const bool isNDown = Input::GetKey(DirectX::Keyboard::Keys::N);
+    //const bool isODown = Input::GetKey(DirectX::Keyboard::Keys::O);
+    //const bool isPDown = Input::GetKey(DirectX::Keyboard::Keys::P);
 
     // Local test hook: trigger map/item collect events by key.
-    if (isNDown && !wasNDown)
-    {
-        auto scene = SceneSystem::Instance().GetCurrentScene();
-        if (scene)
-        {
-            if (auto ctrl = scene->GetGameObjectByName("UI_MiniMap_Controller"))
-            {
-                if (auto mgr = ctrl->GetComponent<MiniMapManager>())
-                {
-                    const int index = std::min(collectedPieces, 5);
-                    mgr->TriggerPieceCollected(index);
-                }
-            }
-        }
-    }
+    //if (isNDown && !wasNDown)
+    //{
+    //    auto scene = SceneSystem::Instance().GetCurrentScene();
+    //    if (scene)
+    //    {
+    //        if (auto ctrl = scene->GetGameObjectByName("UI_MiniMap_Controller"))
+    //        {
+    //            if (auto mgr = ctrl->GetComponent<MiniMapManager>())
+    //            {
+    //                const int index = std::min(collectedPieces, 5);
+    //                mgr->TriggerPieceCollected(index);
+    //            }
+    //        }
+    //    }
+    //}
 
-    if (isODown && !wasODown)
-    {
-        OnItemCollected();
-    }
+    //if (isODown && !wasODown)
+    //{
+    //    OnItemCollected();
+    //}
 
-    wasNDown = isNDown;
-    wasODown = isODown;
-    wasPDown = isPDown;
+    //wasNDown = isNDown;
+    //wasODown = isODown;
+    //wasPDown = isPDown;
 }
 
 nlohmann::json MiniMapTestScript::Serialize()

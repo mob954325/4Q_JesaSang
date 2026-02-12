@@ -109,22 +109,22 @@ void PlayerController::OnUpdate(float delta)
 
     // ----- test --------------
     // ai attack test
-    if (Input::GetKeyDown(Keyboard::P))
-    {
-        TakeAttack();
-    }
-
-    // quarter view
-    if (Input::GetKeyDown(Keyboard::O))
-    {
-        camController->SetViewMode(CameraController::ViewMode::Quarter);
-    }
-
-    // front view
-    if (Input::GetKeyDown(Keyboard::I))
-    {
-        camController->SetViewMode(CameraController::ViewMode::Front);
-    }
+    //if (Input::GetKeyDown(Keyboard::P))
+    //{
+    //    TakeAttack();
+    //}
+    //
+    //// quarter view
+    //if (Input::GetKeyDown(Keyboard::O))
+    //{
+    //    camController->SetViewMode(CameraController::ViewMode::Quarter);
+    //}
+    //
+    //// front view
+    //if (Input::GetKeyDown(Keyboard::I))
+    //{
+    //    camController->SetViewMode(CameraController::ViewMode::Front);
+    //}
 }
 
 void PlayerController::OnFixedUpdate(float delta)
