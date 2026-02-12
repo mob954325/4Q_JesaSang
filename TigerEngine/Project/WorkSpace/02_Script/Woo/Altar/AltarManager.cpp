@@ -421,6 +421,9 @@ void AltarManager::UpdateDirectSequence(float dt)
             fireEffect->GetOwner()->GetTransform()->SetPosition(localPos);
             if (fireEffect) fireEffect->Play();
             startedFireFx = true;
+
+            // sound
+            SoundManager::Instance()->PlaySFX(SFXType::Altar_Fire_Sound);
         }
 
         if (visualHoldTime <= 0.0f || phaseTimer >= visualHoldTime)
@@ -457,6 +460,11 @@ void AltarManager::UpdateDirectSequence(float dt)
         // 공간 오픈
         altarOffWall->SetActive(false);
         altarOnWall->SetActive(true);
+
+        // TODO :: 여기 미니맵 호출 연결
+
+        // sound
+        SoundManager::Instance()->PlaySFX(SFXType::Altar_Mapchange_Sound);
 
         StartVignetteFade(0.0f, 1.0f, fadeInTime_2);
     }
