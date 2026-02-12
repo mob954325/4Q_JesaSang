@@ -116,6 +116,8 @@ bool TutorialStep_Step4::IsComplete()
 
 void TutorialStep_Step4::Exit()
 {
+    frozenImage->SetActive(false);
+
     std::cout << "[Step4] Exit " << std::endl;
 }
 

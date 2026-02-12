@@ -22,7 +22,7 @@ void TutorialStep_Step7::Enter()
     phase = Step7Phase::PlayerToJesasang;
 
     JesaSang = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("JesaSang_Tutorial");
-    fruitBasket = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("SearchObject");
+    fruitBasket = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("SearchObject_Tutorial");
     playerTr = tutorialController->player_Obj->GetTransform();
 
     // MainCamera : 컴포넌트로 CameraController가지고 있음 
@@ -68,14 +68,13 @@ bool TutorialStep_Step7::IsComplete()
 
 void TutorialStep_Step7::Exit()
 {
-    tutorialController->player_Obj->GetComponent<PlayerController>()->SetInputLock(false);
     std::cout << "[Step7] Exit " << std::endl;
 }
 
 
 // --------------------------------------------------------------------
 
-// 플레이어를 제사상 앞으로 이동 시키기 (플레이어 입력X 코드로 이동 O) 
+// 플레이어를 제사상 앞으로 이동 시키기 (CCT)
 void TutorialStep_Step7::PlayerToJesasang() 
 {
     //Vector3 target = JesaSang->GetTransform()->GetWorldPosition();
@@ -104,11 +103,8 @@ void TutorialStep_Step7::CameraToJesasang()
         phaseStarted = true;
         stepTimer = 0.0f;
 
-        auto camStart = SceneSystem::Instance().GetCurrentScene()
-            ->GetGameObjectByName("StartCam_Jesa")->GetTransform();
-
-        auto camEnd = SceneSystem::Instance().GetCurrentScene()
-            ->GetGameObjectByName("EndCam_Jesa")->GetTransform();
+        auto camStart = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("StartCam_Jesa")->GetTransform();
+        auto camEnd = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("EndCam_Jesa")->GetTransform();
 
         auto look = JesaSang->GetTransform();
 
@@ -183,7 +179,6 @@ void TutorialStep_Step7::CameraToFruit()
             1.5f,
             3.0f
         );
-
     }
 
     stepTimer += GameTimer::Instance().UnscaledDeltaTime();
