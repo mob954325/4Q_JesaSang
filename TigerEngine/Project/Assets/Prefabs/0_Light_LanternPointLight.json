@@ -1,0 +1,1511 @@
+{
+  "prefab": [
+    {
+      "Active": true,
+      "ID": 1956,
+      "Name": "LANTERN_POINT_LIGHT",
+      "ParentID": -1,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 1957,
+      "Name": "point_light",
+      "ParentID": 1956,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              -589.446533203125,
+              30.0,
+              162.12940979003906
+            ],
+            "Rotation": [
+              -0.0,
+              0.0,
+              -0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Color": [
+              0.9890426993370056,
+              1.0,
+              0.813725471496582,
+              1.0
+            ],
+            "Direction": [
+              0.0,
+              -26.100000381469727,
+              1.0
+            ],
+            "InnerAngle": 15.0,
+            "Intensity": 2000.0,
+            "IsSunLight": false,
+            "LightType": "Point",
+            "OuterAngle": 30.0,
+            "Range": 2000.0
+          },
+          "type": "Light"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 1958,
+      "Name": "point_light",
+      "ParentID": 1956,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              -436.4945373535156,
+              34.19242477416992,
+              -1181.7464599609375
+            ],
+            "Rotation": [
+              -0.0,
+              0.0,
+              -0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Color": [
+              0.9890426993370056,
+              1.0,
+              0.813725471496582,
+              1.0
+            ],
+            "Direction": [
+              0.0,
+              -26.100000381469727,
+              1.0
+            ],
+            "InnerAngle": 15.0,
+            "Intensity": 2000.0,
+            "IsSunLight": false,
+            "LightType": "Point",
+            "OuterAngle": 30.0,
+            "Range": 2000.0
+          },
+          "type": "Light"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 1959,
+      "Name": "point_light",
+      "ParentID": 1956,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              -275.510498046875,
+              34.03173065185547,
+              -1182.0367431640625
+            ],
+            "Rotation": [
+              -0.0,
+              0.0,
+              -0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Color": [
+              0.9890426993370056,
+              1.0,
+              0.813725471496582,
+              1.0
+            ],
+            "Direction": [
+              0.0,
+              -26.100000381469727,
+              1.0
+            ],
+            "InnerAngle": 15.0,
+            "Intensity": 2000.0,
+            "IsSunLight": false,
+            "LightType": "Point",
+            "OuterAngle": 30.0,
+            "Range": 2000.0
+          },
+          "type": "Light"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 1960,
+      "Name": "point_light",
+      "ParentID": 1956,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              17.67099952697754,
+              44.25,
+              166.32899475097656
+            ],
+            "Rotation": [
+              -0.0,
+              0.0,
+              -0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Color": [
+              0.9890426993370056,
+              1.0,
+              0.813725471496582,
+              1.0
+            ],
+            "Direction": [
+              0.0,
+              -26.100000381469727,
+              1.0
+            ],
+            "InnerAngle": 15.0,
+            "Intensity": 2000.0,
+            "IsSunLight": false,
+            "LightType": "Point",
+            "OuterAngle": 30.0,
+            "Range": 2000.0
+          },
+          "type": "Light"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 1961,
+      "Name": "point_light",
+      "ParentID": 1956,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              290.4206237792969,
+              60.42479705810547,
+              162.12940979003906
+            ],
+            "Rotation": [
+              -0.0,
+              0.0,
+              -0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Color": [
+              0.9890426993370056,
+              1.0,
+              0.813725471496582,
+              1.0
+            ],
+            "Direction": [
+              0.0,
+              -26.100000381469727,
+              1.0
+            ],
+            "InnerAngle": 15.0,
+            "Intensity": 2000.0,
+            "IsSunLight": false,
+            "LightType": "Point",
+            "OuterAngle": 30.0,
+            "Range": 2000.0
+          },
+          "type": "Light"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 1962,
+      "Name": "point_light",
+      "ParentID": 1956,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              859.0797729492188,
+              44.149322509765625,
+              175.68536376953125
+            ],
+            "Rotation": [
+              -0.0,
+              0.0,
+              -0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Color": [
+              0.9890426993370056,
+              1.0,
+              0.813725471496582,
+              1.0
+            ],
+            "Direction": [
+              0.0,
+              -26.100000381469727,
+              1.0
+            ],
+            "InnerAngle": 15.0,
+            "Intensity": 2000.0,
+            "IsSunLight": false,
+            "LightType": "Point",
+            "OuterAngle": 30.0,
+            "Range": 2000.0
+          },
+          "type": "Light"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 1963,
+      "Name": "point_light",
+      "ParentID": 1956,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              -1481.280029296875,
+              30.0,
+              634.2508544921875
+            ],
+            "Rotation": [
+              -0.0,
+              0.0,
+              -0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Color": [
+              0.9890426993370056,
+              1.0,
+              0.813725471496582,
+              1.0
+            ],
+            "Direction": [
+              0.0,
+              -26.100000381469727,
+              1.0
+            ],
+            "InnerAngle": 15.0,
+            "Intensity": 2000.0,
+            "IsSunLight": false,
+            "LightType": "Point",
+            "OuterAngle": 30.0,
+            "Range": 2000.0
+          },
+          "type": "Light"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 1964,
+      "Name": "point_light",
+      "ParentID": 1956,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              -1488.2734375,
+              46.459716796875,
+              -169.36529541015625
+            ],
+            "Rotation": [
+              -0.0,
+              0.0,
+              -0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Color": [
+              0.9890426993370056,
+              1.0,
+              0.813725471496582,
+              1.0
+            ],
+            "Direction": [
+              0.0,
+              -26.100000381469727,
+              1.0
+            ],
+            "InnerAngle": 15.0,
+            "Intensity": 2000.0,
+            "IsSunLight": false,
+            "LightType": "Point",
+            "OuterAngle": 30.0,
+            "Range": 2000.0
+          },
+          "type": "Light"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 1965,
+      "Name": "point_light",
+      "ParentID": 1956,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              773.5819702148438,
+              30.0,
+              -910.3120727539063
+            ],
+            "Rotation": [
+              -0.0,
+              0.0,
+              -0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Color": [
+              0.9890426993370056,
+              1.0,
+              0.813725471496582,
+              1.0
+            ],
+            "Direction": [
+              0.0,
+              -26.100000381469727,
+              1.0
+            ],
+            "InnerAngle": 15.0,
+            "Intensity": 2000.0,
+            "IsSunLight": false,
+            "LightType": "Point",
+            "OuterAngle": 30.0,
+            "Range": 2000.0
+          },
+          "type": "Light"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 1966,
+      "Name": "point_light",
+      "ParentID": 1956,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              481.9864196777344,
+              60.42479705810547,
+              -270.6789245605469
+            ],
+            "Rotation": [
+              -0.0,
+              0.0,
+              -0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Color": [
+              0.9890426993370056,
+              1.0,
+              0.813725471496582,
+              1.0
+            ],
+            "Direction": [
+              0.0,
+              -26.100000381469727,
+              1.0
+            ],
+            "InnerAngle": 15.0,
+            "Intensity": 2000.0,
+            "IsSunLight": false,
+            "LightType": "Point",
+            "OuterAngle": 30.0,
+            "Range": 2000.0
+          },
+          "type": "Light"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 1967,
+      "Name": "point_light",
+      "ParentID": 1956,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              -599.0380249023438,
+              40.951480865478516,
+              254.0828094482422
+            ],
+            "Rotation": [
+              -0.0,
+              0.0,
+              -0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Color": [
+              0.9890426993370056,
+              1.0,
+              0.813725471496582,
+              1.0
+            ],
+            "Direction": [
+              0.0,
+              -26.100000381469727,
+              1.0
+            ],
+            "InnerAngle": 15.0,
+            "Intensity": 2000.0,
+            "IsSunLight": false,
+            "LightType": "Point",
+            "OuterAngle": 30.0,
+            "Range": 2000.0
+          },
+          "type": "Light"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 1968,
+      "Name": "point_light",
+      "ParentID": 1956,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              -320.48980712890625,
+              30.0,
+              259.885986328125
+            ],
+            "Rotation": [
+              -0.0,
+              0.0,
+              -0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Color": [
+              0.9890426993370056,
+              1.0,
+              0.813725471496582,
+              1.0
+            ],
+            "Direction": [
+              0.0,
+              -26.100000381469727,
+              1.0
+            ],
+            "InnerAngle": 15.0,
+            "Intensity": 2000.0,
+            "IsSunLight": false,
+            "LightType": "Point",
+            "OuterAngle": 30.0,
+            "Range": 2000.0
+          },
+          "type": "Light"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 1969,
+      "Name": "point_light",
+      "ParentID": 1956,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              -578.3818359375,
+              58.91877746582031,
+              -1516.2825927734375
+            ],
+            "Rotation": [
+              -0.0,
+              0.0,
+              -0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Color": [
+              0.9890426993370056,
+              1.0,
+              0.813725471496582,
+              1.0
+            ],
+            "Direction": [
+              0.0,
+              -26.100000381469727,
+              1.0
+            ],
+            "InnerAngle": 15.0,
+            "Intensity": 2000.0,
+            "IsSunLight": false,
+            "LightType": "Point",
+            "OuterAngle": 30.0,
+            "Range": 2000.0
+          },
+          "type": "Light"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 1970,
+      "Name": "point_light",
+      "ParentID": 1956,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              -567.0269165039063,
+              49.9359130859375,
+              -1671.630615234375
+            ],
+            "Rotation": [
+              -0.0,
+              0.0,
+              -0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Color": [
+              0.9890426993370056,
+              1.0,
+              0.813725471496582,
+              1.0
+            ],
+            "Direction": [
+              0.0,
+              -26.100000381469727,
+              1.0
+            ],
+            "InnerAngle": 15.0,
+            "Intensity": 2000.0,
+            "IsSunLight": false,
+            "LightType": "Point",
+            "OuterAngle": 30.0,
+            "Range": 2000.0
+          },
+          "type": "Light"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 1971,
+      "Name": "point_light",
+      "ParentID": 1956,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              -499.3380126953125,
+              40.93977355957031,
+              -383.00201416015625
+            ],
+            "Rotation": [
+              -0.0,
+              0.0,
+              -0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Color": [
+              0.9890426993370056,
+              1.0,
+              0.813725471496582,
+              1.0
+            ],
+            "Direction": [
+              0.0,
+              -26.100000381469727,
+              1.0
+            ],
+            "InnerAngle": 15.0,
+            "Intensity": 2000.0,
+            "IsSunLight": false,
+            "LightType": "Point",
+            "OuterAngle": 30.0,
+            "Range": 2000.0
+          },
+          "type": "Light"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 1972,
+      "Name": "point_light",
+      "ParentID": 1956,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              -322.9300537109375,
+              45.63999938964844,
+              618.2969970703125
+            ],
+            "Rotation": [
+              -0.0,
+              0.0,
+              -0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Color": [
+              0.9890426993370056,
+              1.0,
+              0.813725471496582,
+              1.0
+            ],
+            "Direction": [
+              0.0,
+              -26.100000381469727,
+              1.0
+            ],
+            "InnerAngle": 15.0,
+            "Intensity": 2000.0,
+            "IsSunLight": false,
+            "LightType": "Point",
+            "OuterAngle": 30.0,
+            "Range": 2000.0
+          },
+          "type": "Light"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 1973,
+      "Name": "point_light",
+      "ParentID": 1956,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              612.59130859375,
+              30.0,
+              637.679443359375
+            ],
+            "Rotation": [
+              -0.0,
+              0.0,
+              -0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Color": [
+              0.9890426993370056,
+              1.0,
+              0.813725471496582,
+              1.0
+            ],
+            "Direction": [
+              0.0,
+              -26.100000381469727,
+              1.0
+            ],
+            "InnerAngle": 15.0,
+            "Intensity": 2000.0,
+            "IsSunLight": false,
+            "LightType": "Point",
+            "OuterAngle": 30.0,
+            "Range": 2000.0
+          },
+          "type": "Light"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 1974,
+      "Name": "point_light",
+      "ParentID": 1956,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              -1486.7843017578125,
+              30.0,
+              -1455.8585205078125
+            ],
+            "Rotation": [
+              -0.0,
+              0.0,
+              -0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Color": [
+              0.9890426993370056,
+              1.0,
+              0.813725471496582,
+              1.0
+            ],
+            "Direction": [
+              0.0,
+              -26.100000381469727,
+              1.0
+            ],
+            "InnerAngle": 15.0,
+            "Intensity": 2000.0,
+            "IsSunLight": false,
+            "LightType": "Point",
+            "OuterAngle": 30.0,
+            "Range": 2000.0
+          },
+          "type": "Light"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 1975,
+      "Name": "point_light",
+      "ParentID": 1956,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              -1293.6185302734375,
+              30.0,
+              -1432.5408935546875
+            ],
+            "Rotation": [
+              -0.0,
+              0.0,
+              -0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Color": [
+              0.9890426993370056,
+              1.0,
+              0.813725471496582,
+              1.0
+            ],
+            "Direction": [
+              0.0,
+              -26.100000381469727,
+              1.0
+            ],
+            "InnerAngle": 15.0,
+            "Intensity": 2000.0,
+            "IsSunLight": false,
+            "LightType": "Point",
+            "OuterAngle": 30.0,
+            "Range": 2000.0
+          },
+          "type": "Light"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 1976,
+      "Name": "point_light",
+      "ParentID": 1956,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              1468.6939697265625,
+              37.121978759765625,
+              600.4386596679688
+            ],
+            "Rotation": [
+              -0.0,
+              0.0,
+              -0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Color": [
+              0.9890426993370056,
+              1.0,
+              0.813725471496582,
+              1.0
+            ],
+            "Direction": [
+              0.0,
+              -26.100000381469727,
+              1.0
+            ],
+            "InnerAngle": 15.0,
+            "Intensity": 2000.0,
+            "IsSunLight": false,
+            "LightType": "Point",
+            "OuterAngle": 30.0,
+            "Range": 2000.0
+          },
+          "type": "Light"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 1977,
+      "Name": "point_light",
+      "ParentID": 1956,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              862.9768676757813,
+              30.0,
+              250.82899475097656
+            ],
+            "Rotation": [
+              -0.0,
+              0.0,
+              -0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Color": [
+              0.9890426993370056,
+              1.0,
+              0.813725471496582,
+              1.0
+            ],
+            "Direction": [
+              0.0,
+              -26.100000381469727,
+              1.0
+            ],
+            "InnerAngle": 15.0,
+            "Intensity": 2000.0,
+            "IsSunLight": false,
+            "LightType": "Point",
+            "OuterAngle": 30.0,
+            "Range": 2000.0
+          },
+          "type": "Light"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 1978,
+      "Name": "point_light",
+      "ParentID": 1956,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              615.3103637695313,
+              30.0,
+              263.2296447753906
+            ],
+            "Rotation": [
+              -0.0,
+              0.0,
+              -0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Color": [
+              0.9890426993370056,
+              1.0,
+              0.813725471496582,
+              1.0
+            ],
+            "Direction": [
+              0.0,
+              -26.100000381469727,
+              1.0
+            ],
+            "InnerAngle": 15.0,
+            "Intensity": 2000.0,
+            "IsSunLight": false,
+            "LightType": "Point",
+            "OuterAngle": 30.0,
+            "Range": 2000.0
+          },
+          "type": "Light"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 1979,
+      "Name": "point_light",
+      "ParentID": 1956,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              1060.7138671875,
+              30.0,
+              -1536.4521484375
+            ],
+            "Rotation": [
+              -0.0,
+              0.0,
+              -0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Color": [
+              0.9890426993370056,
+              1.0,
+              0.813725471496582,
+              1.0
+            ],
+            "Direction": [
+              0.0,
+              -26.100000381469727,
+              1.0
+            ],
+            "InnerAngle": 15.0,
+            "Intensity": 2000.0,
+            "IsSunLight": false,
+            "LightType": "Point",
+            "OuterAngle": 30.0,
+            "Range": 2000.0
+          },
+          "type": "Light"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 1980,
+      "Name": "point_light",
+      "ParentID": 1956,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              1464.3038330078125,
+              30.0,
+              -185.01473999023438
+            ],
+            "Rotation": [
+              -0.0,
+              0.0,
+              -0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Color": [
+              0.9890426993370056,
+              1.0,
+              0.813725471496582,
+              1.0
+            ],
+            "Direction": [
+              0.0,
+              -26.100000381469727,
+              1.0
+            ],
+            "InnerAngle": 15.0,
+            "Intensity": 2000.0,
+            "IsSunLight": false,
+            "LightType": "Point",
+            "OuterAngle": 30.0,
+            "Range": 2000.0
+          },
+          "type": "Light"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 1981,
+      "Name": "point_light",
+      "ParentID": 1956,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              1471.645751953125,
+              30.0,
+              -90.29955291748047
+            ],
+            "Rotation": [
+              -0.0,
+              0.0,
+              -0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Color": [
+              0.9890426993370056,
+              1.0,
+              0.813725471496582,
+              1.0
+            ],
+            "Direction": [
+              0.0,
+              -26.100000381469727,
+              1.0
+            ],
+            "InnerAngle": 15.0,
+            "Intensity": 2000.0,
+            "IsSunLight": false,
+            "LightType": "Point",
+            "OuterAngle": 30.0,
+            "Range": 2000.0
+          },
+          "type": "Light"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 1982,
+      "Name": "point_light",
+      "ParentID": 1956,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              1226.6370849609375,
+              30.0,
+              -85.4458999633789
+            ],
+            "Rotation": [
+              -0.0,
+              0.0,
+              -0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Color": [
+              0.9890426993370056,
+              1.0,
+              0.813725471496582,
+              1.0
+            ],
+            "Direction": [
+              0.0,
+              -26.100000381469727,
+              1.0
+            ],
+            "InnerAngle": 15.0,
+            "Intensity": 2000.0,
+            "IsSunLight": false,
+            "LightType": "Point",
+            "OuterAngle": 30.0,
+            "Range": 2000.0
+          },
+          "type": "Light"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 1983,
+      "Name": "point_light",
+      "ParentID": 1956,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              181.1636962890625,
+              36.735130310058594,
+              -1819.498046875
+            ],
+            "Rotation": [
+              -0.0,
+              0.0,
+              -0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Color": [
+              0.9890426993370056,
+              1.0,
+              0.813725471496582,
+              1.0
+            ],
+            "Direction": [
+              0.0,
+              -26.100000381469727,
+              1.0
+            ],
+            "InnerAngle": 15.0,
+            "Intensity": 2000.0,
+            "IsSunLight": false,
+            "LightType": "Point",
+            "OuterAngle": 30.0,
+            "Range": 2000.0
+          },
+          "type": "Light"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 1984,
+      "Name": "point_light",
+      "ParentID": 1956,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              374.2427673339844,
+              28.605052947998047,
+              -852.291259765625
+            ],
+            "Rotation": [
+              -0.0,
+              0.0,
+              -0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Color": [
+              0.9890426993370056,
+              1.0,
+              0.813725471496582,
+              1.0
+            ],
+            "Direction": [
+              0.0,
+              -26.100000381469727,
+              1.0
+            ],
+            "InnerAngle": 15.0,
+            "Intensity": 2000.0,
+            "IsSunLight": false,
+            "LightType": "Point",
+            "OuterAngle": 30.0,
+            "Range": 2000.0
+          },
+          "type": "Light"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 1985,
+      "Name": "point_light",
+      "ParentID": 1956,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              1487.7940673828125,
+              30.0,
+              -1530.9300537109375
+            ],
+            "Rotation": [
+              -0.0,
+              0.0,
+              -0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Color": [
+              0.9890426993370056,
+              1.0,
+              0.813725471496582,
+              1.0
+            ],
+            "Direction": [
+              0.0,
+              -26.100000381469727,
+              1.0
+            ],
+            "InnerAngle": 15.0,
+            "Intensity": 2000.0,
+            "IsSunLight": false,
+            "LightType": "Point",
+            "OuterAngle": 30.0,
+            "Range": 2000.0
+          },
+          "type": "Light"
+        }
+      ]
+    }
+  ]
+}
