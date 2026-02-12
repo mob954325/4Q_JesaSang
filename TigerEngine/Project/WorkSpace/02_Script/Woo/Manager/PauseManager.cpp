@@ -31,6 +31,8 @@ void PauseManager::OnStart()
     // init
     pausePannel->SetActive(false);
     isPause = false;
+
+    GameTimer::Instance().SetTimeScale(1.0f);
 }
 
 void PauseManager::OnUpdate(float delta)
