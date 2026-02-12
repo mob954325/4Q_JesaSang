@@ -38,6 +38,7 @@
 #include "../CookingZone/CookingZone.h"
 #include "../../Ron/MiniMapTest/MiniMapManager.h"
 #include "../../Ho/Sound/PlayerSoundSource.h"
+#include "../../Ho/Sound/SoundManager.h"
 
 
 REGISTER_COMPONENT(PlayerController)
@@ -107,23 +108,23 @@ void PlayerController::OnUpdate(float delta)
     UpsateHitDuration(delta);
 
     // ----- test --------------
-    // ai attack test
+    //ai attack test
     if (Input::GetKeyDown(Keyboard::P))
     {
         TakeAttack();
     }
-
-    // quarter view
-    if (Input::GetKeyDown(Keyboard::O))
-    {
-        camController->SetViewMode(CameraController::ViewMode::Quarter);
-    }
-
-    // front view
-    if (Input::GetKeyDown(Keyboard::I))
-    {
-        camController->SetViewMode(CameraController::ViewMode::Front);
-    }
+    //
+    //// quarter view
+    //if (Input::GetKeyDown(Keyboard::O))
+    //{
+    //    camController->SetViewMode(CameraController::ViewMode::Quarter);
+    //}
+    //
+    //// front view
+    //if (Input::GetKeyDown(Keyboard::I))
+    //{
+    //    camController->SetViewMode(CameraController::ViewMode::Front);
+    //}
 }
 
 void PlayerController::OnFixedUpdate(float delta)
@@ -293,8 +294,16 @@ void PlayerController::InputProcess()
 /*-------[ Movement ]----------------------------------*/
 void PlayerController::Move(float delta)
 {
-    if (isInputLocked) return; // 선민 | 02.11 
     if (!cct) return;
+
+    //// 연출 강제 이동 // 선민 | 02.11 
+    //if (isForcedMove)
+    //{
+    //    cct->MovePlayer(forcedDir, forcedSpeed, delta);
+    //    return;
+    //}
+
+    if (isInputLocked) return; // 선민 | 02.11 
 
     // cct->m_MoveSpeed = curSpeed;
     cct->MovePlayer(lookDir, curSpeed, delta);
@@ -310,7 +319,8 @@ static float WrapAngleRad(float a)      // util
 
 void PlayerController::Rotation(float delta)
 {
-    if (isInputLocked) return; // 선민 | 02.11 
+    // if (isForcedMove) return;   // 선민 | 02.11 
+    if (isInputLocked) return;  // 선민 | 02.11 
     if (lookDir.LengthSquared() <= 0.0001f)
         return;
 
@@ -359,6 +369,10 @@ void PlayerController::SerachObjectInteraction(float dt)
         return;
     }
 
+    // sound
+    if(Input::GetKeyDown(interaction_Key))
+        SoundManager::Instance()->PlaySFX(SFXType::FindObj_Interaction_2_Sound);
+
     // holding
     searchTimer += dt;
     float progress = searchTimer / searchTime;
@@ -392,11 +406,17 @@ void PlayerController::SerachObjectInteraction(float dt)
                     minimap->TriggerPieceCollected(3);
                 else if (item->itemId == "4")
                     minimap->TriggerPieceCollected(4);
+
+                // sound
+                SoundManager::Instance()->PlaySFX(SFXType::FindObj_Acquiremap_Sound);
             }
             // 퀘스트 1 : [탐색] 제사준비 : 최조로 음식 재료 획득시 달성
             else if (item->itemType == ItemType::Ingredient)
             {
                 QuestManager::Instance()->StepComplete(1);
+
+                // sound
+                SoundManager::Instance()->PlaySFX(SFXType::FindObj_Acquireitem_Sound);
             }
 
             // item get
@@ -515,6 +535,9 @@ void PlayerController::PutFoodJesaSangInteraction(float dt)
 
         // 퀘스트 3 : [운반] 차려지는 상 : 최조로 제사상에 음식을 올렸을시 달성
         QuestManager::Instance()->StepComplete(3);
+
+        // sound
+        SoundManager::Instance()->PlaySFX(SFXType::GoalObj_Sound);
 
         // clear
         putFoodTimer = 0.0f;
@@ -744,3 +767,19 @@ float PlayerController::GetCurSenseRadiuse() const
 {
     return curSenseRadius;
 }
+
+
+//// 선민 | 02.12 ------------------------------------------
+//
+//void PlayerController::SetForcedMove(const Vector3& dir, float speed)
+//{
+//    forcedDir = dir;
+//    forcedSpeed = speed;
+//    isForcedMove = true;
+//}
+//
+//void PlayerController::ClearForcedMove()
+//{
+//    isForcedMove = false;
+//}
+

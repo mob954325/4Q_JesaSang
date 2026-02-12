@@ -17,8 +17,10 @@ enum class Step5Phase
 {
     AdultInCome,
     LookAround,
-    Monologue,
-    WaitInput,
+    Monologue1,
+    WaitInput1,
+    Monologue2,
+    WaitInput2,
     AdultOut,
     Done
 };
@@ -33,10 +35,22 @@ private:
 
     Step5Phase phase = Step5Phase::AdultInCome;
 
+    GameObject* targetA = nullptr;
+    GameObject* targetB = nullptr;
+    Transform* adultTranform = nullptr;
+
+    float speed = 120.0f;
+
+    bool phaseStarted = false;
+
+    bool monologuePlayed = false;
+
     void AdultInCome();
     void LookAround();
-    void Monologue();
-    void WaitInput();
+    void Monologue1();
+    void WaitInput1();
+    void Monologue2();
+    void WaitInput2();
     void AdultOut();
 
 public:

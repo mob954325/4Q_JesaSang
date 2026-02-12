@@ -1,0 +1,389 @@
+{
+  "prefab": [
+    {
+      "Active": true,
+      "ID": 2021,
+      "Name": "playaer_light",
+      "ParentID": -1,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Rotation": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 2013,
+      "Name": "Character_light",
+      "ParentID": 2021,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              1.0916194915771484,
+              64.81193542480469,
+              -34.82858657836914
+            ],
+            "Rotation": [
+              -0.0,
+              0.0,
+              -0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Color": [
+              0.7254902124404907,
+              0.5215245485305786,
+              0.1920415312051773,
+              1.0
+            ],
+            "Direction": [
+              100.0,
+              100.0,
+              300.0
+            ],
+            "InnerAngle": 50.0,
+            "Intensity": 20.0,
+            "IsSunLight": false,
+            "LightType": "Spot",
+            "OuterAngle": 100.0,
+            "Range": 100.0
+          },
+          "type": "Light"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 2014,
+      "Name": "Character_light",
+      "ParentID": 2021,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              1.7326622009277344,
+              94.97026824951172,
+              -38.18015670776367
+            ],
+            "Rotation": [
+              -0.0,
+              0.0,
+              -0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Color": [
+              0.7254902124404907,
+              0.5215245485305786,
+              0.1920415312051773,
+              1.0
+            ],
+            "Direction": [
+              100.0,
+              100.0,
+              300.0
+            ],
+            "InnerAngle": 50.0,
+            "Intensity": 20.0,
+            "IsSunLight": false,
+            "LightType": "Spot",
+            "OuterAngle": 100.0,
+            "Range": 200.0
+          },
+          "type": "Light"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 2015,
+      "Name": "Character_light",
+      "ParentID": 2021,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              17.832040786743164,
+              64.20565032958984,
+              26.663394927978516
+            ],
+            "Rotation": [
+              -0.0,
+              0.0,
+              -0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Color": [
+              0.7254902124404907,
+              0.5215245485305786,
+              0.1920415312051773,
+              1.0
+            ],
+            "Direction": [
+              100.0,
+              100.0,
+              300.0
+            ],
+            "InnerAngle": 50.0,
+            "Intensity": 100.0,
+            "IsSunLight": false,
+            "LightType": "Point",
+            "OuterAngle": 100.0,
+            "Range": 300.0
+          },
+          "type": "Light"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 2016,
+      "Name": "Character_light",
+      "ParentID": 2021,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              18.546245574951172,
+              104.71842193603516,
+              27.578815460205078
+            ],
+            "Rotation": [
+              -0.0,
+              0.0,
+              -0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Color": [
+              0.7254902124404907,
+              0.5215245485305786,
+              0.1920415312051773,
+              1.0
+            ],
+            "Direction": [
+              100.0,
+              100.0,
+              300.0
+            ],
+            "InnerAngle": 50.0,
+            "Intensity": 100.0,
+            "IsSunLight": false,
+            "LightType": "Point",
+            "OuterAngle": 100.0,
+            "Range": 300.0
+          },
+          "type": "Light"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 2017,
+      "Name": "Character_light",
+      "ParentID": 2021,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              -16.457134246826172,
+              105.64045715332031,
+              27.283863067626953
+            ],
+            "Rotation": [
+              -0.0,
+              0.0,
+              -0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Color": [
+              0.7254902124404907,
+              0.5215245485305786,
+              0.1920415312051773,
+              1.0
+            ],
+            "Direction": [
+              100.0,
+              100.0,
+              300.0
+            ],
+            "InnerAngle": 50.0,
+            "Intensity": 100.0,
+            "IsSunLight": false,
+            "LightType": "Point",
+            "OuterAngle": 100.0,
+            "Range": 300.0
+          },
+          "type": "Light"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 2018,
+      "Name": "Character_light",
+      "ParentID": 2021,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              -13.955098152160645,
+              61.70640563964844,
+              27.988515853881836
+            ],
+            "Rotation": [
+              -0.0,
+              0.0,
+              -0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Color": [
+              0.7254902124404907,
+              0.5215245485305786,
+              0.1920415312051773,
+              1.0
+            ],
+            "Direction": [
+              100.0,
+              100.0,
+              300.0
+            ],
+            "InnerAngle": 50.0,
+            "Intensity": 100.0,
+            "IsSunLight": false,
+            "LightType": "Point",
+            "OuterAngle": 100.0,
+            "Range": 300.0
+          },
+          "type": "Light"
+        }
+      ]
+    },
+    {
+      "Active": true,
+      "ID": 2019,
+      "Name": "Character_light",
+      "ParentID": 2021,
+      "components": [
+        {
+          "properties": {
+            "Position": [
+              -1.4401607513427734,
+              122.49137878417969,
+              13.387690544128418
+            ],
+            "Rotation": [
+              -0.0,
+              0.0,
+              -0.0
+            ],
+            "Scale": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "type": "Transform"
+        },
+        {
+          "properties": {
+            "Active": true,
+            "Color": [
+              0.7254902124404907,
+              0.5215245485305786,
+              0.1920415312051773,
+              1.0
+            ],
+            "Direction": [
+              100.0,
+              100.0,
+              300.0
+            ],
+            "InnerAngle": 50.0,
+            "Intensity": 200.0,
+            "IsSunLight": false,
+            "LightType": "Point",
+            "OuterAngle": 100.0,
+            "Range": 500.0
+          },
+          "type": "Light"
+        }
+      ]
+    }
+  ]
+}

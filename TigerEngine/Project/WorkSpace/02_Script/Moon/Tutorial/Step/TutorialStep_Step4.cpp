@@ -3,14 +3,18 @@
 #include "System/InputSystem.h"
 #include "System/TimeSystem.h"
 
+#include "Manager/WorldManager.h"
+//#include "Manager/QuestManager.h"
+
 #include "EngineSystem/SceneSystem.h"
 #include "../../../Woo/Player/PlayerController.h"
+#include "../../../Woo/UI/MainGameUIManager.h"
 
 void TutorialStep_Step4::Enter()
 {
     isDone = false;
     step4Timer = 0.0f;
-    phase = Step4Phase::AdultInComeA;
+    phase = Step4Phase::ShowQuest;
     phaseStarted = false;
 
     hideObject = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("HideObject");
@@ -49,6 +53,23 @@ void TutorialStep_Step4::Enter()
     if (frozenImage)
         frozenImage->SetActive(false);
 
+    // 퀘스트 창
+    if (auto ui = MainGameUIManager::Instance())
+    {
+        ui->QuestPannelClose(0.0f);  // 즉시 닫힘 위치로 이동
+        ui->TickQuestPanel(0.0f);    // 바로 적용
+
+        ui->UpdateQuestTitle(L"[Tutorial] Hide");
+        ui->UpdateQuestLable(L"You Should Hide");
+        ui->SetQuestTitleOn(true);
+        ui->SetQuestLableOn(true);
+        ui->SetQuestCheakboxOn(false);
+        ui->SetQuestLineOn(false);
+
+        ui->QuestPannelOpen(1.0f);  // 1초 슬라이드
+    }
+
+
     std::cout << "[Step4] Enter" << std::endl;
 }
 
@@ -56,14 +77,30 @@ void TutorialStep_Step4::Update(float deltaTime)
 {
     step4Timer += deltaTime;
 
+    if (auto ui = MainGameUIManager::Instance())
+    {
+        ui->TickQuestPanel(deltaTime);
+    }
+
     switch (phase)
     {
+    case Step4Phase::ShowQuest:
+
+        if (step4Timer >= 3.0f)   // 퀘스트 창 3초 보여주기
+        {
+            step4Timer = 0.0f;
+            if (auto ui = MainGameUIManager::Instance())
+            {
+                ui->QuestPannelClose(1.0f);  // 1초 동안 닫기
+            }
+            phase = Step4Phase::AdultInComeA;
+        }
+        break;
     case Step4Phase::AdultInComeA: AdultInComeA(); break;
     case Step4Phase::AdultInComeB: AdultInComeB(); break;
     case Step4Phase::AdultArrive:  AdultArrive();  break;
     case Step4Phase::Fail:
-        std::cout << "[Step4] Fail → Restart\n";
-        Enter();
+        FailUpdate(GameTimer::Instance().UnscaledDeltaTime());
         break;
 
     case Step4Phase::Clear:
@@ -88,7 +125,6 @@ void TutorialStep_Step4::Exit()
 
 
 // 1. 조상 유령 접근 
-// TODO : 거리에 따라서 화면 Frozen 
 // TODO : 퀘스트 띄우기  
 void TutorialStep_Step4::AdultInComeA()
 {
@@ -183,6 +219,8 @@ void TutorialStep_Step4::AdultArrive()
         if (dir.Length() < 5.0f)
         {
             phase = Step4Phase::Fail;
+            failFadeTimer = 0.0f;
+            failStarted = false;
             return;
         }
 
@@ -195,6 +233,41 @@ void TutorialStep_Step4::AdultArrive()
         // 이동 방향 바라보게 회전
         float yaw = atan2f(-dir.x, -dir.z);
         adultTranform->SetRotationY(yaw);
+    }
+}
+
+
+void TutorialStep_Step4::FailUpdate(float dt)
+{
+    auto& postProcessData = WorldManager::Instance().postProcessData;
+
+    if (!failStarted)
+    {
+        failStarted = true;
+
+        // 플레이어 조작 잠금
+        tutorialController->player_Obj->GetComponent<PlayerController>()->SetInputLock(true);
+    }
+
+    failFadeTimer += dt;
+
+    float t = std::clamp(failFadeTimer / failFadeMaxTime, 0.0f, 1.0f);
+
+    // 점점 어두워짐
+    if (failFadeTimer <= failFadeMaxTime)
+    {
+        postProcessData.exposure = std::lerp(0.0f, -10.0f, t);
+    }
+    // 완전 암전 유지 2초
+    else if (failFadeTimer <= failFadeMaxTime + 2.0f)
+    {
+        postProcessData.exposure = -10.0f;
+    }
+    // 재시작
+    else
+    {
+        postProcessData.exposure = 0.0f; // 밝기 원복
+        Enter();
     }
 }
 

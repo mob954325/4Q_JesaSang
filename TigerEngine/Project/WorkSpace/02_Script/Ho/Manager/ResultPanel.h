@@ -13,7 +13,6 @@ class ResultPanel : public ScriptComponent
 public:
     void OnInitialize() override;
     void OnStart() override;
-    void OnUpdate(float dt) override;
 
     nlohmann::json Serialize() override;
     void Deserialize(nlohmann::json data) override;

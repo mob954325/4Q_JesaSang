@@ -28,7 +28,7 @@ void WinCinemachine::OnStart()
 
 void WinCinemachine::OnUpdate(float dt)
 {
-    if (Input::GetKeyDown(DirectX::Keyboard::B)) Play();
+    //if (Input::GetKeyDown(DirectX::Keyboard::B)) Play();
 
     if (!cam) return;
     if (notified && !isPlayed)
