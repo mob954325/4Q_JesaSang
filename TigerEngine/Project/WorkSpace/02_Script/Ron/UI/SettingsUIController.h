@@ -32,6 +32,7 @@ public:
     void Deserialize(nlohmann::json data) override;
 
     static SettingsUIController* Instance() { return s_instance; }
+    bool IsOpen() const { return m_IsOpen; }
 
     void ToggleRoot();
     void SetOpen(bool open);

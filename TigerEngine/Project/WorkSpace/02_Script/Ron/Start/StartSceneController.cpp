@@ -9,6 +9,7 @@
 #include "Components/AudioSourceComponent.h"
 #include "Components/UI/Image.h"
 #include "Components/RectTransform.h"
+#include "../UI/SettingsUIController.h"
 
 REGISTER_COMPONENT(StartSceneController)
 
@@ -65,6 +66,15 @@ void StartSceneController::OnUpdate(float delta)
 
     const bool spaceDown = Input::GetKey(DirectX::Keyboard::Keys::Space);
     const bool enterDown = Input::GetKey(DirectX::Keyboard::Keys::Enter);
+    if (auto* settings = SettingsUIController::Instance())
+    {
+        if (settings->IsOpen())
+        {
+            m_PrevSpace = spaceDown;
+            m_PrevEnter = enterDown;
+            return;
+        }
+    }
 
     if (IsAdvancePressed(spaceDown, m_PrevSpace) || IsAdvancePressed(enterDown, m_PrevEnter))
     {
