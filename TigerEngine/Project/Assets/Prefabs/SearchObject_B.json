@@ -2,16 +2,16 @@
   "prefab": [
     {
       "Active": true,
-      "ID": 18362,
+      "ID": 21989,
       "Name": "SearchObject",
-      "ParentID": 18359,
+      "ParentID": -1,
       "components": [
         {
           "properties": {
             "Position": [
-              -1127.408203125,
-              5.0459697376936674e-05,
-              -189.7286376953125
+              -79.15376281738281,
+              0.0,
+              -294.4878845214844
             ],
             "Rotation": [
               -0.0,
@@ -83,7 +83,7 @@
             "PhysicsBodyType": "Static",
             "density": 10.0,
             "halfExtents": [
-              65.0,
+              100.0,
               100.0,
               34.0
             ],
@@ -118,9 +118,9 @@
     },
     {
       "Active": false,
-      "ID": 18363,
+      "ID": 21990,
       "Name": "Image_SensorOn",
-      "ParentID": 18362,
+      "ParentID": 21989,
       "components": [
         {
           "properties": {
@@ -206,9 +206,9 @@
     },
     {
       "Active": false,
-      "ID": 18364,
+      "ID": 21991,
       "Name": "Image_InteractionOn",
-      "ParentID": 18362,
+      "ParentID": 21989,
       "components": [
         {
           "properties": {
@@ -294,9 +294,9 @@
     },
     {
       "Active": false,
-      "ID": 18365,
+      "ID": 21992,
       "Name": "Image_InteractionGauge",
-      "ParentID": 18362,
+      "ParentID": 21989,
       "components": [
         {
           "properties": {

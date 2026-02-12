@@ -2,16 +2,16 @@
   "prefab": [
     {
       "Active": true,
-      "ID": 7497,
+      "ID": 22003,
       "Name": "HideObject",
-      "ParentID": 7412,
+      "ParentID": -1,
       "components": [
         {
           "properties": {
             "Position": [
-              -48.701622009277344,
+              146.88841247558594,
               0.0,
-              172.27069091796875
+              -578.050537109375
             ],
             "Rotation": [
               -0.0,
@@ -109,9 +109,9 @@
     },
     {
       "Active": false,
-      "ID": 7498,
+      "ID": 22004,
       "Name": "Image_SensorOn",
-      "ParentID": 7497,
+      "ParentID": 22003,
       "components": [
         {
           "properties": {
@@ -197,9 +197,9 @@
     },
     {
       "Active": false,
-      "ID": 7499,
+      "ID": 22005,
       "Name": "Image_InteractionOn",
-      "ParentID": 7497,
+      "ParentID": 22003,
       "components": [
         {
           "properties": {
@@ -267,7 +267,7 @@
             "drawSpacetype": "World",
             "fillAmount": 1.0,
             "imageType": "Simple",
-            "isBillboard": true,
+            "isBillboard": false,
             "isMouseCheck": false,
             "path": "..\\Assets\\Resource\\UI\\Interaction\\F.png",
             "sliceBorderPx": [
@@ -284,10 +284,10 @@
       ]
     },
     {
-      "Active": false,
-      "ID": 7500,
+      "Active": true,
+      "ID": 22006,
       "Name": "Image_InteractionGauge",
-      "ParentID": 7497,
+      "ParentID": 22003,
       "components": [
         {
           "properties": {
@@ -311,7 +311,7 @@
         },
         {
           "properties": {
-            "Active": false,
+            "Active": true,
             "Pivot": [
               0.5,
               0.5
@@ -345,7 +345,7 @@
         },
         {
           "properties": {
-            "Active": false,
+            "Active": true,
             "color": [
               1.0,
               1.0,
