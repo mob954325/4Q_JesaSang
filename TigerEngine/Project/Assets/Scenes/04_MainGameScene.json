@@ -2032,8 +2032,8 @@
                       0.0,
                       1.0
                     ],
-                    "lifeMax": 3.0,
-                    "lifeMin": 2.0,
+                    "lifeMax": 1.7999999523162842,
+                    "lifeMin": 1.0,
                     "rotationMax": 10.0,
                     "rotationMin": -10.0,
                     "sizeMax": [
@@ -2044,15 +2044,15 @@
                       1.0,
                       1.0
                     ],
-                    "speedMax": 30.0,
-                    "speedMin": 20.0
+                    "speedMax": 40.0,
+                    "speedMin": 30.0
                   },
                   "emitDir": [
                     0.0,
                     1.0,
                     0.0
                   ],
-                  "emitRate": 20.0,
+                  "emitRate": 35.0,
                   "enabled": true,
                   "filpbookPlayMode": "Loop",
                   "fixedData": {
@@ -11040,7 +11040,7 @@
     },
     {
       "properties": {
-        "Active": false,
+        "Active": true,
         "ID": 3644,
         "Name": "Grid",
         "ParentID": -1,
@@ -11067,7 +11067,7 @@
           },
           {
             "properties": {
-              "Active": false
+              "Active": true
             },
             "type": "GridComponent"
           }
@@ -63635,7 +63635,7 @@
     },
     {
       "properties": {
-        "Active": true,
+        "Active": false,
         "ID": 4206,
         "Name": "playaer_light",
         "ParentID": 3513,
@@ -63720,7 +63720,7 @@
     },
     {
       "properties": {
-        "Active": true,
+        "Active": false,
         "ID": 4208,
         "Name": "Character_light_F2",
         "ParentID": 4206,
@@ -63747,7 +63747,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "Color": [
                 0.7254902124404907,
                 0.5215245485305786,
@@ -63774,7 +63774,7 @@
     },
     {
       "properties": {
-        "Active": true,
+        "Active": false,
         "ID": 4209,
         "Name": "Character_light_F3",
         "ParentID": 4206,
@@ -63801,7 +63801,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "Color": [
                 0.7254902124404907,
                 0.5215245485305786,
@@ -63828,7 +63828,7 @@
     },
     {
       "properties": {
-        "Active": true,
+        "Active": false,
         "ID": 4210,
         "Name": "Character_light_R",
         "ParentID": 4206,
@@ -63855,7 +63855,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "Color": [
                 0.7254902124404907,
                 0.5215245485305786,
@@ -63882,7 +63882,7 @@
     },
     {
       "properties": {
-        "Active": true,
+        "Active": false,
         "ID": 4211,
         "Name": "Character_light_L",
         "ParentID": 4206,
@@ -63909,7 +63909,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "Color": [
                 0.7254902124404907,
                 0.5215245485305786,
@@ -63936,7 +63936,7 @@
     },
     {
       "properties": {
-        "Active": true,
+        "Active": false,
         "ID": 4212,
         "Name": "Character_light_B1",
         "ParentID": 4206,
@@ -63963,7 +63963,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "Color": [
                 0.7254902124404907,
                 0.5215245485305786,
@@ -63990,7 +63990,7 @@
     },
     {
       "properties": {
-        "Active": true,
+        "Active": false,
         "ID": 4213,
         "Name": "Character_light_B2",
         "ParentID": 4206,
@@ -64017,7 +64017,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "Color": [
                 0.7254902124404907,
                 0.5215245485305786,
@@ -64454,7 +64454,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 4223,
+        "ID": 4222,
         "Name": "GHost_LIGHT",
         "ParentID": 3645,
         "components": [
@@ -64485,9 +64485,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 4224,
+        "ID": 4223,
         "Name": "GHOST_LIGHT_F1",
-        "ParentID": 4223,
+        "ParentID": 4222,
         "components": [
           {
             "properties": {
@@ -64539,9 +64539,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 4225,
+        "ID": 4224,
         "Name": "GHOST_LIGHT_F2",
-        "ParentID": 4223,
+        "ParentID": 4222,
         "components": [
           {
             "properties": {
@@ -64593,9 +64593,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 4226,
+        "ID": 4225,
         "Name": "GHOST_LIGHT_R",
-        "ParentID": 4223,
+        "ParentID": 4222,
         "components": [
           {
             "properties": {
@@ -64647,9 +64647,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 4227,
+        "ID": 4226,
         "Name": "GHOST_LIGHT_L",
-        "ParentID": 4223,
+        "ParentID": 4222,
         "components": [
           {
             "properties": {
@@ -64701,9 +64701,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 4228,
+        "ID": 4227,
         "Name": "GHOST_LIGHT_B1",
-        "ParentID": 4223,
+        "ParentID": 4222,
         "components": [
           {
             "properties": {
@@ -64755,9 +64755,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 4229,
+        "ID": 4228,
         "Name": "GHOST_LIGHT_B2",
-        "ParentID": 4223,
+        "ParentID": 4222,
         "components": [
           {
             "properties": {
@@ -64809,9 +64809,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 4230,
+        "ID": 4229,
         "Name": "GHOST_LIGHT_B3",
-        "ParentID": 4223,
+        "ParentID": 4222,
         "components": [
           {
             "properties": {
@@ -64863,7 +64863,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 4231,
+        "ID": 4230,
         "Name": "book",
         "ParentID": 4205,
         "components": [
@@ -64944,7 +64944,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 4232,
+        "ID": 4231,
         "Name": "book",
         "ParentID": 4205,
         "components": [
@@ -65025,7 +65025,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 4233,
+        "ID": 4232,
         "Name": "book",
         "ParentID": 4205,
         "components": [
@@ -65106,7 +65106,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 4234,
+        "ID": 4233,
         "Name": "Flowerpot_02",
         "ParentID": 4205,
         "components": [
@@ -65187,7 +65187,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 4235,
+        "ID": 4234,
         "Name": "ceramic03",
         "ParentID": 4205,
         "components": [
@@ -65268,7 +65268,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 4236,
+        "ID": 4235,
         "Name": "Flowerpot_01",
         "ParentID": 4205,
         "components": [
@@ -65349,7 +65349,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 4237,
+        "ID": 4236,
         "Name": "book",
         "ParentID": 4205,
         "components": [
@@ -65430,7 +65430,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 4238,
+        "ID": 4237,
         "Name": "book",
         "ParentID": 4205,
         "components": [
@@ -65511,7 +65511,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 4239,
+        "ID": 4238,
         "Name": "ceramic01",
         "ParentID": 4205,
         "components": [
@@ -65592,7 +65592,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 4240,
+        "ID": 4239,
         "Name": "ceramic02",
         "ParentID": 4205,
         "components": [
@@ -65673,7 +65673,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 4241,
+        "ID": 4240,
         "Name": "ceramic03",
         "ParentID": 4205,
         "components": [
@@ -65754,7 +65754,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 4242,
+        "ID": 4241,
         "Name": "book",
         "ParentID": 4205,
         "components": [
@@ -65835,7 +65835,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 4243,
+        "ID": 4242,
         "Name": "book",
         "ParentID": 4205,
         "components": [
@@ -65916,7 +65916,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 4244,
+        "ID": 4243,
         "Name": "book",
         "ParentID": 4205,
         "components": [
@@ -65997,7 +65997,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 4245,
+        "ID": 4244,
         "Name": "Clock",
         "ParentID": 4205,
         "components": [
@@ -66078,7 +66078,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 4246,
+        "ID": 4245,
         "Name": "die_Flowerpot",
         "ParentID": 4205,
         "components": [
@@ -66159,7 +66159,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 4247,
+        "ID": 4246,
         "Name": "Flowerpot",
         "ParentID": 4205,
         "components": [
@@ -66240,7 +66240,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 4248,
+        "ID": 4247,
         "Name": "Flowerpot_01",
         "ParentID": 4205,
         "components": [
@@ -66321,7 +66321,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 4249,
+        "ID": 4248,
         "Name": "Flowerpot_02",
         "ParentID": 4205,
         "components": [
@@ -66402,7 +66402,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 4250,
+        "ID": 4249,
         "Name": "die_Flowerpot",
         "ParentID": 4205,
         "components": [
@@ -66483,7 +66483,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 4251,
+        "ID": 4250,
         "Name": "-----[Colliders]------",
         "ParentID": -1,
         "components": [
@@ -66514,7 +66514,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 4252,
+        "ID": 4251,
         "Name": "ColliderRoot",
         "ParentID": -1,
         "components": [
@@ -66545,9 +66545,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 4253,
+        "ID": 4252,
         "Name": "KitchenCenter",
-        "ParentID": 4252,
+        "ParentID": 4251,
         "components": [
           {
             "properties": {
@@ -66599,9 +66599,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 4254,
+        "ID": 4253,
         "Name": "KitchenDoor1",
-        "ParentID": 4252,
+        "ParentID": 4251,
         "components": [
           {
             "properties": {
@@ -66653,9 +66653,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 4255,
+        "ID": 4254,
         "Name": "KitchenDoor2",
-        "ParentID": 4252,
+        "ParentID": 4251,
         "components": [
           {
             "properties": {
@@ -66707,9 +66707,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 4256,
+        "ID": 4255,
         "Name": "KitchenDoor3",
-        "ParentID": 4252,
+        "ParentID": 4251,
         "components": [
           {
             "properties": {
@@ -66761,9 +66761,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 4257,
+        "ID": 4256,
         "Name": "WhiteDoor1",
-        "ParentID": 4252,
+        "ParentID": 4251,
         "components": [
           {
             "properties": {
@@ -66815,9 +66815,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 4258,
+        "ID": 4257,
         "Name": "WhiteDoor2",
-        "ParentID": 4252,
+        "ParentID": 4251,
         "components": [
           {
             "properties": {
@@ -66869,9 +66869,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 4259,
+        "ID": 4258,
         "Name": "CenterDoor1",
-        "ParentID": 4252,
+        "ParentID": 4251,
         "components": [
           {
             "properties": {
@@ -66923,9 +66923,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 4260,
+        "ID": 4259,
         "Name": "BottomRoomDoor1",
-        "ParentID": 4252,
+        "ParentID": 4251,
         "components": [
           {
             "properties": {
@@ -66977,9 +66977,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 4261,
+        "ID": 4260,
         "Name": "BottomRoomDoor2",
-        "ParentID": 4252,
+        "ParentID": 4251,
         "components": [
           {
             "properties": {
@@ -67031,9 +67031,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 4262,
+        "ID": 4261,
         "Name": "BottomHallwayDoor1",
-        "ParentID": 4252,
+        "ParentID": 4251,
         "components": [
           {
             "properties": {
@@ -67085,9 +67085,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 4263,
+        "ID": 4262,
         "Name": "BottomHallwayDoor2",
-        "ParentID": 4252,
+        "ParentID": 4251,
         "components": [
           {
             "properties": {
@@ -67139,9 +67139,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 4264,
+        "ID": 4263,
         "Name": "BottomHallWayDoor3",
-        "ParentID": 4252,
+        "ParentID": 4251,
         "components": [
           {
             "properties": {
@@ -67193,9 +67193,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 4265,
+        "ID": 4264,
         "Name": "BottomRoomPartition1",
-        "ParentID": 4252,
+        "ParentID": 4251,
         "components": [
           {
             "properties": {
@@ -67247,9 +67247,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 4266,
+        "ID": 4265,
         "Name": "CenterDoor2",
-        "ParentID": 4252,
+        "ParentID": 4251,
         "components": [
           {
             "properties": {
@@ -67301,9 +67301,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 4267,
+        "ID": 4266,
         "Name": "TopRightDoor1",
-        "ParentID": 4252,
+        "ParentID": 4251,
         "components": [
           {
             "properties": {
@@ -67355,9 +67355,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 4268,
+        "ID": 4267,
         "Name": "TopRightDoor2",
-        "ParentID": 4252,
+        "ParentID": 4251,
         "components": [
           {
             "properties": {
@@ -67409,9 +67409,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 4269,
+        "ID": 4268,
         "Name": "TopMiddleDoor1",
-        "ParentID": 4252,
+        "ParentID": 4251,
         "components": [
           {
             "properties": {
@@ -67463,9 +67463,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 4270,
+        "ID": 4269,
         "Name": "TopRightDoor1",
-        "ParentID": 4252,
+        "ParentID": 4251,
         "components": [
           {
             "properties": {
@@ -67517,9 +67517,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 4271,
+        "ID": 4270,
         "Name": "TopRightDoor2",
-        "ParentID": 4252,
+        "ParentID": 4251,
         "components": [
           {
             "properties": {
@@ -67571,9 +67571,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 4272,
+        "ID": 4271,
         "Name": "KitcheBottomWall1",
-        "ParentID": 4252,
+        "ParentID": 4251,
         "components": [
           {
             "properties": {
@@ -67625,9 +67625,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 4273,
+        "ID": 4272,
         "Name": "KitchenRightWall1",
-        "ParentID": 4252,
+        "ParentID": 4251,
         "components": [
           {
             "properties": {
@@ -67679,9 +67679,9 @@
     {
       "properties": {
         "Active": true,
-        "ID": 4274,
+        "ID": 4273,
         "Name": "BottomRoomDoor3",
-        "ParentID": 4252,
+        "ParentID": 4251,
         "components": [
           {
             "properties": {
@@ -67733,7 +67733,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 4275,
+        "ID": 4274,
         "Name": "------------------",
         "ParentID": -1,
         "components": [
@@ -67763,8 +67763,8 @@
     },
     {
       "properties": {
-        "Active": true,
-        "ID": 4277,
+        "Active": false,
+        "ID": 4275,
         "Name": "Character_light_B3",
         "ParentID": 4206,
         "components": [
@@ -67790,7 +67790,7 @@
           },
           {
             "properties": {
-              "Active": true,
+              "Active": false,
               "Color": [
                 0.7254902124404907,
                 0.5215686559677124,
