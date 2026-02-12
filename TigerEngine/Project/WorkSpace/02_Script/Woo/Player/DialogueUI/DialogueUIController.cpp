@@ -224,3 +224,11 @@ void DialogueUIController::ShowInteractionHintAndPause(const wchar_t* s)
     // 자동 연출 시작
     DialogueOnOff(true);
 }
+
+
+// --------------------------------
+
+void DialogueUIController::SetdialogueTarget(Transform* tr)
+{
+    targetTr = tr;
+}

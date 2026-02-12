@@ -63,5 +63,9 @@ public:
     // 선민 | 02.11 
     // 자동 종료 없이 계속 유지
     void ShowDialogueHold(const wchar_t* s);
+
+    // 다이얼로그 타겟 따로 설정 
+    void SetdialogueTarget(Transform* tr);
+
 };
 

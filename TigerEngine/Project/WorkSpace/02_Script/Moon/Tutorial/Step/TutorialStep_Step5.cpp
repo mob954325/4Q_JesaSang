@@ -28,7 +28,6 @@ void TutorialStep_Step5::Enter()
 
     targetA = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("Adult_Target_A");
     targetB = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("Adult_Target_B");
-    step5_out = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("Baby_Target_B");
 
     // 어른 귀신의 위치를 targetA로 세팅 
     tutorialController->adultGhost_Obj->GetTransform()->SetPosition(targetA->GetComponent<Transform>()->GetWorldPosition());
@@ -37,6 +36,14 @@ void TutorialStep_Step5::Enter()
     // CameraController 타겟 변경 (귀신 바라봐야함)
     auto camCtrl = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("MainCamera")->GetComponent<CameraController>();
     if (camCtrl) camCtrl->SetTargetTransform(tutorialController->adultGhost_Obj->GetTransform());
+
+    // 다이얼로그 타겟 변경 (귀신 기준)
+    if (tutorialController->dialogue)
+    {
+        auto pointObj = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("Ghost_DialoguePoint");
+        auto point = pointObj->GetComponent<Transform>();
+        tutorialController->dialogue->SetdialogueTarget(point);
+    }
 
     std::cout << "[Step5] Enter" << std::endl;
 }
@@ -88,12 +95,15 @@ bool TutorialStep_Step5::IsComplete()
 
 void TutorialStep_Step5::Exit()
 {
+    // 귀신 끄기 
+    tutorialController->adultGhost_Obj->GetComponent<FBXRenderer>()->SetActive(false);
+
     // 카메라 타겟 플레이어로 복구
     auto camCtrl = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("MainCamera")->GetComponent<CameraController>();
     if (camCtrl) camCtrl->SetTargetTransform(tutorialController->player_Obj->GetTransform());
 
     // 렌더도 다시 켜기
-    tutorialController->player_Obj->GetComponent<FBXRenderer>()->SetActive(false);
+    tutorialController->player_Obj->GetComponent<FBXRenderer>()->SetActive(true);
 
     std::cout << "[Step5] Exit " << std::endl;
 }
@@ -213,7 +223,7 @@ void TutorialStep_Step5::WaitInput2()
 void TutorialStep_Step5::AdultOut()
 {
     // Target A로 이동 
-    Vector3 target_out = step5_out->GetTransform()->GetWorldPosition();
+    Vector3 target_out = targetA->GetTransform()->GetWorldPosition();
     Vector3 pos = tutorialController->adultGhost_Obj->GetTransform()->GetWorldPosition();
     Vector3 dir = target_out - pos;
 

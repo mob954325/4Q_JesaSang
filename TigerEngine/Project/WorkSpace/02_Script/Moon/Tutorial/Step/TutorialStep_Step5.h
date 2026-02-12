@@ -37,7 +37,6 @@ private:
 
     GameObject* targetA = nullptr;
     GameObject* targetB = nullptr;
-    GameObject* step5_out = nullptr;
     Transform* adultTranform = nullptr;
 
     float speed = 120.0f;
