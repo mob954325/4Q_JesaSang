@@ -33,6 +33,7 @@ namespace
     constexpr float kPreSlideFrameInterval = 0.2f;
     constexpr float kPreSlideSize = 500.0f;
     constexpr const char* kBlackOverlayPath = "..\\Assets\\Resource\\CutScene\\intro-black-overlay.png";
+    constexpr const char* kCutSceneFramePath = "..\\Assets\\Resource\\CutScene\\cutscene-frame.png";
     const std::array<const char*, 8> kPreSlideFileNames =
     {
         "00.png", "01.png", "02.png", "03.png", "04.png", "05.png", "06.png", "07.png"
@@ -396,9 +397,9 @@ void IntroCutSceneController::ApplyMainLayout()
 
     if (m_FrameImage)
     {
-        m_FrameImage->ChangeData(kBlackOverlayPath);
+        m_FrameImage->ChangeData(kCutSceneFramePath);
         m_FrameImage->SetColor({ 1.0f, 1.0f, 1.0f, 1.0f });
-        m_FrameImage->SetZOrder(0);
+        m_FrameImage->SetZOrder(2);
     }
 
     if (m_Image)
