@@ -4,12 +4,19 @@
 class GameObject;
 class Image;
 class RectTransform;
+class AudioSourceComponent;
 
 class SettingsUIController : public ScriptComponent
 {
     RTTR_ENABLE(ScriptComponent)
 
 private:
+    enum class SettingsTab
+    {
+        Sound,
+        Credit
+    };
+
     static SettingsUIController* s_instance;
 
 public:
@@ -32,6 +39,11 @@ public:
     void ShowCreditTab();
 
 private:
+    void EnsureClickAudioSource();
+    void PlayClickSound();
+    void BindSoundBarInputOnce();
+    void BeginSoundBarDrag(int barIndex);
+    void EndSoundBarDrag(int barIndex);
     void ResolveRefs();
     void CaptureSoundBarBase();
     void UpdateSoundBarVisuals();
@@ -78,10 +90,17 @@ private:
     GameObject* m_SoundBar2Bg = nullptr;
     GameObject* m_SoundBar2Gauge = nullptr;
     GameObject* m_SoundBar2Point = nullptr;
+    AudioSourceComponent* m_ClickAudioSource = nullptr;
     Image* m_SoundButtonImage = nullptr;
     Image* m_CreditButtonImage = nullptr;
     Image* m_CloseButtonImage = nullptr;
     Image* m_ExitButtonImage = nullptr;
+    Image* m_SoundBar1BgImage = nullptr;
+    Image* m_SoundBar1GaugeImage = nullptr;
+    Image* m_SoundBar1PointImage = nullptr;
+    Image* m_SoundBar2BgImage = nullptr;
+    Image* m_SoundBar2GaugeImage = nullptr;
+    Image* m_SoundBar2PointImage = nullptr;
     RectTransform* m_SoundButtonRect = nullptr;
     RectTransform* m_CreditButtonRect = nullptr;
     bool m_ButtonBaseCaptured = false;
@@ -111,4 +130,7 @@ private:
 
     bool m_WasEscDown = false;
     bool m_IsOpen = false;
+    bool m_SoundBarInputBound = false;
+    SettingsTab m_CurrentTab = SettingsTab::Sound;
+    bool m_TabSwitchInProgress = false;
 };

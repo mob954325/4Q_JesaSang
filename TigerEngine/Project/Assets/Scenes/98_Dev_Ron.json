@@ -3,7 +3,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 215,
+        "ID": 386,
         "Name": "Main Camera",
         "ParentID": -1,
         "components": [
@@ -36,9 +36,9 @@
           {
             "properties": {
               "angle": 1.5707963705062866,
-              "farDist": 2000.0,
+              "farDist": 1800.0,
               "moveSpeed": 100.0,
-              "nearDist": 0.009999999776482582,
+              "nearDist": 70.0,
               "rotSpeed": 0.004000000189989805
             },
             "type": "Camera"
@@ -58,7 +58,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 216,
+        "ID": 387,
         "Name": "DirectionalLight(Sun)",
         "ParentID": -1,
         "components": [
@@ -112,7 +112,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 217,
+        "ID": 388,
         "Name": "----------------------",
         "ParentID": -1,
         "components": [
@@ -143,7 +143,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 218,
+        "ID": 389,
         "Name": "Ground",
         "ParentID": -1,
         "components": [
@@ -212,7 +212,8 @@
               "UseDiffuseOverride": false,
               "UseEmissiveOverride": false,
               "UseMetallicOverride": false,
-              "UseRoughnessOverride": false
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
             },
             "type": "FBXRenderer"
           }
@@ -223,7 +224,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 219,
+        "ID": 390,
         "Name": "CurScene_98_Dev_Ron",
         "ParentID": -1,
         "components": [
@@ -254,7 +255,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 220,
+        "ID": 391,
         "Name": "Audio_Mover",
         "ParentID": -1,
         "components": [
@@ -315,7 +316,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 221,
+        "ID": 392,
         "Name": "Player",
         "ParentID": -1,
         "components": [
@@ -401,7 +402,8 @@
               "UseDiffuseOverride": false,
               "UseEmissiveOverride": false,
               "UseMetallicOverride": false,
-              "UseRoughnessOverride": false
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
             },
             "type": "FBXRenderer"
           },
@@ -436,7 +438,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 222,
+        "ID": 393,
         "Name": "Floor",
         "ParentID": -1,
         "components": [
@@ -505,7 +507,8 @@
               "UseDiffuseOverride": false,
               "UseEmissiveOverride": false,
               "UseMetallicOverride": false,
-              "UseRoughnessOverride": false
+              "UseRoughnessOverride": false,
+              "isroughnessFromShininess": false
             },
             "type": "FBXRenderer"
           },
@@ -539,7 +542,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 223,
+        "ID": 394,
         "Name": "AudioManager",
         "ParentID": -1,
         "components": [
@@ -585,1573 +588,7 @@
     {
       "properties": {
         "Active": true,
-        "ID": 224,
-        "Name": "UI_MiniMap_Base",
-        "ParentID": -1,
-        "components": [
-          {
-            "properties": {
-              "Position": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Rotation": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ]
-            },
-            "type": "Transform"
-          },
-          {
-            "properties": {
-              "Active": true,
-              "color": [
-                1.0,
-                1.0,
-                1.0,
-                1.0
-              ],
-              "fillAmount": 1.0,
-              "isMouseCheck": false,
-              "path": "..\\\\Assets\\\\Resource\\\\MiniMap\\\\MAP_GR.png",
-              "sliceBorderPx": [
-                0.0,
-                0.0,
-                0.0,
-                0.0
-              ],
-              "type": "Simple"
-            },
-            "type": "Image"
-          },
-          {
-            "properties": {
-              "Active": true,
-              "Pivot": [
-                0.0,
-                0.0
-              ],
-              "Pos": [
-                1500.0,
-                40.0,
-                0.0
-              ],
-              "Position": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Rotation": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ],
-              "Size": [
-                256.0,
-                256.0
-              ]
-            },
-            "type": "RectTransform"
-          }
-        ]
-      },
-      "type": "GameObject"
-    },
-    {
-      "properties": {
-        "Active": false,
-        "ID": 225,
-        "Name": "UI_MiniMap_Complete",
-        "ParentID": -1,
-        "components": [
-          {
-            "properties": {
-              "Position": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Rotation": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ]
-            },
-            "type": "Transform"
-          },
-          {
-            "properties": {
-              "Active": false,
-              "color": [
-                1.0,
-                1.0,
-                1.0,
-                1.0
-              ],
-              "fillAmount": 1.0,
-              "isMouseCheck": false,
-              "path": "..\\\\Assets\\\\Resource\\\\MiniMap\\\\Map.png",
-              "sliceBorderPx": [
-                0.0,
-                0.0,
-                0.0,
-                0.0
-              ],
-              "type": "Simple"
-            },
-            "type": "Image"
-          },
-          {
-            "properties": {
-              "Active": true,
-              "Pivot": [
-                0.0,
-                0.0
-              ],
-              "Pos": [
-                1500.0,
-                40.0,
-                0.0
-              ],
-              "Position": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Rotation": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ],
-              "Size": [
-                1075.0,
-                1048.0
-              ]
-            },
-            "type": "RectTransform"
-          }
-        ]
-      },
-      "type": "GameObject"
-    },
-    {
-      "properties": {
-        "Active": true,
-        "ID": 226,
-        "Name": "UI_MiniMap_GaugeBG",
-        "ParentID": -1,
-        "components": [
-          {
-            "properties": {
-              "Position": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Rotation": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ]
-            },
-            "type": "Transform"
-          },
-          {
-            "properties": {
-              "Active": false,
-              "color": [
-                1.0,
-                1.0,
-                1.0,
-                1.0
-              ],
-              "fillAmount": 1.0,
-              "isMouseCheck": false,
-              "path": "..\\Assets\\Resource\\MiniMap\\GaugeBG.png",
-              "sliceBorderPx": [
-                0.0,
-                0.0,
-                0.0,
-                0.0
-              ],
-              "type": "Simple"
-            },
-            "type": "Image"
-          },
-          {
-            "properties": {
-              "Active": true,
-              "Pivot": [
-                0.0,
-                0.0
-              ],
-              "Pos": [
-                1500.0,
-                302.0,
-                0.0
-              ],
-              "Position": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Rotation": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ],
-              "Size": [
-                256.0,
-                16.0
-              ]
-            },
-            "type": "RectTransform"
-          }
-        ]
-      },
-      "type": "GameObject"
-    },
-    {
-      "properties": {
-        "Active": true,
-        "ID": 227,
-        "Name": "UI_MiniMap_GaugeFill",
-        "ParentID": -1,
-        "components": [
-          {
-            "properties": {
-              "Position": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Rotation": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ]
-            },
-            "type": "Transform"
-          },
-          {
-            "properties": {
-              "Active": false,
-              "color": [
-                1.0,
-                1.0,
-                1.0,
-                1.0
-              ],
-              "fillAmount": 1.0,
-              "isMouseCheck": false,
-              "path": "..\\Assets\\Resource\\MiniMap\\GaugeFill.png",
-              "sliceBorderPx": [
-                0.0,
-                0.0,
-                0.0,
-                0.0
-              ],
-              "type": "Simple"
-            },
-            "type": "Image"
-          },
-          {
-            "properties": {
-              "Active": true,
-              "Pivot": [
-                0.0,
-                0.0
-              ],
-              "Pos": [
-                1500.0,
-                302.0,
-                0.0
-              ],
-              "Position": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Rotation": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ],
-              "Size": [
-                256.0,
-                16.0
-              ]
-            },
-            "type": "RectTransform"
-          }
-        ]
-      },
-      "type": "GameObject"
-    },
-    {
-      "properties": {
-        "Active": true,
-        "ID": 228,
-        "Name": "UI_MiniMap_Piece_01",
-        "ParentID": -1,
-        "components": [
-          {
-            "properties": {
-              "Position": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Rotation": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ]
-            },
-            "type": "Transform"
-          },
-          {
-            "properties": {
-              "Active": false,
-              "color": [
-                1.0,
-                1.0,
-                1.0,
-                1.0
-              ],
-              "fillAmount": 1.0,
-              "isMouseCheck": false,
-              "path": "..\\\\Assets\\\\Resource\\\\MiniMap\\\\MAP01.png",
-              "sliceBorderPx": [
-                0.0,
-                0.0,
-                0.0,
-                0.0
-              ],
-              "type": "Simple"
-            },
-            "type": "Image"
-          },
-          {
-            "properties": {
-              "Active": true,
-              "Pivot": [
-                0.0,
-                0.0
-              ],
-              "Pos": [
-                1500.0,
-                40.0,
-                0.0
-              ],
-              "Position": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Rotation": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ],
-              "Size": [
-                256.0,
-                256.0
-              ]
-            },
-            "type": "RectTransform"
-          }
-        ]
-      },
-      "type": "GameObject"
-    },
-    {
-      "properties": {
-        "Active": true,
-        "ID": 229,
-        "Name": "UI_MiniMap_Piece_02",
-        "ParentID": -1,
-        "components": [
-          {
-            "properties": {
-              "Position": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Rotation": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ]
-            },
-            "type": "Transform"
-          },
-          {
-            "properties": {
-              "Active": false,
-              "color": [
-                1.0,
-                1.0,
-                1.0,
-                1.0
-              ],
-              "fillAmount": 1.0,
-              "isMouseCheck": false,
-              "path": "..\\\\Assets\\\\Resource\\\\MiniMap\\\\MAP02.png",
-              "sliceBorderPx": [
-                0.0,
-                0.0,
-                0.0,
-                0.0
-              ],
-              "type": "Simple"
-            },
-            "type": "Image"
-          },
-          {
-            "properties": {
-              "Active": true,
-              "Pivot": [
-                0.0,
-                0.0
-              ],
-              "Pos": [
-                1500.0,
-                40.0,
-                0.0
-              ],
-              "Position": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Rotation": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ],
-              "Size": [
-                256.0,
-                256.0
-              ]
-            },
-            "type": "RectTransform"
-          }
-        ]
-      },
-      "type": "GameObject"
-    },
-    {
-      "properties": {
-        "Active": true,
-        "ID": 230,
-        "Name": "UI_MiniMap_Piece_03",
-        "ParentID": -1,
-        "components": [
-          {
-            "properties": {
-              "Position": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Rotation": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ]
-            },
-            "type": "Transform"
-          },
-          {
-            "properties": {
-              "Active": false,
-              "color": [
-                1.0,
-                1.0,
-                1.0,
-                1.0
-              ],
-              "fillAmount": 1.0,
-              "isMouseCheck": false,
-              "path": "..\\\\Assets\\\\Resource\\\\MiniMap\\\\MAP03.png",
-              "sliceBorderPx": [
-                0.0,
-                0.0,
-                0.0,
-                0.0
-              ],
-              "type": "Simple"
-            },
-            "type": "Image"
-          },
-          {
-            "properties": {
-              "Active": true,
-              "Pivot": [
-                0.0,
-                0.0
-              ],
-              "Pos": [
-                1500.0,
-                40.0,
-                0.0
-              ],
-              "Position": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Rotation": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ],
-              "Size": [
-                256.0,
-                256.0
-              ]
-            },
-            "type": "RectTransform"
-          }
-        ]
-      },
-      "type": "GameObject"
-    },
-    {
-      "properties": {
-        "Active": true,
-        "ID": 231,
-        "Name": "UI_MiniMap_Piece_04",
-        "ParentID": -1,
-        "components": [
-          {
-            "properties": {
-              "Position": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Rotation": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ]
-            },
-            "type": "Transform"
-          },
-          {
-            "properties": {
-              "Active": false,
-              "color": [
-                1.0,
-                1.0,
-                1.0,
-                1.0
-              ],
-              "fillAmount": 1.0,
-              "isMouseCheck": false,
-              "path": "..\\\\Assets\\\\Resource\\\\MiniMap\\\\MAP04.png",
-              "sliceBorderPx": [
-                0.0,
-                0.0,
-                0.0,
-                0.0
-              ],
-              "type": "Simple"
-            },
-            "type": "Image"
-          },
-          {
-            "properties": {
-              "Active": true,
-              "Pivot": [
-                0.0,
-                0.0
-              ],
-              "Pos": [
-                1500.0,
-                40.0,
-                0.0
-              ],
-              "Position": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Rotation": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ],
-              "Size": [
-                256.0,
-                256.0
-              ]
-            },
-            "type": "RectTransform"
-          }
-        ]
-      },
-      "type": "GameObject"
-    },
-    {
-      "properties": {
-        "Active": true,
-        "ID": 232,
-        "Name": "UI_MiniMap_Piece_05",
-        "ParentID": -1,
-        "components": [
-          {
-            "properties": {
-              "Position": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Rotation": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ]
-            },
-            "type": "Transform"
-          },
-          {
-            "properties": {
-              "Active": false,
-              "color": [
-                1.0,
-                1.0,
-                1.0,
-                1.0
-              ],
-              "fillAmount": 1.0,
-              "isMouseCheck": false,
-              "path": "..\\\\Assets\\\\Resource\\\\MiniMap\\\\MAP05.png",
-              "sliceBorderPx": [
-                0.0,
-                0.0,
-                0.0,
-                0.0
-              ],
-              "type": "Simple"
-            },
-            "type": "Image"
-          },
-          {
-            "properties": {
-              "Active": true,
-              "Pivot": [
-                0.0,
-                0.0
-              ],
-              "Pos": [
-                1500.0,
-                40.0,
-                0.0
-              ],
-              "Position": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Rotation": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ],
-              "Size": [
-                256.0,
-                256.0
-              ]
-            },
-            "type": "RectTransform"
-          }
-        ]
-      },
-      "type": "GameObject"
-    },
-    {
-      "properties": {
-        "Active": false,
-        "ID": 233,
-        "Name": "UI_MiniMap_Piece_06",
-        "ParentID": -1,
-        "components": [
-          {
-            "properties": {
-              "Position": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Rotation": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ]
-            },
-            "type": "Transform"
-          },
-          {
-            "properties": {
-              "Active": false,
-              "color": [
-                1.0,
-                1.0,
-                1.0,
-                1.0
-              ],
-              "fillAmount": 1.0,
-              "isMouseCheck": false,
-              "path": "..\\Assets\\Resource\\MiniMap\\MAP05.png",
-              "sliceBorderPx": [
-                0.0,
-                0.0,
-                0.0,
-                0.0
-              ],
-              "type": "Simple"
-            },
-            "type": "Image"
-          },
-          {
-            "properties": {
-              "Active": false,
-              "Pivot": [
-                0.0,
-                0.0
-              ],
-              "Pos": [
-                1670.666748046875,
-                168.0,
-                0.0
-              ],
-              "Position": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Rotation": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ],
-              "Size": [
-                85.33333587646484,
-                128.0
-              ]
-            },
-            "type": "RectTransform"
-          }
-        ]
-      },
-      "type": "GameObject"
-    },
-    {
-      "properties": {
-        "Active": true,
-        "ID": 234,
-        "Name": "UI_MiniMap_MainPing",
-        "ParentID": -1,
-        "components": [
-          {
-            "properties": {
-              "Position": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Rotation": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ]
-            },
-            "type": "Transform"
-          },
-          {
-            "properties": {
-              "Active": true,
-              "color": [
-                1.0,
-                1.0,
-                1.0,
-                1.0
-              ],
-              "fillAmount": 1.0,
-              "isMouseCheck": false,
-              "path": "..\\Assets\\Resource\\MiniMap\\MainPing.png",
-              "sliceBorderPx": [
-                0.0,
-                0.0,
-                0.0,
-                0.0
-              ],
-              "type": "Simple"
-            },
-            "type": "Image"
-          },
-          {
-            "properties": {
-              "Active": true,
-              "Pivot": [
-                0.0,
-                0.0
-              ],
-              "Pos": [
-                1500.0,
-                40.0,
-                0.0
-              ],
-              "Position": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Rotation": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ],
-              "Size": [
-                16.0,
-                16.0
-              ]
-            },
-            "type": "RectTransform"
-          }
-        ]
-      },
-      "type": "GameObject"
-    },
-    {
-      "properties": {
-        "Active": true,
-        "ID": 235,
-        "Name": "UI_MiniMap_Treasure",
-        "ParentID": -1,
-        "components": [
-          {
-            "properties": {
-              "Position": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Rotation": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ]
-            },
-            "type": "Transform"
-          },
-          {
-            "properties": {
-              "Active": true,
-              "color": [
-                1.0,
-                1.0,
-                1.0,
-                1.0
-              ],
-              "fillAmount": 1.0,
-              "isMouseCheck": false,
-              "path": "..\\Assets\\Resource\\MiniMap\\Treasure.png",
-              "sliceBorderPx": [
-                0.0,
-                0.0,
-                0.0,
-                0.0
-              ],
-              "type": "Simple"
-            },
-            "type": "Image"
-          },
-          {
-            "properties": {
-              "Active": true,
-              "Pivot": [
-                0.0,
-                0.0
-              ],
-              "Pos": [
-                1500.0,
-                40.0,
-                0.0
-              ],
-              "Position": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Rotation": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ],
-              "Size": [
-                16.0,
-                16.0
-              ]
-            },
-            "type": "RectTransform"
-          }
-        ]
-      },
-      "type": "GameObject"
-    },
-    {
-      "properties": {
-        "Active": true,
-        "ID": 236,
-        "Name": "UI_MiniMap_ItemPing_01",
-        "ParentID": -1,
-        "components": [
-          {
-            "properties": {
-              "Position": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Rotation": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ]
-            },
-            "type": "Transform"
-          },
-          {
-            "properties": {
-              "Active": true,
-              "color": [
-                1.0,
-                1.0,
-                1.0,
-                1.0
-              ],
-              "fillAmount": 1.0,
-              "isMouseCheck": false,
-              "path": "..\\Assets\\Resource\\MiniMap\\Treasure.png",
-              "sliceBorderPx": [
-                0.0,
-                0.0,
-                0.0,
-                0.0
-              ],
-              "type": "Simple"
-            },
-            "type": "Image"
-          },
-          {
-            "properties": {
-              "Active": true,
-              "Pivot": [
-                0.0,
-                0.0
-              ],
-              "Pos": [
-                1500.0,
-                40.0,
-                0.0
-              ],
-              "Position": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Rotation": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ],
-              "Size": [
-                12.0,
-                12.0
-              ]
-            },
-            "type": "RectTransform"
-          }
-        ]
-      },
-      "type": "GameObject"
-    },
-    {
-      "properties": {
-        "Active": true,
-        "ID": 237,
-        "Name": "UI_MiniMap_ItemPing_02",
-        "ParentID": -1,
-        "components": [
-          {
-            "properties": {
-              "Position": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Rotation": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ]
-            },
-            "type": "Transform"
-          },
-          {
-            "properties": {
-              "Active": true,
-              "color": [
-                1.0,
-                1.0,
-                1.0,
-                1.0
-              ],
-              "fillAmount": 1.0,
-              "isMouseCheck": false,
-              "path": "..\\Assets\\Resource\\MiniMap\\Treasure.png",
-              "sliceBorderPx": [
-                0.0,
-                0.0,
-                0.0,
-                0.0
-              ],
-              "type": "Simple"
-            },
-            "type": "Image"
-          },
-          {
-            "properties": {
-              "Active": true,
-              "Pivot": [
-                0.0,
-                0.0
-              ],
-              "Pos": [
-                1500.0,
-                40.0,
-                0.0
-              ],
-              "Position": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Rotation": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ],
-              "Size": [
-                12.0,
-                12.0
-              ]
-            },
-            "type": "RectTransform"
-          }
-        ]
-      },
-      "type": "GameObject"
-    },
-    {
-      "properties": {
-        "Active": true,
-        "ID": 238,
-        "Name": "UI_MiniMap_ItemPing_03",
-        "ParentID": -1,
-        "components": [
-          {
-            "properties": {
-              "Position": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Rotation": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ]
-            },
-            "type": "Transform"
-          },
-          {
-            "properties": {
-              "Active": true,
-              "color": [
-                1.0,
-                1.0,
-                1.0,
-                1.0
-              ],
-              "fillAmount": 1.0,
-              "isMouseCheck": false,
-              "path": "..\\Assets\\Resource\\MiniMap\\Treasure.png",
-              "sliceBorderPx": [
-                0.0,
-                0.0,
-                0.0,
-                0.0
-              ],
-              "type": "Simple"
-            },
-            "type": "Image"
-          },
-          {
-            "properties": {
-              "Active": true,
-              "Pivot": [
-                0.0,
-                0.0
-              ],
-              "Pos": [
-                1500.0,
-                40.0,
-                0.0
-              ],
-              "Position": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Rotation": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ],
-              "Size": [
-                12.0,
-                12.0
-              ]
-            },
-            "type": "RectTransform"
-          }
-        ]
-      },
-      "type": "GameObject"
-    },
-    {
-      "properties": {
-        "Active": true,
-        "ID": 239,
-        "Name": "UI_MiniMap_ItemPing_04",
-        "ParentID": -1,
-        "components": [
-          {
-            "properties": {
-              "Position": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Rotation": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ]
-            },
-            "type": "Transform"
-          },
-          {
-            "properties": {
-              "Active": true,
-              "color": [
-                1.0,
-                1.0,
-                1.0,
-                1.0
-              ],
-              "fillAmount": 1.0,
-              "isMouseCheck": false,
-              "path": "..\\Assets\\Resource\\MiniMap\\Treasure.png",
-              "sliceBorderPx": [
-                0.0,
-                0.0,
-                0.0,
-                0.0
-              ],
-              "type": "Simple"
-            },
-            "type": "Image"
-          },
-          {
-            "properties": {
-              "Active": true,
-              "Pivot": [
-                0.0,
-                0.0
-              ],
-              "Pos": [
-                1500.0,
-                40.0,
-                0.0
-              ],
-              "Position": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Rotation": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ],
-              "Size": [
-                12.0,
-                12.0
-              ]
-            },
-            "type": "RectTransform"
-          }
-        ]
-      },
-      "type": "GameObject"
-    },
-    {
-      "properties": {
-        "Active": true,
-        "ID": 240,
-        "Name": "UI_MiniMap_ItemPing_05",
-        "ParentID": -1,
-        "components": [
-          {
-            "properties": {
-              "Position": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Rotation": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ]
-            },
-            "type": "Transform"
-          },
-          {
-            "properties": {
-              "Active": true,
-              "color": [
-                1.0,
-                1.0,
-                1.0,
-                1.0
-              ],
-              "fillAmount": 1.0,
-              "isMouseCheck": false,
-              "path": "..\\Assets\\Resource\\MiniMap\\Treasure.png",
-              "sliceBorderPx": [
-                0.0,
-                0.0,
-                0.0,
-                0.0
-              ],
-              "type": "Simple"
-            },
-            "type": "Image"
-          },
-          {
-            "properties": {
-              "Active": true,
-              "Pivot": [
-                0.0,
-                0.0
-              ],
-              "Pos": [
-                1500.0,
-                40.0,
-                0.0
-              ],
-              "Position": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Rotation": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ],
-              "Size": [
-                12.0,
-                12.0
-              ]
-            },
-            "type": "RectTransform"
-          }
-        ]
-      },
-      "type": "GameObject"
-    },
-    {
-      "properties": {
-        "Active": true,
-        "ID": 241,
-        "Name": "UI_MiniMap_ItemPing_06",
-        "ParentID": -1,
-        "components": [
-          {
-            "properties": {
-              "Position": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Rotation": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ]
-            },
-            "type": "Transform"
-          },
-          {
-            "properties": {
-              "Active": true,
-              "color": [
-                1.0,
-                1.0,
-                1.0,
-                1.0
-              ],
-              "fillAmount": 1.0,
-              "isMouseCheck": false,
-              "path": "..\\Assets\\Resource\\MiniMap\\Treasure.png",
-              "sliceBorderPx": [
-                0.0,
-                0.0,
-                0.0,
-                0.0
-              ],
-              "type": "Simple"
-            },
-            "type": "Image"
-          },
-          {
-            "properties": {
-              "Active": true,
-              "Pivot": [
-                0.0,
-                0.0
-              ],
-              "Pos": [
-                1500.0,
-                40.0,
-                0.0
-              ],
-              "Position": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Rotation": [
-                0.0,
-                0.0,
-                0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ],
-              "Size": [
-                12.0,
-                12.0
-              ]
-            },
-            "type": "RectTransform"
-          }
-        ]
-      },
-      "type": "GameObject"
-    },
-    {
-      "properties": {
-        "Active": true,
-        "ID": 242,
+        "ID": 485,
         "Name": "UI_MiniMap_Controller",
         "ParentID": -1,
         "components": [
@@ -2179,15 +616,17 @@
             "properties": {
               "Active": true,
               "BaseMapObjectName": "UI_MiniMap_Base",
+              "BaseMapPath": "..\\Assets\\Resource\\MiniMap\\MAP_GR.png",
               "BottomRightMargin": [
                 60.0,
                 80.0
               ],
               "CompleteMapObjectName": "UI_MiniMap_Complete",
-              "DebugShowAllItemPings": true,
+              "CompleteMapPath": "..\\Assets\\Resource\\MiniMap\\Map.png",
+              "DebugShowAllItemPings": false,
               "DebugShowAllPieces": false,
-              "GaugeObjectName": "UI_MiniMap_GaugeFill",
               "GaugeBgObjectName": "UI_MiniMap_GaugeBG",
+              "GaugeObjectName": "UI_MiniMap_GaugeFill",
               "ItemWorldPos1": [
                 -300.0,
                 0.0,
@@ -2219,24 +658,1583 @@
                 100.0
               ],
               "MainPingObjectName": "UI_MiniMap_MainPing",
-              "PlaceBottomRight": true,
               "PieceObjectName1": "UI_MiniMap_Piece_01",
               "PieceObjectName2": "UI_MiniMap_Piece_02",
               "PieceObjectName3": "UI_MiniMap_Piece_03",
               "PieceObjectName4": "UI_MiniMap_Piece_04",
               "PieceObjectName5": "UI_MiniMap_Piece_05",
-              "PieceObjectName6": "",
+              "PieceObjectName6": "UI_MiniMap_Piece_06",
               "PingObjectName1": "UI_MiniMap_ItemPing_01",
               "PingObjectName2": "UI_MiniMap_ItemPing_02",
               "PingObjectName3": "UI_MiniMap_ItemPing_03",
               "PingObjectName4": "UI_MiniMap_ItemPing_04",
               "PingObjectName5": "UI_MiniMap_ItemPing_05",
               "PingObjectName6": "UI_MiniMap_ItemPing_06",
+              "PlaceBottomRight": true,
               "PlayerObjectName": "Player",
               "ShiftLeftByMapCount": 0,
-              "ShowCompleteOnFull": false
+              "ShowCompleteOnFull": false,
+              "ShrineMapPath": "..\\\\Assets\\\\Resource\\\\MiniMap\\\\MAP_S.png",
+              "UseFixedItemPingPositions": true,
+              "Zone0IngredientIds": "",
+              "Zone0PingIndices": "",
+              "Zone1IngredientIds": "",
+              "Zone1PingIndices": "",
+              "Zone2IngredientIds": "",
+              "Zone2PingIndices": "",
+              "Zone3IngredientIds": "",
+              "Zone3PingIndices": "",
+              "Zone4IngredientIds": "",
+              "Zone4PingIndices": ""
             },
             "type": "MiniMapManager"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 486,
+        "Name": "UI_MiniMap_ItemPing_06",
+        "ParentID": 485,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "drawSpacetype": "Screen",
+              "fillAmount": 1.0,
+              "imageType": "Simple",
+              "isBillboard": false,
+              "isMouseCheck": false,
+              "path": "..\\Assets\\Resource\\MiniMap\\Treasure.png",
+              "sliceBorderPx": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "type": "Simple",
+              "zOrder": 0
+            },
+            "type": "Image"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "Pivot": [
+                0.0,
+                0.0
+              ],
+              "Pos": [
+                1500.0,
+                40.0,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Size": [
+                12.0,
+                12.0
+              ]
+            },
+            "type": "RectTransform"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 487,
+        "Name": "UI_MiniMap_ItemPing_05",
+        "ParentID": 485,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "drawSpacetype": "Screen",
+              "fillAmount": 1.0,
+              "imageType": "Simple",
+              "isBillboard": false,
+              "isMouseCheck": false,
+              "path": "..\\Assets\\Resource\\MiniMap\\Treasure.png",
+              "sliceBorderPx": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "type": "Simple",
+              "zOrder": 0
+            },
+            "type": "Image"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "Pivot": [
+                0.0,
+                0.0
+              ],
+              "Pos": [
+                1500.0,
+                40.0,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Size": [
+                12.0,
+                12.0
+              ]
+            },
+            "type": "RectTransform"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 488,
+        "Name": "UI_MiniMap_ItemPing_04",
+        "ParentID": 485,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "drawSpacetype": "Screen",
+              "fillAmount": 1.0,
+              "imageType": "Simple",
+              "isBillboard": false,
+              "isMouseCheck": false,
+              "path": "..\\Assets\\Resource\\MiniMap\\Treasure.png",
+              "sliceBorderPx": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "type": "Simple",
+              "zOrder": 0
+            },
+            "type": "Image"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "Pivot": [
+                0.0,
+                0.0
+              ],
+              "Pos": [
+                1500.0,
+                40.0,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Size": [
+                12.0,
+                12.0
+              ]
+            },
+            "type": "RectTransform"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 489,
+        "Name": "UI_MiniMap_ItemPing_03",
+        "ParentID": 485,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "drawSpacetype": "Screen",
+              "fillAmount": 1.0,
+              "imageType": "Simple",
+              "isBillboard": false,
+              "isMouseCheck": false,
+              "path": "..\\Assets\\Resource\\MiniMap\\Treasure.png",
+              "sliceBorderPx": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "type": "Simple",
+              "zOrder": 0
+            },
+            "type": "Image"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "Pivot": [
+                0.0,
+                0.0
+              ],
+              "Pos": [
+                1500.0,
+                40.0,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Size": [
+                12.0,
+                12.0
+              ]
+            },
+            "type": "RectTransform"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 490,
+        "Name": "UI_MiniMap_ItemPing_02",
+        "ParentID": 485,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "drawSpacetype": "Screen",
+              "fillAmount": 1.0,
+              "imageType": "Simple",
+              "isBillboard": false,
+              "isMouseCheck": false,
+              "path": "..\\Assets\\Resource\\MiniMap\\Treasure.png",
+              "sliceBorderPx": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "type": "Simple",
+              "zOrder": 0
+            },
+            "type": "Image"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "Pivot": [
+                0.0,
+                0.0
+              ],
+              "Pos": [
+                1500.0,
+                40.0,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Size": [
+                12.0,
+                12.0
+              ]
+            },
+            "type": "RectTransform"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 491,
+        "Name": "UI_MiniMap_ItemPing_01",
+        "ParentID": 485,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "drawSpacetype": "Screen",
+              "fillAmount": 1.0,
+              "imageType": "Simple",
+              "isBillboard": false,
+              "isMouseCheck": false,
+              "path": "..\\Assets\\Resource\\MiniMap\\Treasure.png",
+              "sliceBorderPx": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "type": "Simple",
+              "zOrder": 0
+            },
+            "type": "Image"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "Pivot": [
+                0.0,
+                0.0
+              ],
+              "Pos": [
+                1500.0,
+                40.0,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Size": [
+                12.0,
+                12.0
+              ]
+            },
+            "type": "RectTransform"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 492,
+        "Name": "UI_MiniMap_MainPing",
+        "ParentID": 485,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "drawSpacetype": "Screen",
+              "fillAmount": 1.0,
+              "imageType": "Simple",
+              "isBillboard": false,
+              "isMouseCheck": false,
+              "path": "..\\Assets\\Resource\\MiniMap\\MainPing.png",
+              "sliceBorderPx": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "type": "Simple",
+              "zOrder": 0
+            },
+            "type": "Image"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "Pivot": [
+                0.0,
+                0.0
+              ],
+              "Pos": [
+                1500.0,
+                40.0,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Size": [
+                16.0,
+                16.0
+              ]
+            },
+            "type": "RectTransform"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": false,
+        "ID": 493,
+        "Name": "UI_MiniMap_Piece_06",
+        "ParentID": 485,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "drawSpacetype": "Screen",
+              "fillAmount": 1.0,
+              "imageType": "Simple",
+              "isBillboard": false,
+              "isMouseCheck": false,
+              "path": "..\\\\Assets\\\\Resource\\\\MiniMap\\\\MAP_S.png",
+              "sliceBorderPx": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "type": "Simple",
+              "zOrder": 0
+            },
+            "type": "Image"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "Pivot": [
+                0.0,
+                0.0
+              ],
+              "Pos": [
+                1500.0,
+                40.0,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Size": [
+                256.0,
+                256.0
+              ]
+            },
+            "type": "RectTransform"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 494,
+        "Name": "UI_MiniMap_Piece_05",
+        "ParentID": 485,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "drawSpacetype": "Screen",
+              "fillAmount": 1.0,
+              "imageType": "Simple",
+              "isBillboard": false,
+              "isMouseCheck": false,
+              "path": "..\\\\Assets\\\\Resource\\\\MiniMap\\\\MAP05.png",
+              "sliceBorderPx": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "type": "Simple",
+              "zOrder": 0
+            },
+            "type": "Image"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "Pivot": [
+                0.0,
+                0.0
+              ],
+              "Pos": [
+                1500.0,
+                40.0,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Size": [
+                256.0,
+                256.0
+              ]
+            },
+            "type": "RectTransform"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 495,
+        "Name": "UI_MiniMap_Piece_04",
+        "ParentID": 485,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "drawSpacetype": "Screen",
+              "fillAmount": 1.0,
+              "imageType": "Simple",
+              "isBillboard": false,
+              "isMouseCheck": false,
+              "path": "..\\\\Assets\\\\Resource\\\\MiniMap\\\\MAP04.png",
+              "sliceBorderPx": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "type": "Simple",
+              "zOrder": 0
+            },
+            "type": "Image"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "Pivot": [
+                0.0,
+                0.0
+              ],
+              "Pos": [
+                1500.0,
+                40.0,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Size": [
+                256.0,
+                256.0
+              ]
+            },
+            "type": "RectTransform"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 496,
+        "Name": "UI_MiniMap_Piece_03",
+        "ParentID": 485,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "drawSpacetype": "Screen",
+              "fillAmount": 1.0,
+              "imageType": "Simple",
+              "isBillboard": false,
+              "isMouseCheck": false,
+              "path": "..\\\\Assets\\\\Resource\\\\MiniMap\\\\MAP03.png",
+              "sliceBorderPx": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "type": "Simple",
+              "zOrder": 0
+            },
+            "type": "Image"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "Pivot": [
+                0.0,
+                0.0
+              ],
+              "Pos": [
+                1500.0,
+                40.0,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Size": [
+                256.0,
+                256.0
+              ]
+            },
+            "type": "RectTransform"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 497,
+        "Name": "UI_MiniMap_Piece_02",
+        "ParentID": 485,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "drawSpacetype": "Screen",
+              "fillAmount": 1.0,
+              "imageType": "Simple",
+              "isBillboard": false,
+              "isMouseCheck": false,
+              "path": "..\\\\Assets\\\\Resource\\\\MiniMap\\\\MAP02.png",
+              "sliceBorderPx": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "type": "Simple",
+              "zOrder": 0
+            },
+            "type": "Image"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "Pivot": [
+                0.0,
+                0.0
+              ],
+              "Pos": [
+                1500.0,
+                40.0,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Size": [
+                256.0,
+                256.0
+              ]
+            },
+            "type": "RectTransform"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 498,
+        "Name": "UI_MiniMap_Piece_01",
+        "ParentID": 485,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "drawSpacetype": "Screen",
+              "fillAmount": 1.0,
+              "imageType": "Simple",
+              "isBillboard": false,
+              "isMouseCheck": false,
+              "path": "..\\\\Assets\\\\Resource\\\\MiniMap\\\\MAP01.png",
+              "sliceBorderPx": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "type": "Simple",
+              "zOrder": 0
+            },
+            "type": "Image"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "Pivot": [
+                0.0,
+                0.0
+              ],
+              "Pos": [
+                1500.0,
+                40.0,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Size": [
+                256.0,
+                256.0
+              ]
+            },
+            "type": "RectTransform"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 499,
+        "Name": "UI_MiniMap_GaugeFill",
+        "ParentID": 485,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "drawSpacetype": "Screen",
+              "fillAmount": 1.0,
+              "imageType": "Simple",
+              "isBillboard": false,
+              "isMouseCheck": false,
+              "path": "..\\Assets\\Resource\\MiniMap\\GaugeFill.png",
+              "sliceBorderPx": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "type": "Simple",
+              "zOrder": 0
+            },
+            "type": "Image"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "Pivot": [
+                0.0,
+                0.0
+              ],
+              "Pos": [
+                1500.0,
+                302.0,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Size": [
+                256.0,
+                16.0
+              ]
+            },
+            "type": "RectTransform"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 500,
+        "Name": "UI_MiniMap_GaugeBG",
+        "ParentID": 485,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "drawSpacetype": "Screen",
+              "fillAmount": 1.0,
+              "imageType": "Simple",
+              "isBillboard": false,
+              "isMouseCheck": false,
+              "path": "..\\Assets\\Resource\\MiniMap\\GaugeBG.png",
+              "sliceBorderPx": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "type": "Simple",
+              "zOrder": 0
+            },
+            "type": "Image"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "Pivot": [
+                0.0,
+                0.0
+              ],
+              "Pos": [
+                1500.0,
+                302.0,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Size": [
+                256.0,
+                16.0
+              ]
+            },
+            "type": "RectTransform"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": false,
+        "ID": 501,
+        "Name": "UI_MiniMap_Complete",
+        "ParentID": 485,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "drawSpacetype": "Screen",
+              "fillAmount": 1.0,
+              "imageType": "Simple",
+              "isBillboard": false,
+              "isMouseCheck": false,
+              "path": "..\\\\Assets\\\\Resource\\\\MiniMap\\\\MAP_S.png",
+              "sliceBorderPx": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "type": "Simple",
+              "zOrder": 0
+            },
+            "type": "Image"
+          },
+          {
+            "properties": {
+              "Active": false,
+              "Pivot": [
+                0.0,
+                0.0
+              ],
+              "Pos": [
+                1500.0,
+                40.0,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Size": [
+                256.0,
+                256.0
+              ]
+            },
+            "type": "RectTransform"
+          }
+        ]
+      },
+      "type": "GameObject"
+    },
+    {
+      "properties": {
+        "Active": true,
+        "ID": 502,
+        "Name": "UI_MiniMap_Base",
+        "ParentID": 485,
+        "components": [
+          {
+            "properties": {
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ]
+            },
+            "type": "Transform"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "color": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "drawSpacetype": "Screen",
+              "fillAmount": 1.0,
+              "imageType": "Simple",
+              "isBillboard": false,
+              "isMouseCheck": false,
+              "path": "..\\\\Assets\\\\Resource\\\\MiniMap\\\\MAP_GR.png",
+              "sliceBorderPx": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "type": "Simple",
+              "zOrder": 0
+            },
+            "type": "Image"
+          },
+          {
+            "properties": {
+              "Active": true,
+              "Pivot": [
+                0.0,
+                0.0
+              ],
+              "Pos": [
+                1500.0,
+                40.0,
+                0.0
+              ],
+              "Position": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Rotation": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "Scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "Size": [
+                256.0,
+                256.0
+              ]
+            },
+            "type": "RectTransform"
           }
         ]
       },
@@ -2336,4 +2334,3 @@
     }
   ]
 }
-
