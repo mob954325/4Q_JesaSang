@@ -13,7 +13,7 @@
 
 #include "../../Woo/Object/HideObject.h"
 #include "../../Woo/Player/PlayerController.h"
-
+#include "../../Ho/Sound/EnemySoundSource.h"
 
 
 REGISTER_COMPONENT(BabyGhostController)
