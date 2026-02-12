@@ -5,6 +5,7 @@
 #include "System/InputSystem.h"
 #include <directxtk/Keyboard.h>
 #include "EngineSystem/SceneSystem.h"
+#include "../UI/SettingsUIController.h"
 
 REGISTER_COMPONENT(SceneFlowManager)
 
@@ -69,6 +70,14 @@ void SceneFlowManager::LoadScene(const std::string& path)
 void SceneFlowManager::OnUpdate(float delta)
 {
     (void)delta;
+
+    if (auto* settings = SettingsUIController::Instance())
+    {
+        if (settings->IsOpen())
+        {
+            return;
+        }
+    }
 
     if (allowNumberKeys)
     {

@@ -14,6 +14,7 @@
 #include "Util/JsonHelper.h"
 #include "Util/PathHelper.h"
 #include "System/InputSystem.h"
+#include "../UI/SettingsUIController.h"
 
 REGISTER_COMPONENT(IntroCutSceneController);
 
@@ -198,6 +199,18 @@ void IntroCutSceneController::OnUpdate(float delta)
     const bool spaceDown = Input::GetKey(DirectX::Keyboard::Keys::Space);
     const bool enterDown = Input::GetKey(DirectX::Keyboard::Keys::Enter);
     const bool escDown = Input::GetKey(DirectX::Keyboard::Keys::Escape);
+
+    // While settings UI is open, block intro advance/skip input propagation.
+    if (auto* settings = SettingsUIController::Instance())
+    {
+        if (settings->IsOpen())
+        {
+            m_PrevSpace = spaceDown;
+            m_PrevEnter = enterDown;
+            m_PrevEsc = escDown;
+            return;
+        }
+    }
 
     const bool advance = IsAdvancePressed(spaceDown, m_PrevSpace)
         || IsAdvancePressed(enterDown, m_PrevEnter);
