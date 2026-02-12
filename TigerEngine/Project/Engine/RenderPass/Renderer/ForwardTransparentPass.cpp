@@ -81,7 +81,7 @@ void ForwardTransparentPass::Execute(ComPtr<ID3D11DeviceContext>& context, Rende
         for (Light*& light : lights)
         {
             // CB
-            auto lightPos = light->GetOwner()->GetTransform()->GetLocalPosition();
+            auto lightPos = light->GetOwner()->GetTransform()->GetWorldPosition();
 
             // CB - Light
             sm.lightingCBData.lightType = static_cast<int>(light->type);
