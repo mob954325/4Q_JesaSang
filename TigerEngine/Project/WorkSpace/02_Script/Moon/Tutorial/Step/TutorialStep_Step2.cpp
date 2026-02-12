@@ -23,7 +23,6 @@ void TutorialStep_Step2::Update(float deltaTime)
         if (!soundPlayed)
         {
             // TODO: 쿵 사운드 재생 
-            std::cout << "[Step2] *BANG!* Sound from entrance!\n";
             // TODO: 캐릭터 머리 위 놀람 오브젝트 활성화 
             soundPlayed = true;   
         }
@@ -83,5 +82,5 @@ void TutorialStep_Step2::Monologue()
 {
     if (!tutorialController->dialogue) return;
 
-    tutorialController->dialogue->ShowDialogueHold(L"..!! Mom's Comming?");
+    tutorialController->dialogue->ShowDialogueHold(L"..!! 엄마가 왔나??");
 }
