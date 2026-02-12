@@ -1,4 +1,4 @@
-#include "InteractionSensor.h"
+﻿#include "InteractionSensor.h"
 #include "Util/JsonHelper.h"
 #include "Util/ComponentAutoRegister.h"
 #include "Object/GameObject.h"
