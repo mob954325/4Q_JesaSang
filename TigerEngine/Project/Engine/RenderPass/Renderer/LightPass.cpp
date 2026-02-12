@@ -90,7 +90,7 @@ void LightPass::LightingPass(ComPtr<ID3D11DeviceContext>& context, Camera* camer
 {
     auto& sm = ShaderManager::Instance();
     std::vector<Light*> lights = LightSystem::Instance().GetComponents();
-    Vector3 camPos = camera->GetOwner()->GetTransform()->GetLocalPosition();
+    Vector3 camPos = camera->GetOwner()->GetTransform()->GetWorldPosition();
 
     // RTV, DSV
     context->RSSetViewports(1, &sm.viewport_screen);
@@ -136,7 +136,7 @@ void LightPass::LightingPass(ComPtr<ID3D11DeviceContext>& context, Camera* camer
     // Render
     for (Light*& light : lights)
     {
-       auto lightPos = light->GetOwner()->GetTransform()->GetLocalPosition();
+       auto lightPos = light->GetOwner()->GetTransform()->GetWorldPosition();
 
        // CB - Light
        sm.lightingCBData.lightType = static_cast<int>(light->type);
