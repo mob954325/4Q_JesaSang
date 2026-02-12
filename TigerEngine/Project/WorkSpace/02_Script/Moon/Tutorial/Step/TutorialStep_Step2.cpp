@@ -1,4 +1,4 @@
-#include "TutorialStep_Step2.h"
+ï»¿#include "TutorialStep_Step2.h"
 
 #include "System/InputSystem.h"
 #include "EngineSystem/SceneSystem.h"
@@ -22,8 +22,8 @@ void TutorialStep_Step2::Update(float deltaTime)
 
         if (!soundPlayed)
         {
-            // TODO: Äô »ç¿îµå Àç»ý 
-            // TODO: Ä³¸¯ÅÍ ¸Ó¸® À§ ³î¶÷ ¿ÀºêÁ§Æ® È°¼ºÈ­ 
+            // TODO: ì¿µ ì‚¬ìš´ë“œ ìž¬ìƒ 
+            // TODO: ìºë¦­í„° ë¨¸ë¦¬ ìœ„ ë†€ëžŒ ì˜¤ë¸Œì íŠ¸ í™œì„±í™” 
             soundPlayed = true;   
         }
 
@@ -82,5 +82,5 @@ void TutorialStep_Step2::Monologue()
 {
     if (!tutorialController->dialogue) return;
 
-    tutorialController->dialogue->ShowDialogueHold(L"..!! ¾ö¸¶°¡ ¿Ô³ª??");
+    tutorialController->dialogue->ShowDialogueHold(L"..!! ì—„ë§ˆê°€ ì™”ë‚˜??");
 }

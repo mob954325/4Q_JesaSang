@@ -1,4 +1,4 @@
-#include "TutorialStep_Step8.h"
+ï»¿#include "TutorialStep_Step8.h"
 
 #include "System/InputSystem.h"
 #include "System/TimeSystem.h"
@@ -65,11 +65,11 @@ void TutorialStep_Step8::Exit()
 
 void TutorialStep_Step8::FreePlay()
 {
-    // ¸¸¾à FÅ° »óÈ£ÀÛ¿ëÀ» ÇØ¼­ ¿Ï·áÇÏ¸é, Monologue·Î ³Ñ¾î°¡±â 
+    //      FÅ°   È£ Û¿     Ø¼   Ï·  Ï¸ , Monologue    Ñ¾î°¡   
     if (!basket || basket->isCompleted)
         return;
 
-    // °Å¸® Ã¼Å©
+    //  Å¸  Ã¼Å©
     Vector3 playerPos = tutorialController->player_Obj->GetTransform()->GetWorldPosition();
     Vector3 basketPos = basket->GetOwner()->GetTransform()->GetWorldPosition();
 
@@ -93,7 +93,7 @@ void TutorialStep_Step8::FreePlay()
 
 void TutorialStep_Step8::Monologue()
 {
-    static const wchar_t* line = L"¾î¶ó¡¦ ¹Ù±¸´Ï¿¡ °úÀÏÀÌ ¾ø³×?";
+    static const wchar_t* line = L"     Ù±  Ï¿             ?";
 
     tutorialController->dialogue->ShowDialogueHold(line);
 
