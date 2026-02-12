@@ -188,8 +188,11 @@ public:
 private:
     // FSM
     void InitFSMStates();
-    void ChangeState(PlayerState state);
 
+public:
+    void ChangeState(PlayerState state); // 선민 | 02.12 ㅎㅎㅎㅎㅎㅎ 
+
+private:
     // Animation
     void LoadAnimation();
 
@@ -232,6 +235,15 @@ public:
     // AI
     void TakeAttack();                   // AI에게 공격 당했을 때
     float GetCurSenseRadiuse() const;    // 플레이어 현재 기척 getter
+
+
+    //// 선민 | 02.12 
+    //bool isForcedMove = false;
+    //Vector3 forcedDir;
+    //float forcedSpeed = 0.0f;
+
+    //void SetForcedMove(const Vector3& dir, float speed);
+    //void ClearForcedMove();
 
 
 

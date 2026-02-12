@@ -5,7 +5,6 @@
 // [ Step6 ]
 // 조상 유령 퇴장 후 장롱에서 나옴. 대사 출력
 // 
-// 1. 플레이어가 Hide에서 나오기 
 // 2. 대사 출력 
 // 3. [F] / [Space] / [클릭] / 방향키 중 하나의 입력 : 대화창 OFF 
 // 4. Step7 전환 
@@ -13,9 +12,12 @@
 
 enum class Step6Phase
 {
-    HideOut,
-    Monologue,
-    WaitInput,
+    Monologue1,
+    WaitInput1,
+    Monologue2,
+    WaitInput2,
+    Monologue3,
+    WaitInput3,
     Done
 };
 
@@ -26,12 +28,16 @@ private:
 
     float stepTimer = 0.0f;
     float delayStart = 1.0f;
+    bool waitingStart = true;
 
-    Step6Phase phase = Step6Phase::HideOut;
+    Step6Phase phase = Step6Phase::Monologue1;
 
-    void HideOut();
-    void Monologue();
-    void WaitInput();
+    void Monologue1();
+    void WaitInput1();
+    void Monologue2();
+    void WaitInput2();
+    void Monologue3();
+    void WaitInput3();
 
 public:
     TutorialStep_Step6(TutorialController* _tutorialController) : ITutorialStep(_tutorialController) {}

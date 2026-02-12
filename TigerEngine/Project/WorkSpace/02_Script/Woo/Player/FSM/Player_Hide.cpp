@@ -5,6 +5,7 @@
 #include "../../Object/HideObject.h"
 #include "../../Inventory/Inventory.h"
 #include "../../../Ho/Sound/PlayerSoundSource.h"
+#include "../../../Ho/Sound/SoundManager.h"
 
 void Player_Hide::Enter()
 {
@@ -27,6 +28,7 @@ void Player_Hide::Enter()
 
     // set sound
     player->sound->StopSound();
+    SoundManager::Instance()->PlaySFX(SFXType::HiddenObj_Playerin_Sound);
 
     //cout << "[Player] Enter Hide State" << endl;
 }
@@ -66,6 +68,9 @@ void Player_Hide::Exit()
     // camera view mode change
     player->camController->SetTargetTransform(player->transform);
     player->camController->SetViewMode(CameraController::ViewMode::Quarter);
+
+    // set sound
+    SoundManager::Instance()->PlaySFX(SFXType::HiddenObj_Playerin_Sound);
 
     //cout << "[Player] Exit Hide State" << endl;
 }

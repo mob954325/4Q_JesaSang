@@ -22,15 +22,30 @@ enum class Step7Phase
     Done
 };
 
+class PlayerController;
+class CameraController;
 class TutorialStep_Step7 : public ITutorialStep
 {
+
 private:
     bool isDone = false;
-
     float stepTimer = 0.0f;
-    float delayStart = 1.0f;
 
     Step7Phase phase = Step7Phase::PlayerToJesasang;
+
+    PlayerController* playerCtrl = nullptr;
+    CameraController* camCtrl = nullptr; 
+
+    GameObject* JesaSang = nullptr;
+    GameObject* fruitBasket = nullptr;
+
+    int monoIndex = 0;
+    bool phaseStarted = false;
+
+    Transform* playerTr = nullptr;
+    Transform* cameraTr = nullptr;
+
+    Vector3 camOriginPos;
 
     void PlayerToJesasang();
     void CameraToJesasang();

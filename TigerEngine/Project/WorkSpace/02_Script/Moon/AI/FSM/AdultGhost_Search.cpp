@@ -35,12 +35,16 @@ void AdultGhost_Search::Enter()
         adultGhost->lastPlayerGrid.valid = false; // 1회성
     }
 
-    // 3) Patrol에서 넘어왔는데도 lastPlayerGrid가 없으면 바로 Return (혹은 RotateSearch로 할까?)
-    if (phase == SearchPhase::WaitBeforeMove && !adultGhost->agent->hasTarget)
+    // MoveToPoint인데 타겟이 없으면 바로 실패 처리
+    if (phase == SearchPhase::MoveToPoint && !adultGhost->agent->hasTarget)
     {
         adultGhost->ChangeState(AdultGhostState::Return);
         return;
     }
+
+    cout << "[Search] phase=" << (int)phase
+        << " hasTarget=" << adultGhost->agent->hasTarget
+        << " reason=" << (int)adultGhost->searchReason << endl;
 }
 
 void AdultGhost_Search::ChangeStateLogic()
@@ -64,9 +68,14 @@ void AdultGhost_Search::Update(float deltaTime)
 {
     if (phase == SearchPhase::WaitBeforeMove)
     {
-        waitTimer += deltaTime;
         if (waitTimer >= waitTime)
         {
+            if (!adultGhost->agent->hasTarget)
+            {
+                cout << "[Search] Wait done but no target -> Return" << endl;
+                adultGhost->ChangeState(AdultGhostState::Return);
+                return;
+            }
             phase = SearchPhase::MoveToPoint;
         }
     }
@@ -74,6 +83,14 @@ void AdultGhost_Search::Update(float deltaTime)
 
 void AdultGhost_Search::FixedUpdate(float deltaTime)
 {
+    if (phase == SearchPhase::MoveToPoint && !adultGhost->agent->hasTarget)
+    {
+        cout << "[Search] Target lost during Move -> RotateSearch" << endl;
+        phase = SearchPhase::RotateSearch;
+        rotateTimer = 0.0f;
+        return;
+    }
+
     if (phase == SearchPhase::MoveToPoint && !arrived)
     {
         bool done = adultGhost->MoveToTarget(deltaTime);

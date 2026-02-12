@@ -9,6 +9,7 @@
 
 enum class Step4Phase
 {
+    ShowQuest,
     AdultInComeA,
     AdultInComeB,
     AdultArrive,
@@ -40,7 +41,12 @@ private:
     // --- Frozen Effect ---
     Image* frozenImage = nullptr;
 
-    float len1 = 500.0f;
+    //float len1 = 500.0f;
+    //float len2 = 400.5f;
+    //float len3 = 300.0f;
+    //float len4 = 200.5f;
+    //float len5 = 100.0f;
+    float len1 = 1000.0f;
     float len2 = 400.5f;
     float len3 = 300.0f;
     float len4 = 200.5f;
@@ -56,10 +62,20 @@ private:
 
     void UpdateFrozen(float dt);
 
+    // --- fade out ---
+    float failFadeTimer = 0.0f;
+    float failFadeMaxTime = 3.0f;   // 3초 동안 어두워짐
+    bool failStarted = false;
+
+
+    // Quest
+    GameObject* Quest = nullptr;
+
 private:
     void AdultInComeA();
     void AdultInComeB();
     void AdultArrive();
+    void FailUpdate(float dt);
 
 public:
     TutorialStep_Step4(TutorialController* _tutorialController) : ITutorialStep(_tutorialController) {}
