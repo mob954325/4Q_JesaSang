@@ -48,6 +48,12 @@ public:
     void SetInputLock(bool lock) { isInputLocked = lock; }
     bool IsInputLocked() const { return isInputLocked; }
 
+
+private:
+    // 치트
+    Keyboard::Keys cheetKey = Keyboard::D0;;
+    bool isCheetMode = false;
+
 private:
     
     // --- [ Component ] ---------------------------
@@ -113,8 +119,8 @@ private:
     float renderDirectorTimer = 0.0f;    // 플레이어 렌더 깜빡거림 지속시간 타이머
 
     // first interaction hint
-    bool isExplainedHideObject = true;      // 튜토리얼용
-    bool isExplainedSearchObject = true;    // 튜토리얼용
+    bool isExplainedHideObject = false;      // 튜토리얼용
+    bool isExplainedSearchObject = false;    // 튜토리얼용
     bool isExplainedTrapObject = false;
     bool isExplainedCookingZone = false;
 

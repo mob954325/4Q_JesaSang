@@ -106,25 +106,6 @@ void PlayerController::OnUpdate(float delta)
 
     // hit duration
     UpsateHitDuration(delta);
-
-    // ----- test --------------
-    //ai attack test
-    if (Input::GetKeyDown(Keyboard::P))
-    {
-        TakeAttack();
-    }
-    //
-    //// quarter view
-    //if (Input::GetKeyDown(Keyboard::O))
-    //{
-    //    camController->SetViewMode(CameraController::ViewMode::Quarter);
-    //}
-    //
-    //// front view
-    //if (Input::GetKeyDown(Keyboard::I))
-    //{
-    //    camController->SetViewMode(CameraController::ViewMode::Front);
-    //}
 }
 
 void PlayerController::OnFixedUpdate(float delta)
@@ -289,6 +270,28 @@ void PlayerController::InputProcess()
     isSitKey = Input::GetKey(sit_Key);
     isRunKey = Input::GetKey(run_Key);
     isInteractionKey = Input::GetKey(interaction_Key);
+
+
+    // ------ Debuging ----------
+    // cheet
+    if (Input::GetKeyDown(cheetKey))
+        isCheetMode = !isCheetMode;
+
+    //ai attack test
+    if (Input::GetKeyDown(Keyboard::D9))
+        TakeAttack();
+
+    // quarter view
+    if (Input::GetKeyDown(Keyboard::D8))
+        camController->SetViewMode(CameraController::ViewMode::Quarter);
+    
+    // top view
+    if (Input::GetKeyDown(Keyboard::D7))
+        camController->SetViewMode(CameraController::ViewMode::Top);
+
+    // front view
+    if (Input::GetKeyDown(Keyboard::D6))
+        camController->SetViewMode(CameraController::ViewMode::Front);
 }
 
 /*-------[ Movement ]----------------------------------*/
@@ -703,6 +706,9 @@ void PlayerController::ReceiveMiniGameItem(unique_ptr<IItem> ingredient)
 
 void PlayerController::TakeAttack()
 {
+    // cheet
+    if (isCheetMode) return;
+    
     // 이미 죽은상태 return
     if (state == PlayerState::Die) return;
 

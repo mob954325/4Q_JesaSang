@@ -126,8 +126,7 @@ void AltarManager::OnUpdate(float delta)
 {
     if (!isDirecting) return;
 
-    float unscaledDt = GameTimer::Instance().UnscaledDeltaTime();
-    UpdateDirectSequence(unscaledDt);
+    UpdateDirectSequence();
 }
 
 void AltarManager::OnDestory()
@@ -342,6 +341,9 @@ void AltarManager::BeginDirectSequence(std::string itemId)
 
     BackupPostProcess();
 
+    // 게임 시간 정지
+    GameTimer::Instance().SetTimeScale(0.0);
+
     // 연출 진입
     isDirecting = true;
     directPhase = DirectPhase::FadeOut_1;
@@ -350,19 +352,22 @@ void AltarManager::BeginDirectSequence(std::string itemId)
     StartVignetteFade(1.0f, 0.0f, fadeOutTime_1);
 }
 
-void AltarManager::UpdateDirectSequence(float dt)
+void AltarManager::UpdateDirectSequence()
 {
+    // 연출용 타이머
+    auto udt = GameTimer::Instance().UnscaledDeltaTime();
+
     auto& renderDesc = WorldManager::Instance().postProcessData;
     (void)renderDesc;
 
-    phaseTimer += dt;
+    phaseTimer += udt;
 
     switch (directPhase)
     {
     case DirectPhase::FadeOut_1:
     {
         // 1. FadeOut
-        UpdateVignetteFade(dt);
+        UpdateVignetteFade();
         
         if (phaseTimer >= fadeOutTime_1)
         {
@@ -391,7 +396,7 @@ void AltarManager::UpdateDirectSequence(float dt)
     case DirectPhase::FadeIn_1_And_ZoomIn:
     {
         // 4. FadeIn + Cam position update
-        UpdateVignetteFade(dt);
+        UpdateVignetteFade();
 
         if (hasDirectCamPosCached && altarDirectCam)
         {
@@ -439,7 +444,7 @@ void AltarManager::UpdateDirectSequence(float dt)
     case DirectPhase::FadeOut_2:
     {
         // 6. FadeOut
-        UpdateVignetteFade(dt);
+        UpdateVignetteFade();
 
         if (phaseTimer >= fadeOutTime_2)
         {
@@ -473,7 +478,7 @@ void AltarManager::UpdateDirectSequence(float dt)
     case DirectPhase::FadeIn_2:
     {
         // 8. FadeIn
-        UpdateVignetteFade(dt);
+        UpdateVignetteFade();
 
         if (phaseTimer >= fadeInTime_2)
         {
@@ -492,6 +497,9 @@ void AltarManager::UpdateDirectSequence(float dt)
 
         // post data 복구
         RestorePostProcess();
+
+        // 게임 시간 재개
+        GameTimer::Instance().SetTimeScale(1.0);
 
         // Player 다이얼로그
         auto go = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("Player");
@@ -589,7 +597,7 @@ void AltarManager::StartVignetteFade(float from, float to, float duration)
     pp.vignette_smoothness = vignetteFrom;
 }
 
-void AltarManager::UpdateVignetteFade(float dt)
+void AltarManager::UpdateVignetteFade()
 {
     if (vignetteDuration <= 0.0f) return;
 

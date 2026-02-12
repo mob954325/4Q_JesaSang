@@ -37,6 +37,7 @@ void FrozenManager::OnStart()
 {
     // 이미지 찾기
     frozenVignetteImage = GetOwner()->GetComponent<Image>();
+    frozenVignetteImage->SetColor({1,1,1,0.8});
 
     // player 찾기
     pc = SceneUtil::GetObjectByName("Player")->GetComponent<PlayerController>();
