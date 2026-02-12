@@ -102,6 +102,9 @@ bool TutorialStep_Step3::IsComplete()
 
 void TutorialStep_Step3::Exit()
 {
+    // 귀신 끄기 
+    tutorialController->babyGhost_Obj->GetComponent<FBXRenderer>()->SetActive(false);
+
     std::cout << "[Step3] Exit " << std::endl;
 }
 
