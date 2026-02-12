@@ -104,10 +104,21 @@ void TutorialStep_Step7::CameraToJesasang()
         phaseStarted = true;
         stepTimer = 0.0f;
 
-        Vector3 camPos = JesaSang->GetTransform()->GetWorldPosition() + Vector3(0, 80, -150);
-        Vector3 lookAt = JesaSang->GetTransform()->GetWorldPosition();
+        auto camStart = SceneSystem::Instance().GetCurrentScene()
+            ->GetGameObjectByName("StartCam_Jesa")->GetTransform();
 
-        camCtrl->PlayCinematic(camPos, lookAt, 3.0f);// 3ÃÊ À¯Áö
+        auto camEnd = SceneSystem::Instance().GetCurrentScene()
+            ->GetGameObjectByName("EndCam_Jesa")->GetTransform();
+
+        auto look = JesaSang->GetTransform();
+
+        camCtrl->PlayCinematic(
+            camStart,
+            camEnd,
+            look,
+            1.5f,   // ÀÌµ¿
+            3.0f    // ¸ØÃã
+        );
     }
 
     stepTimer += GameTimer::Instance().UnscaledDeltaTime();
@@ -165,10 +176,14 @@ void TutorialStep_Step7::CameraToFruit()
         phaseStarted = true;
         stepTimer = 0.0f;
 
-        Vector3 camPos = fruitBasket->GetTransform()->GetWorldPosition() + Vector3(0, 80, -100);
-        Vector3 lookAt = fruitBasket->GetTransform()->GetWorldPosition();
+        camCtrl->PlayCinematic(
+            SceneSystem::Instance().GetCurrentScene() ->GetGameObjectByName("StartCam_Fruit")->GetTransform(),
+            SceneSystem::Instance().GetCurrentScene() ->GetGameObjectByName("EndCam_Fruit")->GetTransform(),
+            fruitBasket->GetTransform(),
+            1.5f,
+            3.0f
+        );
 
-        camCtrl->PlayCinematic(camPos, lookAt, 3.0f);
     }
 
     stepTimer += GameTimer::Instance().UnscaledDeltaTime();
