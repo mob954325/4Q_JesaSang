@@ -4914,9 +4914,9 @@
           {
             "properties": {
               "Position": [
-                -493.5398254394531,
-                7.61070114094764e-05,
-                448.2395324707031
+                619.8583984375,
+                7.601309334859252e-05,
+                -1659.617431640625
               ],
               "Rotation": [
                 -0.0,
@@ -10499,9 +10499,9 @@
           {
             "properties": {
               "Position": [
-                0.0,
-                1.8693390302360058e-07,
-                0.0
+                127.18499755859375,
+                3.0312083254102618e-05,
+                15.3299560546875
               ],
               "Rotation": [
                 -0.0,
@@ -38446,60 +38446,6 @@
               ]
             },
             "type": "Transform"
-          }
-        ]
-      },
-      "type": "GameObject"
-    },
-    {
-      "properties": {
-        "Active": true,
-        "ID": 3916,
-        "Name": "CookingZone",
-        "ParentID": 3915,
-        "components": [
-          {
-            "properties": {
-              "Position": [
-                669.2479858398438,
-                0.0,
-                -1624.783203125
-              ],
-              "Rotation": [
-                -0.0,
-                0.0,
-                -0.0
-              ],
-              "Scale": [
-                1.0,
-                1.0,
-                1.0
-              ]
-            },
-            "type": "Transform"
-          },
-          {
-            "properties": {
-              "Active": true,
-              "ColliderType": "Box",
-              "PhysicsBodyType": "Static",
-              "density": 10.0,
-              "halfExtents": [
-                200.0,
-                100.0,
-                200.0
-              ],
-              "height": 10.0,
-              "isTrigger": true,
-              "layer": "Default",
-              "localOffset": [
-                0.0,
-                100.0,
-                0.0
-              ],
-              "radius": 50.0
-            },
-            "type": "PhysicsComponent"
           }
         ]
       },
