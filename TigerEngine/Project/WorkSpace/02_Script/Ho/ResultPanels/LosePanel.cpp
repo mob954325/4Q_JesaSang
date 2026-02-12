@@ -50,8 +50,8 @@ void LosePanel::OnUpdate(float delta)
             }
             else
             {
-                if (cutImg)
-                    cutImg->ChangeData(cutPath);
+                auto s = SceneSystem::Instance().GetCurrentScene();
+                s->LoadToJson("..\\Assets\\Scenes\\12_SadEndScene.json");
                 isPlayed = true;
             }
         }

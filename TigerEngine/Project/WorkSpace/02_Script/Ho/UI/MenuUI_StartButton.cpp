@@ -4,6 +4,12 @@
 #include "../Base/Datas/ReflectionMedtaDatas.hpp"
 #include "../Engine/Util/ComponentAutoRegister.h"
 #include "../Engine/EngineSystem/SceneSystem.h"
+#include "../Engine/Components/AudioSourceComponent.h"
+
+namespace
+{
+    constexpr const char* kStartSceneButtonClickClipId = "Intro_Button_Sound";
+}
 
 REGISTER_COMPONENT(MenuUI_StartButton);
 
@@ -31,6 +37,7 @@ void MenuUI_StartButton::OnStart()
 {
     // 등록 후 시작 전에 해당 게임 오브젝트에 컴포넌트가 있는지 확인
     image = GetOwner()->GetComponent<Image>();
+    EnsureClickAudioSource();
 
 
     if (image)
@@ -46,6 +53,7 @@ void MenuUI_StartButton::OnStart()
         image->OnPressOut.AddListener(image, [this]() 
             { 
                 image->ChangeData(normalImagePath); 
+                PlayClickSound();
 
                 // 시작 씬으로 전환 
                 // NOTE : 지정하는게 browse면 상관없을 거임
@@ -88,4 +96,32 @@ const std::string& MenuUI_StartButton::GetPressImagePath() const
 void MenuUI_StartButton::SetPressImagePath(const std::string& path)
 {
     pressedImagePath = path;
+}
+
+void MenuUI_StartButton::EnsureClickAudioSource()
+{
+    auto* owner = GetOwner();
+    if (!owner)
+    {
+        return;
+    }
+
+    m_ClickAudioSource = owner->GetComponent<AudioSourceComponent>();
+    if (!m_ClickAudioSource)
+    {
+        m_ClickAudioSource = owner->AddComponent<AudioSourceComponent>();
+    }
+}
+
+void MenuUI_StartButton::PlayClickSound()
+{
+    if (!m_ClickAudioSource)
+    {
+        return;
+    }
+
+    m_ClickAudioSource->SetChannelGroup("SFX");
+    m_ClickAudioSource->SetLoop(false);
+    m_ClickAudioSource->SetClipId(kStartSceneButtonClickClipId);
+    m_ClickAudioSource->Play(true);
 }

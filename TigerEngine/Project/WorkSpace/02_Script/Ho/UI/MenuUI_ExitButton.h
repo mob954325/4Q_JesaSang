@@ -27,5 +27,9 @@ public:
     std::string targetScenePath = "";
 
 private:
+    void EnsureClickAudioSource();
+    void PlayClickSound();
+
     Image* image{};                 // 해당 게임 오브젝트가 가지고 있는 이미지 컴포넌트
+    class AudioSourceComponent* m_ClickAudioSource = nullptr;
 };

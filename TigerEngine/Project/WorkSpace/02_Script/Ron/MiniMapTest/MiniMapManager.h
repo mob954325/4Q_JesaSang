@@ -29,6 +29,7 @@ public:
     std::string gaugeObjectName = "UI_MiniMap_GaugeFill";
     std::string gaugeBgObjectName = "UI_MiniMap_GaugeBG";
     std::string baseMapPath = "..\\Assets\\Resource\\MiniMap\\MAP_GR.png";
+    std::string shrineMapPath = "..\\Assets\\Resource\\MiniMap\\MAP_S.png";
     std::string completeMapPath = "..\\Assets\\Resource\\MiniMap\\Map.png";
 
     std::string itemPingObjectName1 = "UI_MiniMap_ItemPing_01";
@@ -80,6 +81,7 @@ public:
     void TriggerAllPiecesInactive();
     void TriggerItemCollected(int index, const Vector3& worldPos);
     void TriggerPieceCollected(int index);
+    void TriggerShrineEvent(bool active);
 
 private:
     MiniMapTestScript* m_Map = nullptr;
@@ -101,6 +103,7 @@ private:
     Image* m_TreasureImage = nullptr;
     RectTransform* m_TreasureRect = nullptr;
     bool m_UsingCompleteMap = false;
+    bool m_ShrineEventActive = false;
     bool m_ZoneActivated[5]{};
 
     Vector2 m_GaugeBaseSize{};

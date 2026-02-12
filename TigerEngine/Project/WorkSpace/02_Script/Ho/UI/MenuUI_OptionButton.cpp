@@ -5,6 +5,12 @@
 #include "../Engine/Util/ComponentAutoRegister.h"
 #include "../../Ron/UI/SettingsUIController.h"
 #include "../Engine/EngineSystem/SceneSystem.h"
+#include "../Engine/Components/AudioSourceComponent.h"
+
+namespace
+{
+    constexpr const char* kStartSceneButtonClickClipId = "Intro_Button_Sound";
+}
 
 REGISTER_COMPONENT(MenuUI_OptionButton);
 
@@ -32,6 +38,7 @@ void MenuUI_OptionButton::OnStart()
 {
     // 등록 후 시작 전에 해당 게임 오브젝트에 컴포넌트가 있는지 확인
     image = GetOwner()->GetComponent<Image>();
+    EnsureClickAudioSource();
 
 
     if (image)
@@ -45,11 +52,12 @@ void MenuUI_OptionButton::OnStart()
 
         image->OnPressOut.AddListener(image, [this]()
             {
+                PlayClickSound();
+                image->ChangeData(normalImagePath);
+
+                if (SettingsUIController* settings = SettingsUIController::Instance())
                 {
-                    image->ChangeData(normalImagePath);
-                    SettingsUIController* settings = SettingsUIController::Instance();
-                    if (settings != nullptr)
-                        settings->ToggleRoot();
+                    settings->SetOpen(true);
                     return;
                 }
 
@@ -59,19 +67,9 @@ void MenuUI_OptionButton::OnStart()
                     {
                         if (auto ctrl = obj->GetComponent<SettingsUIController>())
                         {
-                            ctrl->ToggleRoot();
+                            ctrl->SetOpen(true);
                             return;
                         }
-                        // Fallback: toggle panels directly if controller is missing
-                        auto soundPanel = scene->GetGameObjectByName("UI_Settings_SoundPanel");
-                        auto creditPanel = scene->GetGameObjectByName("UI_Settings_CreditPanel");
-                        auto soundButton = scene->GetGameObjectByName("UI_Settings_SoundButton");
-                        auto creditButton = scene->GetGameObjectByName("UI_Settings_CreditButton");
-                        const bool open = soundPanel ? !soundPanel->GetActiveSelf() : true;
-                        if (soundPanel) soundPanel->SetActive(open);
-                        if (creditPanel) creditPanel->SetActive(false);
-                        if (soundButton) soundButton->SetActive(open);
-                        if (creditButton) creditButton->SetActive(open);
                     }
                 }
             });
@@ -110,4 +108,32 @@ const std::string& MenuUI_OptionButton::GetPressImagePath() const
 void MenuUI_OptionButton::SetPressImagePath(const std::string& path)
 {
     pressedImagePath = path;
+}
+
+void MenuUI_OptionButton::EnsureClickAudioSource()
+{
+    auto* owner = GetOwner();
+    if (!owner)
+    {
+        return;
+    }
+
+    m_ClickAudioSource = owner->GetComponent<AudioSourceComponent>();
+    if (!m_ClickAudioSource)
+    {
+        m_ClickAudioSource = owner->AddComponent<AudioSourceComponent>();
+    }
+}
+
+void MenuUI_OptionButton::PlayClickSound()
+{
+    if (!m_ClickAudioSource)
+    {
+        return;
+    }
+
+    m_ClickAudioSource->SetChannelGroup("SFX");
+    m_ClickAudioSource->SetLoop(false);
+    m_ClickAudioSource->SetClipId(kStartSceneButtonClickClipId);
+    m_ClickAudioSource->Play(true);
 }
