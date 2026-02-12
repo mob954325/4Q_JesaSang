@@ -149,8 +149,10 @@
   <ItemGroup>
     <ClInclude Include="02_Script\Ho\Manager\ResultPanel.h" />
     <ClInclude Include="02_Script\Ho\ResultPanels\EdgeToCenterSampler.h" />
+    <ClInclude Include="02_Script\Ho\ResultPanels\HappyEndingPanel.h" />
     <ClInclude Include="02_Script\Ho\ResultPanels\LoseCinemachine.h" />
     <ClInclude Include="02_Script\Ho\ResultPanels\LosePanel.h" />
+    <ClInclude Include="02_Script\Ho\ResultPanels\SadEndingPanel.h" />
     <ClInclude Include="02_Script\Ho\ResultPanels\WinCinemachine.h" />
     <ClInclude Include="02_Script\Ho\ResultPanels\WinPanel.h" />
     <ClInclude Include="02_Script\Ho\Sound\EnemySoundSource.h" />
@@ -248,8 +250,10 @@
     <ClCompile Include="02_Script\Ho\Manager\FrozenManager.cpp" />
     <ClCompile Include="02_Script\Ho\Manager\FrozenManager.h" />
     <ClCompile Include="02_Script\Ho\Manager\ResultPanel.cpp" />
+    <ClCompile Include="02_Script\Ho\ResultPanels\HappyEndingPanel.cpp" />
     <ClCompile Include="02_Script\Ho\ResultPanels\LoseCinemachine.cpp" />
     <ClCompile Include="02_Script\Ho\ResultPanels\LosePanel.cpp" />
+    <ClCompile Include="02_Script\Ho\ResultPanels\SadEndingPanel.cpp" />
     <ClCompile Include="02_Script\Ho\ResultPanels\WinCinemachine.cpp" />
     <ClCompile Include="02_Script\Ho\ResultPanels\WinPanel.cpp" />
     <ClCompile Include="02_Script\Ho\Sound\EnemySoundSource.cpp" />

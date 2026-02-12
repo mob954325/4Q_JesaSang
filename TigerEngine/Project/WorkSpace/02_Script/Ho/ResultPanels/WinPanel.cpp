@@ -61,8 +61,9 @@ void WinPanel::OnUpdate(float delta)
                 }
                 else
                 {
-                    if (cutImg)
-                        cutImg->ChangeData(cutPath);
+                    auto s = SceneSystem::Instance().GetCurrentScene();
+                    s->LoadToJson("..\\Assets\\Scenes\\11_HappyEndScene.json");
+
                     isPlayed = true;
                 }
             }
