@@ -9,9 +9,8 @@ void ObjectSystem::Destory(Handle h)
 	if (slot.generation != h.generation) // ¼¼´ë°¡ ´Ù¸§ -> ÀÌ¹Ì handle °´Ã¼ ÆÄ±«µÊ
 		return;
 
-	slot.ptr->~Object();
-	slot.ptr = nullptr;
     delete slot.ptr;
+	slot.ptr = nullptr;
 
 	slot.generation++;
 
