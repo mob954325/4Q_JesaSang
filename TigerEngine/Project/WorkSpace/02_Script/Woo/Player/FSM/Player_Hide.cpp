@@ -70,7 +70,7 @@ void Player_Hide::Exit()
     player->camController->SetViewMode(CameraController::ViewMode::Quarter);
 
     // set sound
-    SoundManager::Instance()->PlaySFX(SFXType::HiddenObj_Playerout_Sound);
+    SoundManager::Instance()->PlaySFX(SFXType::HiddenObj_Playerin_Sound);
 
     //cout << "[Player] Exit Hide State" << endl;
 }
