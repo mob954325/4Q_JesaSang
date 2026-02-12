@@ -65,7 +65,12 @@ RTTR_REGISTRATION
         .property("PlaceBottomRight", &MiniMapManager::placeBottomRight)
         .property("BottomRightMargin", &MiniMapManager::bottomRightMargin)
         .property("ShiftLeftByMapCount", &MiniMapManager::shiftLeftByMapCount)
-        .property("ShowCompleteOnFull", &MiniMapManager::showCompleteOnFull);
+        .property("ShowCompleteOnFull", &MiniMapManager::showCompleteOnFull)
+        .property("PieceToZoneIndex0", &MiniMapManager::pieceToZoneIndex0)
+        .property("PieceToZoneIndex1", &MiniMapManager::pieceToZoneIndex1)
+        .property("PieceToZoneIndex2", &MiniMapManager::pieceToZoneIndex2)
+        .property("PieceToZoneIndex3", &MiniMapManager::pieceToZoneIndex3)
+        .property("PieceToZoneIndex4", &MiniMapManager::pieceToZoneIndex4);
 }
 
 static Vector2 WorldToMiniMap(const Vector3& worldPos, const Vector3& worldMin, const Vector3& worldMax, const Vector2& mapSize)
@@ -273,27 +278,20 @@ void MiniMapManager::OnInitialize()
 
 void MiniMapManager::OnStart()
 {
-    if (zone0IngredientIds.empty() &&
-        zone1IngredientIds.empty() &&
-        zone2IngredientIds.empty() &&
-        zone3IngredientIds.empty() &&
-        zone4IngredientIds.empty())
-    {
-        zone0IngredientIds = "Ingredient_Apple,Ingredient_Pear";
-        zone1IngredientIds = "Ingredient_Batter";
-        zone2IngredientIds = "Ingredient_Tofu";
-        zone3IngredientIds = "Ingredient_Sanjeok";
-        zone4IngredientIds = "Ingredient_Donggeurangttaeng";
-    }
-    if (zone0PingIndices.empty() &&
-        zone1PingIndices.empty() &&
-        zone2PingIndices.empty() &&
-        zone3PingIndices.empty() &&
-        zone4PingIndices.empty())
-    {
-        // default: piece index 3 -> ping 3,5 (user-facing 1-based indices)
-        zone3PingIndices = "3,5";
-    }
+    // Source of truth in code (independent from scene JSON values).
+    zone0IngredientIds = "Ingredient_Apple";
+    zone1IngredientIds = "Ingredient_Donggeurangttaeng";
+    zone2IngredientIds = "Ingredient_Pear,Ingredient_Sanjeok";
+    zone3IngredientIds = "Ingredient_Batter";
+    zone4IngredientIds = "Ingredient_Tofu";
+
+    // Ping index mapping (0-based):
+    // ping1 Apple, ping2 Donggeurangttaeng, ping3 Pear, ping4 Sanjeok, ping5 Batter, ping6 Tofu
+    zone0PingIndices = "0";
+    zone1PingIndices = "1";
+    zone2PingIndices = "2,3";
+    zone3PingIndices = "4";
+    zone4PingIndices = "5";
 
     auto scene = SceneSystem::Instance().GetCurrentScene();
     if (!scene)
@@ -431,6 +429,7 @@ void MiniMapManager::OnStart()
     {
         m_ItemActive[i] = debugShowAllItemPings;
         SetRectActive(m_ItemPingRects[i], m_ItemActive[i]);
+        SetImageActive(m_ItemPingImages[i], m_ItemActive[i]);
     }
 
     for (int i = 0; i < 6; ++i)
@@ -639,6 +638,7 @@ void MiniMapManager::TriggerItemPing(int index, const Vector3& worldPos)
     m_ItemWorldPos[i] = worldPos;
     m_ItemActive[i] = true;
     SetRectActive(m_ItemPingRects[i], m_ItemActive[i]);
+    SetImageActive(m_ItemPingImages[i], m_ItemActive[i]);
 }
 
 void MiniMapManager::TriggerItemPingActive(int index, bool active)
@@ -646,6 +646,7 @@ void MiniMapManager::TriggerItemPingActive(int index, bool active)
     const int i = ClampItemIndex(index);
     m_ItemActive[i] = active;
     SetRectActive(m_ItemPingRects[i], active);
+    SetImageActive(m_ItemPingImages[i], active);
 }
 
 void MiniMapManager::TriggerAllItemPingsInactive()
@@ -654,6 +655,7 @@ void MiniMapManager::TriggerAllItemPingsInactive()
     {
         m_ItemActive[i] = false;
         SetRectActive(m_ItemPingRects[i], m_ItemActive[i]);
+        SetImageActive(m_ItemPingImages[i], m_ItemActive[i]);
     }
 }
 
@@ -701,7 +703,15 @@ void MiniMapManager::TriggerPieceCollected(int index)
 {
     cout << "Test" << endl;
     TriggerPieceActive(index, true);
-    ActivateIngredientsForZone(index);
+    // Runtime piece index order is swapped at 0/1 against the intended visual labels.
+    static constexpr int kPieceToZone[5] = { 1, 0, 2, 3, 4 };
+    int zoneIndex = index;
+    if (index >= 0 && index < 5)
+    {
+        zoneIndex = kPieceToZone[index];
+    }
+
+    ActivateIngredientsForZone(zoneIndex);
     if (m_Map)
     {
         m_Map->TriggerPieceCollected();
@@ -820,3 +830,5 @@ void MiniMapManager::ActivateIngredientsForZone(int zoneIndex)
 
     m_ZoneActivated[zoneIndex] = true;
 }
+
+
