@@ -186,8 +186,11 @@ public:
 private:
     // FSM
     void InitFSMStates();
-    void ChangeState(PlayerState state);
 
+public:
+    void ChangeState(PlayerState state); // 선민 | 02.12 ㅎㅎㅎㅎㅎㅎ 
+
+private:
     // Animation
     void LoadAnimation();
 

@@ -5,6 +5,8 @@
 #include "System/TimeSystem.h"
 
 #include "../../../Woo/Player/PlayerController.h"
+#include "../../../Woo/Camera/CameraController.h"
+
 
 // - 플레이어 렌더 끄고, hold상태에서 나오기 
 // - 카메라와 다이얼로그 귀신에게 맞추기 
@@ -18,15 +20,23 @@ void TutorialStep_Step5::Enter()
     // 조작 불가 
     tutorialController->player_Obj->GetComponent<PlayerController>()->SetInputLock(true);
     
-    // 플레이어 모습 감추기
+    // 플레이어를 강제로 idle 상태로 만들기
+    auto playerCtrl = tutorialController->player_Obj->GetComponent<PlayerController>();
+    playerCtrl->ChangeState(PlayerState::Idle);  
+    // 렌더도 끄기
     tutorialController->player_Obj->GetComponent<FBXRenderer>()->SetActive(false);
 
     targetA = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("Adult_Target_A");
     targetB = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("Adult_Target_B");
+    step5_out = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("Baby_Target_B");
 
     // 어른 귀신의 위치를 targetA로 세팅 
     tutorialController->adultGhost_Obj->GetTransform()->SetPosition(targetA->GetComponent<Transform>()->GetWorldPosition());
     adultTranform = tutorialController->adultGhost_Obj->GetTransform();
+
+    // CameraController 타겟 변경 (귀신 바라봐야함)
+    auto camCtrl = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("MainCamera")->GetComponent<CameraController>();
+    if (camCtrl) camCtrl->SetTargetTransform(tutorialController->adultGhost_Obj->GetTransform());
 
     std::cout << "[Step5] Enter" << std::endl;
 }
@@ -78,13 +88,20 @@ bool TutorialStep_Step5::IsComplete()
 
 void TutorialStep_Step5::Exit()
 {
+    // 카메라 타겟 플레이어로 복구
+    auto camCtrl = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("MainCamera")->GetComponent<CameraController>();
+    if (camCtrl) camCtrl->SetTargetTransform(tutorialController->player_Obj->GetTransform());
+
+    // 렌더도 다시 켜기
+    tutorialController->player_Obj->GetComponent<FBXRenderer>()->SetActive(false);
+
     std::cout << "[Step5] Exit " << std::endl;
 }
 
 
 // -------------------------------------------------------------
 
-// 1. 어른 유령이 방으로 들어옴 & 화면 외각 프로즌 점점 심해짐 
+// 1. 어른 유령이 방으로 들어옴(TargetB) & 화면 외각 프로즌 점점 심해짐 
 void TutorialStep_Step5::AdultInCome()
 {
     // TargetB로 이동 
@@ -130,10 +147,10 @@ void TutorialStep_Step5::LookAround()
     // 현재 시간 비율
     float t = step5Timer / duration;
 
-    // sin으로 자연스럽게 왔다갔다
-    float yaw = sinf(t * XM_2PI) * angleRange;
+    float baseYaw = XM_PI;
+    float offset = sinf(t * XM_2PI) * angleRange;
 
-    adultTranform->SetRotationY(yaw);
+    adultTranform->SetRotationY(baseYaw + offset);
 
     step5Timer += dt;
 
@@ -147,14 +164,6 @@ void TutorialStep_Step5::LookAround()
 
 void TutorialStep_Step5::Monologue1()
 {
-    if (!monologuePlayed)
-    {
-        // 독백 1
-        std::cout << "[Step5] " << "어 여기 맛있는 냄새가 나는데?" << std::endl;
-        monologuePlayed = true;
-    }
-
-    // 대화창은 tutorialController->dialogue 사용
     if (tutorialController->dialogue)
         tutorialController->dialogue->ShowDialogueHold(L"어 여기 맛있는 냄새가 나는데?");
 
@@ -179,12 +188,6 @@ void TutorialStep_Step5::WaitInput1()
 
 void TutorialStep_Step5::Monologue2()
 {
-    if (!monologuePlayed)
-    {
-        std::cout << "[Step5] " << "아무것도 없네, 배고파서 헛 냄새를 맡았나.." << std::endl;
-        monologuePlayed = true;
-    }
-
     if (tutorialController->dialogue)
         tutorialController->dialogue->ShowDialogueHold(L"아무것도 없네, 배고파서 헛 냄새를 맡았나..");
 
@@ -206,13 +209,13 @@ void TutorialStep_Step5::WaitInput2()
     }
 }
 
-// Target A의 위치로 이동 
+// Target_Out 의 위치로 이동 
 void TutorialStep_Step5::AdultOut()
 {
     // Target A로 이동 
-    Vector3 target_a = targetA->GetTransform()->GetWorldPosition();
+    Vector3 target_out = step5_out->GetTransform()->GetWorldPosition();
     Vector3 pos = tutorialController->adultGhost_Obj->GetTransform()->GetWorldPosition();
-    Vector3 dir = target_a - pos;
+    Vector3 dir = target_out - pos;
 
     if (dir.Length() < 5.0f)
     {
