@@ -1,11 +1,17 @@
 #include "Scene.h"	
 #include "../Object/GameObject.h"
 #include "../EngineSystem/ScriptSystem.h"
+#include "../Manager/ComponentFactory.h"
 #include "../Manager/WorldManager.h"
 #include "System/ObjectSystem.h"
 #include "../EngineSystem/LightSystem.h"
+#include "../Components/Camera.h"
 #include "../EngineSystem/CameraSystem.h"
 #include "../EngineSystem/SceneSystem.h"
+
+#include <algorithm>
+#include <chrono>
+#include <unordered_map>
 
 void Scene::OnUpdate(float deltaTime)
 {
@@ -215,93 +221,366 @@ bool Scene::SaveToJson(const std::string& filename) const
 
 bool Scene::LoadToJson(const std::string& filename)
 {
-    std::ifstream file(filename);
-    if (!file.is_open()) return false;
+    if (filename.empty()) return false;
 
-    nlohmann::json root;
+    checkSceneChange = true;
+    targetLoadJsonPath = filename;
 
-    try
+    return true;
+}
+
+bool Scene::CheckLoadJson()
+{
+    auto ResetLoadState = [&]()
     {
-        file >> root;
-    }
-    catch (const nlohmann::json::exception& e)
-    {	// 파일 열기 실패
-        MessageBoxA(nullptr, e.what(), "Error", MB_OK | MB_ICONERROR);
-        file.close();
+        loadRoot = nlohmann::json();
+        loadCursor = 0;
+        loadTotal = 0;
+        loadParentIDs.clear();
+        loadActiveFlags.clear();
+        loadingJsonPath.clear();
+        loadPhase = SceneLoadPhase::None;
+    };
+
+    auto DestroyLoadingCamera = [&]()
+    {
+        if (!hasLoadingCamera) return;
+
+        if (auto* obj = ObjectSystem::Instance().Get<GameObject>(loadingCameraHandle))
+        {
+            obj->ClearAll();
+        }
+        ObjectSystem::Instance().Destory(loadingCameraHandle);
+
+        loadingCameraHandle = {};
+        hasLoadingCamera = false;
+    };
+
+    auto CancelOngoingLoad = [&]()
+    {
+        // NOTE : ClearOldScene 단계 전에 취소하면 기존 씬을 유지해야 한다.
+        if (loadPhase == SceneLoadPhase::CreateObjects ||
+            loadPhase == SceneLoadPhase::ApplyWorldData ||
+            loadPhase == SceneLoadPhase::ActivateObjects ||
+            loadPhase == SceneLoadPhase::ApplyHierarchy ||
+            loadPhase == SceneLoadPhase::FixObjectIds)
+        {
+            ClearScene();
+        }
+
+        DestroyLoadingCamera();
+        ResetLoadState();
+    };
+
+    auto FailLoad = [&](const char* msg)
+    {
+        if (msg)
+        {
+            MessageBoxA(nullptr, msg, "Error", MB_OK | MB_ICONERROR);
+        }
+        CancelOngoingLoad();
         return false;
-    }
-    file.close();
+    };
 
-    // json 데이터에 objects 객체이나 배열이 없음
-    if (!root.contains("objects") || !root["objects"].is_array()) return false;
-
-    ClearScene(); // 데이터가 존재하면 현재 씬 제거
-    targetLoadedPath = filename;
-    SceneSystem::Instance().isSceneChanging = true; // 씬 교체 플래그  - 26.02.09 이성호
-
-    // 데이터에 있는 게임 오브젝트 불러오기
-    vector<int> parentIDs; // 넣은 순서대로 부모 ID 기억하기 ( 부모가 없으면 -1 )
-    for (const auto& objData : root["objects"])
+    // 새 요청이 들어오면 현재 로딩 취소 후 재시작
+    if (checkSceneChange && loadPhase != SceneLoadPhase::None)
     {
-        if (!objData.contains("type")) continue;
-
-        std::string typeName = objData["type"]; // 클래스 타입 : GameObject
-
-        // 이름 찾기
-        std::string objectName = "";
-        if (objData.contains("properties")) objectName = objData["properties"]["Name"];
-
-        auto instance = AddGameObjectByName(objectName);
-        if (!instance) continue;
-
-        instance->Deserialize(objData["properties"]);
-
-        if (objData["properties"].contains("ID"))
-        {
-            instance->SetId(objData["properties"]["ID"]); // ID 추가
-        }
-
-        if (objData["properties"].contains("ParentID"))
-        {
-            parentIDs.push_back(objData["properties"]["ParentID"]); // 미리 부모 ID 기억
-        }
+        CancelOngoingLoad();
     }
 
-    // 월드 데이터 불러오기
-    if (!root.contains("worldData") || !root["worldData"].is_array()) return false;
-
-    auto& wm = WorldManager::Instance();
-    wm.Deserialize(root["worldData"][0]);
-
-    // 게임 오브젝트 계층 구조 맞추기
-
-    // ObjectsID와 1:1 대응이라고 가정
-    // id가 없는 데이터 이거나 데이터 개수가 안맞으면 무시한다.
-    if (!parentIDs.empty() && parentIDs.size() == gameObjects.size())
+    // Idle 상태에서만 요청을 받아 로딩 시작
+    if (loadPhase == SceneLoadPhase::None)
     {
-        for (int i = 0; i < gameObjects.size(); i++)
-        {
-            auto currObject = gameObjects[i].objPtr;
-            int currParentID = parentIDs[i];
-            if (currParentID == -1) continue; // 부모없음
+        if (!checkSceneChange) return false;
 
-            for (int j = 0; j < gameObjects.size(); j++)
+        if (targetLoadJsonPath.empty())
+        {
+            checkSceneChange = false;
+            return false;
+        }
+
+        checkSceneChange = false;
+        loadingJsonPath = targetLoadJsonPath;
+        targetLoadJsonPath.clear();
+
+        loadRoot = nlohmann::json();
+        loadCursor = 0;
+        loadTotal = 0;
+        loadParentIDs.clear();
+        loadActiveFlags.clear();
+
+        loadPhase = SceneLoadPhase::ParseJson;
+    }
+
+    for (int safety = 0; safety < 16; ++safety)
+    {
+        switch (loadPhase)
+        {
+        case SceneLoadPhase::ParseJson:
+        {
+            std::ifstream file(loadingJsonPath);
+            if (!file.is_open())
             {
-                if (i == j) continue;
+                return FailLoad(nullptr);
+            }
 
-                if (currParentID == gameObjects[j].objPtr->GetId()) // 부모 찾음
+            try
+            {
+                file >> loadRoot;
+            }
+            catch (const nlohmann::json::exception& e)
+            {
+                file.close();
+                return FailLoad(e.what());
+            }
+            file.close();
+
+            if (!loadRoot.contains("objects") || !loadRoot["objects"].is_array())
+            {
+                return FailLoad("Invalid scene json: objects[] not found.");
+            }
+
+            loadTotal = loadRoot["objects"].size();
+            loadCursor = 0;
+            loadParentIDs.clear();
+            loadActiveFlags.clear();
+
+            loadPhase = SceneLoadPhase::ClearOldScene;
+            continue;
+        }
+
+        case SceneLoadPhase::ClearOldScene:
+        {
+            // 이제부터는 기존 씬을 지우고 로딩 카메라를 유지하면서 점진적으로 생성한다.
+            ClearScene();
+            targetLoadedPath = loadingJsonPath;
+            SceneSystem::Instance().isSceneChanging = true;
+
+            // Loading camera (Release에서 FreeCamera가 없을 수 있어 크래시 방지)
+            if (!hasLoadingCamera)
+            {
+                loadingCameraHandle = ObjectSystem::Instance().Create<GameObject>();
+                if (auto* loadingObj = ObjectSystem::Instance().Get<GameObject>(loadingCameraHandle))
                 {
-                    currObject->GetTransform()->SetParent(gameObjects[j].objPtr->GetTransform()); // 부모 설정
-                    break;
+                    loadingObj->SetName("LoadingCamera");
+                    loadingObj->SetScene(this);
+                    // NOTE : GameObject는 비활성화 상태로 두고, Camera 컴포넌트만 활성화해서
+                    // ScriptSystem(Transform 포함) 등록을 피한다.
+                    if (auto* loadingCam = loadingObj->AddComponent<Camera>())
+                    {
+                        loadingCam->SetActive(true);
+                        hasLoadingCamera = true;
+                    }
                 }
             }
-        }
-    }
 
-    // 새로운 ID 부여 -> 이전 Save데이터와 ID 충돌 방지
-    for (auto& obj : gameObjects)
-    {
-        obj.objPtr->SetId(ObjectSystem::Instance().GetNewID());
+            loadPhase = SceneLoadPhase::CreateObjects;
+            continue;
+        }
+
+        case SceneLoadPhase::CreateObjects:
+        {
+            SceneSystem::Instance().isSceneChanging = true;
+
+            constexpr auto kLoadTimeBudget = std::chrono::milliseconds(3);
+            constexpr size_t kMinObjectsPerTick = 1;
+            constexpr size_t kMaxObjectsPerTick = 128;
+
+            const auto tickStart = std::chrono::steady_clock::now();
+            size_t createdThisTick = 0;
+
+            auto CreateGameObjectInactive = [&](const std::string& name) -> GameObject*
+            {
+                Handle handle = ObjectSystem::Instance().Create<GameObject>();
+                auto* obj = ObjectSystem::Instance().Get<GameObject>(handle);
+                if (!obj) return nullptr;
+
+                obj->SetScene(this);
+                obj->SetName(name);
+
+                const int index = static_cast<int>(gameObjects.size());
+                gameObjects.push_back({ obj, handle });
+                mappedGameObjects[name].push_back({ handle, index });
+
+                // NOTE : 로딩 중에는 비활성화 상태로 유지 (추후 ActivateObjects 단계에서 켠다)
+                return obj;
+            };
+
+            while (loadCursor < loadTotal)
+            {
+                if (createdThisTick >= kMaxObjectsPerTick) break;
+                if (createdThisTick >= kMinObjectsPerTick &&
+                    (std::chrono::steady_clock::now() - tickStart) >= kLoadTimeBudget)
+                {
+                    break;
+                }
+
+                const auto& objData = loadRoot["objects"][loadCursor];
+                loadCursor++;
+
+                if (!objData.contains("properties") || !objData["properties"].is_object())
+                {
+                    continue;
+                }
+
+                const auto& propsRef = objData["properties"];
+
+                std::string objectName;
+                if (propsRef.contains("Name") && propsRef["Name"].is_string())
+                {
+                    objectName = propsRef["Name"].get<std::string>();
+                }
+
+                auto* instance = CreateGameObjectInactive(objectName);
+                if (!instance) continue;
+
+                // Parent/Active 정보 저장
+                int parentID = -1;
+                if (propsRef.contains("ParentID") && propsRef["ParentID"].is_number_integer())
+                {
+                    parentID = propsRef["ParentID"].get<int>();
+                }
+                loadParentIDs.push_back(parentID);
+
+                bool isActive = true;
+                if (propsRef.contains("Active") && propsRef["Active"].is_boolean())
+                {
+                    isActive = propsRef["Active"].get<bool>();
+                }
+                loadActiveFlags.push_back(isActive);
+
+                // Deserialize는 components만 필요. Active는 포함하지 않아 활성화가 일어나지 않게 한다.
+                nlohmann::json props = nlohmann::json::object();
+                if (propsRef.contains("components") && propsRef["components"].is_array())
+                {
+                    props["components"] = propsRef["components"];
+                }
+
+                // ComponentFactory가 생성 직후 SetActive(true)를 호출하므로, 로딩 중엔 이를 억제한다.
+                auto& factory = ComponentFactory::Instance();
+                const bool prevSuppress = factory.suppressAutoActivate;
+                factory.suppressAutoActivate = true;
+                instance->Deserialize(props);
+                factory.suppressAutoActivate = prevSuppress;
+
+                // ID는 계층 구성용으로만 유지 (완료 후 재부여)
+                if (propsRef.contains("ID") && propsRef["ID"].is_number_integer())
+                {
+                    instance->SetId(propsRef["ID"].get<int>());
+                }
+
+                createdThisTick++;
+            }
+
+            if (loadCursor < loadTotal)
+            {
+                return true; // 다음 프레임에 계속 생성
+            }
+
+            loadPhase = SceneLoadPhase::ApplyWorldData;
+            continue;
+        }
+
+        case SceneLoadPhase::ApplyWorldData:
+        {
+            SceneSystem::Instance().isSceneChanging = true;
+
+            // worldData는 없는 경우도 있을 수 있으므로 optional로 처리
+            if (loadRoot.contains("worldData") && loadRoot["worldData"].is_array() && !loadRoot["worldData"].empty())
+            {
+                auto& wm = WorldManager::Instance();
+                wm.Deserialize(loadRoot["worldData"][0]);
+            }
+
+            loadPhase = SceneLoadPhase::ActivateObjects;
+            continue;
+        }
+
+        case SceneLoadPhase::ActivateObjects:
+        {
+            SceneSystem::Instance().isSceneChanging = true;
+
+            const size_t count = std::min(gameObjects.size(), loadActiveFlags.size());
+            for (size_t i = 0; i < count; ++i)
+            {
+                if (!gameObjects[i].objPtr) continue;
+                gameObjects[i].objPtr->SetActive(loadActiveFlags[i]);
+            }
+
+            loadPhase = SceneLoadPhase::ApplyHierarchy;
+            continue;
+        }
+
+        case SceneLoadPhase::ApplyHierarchy:
+        {
+            SceneSystem::Instance().isSceneChanging = true;
+
+            std::unordered_map<int, Transform*> idToTransform;
+            idToTransform.reserve(gameObjects.size());
+
+            for (auto& entity : gameObjects)
+            {
+                if (!entity.objPtr) continue;
+                idToTransform[entity.objPtr->GetId()] = entity.objPtr->GetTransform();
+            }
+
+            const size_t count = std::min(gameObjects.size(), loadParentIDs.size());
+            for (size_t i = 0; i < count; ++i)
+            {
+                auto* obj = gameObjects[i].objPtr;
+                if (!obj) continue;
+
+                const int parentID = loadParentIDs[i];
+                if (parentID == -1) continue;
+
+                auto it = idToTransform.find(parentID);
+                if (it == idToTransform.end()) continue;
+
+                obj->GetTransform()->SetParent(it->second);
+            }
+
+            loadPhase = SceneLoadPhase::FixObjectIds;
+            continue;
+        }
+
+        case SceneLoadPhase::FixObjectIds:
+        {
+            SceneSystem::Instance().isSceneChanging = true;
+
+            for (auto& obj : gameObjects)
+            {
+                if (!obj.objPtr) continue;
+                obj.objPtr->SetId(ObjectSystem::Instance().GetNewID());
+            }
+
+            // 로딩 카메라는 다른 카메라가 존재할 때만 제거 (없으면 Release에서 크래시 위험)
+            if (hasLoadingCamera)
+            {
+                bool hasOtherCamera = false;
+                for (auto* cam : CameraSystem::Instance().GetAllCamera())
+                {
+                    if (!cam || !cam->GetOwner()) continue;
+                    if (cam->GetOwner()->GetName() == "LoadingCamera") continue;
+
+                    hasOtherCamera = true;
+                    break;
+                }
+
+                if (hasOtherCamera)
+                {
+                    DestroyLoadingCamera();
+                }
+            }
+
+            ResetLoadState();
+            SceneSystem::Instance().isSceneChanging = false; // 로딩 완료 프레임에는 정상 렌더링
+            return true;
+        }
+
+        case SceneLoadPhase::None:
+        default:
+            return false;
+        }
     }
 
     return true;
@@ -337,7 +616,8 @@ GameObject* Scene::RayCastGameObject(const Ray& ray, float* outDistance)
 
 void Scene::ReloadScene()
 {
-    ClearScene();
+    if (targetLoadedPath.empty()) return;
+
     LoadToJson(targetLoadedPath);
 }
 

@@ -69,9 +69,12 @@ public:
     /// @param filename 저장할 파일 이름
     bool SaveToJson(const std::string& filename) const;
 
-    /// @brief json 파일을 읽어서 scene에 로드하는 함수
+    /// @brief json 파일을 읽어서 scene에 로드하는 함수 -> 260212 : 무슨 json 불러올껀지 bool값 true로 하고 문자열 저장만함.
     /// @param 불러오는 파일 이름
     bool LoadToJson(const std::string& filename);
+
+    //checkSceneChange 플래그 확인
+    bool CheckLoadJson();
 
     int GetObjectCount() { return gameObjects.size(); }
 
@@ -114,4 +117,31 @@ protected:
     std::unordered_map<std::string, std::vector<std::pair<Handle, int>>> mappedGameObjects;
 
     std::string targetLoadedPath = "";
+
+    std::string targetLoadJsonPath = ""; // 교체할 json 패스 
+    std::string loadingJsonPath = "";    // 현재 로딩중인 json 패스
+    bool checkSceneChange = false; // 씬 교체 여부 ( LoadToJson 호출됨 여부 )
+
+    enum class SceneLoadPhase
+    {
+        None,
+        ParseJson,
+        ClearOldScene,
+        CreateObjects,
+        ApplyWorldData,
+        ApplyHierarchy,
+        FixObjectIds,
+        ActivateObjects,
+    };
+
+    SceneLoadPhase loadPhase = SceneLoadPhase::None;
+
+    nlohmann::json loadRoot;
+    size_t loadCursor = 0;
+    size_t loadTotal = 0;
+    std::vector<int> loadParentIDs;
+    std::vector<bool> loadActiveFlags;
+
+    Handle loadingCameraHandle{};
+    bool hasLoadingCamera = false;
 };

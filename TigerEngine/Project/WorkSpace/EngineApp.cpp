@@ -144,6 +144,7 @@ void EngineApp::OnPreUpdate()
 {
     if (SceneSystem::Instance().isSceneChanging) SceneSystem::Instance().isSceneChanging = false; // NOTE : 플래그 활성화 되어있으면 비활성화 하기
 
+    SceneSystem::Instance().CheckSceneShange();
     ScriptSystem::Instance().CheckReadyQueue();
     RenderSystem::Instance().CheckReadyQueue();
 }

@@ -28,6 +28,7 @@ public:
     ~ComponentFactory() = default;       
 
     bool isRegisteredAll = false;
+    bool suppressAutoActivate = false; // NOTE : Scene 점진 로딩 등에서 생성 직후 활성화(등록) 방지
 
     template<typename T>
     void Register(std::string compName, ComponentCategory cat = ComponentCategory::Other);
@@ -41,13 +42,16 @@ private:
 template<typename T>
 inline void ComponentFactory::Register(std::string compName, ComponentCategory cat)
 {
-    auto createComp = [name = compName](GameObject* obj)
+    auto createComp = [this, name = compName](GameObject* obj)
         {
             auto comp = obj->AddComponent<T>();
             if (auto sp = comp)
             {
                 sp->SetName(name);
-                sp->SetActive(true); // 해당 컴포넌트 활성화 ( false -> true )
+                if (!suppressAutoActivate)
+                {
+                    sp->SetActive(true); // 해당 컴포넌트 활성화 ( false -> true )
+                }
                 cout << name << " : factory call \n";
             }
             return comp;

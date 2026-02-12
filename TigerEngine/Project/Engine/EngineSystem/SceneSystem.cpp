@@ -32,6 +32,14 @@ void SceneSystem::LateUpdateScene(float deltaTime)
     currentScene->OnLateUpdate(deltaTime);
 }
 
+void SceneSystem::CheckSceneShange()
+{
+    if (scenes.empty()) return;
+    if (!currentScene) return;
+
+    currentScene->CheckLoadJson(); // 씬 교체 확인
+}
+
 std::shared_ptr<Scene> SceneSystem::GetSceneByIndex(int index)
 {
     return scenes.find(index)->second;

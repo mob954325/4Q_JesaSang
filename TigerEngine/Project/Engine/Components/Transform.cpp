@@ -207,6 +207,8 @@ void Transform::AddChild(Transform* transPtr)
 
 void Transform::RemoveChild(Transform* transPtr)
 {
+    if (children.empty()) return; // ?
+
     for (auto it = children.begin(); it != children.end();)
     {
         if (*it == transPtr)

@@ -15,13 +15,14 @@ public:
     void UpdateScene(float deltaTime);
     void FixedUpdateScene(float deltaTime);
     void LateUpdateScene(float deltaTime);
+    void CheckSceneShange();
 
     std::shared_ptr<Scene> GetSceneByIndex(int index);
     void AddScene();
     std::shared_ptr<Scene> GetCurrentScene();
     std::shared_ptr<Scene> SetCurrentSceneByIndex(int i = 0);
 
-    bool isSceneChanging = false; // 현재 씬 교체 중인가?
+    bool isSceneChanging = false; // 현재 씬 교체 중인가? -> 사용안함
 
 private:
     std::map<int, std::shared_ptr<Scene>> scenes;
