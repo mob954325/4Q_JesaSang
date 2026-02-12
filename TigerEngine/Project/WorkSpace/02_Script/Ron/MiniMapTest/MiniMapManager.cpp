@@ -272,6 +272,15 @@ static bool ContainsId(const std::vector<std::string>& list, const std::string& 
     return false;
 }
 
+static int FindIdIndex(const std::vector<std::string>& list, const std::string& id)
+{
+    for (int i = 0; i < static_cast<int>(list.size()); ++i)
+    {
+        if (list[i] == id) return i;
+    }
+    return -1;
+}
+
 void MiniMapManager::OnInitialize()
 {
 }
@@ -703,8 +712,8 @@ void MiniMapManager::TriggerPieceCollected(int index)
 {
     cout << "Test" << endl;
     TriggerPieceActive(index, true);
-    // Runtime piece index order is swapped at 0/1 against the intended visual labels.
-    static constexpr int kPieceToZone[5] = { 1, 0, 2, 3, 4 };
+    // Piece index uses direct mapping 0..4 -> zone 0..4.
+    static constexpr int kPieceToZone[5] = { 0, 1, 2, 3, 4 };
     int zoneIndex = index;
     if (index >= 0 && index < 5)
     {
@@ -801,9 +810,18 @@ void MiniMapManager::ActivateIngredientsForZone(int zoneIndex)
         int targetIndex = -1;
         if (!indices.empty())
         {
-            if (pingIndex >= static_cast<int>(indices.size())) return;
-            targetIndex = indices[pingIndex];
-            pingIndex++;
+            // Deterministic mapping by ingredient id -> ping index position.
+            const int idPos = FindIdIndex(ids, search->itemID);
+            if (idPos >= 0 && idPos < static_cast<int>(indices.size()))
+            {
+                targetIndex = indices[idPos];
+            }
+            else
+            {
+                if (pingIndex >= static_cast<int>(indices.size())) return;
+                targetIndex = indices[pingIndex];
+                pingIndex++;
+            }
         }
         else
         {
@@ -817,7 +835,6 @@ void MiniMapManager::ActivateIngredientsForZone(int zoneIndex)
         }
 
         if (targetIndex < 0 || targetIndex > 5) return;
-        if (m_ItemSearchObjects[targetIndex] != nullptr) return;
 
         auto* tr = obj->GetTransform();
         if (!tr) return;
