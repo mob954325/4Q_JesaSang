@@ -29,6 +29,7 @@ RTTR_REGISTRATION
         .property("GaugeObjectName", &MiniMapManager::gaugeObjectName)
         .property("GaugeBgObjectName", &MiniMapManager::gaugeBgObjectName)
         .property("BaseMapPath", &MiniMapManager::baseMapPath)
+        .property("ShrineMapPath", &MiniMapManager::shrineMapPath)
         .property("CompleteMapPath", &MiniMapManager::completeMapPath)
         .property("PingObjectName1", &MiniMapManager::itemPingObjectName1)
         .property("PingObjectName2", &MiniMapManager::itemPingObjectName2)
@@ -165,7 +166,7 @@ static int ClampItemIndex(int index)
 
 static constexpr float kPingZOffset = 2.0f;
 static constexpr float kPieceZOffset = -1.0f;
-static constexpr float kCompleteZOffset = -2.0f;
+static constexpr float kCompleteZOffset = 1.0f;
 
 static void InitActive(RectTransform* rect, Image* image, bool active)
 {
@@ -360,6 +361,10 @@ void MiniMapManager::OnStart()
         m_PieceRects[i] = GetRectOrLog(scene, pieceNames[i], "RectTransform on piece object");
         m_PieceImages[i] = GetImageOrLog(scene, pieceNames[i], "Image on piece object");
     }
+    if (m_PieceImages[5] && !shrineMapPath.empty())
+    {
+        m_PieceImages[5]->ChangeData(shrineMapPath);
+    }
 
     m_TreasureImage = GetImage(scene, "UI_MiniMap_Treasure");
     m_TreasureRect = GetRectOrLog(scene, "UI_MiniMap_Treasure", "RectTransform on treasure object");
@@ -385,6 +390,10 @@ void MiniMapManager::OnStart()
     }
     if (m_CompleteImage)
     {
+        if (!shrineMapPath.empty())
+        {
+            m_CompleteImage->ChangeData(shrineMapPath);
+        }
         SetImageActive(m_CompleteImage, false);
         SetRectActive(m_CompleteRect, false);
         SetImageAlpha(m_CompleteImage, 0.0f);
@@ -472,11 +481,18 @@ void MiniMapManager::OnUpdate(float delta)
         SetImageActive(m_BaseImage, true);
         SetRectActive(m_BaseRect, true);
         SetImageAlpha(m_BaseImage, 1.0f);
-        if (m_CompleteImage)
-        {
-            SetImageAlpha(m_CompleteImage, complete ? 1.0f : 0.0f);
-        }
-        if (m_CompleteObject) m_CompleteObject->SetActive(false);
+    }
+
+    // Shrine map is controlled as Piece_06 to keep the same behavior as other map pieces.
+    if (m_CompleteImage)
+    {
+        SetRectActive(m_CompleteRect, false);
+        SetImageActive(m_CompleteImage, false);
+        SetImageAlpha(m_CompleteImage, 0.0f);
+    }
+    if (m_CompleteObject)
+    {
+        m_CompleteObject->SetActive(false);
     }
 
     const Vector3 basePos = m_BaseRect->GetPos();
@@ -689,6 +705,20 @@ void MiniMapManager::TriggerPieceCollected(int index)
     if (m_Map)
     {
         m_Map->TriggerPieceCollected();
+    }
+}
+
+void MiniMapManager::TriggerShrineEvent(bool active)
+{
+    m_ShrineEventActive = active;
+
+    // Control shrine as Piece_06 only.
+    TriggerPieceActive(5, active);
+
+    if (active)
+    {
+        BumpRenderOrder(m_PieceImages[5]);
+        BumpPingRenderOrder();
     }
 }
 
