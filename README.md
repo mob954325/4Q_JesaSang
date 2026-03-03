@@ -1,3 +1,5 @@
+원본 리포지토리 : https://github.com/MoonSun-v/JesaSang
+
 # 🍚 제사상
 
 - **자체 제작 C++ / DirectX 11 게임 엔진**으로 개발한 3D 게임 프로젝트입니다.
