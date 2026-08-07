@@ -15,6 +15,7 @@
 #include "../Player/DialogueUI/DialogueUIController.h"
 
 #include "../Item/Item.h"
+#include "../../Ho/Manager/FrozenManager.h"
 #include "../../Ho/Sound/SoundManager.h"
 #include "../../Ron/MiniMapTest/MiniMapManager.h"
 
@@ -268,6 +269,7 @@ std::unique_ptr<IItem> AltarManager::GetItem()
 void AltarManager::UISensorOnOff(bool flag)
 {
     if (!image_sensorOn) return;
+    if (flag && !HasItem()) return;
     if (flag && !isFirstReceiveItem) return;
     if (flag && isDirecting) return;
     image_sensorOn->SetActive(flag);
@@ -276,6 +278,7 @@ void AltarManager::UISensorOnOff(bool flag)
 void AltarManager::UIInteractionOnOff(bool flag)
 {
     if (!image_interactionOn) return;
+    if (flag && !HasItem()) return;
     if (flag && !isFirstReceiveItem) return;
     if (flag && isDirecting) return;
     image_interactionOn->SetActive(flag);
@@ -328,6 +331,10 @@ void AltarManager::BeginDirectSequence(std::string itemId)
     altar->SetActive(false);
     UISensorOnOff(false);
     UIInteractionOnOff(false);
+
+    // Screen UI Off
+    FrozenManager* fm = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("FrozenManager")->GetComponent<FrozenManager>();
+    fm->ImageActive(false);
 
     // direct cam 위치 캐싱
     hasDirectCamPosCached = false;
@@ -507,6 +514,9 @@ void AltarManager::UpdateDirectSequence()
         auto go = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("Player");
         go->GetComponent<DialogueUIController>()->ShowDialogueText(L"집안 어딘가에 이상한 기운이 생겼어... 확인해봐야겠어.");
 
+        // Screen UI Off
+        FrozenManager* fm = SceneSystem::Instance().GetCurrentScene()->GetGameObjectByName("FrozenManager")->GetComponent<FrozenManager>();
+        fm->ImageActive(true);
     }
     break;
 
