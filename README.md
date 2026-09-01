@@ -64,7 +64,6 @@ Editor모드에서는 Imgui와 rttr를 통해 실시간 조절이 가능합니�
 렌더링은 Deffered Render 방식을 채용합니다.
 
 ### 객체 관리
-[그림] - slotmap 그림
 게임에서 사용하는 모든 객체는 Object 클래스라는 최상위 클래스를 상속받아서 생명관리를 합니다.
 ObjectSystem에서 slots 배열에서 관리하고 각 인덱스 별로 generation값을 소유해 포인터를 찾을 때 dangling pointer를 방지합니다.
 
@@ -86,7 +85,8 @@ ObjectSystem에서 slots 배열에서 관리하고 각 인덱스 별로 generati
 
 
 ### 엔진구조 
-[사진] - 엔진 루프 그림
+<img width="940" height="341" alt="4QEngine" src="https://github.com/user-attachments/assets/99eb799b-a30c-4979-aa4e-783e2c6f1ce8" />
+
 
 ### 컴포넌트 내부 호출 순서
-[사진] - 컴포넌트 이벤트 호출 순서 그림
+<img width="1311" height="260" alt="componentEventOrder" src="https://github.com/user-attachments/assets/402d0921-d881-469c-a638-9bf96a0c88d6" />
